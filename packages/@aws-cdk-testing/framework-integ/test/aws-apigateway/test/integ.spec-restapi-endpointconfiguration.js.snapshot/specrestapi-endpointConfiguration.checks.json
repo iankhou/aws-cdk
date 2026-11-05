@@ -1,0 +1,97 @@
+{
+ "stackName": "specrestapi-endpointConfiguration",
+ "summary": {
+  "pass": 10
+ },
+ "results": [
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "my-api",
+   "actual": "my-api"
+  },
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "EndpointConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "types": [
+     "REGIONAL"
+    ]
+   },
+   "actual": {
+    "types": [
+     "REGIONAL"
+    ]
+   }
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB490e99c1932ac058c07f251d768959caa7",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB490e99c1932ac058c07f251d768959caa7",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB490e99c1932ac058c07f251d768959caa7",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiDeploymentStageprod298F01AF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiDeploymentStageprod298F01AF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "myapiDeploymentStageprod298F01AF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiDeploymentStageprod298F01AF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiDeployment92F2CB490e99c1932ac058c07f251d768959caa7}",
+   "actual": "${myapiDeployment92F2CB490e99c1932ac058c07f251d768959caa7}"
+  }
+ ]
+}

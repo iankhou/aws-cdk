@@ -1,0 +1,110 @@
+{
+ "version": "1",
+ "stackName": "integ-aws-websocket-integration",
+ "resources": {
+  "MyTable794EDED1": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "id",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "id",
+      "KeyType": "HASH"
+     }
+    ],
+    "TableName": "MyTable"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ApiGatewayRoleD2518903": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/AmazonDynamoDBFullAccess"
+    ]
+   }
+  },
+  "mywsapi32E6CE11": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "mywsapi",
+    "ProtocolType": "WEBSOCKET",
+    "RouteSelectionExpression": "$request.body.action"
+   }
+  },
+  "mywsapidefaultRouteDefaultIntegrationFFCB3BA9": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "IntegrationType": "MOCK",
+    "IntegrationUri": ""
+   }
+  },
+  "mywsapidefaultRouteE9382DF8": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "$default",
+    "Target": "integrations/${mywsapidefaultRouteDefaultIntegrationFFCB3BA9}"
+   }
+  },
+  "mywsapiconnectRouteDynamodbPutItem9E189A39": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "ContentHandlingStrategy": "CONVERT_TO_BINARY",
+    "CredentialsArn": "${ApiGatewayRoleD2518903.Arn}",
+    "IntegrationMethod": "POST",
+    "IntegrationType": "AWS",
+    "IntegrationUri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:dynamodb:action/PutItem",
+    "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+    "RequestParameters": {
+     "integration.request.header.Content-Type": "'application/x-www-form-urlencoded'"
+    },
+    "RequestTemplates": {
+     "application/json": "{\"TableName\":\"${MyTable794EDED1}\",\"Item\":{\"id\":{\"S\":\"$context.requestId\"}}}"
+    },
+    "TemplateSelectionExpression": "\\$default",
+    "TimeoutInMillis": 10000
+   }
+  },
+  "mywsapiconnectRoute45A0ED6A": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "$connect",
+    "Target": "integrations/${mywsapiconnectRouteDynamodbPutItem9E189A39}"
+   }
+  },
+  "DevStage520A913F": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AutoDeploy": true,
+    "StageName": "dev"
+   }
+  }
+ },
+ "unresolved": []
+}

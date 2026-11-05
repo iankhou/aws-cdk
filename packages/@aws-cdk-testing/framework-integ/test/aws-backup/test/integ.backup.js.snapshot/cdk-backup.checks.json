@@ -1,0 +1,155 @@
+{
+ "stackName": "cdk-backup",
+ "summary": {
+  "pass": 7,
+  "no handler": 8
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "FileSystem",
+   "type": "AWS::EFS::FileSystem",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Vault23237E5B",
+   "type": "AWS::Backup::BackupVault",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SecondaryVault67665B5E",
+   "type": "AWS::Backup::BackupVault",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ThirdVault3441C01E",
+   "type": "AWS::Backup::BackupVault",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "PlanDAF4E53A",
+   "type": "AWS::Backup::BackupPlan",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "PlanSelectionRole6D10F4B7",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PlanSelectionRole6D10F4B7",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "backup.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22backup.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "PlanSelectionRole6D10F4B7",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+   ]
+  },
+  {
+   "logicalId": "PlanSelectionF88CBC04",
+   "type": "AWS::Backup::BackupSelection",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TokenLockVaultDE8332F2",
+   "type": "AWS::Backup::BackupVault",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TokenPlan40E6C026",
+   "type": "AWS::Backup::BackupPlan",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

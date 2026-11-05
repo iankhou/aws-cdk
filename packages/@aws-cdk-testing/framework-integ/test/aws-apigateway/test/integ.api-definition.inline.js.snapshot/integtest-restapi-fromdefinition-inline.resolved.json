@@ -1,0 +1,125 @@
+{
+ "version": "1",
+ "stackName": "integtest-restapi-fromdefinition-inline",
+ "resources": {
+  "myapi4C7BF186": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Body": {
+     "openapi": "3.0.2",
+     "info": {
+      "version": "1.0.0",
+      "title": "Test API for CDK"
+     },
+     "paths": {
+      "/pets": {
+       "get": {
+        "summary": "Test Method",
+        "operationId": "testMethod",
+        "responses": {
+         "200": {
+          "description": "A paged array of pets",
+          "content": {
+           "application/json": {
+            "schema": {
+             "$ref": "#/components/schemas/Empty"
+            }
+           }
+          }
+         }
+        },
+        "x-amazon-apigateway-integration": {
+         "responses": {
+          "default": {
+           "statusCode": "200"
+          }
+         },
+         "requestTemplates": {
+          "application/json": "{\"statusCode\": 200}"
+         },
+         "passthroughBehavior": "when_no_match",
+         "type": "mock"
+        }
+       }
+      }
+     },
+     "components": {
+      "schemas": {
+       "Empty": {
+        "title": "Empty Schema",
+        "type": "object"
+       }
+      }
+     }
+    },
+    "Name": "my-api"
+   }
+  },
+  "myapiCloudWatchRole095452E5": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "myapiAccountEC421A0A": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": "${myapiCloudWatchRole095452E5.Arn}"
+   },
+   "DependsOn": [
+    "myapi4C7BF186"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "myapiDeployment92F2CB49a59bca458e4fac1fcd742212ded42a65": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${myapi4C7BF186}"
+   },
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "myapiDeploymentStageprod298F01AF": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${myapiDeployment92F2CB49a59bca458e4fac1fcd742212ded42a65}",
+    "RestApiId": "${myapi4C7BF186}",
+    "StageName": "prod"
+   },
+   "DependsOn": [
+    "myapiAccountEC421A0A"
+   ]
+  }
+ },
+ "outputs": {
+  "myapiEndpoint3628AFE3": {
+   "Value": "https://${myapi4C7BF186}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${myapiDeploymentStageprod298F01AF}/"
+  },
+  "PetsURL": {
+   "Value": "https://${myapi4C7BF186}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${myapiDeploymentStageprod298F01AF}/pets"
+  }
+ },
+ "unresolved": [],
+ "accountWide": [
+  "myapiAccountEC421A0A"
+ ]
+}

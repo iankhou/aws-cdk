@@ -1,0 +1,170 @@
+{
+ "stackName": "aws-cdk-cloudwatch",
+ "summary": {
+  "pass": 9
+ },
+ "results": [
+  {
+   "logicalId": "queue",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 3,
+   "actual": 3
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Metrics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Expression": "m1+m2",
+     "Id": "expr_1",
+     "Label": "Total Messages",
+     "ReturnData": true
+    },
+    {
+     "Id": "m1",
+     "Label": "Visible Messages",
+     "MetricStat": {
+      "Metric": {
+       "Dimensions": [
+        {
+         "Name": "QueueName",
+         "Value": "${queue.Name}"
+        }
+       ],
+       "MetricName": "ApproximateNumberOfMessagesVisible",
+       "Namespace": "AWS/SQS"
+      },
+      "Period": 60,
+      "Stat": "Average"
+     },
+     "ReturnData": false
+    },
+    {
+     "Id": "m2",
+     "Label": "NotVisible Messages",
+     "MetricStat": {
+      "Metric": {
+       "Dimensions": [
+        {
+         "Name": "QueueName",
+         "Value": "${queue.Name}"
+        }
+       ],
+       "MetricName": "ApproximateNumberOfMessagesNotVisible",
+       "Namespace": "AWS/SQS"
+      },
+      "Period": 60,
+      "Stat": "Average"
+     },
+     "ReturnData": false
+    }
+   ],
+   "actual": [
+    {
+     "Id": "expr_1",
+     "Expression": "m1+m2",
+     "Label": "Total Messages",
+     "ReturnData": true
+    },
+    {
+     "Id": "m1",
+     "MetricStat": {
+      "Metric": {
+       "Namespace": "AWS/SQS",
+       "MetricName": "ApproximateNumberOfMessagesVisible",
+       "Dimensions": [
+        {
+         "Name": "QueueName",
+         "Value": "${queue.Name}"
+        }
+       ]
+      },
+      "Period": 60,
+      "Stat": "Average"
+     },
+     "Label": "Visible Messages",
+     "ReturnData": false
+    },
+    {
+     "Id": "m2",
+     "MetricStat": {
+      "Metric": {
+       "Namespace": "AWS/SQS",
+       "MetricName": "ApproximateNumberOfMessagesNotVisible",
+       "Dimensions": [
+        {
+         "Name": "QueueName",
+         "Value": "${queue.Name}"
+        }
+       ]
+      },
+      "Period": 60,
+      "Stat": "Average"
+     },
+     "Label": "NotVisible Messages",
+     "ReturnData": false
+    }
+   ]
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "DashboardName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyMathExpressionDashboardName",
+   "actual": "MyMathExpressionDashboardName"
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "DashboardBody",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Total messages in queue\",\"region\":\"${AWS::Region}\",\"annotations\":{\"alarms\":[\"arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}\"]},\"yAxis\":{},\"accountId\":\"123456789012\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"More total messages in queue with alarm annotation\",\"region\":\"${AWS::Region}\",\"metrics\":[[{\"label\":\"Total Messages\",\"expression\":\"m1+m2\",\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"Visible Messages\",\"id\":\"m1\",\"visible\":false,\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesNotVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"NotVisible Messages\",\"id\":\"m2\",\"visible\":false,\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"Visible Messages\",\"period\":10,\"yAxis\":\"right\"}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesNotVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"NotVisible Messages\",\"period\":30,\"yAxis\":\"right\"}]],\"annotations\":{\"horizontal\":[{\"label\":\"Total Messages >= 100 for 3 datapoints within 3 minutes\",\"value\":100,\"yAxis\":\"left\"}]},\"yAxis\":{},\"accountId\":\"123456789012\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":12,\"properties\":{\"view\":\"pie\",\"title\":\"Percentage of messages in each queue as pie chart\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"Visible Messages\",\"period\":10}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesNotVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"NotVisible Messages\",\"period\":30}]],\"yAxis\":{},\"setPeriodToTimeRange\":true,\"accountId\":\"123456789012\"}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":18,\"properties\":{\"view\":\"singleValue\",\"title\":\"Current total messages in queue\",\"region\":\"${AWS::Region}\",\"metrics\":[[{\"label\":\"Total Messages\",\"expression\":\"m1+m2\",\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"Visible Messages\",\"id\":\"m1\",\"visible\":false,\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesNotVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"NotVisible Messages\",\"id\":\"m2\",\"visible\":false,\"period\":60}]],\"accountId\":\"123456789012\"}}]}",
+   "actual": "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Total messages in queue\",\"region\":\"${AWS::Region}\",\"annotations\":{\"alarms\":[\"arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}\"]},\"yAxis\":{},\"accountId\":\"123456789012\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"More total messages in queue with alarm annotation\",\"region\":\"${AWS::Region}\",\"metrics\":[[{\"label\":\"Total Messages\",\"expression\":\"m1+m2\",\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"Visible Messages\",\"id\":\"m1\",\"visible\":false,\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesNotVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"NotVisible Messages\",\"id\":\"m2\",\"visible\":false,\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"Visible Messages\",\"period\":10,\"yAxis\":\"right\"}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesNotVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"NotVisible Messages\",\"period\":30,\"yAxis\":\"right\"}]],\"annotations\":{\"horizontal\":[{\"label\":\"Total Messages >= 100 for 3 datapoints within 3 minutes\",\"value\":100,\"yAxis\":\"left\"}]},\"yAxis\":{},\"accountId\":\"123456789012\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":12,\"properties\":{\"view\":\"pie\",\"title\":\"Percentage of messages in each queue as pie chart\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"Visible Messages\",\"period\":10}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesNotVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"NotVisible Messages\",\"period\":30}]],\"yAxis\":{},\"setPeriodToTimeRange\":true,\"accountId\":\"123456789012\"}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":18,\"properties\":{\"view\":\"singleValue\",\"title\":\"Current total messages in queue\",\"region\":\"${AWS::Region}\",\"metrics\":[[{\"label\":\"Total Messages\",\"expression\":\"m1+m2\",\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"Visible Messages\",\"id\":\"m1\",\"visible\":false,\"period\":60}],[\"AWS/SQS\",\"ApproximateNumberOfMessagesNotVisible\",\"QueueName\",\"${queue.Name}\",{\"label\":\"NotVisible Messages\",\"id\":\"m2\",\"visible\":false,\"period\":60}]],\"accountId\":\"123456789012\"}}]}"
+  }
+ ]
+}

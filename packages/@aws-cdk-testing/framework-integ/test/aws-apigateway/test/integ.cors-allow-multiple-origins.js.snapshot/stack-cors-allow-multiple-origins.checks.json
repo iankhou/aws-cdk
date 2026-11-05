@@ -1,0 +1,605 @@
+{
+ "stackName": "stack-cors-allow-multiple-origins",
+ "summary": {
+  "pass": 52
+ },
+ "results": [
+  {
+   "logicalId": "corsapitest8682546E",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitest8682546E",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "cors-api-test",
+   "actual": "cors-api-test"
+  },
+  {
+   "logicalId": "corsapitestDeployment2BF1633A506e17bacbb92c0f9e65d8c89b158b9c",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitestDeployment2BF1633A506e17bacbb92c0f9e65d8c89b158b9c",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "corsapitestDeployment2BF1633A506e17bacbb92c0f9e65d8c89b158b9c",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitest8682546E}",
+   "actual": "${corsapitest8682546E}"
+  },
+  {
+   "logicalId": "corsapitestDeploymentStageprod8F31F2AB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitestDeploymentStageprod8F31F2AB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "corsapitestDeploymentStageprod8F31F2AB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitest8682546E}",
+   "actual": "${corsapitest8682546E}"
+  },
+  {
+   "logicalId": "corsapitestDeploymentStageprod8F31F2AB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitestDeployment2BF1633A506e17bacbb92c0f9e65d8c89b158b9c}",
+   "actual": "${corsapitestDeployment2BF1633A506e17bacbb92c0f9e65d8c89b158b9c}"
+  },
+  {
+   "logicalId": "corsapitestOPTIONS15560589",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitestOPTIONS15560589",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitest8682546E}",
+   "actual": "${corsapitest8682546E}"
+  },
+  {
+   "logicalId": "corsapitestOPTIONS15560589",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitestOPTIONS15560589[1]}",
+   "actual": "${corsapitestOPTIONS15560589[1]}"
+  },
+  {
+   "logicalId": "corsapitestOPTIONS15560589",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "OPTIONS",
+   "actual": "OPTIONS"
+  },
+  {
+   "logicalId": "corsapitestOPTIONS15560589",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "corsapitestOPTIONS15560589",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ApiKeyRequired",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "corsapitestOPTIONS15560589",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "204": {
+     "statusCode": "204",
+     "responseParameters": {
+      "method.response.header.Access-Control-Allow-Headers": true,
+      "method.response.header.Access-Control-Allow-Origin": true,
+      "method.response.header.Vary": true,
+      "method.response.header.Access-Control-Allow-Methods": true
+     }
+    }
+   },
+   "actual": {
+    "204": {
+     "statusCode": "204",
+     "responseParameters": {
+      "method.response.header.Access-Control-Allow-Headers": true,
+      "method.response.header.Access-Control-Allow-Methods": true,
+      "method.response.header.Access-Control-Allow-Origin": true,
+      "method.response.header.Vary": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "corsapitestOPTIONS15560589",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ statusCode: 200 }"
+    },
+    "integrationResponses": {
+     "204": {
+      "statusCode": "204",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+       "method.response.header.Access-Control-Allow-Origin": "'https://amazon.com'",
+       "method.response.header.Vary": "'Origin'",
+       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+      },
+      "responseTemplates": {
+       "application/json": "#set($origin = $input.params().header.get(\"Origin\"))\n#if($origin == \"\")\n  #set($origin = $input.params().header.get(\"origin\"))\n#end\n#if($origin == \"https://twitch.tv\" || $origin == \"https://aws.amazon.com\")\n  #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin)\n#end"
+      }
+     }
+    }
+   },
+   "actual": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ statusCode: 200 }"
+    },
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${corsapitestOPTIONS15560589[1]}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "204": {
+      "statusCode": "204",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+       "method.response.header.Access-Control-Allow-Origin": "'https://amazon.com'",
+       "method.response.header.Vary": "'Origin'"
+      },
+      "responseTemplates": {
+       "application/json": "#set($origin = $input.params().header.get(\"Origin\"))\n#if($origin == \"\")\n  #set($origin = $input.params().header.get(\"origin\"))\n#end\n#if($origin == \"https://twitch.tv\" || $origin == \"https://aws.amazon.com\")\n  #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin)\n#end"
+      }
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "corsapitestmyresource73D41BDD",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitestmyresource73D41BDD",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitestOPTIONS15560589[1]}",
+   "actual": "${corsapitestOPTIONS15560589[1]}"
+  },
+  {
+   "logicalId": "corsapitestmyresource73D41BDD",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "my-resource",
+   "actual": "my-resource"
+  },
+  {
+   "logicalId": "corsapitestmyresource73D41BDD",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitest8682546E}",
+   "actual": "${corsapitest8682546E}"
+  },
+  {
+   "logicalId": "corsapitestmyresourceOPTIONSD5275318",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitestmyresourceOPTIONSD5275318",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitest8682546E}",
+   "actual": "${corsapitest8682546E}"
+  },
+  {
+   "logicalId": "corsapitestmyresourceOPTIONSD5275318",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitestmyresource73D41BDD}",
+   "actual": "${corsapitestmyresource73D41BDD}"
+  },
+  {
+   "logicalId": "corsapitestmyresourceOPTIONSD5275318",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "OPTIONS",
+   "actual": "OPTIONS"
+  },
+  {
+   "logicalId": "corsapitestmyresourceOPTIONSD5275318",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "corsapitestmyresourceOPTIONSD5275318",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ApiKeyRequired",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "corsapitestmyresourceOPTIONSD5275318",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "204": {
+     "statusCode": "204",
+     "responseParameters": {
+      "method.response.header.Access-Control-Allow-Headers": true,
+      "method.response.header.Access-Control-Allow-Origin": true,
+      "method.response.header.Vary": true,
+      "method.response.header.Access-Control-Allow-Methods": true
+     }
+    }
+   },
+   "actual": {
+    "204": {
+     "statusCode": "204",
+     "responseParameters": {
+      "method.response.header.Access-Control-Allow-Headers": true,
+      "method.response.header.Access-Control-Allow-Methods": true,
+      "method.response.header.Access-Control-Allow-Origin": true,
+      "method.response.header.Vary": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "corsapitestmyresourceOPTIONSD5275318",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ statusCode: 200 }"
+    },
+    "integrationResponses": {
+     "204": {
+      "statusCode": "204",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+       "method.response.header.Access-Control-Allow-Origin": "'https://amazon.com'",
+       "method.response.header.Vary": "'Origin'",
+       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+      },
+      "responseTemplates": {
+       "application/json": "#set($origin = $input.params().header.get(\"Origin\"))\n#if($origin == \"\")\n  #set($origin = $input.params().header.get(\"origin\"))\n#end\n#if($origin == \"https://twitch.tv\" || $origin == \"https://aws.amazon.com\")\n  #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin)\n#end"
+      }
+     }
+    }
+   },
+   "actual": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ statusCode: 200 }"
+    },
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${corsapitestmyresource73D41BDD}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "204": {
+      "statusCode": "204",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+       "method.response.header.Access-Control-Allow-Origin": "'https://amazon.com'",
+       "method.response.header.Vary": "'Origin'"
+      },
+      "responseTemplates": {
+       "application/json": "#set($origin = $input.params().header.get(\"Origin\"))\n#if($origin == \"\")\n  #set($origin = $input.params().header.get(\"origin\"))\n#end\n#if($origin == \"https://twitch.tv\" || $origin == \"https://aws.amazon.com\")\n  #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin)\n#end"
+      }
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionstackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresourceB82B6C26",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionstackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresourceB82B6C26",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionstackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresourceB82B6C26",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${handlerE1533BD5}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${handlerE1533BD5}"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionstackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresourceB82B6C26",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionstackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresourceB82B6C26",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${corsapitest8682546E}/prod/GET/my-resource",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${corsapitest8682546E}/prod/GET/my-resource"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionTeststackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresource29B41ABB",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionTeststackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresource29B41ABB",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionTeststackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresource29B41ABB",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${handlerE1533BD5}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${handlerE1533BD5}"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionTeststackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresource29B41ABB",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "corsapitestmyresourceGETApiPermissionTeststackcorsallowmultipleoriginscorsapitestC473FAE8GETmyresource29B41ABB",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${corsapitest8682546E}/test-invoke-stage/GET/my-resource",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${corsapitest8682546E}/test-invoke-stage/GET/my-resource"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGET844C52EA",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGET844C52EA",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitest8682546E}",
+   "actual": "${corsapitest8682546E}"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGET844C52EA",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${corsapitestmyresource73D41BDD}",
+   "actual": "${corsapitestmyresource73D41BDD}"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGET844C52EA",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGET844C52EA",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "corsapitestmyresourceGET844C52EA",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${handlerE1533BD5}/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${handlerE1533BD5}/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${corsapitestmyresource73D41BDD}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "handlerServiceRole187D5A5A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "handlerServiceRole187D5A5A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "handlerServiceRole187D5A5A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "handlerE1533BD5",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "handlerE1533BD5",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "handlerE1533BD5",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "handlerE1533BD5",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${handlerServiceRole187D5A5A}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${handlerServiceRole187D5A5A}"
+  }
+ ]
+}

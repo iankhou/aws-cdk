@@ -1,0 +1,590 @@
+{
+ "stackName": "aws-cdk-aws-apigateway-stepfunctions-startexecution",
+ "summary": {
+  "pass": 39,
+  "fail": 2
+ },
+ "results": [
+  {
+   "logicalId": "myrestapiBAC2BF45",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiBAC2BF45",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "my-rest-api",
+   "actual": "my-rest-api"
+  },
+  {
+   "logicalId": "myrestapiDeployment010A9D4F8d8391dd5e41be487121f43257df00d7",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiDeployment010A9D4F8d8391dd5e41be487121f43257df00d7",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "myrestapiDeployment010A9D4F8d8391dd5e41be487121f43257df00d7",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiBAC2BF45}",
+   "actual": "${myrestapiBAC2BF45}"
+  },
+  {
+   "logicalId": "myrestapiDeploymentStageprod3140E1BE",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiDeploymentStageprod3140E1BE",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "myrestapiDeploymentStageprod3140E1BE",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiBAC2BF45}",
+   "actual": "${myrestapiBAC2BF45}"
+  },
+  {
+   "logicalId": "myrestapiDeploymentStageprod3140E1BE",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiDeployment010A9D4F8d8391dd5e41be487121f43257df00d7}",
+   "actual": "${myrestapiDeployment010A9D4F8d8391dd5e41be487121f43257df00d7}"
+  },
+  {
+   "logicalId": "myrestapiGETStartSyncExecutionRoleC284C05B",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiGETStartSyncExecutionRoleC284C05B",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "myrestapiGETStartSyncExecutionRoleDefaultPolicy8B2F6ADF",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiGETStartSyncExecutionRoleDefaultPolicy8B2F6ADF",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "myrestapiGETStartSyncExecutionRoleDefaultPolicy8B2F6ADF",
+   "actual": "myrestapiGETStartSyncExecutionRoleDefaultPolicy8B2F6ADF"
+  },
+  {
+   "logicalId": "myrestapiGETStartSyncExecutionRoleDefaultPolicy8B2F6ADF",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartSyncExecution",
+      "Effect": "Allow",
+      "Resource": "${StateMachine2E01A3A5}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartSyncExecution",
+      "Effect": "Allow",
+      "Resource": "${StateMachine2E01A3A5}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "myrestapiGETStartSyncExecutionRoleDefaultPolicy8B2F6ADF",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiGETStartSyncExecutionRoleC284C05B}",
+   "actual": "${myrestapiGETStartSyncExecutionRoleC284C05B}"
+  },
+  {
+   "logicalId": "myrestapiGET3A49A218",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiGET3A49A218",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiBAC2BF45}",
+   "actual": "${myrestapiBAC2BF45}"
+  },
+  {
+   "logicalId": "myrestapiGET3A49A218",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiGET3A49A218[1]}",
+   "actual": "${myrestapiGET3A49A218[1]}"
+  },
+  {
+   "logicalId": "myrestapiGET3A49A218",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "myrestapiGET3A49A218",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myrestapiGET3A49A218",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "fail",
+   "expected": {
+    "200": {
+     "statusCode": "200",
+     "responseModels": {
+      "application/json": "Empty"
+     }
+    },
+    "400": {
+     "statusCode": "400",
+     "responseModels": {
+      "application/json": "Error"
+     }
+    },
+    "500": {
+     "statusCode": "500",
+     "responseModels": {
+      "application/json": "Error"
+     }
+    }
+   },
+   "actual": {
+    "200": {
+     "statusCode": "200",
+     "responseParameters": {
+      "method.response.header.Access-Control-Allow-Origin": true
+     }
+    },
+    "400": {
+     "statusCode": "400",
+     "responseModels": {
+      "application/json": "Error"
+     }
+    },
+    "500": {
+     "statusCode": "500",
+     "responseModels": {
+      "application/json": "Error"
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "myrestapiGET3A49A218",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:states:action/StartSyncExecution",
+    "credentials": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${myrestapiGETStartSyncExecutionRoleC284C05B}",
+    "requestTemplates": {
+     "application/json": "## Velocity Template used for API Gateway request mapping template\n##\n## This template forwards the request body, header, path, and querystring\n## to the execution input of the state machine.\n##\n## \"@@\" is used here as a placeholder for '\"' to avoid using escape characters.\n\n#set($inputString = '')\n#set($includeHeaders = false)\n#set($includeQueryString = true)\n#set($includePath = true)\n#set($includeAuthorizer = false)\n#set($allParams = $input.params())\n{\n    \"stateMachineArn\": \"${StateMachine2E01A3A5}\",\n\n    #set($inputString = \"$inputString,@@body@@: $input.body\")\n\n    #if ($includeHeaders)\n        #set($inputString = \"$inputString, @@header@@:{\")\n        #foreach($paramName in $allParams.header.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.header.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n        \n    #end\n\n    #if ($includeQueryString)\n        #set($inputString = \"$inputString, @@querystring@@:{\")\n        #foreach($paramName in $allParams.querystring.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.querystring.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n\n    #if ($includePath)\n        #set($inputString = \"$inputString, @@path@@:{\")\n        #foreach($paramName in $allParams.path.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.path.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n    \n    #if ($includeAuthorizer)\n        #set($inputString = \"$inputString, @@authorizer@@:{\")\n        #foreach($paramName in $context.authorizer.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($context.authorizer.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n\n    #set($requestContext = \"\")\n    ## Check if the request context should be included as part of the execution input\n    #if($requestContext && !$requestContext.empty)\n        #set($inputString = \"$inputString,\")\n        #set($inputString = \"$inputString @@requestContext@@: $requestContext\")\n    #end\n\n    #set($inputString = \"$inputString}\")\n    #set($inputString = $inputString.replaceAll(\"@@\",'\"'))\n    #set($len = $inputString.length() - 1)\n    \"input\": \"{$util.escapeJavaScript($inputString.substring(1,$len)).replaceAll(\"\\\\'\",\"'\")}\"\n}\n"
+    },
+    "passthroughBehavior": "NEVER",
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Origin": "'*'"
+      }
+     }
+    }
+   },
+   "actual": {
+    "type": "AWS",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:states:action/StartSyncExecution",
+    "credentials": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${myrestapiGETStartSyncExecutionRoleC284C05B}",
+    "requestTemplates": {
+     "application/json": "## Velocity Template used for API Gateway request mapping template\n##\n## This template forwards the request body, header, path, and querystring\n## to the execution input of the state machine.\n##\n## \"@@\" is used here as a placeholder for '\"' to avoid using escape characters.\n\n#set($inputString = '')\n#set($includeHeaders = false)\n#set($includeQueryString = true)\n#set($includePath = true)\n#set($includeAuthorizer = false)\n#set($allParams = $input.params())\n{\n    \"stateMachineArn\": \"${StateMachine2E01A3A5}\",\n\n    #set($inputString = \"$inputString,@@body@@: $input.body\")\n\n    #if ($includeHeaders)\n        #set($inputString = \"$inputString, @@header@@:{\")\n        #foreach($paramName in $allParams.header.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.header.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n        \n    #end\n\n    #if ($includeQueryString)\n        #set($inputString = \"$inputString, @@querystring@@:{\")\n        #foreach($paramName in $allParams.querystring.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.querystring.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n\n    #if ($includePath)\n        #set($inputString = \"$inputString, @@path@@:{\")\n        #foreach($paramName in $allParams.path.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.path.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n    \n    #if ($includeAuthorizer)\n        #set($inputString = \"$inputString, @@authorizer@@:{\")\n        #foreach($paramName in $context.authorizer.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($context.authorizer.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n\n    #set($requestContext = \"\")\n    ## Check if the request context should be included as part of the execution input\n    #if($requestContext && !$requestContext.empty)\n        #set($inputString = \"$inputString,\")\n        #set($inputString = \"$inputString @@requestContext@@: $requestContext\")\n    #end\n\n    #set($inputString = \"$inputString}\")\n    #set($inputString = $inputString.replaceAll(\"@@\",'\"'))\n    #set($len = $inputString.length() - 1)\n    \"input\": \"{$util.escapeJavaScript($inputString.substring(1,$len)).replaceAll(\"\\\\'\",\"'\")}\"\n}\n"
+    },
+    "passthroughBehavior": "NEVER",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myrestapiGET3A49A218[1]}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Origin": "'*'"
+      }
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "myrestapiPOSTStartSyncExecutionRole7AFBE835",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiPOSTStartSyncExecutionRole7AFBE835",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "myrestapiPOSTStartSyncExecutionRoleDefaultPolicy7D411AE9",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiPOSTStartSyncExecutionRoleDefaultPolicy7D411AE9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "myrestapiPOSTStartSyncExecutionRoleDefaultPolicy7D411AE9",
+   "actual": "myrestapiPOSTStartSyncExecutionRoleDefaultPolicy7D411AE9"
+  },
+  {
+   "logicalId": "myrestapiPOSTStartSyncExecutionRoleDefaultPolicy7D411AE9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartSyncExecution",
+      "Effect": "Allow",
+      "Resource": "${StateMachine2E01A3A5}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartSyncExecution",
+      "Effect": "Allow",
+      "Resource": "${StateMachine2E01A3A5}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "myrestapiPOSTStartSyncExecutionRoleDefaultPolicy7D411AE9",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiPOSTStartSyncExecutionRole7AFBE835}",
+   "actual": "${myrestapiPOSTStartSyncExecutionRole7AFBE835}"
+  },
+  {
+   "logicalId": "myrestapiPOST155A9625",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myrestapiPOST155A9625",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiBAC2BF45}",
+   "actual": "${myrestapiBAC2BF45}"
+  },
+  {
+   "logicalId": "myrestapiPOST155A9625",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myrestapiGET3A49A218[1]}",
+   "actual": "${myrestapiGET3A49A218[1]}"
+  },
+  {
+   "logicalId": "myrestapiPOST155A9625",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "POST",
+   "actual": "POST"
+  },
+  {
+   "logicalId": "myrestapiPOST155A9625",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myrestapiPOST155A9625",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "fail",
+   "expected": {
+    "200": {
+     "statusCode": "200",
+     "responseModels": {
+      "application/json": "Empty"
+     }
+    },
+    "400": {
+     "statusCode": "400",
+     "responseModels": {
+      "application/json": "Error"
+     }
+    },
+    "500": {
+     "statusCode": "500",
+     "responseModels": {
+      "application/json": "Error"
+     }
+    }
+   },
+   "actual": {
+    "200": {
+     "statusCode": "200",
+     "responseParameters": {
+      "method.response.header.Access-Control-Allow-Origin": true
+     }
+    },
+    "400": {
+     "statusCode": "400",
+     "responseModels": {
+      "application/json": "Error"
+     }
+    },
+    "500": {
+     "statusCode": "500",
+     "responseModels": {
+      "application/json": "Error"
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "myrestapiPOST155A9625",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:states:action/StartSyncExecution",
+    "credentials": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${myrestapiPOSTStartSyncExecutionRole7AFBE835}",
+    "requestTemplates": {
+     "application/json": "## Velocity Template used for API Gateway request mapping template\n##\n## This template forwards the request body, header, path, and querystring\n## to the execution input of the state machine.\n##\n## \"@@\" is used here as a placeholder for '\"' to avoid using escape characters.\n\n#set($inputString = '')\n#set($includeHeaders = false)\n#set($includeQueryString = true)\n#set($includePath = true)\n#set($includeAuthorizer = false)\n#set($allParams = $input.params())\n{\n    \"stateMachineArn\": \"${StateMachine2E01A3A5}\",\n\n    #set($inputString = \"$inputString,@@body@@: $input.body\")\n\n    #if ($includeHeaders)\n        #set($inputString = \"$inputString, @@header@@:{\")\n        #foreach($paramName in $allParams.header.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.header.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n        \n    #end\n\n    #if ($includeQueryString)\n        #set($inputString = \"$inputString, @@querystring@@:{\")\n        #foreach($paramName in $allParams.querystring.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.querystring.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n\n    #if ($includePath)\n        #set($inputString = \"$inputString, @@path@@:{\")\n        #foreach($paramName in $allParams.path.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.path.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n    \n    #if ($includeAuthorizer)\n        #set($inputString = \"$inputString, @@authorizer@@:{\")\n        #foreach($paramName in $context.authorizer.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($context.authorizer.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n\n    #set($requestContext = \"\")\n    ## Check if the request context should be included as part of the execution input\n    #if($requestContext && !$requestContext.empty)\n        #set($inputString = \"$inputString,\")\n        #set($inputString = \"$inputString @@requestContext@@: $requestContext\")\n    #end\n\n    #set($inputString = \"$inputString}\")\n    #set($inputString = $inputString.replaceAll(\"@@\",'\"'))\n    #set($len = $inputString.length() - 1)\n    \"input\": \"{$util.escapeJavaScript($inputString.substring(1,$len)).replaceAll(\"\\\\'\",\"'\")}\"\n}\n"
+    },
+    "passthroughBehavior": "NEVER",
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Origin": "'*'"
+      }
+     }
+    }
+   },
+   "actual": {
+    "type": "AWS",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:states:action/StartSyncExecution",
+    "credentials": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${myrestapiPOSTStartSyncExecutionRole7AFBE835}",
+    "requestTemplates": {
+     "application/json": "## Velocity Template used for API Gateway request mapping template\n##\n## This template forwards the request body, header, path, and querystring\n## to the execution input of the state machine.\n##\n## \"@@\" is used here as a placeholder for '\"' to avoid using escape characters.\n\n#set($inputString = '')\n#set($includeHeaders = false)\n#set($includeQueryString = true)\n#set($includePath = true)\n#set($includeAuthorizer = false)\n#set($allParams = $input.params())\n{\n    \"stateMachineArn\": \"${StateMachine2E01A3A5}\",\n\n    #set($inputString = \"$inputString,@@body@@: $input.body\")\n\n    #if ($includeHeaders)\n        #set($inputString = \"$inputString, @@header@@:{\")\n        #foreach($paramName in $allParams.header.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.header.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n        \n    #end\n\n    #if ($includeQueryString)\n        #set($inputString = \"$inputString, @@querystring@@:{\")\n        #foreach($paramName in $allParams.querystring.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.querystring.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n\n    #if ($includePath)\n        #set($inputString = \"$inputString, @@path@@:{\")\n        #foreach($paramName in $allParams.path.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($allParams.path.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n    \n    #if ($includeAuthorizer)\n        #set($inputString = \"$inputString, @@authorizer@@:{\")\n        #foreach($paramName in $context.authorizer.keySet())\n            #set($inputString = \"$inputString @@$paramName@@: @@$util.escapeJavaScript($context.authorizer.get($paramName))@@\")\n            #if($foreach.hasNext)\n                #set($inputString = \"$inputString,\")\n            #end\n        #end\n        #set($inputString = \"$inputString }\")\n    #end\n\n    #set($requestContext = \"\")\n    ## Check if the request context should be included as part of the execution input\n    #if($requestContext && !$requestContext.empty)\n        #set($inputString = \"$inputString,\")\n        #set($inputString = \"$inputString @@requestContext@@: $requestContext\")\n    #end\n\n    #set($inputString = \"$inputString}\")\n    #set($inputString = $inputString.replaceAll(\"@@\",'\"'))\n    #set($len = $inputString.length() - 1)\n    \"input\": \"{$util.escapeJavaScript($inputString.substring(1,$len)).replaceAll(\"\\\\'\",\"'\")}\"\n}\n"
+    },
+    "passthroughBehavior": "NEVER",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myrestapiGET3A49A218[1]}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Origin": "'*'"
+      }
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "passTask",
+    "States": {
+     "passTask": {
+      "Type": "Pass",
+      "InputPath": "$.somekey",
+      "End": true
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "passTask",
+    "States": {
+     "passTask": {
+      "Type": "Pass",
+      "InputPath": "$.somekey",
+      "End": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "StateMachineType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "EXPRESS",
+   "actual": "EXPRESS"
+  }
+ ]
+}

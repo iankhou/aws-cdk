@@ -1,0 +1,21 @@
+{
+ "version": "1",
+ "stackName": "nested-stacks-multi-refs",
+ "resources": {
+  "Level1ABBD39B3": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "Nested1NestedStackNested1NestedStackResourceCD0AD36B": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": "https://s3.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4bdae5eef426be902bf557cb4e8586dca464f5907b710c68d9679f61d2b7eee7.json",
+    "Parameters": {
+     "referencetonestedstacksmultirefsLevel19FB2466DTopicName": "${Level1ABBD39B3.TopicName}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

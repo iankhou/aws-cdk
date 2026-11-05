@@ -1,0 +1,99 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-codebuild",
+ "resources": {
+  "CacheBucket41D9D0B0": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MyProjectRole9BBE5233": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyProjectRoleDefaultPolicyB19B7C29": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${CacheBucket41D9D0B0.Arn}",
+        "${CacheBucket41D9D0B0.Arn}/*"
+       ]
+      },
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectRoleDefaultPolicyB19B7C29",
+    "Roles": [
+     "${MyProjectRole9BBE5233}"
+    ]
+   }
+  },
+  "MyProject39F7B0AE": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:7.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": "${MyProjectRole9BBE5233.Arn}",
+    "Source": {
+     "BuildSpec": "{\n  \"build\": {\n    \"commands\": [\n      \"echo Hello\"\n    ]\n  },\n  \"cache\": {\n    \"paths\": [\n      \"/root/.cache/pip/**/*\"\n    ]\n  }\n}",
+     "Type": "NO_SOURCE"
+    },
+    "Cache": {
+     "Location": "${CacheBucket41D9D0B0}",
+     "Type": "S3"
+    },
+    "EncryptionKey": "alias/aws/s3"
+   }
+  }
+ },
+ "unresolved": []
+}

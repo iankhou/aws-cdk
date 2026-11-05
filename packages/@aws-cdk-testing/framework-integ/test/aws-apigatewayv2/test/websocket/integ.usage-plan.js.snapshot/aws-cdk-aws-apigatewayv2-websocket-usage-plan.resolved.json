@@ -1,0 +1,136 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-aws-apigatewayv2-websocket-usage-plan",
+ "resources": {
+  "WebSocketApi34BCF99B": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "WebSocketApi",
+    "ProtocolType": "WEBSOCKET",
+    "RouteSelectionExpression": "$request.body.action"
+   }
+  },
+  "WebSocketStageC46B7E43": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${WebSocketApi34BCF99B}",
+    "StageName": "dev"
+   }
+  },
+  "ApiKeyF9DDEE66": {
+   "Type": "AWS::ApiGateway::ApiKey",
+   "Properties": {
+    "CustomerId": "my-customer",
+    "Description": "Basic api-key",
+    "Enabled": true,
+    "GenerateDistinctId": true,
+    "Name": "my-api-key",
+    "Value": "MyApiKeyThatIsAtLeast20Characters"
+   }
+  },
+  "UsagePlanC18B28F1": {
+   "Type": "AWS::ApiGateway::UsagePlan",
+   "Properties": {
+    "ApiStages": [
+     {
+      "ApiId": "${WebSocketApi34BCF99B}",
+      "Stage": "dev"
+     },
+     {
+      "ApiId": "${WebSocketApi34BCF99B}",
+      "Stage": "dev2"
+     }
+    ],
+    "Description": "Basic usage plan",
+    "Quota": {
+     "Limit": 10000,
+     "Offset": 1,
+     "Period": "MONTH"
+    },
+    "Throttle": {
+     "BurstLimit": 200,
+     "RateLimit": 100
+    },
+    "UsagePlanName": "WebSocketUsagePlan"
+   },
+   "DependsOn": [
+    "WebSocketApi34BCF99B",
+    "WebSocketStageC46B7E43"
+   ]
+  },
+  "UsagePlanUsagePlanKeyResourceawscdkawsapigatewayv2websocketusageplanApiKey13D28EDFF7C5F9B8": {
+   "Type": "AWS::ApiGateway::UsagePlanKey",
+   "Properties": {
+    "KeyId": "${ApiKeyF9DDEE66}",
+    "KeyType": "API_KEY",
+    "UsagePlanId": "${UsagePlanC18B28F1}"
+   },
+   "DependsOn": [
+    "WebSocketApi34BCF99B",
+    "WebSocketStageC46B7E43"
+   ]
+  },
+  "WebSocketStage281A2E5CC": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${WebSocketApi34BCF99B}",
+    "StageName": "dev2"
+   }
+  },
+  "WebSocketStage327374806": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${WebSocketApi34BCF99B}",
+    "StageName": "dev3"
+   }
+  },
+  "RateLimitedApiKeyC2569A4F": {
+   "Type": "AWS::ApiGateway::ApiKey",
+   "Properties": {
+    "CustomerId": "my-customer",
+    "Description": "Basic rate-limited-api-key",
+    "Enabled": true,
+    "GenerateDistinctId": true,
+    "Name": "my-rate-limited-api-key",
+    "Value": "MyRateLimitedApiKeyThatIsAtLeast20Characters"
+   }
+  },
+  "RateLimitedApiKeyUsagePlanResource1CA5546B": {
+   "Type": "AWS::ApiGateway::UsagePlan",
+   "Properties": {
+    "ApiStages": [
+     {
+      "ApiId": "${WebSocketApi34BCF99B}",
+      "Stage": "dev3"
+     }
+    ],
+    "Quota": {
+     "Limit": 10000,
+     "Offset": 1,
+     "Period": "MONTH"
+    },
+    "Throttle": {
+     "BurstLimit": 200,
+     "RateLimit": 100
+    }
+   },
+   "DependsOn": [
+    "WebSocketApi34BCF99B",
+    "WebSocketStage327374806"
+   ]
+  },
+  "RateLimitedApiKeyUsagePlanResourceUsagePlanKeyResourceawscdkawsapigatewayv2websocketusageplanRateLimitedApiKey4FFB7A4516024339": {
+   "Type": "AWS::ApiGateway::UsagePlanKey",
+   "Properties": {
+    "KeyId": "${RateLimitedApiKeyC2569A4F}",
+    "KeyType": "API_KEY",
+    "UsagePlanId": "${RateLimitedApiKeyUsagePlanResource1CA5546B}"
+   },
+   "DependsOn": [
+    "WebSocketApi34BCF99B",
+    "WebSocketStage327374806"
+   ]
+  }
+ },
+ "unresolved": []
+}

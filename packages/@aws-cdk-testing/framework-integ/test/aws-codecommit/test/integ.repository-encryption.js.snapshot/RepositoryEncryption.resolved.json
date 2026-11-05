@@ -1,0 +1,34 @@
+{
+ "version": "1",
+ "stackName": "RepositoryEncryption",
+ "resources": {
+  "MyKey6AB29FA6": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MyCodecommitRepository26DB372B": {
+   "Type": "AWS::CodeCommit::Repository",
+   "Properties": {
+    "KmsKeyId": "${MyKey6AB29FA6.Arn}",
+    "RepositoryName": "my-test-repository"
+   }
+  }
+ },
+ "unresolved": []
+}

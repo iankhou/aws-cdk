@@ -1,0 +1,399 @@
+{
+ "stackName": "TokenAuthorizerIAMRoleInteg",
+ "summary": {
+  "pass": 34,
+  "no handler": 1,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyAuthorizerFunctionServiceRole8A34C19E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAuthorizerFunctionServiceRole8A34C19E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyAuthorizerFunctionServiceRole8A34C19E",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyAuthorizerFunction70F1223E",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAuthorizerFunction70F1223E",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyAuthorizerFunction70F1223E",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyAuthorizerFunction70F1223E",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyAuthorizerFunctionServiceRole8A34C19E}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyAuthorizerFunctionServiceRole8A34C19E}"
+  },
+  {
+   "logicalId": "authorizerRole06E70703",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "authorizerRole06E70703",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyAuthorizer6575980E",
+   "type": "AWS::ApiGateway::Authorizer",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyAuthorizerauthorizerInvokePolicy0F88B8E1",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAuthorizerauthorizerInvokePolicy0F88B8E1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyAuthorizerauthorizerInvokePolicy0F88B8E1",
+   "actual": "MyAuthorizerauthorizerInvokePolicy0F88B8E1"
+  },
+  {
+   "logicalId": "MyAuthorizerauthorizerInvokePolicy0F88B8E1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyAuthorizerFunction70F1223E}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyAuthorizerFunction70F1223E}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyAuthorizerFunction70F1223E}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyAuthorizerFunction70F1223E}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyAuthorizerauthorizerInvokePolicy0F88B8E1",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${authorizerRole06E70703}",
+   "actual": "${authorizerRole06E70703}"
+  },
+  {
+   "logicalId": "MyRestApi2D1F47A9",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApi2D1F47A9",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyRestApi",
+   "actual": "MyRestApi"
+  },
+  {
+   "logicalId": "MyRestApiCloudWatchRoleD4042E8E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiCloudWatchRoleD4042E8E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyRestApiCloudWatchRoleD4042E8E",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ]
+  },
+  {
+   "logicalId": "MyRestApiAccount2FB6DB7A",
+   "type": "AWS::ApiGateway::Account",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiAccount2FB6DB7A",
+   "type": "AWS::ApiGateway::Account",
+   "property": "CloudWatchRoleArn",
+   "status": "fail",
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRestApiCloudWatchRoleD4042E8E}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/TokenAuthorizerInteg-MyRestApiCloudWatchRoleD4042E8-3RWRgT45Jkn4"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentB555B58259401a546b13c99de2d05e5e255a9ede",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentB555B58259401a546b13c99de2d05e5e255a9ede",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentB555B58259401a546b13c99de2d05e5e255a9ede",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApi2D1F47A9}",
+   "actual": "${MyRestApi2D1F47A9}"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApi2D1F47A9}",
+   "actual": "${MyRestApi2D1F47A9}"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApiDeploymentB555B58259401a546b13c99de2d05e5e255a9ede}",
+   "actual": "${MyRestApiDeploymentB555B58259401a546b13c99de2d05e5e255a9ede}"
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApi2D1F47A9}",
+   "actual": "${MyRestApi2D1F47A9}"
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApiANY05143F93[1]}",
+   "actual": "${MyRestApiANY05143F93[1]}"
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ANY",
+   "actual": "ANY"
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CUSTOM",
+   "actual": "CUSTOM"
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizerId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyAuthorizer6575980E}",
+   "actual": "${MyAuthorizer6575980E}"
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "200": {
+     "statusCode": "200"
+    }
+   },
+   "actual": {
+    "200": {
+     "statusCode": "200"
+    }
+   }
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ \"statusCode\": 200 }"
+    },
+    "passthroughBehavior": "NEVER",
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200"
+     }
+    }
+   },
+   "actual": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ \"statusCode\": 200 }"
+    },
+    "passthroughBehavior": "NEVER",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${MyRestApiANY05143F93[1]}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200"
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  }
+ ]
+}

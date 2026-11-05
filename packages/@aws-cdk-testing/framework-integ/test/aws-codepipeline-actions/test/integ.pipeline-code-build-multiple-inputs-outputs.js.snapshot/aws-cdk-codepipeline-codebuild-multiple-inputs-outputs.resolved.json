@@ -1,0 +1,421 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-codepipeline-codebuild-multiple-inputs-outputs",
+ "resources": {
+  "MyRepoF4F48043": {
+   "Type": "AWS::CodeCommit::Repository",
+   "Properties": {
+    "RepositoryName": "MyIntegTestTempRepo"
+   }
+  },
+  "MyRepoawscdkcodepipelinecodebuildmultipleinputsoutputsPipeline314D3A85EventRule9F75D675": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "EventPattern": {
+     "source": [
+      "aws.codecommit"
+     ],
+     "resources": [
+      {
+       "Fn::GetAtt": [
+        "MyRepoF4F48043",
+        "Arn"
+       ]
+      }
+     ],
+     "detail-type": [
+      "CodeCommit Repository State Change"
+     ],
+     "detail": {
+      "event": [
+       "referenceCreated",
+       "referenceUpdated"
+      ],
+      "referenceName": [
+       "main"
+      ]
+     }
+    },
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${PipelineC660917D}",
+      "Id": "Target0",
+      "RoleArn": "${PipelineEventsRole46BEEA7C.Arn}"
+     }
+    ]
+   }
+  },
+  "MyBucketF68F3FF0": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "PipelineRoleD68726F7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codepipeline.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "PipelineRoleDefaultPolicyC7A05455": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${MyBucketF68F3FF0.Arn}",
+        "${MyBucketF68F3FF0.Arn}/*"
+       ]
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": "${PipelineRoleD68726F7.Arn}"
+      },
+      {
+       "Action": [
+        "codecommit:CancelUploadArchive",
+        "codecommit:GetBranch",
+        "codecommit:GetCommit",
+        "codecommit:GetUploadArchiveStatus",
+        "codecommit:UploadArchive"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "MyRepoF4F48043",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${MyBucketF68F3FF0.Arn}",
+        "${MyBucketF68F3FF0.Arn}/some/path"
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild",
+        "codebuild:StopBuild"
+       ],
+       "Effect": "Allow",
+       "Resource": "${MyBuildProject30DB9D6E.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "PipelineRoleDefaultPolicyC7A05455",
+    "Roles": [
+     "${PipelineRoleD68726F7}"
+    ]
+   }
+  },
+  "PipelineC660917D": {
+   "Type": "AWS::CodePipeline::Pipeline",
+   "Properties": {
+    "ArtifactStore": {
+     "Location": "${MyBucketF68F3FF0}",
+     "Type": "S3"
+    },
+    "RoleArn": "${PipelineRoleD68726F7.Arn}",
+    "Stages": [
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "AWS",
+         "Provider": "CodeCommit",
+         "Version": "1"
+        },
+        "Configuration": {
+         "RepositoryName": {
+          "Fn::GetAtt": [
+           "MyRepoF4F48043",
+           "Name"
+          ]
+         },
+         "BranchName": "main",
+         "PollForSourceChanges": false
+        },
+        "Name": "Source1",
+        "OutputArtifacts": [
+         {
+          "Name": "Artifact_Source_Source1"
+         }
+        ],
+        "RoleArn": "${PipelineRoleD68726F7.Arn}",
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "AWS",
+         "Provider": "S3",
+         "Version": "1"
+        },
+        "Configuration": {
+         "S3Bucket": "${MyBucketF68F3FF0}",
+         "S3ObjectKey": "some/path"
+        },
+        "Name": "Source2",
+        "OutputArtifacts": [
+         {
+          "Name": "Artifact_Source_Source2"
+         }
+        ],
+        "RoleArn": "${PipelineRoleD68726F7.Arn}",
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Source"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": "${MyBuildProject30DB9D6E}",
+         "PrimarySource": "Artifact_Source_Source1"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "Artifact_Source_Source1"
+         },
+         {
+          "Name": "Artifact_Source_Source2"
+         }
+        ],
+        "Name": "Build1",
+        "OutputArtifacts": [
+         {
+          "Name": "Artifact_Build_Build1_1"
+         },
+         {
+          "Name": "Artifact_Build_Build1_2"
+         }
+        ],
+        "RoleArn": "${PipelineRoleD68726F7.Arn}",
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Test",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": "${MyBuildProject30DB9D6E}",
+         "PrimarySource": "Artifact_Source_Source2"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "Artifact_Source_Source2"
+         },
+         {
+          "Name": "Artifact_Source_Source1"
+         }
+        ],
+        "Name": "Build2",
+        "OutputArtifacts": [
+         {
+          "Name": "CustomOutput2"
+         }
+        ],
+        "RoleArn": "${PipelineRoleD68726F7.Arn}",
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Build"
+     }
+    ]
+   },
+   "DependsOn": [
+    "PipelineRoleDefaultPolicyC7A05455",
+    "PipelineRoleD68726F7"
+   ]
+  },
+  "PipelineEventsRole46BEEA7C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "PipelineEventsRoleDefaultPolicyFF4FCCE0": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "codepipeline:StartPipelineExecution",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${PipelineC660917D}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "PipelineEventsRoleDefaultPolicyFF4FCCE0",
+    "Roles": [
+     "${PipelineEventsRole46BEEA7C}"
+    ]
+   }
+  },
+  "MyBuildProjectRole6B7E2258": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyBuildProjectRoleDefaultPolicy5604AA87": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyBuildProject30DB9D6E}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyBuildProject30DB9D6E}"
+       ]
+      },
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${MyBucketF68F3FF0.Arn}",
+        "${MyBucketF68F3FF0.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyBuildProjectRoleDefaultPolicy5604AA87",
+    "Roles": [
+     "${MyBuildProjectRole6B7E2258}"
+    ]
+   }
+  },
+  "MyBuildProject30DB9D6E": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:7.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": "${MyBuildProjectRole6B7E2258.Arn}",
+    "Source": {
+     "Type": "CODEPIPELINE"
+    }
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.MyRepoawscdkcodepipelinecodebuildmultipleinputsoutputsPipeline314D3A85EventRule9F75D675.Properties.EventPattern.resources.0",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Arn' attribute of the 'AWS::CodeCommit::Repository' resource because an error occurred while attempting to retrieve the information: 'AccessDeniedException:AWS::CodeCommit::Repository Handler returned status FAILED: AWS CodeCommit is not authorized to access the KMS key arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/27cf9603-b551-4da6-b4bf-3e0b36b0f457 (Service: CodeCommit, Status Code: 400, Request ID: 57209cfe-ce79-4745-b363-09e532ea08d0) (SDK Attempt Count: 1) (HandlerErrorCode: AccessDenied, RequestToken: d11da795-1ee9-4f92-b5d5-b78a1963e5fe)'"
+  },
+  {
+   "path": "Resources.PipelineRoleDefaultPolicyC7A05455.Properties.PolicyDocument.Statement.2.Resource",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Arn' attribute of the 'AWS::CodeCommit::Repository' resource because an error occurred while attempting to retrieve the information: 'AccessDeniedException:AWS::CodeCommit::Repository Handler returned status FAILED: AWS CodeCommit is not authorized to access the KMS key arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/27cf9603-b551-4da6-b4bf-3e0b36b0f457 (Service: CodeCommit, Status Code: 400, Request ID: 57209cfe-ce79-4745-b363-09e532ea08d0) (SDK Attempt Count: 1) (HandlerErrorCode: AccessDenied, RequestToken: d11da795-1ee9-4f92-b5d5-b78a1963e5fe)'"
+  },
+  {
+   "path": "Resources.PipelineC660917D.Properties.Stages.0.Actions.0.Configuration.RepositoryName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Name' attribute of the 'AWS::CodeCommit::Repository' resource because an error occurred while attempting to retrieve the information: 'AccessDeniedException:AWS::CodeCommit::Repository Handler returned status FAILED: AWS CodeCommit is not authorized to access the KMS key arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/27cf9603-b551-4da6-b4bf-3e0b36b0f457 (Service: CodeCommit, Status Code: 400, Request ID: 57209cfe-ce79-4745-b363-09e532ea08d0) (SDK Attempt Count: 1) (HandlerErrorCode: AccessDenied, RequestToken: d11da795-1ee9-4f92-b5d5-b78a1963e5fe)'"
+  }
+ ]
+}

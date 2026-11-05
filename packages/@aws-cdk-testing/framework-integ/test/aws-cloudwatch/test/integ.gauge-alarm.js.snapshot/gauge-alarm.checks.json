@@ -1,0 +1,38 @@
+{
+ "stackName": "gauge-alarm",
+ "summary": {
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "queue",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "DashboardName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyCustomGaugeAlarm",
+   "actual": "MyCustomGaugeAlarm"
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "DashboardBody",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "{\"widgets\":[{\"type\":\"metric\",\"width\":24,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"gauge\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"gauge-alarm-queue-VucGUIxjkxBr\"]],\"yAxis\":{\"left\":{\"min\":0,\"max\":500}}}}]}",
+   "actual": "{\"widgets\":[{\"type\":\"metric\",\"width\":24,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"gauge\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"gauge-alarm-queue-VucGUIxjkxBr\"]],\"yAxis\":{\"left\":{\"min\":0,\"max\":500}}}}]}"
+  }
+ ]
+}

@@ -1,0 +1,150 @@
+{
+ "stackName": "aws-cdk-dynamodb-contributor-insights-for-gsi",
+ "summary": {
+  "pass": 5
+ },
+ "results": [
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "GSI-ContributorInsightsEnabled",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "GSI-ContributorInsightsDisabled",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "GSI-ContributorInsightsEnabled",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "GSI-ContributorInsightsDisabled",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ]
+  }
+ ]
+}

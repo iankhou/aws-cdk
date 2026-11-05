@@ -1,0 +1,84 @@
+{
+ "stackName": "aws-appconfig-environment-grant",
+ "summary": {
+  "no handler": 3,
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "MyApplicationForEnv1F597ED9",
+   "type": "AWS::AppConfig::Application",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyEnvironment465E4DEA",
+   "type": "AWS::AppConfig::Environment",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyUserDC45028B",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyUserDefaultPolicy7B897426",
+   "actual": "MyUserDefaultPolicy7B897426"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "appconfig:GetLatestConfiguration",
+       "appconfig:StartConfigurationSession"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appconfig:${AWS::Region}:${AWS::AccountId}:application/pzqe3jp/environment/x35wf67/configuration/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "appconfig:GetLatestConfiguration",
+       "appconfig:StartConfigurationSession"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appconfig:${AWS::Region}:${AWS::AccountId}:application/pzqe3jp/environment/x35wf67/configuration/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyUserDC45028B}",
+   "actual": "${MyUserDC45028B}"
+  }
+ ]
+}

@@ -1,0 +1,194 @@
+{
+ "stackName": "test-apigateway-restapi-cloudwatch-removal-policy",
+ "summary": {
+  "pass": 20
+ },
+ "results": [
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "my-api",
+   "actual": "my-api"
+  },
+  {
+   "logicalId": "myapiCloudWatchRole095452E5",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiCloudWatchRole095452E5",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "myapiCloudWatchRole095452E5",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ]
+  },
+  {
+   "logicalId": "myapiAccountEC421A0A",
+   "type": "AWS::ApiGateway::Account",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiAccountEC421A0A",
+   "type": "AWS::ApiGateway::Account",
+   "property": "CloudWatchRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${myapiCloudWatchRole095452E5}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${myapiCloudWatchRole095452E5}"
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB4972a890db5063ec679071ba7eefc76f2a",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB4972a890db5063ec679071ba7eefc76f2a",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB4972a890db5063ec679071ba7eefc76f2a",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiDeploymentStageprod298F01AF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiDeploymentStageprod298F01AF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "myapiDeploymentStageprod298F01AF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiDeploymentStageprod298F01AF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiDeployment92F2CB4972a890db5063ec679071ba7eefc76f2a}",
+   "actual": "${myapiDeployment92F2CB4972a890db5063ec679071ba7eefc76f2a}"
+  },
+  {
+   "logicalId": "myapiGETF990CE3C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiGETF990CE3C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiGETF990CE3C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiGETF990CE3C[1]}",
+   "actual": "${myapiGETF990CE3C[1]}"
+  },
+  {
+   "logicalId": "myapiGETF990CE3C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "myapiGETF990CE3C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myapiGETF990CE3C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK"
+   },
+   "actual": {
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myapiGETF990CE3C[1]}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  }
+ ]
+}

@@ -1,0 +1,270 @@
+{
+ "version": "1",
+ "stackName": "WebSocketApiInteg",
+ "resources": {
+  "ConnectHandlerServiceRole7E4A9B1F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "ConnectHandler2FFD52D8": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "exports.handler = async function(event, context) { console.log(event); return { statusCode: 200, body: \"connected\" }; };"
+    },
+    "Handler": "index.handler",
+    "Role": "${ConnectHandlerServiceRole7E4A9B1F.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "ConnectHandlerServiceRole7E4A9B1F"
+   ]
+  },
+  "DisconnectHandlerServiceRoleE54F14F9": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "DisconnectHandlerCB7ED6F7": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "exports.handler = async function(event, context) { console.log(event); return { statusCode: 200, body: \"disconnected\" }; };"
+    },
+    "Handler": "index.handler",
+    "Role": "${DisconnectHandlerServiceRoleE54F14F9.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "DisconnectHandlerServiceRoleE54F14F9"
+   ]
+  },
+  "DefaultHandlerServiceRoleDF00569C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "DefaultHandler604DF7AC": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "exports.handler = async function(event, context) { console.log(event); return { statusCode: 200, body: \"default\" }; };"
+    },
+    "Handler": "index.handler",
+    "Role": "${DefaultHandlerServiceRoleDF00569C.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "DefaultHandlerServiceRoleDF00569C"
+   ]
+  },
+  "MessageHandlerServiceRoleDF05266A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MessageHandlerDFBBCD6B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "exports.handler = async function(event, context) { console.log(event); return { statusCode: 200, body: \"received\" }; };"
+    },
+    "Handler": "index.handler",
+    "Role": "${MessageHandlerServiceRoleDF05266A.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "MessageHandlerServiceRoleDF05266A"
+   ]
+  },
+  "mywsapi32E6CE11": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "mywsapi",
+    "ProtocolType": "WEBSOCKET",
+    "RouteSelectionExpression": "$request.body.action"
+   }
+  },
+  "mywsapiconnectRouteConnectIntegrationPermission719B6E63": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${ConnectHandler2FFD52D8.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$connect"
+   }
+  },
+  "mywsapiconnectRouteConnectIntegrationE101DB9B": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ConnectHandler2FFD52D8.Arn}/invocations"
+   }
+  },
+  "mywsapiconnectRoute45A0ED6A": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "$connect",
+    "Target": "integrations/${mywsapiconnectRouteConnectIntegrationE101DB9B}"
+   }
+  },
+  "mywsapidisconnectRouteDisconnectIntegrationPermissionA8197C41": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${DisconnectHandlerCB7ED6F7.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$disconnect"
+   }
+  },
+  "mywsapidisconnectRouteDisconnectIntegrationF927D904": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DisconnectHandlerCB7ED6F7.Arn}/invocations"
+   }
+  },
+  "mywsapidisconnectRoute421A8CB9": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "$disconnect",
+    "Target": "integrations/${mywsapidisconnectRouteDisconnectIntegrationF927D904}"
+   }
+  },
+  "mywsapidefaultRouteDefaultIntegrationPermission3B7F9CA1": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${DefaultHandler604DF7AC.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$default"
+   }
+  },
+  "mywsapidefaultRouteDefaultIntegrationFFCB3BA9": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "ContentHandlingStrategy": "CONVERT_TO_TEXT",
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DefaultHandler604DF7AC.Arn}/invocations",
+    "TimeoutInMillis": 10000
+   }
+  },
+  "mywsapidefaultRouteE9382DF8": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "$default",
+    "Target": "integrations/${mywsapidefaultRouteDefaultIntegrationFFCB3BA9}"
+   }
+  },
+  "mywsapisendmessageRouteSendMessageIntegrationPermission92C9841E": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${MessageHandlerDFBBCD6B.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*sendmessage"
+   }
+  },
+  "mywsapisendmessageRouteSendMessageIntegrationD29E12F9": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${MessageHandlerDFBBCD6B.Arn}/invocations"
+   }
+  },
+  "mywsapisendmessageRouteAE873328": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "sendmessage",
+    "Target": "integrations/${mywsapisendmessageRouteSendMessageIntegrationD29E12F9}"
+   }
+  },
+  "mystage114C35EC": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AutoDeploy": true,
+    "StageName": "dev"
+   }
+  }
+ },
+ "outputs": {
+  "ApiEndpoint": {
+   "Value": "wss://${mywsapi32E6CE11}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev"
+  }
+ },
+ "unresolved": []
+}

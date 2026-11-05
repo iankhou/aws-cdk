@@ -1,0 +1,49 @@
+{
+ "stackName": "aws-cdk-agentcore-memory-auto-generated-name",
+ "summary": {
+  "pass": 2,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "MemoryServiceRoleC95D1642",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MemoryServiceRoleC95D1642",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:memory/awscdkagentcorememorogeneratednameMemory11979D3F*"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Amemory%2FawscdkagentcorememorogeneratednameMemory11979D3F%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "Memory3232ACAB",
+   "type": "AWS::BedrockAgentCore::Memory",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

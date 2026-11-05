@@ -1,0 +1,148 @@
+{
+ "stackName": "appsync-opensearch",
+ "summary": {
+  "no handler": 7,
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "User00B015A1",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Domain66AC69E0",
+   "type": "AWS::OpenSearchService::Domain",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "apiC8550315",
+   "type": "AWS::AppSync::GraphQLApi",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "apiSchema0EA92056",
+   "type": "AWS::AppSync::GraphQLSchema",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "apiDefaultApiKey6AB8D7C4",
+   "type": "AWS::AppSync::ApiKey",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "apidsServiceRoleBDB08107",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "apidsServiceRoleBDB08107",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "appsync.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22appsync.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "apidsServiceRoleDefaultPolicy5634EFD0",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "apidsServiceRoleDefaultPolicy5634EFD0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "apidsServiceRoleDefaultPolicy5634EFD0",
+   "actual": "apidsServiceRoleDefaultPolicy5634EFD0"
+  },
+  {
+   "logicalId": "apidsServiceRoleDefaultPolicy5634EFD0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "es:ESHttpDelete",
+       "es:ESHttpGet",
+       "es:ESHttpHead",
+       "es:ESHttpPatch",
+       "es:ESHttpPost",
+       "es:ESHttpPut"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:es:${AWS::Region}:${AWS::AccountId}:domain/${Domain66AC69E0}",
+       "arn:${AWS::Partition}:es:${AWS::Region}:${AWS::AccountId}:domain/${Domain66AC69E0}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "es:ESHttpDelete",
+       "es:ESHttpGet",
+       "es:ESHttpHead",
+       "es:ESHttpPatch",
+       "es:ESHttpPost",
+       "es:ESHttpPut"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:es:${AWS::Region}:${AWS::AccountId}:domain/${Domain66AC69E0}",
+       "arn:${AWS::Partition}:es:${AWS::Region}:${AWS::AccountId}:domain/${Domain66AC69E0}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "apidsServiceRoleDefaultPolicy5634EFD0",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${apidsServiceRoleBDB08107}",
+   "actual": "${apidsServiceRoleBDB08107}"
+  },
+  {
+   "logicalId": "apids4328272F",
+   "type": "AWS::AppSync::DataSource",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "apiQueryGetTests5F79F353",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

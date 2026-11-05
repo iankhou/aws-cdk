@@ -1,0 +1,613 @@
+{
+ "stackName": "aws-cdk-codedeploy-lambda",
+ "summary": {
+  "pass": 50,
+  "no handler": 6
+ },
+ "results": [
+  {
+   "logicalId": "HandlerServiceRoleFCDC14AE",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HandlerServiceRoleFCDC14AE",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "HandlerServiceRoleFCDC14AE",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Handler886CB40B",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Handler886CB40B",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Handler886CB40B",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Handler886CB40B",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${HandlerServiceRoleFCDC14AE}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${HandlerServiceRoleFCDC14AE}"
+  },
+  {
+   "logicalId": "HandlerCurrentVersion93FB80BFc4706e7444907189998c700b4a4555e2",
+   "type": "AWS::Lambda::Version",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HandlerCurrentVersion93FB80BFc4706e7444907189998c700b4a4555e2",
+   "type": "AWS::Lambda::Version",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Handler886CB40B}",
+   "actual": "${Handler886CB40B}"
+  },
+  {
+   "logicalId": "Alias325C5727",
+   "type": "AWS::Lambda::Alias",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "PreHookServiceRoleC724B9BA",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PreHookServiceRoleC724B9BA",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "PreHookServiceRoleC724B9BA",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "PreHookServiceRoleDefaultPolicy65358F76",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PreHookServiceRoleDefaultPolicy65358F76",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PreHookServiceRoleDefaultPolicy65358F76",
+   "actual": "PreHookServiceRoleDefaultPolicy65358F76"
+  },
+  {
+   "logicalId": "PreHookServiceRoleDefaultPolicy65358F76",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "codedeploy:PutLifecycleEventHookExecutionStatus",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codedeploy:${AWS::Region}:${AWS::AccountId}:deploymentgroup:${BlueGreenDeploymentApplication36C892C0}/${BlueGreenDeployment5C188134}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "codedeploy:PutLifecycleEventHookExecutionStatus",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codedeploy:${AWS::Region}:${AWS::AccountId}:deploymentgroup:${BlueGreenDeploymentApplication36C892C0}/${BlueGreenDeployment5C188134}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "PreHookServiceRoleDefaultPolicy65358F76",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${PreHookServiceRoleC724B9BA}",
+   "actual": "${PreHookServiceRoleC724B9BA}"
+  },
+  {
+   "logicalId": "PreHook8B53F672",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PreHook8B53F672",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "PreHook8B53F672",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "PreHook8B53F672",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PreHookServiceRoleC724B9BA}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PreHookServiceRoleC724B9BA}"
+  },
+  {
+   "logicalId": "PostHookServiceRoleE8A6AAC2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PostHookServiceRoleE8A6AAC2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "PostHookServiceRoleE8A6AAC2",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "PostHookServiceRoleDefaultPolicy82AEE758",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PostHookServiceRoleDefaultPolicy82AEE758",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PostHookServiceRoleDefaultPolicy82AEE758",
+   "actual": "PostHookServiceRoleDefaultPolicy82AEE758"
+  },
+  {
+   "logicalId": "PostHookServiceRoleDefaultPolicy82AEE758",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "codedeploy:PutLifecycleEventHookExecutionStatus",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codedeploy:${AWS::Region}:${AWS::AccountId}:deploymentgroup:${BlueGreenDeploymentApplication36C892C0}/${BlueGreenDeployment5C188134}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "codedeploy:PutLifecycleEventHookExecutionStatus",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codedeploy:${AWS::Region}:${AWS::AccountId}:deploymentgroup:${BlueGreenDeploymentApplication36C892C0}/${BlueGreenDeployment5C188134}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "PostHookServiceRoleDefaultPolicy82AEE758",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${PostHookServiceRoleE8A6AAC2}",
+   "actual": "${PostHookServiceRoleE8A6AAC2}"
+  },
+  {
+   "logicalId": "PostHookF2E49B30",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PostHookF2E49B30",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "PostHookF2E49B30",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "PostHookF2E49B30",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PostHookServiceRoleE8A6AAC2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PostHookServiceRoleE8A6AAC2}"
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanThreshold",
+   "actual": "GreaterThanThreshold"
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Errors",
+   "actual": "Errors"
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/Lambda",
+   "actual": "AWS/Lambda"
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "FunctionName",
+     "Value": "${Handler886CB40B}"
+    },
+    {
+     "Name": "Resource",
+     "Value": "${Handler886CB40B}:alias"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "FunctionName",
+     "Value": "${Handler886CB40B}"
+    },
+    {
+     "Name": "Resource",
+     "Value": "${Handler886CB40B}:alias"
+    }
+   ]
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "BlueGreenErrors60C27452",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Sum",
+   "actual": "Sum"
+  },
+  {
+   "logicalId": "BlueGreenDeploymentServiceRole225851FB",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BlueGreenDeploymentServiceRole225851FB",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codedeploy.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codedeploy.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "BlueGreenDeploymentServiceRole225851FB",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSCodeDeployRoleForLambdaLimited"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSCodeDeployRoleForLambdaLimited"
+   ]
+  },
+  {
+   "logicalId": "BlueGreenDeploymentServiceRoleDefaultPolicy7008FB0A",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BlueGreenDeploymentServiceRoleDefaultPolicy7008FB0A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "BlueGreenDeploymentServiceRoleDefaultPolicy7008FB0A",
+   "actual": "BlueGreenDeploymentServiceRoleDefaultPolicy7008FB0A"
+  },
+  {
+   "logicalId": "BlueGreenDeploymentServiceRoleDefaultPolicy7008FB0A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${PostHookF2E49B30}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${PreHook8B53F672}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${PostHookF2E49B30}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${PreHook8B53F672}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${PostHookF2E49B30}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${PreHook8B53F672}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${PostHookF2E49B30}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${PreHook8B53F672}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "BlueGreenDeploymentServiceRoleDefaultPolicy7008FB0A",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BlueGreenDeploymentServiceRole225851FB}",
+   "actual": "${BlueGreenDeploymentServiceRole225851FB}"
+  },
+  {
+   "logicalId": "BlueGreenDeploymentApplication36C892C0",
+   "type": "AWS::CodeDeploy::Application",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "BlueGreenDeployment5C188134",
+   "type": "AWS::CodeDeploy::DeploymentGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SecondAlias33D63566",
+   "type": "AWS::Lambda::Alias",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SecondDeploymentServiceRoleAFF1ECD5",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecondDeploymentServiceRoleAFF1ECD5",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codedeploy.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codedeploy.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SecondDeploymentServiceRoleAFF1ECD5",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSCodeDeployRoleForLambdaLimited"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSCodeDeployRoleForLambdaLimited"
+   ]
+  },
+  {
+   "logicalId": "SecondDeploymentApplication1F8C51FE",
+   "type": "AWS::CodeDeploy::Application",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SecondDeploymentC270A23D",
+   "type": "AWS::CodeDeploy::DeploymentGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

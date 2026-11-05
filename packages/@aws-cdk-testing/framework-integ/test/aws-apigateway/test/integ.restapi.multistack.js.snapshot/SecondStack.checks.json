@@ -1,0 +1,383 @@
+{
+ "stackName": "SecondStack",
+ "summary": {
+  "pass": 40
+ },
+ "results": [
+  {
+   "logicalId": "BooksApi60AC975F",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApi60AC975F",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SecondRestAPI",
+   "actual": "SecondRestAPI"
+  },
+  {
+   "logicalId": "BooksApiCloudWatchRoleB120ADBA",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApiCloudWatchRoleB120ADBA",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "BooksApiCloudWatchRoleB120ADBA",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ]
+  },
+  {
+   "logicalId": "BooksApiAccount9C44AF8E",
+   "type": "AWS::ApiGateway::Account",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApiAccount9C44AF8E",
+   "type": "AWS::ApiGateway::Account",
+   "property": "CloudWatchRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${BooksApiCloudWatchRoleB120ADBA}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${BooksApiCloudWatchRoleB120ADBA}"
+  },
+  {
+   "logicalId": "BooksApiDeployment86CA39AF4ff82f86c127f53c9de94d266b1906be",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApiDeployment86CA39AF4ff82f86c127f53c9de94d266b1906be",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "BooksApiDeployment86CA39AF4ff82f86c127f53c9de94d266b1906be",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApi60AC975F}",
+   "actual": "${BooksApi60AC975F}"
+  },
+  {
+   "logicalId": "BooksApiDeploymentStageprod0693B760",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApiDeploymentStageprod0693B760",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "BooksApiDeploymentStageprod0693B760",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApi60AC975F}",
+   "actual": "${BooksApi60AC975F}"
+  },
+  {
+   "logicalId": "BooksApiDeploymentStageprod0693B760",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApiDeployment86CA39AF4ff82f86c127f53c9de94d266b1906be}",
+   "actual": "${BooksApiDeployment86CA39AF4ff82f86c127f53c9de94d266b1906be}"
+  },
+  {
+   "logicalId": "BooksApiANY0C4EABE3",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApiANY0C4EABE3",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApi60AC975F}",
+   "actual": "${BooksApi60AC975F}"
+  },
+  {
+   "logicalId": "BooksApiANY0C4EABE3",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApiANY0C4EABE3[1]}",
+   "actual": "${BooksApiANY0C4EABE3[1]}"
+  },
+  {
+   "logicalId": "BooksApiANY0C4EABE3",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ANY",
+   "actual": "ANY"
+  },
+  {
+   "logicalId": "BooksApiANY0C4EABE3",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "BooksApiANY0C4EABE3",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK"
+   },
+   "actual": {
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${BooksApiANY0C4EABE3[1]}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "BooksApibooks1F745538",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApibooks1F745538",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApiANY0C4EABE3[1]}",
+   "actual": "${BooksApiANY0C4EABE3[1]}"
+  },
+  {
+   "logicalId": "BooksApibooks1F745538",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "books",
+   "actual": "books"
+  },
+  {
+   "logicalId": "BooksApibooks1F745538",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApi60AC975F}",
+   "actual": "${BooksApi60AC975F}"
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionSecondStackBooksApi2660DEC5GETbooksE54B6E9B",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionSecondStackBooksApi2660DEC5GETbooksE54B6E9B",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionSecondStackBooksApi2660DEC5GETbooksE54B6E9B",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:FirstLambda",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:FirstLambda"
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionSecondStackBooksApi2660DEC5GETbooksE54B6E9B",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionSecondStackBooksApi2660DEC5GETbooksE54B6E9B",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${BooksApi60AC975F}/prod/GET/books",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${BooksApi60AC975F}/prod/GET/books"
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionTestSecondStackBooksApi2660DEC5GETbooks0B7ED39D",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionTestSecondStackBooksApi2660DEC5GETbooks0B7ED39D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionTestSecondStackBooksApi2660DEC5GETbooks0B7ED39D",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:FirstLambda",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:FirstLambda"
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionTestSecondStackBooksApi2660DEC5GETbooks0B7ED39D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "BooksApibooksGETApiPermissionTestSecondStackBooksApi2660DEC5GETbooks0B7ED39D",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${BooksApi60AC975F}/test-invoke-stage/GET/books",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${BooksApi60AC975F}/test-invoke-stage/GET/books"
+  },
+  {
+   "logicalId": "BooksApibooksGET6066BF7E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BooksApibooksGET6066BF7E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApi60AC975F}",
+   "actual": "${BooksApi60AC975F}"
+  },
+  {
+   "logicalId": "BooksApibooksGET6066BF7E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BooksApibooks1F745538}",
+   "actual": "${BooksApibooks1F745538}"
+  },
+  {
+   "logicalId": "BooksApibooksGET6066BF7E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "BooksApibooksGET6066BF7E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "BooksApibooksGET6066BF7E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:FirstLambda/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:FirstLambda/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${BooksApibooks1F745538}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  }
+ ]
+}

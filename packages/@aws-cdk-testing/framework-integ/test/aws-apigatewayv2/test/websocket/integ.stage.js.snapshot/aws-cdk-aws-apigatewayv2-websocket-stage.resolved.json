@@ -1,0 +1,72 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-aws-apigatewayv2-websocket-stage",
+ "resources": {
+  "CloudWatchRoleE5C01D12": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+    ]
+   }
+  },
+  "Account": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": "${CloudWatchRoleE5C01D12.Arn}"
+   }
+  },
+  "MyLogGroup5C0DAD85": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "WebSocketApi34BCF99B": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "WebSocketApi",
+    "ProtocolType": "WEBSOCKET",
+    "RouteSelectionExpression": "$request.body.action"
+   }
+  },
+  "WebSocketStageC46B7E43": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "AccessLogSettings": {
+     "DestinationArn": "${MyLogGroup5C0DAD85.Arn}",
+     "Format": "{\"extendedRequestId\":\"$context.extendedRequestId\",\"requestTime\":\"$context.requestTime\"}"
+    },
+    "ApiId": "${WebSocketApi34BCF99B}",
+    "DefaultRouteSettings": {
+     "DetailedMetricsEnabled": true,
+     "ThrottlingBurstLimit": 1000,
+     "ThrottlingRateLimit": 1000
+    },
+    "Description": "My Stage",
+    "StageName": "dev"
+   },
+   "DependsOn": [
+    "Account"
+   ]
+  }
+ },
+ "unresolved": [],
+ "accountWide": [
+  "Account"
+ ]
+}

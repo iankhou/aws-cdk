@@ -1,0 +1,259 @@
+{
+ "stackName": "aws-cdk-dynamodb-compound-keys",
+ "summary": {
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "TableName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "cdk-test-compound",
+   "actual": "cdk-test-compound"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "bar",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "baz",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "foo",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "PK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "PK2",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "pkey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "SK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "SK2",
+     "AttributeType": "N"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "bar",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "baz",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "foo",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "PK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "PK2",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "pkey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "SK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "SK2",
+     "AttributeType": "N"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "pkey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "pkey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "IndexA",
+     "KeySchema": [
+      {
+       "AttributeName": "PK1",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "PK2",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "SK1",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "SK2",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "bar"
+      ]
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "IndexB",
+     "KeySchema": [
+      {
+       "AttributeName": "baz",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "bar",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "foo",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "blah"
+      ]
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "IndexA",
+     "KeySchema": [
+      {
+       "AttributeName": "PK1",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "PK2",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "SK1",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "SK2",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "bar"
+      ]
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "IndexB",
+     "KeySchema": [
+      {
+       "AttributeName": "baz",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "bar",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "foo",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "blah"
+      ]
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ]
+  }
+ ]
+}

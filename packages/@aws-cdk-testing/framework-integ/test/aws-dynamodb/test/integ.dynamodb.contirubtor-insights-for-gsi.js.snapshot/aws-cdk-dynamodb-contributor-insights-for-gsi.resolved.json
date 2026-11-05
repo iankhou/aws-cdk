@@ -1,0 +1,74 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-dynamodb-contributor-insights-for-gsi",
+ "resources": {
+  "TableWithGlobalSecondaryIndexCC8E841E": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "hashKey",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "gsiHashKey",
+      "AttributeType": "S"
+     }
+    ],
+    "GlobalSecondaryIndexes": [
+     {
+      "ContributorInsightsSpecification": {
+       "Enabled": true
+      },
+      "IndexName": "GSI-ContributorInsightsEnabled",
+      "KeySchema": [
+       {
+        "AttributeName": "gsiHashKey",
+        "KeyType": "HASH"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+       "ReadCapacityUnits": 5,
+       "WriteCapacityUnits": 5
+      }
+     },
+     {
+      "ContributorInsightsSpecification": {
+       "Enabled": false
+      },
+      "IndexName": "GSI-ContributorInsightsDisabled",
+      "KeySchema": [
+       {
+        "AttributeName": "gsiHashKey",
+        "KeyType": "HASH"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+       "ReadCapacityUnits": 5,
+       "WriteCapacityUnits": 5
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "hashKey",
+      "KeyType": "HASH"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

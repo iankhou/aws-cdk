@@ -1,0 +1,135 @@
+{
+ "stackName": "aws-cdk-cloudwatch-alarms",
+ "summary": {
+  "pass": 14
+ },
+ "results": [
+  {
+   "logicalId": "queue",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 3,
+   "actual": 3
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "DatapointsToAlarm",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 2,
+   "actual": 2
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApproximateNumberOfMessagesVisible",
+   "actual": "ApproximateNumberOfMessagesVisible"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/SQS",
+   "actual": "AWS/SQS"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "QueueName",
+     "Value": "${queue.Name}"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "QueueName",
+     "Value": "${queue.Name}"
+    }
+   ]
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Average",
+   "actual": "Average"
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "DashboardName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyCustomDashboardName",
+   "actual": "MyCustomDashboardName"
+  },
+  {
+   "logicalId": "DashCCD7F836",
+   "type": "AWS::CloudWatch::Dashboard",
+   "property": "DashboardBody",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "{\"start\":\"-9H\",\"end\":\"2018-12-17T06:00:00.000Z\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":6,\"height\":2,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"# This is my dashboard\",\"background\":\"transparent\"}},{\"type\":\"text\",\"width\":6,\"height\":2,\"x\":6,\"y\":0,\"properties\":{\"markdown\":\"you like?\",\"background\":\"transparent\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":2,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Messages in queue\",\"region\":\"${AWS::Region}\",\"annotations\":{\"alarms\":[\"arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}\"]},\"yAxis\":{}}},{\"type\":\"alarm\",\"width\":6,\"height\":3,\"x\":0,\"y\":8,\"properties\":{\"title\":\"Firing alarms\",\"alarms\":[\"arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}\"]}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":11,\"properties\":{\"view\":\"timeSeries\",\"title\":\"More messages in queue with alarm annotation\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\"]],\"annotations\":{\"horizontal\":[{\"label\":\"ApproximateNumberOfMessagesVisible >= 100 for 2 datapoints within 15 minutes\",\"value\":100,\"yAxis\":\"left\"}]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":17,\"properties\":{\"view\":\"singleValue\",\"title\":\"Current messages in queue\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\"]]}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":20,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":26,\"properties\":{\"view\":\"bar\",\"title\":\"Errors in my log group - bar\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":32,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors in my log group - line\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\",\"stacked\":false}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":38,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors in my log group - stacked\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\",\"stacked\":true}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":44,\"properties\":{\"view\":\"pie\",\"title\":\"Errors in my log group - pie\",\"region\":\"${AWS::Region}\",\"accountId\":\"123456789012\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":50,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group - SQL\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | SELECT count(*) as count FROM 'my-log-group'\",\"queryLanguage\":\"SQL\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":56,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group - PPL\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields `@message` | sort - `@timestamp`\",\"queryLanguage\":\"PPL\"}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":62,\"properties\":{\"view\":\"singleValue\",\"title\":\"Sent message size\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.Name}\"]],\"singleValueFullPrecision\":false}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":65,\"properties\":{\"view\":\"singleValue\",\"title\":\"Sent message size with full precision\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.Name}\"]],\"singleValueFullPrecision\":true}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":68,\"properties\":{\"view\":\"singleValue\",\"title\":\"Live data of sent message size\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.Name}\"]],\"liveData\":true}},{\"type\":\"custom\",\"width\":6,\"height\":6,\"x\":0,\"y\":71,\"properties\":{\"endpoint\":\"arn:${AWS::Partition}:lambda:us-west-2:123456789012:function:my-function\",\"title\":\"My custom alarm\",\"updateOn\":{\"refresh\":true,\"resize\":true,\"timeRange\":true}}}]}",
+   "actual": "{\"start\":\"-9H\",\"end\":\"2018-12-17T06:00:00.000Z\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":6,\"height\":2,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"# This is my dashboard\",\"background\":\"transparent\"}},{\"type\":\"text\",\"width\":6,\"height\":2,\"x\":6,\"y\":0,\"properties\":{\"markdown\":\"you like?\",\"background\":\"transparent\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":2,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Messages in queue\",\"region\":\"${AWS::Region}\",\"annotations\":{\"alarms\":[\"arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}\"]},\"yAxis\":{}}},{\"type\":\"alarm\",\"width\":6,\"height\":3,\"x\":0,\"y\":8,\"properties\":{\"title\":\"Firing alarms\",\"alarms\":[\"arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}\"]}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":11,\"properties\":{\"view\":\"timeSeries\",\"title\":\"More messages in queue with alarm annotation\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\"]],\"annotations\":{\"horizontal\":[{\"label\":\"ApproximateNumberOfMessagesVisible >= 100 for 2 datapoints within 15 minutes\",\"value\":100,\"yAxis\":\"left\"}]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":17,\"properties\":{\"view\":\"singleValue\",\"title\":\"Current messages in queue\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.Name}\"]]}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":20,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":26,\"properties\":{\"view\":\"bar\",\"title\":\"Errors in my log group - bar\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":32,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors in my log group - line\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\",\"stacked\":false}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":38,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors in my log group - stacked\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\",\"stacked\":true}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":44,\"properties\":{\"view\":\"pie\",\"title\":\"Errors in my log group - pie\",\"region\":\"${AWS::Region}\",\"accountId\":\"123456789012\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":50,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group - SQL\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | SELECT count(*) as count FROM 'my-log-group'\",\"queryLanguage\":\"SQL\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":56,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group - PPL\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields `@message` | sort - `@timestamp`\",\"queryLanguage\":\"PPL\"}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":62,\"properties\":{\"view\":\"singleValue\",\"title\":\"Sent message size\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.Name}\"]],\"singleValueFullPrecision\":false}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":65,\"properties\":{\"view\":\"singleValue\",\"title\":\"Sent message size with full precision\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.Name}\"]],\"singleValueFullPrecision\":true}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":68,\"properties\":{\"view\":\"singleValue\",\"title\":\"Live data of sent message size\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.Name}\"]],\"liveData\":true}},{\"type\":\"custom\",\"width\":6,\"height\":6,\"x\":0,\"y\":71,\"properties\":{\"endpoint\":\"arn:${AWS::Partition}:lambda:us-west-2:123456789012:function:my-function\",\"title\":\"My custom alarm\",\"updateOn\":{\"refresh\":true,\"resize\":true,\"timeRange\":true}}}]}"
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "version": "1",
+ "stackName": "CompositeAlarmTokenThresholdIntegrationTest",
+ "resources": {
+  "Alarm1F9009D71": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "EvaluationPeriods": 3,
+    "MetricName": "Metric",
+    "Namespace": "CDK/Test",
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 100
+   }
+  },
+  "Alarm2A7122E13": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "EvaluationPeriods": 3,
+    "MetricName": "Metric",
+    "Namespace": "CDK/Test",
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 1000
+   }
+  },
+  "Alarm32341D8D9": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "EvaluationPeriods": 3,
+    "MetricName": "Metric",
+    "Namespace": "CDK/Test",
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 10000
+   }
+  },
+  "CompositeAlarmWithTokenThreshold8A62D58A": {
+   "Type": "AWS::CloudWatch::CompositeAlarm",
+   "Properties": {
+    "AlarmName": "CompositeAlarmTokenThresholdIntegrationTestCompositeAlarmWithTokenThreshold6E6F8F6C",
+    "AlarmRule": "AT_LEAST(2, ALARM, (\"${Alarm1F9009D71.Arn}\", \"${Alarm2A7122E13.Arn}\", \"${Alarm32341D8D9.Arn}\"))"
+   }
+  }
+ },
+ "unresolved": []
+}

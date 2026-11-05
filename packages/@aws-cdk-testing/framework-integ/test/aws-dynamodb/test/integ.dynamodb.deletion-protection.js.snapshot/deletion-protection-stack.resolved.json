@@ -1,0 +1,39 @@
+{
+ "version": "1",
+ "stackName": "deletion-protection-stack",
+ "resources": {
+  "TableCD117FA1": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "pk",
+      "AttributeType": "S"
+     }
+    ],
+    "DeletionProtectionEnabled": true,
+    "KeySchema": [
+     {
+      "AttributeName": "pk",
+      "KeyType": "HASH"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefTableCD117FA1D18A8047": {
+   "Value": "${TableCD117FA1}",
+   "Export": {
+    "Name": "deletion-protection-stack:ExportsOutputRefTableCD117FA1D18A8047"
+   }
+  }
+ },
+ "unresolved": []
+}

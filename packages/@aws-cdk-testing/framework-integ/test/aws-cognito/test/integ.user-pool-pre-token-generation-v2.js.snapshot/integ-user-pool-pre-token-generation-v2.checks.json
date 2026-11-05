@@ -1,0 +1,139 @@
+{
+ "stackName": "integ-user-pool-pre-token-generation-v2",
+ "summary": {
+  "pass": 12,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "preTokenGenerationLambdaServiceRole0C3B4FA0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "preTokenGenerationLambdaServiceRole0C3B4FA0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "preTokenGenerationLambdaServiceRole0C3B4FA0",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "preTokenGenerationLambda1F130400",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "preTokenGenerationLambda1F130400",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "preTokenGenerationLambda1F130400",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "preTokenGenerationLambda1F130400",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${preTokenGenerationLambdaServiceRole0C3B4FA0}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${preTokenGenerationLambdaServiceRole0C3B4FA0}"
+  },
+  {
+   "logicalId": "pool056F3F7E",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "poolPreTokenGenerationConfigCognito310B2A58",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "poolPreTokenGenerationConfigCognito310B2A58",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "poolPreTokenGenerationConfigCognito310B2A58",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${preTokenGenerationLambda1F130400}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${preTokenGenerationLambda1F130400}"
+  },
+  {
+   "logicalId": "poolPreTokenGenerationConfigCognito310B2A58",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "cognito-idp.amazonaws.com"
+   },
+   "actual": {
+    "Service": "cognito-idp.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "poolPreTokenGenerationConfigCognito310B2A58",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${pool056F3F7E}",
+   "actual": "arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${pool056F3F7E}"
+  },
+  {
+   "logicalId": "poolclient2623294C",
+   "type": "AWS::Cognito::UserPoolClient",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

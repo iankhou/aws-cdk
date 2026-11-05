@@ -1,0 +1,1115 @@
+{
+ "stackName": "test-apigateway-spec-restapi",
+ "summary": {
+  "pass": 109,
+  "fail": 2,
+  "no handler": 3
+ },
+ "results": [
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "my-api",
+   "actual": "my-api"
+  },
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "DisableExecuteApiEndpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "MinimumCompressionSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1024,
+   "actual": 1024
+  },
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "BinaryMediaTypes",
+   "status": "fail",
+   "expected": [
+    "image/png",
+    "application/pdf"
+   ],
+   "actual": [
+    "application/pdf",
+    "image/png"
+   ]
+  },
+  {
+   "logicalId": "myapiv113487378",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv113487378",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "610oh9sdj7",
+   "actual": "610oh9sdj7"
+  },
+  {
+   "logicalId": "myapiv113487378",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "v1",
+   "actual": "v1"
+  },
+  {
+   "logicalId": "myapiv113487378",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1toysA55FCBC4",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1toysA55FCBC4",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv113487378}",
+   "actual": "${myapiv113487378}"
+  },
+  {
+   "logicalId": "myapiv1toysA55FCBC4",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "toys",
+   "actual": "toys"
+  },
+  {
+   "logicalId": "myapiv1toysA55FCBC4",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1toysE7114441",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1toysE7114441",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1toysE7114441",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}"
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1toysE7114441",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1toysE7114441",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/beta/GET/v1/toys",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/beta/GET/v1/toys"
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1toys468023A4",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1toys468023A4",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1toys468023A4",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}"
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1toys468023A4",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "myapiv1toysGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1toys468023A4",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/test-invoke-stage/GET/v1/toys",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/test-invoke-stage/GET/v1/toys"
+  },
+  {
+   "logicalId": "myapiv1toysGET7348114D",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1toysGET7348114D",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1toysGET7348114D",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv1toysA55FCBC4}",
+   "actual": "${myapiv1toysA55FCBC4}"
+  },
+  {
+   "logicalId": "myapiv1toysGET7348114D",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "myapiv1toysGET7348114D",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myapiv1toysGET7348114D",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ApiKeyRequired",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "myapiv1toysGET7348114D",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myapiv1toysA55FCBC4}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "myapiv1toysPOST55128058",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1toysPOST55128058",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1toysPOST55128058",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv1toysA55FCBC4}",
+   "actual": "${myapiv1toysA55FCBC4}"
+  },
+  {
+   "logicalId": "myapiv1toysPOST55128058",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "POST",
+   "actual": "POST"
+  },
+  {
+   "logicalId": "myapiv1toysPOST55128058",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myapiv1toysPOST55128058",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK"
+   },
+   "actual": {
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myapiv1toysA55FCBC4}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "myapiv1toysPUT59AFBBC2",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1toysPUT59AFBBC2",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1toysPUT59AFBBC2",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv1toysA55FCBC4}",
+   "actual": "${myapiv1toysA55FCBC4}"
+  },
+  {
+   "logicalId": "myapiv1toysPUT59AFBBC2",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PUT",
+   "actual": "PUT"
+  },
+  {
+   "logicalId": "myapiv1toysPUT59AFBBC2",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myapiv1toysPUT59AFBBC2",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK"
+   },
+   "actual": {
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myapiv1toysA55FCBC4}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "myapiv1appliances507FEFF4",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1appliances507FEFF4",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv113487378}",
+   "actual": "${myapiv113487378}"
+  },
+  {
+   "logicalId": "myapiv1appliances507FEFF4",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "appliances",
+   "actual": "appliances"
+  },
+  {
+   "logicalId": "myapiv1appliances507FEFF4",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1appliancesGET8FE872EC",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1appliancesGET8FE872EC",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1appliancesGET8FE872EC",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv1appliances507FEFF4}",
+   "actual": "${myapiv1appliances507FEFF4}"
+  },
+  {
+   "logicalId": "myapiv1appliancesGET8FE872EC",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "myapiv1appliancesGET8FE872EC",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myapiv1appliancesGET8FE872EC",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK"
+   },
+   "actual": {
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myapiv1appliances507FEFF4}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "myapiv1books1D4BE6C1",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1books1D4BE6C1",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv113487378}",
+   "actual": "${myapiv113487378}"
+  },
+  {
+   "logicalId": "myapiv1books1D4BE6C1",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "books",
+   "actual": "books"
+  },
+  {
+   "logicalId": "myapiv1books1D4BE6C1",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1books1BA6FE85",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1books1BA6FE85",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1books1BA6FE85",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}"
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1books1BA6FE85",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissiontestapigatewayspecrestapimyapiA4A36FD7GETv1books1BA6FE85",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/beta/GET/v1/books",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/beta/GET/v1/books"
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1booksC9F2D354",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1booksC9F2D354",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1booksC9F2D354",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}"
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1booksC9F2D354",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "myapiv1booksGETApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7GETv1booksC9F2D354",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/test-invoke-stage/GET/v1/books",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/test-invoke-stage/GET/v1/books"
+  },
+  {
+   "logicalId": "myapiv1booksGETC6B996D0",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1booksGETC6B996D0",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1booksGETC6B996D0",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv1books1D4BE6C1}",
+   "actual": "${myapiv1books1D4BE6C1}"
+  },
+  {
+   "logicalId": "myapiv1booksGETC6B996D0",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "myapiv1booksGETC6B996D0",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myapiv1booksGETC6B996D0",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myapiv1books1D4BE6C1}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissiontestapigatewayspecrestapimyapiA4A36FD7POSTv1books555D819D",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissiontestapigatewayspecrestapimyapiA4A36FD7POSTv1books555D819D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissiontestapigatewayspecrestapimyapiA4A36FD7POSTv1books555D819D",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}"
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissiontestapigatewayspecrestapimyapiA4A36FD7POSTv1books555D819D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissiontestapigatewayspecrestapimyapiA4A36FD7POSTv1books555D819D",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/beta/POST/v1/books",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/beta/POST/v1/books"
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7POSTv1booksF101DFF9",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7POSTv1booksF101DFF9",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7POSTv1booksF101DFF9",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}"
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7POSTv1booksF101DFF9",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "myapiv1booksPOSTApiPermissionTesttestapigatewayspecrestapimyapiA4A36FD7POSTv1booksF101DFF9",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/test-invoke-stage/POST/v1/books",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${myapi4C7BF186}/test-invoke-stage/POST/v1/books"
+  },
+  {
+   "logicalId": "myapiv1booksPOST53E2832E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiv1booksPOST53E2832E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiv1booksPOST53E2832E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiv1books1D4BE6C1}",
+   "actual": "${myapiv1books1D4BE6C1}"
+  },
+  {
+   "logicalId": "myapiv1booksPOST53E2832E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "POST",
+   "actual": "POST"
+  },
+  {
+   "logicalId": "myapiv1booksPOST53E2832E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "myapiv1booksPOST53E2832E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyHandler6B74D312}/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${myapiv1books1D4BE6C1}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "myapiCloudWatchRole095452E5",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiCloudWatchRole095452E5",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "myapiCloudWatchRole095452E5",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ]
+  },
+  {
+   "logicalId": "myapiAccountEC421A0A",
+   "type": "AWS::ApiGateway::Account",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiAccountEC421A0A",
+   "type": "AWS::ApiGateway::Account",
+   "property": "CloudWatchRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${myapiCloudWatchRole095452E5}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${myapiCloudWatchRole095452E5}"
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB49a6f2b34c48304b5ea39e505074a5a8ee",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB49a6f2b34c48304b5ea39e505074a5a8ee",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "beta stage",
+   "actual": "beta stage"
+  },
+  {
+   "logicalId": "myapiDeployment92F2CB49a6f2b34c48304b5ea39e505074a5a8ee",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiDeploymentStagebeta96434BEB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapiDeploymentStagebeta96434BEB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "beta",
+   "actual": "beta"
+  },
+  {
+   "logicalId": "myapiDeploymentStagebeta96434BEB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  },
+  {
+   "logicalId": "myapiDeploymentStagebeta96434BEB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapiDeployment92F2CB49a6f2b34c48304b5ea39e505074a5a8ee}",
+   "actual": "${myapiDeployment92F2CB49a6f2b34c48304b5ea39e505074a5a8ee}"
+  },
+  {
+   "logicalId": "myapiDeploymentStagebeta96434BEB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "beta stage",
+   "actual": "beta stage"
+  },
+  {
+   "logicalId": "myapiDeploymentStagebeta96434BEB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "CacheClusterEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "myapiDeploymentStagebeta96434BEB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "CacheClusterSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "0.5",
+   "actual": "0.5"
+  },
+  {
+   "logicalId": "myapiDeploymentStagebeta96434BEB",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "MethodSettings",
+   "status": "fail",
+   "expected": {
+    "*/*": {
+     "loggingLevel": "INFO",
+     "dataTraceEnabled": true
+    },
+    "~1~1api~1appliances/GET": {
+     "dataTraceEnabled": false,
+     "cachingEnabled": true
+    }
+   },
+   "actual": {
+    "*/*": {
+     "metricsEnabled": false,
+     "loggingLevel": "INFO",
+     "dataTraceEnabled": true,
+     "throttlingBurstLimit": 5000,
+     "throttlingRateLimit": 10000,
+     "cachingEnabled": false,
+     "cacheTtlInSeconds": 300,
+     "cacheDataEncrypted": false,
+     "requireAuthorizationForCacheControl": true,
+     "unauthorizedCacheControlHeaderStrategy": "SUCCEED_WITH_RESPONSE_HEADER"
+    },
+    "~1api~1appliances/GET": {
+     "metricsEnabled": false,
+     "dataTraceEnabled": false,
+     "throttlingBurstLimit": 5000,
+     "throttlingRateLimit": 10000,
+     "cachingEnabled": true,
+     "cacheTtlInSeconds": 300,
+     "cacheDataEncrypted": false,
+     "requireAuthorizationForCacheControl": true,
+     "unauthorizedCacheControlHeaderStrategy": "SUCCEED_WITH_RESPONSE_HEADER"
+    }
+   }
+  },
+  {
+   "logicalId": "myapiApiKey43446CCF",
+   "type": "AWS::ApiGateway::ApiKey",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "myapiUsagePlan56F9C4F2",
+   "type": "AWS::ApiGateway::UsagePlan",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "myapiUsagePlanUsagePlanKeyResourcetestapigatewayspecrestapimyapiApiKey950FF760D8BD56CA",
+   "type": "AWS::ApiGateway::UsagePlanKey",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyHandlerServiceRoleFFA06653",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyHandlerServiceRoleFFA06653",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyHandlerServiceRoleFFA06653",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyHandler6B74D312",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyHandler6B74D312",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyHandler6B74D312",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyHandler6B74D312",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyHandlerServiceRoleFFA06653}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyHandlerServiceRoleFFA06653}"
+  }
+ ]
+}

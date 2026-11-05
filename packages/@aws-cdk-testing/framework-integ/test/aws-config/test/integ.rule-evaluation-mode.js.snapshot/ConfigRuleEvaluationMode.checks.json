@@ -1,0 +1,446 @@
+{
+ "stackName": "ConfigRuleEvaluationMode",
+ "summary": {
+  "pass": 30,
+  "no handler": 5
+ },
+ "results": [
+  {
+   "logicalId": "ConfigPrerequisitesRoleAB65121E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfigPrerequisitesRoleAB65121E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "config.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22config.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ConfigPrerequisitesRoleAB65121E",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWS_ConfigRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWS_ConfigRole"
+   ]
+  },
+  {
+   "logicalId": "ConfigPrerequisitesRecorderF50F1E3E",
+   "type": "AWS::Config::ConfigurationRecorder",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ConfigPrerequisitesDeliveryBucketC25E0643",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfigPrerequisitesDeliveryBucketC25E0643",
+   "type": "AWS::S3::Bucket",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "ConfigRuleEvaluationMode"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ConfigPrerequisitesDeliveryBucketC25E0643"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ]
+  },
+  {
+   "logicalId": "ConfigPrerequisitesDeliveryBucketPolicy19A7503F",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfigPrerequisitesDeliveryBucketPolicy19A7503F",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ConfigPrerequisitesDeliveryBucketC25E0643}",
+   "actual": "${ConfigPrerequisitesDeliveryBucketC25E0643}"
+  },
+  {
+   "logicalId": "ConfigPrerequisitesDeliveryBucketPolicy19A7503F",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${ConfigPrerequisitesDeliveryBucketC25E0643}",
+       "arn:${AWS::Partition}:s3:::${ConfigPrerequisitesDeliveryBucketC25E0643}/*"
+      ]
+     },
+     {
+      "Action": [
+       "s3:GetBucketAcl",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "config.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${ConfigPrerequisitesDeliveryBucketC25E0643}"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "StringEquals": {
+        "s3:x-amz-acl": "bucket-owner-full-control"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "config.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${ConfigPrerequisitesDeliveryBucketC25E0643}/AWSLogs/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${ConfigPrerequisitesDeliveryBucketC25E0643}",
+       "arn:${AWS::Partition}:s3:::${ConfigPrerequisitesDeliveryBucketC25E0643}/*"
+      ]
+     },
+     {
+      "Action": [
+       "s3:GetBucketAcl",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "config.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${ConfigPrerequisitesDeliveryBucketC25E0643}"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "StringEquals": {
+        "s3:x-amz-acl": "bucket-owner-full-control"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "config.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${ConfigPrerequisitesDeliveryBucketC25E0643}/AWSLogs/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ConfigPrerequisitesDeliveryChannelF524911C",
+   "type": "AWS::Config::DeliveryChannel",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lambda function for auto-deleting objects in ${ConfigPrerequisitesDeliveryBucketC25E0643} S3 bucket.",
+   "actual": "Lambda function for auto-deleting objects in ${ConfigPrerequisitesDeliveryBucketC25E0643} S3 bucket."
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 128,
+   "actual": 128
+  },
+  {
+   "logicalId": "CustomFunctionServiceRoleD3F73B79",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomFunctionServiceRoleD3F73B79",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomFunctionServiceRoleD3F73B79",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSConfigRulesExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSConfigRulesExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomFunctionBADD59E7",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomFunctionBADD59E7",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "CustomFunctionBADD59E7",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomFunctionBADD59E7",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomFunctionServiceRoleD3F73B79}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomFunctionServiceRoleD3F73B79}"
+  },
+  {
+   "logicalId": "CustomFunctionCustomRulePermissionbM1jVaicvRO9SDCiAbsQcYrOlESEtMwrrF9ZQQRvd5QED54A3F8",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomFunctionCustomRulePermissionbM1jVaicvRO9SDCiAbsQcYrOlESEtMwrrF9ZQQRvd5QED54A3F8",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "CustomFunctionCustomRulePermissionbM1jVaicvRO9SDCiAbsQcYrOlESEtMwrrF9ZQQRvd5QED54A3F8",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CustomFunctionBADD59E7}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CustomFunctionBADD59E7}"
+  },
+  {
+   "logicalId": "CustomFunctionCustomRulePermissionbM1jVaicvRO9SDCiAbsQcYrOlESEtMwrrF9ZQQRvd5QED54A3F8",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "config.amazonaws.com"
+   },
+   "actual": {
+    "Service": "config.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "CustomFunctionCustomRulePermissionbM1jVaicvRO9SDCiAbsQcYrOlESEtMwrrF9ZQQRvd5QED54A3F8",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceAccount",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS::AccountId}",
+   "actual": "${AWS::AccountId}"
+  },
+  {
+   "logicalId": "CustomRuleB1CBBADE",
+   "type": "AWS::Config::ConfigRule",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ManagedRule7126A2A0",
+   "type": "AWS::Config::ConfigRule",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomPolicy6CB3FDA5",
+   "type": "AWS::Config::ConfigRule",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

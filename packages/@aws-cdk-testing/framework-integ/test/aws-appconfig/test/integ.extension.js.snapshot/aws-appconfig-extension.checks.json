@@ -1,0 +1,388 @@
+{
+ "stackName": "aws-appconfig-extension",
+ "summary": {
+  "pass": 25,
+  "no handler": 14
+ },
+ "results": [
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.8",
+   "actual": "python3.8"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunctionServiceRole3C357FF2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunctionServiceRole3C357FF2}"
+  },
+  {
+   "logicalId": "MyFunctionAppConfigPermission673BEA35",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunctionAppConfigPermission673BEA35",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "MyFunctionAppConfigPermission673BEA35",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunction3BAA72D1}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunction3BAA72D1}"
+  },
+  {
+   "logicalId": "MyFunctionAppConfigPermission673BEA35",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "appconfig.amazonaws.com"
+   },
+   "actual": {
+    "Service": "appconfig.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "MyApplication5C63EC1D",
+   "type": "AWS::AppConfig::Application",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyApplicationAssociationResource3FA55E02ED1FB",
+   "type": "AWS::AppConfig::ExtensionAssociation",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyApplicationAssociationResourceBAC86D18B66DB",
+   "type": "AWS::AppConfig::ExtensionAssociation",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyApplicationAssociationResource7F3E1F71FC034",
+   "type": "AWS::AppConfig::ExtensionAssociation",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyApplicationAssociationResource689DE159F9BFC",
+   "type": "AWS::AppConfig::ExtensionAssociation",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyApplicationMyEnv55DE3293",
+   "type": "AWS::AppConfig::Environment",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyLambdaExtensionRoleBC958D3F13B04",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaExtensionRoleBC958D3F13B04",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "appconfig.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22appconfig.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyLambdaExtensionRoleBC958D3F13B04",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "AllowAppConfigInvokeExtensionEventSourcePolicy"
+   ],
+   "actual": [
+    "AllowAppConfigInvokeExtensionEventSourcePolicy"
+   ]
+  },
+  {
+   "logicalId": "MyLambdaExtensionRoleBC958D3F13B04",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "lambda:InvokeAsync",
+       "lambda:InvokeFunction"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunction3BAA72D1}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22lambda%3AInvokeAsync%22%2C%22lambda%3AInvokeFunction%22%5D%2C%22Resource%22%3A%22arn%3Aaws%3Alambda%3A${AWS::Region}%3A${AWS::AccountId}%3Afunction%3A${MyFunction3BAA72D1}%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyLambdaExtensionAFA1476A",
+   "type": "AWS::AppConfig::Extension",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyQueueE6CA6235",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueueExtensionRole63F1970B4A7A6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueueExtensionRole63F1970B4A7A6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "appconfig.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22appconfig.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyQueueExtensionRole63F1970B4A7A6",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "AllowAppConfigInvokeExtensionEventSourcePolicy"
+   ],
+   "actual": [
+    "AllowAppConfigInvokeExtensionEventSourcePolicy"
+   ]
+  },
+  {
+   "logicalId": "MyQueueExtensionRole63F1970B4A7A6",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22sqs%3ASendMessage%22%2C%22Resource%22%3A%22arn%3Aaws%3Asqs%3A${AWS::Region}%3A${AWS::AccountId}%3A${MyQueueE6CA6235.Name}%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyQueueExtension872C5D27",
+   "type": "AWS::AppConfig::Extension",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopicExtensionRole39BF2474FECA3",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopicExtensionRole39BF2474FECA3",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "appconfig.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22appconfig.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyTopicExtensionRole39BF2474FECA3",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "AllowAppConfigInvokeExtensionEventSourcePolicy"
+   ],
+   "actual": [
+    "AllowAppConfigInvokeExtensionEventSourcePolicy"
+   ]
+  },
+  {
+   "logicalId": "MyTopicExtensionRole39BF2474FECA3",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Publish",
+      "Effect": "Allow",
+      "Resource": "${MyTopic86869434}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22sns%3APublish%22%2C%22Resource%22%3A%22arn%3Aaws%3Asns%3A${AWS::Region}%3A${AWS::AccountId}%3A${MyTopic86869434.Name}%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyTopicExtension9B6DF691",
+   "type": "AWS::AppConfig::Extension",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyEventBusExtensionADFE2273",
+   "type": "AWS::AppConfig::Extension",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyDeployStrategy062CAEA2",
+   "type": "AWS::AppConfig::DeploymentStrategy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HostedConfigurationConfigurationProfile3AB17BEA",
+   "type": "AWS::AppConfig::ConfigurationProfile",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HostedConfiguration257746B4",
+   "type": "AWS::AppConfig::HostedConfigurationVersion",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HostedConfigurationDeployment9D5FCC2741866",
+   "type": "AWS::AppConfig::Deployment",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

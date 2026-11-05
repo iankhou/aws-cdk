@@ -1,0 +1,114 @@
+{
+ "stackName": "IntegApiGatewayV2Iam",
+ "summary": {
+  "no handler": 8,
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "User00B015A1",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "UserDefaultPolicy1F97781E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "UserDefaultPolicy1F97781E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "UserDefaultPolicy1F97781E",
+   "actual": "UserDefaultPolicy1F97781E"
+  },
+  {
+   "logicalId": "UserDefaultPolicy1F97781E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "execute-api:Invoke",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiF5A9A8A7}/*/*/books/*",
+       "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiF5A9A8A7}/*/*/foo"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "execute-api:Invoke",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiF5A9A8A7}/*/*/books/*",
+       "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiF5A9A8A7}/*/*/foo"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "UserDefaultPolicy1F97781E",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${User00B015A1}",
+   "actual": "${User00B015A1}"
+  },
+  {
+   "logicalId": "UserAccessEC42ADF7",
+   "type": "AWS::IAM::AccessKey",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HttpApiF5A9A8A7",
+   "type": "AWS::ApiGatewayV2::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HttpApiDefaultStage3EEB07D6",
+   "type": "AWS::ApiGatewayV2::Stage",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HttpApiANYfooexamplecom903F7A9F",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HttpApiANYfooD178456F",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HttpApiANYbooksbookexamplecom5C333C98",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HttpApiANYbooksbook2F78361C",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

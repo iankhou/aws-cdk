@@ -1,0 +1,270 @@
+{
+ "stackName": "add-to-resource-policy-test-stack",
+ "summary": {
+  "pass": 16
+ },
+ "results": [
+  {
+   "logicalId": "WildcardTableE075CD4D",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "WildcardTableE075CD4D",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "WildcardTableE075CD4D",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "WildcardTableE075CD4D",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "WildcardTableE075CD4D",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ResourcePolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:GetItem",
+       "dynamodb:PutItem",
+       "dynamodb:Query"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"},\"Action\":[\"dynamodb:GetItem\",\"dynamodb:PutItem\",\"dynamodb:Query\"],\"Resource\":\"*\"}]}"
+  },
+  {
+   "logicalId": "ScopedTableC019D4A1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ScopedTableC019D4A1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "TableName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "my-explicit-scoped-table",
+   "actual": "my-explicit-scoped-table"
+  },
+  {
+   "logicalId": "ScopedTableC019D4A1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "ScopedTableC019D4A1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "ScopedTableC019D4A1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "ScopedTableC019D4A1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ResourcePolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:GetItem",
+       "dynamodb:Query"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/my-explicit-scoped-table"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"},\"Action\":[\"dynamodb:GetItem\",\"dynamodb:Query\"],\"Resource\":\"arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/my-explicit-scoped-table\"}]}"
+  },
+  {
+   "logicalId": "GrantTable13160A8B",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantTable13160A8B",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "GrantTable13160A8B",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "GrantTable13160A8B",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "GrantTable13160A8B",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ResourcePolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchWriteItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:PutItem",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"},\"Action\":[\"dynamodb:BatchWriteItem\",\"dynamodb:DeleteItem\",\"dynamodb:DescribeTable\",\"dynamodb:PutItem\",\"dynamodb:UpdateItem\"],\"Resource\":\"*\"}]}"
+  }
+ ]
+}

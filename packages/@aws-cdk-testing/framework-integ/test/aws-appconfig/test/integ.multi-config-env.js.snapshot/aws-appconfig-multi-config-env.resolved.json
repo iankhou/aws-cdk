@@ -1,0 +1,91 @@
+{
+ "version": "1",
+ "stackName": "aws-appconfig-multi-config-env",
+ "resources": {
+  "MyApplicationForEnv1F597ED9": {
+   "Type": "AWS::AppConfig::Application",
+   "Properties": {
+    "Name": "awsappconfigmulticonfigenv-MyApplicationForEnv-1EE3EA95"
+   }
+  },
+  "MultiConfigEnvironment5F41B747": {
+   "Type": "AWS::AppConfig::Environment",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "Name": "awsappconfigmulticonfigenv-MultiConfigEnvironment-59525230"
+   }
+  },
+  "QuickDeploymentStrategy980252EC": {
+   "Type": "AWS::AppConfig::DeploymentStrategy",
+   "Properties": {
+    "DeploymentDurationInMinutes": 1,
+    "GrowthFactor": 50,
+    "GrowthType": "LINEAR",
+    "Name": "awsappconfigmulticonfigenv-QuickDeploymentStrategy-CAB72574",
+    "ReplicateTo": "NONE"
+   }
+  },
+  "MyFirstConfigConfigurationProfileAB11F87A": {
+   "Type": "AWS::AppConfig::ConfigurationProfile",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "LocationUri": "hosted",
+    "Name": "awsappconfigmulticonfigenv-MyFirstConfig-2FF7CAAB"
+   }
+  },
+  "MyFirstConfig117AFBAC": {
+   "Type": "AWS::AppConfig::HostedConfigurationVersion",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "ConfigurationProfileId": "${MyFirstConfigConfigurationProfileAB11F87A}",
+    "Content": "first config content",
+    "ContentType": "application/octet-stream"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MyFirstConfigDeployment5AEBAD52B8EE4": {
+   "Type": "AWS::AppConfig::Deployment",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "ConfigurationProfileId": "${MyFirstConfigConfigurationProfileAB11F87A}",
+    "ConfigurationVersion": "${MyFirstConfig117AFBAC}",
+    "DeploymentStrategyId": "${QuickDeploymentStrategy980252EC}",
+    "EnvironmentId": "${MultiConfigEnvironment5F41B747}"
+   }
+  },
+  "MySecondConfigConfigurationProfileD0CC1BAA": {
+   "Type": "AWS::AppConfig::ConfigurationProfile",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "LocationUri": "hosted",
+    "Name": "awsappconfigmulticonfigenv-MySecondConfig-4F837809"
+   }
+  },
+  "MySecondConfig28DEBAC4": {
+   "Type": "AWS::AppConfig::HostedConfigurationVersion",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "ConfigurationProfileId": "${MySecondConfigConfigurationProfileD0CC1BAA}",
+    "Content": "second config content",
+    "ContentType": "application/octet-stream"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MySecondConfigDeployment5AEBAD1470BE4": {
+   "Type": "AWS::AppConfig::Deployment",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "ConfigurationProfileId": "${MySecondConfigConfigurationProfileD0CC1BAA}",
+    "ConfigurationVersion": "${MySecondConfig28DEBAC4}",
+    "DeploymentStrategyId": "${QuickDeploymentStrategy980252EC}",
+    "EnvironmentId": "${MultiConfigEnvironment5F41B747}"
+   },
+   "DependsOn": [
+    "MyFirstConfigDeployment5AEBAD52B8EE4"
+   ]
+  }
+ },
+ "unresolved": []
+}

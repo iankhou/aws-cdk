@@ -1,0 +1,60 @@
+{
+ "version": "1",
+ "stackName": "specrestapi-endpointConfiguration",
+ "resources": {
+  "myapi4C7BF186": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "BodyS3Location": {
+     "Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "Key": "68497ac876de4e963fc8f7b5f1b28844c18ecc95e3f7c6e9e0bf250e03c037fb.yaml"
+    },
+    "EndpointConfiguration": {
+     "Types": [
+      "REGIONAL"
+     ]
+    },
+    "Name": "my-api"
+   }
+  },
+  "myapiDeployment92F2CB490e99c1932ac058c07f251d768959caa7": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${myapi4C7BF186}"
+   },
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "myapiDeploymentStageprod298F01AF": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${myapiDeployment92F2CB490e99c1932ac058c07f251d768959caa7}",
+    "RestApiId": "${myapi4C7BF186}",
+    "StageName": "prod"
+   }
+  }
+ },
+ "outputs": {
+  "myapiEndpoint3628AFE3": {
+   "Value": "https://${myapi4C7BF186}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${myapiDeploymentStageprod298F01AF}/"
+  },
+  "PetsURL": {
+   "Value": "https://${myapi4C7BF186}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${myapiDeploymentStageprod298F01AF}/pets"
+  },
+  "ExportsOutputRefmyapi4C7BF1862E84350A": {
+   "Value": "${myapi4C7BF186}",
+   "Export": {
+    "Name": "specrestapi-endpointConfiguration:ExportsOutputRefmyapi4C7BF1862E84350A"
+   }
+  },
+  "ExportsOutputRefmyapiDeploymentStageprod298F01AF9767B267": {
+   "Value": "${myapiDeploymentStageprod298F01AF}",
+   "Export": {
+    "Name": "specrestapi-endpointConfiguration:ExportsOutputRefmyapiDeploymentStageprod298F01AF9767B267"
+   }
+  }
+ },
+ "unresolved": []
+}

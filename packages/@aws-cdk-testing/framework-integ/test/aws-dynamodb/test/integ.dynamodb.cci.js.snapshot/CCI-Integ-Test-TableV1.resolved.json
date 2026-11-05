@@ -1,0 +1,42 @@
+{
+ "version": "1",
+ "stackName": "CCI-Integ-Test-TableV1",
+ "resources": {
+  "TableV26B253703": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "hashKey",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "sortKey",
+      "AttributeType": "N"
+     }
+    ],
+    "ContributorInsightsSpecification": {
+     "Enabled": true,
+     "Mode": "ACCESSED_AND_THROTTLED_KEYS"
+    },
+    "KeySchema": [
+     {
+      "AttributeName": "hashKey",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "sortKey",
+      "KeyType": "RANGE"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": []
+}

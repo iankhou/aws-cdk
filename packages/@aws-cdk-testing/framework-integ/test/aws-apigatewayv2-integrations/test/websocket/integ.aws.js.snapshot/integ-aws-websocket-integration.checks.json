@@ -1,0 +1,146 @@
+{
+ "stackName": "integ-aws-websocket-integration",
+ "summary": {
+  "pass": 8,
+  "no handler": 6
+ },
+ "results": [
+  {
+   "logicalId": "MyTable794EDED1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTable794EDED1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "TableName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyTable",
+   "actual": "MyTable"
+  },
+  {
+   "logicalId": "MyTable794EDED1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "MyTable794EDED1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "MyTable794EDED1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "ApiGatewayRoleD2518903",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiGatewayRoleD2518903",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiGatewayRoleD2518903",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonDynamoDBFullAccess"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonDynamoDBFullAccess"
+   ]
+  },
+  {
+   "logicalId": "mywsapi32E6CE11",
+   "type": "AWS::ApiGatewayV2::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapidefaultRouteDefaultIntegrationFFCB3BA9",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapidefaultRouteE9382DF8",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapiconnectRouteDynamodbPutItem9E189A39",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapiconnectRoute45A0ED6A",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DevStage520A913F",
+   "type": "AWS::ApiGatewayV2::Stage",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+ "version": "1",
+ "stackName": "integ-lambda-proxy",
+ "resources": {
+  "AlwaysSuccessServiceRole6DB8C2F6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "AlwaysSuccess099EAB05": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "exports.handler = async function(event, context) { return { statusCode: 200, body: \"success\" }; };"
+    },
+    "Handler": "index.handler",
+    "Role": "${AlwaysSuccessServiceRole6DB8C2F6.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "AlwaysSuccessServiceRole6DB8C2F6"
+   ]
+  },
+  "LambdaProxyApi67594471": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "LambdaProxyApi",
+    "ProtocolType": "HTTP"
+   }
+  },
+  "LambdaProxyApiDefaultRouteDefaultIntegrationAE9908C8": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${LambdaProxyApi67594471}",
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": "${AlwaysSuccess099EAB05.Arn}",
+    "PayloadFormatVersion": "2.0"
+   }
+  },
+  "LambdaProxyApiDefaultRouteDefaultIntegrationPermission39F587FC": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${AlwaysSuccess099EAB05.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${LambdaProxyApi67594471}/*/*"
+   }
+  },
+  "LambdaProxyApiDefaultRoute1EB30A46": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${LambdaProxyApi67594471}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "$default",
+    "Target": "integrations/${LambdaProxyApiDefaultRouteDefaultIntegrationAE9908C8}"
+   }
+  },
+  "LambdaProxyApiDefaultStage07C38681": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${LambdaProxyApi67594471}",
+    "AutoDeploy": true,
+    "StageName": "$default"
+   }
+  }
+ },
+ "outputs": {
+  "Endpoint": {
+   "Value": "https://${LambdaProxyApi67594471}.execute-api.${AWS::Region}.${AWS::URLSuffix}/"
+  }
+ },
+ "unresolved": []
+}

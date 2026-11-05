@@ -1,0 +1,29 @@
+{
+ "version": "1",
+ "stackName": "PolicyMinimalIntegTestStack",
+ "resources": {
+  "TestPolicyEngineEDA3E3DC": {
+   "Type": "AWS::BedrockAgentCore::PolicyEngine",
+   "Properties": {
+    "Name": "PolicyMinimalIntegTetackTestPolicyEngineB3F4F89B"
+   }
+  },
+  "TestPolicyCC05E598": {
+   "Type": "AWS::BedrockAgentCore::Policy",
+   "Properties": {
+    "Definition": {
+     "Cedar": {
+      "Statement": "permit(\n  principal == AgentCore::IamEntity::\"arn:${AWS::Partition}:iam::123456789012:role/TestAgentRole\",\n  action,\n  resource is AgentCore::Gateway\n);"
+     }
+    },
+    "Name": "PolicyMinimalIntegTestStackTestPolicyEC5DD5C8",
+    "PolicyEngineId": "${TestPolicyEngineEDA3E3DC.PolicyEngineId}",
+    "ValidationMode": "FAIL_ON_ANY_FINDINGS"
+   },
+   "DependsOn": [
+    "TestPolicyEngineEDA3E3DC"
+   ]
+  }
+ },
+ "unresolved": []
+}

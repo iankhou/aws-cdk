@@ -1,0 +1,92 @@
+{
+ "version": "1",
+ "stackName": "warm-throughput-stack-v2",
+ "resources": {
+  "TableTest143E55AA2": {
+   "Type": "AWS::DynamoDB::GlobalTable",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "gsi1pk",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "my-index-1",
+      "KeySchema": [
+       {
+        "AttributeName": "gsi1pk",
+        "KeyType": "HASH"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      },
+      "WarmThroughput": {
+       "ReadUnitsPerSecond": 15000,
+       "WriteUnitsPerSecond": 6000
+      }
+     },
+     {
+      "IndexName": "my-index-2",
+      "KeySchema": [
+       {
+        "AttributeName": "gsi1pk",
+        "KeyType": "HASH"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "id",
+      "KeyType": "HASH"
+     }
+    ],
+    "Replicas": [
+     {
+      "GlobalSecondaryIndexes": [
+       {
+        "IndexName": "my-index-1"
+       },
+       {
+        "IndexName": "my-index-2"
+       }
+      ],
+      "Region": "us-west-2"
+     },
+     {
+      "GlobalSecondaryIndexes": [
+       {
+        "IndexName": "my-index-1"
+       },
+       {
+        "IndexName": "my-index-2"
+       }
+      ],
+      "Region": "${AWS::Region}"
+     }
+    ],
+    "StreamSpecification": {
+     "StreamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "WarmThroughput": {
+     "ReadUnitsPerSecond": 14000,
+     "WriteUnitsPerSecond": 5000
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

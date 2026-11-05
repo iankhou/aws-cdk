@@ -1,0 +1,127 @@
+{
+ "stackName": "integ-cloudtrail-defaults",
+ "summary": {
+  "pass": 4,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "TrailS30071F172",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TrailS3PolicyE42170FE",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TrailS3PolicyE42170FE",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TrailS30071F172}",
+   "actual": "${TrailS30071F172}"
+  },
+  {
+   "logicalId": "TrailS3PolicyE42170FE",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TrailS30071F172}",
+       "arn:${AWS::Partition}:s3:::${TrailS30071F172}/*"
+      ]
+     },
+     {
+      "Action": "s3:GetBucketAcl",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "cloudtrail.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${TrailS30071F172}"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "StringEquals": {
+        "s3:x-amz-acl": "bucket-owner-full-control"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "cloudtrail.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${TrailS30071F172}/AWSLogs/${AWS::AccountId}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TrailS30071F172}",
+       "arn:${AWS::Partition}:s3:::${TrailS30071F172}/*"
+      ]
+     },
+     {
+      "Action": "s3:GetBucketAcl",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "cloudtrail.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${TrailS30071F172}"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "StringEquals": {
+        "s3:x-amz-acl": "bucket-owner-full-control"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "cloudtrail.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${TrailS30071F172}/AWSLogs/${AWS::AccountId}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Trail022F0CF2",
+   "type": "AWS::CloudTrail::Trail",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

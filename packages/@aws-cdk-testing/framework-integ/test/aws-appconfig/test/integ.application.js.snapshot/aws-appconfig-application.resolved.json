@@ -1,0 +1,51 @@
+{
+ "version": "1",
+ "stackName": "aws-appconfig-application",
+ "resources": {
+  "MyAppConfigB4B63E75": {
+   "Type": "AWS::AppConfig::Application",
+   "Properties": {
+    "Description": "This is my application for testing",
+    "Name": "MySampleApplication"
+   }
+  },
+  "MyTaskDefTaskRole727F9D3B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyTaskDef01F0D39B": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": "public.ecr.aws/aws-appconfig/aws-appconfig-agent:latest",
+      "Name": "AppConfigAgentContainer"
+     }
+    ],
+    "Cpu": "256",
+    "Family": "awsappconfigapplicationMyTaskDef7372410D",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": "${MyTaskDefTaskRole727F9D3B.Arn}"
+   }
+  }
+ },
+ "unresolved": []
+}

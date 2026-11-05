@@ -1,0 +1,600 @@
+{
+ "version": "1",
+ "stackName": "restapi-ip-address-type-test-stack",
+ "resources": {
+  "Vpc8378EB38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcPublicSubnet1Subnet5C2D37C4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcPublicSubnet1RouteTable6C95E38E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcPublicSubnet1RouteTableAssociation97140677": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcPublicSubnet1RouteTable6C95E38E}",
+    "SubnetId": "${VpcPublicSubnet1Subnet5C2D37C4}"
+   }
+  },
+  "VpcPublicSubnet1DefaultRoute3DA9E72A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VpcPublicSubnet1DefaultRoute3DA9E72A[1]}",
+    "GatewayId": "${VpcIGWD7BA715C}",
+    "RouteTableId": "${VpcPublicSubnet1RouteTable6C95E38E}"
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcPublicSubnet2Subnet691E08A3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcPublicSubnet2RouteTable94F7E489": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcPublicSubnet2RouteTableAssociationDD5762D8": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcPublicSubnet2RouteTable94F7E489}",
+    "SubnetId": "${VpcPublicSubnet2Subnet691E08A3}"
+   }
+  },
+  "VpcPublicSubnet2DefaultRoute97F91067": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VpcPublicSubnet1DefaultRoute3DA9E72A[1]}",
+    "GatewayId": "${VpcIGWD7BA715C}",
+    "RouteTableId": "${VpcPublicSubnet2RouteTable94F7E489}"
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcIsolatedSubnet1SubnetE48C5737": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc/IsolatedSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcIsolatedSubnet1RouteTable4771E3E5": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc/IsolatedSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcIsolatedSubnet1RouteTableAssociationD300FCBB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcIsolatedSubnet1RouteTable4771E3E5}",
+    "SubnetId": "${VpcIsolatedSubnet1SubnetE48C5737}"
+   }
+  },
+  "VpcIsolatedSubnet2Subnet16364B91": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc/IsolatedSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcIsolatedSubnet2RouteTable1D30AF7D": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc/IsolatedSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcIsolatedSubnet2RouteTableAssociationF7B18CCA": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcIsolatedSubnet2RouteTable1D30AF7D}",
+    "SubnetId": "${VpcIsolatedSubnet2Subnet16364B91}"
+   }
+  },
+  "VpcIGWD7BA715C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcVPCGWBF912B6E": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": "${VpcIGWD7BA715C}",
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcVpcEndpointSecurityGroup0E497F39": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "restapi-ip-address-type-test-stack/Vpc/VpcEndpoint/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${VpcPublicSubnet1DefaultRoute3DA9E72A[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "${Vpc8378EB38.CidrBlock}",
+      "Description": "from ${Vpc8378EB38.CidrBlock}:443",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcVpcEndpoint697E0D62": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     "${VpcVpcEndpointSecurityGroup0E497F39.GroupId}"
+    ],
+    "ServiceName": "com.amazonaws.${AWS::Region}.execute-api",
+    "SubnetIds": [
+     "${VpcIsolatedSubnet1SubnetE48C5737}",
+     "${VpcIsolatedSubnet2Subnet16364B91}"
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "restapi-ip-address-type-test-stack/Vpc"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "EdgeIpv4ApiCFB9ED42": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "EndpointConfiguration": {
+     "IpAddressType": "ipv4",
+     "Types": [
+      "EDGE"
+     ]
+    },
+    "Name": "EdgeIpv4Api"
+   }
+  },
+  "EdgeIpv4ApiDeploymentAAA722F1b22002174628ba0e84625e834ba7d7ac": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${EdgeIpv4ApiCFB9ED42}"
+   },
+   "DependsOn": [
+    "EdgeIpv4ApiGETFFC4D99B"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "EdgeIpv4ApiDeploymentStageprodD2CA6885": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${EdgeIpv4ApiDeploymentAAA722F1b22002174628ba0e84625e834ba7d7ac}",
+    "RestApiId": "${EdgeIpv4ApiCFB9ED42}",
+    "StageName": "prod"
+   }
+  },
+  "EdgeIpv4ApiGETFFC4D99B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${EdgeIpv4ApiCFB9ED42.RootResourceId}",
+    "RestApiId": "${EdgeIpv4ApiCFB9ED42}"
+   }
+  },
+  "EdgeDualStackApi70584C34": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "EndpointConfiguration": {
+     "IpAddressType": "dualstack",
+     "Types": [
+      "EDGE"
+     ]
+    },
+    "Name": "EdgeDualStackApi"
+   }
+  },
+  "EdgeDualStackApiDeployment257C3F6F7104d13eb1093c3722e3eb2cf05813c8": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${EdgeDualStackApi70584C34}"
+   },
+   "DependsOn": [
+    "EdgeDualStackApiGET6F5A20B5"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "EdgeDualStackApiDeploymentStageprodF8D00A4B": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${EdgeDualStackApiDeployment257C3F6F7104d13eb1093c3722e3eb2cf05813c8}",
+    "RestApiId": "${EdgeDualStackApi70584C34}",
+    "StageName": "prod"
+   }
+  },
+  "EdgeDualStackApiGET6F5A20B5": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${EdgeDualStackApi70584C34.RootResourceId}",
+    "RestApiId": "${EdgeDualStackApi70584C34}"
+   }
+  },
+  "RegionalIpv4Api7846288A": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "EndpointConfiguration": {
+     "IpAddressType": "ipv4",
+     "Types": [
+      "REGIONAL"
+     ]
+    },
+    "Name": "RegionalIpv4Api"
+   }
+  },
+  "RegionalIpv4ApiDeployment29258D8A8646fa5566626943f8c2fea6834644cd": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${RegionalIpv4Api7846288A}"
+   },
+   "DependsOn": [
+    "RegionalIpv4ApiGET97CBC6B6"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "RegionalIpv4ApiDeploymentStageprod068741CD": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${RegionalIpv4ApiDeployment29258D8A8646fa5566626943f8c2fea6834644cd}",
+    "RestApiId": "${RegionalIpv4Api7846288A}",
+    "StageName": "prod"
+   }
+  },
+  "RegionalIpv4ApiGET97CBC6B6": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${RegionalIpv4Api7846288A.RootResourceId}",
+    "RestApiId": "${RegionalIpv4Api7846288A}"
+   }
+  },
+  "RegionalDualStackApi8E297664": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "EndpointConfiguration": {
+     "IpAddressType": "dualstack",
+     "Types": [
+      "REGIONAL"
+     ]
+    },
+    "Name": "RegionalDualStackApi"
+   }
+  },
+  "RegionalDualStackApiDeployment29E88BD6051b7fb9f17179f7ec0983f9eb188ea0": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${RegionalDualStackApi8E297664}"
+   },
+   "DependsOn": [
+    "RegionalDualStackApiGET21115B38"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "RegionalDualStackApiDeploymentStageprod5DA52830": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${RegionalDualStackApiDeployment29E88BD6051b7fb9f17179f7ec0983f9eb188ea0}",
+    "RestApiId": "${RegionalDualStackApi8E297664}",
+    "StageName": "prod"
+   }
+  },
+  "RegionalDualStackApiGET21115B38": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${RegionalDualStackApi8E297664.RootResourceId}",
+    "RestApiId": "${RegionalDualStackApi8E297664}"
+   }
+  },
+  "PrivateDualStackApi2CCFC682": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "EndpointConfiguration": {
+     "IpAddressType": "dualstack",
+     "Types": [
+      "PRIVATE"
+     ]
+    },
+    "Name": "PrivateDualStackApi",
+    "Policy": {
+     "Statement": [
+      {
+       "Action": "execute-api:Invoke",
+       "Condition": {
+        "StringNotEquals": {
+         "aws:SourceVpce": [
+          "${VpcVpcEndpoint697E0D62}"
+         ]
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": "execute-api:/*"
+      },
+      {
+       "Action": "execute-api:Invoke",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": "execute-api:/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "PrivateDualStackApiDeploymentB8DAB5721935cdcd96f76b2b894fbe54157fe042": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${PrivateDualStackApi2CCFC682}"
+   },
+   "DependsOn": [
+    "PrivateDualStackApiGET41804A3C"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "PrivateDualStackApiDeploymentStageprod0A975547": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${PrivateDualStackApiDeploymentB8DAB5721935cdcd96f76b2b894fbe54157fe042}",
+    "RestApiId": "${PrivateDualStackApi2CCFC682}",
+    "StageName": "prod"
+   }
+  },
+  "PrivateDualStackApiGET41804A3C": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${PrivateDualStackApi2CCFC682.RootResourceId}",
+    "RestApiId": "${PrivateDualStackApi2CCFC682}"
+   }
+  }
+ },
+ "outputs": {
+  "EdgeIpv4ApiEndpoint041D724F": {
+   "Value": "https://${EdgeIpv4ApiCFB9ED42}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${EdgeIpv4ApiDeploymentStageprodD2CA6885}/"
+  },
+  "EdgeDualStackApiEndpoint07363117": {
+   "Value": "https://${EdgeDualStackApi70584C34}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${EdgeDualStackApiDeploymentStageprodF8D00A4B}/"
+  },
+  "RegionalIpv4ApiEndpoint4DBD9FD1": {
+   "Value": "https://${RegionalIpv4Api7846288A}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${RegionalIpv4ApiDeploymentStageprod068741CD}/"
+  },
+  "RegionalDualStackApiEndpoint76388023": {
+   "Value": "https://${RegionalDualStackApi8E297664}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${RegionalDualStackApiDeploymentStageprod5DA52830}/"
+  },
+  "PrivateDualStackApiEndpointD2C12CE0": {
+   "Value": "https://${PrivateDualStackApi2CCFC682}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${PrivateDualStackApiDeploymentStageprod0A975547}/"
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.VpcPublicSubnet1Subnet5C2D37C4.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcPublicSubnet2Subnet691E08A3.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcIsolatedSubnet1SubnetE48C5737.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcIsolatedSubnet2Subnet16364B91.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}

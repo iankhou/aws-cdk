@@ -1,0 +1,218 @@
+{
+ "stackName": "aws-cdk-dynamodb",
+ "summary": {
+  "pass": 16,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableReadScalingTargetF96E9F76",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableReadScalingTargetF96E9F76",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableReadScalingTargetF96E9F76[0]}",
+   "actual": "${TableReadScalingTargetF96E9F76[0]}"
+  },
+  {
+   "logicalId": "TableReadScalingTargetF96E9F76",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ScalableDimension",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "dynamodb:table:ReadCapacityUnits",
+   "actual": "dynamodb:table:ReadCapacityUnits"
+  },
+  {
+   "logicalId": "TableReadScalingTargetF96E9F76",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ServiceNamespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "dynamodb",
+   "actual": "dynamodb"
+  },
+  {
+   "logicalId": "TableReadScalingTargetF96E9F76",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "MinCapacity",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "TableReadScalingTargetF96E9F76",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "MaxCapacity",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 50,
+   "actual": 50
+  },
+  {
+   "logicalId": "TableReadScalingTargetF96E9F76",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "RoleARN",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+  },
+  {
+   "logicalId": "TableReadScalingTargetF96E9F76",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ScheduledActions",
+   "status": "fail",
+   "expected": [
+    {
+     "ScheduledActionName": "ScaleUpInTheMorning",
+     "Schedule": "cron(0 8 * * ? *)",
+     "ScalableTargetAction": {
+      "MinCapacity": 20
+     }
+    },
+    {
+     "ScheduledActionName": "ScaleDownAtNight",
+     "Schedule": "cron(0 20 * * ? *)",
+     "ScalableTargetAction": {
+      "MaxCapacity": 20
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ScheduledActionName": "ScaleDownAtNight",
+     "Schedule": "cron(0 20 * * ? *)",
+     "ScalableTargetAction": {
+      "MaxCapacity": 20
+     }
+    },
+    {
+     "ScheduledActionName": "ScaleUpInTheMorning",
+     "Schedule": "cron(0 8 * * ? *)",
+     "ScalableTargetAction": {
+      "MinCapacity": 20
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableReadScalingTargetTracking67DF0596",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableReadScalingTargetTracking67DF0596",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableReadScalingTargetTracking67DF0596.Name}",
+   "actual": "${TableReadScalingTargetTracking67DF0596.Name}"
+  },
+  {
+   "logicalId": "TableReadScalingTargetTracking67DF0596",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TargetTrackingScaling",
+   "actual": "TargetTrackingScaling"
+  },
+  {
+   "logicalId": "TableReadScalingTargetTracking67DF0596",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "ScalingTargetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableReadScalingTargetF96E9F76}",
+   "actual": "${TableReadScalingTargetF96E9F76}"
+  },
+  {
+   "logicalId": "TableReadScalingTargetTracking67DF0596",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "TargetTrackingScalingPolicyConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetValue": 50,
+    "PredefinedMetricSpecification": {
+     "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+    }
+   },
+   "actual": {
+    "TargetValue": 50,
+    "PredefinedMetricSpecification": {
+     "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+    }
+   }
+  }
+ ]
+}

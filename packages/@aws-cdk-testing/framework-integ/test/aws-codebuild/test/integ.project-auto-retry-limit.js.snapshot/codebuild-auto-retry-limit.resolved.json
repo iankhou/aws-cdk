@@ -1,0 +1,103 @@
+{
+ "version": "1",
+ "stackName": "codebuild-auto-retry-limit",
+ "resources": {
+  "MyBucketF68F3FF0": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MyProjectRole9BBE5233": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyProjectRoleDefaultPolicyB19B7C29": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${MyBucketF68F3FF0.Arn}",
+        "${MyBucketF68F3FF0.Arn}/path/to/my/source.zip"
+       ]
+      },
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}"
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProject39F7B0AE}-*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectRoleDefaultPolicyB19B7C29",
+    "Roles": [
+     "${MyProjectRole9BBE5233}"
+    ]
+   }
+  },
+  "MyProject39F7B0AE": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "AutoRetryLimit": 2,
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:7.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": "${MyProjectRole9BBE5233.Arn}",
+    "Source": {
+     "Location": "${MyBucketF68F3FF0}/path/to/my/source.zip",
+     "Type": "S3"
+    }
+   }
+  }
+ },
+ "unresolved": []
+}

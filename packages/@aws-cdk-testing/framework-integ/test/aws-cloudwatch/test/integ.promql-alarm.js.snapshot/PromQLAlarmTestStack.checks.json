@@ -1,0 +1,94 @@
+{
+ "stackName": "PromQLAlarmTestStack",
+ "summary": {
+  "pass": 8
+ },
+ "results": [
+  {
+   "logicalId": "BasicPromQLAlarmA78E509D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BasicPromQLAlarmA78E509D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "AlarmName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "BasicPromQLAlarm",
+   "actual": "BasicPromQLAlarm"
+  },
+  {
+   "logicalId": "BasicPromQLAlarmA78E509D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "AlarmDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Test PromQL alarm",
+   "actual": "Test PromQL alarm"
+  },
+  {
+   "logicalId": "BasicPromQLAlarmA78E509D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationCriteria",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "PromQLCriteria": {
+     "PendingPeriod": 300,
+     "Query": "up == 0",
+     "RecoveryPeriod": 300
+    }
+   },
+   "actual": {
+    "PromQLCriteria": {
+     "Query": "up == 0",
+     "PendingPeriod": 300,
+     "RecoveryPeriod": 300
+    }
+   }
+  },
+  {
+   "logicalId": "BasicPromQLAlarmA78E509D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationInterval",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 60,
+   "actual": 60
+  },
+  {
+   "logicalId": "MinimalPromQLAlarmF4D0FFBF",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MinimalPromQLAlarmF4D0FFBF",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationCriteria",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "PromQLCriteria": {
+     "Query": "cpu_usage > 90"
+    }
+   },
+   "actual": {
+    "PromQLCriteria": {
+     "Query": "cpu_usage > 90"
+    }
+   }
+  },
+  {
+   "logicalId": "MinimalPromQLAlarmF4D0FFBF",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationInterval",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  }
+ ]
+}

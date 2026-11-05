@@ -1,0 +1,211 @@
+{
+ "stackName": "code-first-schema",
+ "summary": {
+  "no handler": 6,
+  "pass": 10
+ },
+ "results": [
+  {
+   "logicalId": "codefirstapi1A3CC7D2",
+   "type": "AWS::AppSync::GraphQLApi",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "codefirstapiSchema148B6CDE",
+   "type": "AWS::AppSync::GraphQLSchema",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "codefirstapiDefaultApiKey89863A80",
+   "type": "AWS::AppSync::ApiKey",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "codefirstapiplanetsServiceRole2F4AA8E7",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "codefirstapiplanetsServiceRole2F4AA8E7",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "appsync.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22appsync.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "codefirstapiplanetsServiceRoleDefaultPolicy76FE4F2C",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "codefirstapiplanetsServiceRoleDefaultPolicy76FE4F2C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "codefirstapiplanetsServiceRoleDefaultPolicy76FE4F2C",
+   "actual": "codefirstapiplanetsServiceRoleDefaultPolicy76FE4F2C"
+  },
+  {
+   "logicalId": "codefirstapiplanetsServiceRoleDefaultPolicy76FE4F2C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${table8235A42E}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${table8235A42E}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "codefirstapiplanetsServiceRoleDefaultPolicy76FE4F2C",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${codefirstapiplanetsServiceRole2F4AA8E7}",
+   "actual": "${codefirstapiplanetsServiceRole2F4AA8E7}"
+  },
+  {
+   "logicalId": "codefirstapiplanets0F6BB479",
+   "type": "AWS::AppSync::DataSource",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "codefirstapiQuerygetPlanetsResolver54E13D9A",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "codefirstapiMutationaddPlanetResolver49A375A3",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "table8235A42E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "table8235A42E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "table8235A42E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "table8235A42E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  }
+ ]
+}

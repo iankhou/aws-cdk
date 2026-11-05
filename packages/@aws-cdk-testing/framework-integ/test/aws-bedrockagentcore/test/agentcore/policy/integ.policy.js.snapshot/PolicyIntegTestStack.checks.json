@@ -1,0 +1,547 @@
+{
+ "stackName": "PolicyIntegTestStack",
+ "summary": {
+  "pass": 28,
+  "no handler": 17
+ },
+ "results": [
+  {
+   "logicalId": "SharedGatewayServiceRole279B0EC3",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SharedGatewayServiceRole279B0EC3",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/policy-integ-gateway-??????????"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Agateway%2Fpolicy-integ-gateway-%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "SharedGatewayServiceRole279B0EC3",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Service role for Bedrock AgentCore Gateway policy-integ-gateway",
+   "actual": "Service role for Bedrock AgentCore Gateway policy-integ-gateway"
+  },
+  {
+   "logicalId": "SharedGatewayA02A06B9",
+   "type": "AWS::BedrockAgentCore::Gateway",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "BasicPolicyEngine05C42F5C",
+   "type": "AWS::BedrockAgentCore::PolicyEngine",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "RawCedarPolicy334AC182",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "PolicyEngineKeyF386A3BD",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PolicyEngineKeyF386A3BD",
+   "type": "AWS::KMS::Key",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Encryption key for PolicyEngine",
+   "actual": "Encryption key for PolicyEngine"
+  },
+  {
+   "logicalId": "PolicyEngineKeyF386A3BD",
+   "type": "AWS::KMS::Key",
+   "property": "EnableKeyRotation",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "PolicyEngineKeyF386A3BD",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "EncryptedPolicyEngineBC14AF35",
+   "type": "AWS::BedrockAgentCore::PolicyEngine",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "BuilderSpecificPolicyCDF7CA29",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "BuilderIamPrincipalPolicyF07300E4",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ForbidPolicyC7EF841B",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "IgnoreFindingsPolicyBF4464E3",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "BuilderRealisticUserPolicyC6900DE6",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AutoNamedEngine3770C869",
+   "type": "AWS::BedrockAgentCore::PolicyEngine",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AutoNamedEngineAutoPolicy1FA031607",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AutoNamedEngineAutoPolicy23A360CE1",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AssociatedPolicyEngine352CED3D",
+   "type": "AWS::BedrockAgentCore::PolicyEngine",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AssociatedPolicyEngineAssociatedGatewayPolicy63B3D893",
+   "type": "AWS::BedrockAgentCore::Policy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AutoNamedPolicyEngineGatewayServiceRole24C38AC4",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutoNamedPolicyEngineGatewayServiceRole24C38AC4",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/policyintegteststackdpolicyenginegateway99c83002-??????????"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Agateway%2Fpolicyintegteststackdpolicyenginegateway99c83002-%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "AutoNamedPolicyEngineGatewayServiceRole24C38AC4",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Service role for Bedrock AgentCore Gateway PolicyIntegTestStackdPolicyEngineGateway99C83002",
+   "actual": "Service role for Bedrock AgentCore Gateway PolicyIntegTestStackdPolicyEngineGateway99C83002"
+  },
+  {
+   "logicalId": "AutoNamedPolicyEngineGatewayServiceRoleDefaultPolicy5F945671",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutoNamedPolicyEngineGatewayServiceRoleDefaultPolicy5F945671",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AutoNamedPolicyEngineGatewayServiceRoleDefaultPolicy5F945671",
+   "actual": "AutoNamedPolicyEngineGatewayServiceRoleDefaultPolicy5F945671"
+  },
+  {
+   "logicalId": "AutoNamedPolicyEngineGatewayServiceRoleDefaultPolicy5F945671",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "bedrock-agentcore:GetPolicyEngine",
+      "Effect": "Allow",
+      "Resource": "${AssociatedPolicyEngine352CED3D}"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:AuthorizeAction",
+       "bedrock-agentcore:PartiallyAuthorizeActions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${AssociatedPolicyEngine352CED3D}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/policyintegteststackdpolicyenginegateway99c83002-??????????"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "bedrock-agentcore:GetPolicyEngine",
+      "Effect": "Allow",
+      "Resource": "${AssociatedPolicyEngine352CED3D}"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:AuthorizeAction",
+       "bedrock-agentcore:PartiallyAuthorizeActions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${AssociatedPolicyEngine352CED3D}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/policyintegteststackdpolicyenginegateway99c83002-??????????"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "AutoNamedPolicyEngineGatewayServiceRoleDefaultPolicy5F945671",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutoNamedPolicyEngineGatewayServiceRole24C38AC4}",
+   "actual": "${AutoNamedPolicyEngineGatewayServiceRole24C38AC4}"
+  },
+  {
+   "logicalId": "AutoNamedPolicyEngineGateway21C6C6BB",
+   "type": "AWS::BedrockAgentCore::Gateway",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MixedCasePolicyEngineGatewayServiceRoleF6E549FB",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MixedCasePolicyEngineGatewayServiceRoleF6E549FB",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/policyintegmixedcase-??????????"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Agateway%2Fpolicyintegmixedcase-%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "MixedCasePolicyEngineGatewayServiceRoleF6E549FB",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Service role for Bedrock AgentCore Gateway PolicyIntegMixedCase",
+   "actual": "Service role for Bedrock AgentCore Gateway PolicyIntegMixedCase"
+  },
+  {
+   "logicalId": "MixedCasePolicyEngineGatewayServiceRoleDefaultPolicyBD348238",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MixedCasePolicyEngineGatewayServiceRoleDefaultPolicyBD348238",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MixedCasePolicyEngineGatewayServiceRoleDefaultPolicyBD348238",
+   "actual": "MixedCasePolicyEngineGatewayServiceRoleDefaultPolicyBD348238"
+  },
+  {
+   "logicalId": "MixedCasePolicyEngineGatewayServiceRoleDefaultPolicyBD348238",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "bedrock-agentcore:GetPolicyEngine",
+      "Effect": "Allow",
+      "Resource": "${AssociatedPolicyEngine352CED3D}"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:AuthorizeAction",
+       "bedrock-agentcore:PartiallyAuthorizeActions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${AssociatedPolicyEngine352CED3D}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/policyintegmixedcase-??????????"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "bedrock-agentcore:GetPolicyEngine",
+      "Effect": "Allow",
+      "Resource": "${AssociatedPolicyEngine352CED3D}"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:AuthorizeAction",
+       "bedrock-agentcore:PartiallyAuthorizeActions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${AssociatedPolicyEngine352CED3D}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/policyintegmixedcase-??????????"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MixedCasePolicyEngineGatewayServiceRoleDefaultPolicyBD348238",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MixedCasePolicyEngineGatewayServiceRoleF6E549FB}",
+   "actual": "${MixedCasePolicyEngineGatewayServiceRoleF6E549FB}"
+  },
+  {
+   "logicalId": "MixedCasePolicyEngineGateway1535B5B1",
+   "type": "AWS::BedrockAgentCore::Gateway",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TokenNamedPolicyEngineGatewayServiceRole735C8CAB",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TokenNamedPolicyEngineGatewayServiceRole735C8CAB",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/*"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Agateway%2F%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "TokenNamedPolicyEngineGatewayServiceRole735C8CAB",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Service role for Bedrock AgentCore Gateway policy-integ-token-named",
+   "actual": "Service role for Bedrock AgentCore Gateway policy-integ-token-named"
+  },
+  {
+   "logicalId": "TokenNamedPolicyEngineGatewayServiceRoleDefaultPolicy0EDB20D9",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TokenNamedPolicyEngineGatewayServiceRoleDefaultPolicy0EDB20D9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TokenNamedPolicyEngineGatewayServiceRoleDefaultPolicy0EDB20D9",
+   "actual": "TokenNamedPolicyEngineGatewayServiceRoleDefaultPolicy0EDB20D9"
+  },
+  {
+   "logicalId": "TokenNamedPolicyEngineGatewayServiceRoleDefaultPolicy0EDB20D9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "bedrock-agentcore:GetPolicyEngine",
+      "Effect": "Allow",
+      "Resource": "${AssociatedPolicyEngine352CED3D}"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:AuthorizeAction",
+       "bedrock-agentcore:PartiallyAuthorizeActions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${AssociatedPolicyEngine352CED3D}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "bedrock-agentcore:GetPolicyEngine",
+      "Effect": "Allow",
+      "Resource": "${AssociatedPolicyEngine352CED3D}"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:AuthorizeAction",
+       "bedrock-agentcore:PartiallyAuthorizeActions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${AssociatedPolicyEngine352CED3D}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TokenNamedPolicyEngineGatewayServiceRoleDefaultPolicy0EDB20D9",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TokenNamedPolicyEngineGatewayServiceRole735C8CAB}",
+   "actual": "${TokenNamedPolicyEngineGatewayServiceRole735C8CAB}"
+  },
+  {
+   "logicalId": "TokenNamedPolicyEngineGatewayC1EBAD27",
+   "type": "AWS::BedrockAgentCore::Gateway",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

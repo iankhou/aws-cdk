@@ -1,0 +1,257 @@
+{
+ "stackName": "integ-idp",
+ "summary": {
+  "no handler": 10,
+  "pass": 14
+ },
+ "results": [
+  {
+   "logicalId": "PoolD3F588B8",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "PooltestClientFE8D4935",
+   "type": "AWS::Cognito::UserPoolClient",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "PoolProviderGoogle76A1E8D0",
+   "type": "AWS::Cognito::UserPoolIdentityProvider",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "OtherPool7DA7F2F7",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "OtherPoolUserPoolAuthenticationProviderClient08F670F8",
+   "type": "AWS::Cognito::UserPoolClient",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "OtherPoolProviderAmazon4EB0592F",
+   "type": "AWS::Cognito::UserPoolIdentityProvider",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "UserPoolToImport1A7C21D3",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "UserPoolToImportclientToImport6885CDF7",
+   "type": "AWS::Cognito::UserPoolClient",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "identitypoolE2A6D099",
+   "type": "AWS::Cognito::IdentityPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "identitypoolAuthenticatedRoleB074B49D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "identitypoolAuthenticatedRoleB074B49D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+       "StringEquals": {
+        "cognito-identity.amazonaws.com:aud": "${identitypoolE2A6D099}"
+       },
+       "ForAnyValue:StringLike": {
+        "cognito-identity.amazonaws.com:amr": "authenticated"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Federated": "cognito-identity.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Federated%22%3A%22cognito-identity.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRoleWithWebIdentity%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22cognito-identity.amazonaws.com%3Aaud%22%3A%22${AWS::Region}%3A${identitypoolE2A6D099.Name}%22%7D%2C%22ForAnyValue%3AStringLike%22%3A%7B%22cognito-identity.amazonaws.com%3Aamr%22%3A%22authenticated%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "identitypoolAuthenticatedRoleB074B49D",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Default Authenticated Role for Identity Pool my-id-pool",
+   "actual": "Default Authenticated Role for Identity Pool my-id-pool"
+  },
+  {
+   "logicalId": "identitypoolAuthenticatedRoleDefaultPolicyCB4D2992",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "identitypoolAuthenticatedRoleDefaultPolicyCB4D2992",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "identitypoolAuthenticatedRoleDefaultPolicyCB4D2992",
+   "actual": "identitypoolAuthenticatedRoleDefaultPolicyCB4D2992"
+  },
+  {
+   "logicalId": "identitypoolAuthenticatedRoleDefaultPolicyCB4D2992",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "dynamodb:*",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "dynamodb:*",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "identitypoolAuthenticatedRoleDefaultPolicyCB4D2992",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${identitypoolAuthenticatedRoleB074B49D}",
+   "actual": "${identitypoolAuthenticatedRoleB074B49D}"
+  },
+  {
+   "logicalId": "identitypoolUnauthenticatedRoleE61CAC70",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "identitypoolUnauthenticatedRoleE61CAC70",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+       "StringEquals": {
+        "cognito-identity.amazonaws.com:aud": "${identitypoolE2A6D099}"
+       },
+       "ForAnyValue:StringLike": {
+        "cognito-identity.amazonaws.com:amr": "unauthenticated"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Federated": "cognito-identity.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Federated%22%3A%22cognito-identity.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRoleWithWebIdentity%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22cognito-identity.amazonaws.com%3Aaud%22%3A%22${AWS::Region}%3A${identitypoolE2A6D099.Name}%22%7D%2C%22ForAnyValue%3AStringLike%22%3A%7B%22cognito-identity.amazonaws.com%3Aamr%22%3A%22unauthenticated%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "identitypoolUnauthenticatedRoleE61CAC70",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Default Unauthenticated Role for Identity Pool my-id-pool",
+   "actual": "Default Unauthenticated Role for Identity Pool my-id-pool"
+  },
+  {
+   "logicalId": "identitypoolUnauthenticatedRoleDefaultPolicyBFACCE98",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "identitypoolUnauthenticatedRoleDefaultPolicyBFACCE98",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "identitypoolUnauthenticatedRoleDefaultPolicyBFACCE98",
+   "actual": "identitypoolUnauthenticatedRoleDefaultPolicyBFACCE98"
+  },
+  {
+   "logicalId": "identitypoolUnauthenticatedRoleDefaultPolicyBFACCE98",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "dynamodb:Get*",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "dynamodb:Get*",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "identitypoolUnauthenticatedRoleDefaultPolicyBFACCE98",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${identitypoolUnauthenticatedRoleE61CAC70}",
+   "actual": "${identitypoolUnauthenticatedRoleE61CAC70}"
+  },
+  {
+   "logicalId": "identitypoolDefaultRoleAttachment6BCAB114",
+   "type": "AWS::Cognito::IdentityPoolRoleAttachment",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

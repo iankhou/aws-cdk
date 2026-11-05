@@ -1,0 +1,227 @@
+{
+ "stackName": "EventApiLambdaAuthStack",
+ "summary": {
+  "pass": 20,
+  "no handler": 2,
+  "unresolved": 1
+ },
+ "results": [
+  {
+   "logicalId": "AuthorizerFunctionServiceRole5B2A061B",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AuthorizerFunctionServiceRole5B2A061B",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "AuthorizerFunctionServiceRole5B2A061B",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "AuthorizerFunctionB4DBAA43",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AuthorizerFunctionB4DBAA43",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "AuthorizerFunctionB4DBAA43",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "AuthorizerFunctionB4DBAA43",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AuthorizerFunctionServiceRole5B2A061B}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AuthorizerFunctionServiceRole5B2A061B}"
+  },
+  {
+   "logicalId": "AuthorizerFunctionEventApiLambdaAuthappsync51091519",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AuthorizerFunctionEventApiLambdaAuthappsync51091519",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "AuthorizerFunctionEventApiLambdaAuthappsync51091519",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AuthorizerFunctionB4DBAA43}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AuthorizerFunctionB4DBAA43}"
+  },
+  {
+   "logicalId": "AuthorizerFunctionEventApiLambdaAuthappsync51091519",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "appsync.amazonaws.com"
+   },
+   "actual": {
+    "Service": "appsync.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "AuthorizerFunctionEventApiLambdaAuthappsync51091519",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${EventApiLambdaAuth51CBDC5F}",
+   "actual": "${EventApiLambdaAuth51CBDC5F}"
+  },
+  {
+   "logicalId": "EventApiLambdaAuth51CBDC5F",
+   "type": "AWS::AppSync::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventApiLambdaAuthdefaultAC8660FF",
+   "type": "AWS::AppSync::ChannelNamespace",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "LambdaConfigTestFunctionServiceRoleEE8A36D4",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaConfigTestFunctionServiceRoleEE8A36D4",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaConfigTestFunctionServiceRoleEE8A36D4",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaConfigTestFunction61A497A7",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaConfigTestFunction61A497A7",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaConfigTestFunction61A497A7",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "LambdaConfigTestFunction61A497A7",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaConfigTestFunctionServiceRoleEE8A36D4}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaConfigTestFunctionServiceRoleEE8A36D4}"
+  },
+  {
+   "logicalId": "LambdaConfigTestFunction61A497A7",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 15,
+   "actual": 15
+  },
+  {
+   "logicalId": "LambdaConfigTestFunction61A497A7",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "unresolved"
+  }
+ ]
+}

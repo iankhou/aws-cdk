@@ -1,0 +1,817 @@
+{
+ "version": "1",
+ "stackName": "mesh-stack",
+ "resources": {
+  "vpcA2121C38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc"
+     }
+    ]
+   }
+  },
+  "vpcPublicSubnet1Subnet2E65531E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "vpcPublicSubnet1RouteTable48A2DF9B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "vpcPublicSubnet1RouteTableAssociation5D3F4579": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${vpcPublicSubnet1RouteTable48A2DF9B}",
+    "SubnetId": "${vpcPublicSubnet1Subnet2E65531E}"
+   }
+  },
+  "vpcPublicSubnet1DefaultRoute10708846": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": "${vpcPublicSubnet1RouteTable48A2DF9B}",
+    "DestinationCidrBlock": "${vpcPrivateSubnet1DefaultRoute1AA8E2E5[1]}",
+    "GatewayId": "${vpcIGWE57CBDCA}"
+   },
+   "DependsOn": [
+    "vpcVPCGW7984C166"
+   ]
+  },
+  "vpcPublicSubnet1EIPDA49DCBE": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "vpcPublicSubnet1NATGateway9C16659E": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": "${vpcPublicSubnet1Subnet2E65531E}",
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "vpcPublicSubnet1EIPDA49DCBE",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "vpcPublicSubnet1DefaultRoute10708846",
+    "vpcPublicSubnet1RouteTableAssociation5D3F4579"
+   ]
+  },
+  "vpcPublicSubnet2Subnet009B674F": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "vpcPublicSubnet2RouteTableEB40D4CB": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "vpcPublicSubnet2RouteTableAssociation21F81B59": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${vpcPublicSubnet2RouteTableEB40D4CB}",
+    "SubnetId": "${vpcPublicSubnet2Subnet009B674F}"
+   }
+  },
+  "vpcPublicSubnet2DefaultRouteA1EC0F60": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": "${vpcPublicSubnet2RouteTableEB40D4CB}",
+    "DestinationCidrBlock": "${vpcPrivateSubnet1DefaultRoute1AA8E2E5[1]}",
+    "GatewayId": "${vpcIGWE57CBDCA}"
+   },
+   "DependsOn": [
+    "vpcVPCGW7984C166"
+   ]
+  },
+  "vpcPrivateSubnet1Subnet934893E8": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PrivateSubnet1"
+     }
+    ]
+   }
+  },
+  "vpcPrivateSubnet1RouteTableB41A48CC": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PrivateSubnet1"
+     }
+    ]
+   }
+  },
+  "vpcPrivateSubnet1RouteTableAssociation67945127": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${vpcPrivateSubnet1RouteTableB41A48CC}",
+    "SubnetId": "${vpcPrivateSubnet1Subnet934893E8}"
+   }
+  },
+  "vpcPrivateSubnet1DefaultRoute1AA8E2E5": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": "${vpcPrivateSubnet1RouteTableB41A48CC}",
+    "DestinationCidrBlock": "${vpcPrivateSubnet1DefaultRoute1AA8E2E5[1]}",
+    "NatGatewayId": "${vpcPublicSubnet1NATGateway9C16659E}"
+   }
+  },
+  "vpcPrivateSubnet2Subnet7031C2BA": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PrivateSubnet2"
+     }
+    ]
+   }
+  },
+  "vpcPrivateSubnet2RouteTable7280F23E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc/PrivateSubnet2"
+     }
+    ]
+   }
+  },
+  "vpcPrivateSubnet2RouteTableAssociation007E94D3": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${vpcPrivateSubnet2RouteTable7280F23E}",
+    "SubnetId": "${vpcPrivateSubnet2Subnet7031C2BA}"
+   }
+  },
+  "vpcPrivateSubnet2DefaultRouteB0E07F99": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": "${vpcPrivateSubnet2RouteTable7280F23E}",
+    "DestinationCidrBlock": "${vpcPrivateSubnet1DefaultRoute1AA8E2E5[1]}",
+    "NatGatewayId": "${vpcPublicSubnet1NATGateway9C16659E}"
+   }
+  },
+  "vpcIGWE57CBDCA": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "mesh-stack/vpc"
+     }
+    ]
+   }
+  },
+  "vpcVPCGW7984C166": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": "${vpcA2121C38}",
+    "InternetGatewayId": "${vpcIGWE57CBDCA}"
+   }
+  },
+  "testnamespace01FA2CAF": {
+   "Type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+   "Properties": {
+    "Name": "domain.local",
+    "Vpc": "${vpcA2121C38}"
+   }
+  },
+  "meshACDFE68E": {
+   "Type": "AWS::AppMesh::Mesh",
+   "Properties": {
+    "MeshName": "${meshACDFE68E.Name}",
+    "Spec": {}
+   }
+  },
+  "meshhttprouter1DC8881A": {
+   "Type": "AWS::AppMesh::VirtualRouter",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "Listeners": [
+      {
+       "PortMapping": {
+        "Port": 1233,
+        "Protocol": "http"
+       }
+      }
+     ]
+    },
+    "VirtualRouterName": "${meshhttprouter1DC8881A.Name}"
+   }
+  },
+  "meshhttprouterhttprouteA1EC61B9": {
+   "Type": "AWS::AppMesh::Route",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "HttpRoute": {
+      "Action": {
+       "WeightedTargets": [
+        {
+         "VirtualNode": {
+          "Fn::GetAtt": [
+           "meshhttpnode26144F8B",
+           "VirtualNodeName"
+          ]
+         },
+         "Weight": 1
+        }
+       ]
+      },
+      "Match": {
+       "Port": 1233,
+       "Prefix": "/"
+      }
+     }
+    },
+    "VirtualRouterName": {
+     "Fn::GetAtt": [
+      "meshhttprouter1DC8881A",
+      "VirtualRouterName"
+     ]
+    },
+    "RouteName": "http-route"
+   }
+  },
+  "meshgrpcrouter885C4D83": {
+   "Type": "AWS::AppMesh::VirtualRouter",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "Listeners": [
+      {
+       "PortMapping": {
+        "Port": 1234,
+        "Protocol": "grpc"
+       }
+      }
+     ]
+    },
+    "VirtualRouterName": "${meshgrpcrouter885C4D83.Name}"
+   }
+  },
+  "meshgrpcroutergrpcrouteC2C69C40": {
+   "Type": "AWS::AppMesh::Route",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "GrpcRoute": {
+      "Action": {
+       "WeightedTargets": [
+        {
+         "Port": 1234,
+         "VirtualNode": {
+          "Fn::GetAtt": [
+           "meshgrpcnode5DE90B75",
+           "VirtualNodeName"
+          ]
+         },
+         "Weight": 1
+        }
+       ]
+      },
+      "Match": {
+       "Port": 1234
+      }
+     }
+    },
+    "VirtualRouterName": {
+     "Fn::GetAtt": [
+      "meshgrpcrouter885C4D83",
+      "VirtualRouterName"
+     ]
+    },
+    "RouteName": "grpc-route"
+   }
+  },
+  "meshhttpnode26144F8B": {
+   "Type": "AWS::AppMesh::VirtualNode",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "Listeners": [
+      {
+       "PortMapping": {
+        "Port": 1233,
+        "Protocol": "http"
+       }
+      }
+     ],
+     "ServiceDiscovery": {
+      "DNS": {
+       "Hostname": "node.domain.local",
+       "ResponseType": "ENDPOINTS"
+      }
+     }
+    },
+    "VirtualNodeName": "${meshhttpnode26144F8B.Name}"
+   }
+  },
+  "meshgrpcnode5DE90B75": {
+   "Type": "AWS::AppMesh::VirtualNode",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "Listeners": [
+      {
+       "PortMapping": {
+        "Port": 1234,
+        "Protocol": "grpc"
+       }
+      }
+     ],
+     "ServiceDiscovery": {
+      "DNS": {
+       "Hostname": "node.domain.local",
+       "ResponseType": "ENDPOINTS"
+      }
+     }
+    },
+    "VirtualNodeName": "${meshgrpcnode5DE90B75.Name}"
+   }
+  },
+  "meshgateway7E10276F": {
+   "Type": "AWS::AppMesh::VirtualGateway",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "Listeners": [
+      {
+       "PortMapping": {
+        "Port": 1233,
+        "Protocol": "http"
+       }
+      }
+     ],
+     "Logging": {
+      "AccessLog": {
+       "File": {
+        "Path": "/dev/stdout"
+       }
+      }
+     }
+    },
+    "VirtualGatewayName": "gateway"
+   }
+  },
+  "meshgatewaygatewayroutehttpFC878A78": {
+   "Type": "AWS::AppMesh::GatewayRoute",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "HttpRoute": {
+      "Action": {
+       "Target": {
+        "VirtualService": {
+         "VirtualServiceName": {
+          "Fn::GetAtt": [
+           "httpserviceA998E5F0",
+           "VirtualServiceName"
+          ]
+         }
+        }
+       }
+      },
+      "Match": {
+       "Port": 1233,
+       "Prefix": "/"
+      }
+     }
+    },
+    "VirtualGatewayName": {
+     "Fn::GetAtt": [
+      "meshgateway7E10276F",
+      "VirtualGatewayName"
+     ]
+    },
+    "GatewayRouteName": "${meshgatewaygatewayroutehttpFC878A78.Name}"
+   }
+  },
+  "meshgateway2A278D68E": {
+   "Type": "AWS::AppMesh::VirtualGateway",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "Listeners": [
+      {
+       "PortMapping": {
+        "Port": 1234,
+        "Protocol": "grpc"
+       }
+      }
+     ],
+     "Logging": {
+      "AccessLog": {
+       "File": {
+        "Path": "/dev/stdout"
+       }
+      }
+     }
+    },
+    "VirtualGatewayName": "${meshgateway2A278D68E.Name}"
+   }
+  },
+  "meshgateway2gateway2routegrpcD0DA968B": {
+   "Type": "AWS::AppMesh::GatewayRoute",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "GrpcRoute": {
+      "Action": {
+       "Target": {
+        "VirtualService": {
+         "VirtualServiceName": {
+          "Fn::GetAtt": [
+           "grpcserviceF42BA24D",
+           "VirtualServiceName"
+          ]
+         }
+        }
+       }
+      },
+      "Match": {
+       "Port": 1234
+      }
+     }
+    },
+    "VirtualGatewayName": {
+     "Fn::GetAtt": [
+      "mesh${meshgateway2A278D68E.Name}A278D68E",
+      "VirtualGatewayName"
+     ]
+    },
+    "GatewayRouteName": "${meshgateway2gateway2routegrpcD0DA968B.Name}"
+   }
+  },
+  "httpserviceA998E5F0": {
+   "Type": "AWS::AppMesh::VirtualService",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "Provider": {
+      "VirtualRouter": {
+       "VirtualRouterName": {
+        "Fn::GetAtt": [
+         "meshhttprouter1DC8881A",
+         "VirtualRouterName"
+        ]
+       }
+      }
+     }
+    },
+    "VirtualServiceName": "${httpserviceA998E5F0.Name}"
+   }
+  },
+  "grpcserviceF42BA24D": {
+   "Type": "AWS::AppMesh::VirtualService",
+   "Properties": {
+    "MeshName": {
+     "Fn::GetAtt": [
+      "meshACDFE68E",
+      "MeshName"
+     ]
+    },
+    "Spec": {
+     "Provider": {
+      "VirtualRouter": {
+       "VirtualRouterName": {
+        "Fn::GetAtt": [
+         "meshgrpcrouter885C4D83",
+         "VirtualRouterName"
+        ]
+       }
+      }
+     }
+    },
+    "VirtualServiceName": "${grpcserviceF42BA24D.Name}"
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.vpcPublicSubnet1Subnet2E65531E.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.vpcPublicSubnet1NATGateway9C16659E.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${vpcPublicSubnet1EIPDA49DCBE}' does not exist (Service: Ec2, Status Code: 400, Request ID: f29efae4-ea5c-4614-ac40-61e774828b64) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 1f704e60-6fc1-4fb0-9176-459b040e31ad)'"
+  },
+  {
+   "path": "Resources.vpcPublicSubnet2Subnet009B674F.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.vpcPrivateSubnet1Subnet934893E8.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.vpcPrivateSubnet2Subnet7031C2BA.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.meshhttprouter1DC8881A.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshhttprouterhttprouteA1EC61B9.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshhttprouterhttprouteA1EC61B9.Properties.Spec.HttpRoute.Action.WeightedTargets.0.VirtualNode",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualNodeName' attribute of the 'AWS::AppMesh::VirtualNode' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualNode does not support READ action'"
+  },
+  {
+   "path": "Resources.meshhttprouterhttprouteA1EC61B9.Properties.VirtualRouterName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualRouterName' attribute of the 'AWS::AppMesh::VirtualRouter' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualRouter does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgrpcrouter885C4D83.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgrpcroutergrpcrouteC2C69C40.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgrpcroutergrpcrouteC2C69C40.Properties.Spec.GrpcRoute.Action.WeightedTargets.0.VirtualNode",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualNodeName' attribute of the 'AWS::AppMesh::VirtualNode' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualNode does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgrpcroutergrpcrouteC2C69C40.Properties.VirtualRouterName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualRouterName' attribute of the 'AWS::AppMesh::VirtualRouter' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualRouter does not support READ action'"
+  },
+  {
+   "path": "Resources.meshhttpnode26144F8B.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgrpcnode5DE90B75.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgateway7E10276F.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgatewaygatewayroutehttpFC878A78.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgatewaygatewayroutehttpFC878A78.Properties.Spec.HttpRoute.Action.Target.VirtualService.VirtualServiceName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualServiceName' attribute of the 'AWS::AppMesh::VirtualService' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualService does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgatewaygatewayroutehttpFC878A78.Properties.VirtualGatewayName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualGatewayName' attribute of the 'AWS::AppMesh::VirtualGateway' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualGateway does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgateway2A278D68E.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgateway2gateway2routegrpcD0DA968B.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgateway2gateway2routegrpcD0DA968B.Properties.Spec.GrpcRoute.Action.Target.VirtualService.VirtualServiceName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualServiceName' attribute of the 'AWS::AppMesh::VirtualService' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualService does not support READ action'"
+  },
+  {
+   "path": "Resources.meshgateway2gateway2routegrpcD0DA968B.Properties.VirtualGatewayName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualGatewayName' attribute of the 'AWS::AppMesh::VirtualGateway' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualGateway does not support READ action'"
+  },
+  {
+   "path": "Resources.httpserviceA998E5F0.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.httpserviceA998E5F0.Properties.Spec.Provider.VirtualRouter.VirtualRouterName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualRouterName' attribute of the 'AWS::AppMesh::VirtualRouter' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualRouter does not support READ action'"
+  },
+  {
+   "path": "Resources.grpcserviceF42BA24D.Properties.MeshName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'MeshName' attribute of the 'AWS::AppMesh::Mesh' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::Mesh does not support READ action'"
+  },
+  {
+   "path": "Resources.grpcserviceF42BA24D.Properties.Spec.Provider.VirtualRouter.VirtualRouterName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'VirtualRouterName' attribute of the 'AWS::AppMesh::VirtualRouter' resource because an error occurred while attempting to retrieve the information: 'UnsupportedActionException:Resource type AWS::AppMesh::VirtualRouter does not support READ action'"
+  }
+ ]
+}

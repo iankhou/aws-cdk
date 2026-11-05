@@ -1,0 +1,541 @@
+{
+ "stackName": "WebSocketApiInteg",
+ "summary": {
+  "pass": 48,
+  "no handler": 10
+ },
+ "results": [
+  {
+   "logicalId": "ConnectHandlerServiceRole7E4A9B1F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConnectHandlerServiceRole7E4A9B1F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ConnectHandlerServiceRole7E4A9B1F",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "ConnectHandler2FFD52D8",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConnectHandler2FFD52D8",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "ConnectHandler2FFD52D8",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "ConnectHandler2FFD52D8",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ConnectHandlerServiceRole7E4A9B1F}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ConnectHandlerServiceRole7E4A9B1F}"
+  },
+  {
+   "logicalId": "DisconnectHandlerServiceRoleE54F14F9",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DisconnectHandlerServiceRoleE54F14F9",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "DisconnectHandlerServiceRoleE54F14F9",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "DisconnectHandlerCB7ED6F7",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DisconnectHandlerCB7ED6F7",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "DisconnectHandlerCB7ED6F7",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "DisconnectHandlerCB7ED6F7",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${DisconnectHandlerServiceRoleE54F14F9}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${DisconnectHandlerServiceRoleE54F14F9}"
+  },
+  {
+   "logicalId": "DefaultHandlerServiceRoleDF00569C",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DefaultHandlerServiceRoleDF00569C",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "DefaultHandlerServiceRoleDF00569C",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "DefaultHandler604DF7AC",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DefaultHandler604DF7AC",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "DefaultHandler604DF7AC",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "DefaultHandler604DF7AC",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${DefaultHandlerServiceRoleDF00569C}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${DefaultHandlerServiceRoleDF00569C}"
+  },
+  {
+   "logicalId": "MessageHandlerServiceRoleDF05266A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MessageHandlerServiceRoleDF05266A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MessageHandlerServiceRoleDF05266A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MessageHandlerDFBBCD6B",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MessageHandlerDFBBCD6B",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MessageHandlerDFBBCD6B",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "MessageHandlerDFBBCD6B",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MessageHandlerServiceRoleDF05266A}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MessageHandlerServiceRoleDF05266A}"
+  },
+  {
+   "logicalId": "mywsapi32E6CE11",
+   "type": "AWS::ApiGatewayV2::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapiconnectRouteConnectIntegrationPermission719B6E63",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "mywsapiconnectRouteConnectIntegrationPermission719B6E63",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "mywsapiconnectRouteConnectIntegrationPermission719B6E63",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ConnectHandler2FFD52D8}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ConnectHandler2FFD52D8}"
+  },
+  {
+   "logicalId": "mywsapiconnectRouteConnectIntegrationPermission719B6E63",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "mywsapiconnectRouteConnectIntegrationPermission719B6E63",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$connect",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$connect"
+  },
+  {
+   "logicalId": "mywsapiconnectRouteConnectIntegrationE101DB9B",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapiconnectRoute45A0ED6A",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapidisconnectRouteDisconnectIntegrationPermissionA8197C41",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "mywsapidisconnectRouteDisconnectIntegrationPermissionA8197C41",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "mywsapidisconnectRouteDisconnectIntegrationPermissionA8197C41",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${DisconnectHandlerCB7ED6F7}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${DisconnectHandlerCB7ED6F7}"
+  },
+  {
+   "logicalId": "mywsapidisconnectRouteDisconnectIntegrationPermissionA8197C41",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "mywsapidisconnectRouteDisconnectIntegrationPermissionA8197C41",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$disconnect",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$disconnect"
+  },
+  {
+   "logicalId": "mywsapidisconnectRouteDisconnectIntegrationF927D904",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapidisconnectRoute421A8CB9",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapidefaultRouteDefaultIntegrationPermission3B7F9CA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "mywsapidefaultRouteDefaultIntegrationPermission3B7F9CA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "mywsapidefaultRouteDefaultIntegrationPermission3B7F9CA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${DefaultHandler604DF7AC}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${DefaultHandler604DF7AC}"
+  },
+  {
+   "logicalId": "mywsapidefaultRouteDefaultIntegrationPermission3B7F9CA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "mywsapidefaultRouteDefaultIntegrationPermission3B7F9CA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$default",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*$default"
+  },
+  {
+   "logicalId": "mywsapidefaultRouteDefaultIntegrationFFCB3BA9",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapidefaultRouteE9382DF8",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapisendmessageRouteSendMessageIntegrationPermission92C9841E",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "mywsapisendmessageRouteSendMessageIntegrationPermission92C9841E",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "mywsapisendmessageRouteSendMessageIntegrationPermission92C9841E",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MessageHandlerDFBBCD6B}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MessageHandlerDFBBCD6B}"
+  },
+  {
+   "logicalId": "mywsapisendmessageRouteSendMessageIntegrationPermission92C9841E",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "mywsapisendmessageRouteSendMessageIntegrationPermission92C9841E",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*sendmessage",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${mywsapi32E6CE11}/*sendmessage"
+  },
+  {
+   "logicalId": "mywsapisendmessageRouteSendMessageIntegrationD29E12F9",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mywsapisendmessageRouteAE873328",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "mystage114C35EC",
+   "type": "AWS::ApiGatewayV2::Stage",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

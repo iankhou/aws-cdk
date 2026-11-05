@@ -1,0 +1,482 @@
+{
+ "stackName": "sqs-integration",
+ "summary": {
+  "pass": 31,
+  "no handler": 12
+ },
+ "results": [
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiF70053CD",
+   "type": "AWS::ApiGatewayV2::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiDefaultStage189A7074",
+   "type": "AWS::ApiGatewayV2::Stage",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRole9137E4F5",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRole9137E4F5",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "actual": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTdefaultInvokeRole9137E4F5}",
+   "actual": "${ApiPOSTdefaultInvokeRole9137E4F5}"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultdefaultIntegration0355373B",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTdefault1EEA0D1D",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTsendmessageInvokeRole628F6753",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTsendmessageInvokeRole628F6753",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTsendmessageInvokeRoleDefaultPolicy4B7D7B02",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTsendmessageInvokeRoleDefaultPolicy4B7D7B02",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTsendmessageInvokeRoleDefaultPolicy4B7D7B02",
+   "actual": "ApiPOSTsendmessageInvokeRoleDefaultPolicy4B7D7B02"
+  },
+  {
+   "logicalId": "ApiPOSTsendmessageInvokeRoleDefaultPolicy4B7D7B02",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTsendmessageInvokeRoleDefaultPolicy4B7D7B02",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTsendmessageInvokeRole628F6753}",
+   "actual": "${ApiPOSTsendmessageInvokeRole628F6753}"
+  },
+  {
+   "logicalId": "ApiPOSTsendmessagesendMessageIntegrationA3699583",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTsendmessageE475BC37",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTreceivemessageInvokeRoleF920E28E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTreceivemessageInvokeRoleF920E28E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTreceivemessageInvokeRoleDefaultPolicy22774339",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTreceivemessageInvokeRoleDefaultPolicy22774339",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTreceivemessageInvokeRoleDefaultPolicy22774339",
+   "actual": "ApiPOSTreceivemessageInvokeRoleDefaultPolicy22774339"
+  },
+  {
+   "logicalId": "ApiPOSTreceivemessageInvokeRoleDefaultPolicy22774339",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:ReceiveMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:ReceiveMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTreceivemessageInvokeRoleDefaultPolicy22774339",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTreceivemessageInvokeRoleF920E28E}",
+   "actual": "${ApiPOSTreceivemessageInvokeRoleF920E28E}"
+  },
+  {
+   "logicalId": "ApiPOSTreceivemessagereceiveMessageIntegrationFC744BEF",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTreceivemessageA4D1D164",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTdeletemessageInvokeRoleF36F96C7",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTdeletemessageInvokeRoleF36F96C7",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTdeletemessageInvokeRoleDefaultPolicyC736EDFF",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTdeletemessageInvokeRoleDefaultPolicyC736EDFF",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTdeletemessageInvokeRoleDefaultPolicyC736EDFF",
+   "actual": "ApiPOSTdeletemessageInvokeRoleDefaultPolicyC736EDFF"
+  },
+  {
+   "logicalId": "ApiPOSTdeletemessageInvokeRoleDefaultPolicyC736EDFF",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:DeleteMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:DeleteMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTdeletemessageInvokeRoleDefaultPolicyC736EDFF",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTdeletemessageInvokeRoleF36F96C7}",
+   "actual": "${ApiPOSTdeletemessageInvokeRoleF36F96C7}"
+  },
+  {
+   "logicalId": "ApiPOSTdeletemessagedeleteMessageIntegration49DB56A7",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTdeletemessage6FE1C52C",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTpurgequeueInvokeRole1F4EEB80",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTpurgequeueInvokeRole1F4EEB80",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTpurgequeueInvokeRoleDefaultPolicy275FF06E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTpurgequeueInvokeRoleDefaultPolicy275FF06E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTpurgequeueInvokeRoleDefaultPolicy275FF06E",
+   "actual": "ApiPOSTpurgequeueInvokeRoleDefaultPolicy275FF06E"
+  },
+  {
+   "logicalId": "ApiPOSTpurgequeueInvokeRoleDefaultPolicy275FF06E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:PurgeQueue",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:PurgeQueue",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowSqsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTpurgequeueInvokeRoleDefaultPolicy275FF06E",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTpurgequeueInvokeRole1F4EEB80}",
+   "actual": "${ApiPOSTpurgequeueInvokeRole1F4EEB80}"
+  },
+  {
+   "logicalId": "ApiPOSTpurgequeuepurgeQueueIntegration7B3B35C2",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTpurgequeueD7486C9E",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

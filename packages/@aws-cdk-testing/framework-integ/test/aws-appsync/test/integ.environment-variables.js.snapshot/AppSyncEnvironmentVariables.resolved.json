@@ -1,0 +1,34 @@
+{
+ "version": "1",
+ "stackName": "AppSyncEnvironmentVariables",
+ "resources": {
+  "ApiF70053CD": {
+   "Type": "AWS::AppSync::GraphQLApi",
+   "Properties": {
+    "AuthenticationType": "API_KEY",
+    "EnvironmentVariables": {
+     "EnvKey1": "non-empty-1",
+     "EnvKey2": "non-empty-2"
+    },
+    "Name": "Api"
+   }
+  },
+  "ApiSchema510EECD7": {
+   "Type": "AWS::AppSync::GraphQLSchema",
+   "Properties": {
+    "ApiId": "${ApiF70053CD.ApiId}",
+    "Definition": "type Test {\n  id: String!\n  name: String!\n}\ntype Query {\n  getTests: [Test]!\n}\ntype Mutation {\n  addTest(name: String!): Test\n}\n"
+   }
+  },
+  "ApiDefaultApiKeyF991C37B": {
+   "Type": "AWS::AppSync::ApiKey",
+   "Properties": {
+    "ApiId": "${ApiF70053CD.ApiId}"
+   },
+   "DependsOn": [
+    "ApiSchema510EECD7"
+   ]
+  }
+ },
+ "unresolved": []
+}

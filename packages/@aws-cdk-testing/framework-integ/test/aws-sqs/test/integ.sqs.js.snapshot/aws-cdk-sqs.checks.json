@@ -1,0 +1,338 @@
+{
+ "stackName": "aws-cdk-sqs",
+ "summary": {
+  "pass": 27
+ },
+ "results": [
+  {
+   "logicalId": "DeadLetterQueue9F481546",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "KmsMasterKeyId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "alias/aws/sqs",
+   "actual": "alias/aws/sqs"
+  },
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "RedrivePolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "deadLetterTargetArn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}",
+    "maxReceiveCount": 5
+   },
+   "actual": "{\"deadLetterTargetArn\":\"arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}\",\"maxReceiveCount\":5}"
+  },
+  {
+   "logicalId": "EncryptionKey1B843E66",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EncryptionKey1B843E66",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "FifoQueueE5FF7273",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FifoQueueE5FF7273",
+   "type": "AWS::SQS::Queue",
+   "property": "FifoQueue",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "FifoQueueE5FF7273",
+   "type": "AWS::SQS::Queue",
+   "property": "KmsMasterKeyId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${EncryptionKey1B843E66}",
+   "actual": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${EncryptionKey1B843E66}"
+  },
+  {
+   "logicalId": "HighThroughputFifoQueue40A0EEE4",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HighThroughputFifoQueue40A0EEE4",
+   "type": "AWS::SQS::Queue",
+   "property": "DeduplicationScope",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "messageGroup",
+   "actual": "messageGroup"
+  },
+  {
+   "logicalId": "HighThroughputFifoQueue40A0EEE4",
+   "type": "AWS::SQS::Queue",
+   "property": "FifoQueue",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "HighThroughputFifoQueue40A0EEE4",
+   "type": "AWS::SQS::Queue",
+   "property": "FifoThroughputLimit",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "perMessageGroupId",
+   "actual": "perMessageGroupId"
+  },
+  {
+   "logicalId": "SqsManagedEncryptedQueue587679B3",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SqsManagedEncryptedQueue587679B3",
+   "type": "AWS::SQS::Queue",
+   "property": "SqsManagedSseEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "UnencryptedQueue57F92F9C",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "UnencryptedQueue57F92F9C",
+   "type": "AWS::SQS::Queue",
+   "property": "SqsManagedSseEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": "false"
+  },
+  {
+   "logicalId": "SSLQueue4E9BF022",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SSLQueuePolicy5ABFDF4F",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SSLQueuePolicy5ABFDF4F",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SSLQueue4E9BF022.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SSLQueue4E9BF022.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SSLQueuePolicy5ABFDF4F",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${SSLQueue4E9BF022}"
+   ],
+   "actual": [
+    "${SSLQueue4E9BF022}"
+   ]
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Aroot%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "RoleDefaultPolicy5FFB7DAB",
+   "actual": "RoleDefaultPolicy5FFB7DAB"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:ChangeMessageVisibility",
+       "sqs:DeleteMessage",
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:ReceiveMessage"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${FifoQueueE5FF7273.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${HighThroughputFifoQueue40A0EEE4.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SSLQueue4E9BF022.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SqsManagedEncryptedQueue587679B3.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${UnencryptedQueue57F92F9C.Name}"
+      ]
+     },
+     {
+      "Action": "kms:Decrypt",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${EncryptionKey1B843E66}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:ChangeMessageVisibility",
+       "sqs:DeleteMessage",
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:ReceiveMessage"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${FifoQueueE5FF7273.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${HighThroughputFifoQueue40A0EEE4.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SSLQueue4E9BF022.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SqsManagedEncryptedQueue587679B3.Name}",
+       "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${UnencryptedQueue57F92F9C.Name}"
+      ]
+     },
+     {
+      "Action": "kms:Decrypt",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${EncryptionKey1B843E66}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Role1ABCC5F0}",
+   "actual": "${Role1ABCC5F0}"
+  }
+ ]
+}

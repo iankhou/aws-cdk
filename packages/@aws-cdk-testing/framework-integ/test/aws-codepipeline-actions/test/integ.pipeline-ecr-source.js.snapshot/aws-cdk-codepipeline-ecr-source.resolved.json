@@ -1,0 +1,282 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-codepipeline-ecr-source",
+ "resources": {
+  "MyBucketF68F3FF0": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MyPipelineRoleC0D47CA4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codepipeline.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyPipelineRoleDefaultPolicy34F09EFA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${MyBucketF68F3FF0.Arn}",
+        "${MyBucketF68F3FF0.Arn}/*"
+       ]
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": [
+        "${MyPipelineApproveManualApprovalCodePipelineActionRole9E338F01.Arn}",
+        "${MyPipelineSourceECRSourceCodePipelineActionRole4C6714EE.Arn}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyPipelineRoleDefaultPolicy34F09EFA",
+    "Roles": [
+     "${MyPipelineRoleC0D47CA4}"
+    ]
+   }
+  },
+  "MyPipelineAED38ECF": {
+   "Type": "AWS::CodePipeline::Pipeline",
+   "Properties": {
+    "RoleArn": "${MyPipelineRoleC0D47CA4.Arn}",
+    "Stages": [
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "AWS",
+         "Provider": "ECR",
+         "Version": "1"
+        },
+        "Configuration": {
+         "RepositoryName": "${MyEcrRepo767466D0}"
+        },
+        "Name": "ECR_Source",
+        "OutputArtifacts": [
+         {
+          "Name": "Artifact_Source_ECR_Source"
+         }
+        ],
+        "RoleArn": "${MyPipelineSourceECRSourceCodePipelineActionRole4C6714EE.Arn}",
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Source"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Approval",
+         "Owner": "AWS",
+         "Provider": "Manual",
+         "Version": "1"
+        },
+        "Name": "ManualApproval",
+        "RoleArn": "${MyPipelineApproveManualApprovalCodePipelineActionRole9E338F01.Arn}",
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Approve"
+     }
+    ],
+    "ArtifactStore": {
+     "Location": "${MyBucketF68F3FF0}",
+     "Type": "S3"
+    }
+   },
+   "DependsOn": [
+    "MyPipelineRoleDefaultPolicy34F09EFA",
+    "MyPipelineRoleC0D47CA4"
+   ]
+  },
+  "MyPipelineSourceECRSourceCodePipelineActionRole4C6714EE": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyPipelineSourceECRSourceCodePipelineActionRoleDefaultPolicy7646B7FE": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ecr:DescribeImages",
+       "Effect": "Allow",
+       "Resource": "${MyEcrRepo767466D0.Arn}"
+      },
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${MyBucketF68F3FF0.Arn}",
+        "${MyBucketF68F3FF0.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyPipelineSourceECRSourceCodePipelineActionRoleDefaultPolicy7646B7FE",
+    "Roles": [
+     "${MyPipelineSourceECRSourceCodePipelineActionRole4C6714EE}"
+    ]
+   }
+  },
+  "MyPipelineSourceECRSourceawscdkcodepipelineecrsourceMyPipeline63CF3194SourceEventRuleF3B28B14": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "EventPattern": {
+     "detail-type": [
+      "ECR Image Action"
+     ],
+     "source": [
+      "aws.ecr"
+     ],
+     "detail": {
+      "result": [
+       "SUCCESS"
+      ],
+      "repository-name": [
+       "${MyEcrRepo767466D0}"
+      ],
+      "image-tag": [
+       "latest"
+      ],
+      "action-type": [
+       "PUSH"
+      ]
+     }
+    },
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${MyPipelineAED38ECF}",
+      "Id": "Target0",
+      "RoleArn": "${MyPipelineEventsRoleFAB99F32.Arn}"
+     }
+    ]
+   }
+  },
+  "MyPipelineEventsRoleFAB99F32": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyPipelineEventsRoleDefaultPolicyF045F033": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "codepipeline:StartPipelineExecution",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${MyPipelineAED38ECF}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyPipelineEventsRoleDefaultPolicyF045F033",
+    "Roles": [
+     "${MyPipelineEventsRoleFAB99F32}"
+    ]
+   }
+  },
+  "MyPipelineApproveManualApprovalCodePipelineActionRole9E338F01": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyEcrRepo767466D0": {
+   "Type": "AWS::ECR::Repository",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "LoginCommand": {
+   "Value": "aws ecr get-login-password --region ${AWS::Region} | docker login --username AWS --password-stdin ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com"
+  },
+  "PushCommand": {
+   "Value": "docker tag public.ecr.aws/lambda/provided ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${MyEcrRepo767466D0}:latest && docker push ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${MyEcrRepo767466D0}:latest"
+  },
+  "PipelineConsoleLink": {
+   "Value": "https://${AWS::Region}.console.aws.amazon.com/codesuite/codepipeline/pipelines/${MyPipelineAED38ECF}/view?region=${AWS::Region}"
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,429 @@
+{
+ "stackName": "integtest-restapi-with-overriding-default-authorizer",
+ "summary": {
+  "no handler": 2,
+  "pass": 33
+ },
+ "results": [
+  {
+   "logicalId": "UserPool6BA7E5F2",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AuthorizerBD825682",
+   "type": "AWS::ApiGateway::Authorizer",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ActionsApiGatewayF80386B7",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ActionsApiGatewayF80386B7",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Actions-ApiGateway",
+   "actual": "Actions-ApiGateway"
+  },
+  {
+   "logicalId": "ActionsApiGatewayDeployment50B6E6A66403e42852ae63ad13a2b7635300f8a9",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ActionsApiGatewayDeployment50B6E6A66403e42852ae63ad13a2b7635300f8a9",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "ActionsApiGatewayDeployment50B6E6A66403e42852ae63ad13a2b7635300f8a9",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayF80386B7}",
+   "actual": "${ActionsApiGatewayF80386B7}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayDeploymentStageprod812022BF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ActionsApiGatewayDeploymentStageprod812022BF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "ActionsApiGatewayDeploymentStageprod812022BF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayF80386B7}",
+   "actual": "${ActionsApiGatewayF80386B7}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayDeploymentStageprod812022BF",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayDeployment50B6E6A66403e42852ae63ad13a2b7635300f8a9}",
+   "actual": "${ActionsApiGatewayDeployment50B6E6A66403e42852ae63ad13a2b7635300f8a9}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayOPTIONS8EA1F997",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ActionsApiGatewayOPTIONS8EA1F997",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayF80386B7}",
+   "actual": "${ActionsApiGatewayF80386B7}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayOPTIONS8EA1F997",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayANY11FE5E47[1]}",
+   "actual": "${ActionsApiGatewayANY11FE5E47[1]}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayOPTIONS8EA1F997",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "OPTIONS",
+   "actual": "OPTIONS"
+  },
+  {
+   "logicalId": "ActionsApiGatewayOPTIONS8EA1F997",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "ActionsApiGatewayOPTIONS8EA1F997",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ApiKeyRequired",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "ActionsApiGatewayOPTIONS8EA1F997",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "204": {
+     "statusCode": "204",
+     "responseParameters": {
+      "method.response.header.Access-Control-Allow-Headers": true,
+      "method.response.header.Access-Control-Allow-Origin": true,
+      "method.response.header.Access-Control-Allow-Methods": true,
+      "method.response.header.Access-Control-Max-Age": true
+     }
+    }
+   },
+   "actual": {
+    "204": {
+     "statusCode": "204",
+     "responseParameters": {
+      "method.response.header.Access-Control-Allow-Headers": true,
+      "method.response.header.Access-Control-Allow-Methods": true,
+      "method.response.header.Access-Control-Allow-Origin": true,
+      "method.response.header.Access-Control-Max-Age": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "ActionsApiGatewayOPTIONS8EA1F997",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ statusCode: 200 }"
+    },
+    "integrationResponses": {
+     "204": {
+      "statusCode": "204",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+       "method.response.header.Access-Control-Allow-Origin": "'*'",
+       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+       "method.response.header.Access-Control-Max-Age": "'864000'"
+      }
+     }
+    }
+   },
+   "actual": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ statusCode: 200 }"
+    },
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${ActionsApiGatewayANY11FE5E47[1]}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "204": {
+      "statusCode": "204",
+      "responseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+       "method.response.header.Access-Control-Allow-Origin": "'*'",
+       "method.response.header.Access-Control-Max-Age": "'864000'"
+      }
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "ActionsApiGatewayANY11FE5E47",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ActionsApiGatewayANY11FE5E47",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayF80386B7}",
+   "actual": "${ActionsApiGatewayF80386B7}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayANY11FE5E47",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayANY11FE5E47[1]}",
+   "actual": "${ActionsApiGatewayANY11FE5E47[1]}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayANY11FE5E47",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ANY",
+   "actual": "ANY"
+  },
+  {
+   "logicalId": "ActionsApiGatewayANY11FE5E47",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "ActionsApiGatewayANY11FE5E47",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "200": {
+     "statusCode": "200"
+    }
+   },
+   "actual": {
+    "200": {
+     "statusCode": "200"
+    }
+   }
+  },
+  {
+   "logicalId": "ActionsApiGatewayANY11FE5E47",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ \"statusCode\": 200 }"
+    },
+    "passthroughBehavior": "NEVER",
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200"
+     }
+    }
+   },
+   "actual": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ \"statusCode\": 200 }"
+    },
+    "passthroughBehavior": "NEVER",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${ActionsApiGatewayANY11FE5E47[1]}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200"
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayF80386B7}",
+   "actual": "${ActionsApiGatewayF80386B7}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ActionsApiGatewayANY11FE5E47[1]}",
+   "actual": "${ActionsApiGatewayANY11FE5E47[1]}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "COGNITO_USER_POOLS",
+   "actual": "COGNITO_USER_POOLS"
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizerId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AuthorizerBD825682}",
+   "actual": "${AuthorizerBD825682}"
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationScopes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "scope"
+   ],
+   "actual": [
+    "scope"
+   ]
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "200": {
+     "statusCode": "200"
+    }
+   },
+   "actual": {
+    "200": {
+     "statusCode": "200"
+    }
+   }
+  },
+  {
+   "logicalId": "ActionsApiGatewayGET12E87C75",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ \"statusCode\": 200 }"
+    },
+    "passthroughBehavior": "NEVER",
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200"
+     }
+    }
+   },
+   "actual": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ \"statusCode\": 200 }"
+    },
+    "passthroughBehavior": "NEVER",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${ActionsApiGatewayANY11FE5E47[1]}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200"
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  }
+ ]
+}

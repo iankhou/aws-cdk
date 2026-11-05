@@ -1,0 +1,134 @@
+{
+ "stackName": "integ-aws-websocket-sqs-integration",
+ "summary": {
+  "pass": 9,
+  "no handler": 4
+ },
+ "results": [
+  {
+   "logicalId": "MessageSQSQueueF7E656B7",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MessageSQSQueueF7E656B7",
+   "type": "AWS::SQS::Queue",
+   "property": "FifoQueue",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "MessageSQSQueueF7E656B7",
+   "type": "AWS::SQS::Queue",
+   "property": "QueueName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MessageSQSQueue.fifo",
+   "actual": "MessageSQSQueue.fifo"
+  },
+  {
+   "logicalId": "webSocketApi5AB89700",
+   "type": "AWS::ApiGatewayV2::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "webSocketApidefaultRouteSQSSendMessageFC4F9133",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "webSocketApidefaultRoute749519EC",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DevStage520A913F",
+   "type": "AWS::ApiGatewayV2::Stage",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "webSocketApiRoleE85311F3",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "webSocketApiRoleE85311F3",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "webSocketApiRoleDefaultPolicyF067C420",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "webSocketApiRoleDefaultPolicyF067C420",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "webSocketApiRoleDefaultPolicyF067C420",
+   "actual": "webSocketApiRoleDefaultPolicyF067C420"
+  },
+  {
+   "logicalId": "webSocketApiRoleDefaultPolicyF067C420",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:MessageSQSQueue.fifo"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:MessageSQSQueue.fifo"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "webSocketApiRoleDefaultPolicyF067C420",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${webSocketApiRoleE85311F3}",
+   "actual": "${webSocketApiRoleE85311F3}"
+  }
+ ]
+}

@@ -1,0 +1,902 @@
+{
+ "stackName": "BedrockAgentCoreApiGatewayTargetIntegTest",
+ "summary": {
+  "pass": 83,
+  "no handler": 7
+ },
+ "results": [
+  {
+   "logicalId": "TestGatewayServiceRole426CDA0F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestGatewayServiceRole426CDA0F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/api-gateway-target-integ-test-??????????"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Agateway%2Fapi-gateway-target-integ-test-%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "TestGatewayServiceRole426CDA0F",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Service role for Bedrock AgentCore Gateway api-gateway-target-integ-test",
+   "actual": "Service role for Bedrock AgentCore Gateway api-gateway-target-integ-test"
+  },
+  {
+   "logicalId": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "actual": "TestGatewayServiceRoleDefaultPolicyCFEDA895"
+  },
+  {
+   "logicalId": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "execute-api:Invoke",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/prod/*/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "execute-api:Invoke",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/prod/*/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestGatewayServiceRole426CDA0F}",
+   "actual": "${TestGatewayServiceRole426CDA0F}"
+  },
+  {
+   "logicalId": "TestGatewayUserPool545AA49A",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGatewayUserPoolResourceServer7A34B6B2",
+   "type": "AWS::Cognito::UserPoolResourceServer",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGatewayUserPoolDefaultClient3AC9C728",
+   "type": "AWS::Cognito::UserPoolClient",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGatewayUserPoolDomainB64B616E",
+   "type": "AWS::Cognito::UserPoolDomain",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGateway7394A071",
+   "type": "AWS::BedrockAgentCore::Gateway",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "BackendFunctionServiceRoleCA938F8D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BackendFunctionServiceRoleCA938F8D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "BackendFunctionServiceRoleCA938F8D",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "BackendFunction63314140",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BackendFunction63314140",
+   "type": "AWS::Lambda::Function",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "integ-test-apigateway-backend",
+   "actual": "integ-test-apigateway-backend"
+  },
+  {
+   "logicalId": "BackendFunction63314140",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Backend Lambda for API Gateway integration test",
+   "actual": "Backend Lambda for API Gateway integration test"
+  },
+  {
+   "logicalId": "BackendFunction63314140",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "BackendFunction63314140",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "BackendFunction63314140",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${BackendFunctionServiceRoleCA938F8D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${BackendFunctionServiceRoleCA938F8D}"
+  },
+  {
+   "logicalId": "BackendFunctionLogGroupA2C3BDCF",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BackendFunctionLogGroupA2C3BDCF",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/integ-test-apigateway-backend",
+   "actual": "/aws/lambda/integ-test-apigateway-backend"
+  },
+  {
+   "logicalId": "BackendFunctionLogGroupA2C3BDCF",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "TestRestApiB7B4EFDA",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApiB7B4EFDA",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "integ-test-api-gateway-target",
+   "actual": "integ-test-api-gateway-target"
+  },
+  {
+   "logicalId": "TestRestApiB7B4EFDA",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "REST API for testing Gateway API Gateway target integration",
+   "actual": "REST API for testing Gateway API Gateway target integration"
+  },
+  {
+   "logicalId": "TestRestApiDeploymentE31B12656be0631da8d65a9595d57514d0cdd866",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApiDeploymentE31B12656be0631da8d65a9595d57514d0cdd866",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "REST API for testing Gateway API Gateway target integration",
+   "actual": "REST API for testing Gateway API Gateway target integration"
+  },
+  {
+   "logicalId": "TestRestApiDeploymentE31B12656be0631da8d65a9595d57514d0cdd866",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiB7B4EFDA}",
+   "actual": "${TestRestApiB7B4EFDA}"
+  },
+  {
+   "logicalId": "TestRestApiDeploymentStageprod714523E6",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApiDeploymentStageprod714523E6",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "TestRestApiDeploymentStageprod714523E6",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiB7B4EFDA}",
+   "actual": "${TestRestApiB7B4EFDA}"
+  },
+  {
+   "logicalId": "TestRestApiDeploymentStageprod714523E6",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiDeploymentE31B12656be0631da8d65a9595d57514d0cdd866}",
+   "actual": "${TestRestApiDeploymentE31B12656be0631da8d65a9595d57514d0cdd866}"
+  },
+  {
+   "logicalId": "TestRestApipetsFDF5FF2B",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApipetsFDF5FF2B",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "zw5cj6xjm2",
+   "actual": "zw5cj6xjm2"
+  },
+  {
+   "logicalId": "TestRestApipetsFDF5FF2B",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "pets",
+   "actual": "pets"
+  },
+  {
+   "logicalId": "TestRestApipetsFDF5FF2B",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiB7B4EFDA}",
+   "actual": "${TestRestApiB7B4EFDA}"
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets9C6547DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets9C6547DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets9C6547DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend"
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets9C6547DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets9C6547DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/prod/GET/pets",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/prod/GET/pets"
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets4D7624E7",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets4D7624E7",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets4D7624E7",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend"
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets4D7624E7",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "TestRestApipetsGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpets4D7624E7",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/test-invoke-stage/GET/pets",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/test-invoke-stage/GET/pets"
+  },
+  {
+   "logicalId": "TestRestApipetsGETDF04032C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApipetsGETDF04032C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiB7B4EFDA}",
+   "actual": "${TestRestApiB7B4EFDA}"
+  },
+  {
+   "logicalId": "TestRestApipetsGETDF04032C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApipetsFDF5FF2B}",
+   "actual": "${TestRestApipetsFDF5FF2B}"
+  },
+  {
+   "logicalId": "TestRestApipetsGETDF04032C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "TestRestApipetsGETDF04032C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS_IAM",
+   "actual": "AWS_IAM"
+  },
+  {
+   "logicalId": "TestRestApipetsGETDF04032C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "OperationName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "listPets",
+   "actual": "listPets"
+  },
+  {
+   "logicalId": "TestRestApipetsGETDF04032C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "200": {
+     "statusCode": "200",
+     "responseModels": {
+      "application/json": "PetsResponse"
+     }
+    }
+   },
+   "actual": {
+    "200": {
+     "statusCode": "200",
+     "responseModels": {
+      "application/json": "PetsResponse"
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "TestRestApipetsGETDF04032C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${TestRestApipetsFDF5FF2B}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "TestRestApipetspetId7E336794",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApipetspetId7E336794",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApipetsFDF5FF2B}",
+   "actual": "${TestRestApipetsFDF5FF2B}"
+  },
+  {
+   "logicalId": "TestRestApipetspetId7E336794",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "{petId}",
+   "actual": "{petId}"
+  },
+  {
+   "logicalId": "TestRestApipetspetId7E336794",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiB7B4EFDA}",
+   "actual": "${TestRestApiB7B4EFDA}"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId46723F61",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId46723F61",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId46723F61",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId46723F61",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId46723F61",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/prod/GET/pets/*",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/prod/GET/pets/*"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId0C7B937C",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId0C7B937C",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId0C7B937C",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId0C7B937C",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGETApiPermissionTestBedrockAgentCoreApiGatewayTargetIntegTestTestRestApi68EAA9D5GETpetspetId0C7B937C",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/test-invoke-stage/GET/pets/*",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TestRestApiB7B4EFDA}/test-invoke-stage/GET/pets/*"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGET35C5207E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGET35C5207E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiB7B4EFDA}",
+   "actual": "${TestRestApiB7B4EFDA}"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGET35C5207E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApipetspetId7E336794}",
+   "actual": "${TestRestApipetspetId7E336794}"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGET35C5207E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGET35C5207E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS_IAM",
+   "actual": "AWS_IAM"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGET35C5207E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "OperationName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "getPetById",
+   "actual": "getPetById"
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGET35C5207E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "200": {
+     "statusCode": "200",
+     "responseModels": {
+      "application/json": "PetResponse"
+     }
+    }
+   },
+   "actual": {
+    "200": {
+     "statusCode": "200",
+     "responseModels": {
+      "application/json": "PetResponse"
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "TestRestApipetspetIdGET35C5207E",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-apigateway-backend/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${TestRestApipetspetId7E336794}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "TestRestApiResponseModel8CA1958B",
+   "type": "AWS::ApiGateway::Model",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApiResponseModel8CA1958B",
+   "type": "AWS::ApiGateway::Model",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PetsResponse",
+   "actual": "PetsResponse"
+  },
+  {
+   "logicalId": "TestRestApiResponseModel8CA1958B",
+   "type": "AWS::ApiGateway::Model",
+   "property": "ContentType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "application/json",
+   "actual": "application/json"
+  },
+  {
+   "logicalId": "TestRestApiResponseModel8CA1958B",
+   "type": "AWS::ApiGateway::Model",
+   "property": "Schema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "object",
+    "properties": {
+     "pets": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "id": {
+         "type": "string"
+        },
+        "name": {
+         "type": "string"
+        },
+        "type": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#"
+   },
+   "actual": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"pets\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}}}}"
+  },
+  {
+   "logicalId": "TestRestApiResponseModel8CA1958B",
+   "type": "AWS::ApiGateway::Model",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiB7B4EFDA}",
+   "actual": "${TestRestApiB7B4EFDA}"
+  },
+  {
+   "logicalId": "TestRestApiPetResponseModel6088CBBF",
+   "type": "AWS::ApiGateway::Model",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRestApiPetResponseModel6088CBBF",
+   "type": "AWS::ApiGateway::Model",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PetResponse",
+   "actual": "PetResponse"
+  },
+  {
+   "logicalId": "TestRestApiPetResponseModel6088CBBF",
+   "type": "AWS::ApiGateway::Model",
+   "property": "ContentType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "application/json",
+   "actual": "application/json"
+  },
+  {
+   "logicalId": "TestRestApiPetResponseModel6088CBBF",
+   "type": "AWS::ApiGateway::Model",
+   "property": "Schema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string"
+     }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#"
+   },
+   "actual": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}"
+  },
+  {
+   "logicalId": "TestRestApiPetResponseModel6088CBBF",
+   "type": "AWS::ApiGateway::Model",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRestApiB7B4EFDA}",
+   "actual": "${TestRestApiB7B4EFDA}"
+  },
+  {
+   "logicalId": "ApiGatewayTarget9E745974",
+   "type": "AWS::BedrockAgentCore::GatewayTarget",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiGatewayTargetConstructor8957A6B0",
+   "type": "AWS::BedrockAgentCore::GatewayTarget",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

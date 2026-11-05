@@ -1,0 +1,47 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-dynamodb-kinesis-stream",
+ "resources": {
+  "Stream790BDEE4": {
+   "Type": "AWS::Kinesis::Stream",
+   "Properties": {
+    "RetentionPeriodHours": 24,
+    "ShardCount": 1,
+    "StreamEncryption": {
+     "EncryptionType": "KMS",
+     "KeyId": "alias/aws/kinesis"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "TableCD117FA1": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "hashKey",
+      "AttributeType": "S"
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "hashKey",
+      "KeyType": "HASH"
+     }
+    ],
+    "KinesisStreamSpecification": {
+     "ApproximateCreationDateTimePrecision": "MILLISECOND",
+     "StreamArn": "${Stream790BDEE4.Arn}"
+    },
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

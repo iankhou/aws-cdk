@@ -1,0 +1,120 @@
+{
+ "version": "1",
+ "stackName": "ApiGatewayAccessLogArnWithoutWildcard",
+ "resources": {
+  "AccessLogs8B620ECA": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ApiF70053CD": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "Api"
+   }
+  },
+  "ApiCloudWatchRole73EC6FC4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "ApiAccountA18C9B29": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": "${ApiCloudWatchRole73EC6FC4.Arn}"
+   },
+   "DependsOn": [
+    "ApiF70053CD"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${ApiF70053CD}"
+   },
+   "DependsOn": [
+    "ApiGET9257B917"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "ApiDeploymentStageprod3EB9684E": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "AccessLogSetting": {
+     "DestinationArn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${AccessLogs8B620ECA}",
+     "Format": "{\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"user\":\"$context.identity.user\",\"caller\":\"$context.identity.caller\",\"requestTime\":\"$context.requestTime\",\"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\",\"status\":\"$context.status\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"
+    },
+    "DeploymentId": "${ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73}",
+    "RestApiId": "${ApiF70053CD}",
+    "StageName": "prod"
+   },
+   "DependsOn": [
+    "ApiAccountA18C9B29"
+   ]
+  },
+  "ApiGET9257B917": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${ApiF70053CD.RootResourceId}",
+    "RestApiId": "${ApiF70053CD}"
+   }
+  }
+ },
+ "outputs": {
+  "ApiEndpoint4F160690": {
+   "Value": "https://${ApiF70053CD}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${ApiDeploymentStageprod3EB9684E}/"
+  },
+  "ExportsOutputRefAccessLogs8B620ECA39F1F795": {
+   "Value": "${AccessLogs8B620ECA}",
+   "Export": {
+    "Name": "ApiGatewayAccessLogArnWithoutWildcard:ExportsOutputRefAccessLogs8B620ECA39F1F795"
+   }
+  },
+  "ExportsOutputRefApiF70053CD5653BA4D": {
+   "Value": "${ApiF70053CD}",
+   "Export": {
+    "Name": "ApiGatewayAccessLogArnWithoutWildcard:ExportsOutputRefApiF70053CD5653BA4D"
+   }
+  },
+  "ExportsOutputRefApiDeploymentStageprod3EB9684E9290AA51": {
+   "Value": "${ApiDeploymentStageprod3EB9684E}",
+   "Export": {
+    "Name": "ApiGatewayAccessLogArnWithoutWildcard:ExportsOutputRefApiDeploymentStageprod3EB9684E9290AA51"
+   }
+  }
+ },
+ "unresolved": [],
+ "accountWide": [
+  "ApiAccountA18C9B29"
+ ]
+}

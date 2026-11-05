@@ -1,0 +1,75 @@
+{
+ "version": "1",
+ "stackName": "integ-mock-websocket-integration",
+ "resources": {
+  "mywsapi32E6CE11": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "mywsapi",
+    "ProtocolType": "WEBSOCKET",
+    "RouteSelectionExpression": "$request.body.action"
+   }
+  },
+  "mywsapidefaultRouteDefaultIntegrationFFCB3BA9": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "IntegrationType": "MOCK",
+    "IntegrationUri": ""
+   }
+  },
+  "mywsapidefaultRouteE9382DF8": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "$default",
+    "Target": "integrations/${mywsapidefaultRouteDefaultIntegrationFFCB3BA9}"
+   }
+  },
+  "mywsapisendmessageRouteDefaultIntegration702159AD": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "IntegrationType": "MOCK",
+    "IntegrationUri": "",
+    "RequestTemplates": {
+     "application/json": "{\"statusCode\":200}"
+    },
+    "TemplateSelectionExpression": "\\$default"
+   }
+  },
+  "mywsapisendmessageRouteAE873328": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "sendmessage",
+    "RouteResponseSelectionExpression": "$default",
+    "Target": "integrations/${mywsapisendmessageRouteDefaultIntegration702159AD}"
+   }
+  },
+  "mywsapisendmessageRouteResponse2ED167D2": {
+   "Type": "AWS::ApiGatewayV2::RouteResponse",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "RouteId": "${mywsapisendmessageRouteAE873328}",
+    "RouteResponseKey": "$default"
+   }
+  },
+  "mystage114C35EC": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${mywsapi32E6CE11}",
+    "AutoDeploy": true,
+    "StageName": "dev"
+   }
+  }
+ },
+ "outputs": {
+  "ApiEndpoint": {
+   "Value": "wss://${mywsapi32E6CE11}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev"
+  }
+ },
+ "unresolved": []
+}

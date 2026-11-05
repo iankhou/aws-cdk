@@ -1,0 +1,92 @@
+{
+ "version": "1",
+ "stackName": "appsync-lambda-auth",
+ "resources": {
+  "funcServiceRoleA96CCB44": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "funcC3A0C2E2": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "df9f207d681056c35badb6bc0d60a945b44c887b227b759715fd6a6443486443.zip"
+    },
+    "Handler": "lambda-tutorial.handler",
+    "Role": "${funcServiceRoleA96CCB44.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "funcServiceRoleA96CCB44"
+   ]
+  },
+  "funcapi1appsync5C5BBFA1": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${funcC3A0C2E2.Arn}",
+    "Principal": "appsync.amazonaws.com"
+   }
+  },
+  "funcapi2appsync0EE83EF2": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${funcC3A0C2E2.Arn}",
+    "Principal": "appsync.amazonaws.com"
+   }
+  },
+  "api1A91238E2": {
+   "Type": "AWS::AppSync::GraphQLApi",
+   "Properties": {
+    "AuthenticationType": "AWS_LAMBDA",
+    "LambdaAuthorizerConfig": {
+     "AuthorizerUri": "${funcC3A0C2E2.Arn}"
+    },
+    "Name": "api1"
+   }
+  },
+  "api1SchemaFFA53DB6": {
+   "Type": "AWS::AppSync::GraphQLSchema",
+   "Properties": {
+    "ApiId": "${api1A91238E2.ApiId}",
+    "Definition": "type test {\n  version: String!\n}\ntype Query {\n  getTests: [test]!\n}\ntype Mutation {\n  addTest(version: String!): test\n}\n"
+   }
+  },
+  "api2C4850CEA": {
+   "Type": "AWS::AppSync::GraphQLApi",
+   "Properties": {
+    "AuthenticationType": "AWS_LAMBDA",
+    "LambdaAuthorizerConfig": {
+     "AuthorizerUri": "${funcC3A0C2E2.Arn}"
+    },
+    "Name": "api2"
+   }
+  },
+  "api2SchemaD5C26031": {
+   "Type": "AWS::AppSync::GraphQLSchema",
+   "Properties": {
+    "ApiId": "${api2C4850CEA.ApiId}",
+    "Definition": "type test {\n  version: String!\n}\ntype Query {\n  getTests: [test]!\n}\ntype Mutation {\n  addTest(version: String!): test\n}\n"
+   }
+  }
+ },
+ "unresolved": []
+}

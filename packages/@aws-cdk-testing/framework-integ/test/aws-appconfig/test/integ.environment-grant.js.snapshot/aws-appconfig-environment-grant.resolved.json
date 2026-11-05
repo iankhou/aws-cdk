@@ -1,0 +1,45 @@
+{
+ "version": "1",
+ "stackName": "aws-appconfig-environment-grant",
+ "resources": {
+  "MyApplicationForEnv1F597ED9": {
+   "Type": "AWS::AppConfig::Application",
+   "Properties": {
+    "Name": "AppForEnvTest"
+   }
+  },
+  "MyEnvironment465E4DEA": {
+   "Type": "AWS::AppConfig::Environment",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "Name": "awsappconfigenvironmentgrant-MyEnvironment-6CC47125"
+   }
+  },
+  "MyUserDC45028B": {
+   "Type": "AWS::IAM::User"
+  },
+  "MyUserDefaultPolicy7B897426": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "appconfig:GetLatestConfiguration",
+        "appconfig:StartConfigurationSession"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:appconfig:${AWS::Region}:${AWS::AccountId}:application/${MyApplicationForEnv1F597ED9}/environment/${MyEnvironment465E4DEA}/configuration/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyUserDefaultPolicy7B897426",
+    "Users": [
+     "${MyUserDC45028B}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,634 @@
+{
+ "stackName": "EventApiApiGrantStack",
+ "summary": {
+  "no handler": 5,
+  "pass": 48,
+  "unresolved": 4
+ },
+ "results": [
+  {
+   "logicalId": "EventApiApiGrantBFB2D6A9",
+   "type": "AWS::AppSync::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventApiApiGrantdefault117DD93B",
+   "type": "AWS::AppSync::ChannelNamespace",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventApiApiGrantpubsub2B1CA057",
+   "type": "AWS::AppSync::ChannelNamespace",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventApiApiGranttest107EAD262",
+   "type": "AWS::AppSync::ChannelNamespace",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventApiApiGranttest26BB30687",
+   "type": "AWS::AppSync::ChannelNamespace",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SubscribeFunctionServiceRole03C4D951",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscribeFunctionServiceRole03C4D951",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SubscribeFunctionServiceRole03C4D951",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "SubscribeFunctionServiceRoleDefaultPolicyC93B32C6",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscribeFunctionServiceRoleDefaultPolicyC93B32C6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SubscribeFunctionServiceRoleDefaultPolicyC93B32C6",
+   "actual": "SubscribeFunctionServiceRoleDefaultPolicyC93B32C6"
+  },
+  {
+   "logicalId": "SubscribeFunctionServiceRoleDefaultPolicyC93B32C6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:EventConnect",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantBFB2D6A9}"
+     },
+     {
+      "Action": "appsync:EventSubscribe",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantdefault117DD93B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:EventConnect",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantBFB2D6A9}"
+     },
+     {
+      "Action": "appsync:EventSubscribe",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantdefault117DD93B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SubscribeFunctionServiceRoleDefaultPolicyC93B32C6",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SubscribeFunctionServiceRole03C4D951}",
+   "actual": "${SubscribeFunctionServiceRole03C4D951}"
+  },
+  {
+   "logicalId": "SubscribeFunction7B118C27",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscribeFunction7B118C27",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "SubscribeFunction7B118C27",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "SubscribeFunction7B118C27",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SubscribeFunctionServiceRole03C4D951}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SubscribeFunctionServiceRole03C4D951}"
+  },
+  {
+   "logicalId": "SubscribeFunction7B118C27",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 15,
+   "actual": 15
+  },
+  {
+   "logicalId": "SubscribeFunction7B118C27",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "PublishFunctionServiceRole151EB15C",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PublishFunctionServiceRole151EB15C",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "PublishFunctionServiceRole151EB15C",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "PublishFunctionServiceRoleDefaultPolicyE3A9B652",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PublishFunctionServiceRoleDefaultPolicyE3A9B652",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PublishFunctionServiceRoleDefaultPolicyE3A9B652",
+   "actual": "PublishFunctionServiceRoleDefaultPolicyE3A9B652"
+  },
+  {
+   "logicalId": "PublishFunctionServiceRoleDefaultPolicyE3A9B652",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:EventPublish",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantdefault117DD93B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:EventPublish",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantdefault117DD93B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "PublishFunctionServiceRoleDefaultPolicyE3A9B652",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${PublishFunctionServiceRole151EB15C}",
+   "actual": "${PublishFunctionServiceRole151EB15C}"
+  },
+  {
+   "logicalId": "PublishFunctionB6602567",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PublishFunctionB6602567",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "PublishFunctionB6602567",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "PublishFunctionB6602567",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PublishFunctionServiceRole151EB15C}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PublishFunctionServiceRole151EB15C}"
+  },
+  {
+   "logicalId": "PublishFunctionB6602567",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 15,
+   "actual": 15
+  },
+  {
+   "logicalId": "PublishFunctionB6602567",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "PubSubFunctionServiceRole1DAC7126",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PubSubFunctionServiceRole1DAC7126",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "PubSubFunctionServiceRole1DAC7126",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "PubSubFunctionServiceRoleDefaultPolicy00431937",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PubSubFunctionServiceRoleDefaultPolicy00431937",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PubSubFunctionServiceRoleDefaultPolicy00431937",
+   "actual": "PubSubFunctionServiceRoleDefaultPolicy00431937"
+  },
+  {
+   "logicalId": "PubSubFunctionServiceRoleDefaultPolicy00431937",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:EventConnect",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantBFB2D6A9}"
+     },
+     {
+      "Action": [
+       "appsync:EventPublish",
+       "appsync:EventSubscribe"
+      ],
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantpubsub2B1CA057}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:EventConnect",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantBFB2D6A9}"
+     },
+     {
+      "Action": [
+       "appsync:EventPublish",
+       "appsync:EventSubscribe"
+      ],
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantpubsub2B1CA057}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "PubSubFunctionServiceRoleDefaultPolicy00431937",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${PubSubFunctionServiceRole1DAC7126}",
+   "actual": "${PubSubFunctionServiceRole1DAC7126}"
+  },
+  {
+   "logicalId": "PubSubFunctionF65FA1C6",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PubSubFunctionF65FA1C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "PubSubFunctionF65FA1C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "PubSubFunctionF65FA1C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PubSubFunctionServiceRole1DAC7126}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PubSubFunctionServiceRole1DAC7126}"
+  },
+  {
+   "logicalId": "PubSubFunctionF65FA1C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 15,
+   "actual": 15
+  },
+  {
+   "logicalId": "PubSubFunctionF65FA1C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunctionServiceRole612C1829",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunctionServiceRole612C1829",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunctionServiceRole612C1829",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunctionServiceRoleDefaultPolicyE9B2393E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunctionServiceRoleDefaultPolicyE9B2393E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PubSubAllChannelsFunctionServiceRoleDefaultPolicyE9B2393E",
+   "actual": "PubSubAllChannelsFunctionServiceRoleDefaultPolicyE9B2393E"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunctionServiceRoleDefaultPolicyE9B2393E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:EventConnect",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantBFB2D6A9}"
+     },
+     {
+      "Action": [
+       "appsync:EventPublish",
+       "appsync:EventSubscribe"
+      ],
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantBFB2D6A9}/channelNamespace/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:EventConnect",
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantBFB2D6A9}"
+     },
+     {
+      "Action": [
+       "appsync:EventPublish",
+       "appsync:EventSubscribe"
+      ],
+      "Effect": "Allow",
+      "Resource": "${EventApiApiGrantBFB2D6A9}/channelNamespace/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunctionServiceRoleDefaultPolicyE9B2393E",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${PubSubAllChannelsFunctionServiceRole612C1829}",
+   "actual": "${PubSubAllChannelsFunctionServiceRole612C1829}"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunction9EC91B3F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunction9EC91B3F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunction9EC91B3F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunction9EC91B3F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PubSubAllChannelsFunctionServiceRole612C1829}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${PubSubAllChannelsFunctionServiceRole612C1829}"
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunction9EC91B3F",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 15,
+   "actual": 15
+  },
+  {
+   "logicalId": "PubSubAllChannelsFunction9EC91B3F",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "unresolved"
+  }
+ ]
+}

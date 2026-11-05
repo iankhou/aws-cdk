@@ -1,0 +1,604 @@
+{
+ "stackName": "codebuild-project-arm",
+ "summary": {
+  "pass": 30,
+  "no handler": 5
+ },
+ "results": [
+  {
+   "logicalId": "MyProjectMediumRole1F3769C8",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectMediumRole1F3769C8",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codebuild.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codebuild.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyProjectMediumRoleDefaultPolicy08D66D98",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectMediumRoleDefaultPolicy08D66D98",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyProjectMediumRoleDefaultPolicy08D66D98",
+   "actual": "MyProjectMediumRoleDefaultPolicy08D66D98"
+  },
+  {
+   "logicalId": "MyProjectMediumRoleDefaultPolicy08D66D98",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectMediumE40D9677}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectMediumE40D9677}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectMediumE40D9677}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectMediumE40D9677}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectMediumE40D9677}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectMediumE40D9677}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyProjectMediumRoleDefaultPolicy08D66D98",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyProjectMediumRole1F3769C8}",
+   "actual": "${MyProjectMediumRole1F3769C8}"
+  },
+  {
+   "logicalId": "MyProjectMediumE40D9677",
+   "type": "AWS::CodeBuild::Project",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyProjectXLargeRoleC17867F7",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectXLargeRoleC17867F7",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codebuild.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codebuild.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyProjectXLargeRoleDefaultPolicyACC3F91E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectXLargeRoleDefaultPolicyACC3F91E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyProjectXLargeRoleDefaultPolicyACC3F91E",
+   "actual": "MyProjectXLargeRoleDefaultPolicyACC3F91E"
+  },
+  {
+   "logicalId": "MyProjectXLargeRoleDefaultPolicyACC3F91E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectXLarge21A68AC6}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectXLarge21A68AC6}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectXLarge21A68AC6}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectXLarge21A68AC6}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectXLarge21A68AC6}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectXLarge21A68AC6}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyProjectXLargeRoleDefaultPolicyACC3F91E",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyProjectXLargeRoleC17867F7}",
+   "actual": "${MyProjectXLargeRoleC17867F7}"
+  },
+  {
+   "logicalId": "MyProjectXLarge21A68AC6",
+   "type": "AWS::CodeBuild::Project",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyProjectX2LargeRole65F64577",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectX2LargeRole65F64577",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codebuild.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codebuild.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyProjectX2LargeRoleDefaultPolicy241428C8",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectX2LargeRoleDefaultPolicy241428C8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyProjectX2LargeRoleDefaultPolicy241428C8",
+   "actual": "MyProjectX2LargeRoleDefaultPolicy241428C8"
+  },
+  {
+   "logicalId": "MyProjectX2LargeRoleDefaultPolicy241428C8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectX2Large715B77CC}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectX2Large715B77CC}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectX2Large715B77CC}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectX2Large715B77CC}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectX2Large715B77CC}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectX2Large715B77CC}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyProjectX2LargeRoleDefaultPolicy241428C8",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyProjectX2LargeRole65F64577}",
+   "actual": "${MyProjectX2LargeRole65F64577}"
+  },
+  {
+   "logicalId": "MyProjectX2Large715B77CC",
+   "type": "AWS::CodeBuild::Project",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4MediumRoleDC1E6ACC",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4MediumRoleDC1E6ACC",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codebuild.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codebuild.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4MediumRoleDefaultPolicy7B84EC3C",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4MediumRoleDefaultPolicy7B84EC3C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyProjectAL2023Arm4MediumRoleDefaultPolicy7B84EC3C",
+   "actual": "MyProjectAL2023Arm4MediumRoleDefaultPolicy7B84EC3C"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4MediumRoleDefaultPolicy7B84EC3C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4Medium5FE6B809}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4Medium5FE6B809}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectAL2023Arm4Medium5FE6B809}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4Medium5FE6B809}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4Medium5FE6B809}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectAL2023Arm4Medium5FE6B809}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4MediumRoleDefaultPolicy7B84EC3C",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyProjectAL2023Arm4MediumRoleDC1E6ACC}",
+   "actual": "${MyProjectAL2023Arm4MediumRoleDC1E6ACC}"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4Medium5FE6B809",
+   "type": "AWS::CodeBuild::Project",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4XLargeRole65C75B1D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4XLargeRole65C75B1D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codebuild.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codebuild.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4XLargeRoleDefaultPolicy9BD6C968",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4XLargeRoleDefaultPolicy9BD6C968",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyProjectAL2023Arm4XLargeRoleDefaultPolicy9BD6C968",
+   "actual": "MyProjectAL2023Arm4XLargeRoleDefaultPolicy9BD6C968"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4XLargeRoleDefaultPolicy9BD6C968",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4XLargeCE68ACAF}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4XLargeCE68ACAF}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectAL2023Arm4XLargeCE68ACAF}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4XLargeCE68ACAF}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4XLargeCE68ACAF}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectAL2023Arm4XLargeCE68ACAF}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4XLargeRoleDefaultPolicy9BD6C968",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyProjectAL2023Arm4XLargeRole65C75B1D}",
+   "actual": "${MyProjectAL2023Arm4XLargeRole65C75B1D}"
+  },
+  {
+   "logicalId": "MyProjectAL2023Arm4XLargeCE68ACAF",
+   "type": "AWS::CodeBuild::Project",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

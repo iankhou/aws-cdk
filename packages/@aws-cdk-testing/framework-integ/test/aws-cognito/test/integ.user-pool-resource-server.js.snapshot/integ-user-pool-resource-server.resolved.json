@@ -1,0 +1,79 @@
+{
+ "version": "1",
+ "stackName": "integ-user-pool-resource-server",
+ "resources": {
+  "myuserpool01998219": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_phone_number",
+       "Priority": 1
+      },
+      {
+       "Name": "verified_email",
+       "Priority": 2
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": true
+    },
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UserPoolName": "MyUserPool",
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "myuserpoolmyserver50C4D8E9": {
+   "Type": "AWS::Cognito::UserPoolResourceServer",
+   "Properties": {
+    "Identifier": "users",
+    "Name": "users",
+    "Scopes": [
+     {
+      "ScopeDescription": "read only",
+      "ScopeName": "read"
+     }
+    ],
+    "UserPoolId": "${myuserpool01998219}"
+   }
+  },
+  "myuserpoolclientC5FA41EC": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "AllowedOAuthFlows": [
+     "client_credentials"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "${myuserpoolmyserver50C4D8E9}/read"
+    ],
+    "ClientName": "users-app",
+    "GenerateSecret": true,
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ],
+    "UserPoolId": "${myuserpool01998219}"
+   }
+  }
+ },
+ "outputs": {
+  "poolid": {
+   "Value": "${myuserpool01998219}"
+  },
+  "clientid": {
+   "Value": "${myuserpoolclientC5FA41EC}"
+  }
+ },
+ "unresolved": []
+}

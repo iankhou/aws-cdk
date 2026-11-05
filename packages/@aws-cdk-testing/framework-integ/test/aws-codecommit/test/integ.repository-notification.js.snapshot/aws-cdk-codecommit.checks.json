@@ -1,0 +1,74 @@
+{
+ "stackName": "aws-cdk-codecommit",
+ "summary": {
+  "no handler": 3,
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "MyCodecommitRepository26DB372B",
+   "type": "AWS::CodeCommit::Repository",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyCodecommitRepositoryNotifyOnPullRequestCreated4CAB0621",
+   "type": "AWS::CodeStarNotifications::NotificationRule",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyCodecommitRepositoryNotifyOnPullRequestMerged80574FED",
+   "type": "AWS::CodeStarNotifications::NotificationRule",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Publish",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codestar-notifications.amazonaws.com"
+      },
+      "Resource": "${MyTopic86869434}",
+      "Sid": "0"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"0\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codestar-notifications.amazonaws.com\"},\"Action\":\"sns:Publish\",\"Resource\":\"${MyTopic86869434}\"}]}"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${MyTopic86869434}"
+   ],
+   "actual": [
+    "${MyTopic86869434}"
+   ]
+  }
+ ]
+}

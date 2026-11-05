@@ -1,0 +1,428 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-codepipeline-codecommit-custom-event",
+ "resources": {
+  "MyRepoF4F48043": {
+   "Type": "AWS::CodeCommit::Repository",
+   "Properties": {
+    "RepositoryName": "my-repo"
+   }
+  },
+  "MyRepoawscdkcodepipelinecodecommitcustomeventPipeline0A3A5212EventRule28059836": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "Description": "Custom event rule for CodeCommit",
+    "EventPattern": {
+     "detail-type": [
+      "CodeCommit Repository State Change"
+     ],
+     "resources": [
+      "${MyRepoF4F48043.Arn}"
+     ],
+     "source": [
+      "aws.codecommit"
+     ],
+     "detail": {
+      "referenceType": [
+       "branch"
+      ],
+      "event": [
+       "referenceCreated",
+       "referenceUpdated"
+      ],
+      "referenceName": [
+       "test-branch"
+      ]
+     }
+    },
+    "Name": "CustomEventRule",
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": "${MyFunc8A243A2C.Arn}",
+      "Id": "Target0"
+     }
+    ]
+   }
+  },
+  "MyRepoawscdkcodepipelinecodecommitcustomeventPipeline0A3A5212EventRuleAllowEventRuleawscdkcodepipelinecodecommitcustomeventMyFunc5C2DFAD1D5D7C86B": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${MyFunc8A243A2C.Arn}",
+    "Principal": "events.amazonaws.com",
+    "SourceArn": "${MyRepoawscdkcodepipelinecodecommitcustomeventPipeline0A3A5212EventRule28059836.Arn}"
+   }
+  },
+  "MyFuncServiceRole54065130": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MyFuncServiceRoleDefaultPolicyF3C36699": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "codepipeline:StartPipelineExecution",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyFuncServiceRoleDefaultPolicyF3C36699",
+    "Roles": [
+     "${MyFuncServiceRole54065130}"
+    ]
+   }
+  },
+  "MyFunc8A243A2C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "e13e6995609aa8454729e5485c2f4e44385b644253c73c5872c27fce2403603e.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${MyFuncServiceRole54065130.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "MyFuncServiceRoleDefaultPolicyF3C36699",
+    "MyFuncServiceRole54065130"
+   ]
+  },
+  "PipelineArtifactsBucketEncryptionKey01D58D69": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "PipelineArtifactsBucketEncryptionKeyAlias5C510EEE": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/codepipeline-aws-cdk-codepipeline-codecommit-custom-event-pipeline-0a3a5212",
+    "TargetKeyId": "${PipelineArtifactsBucketEncryptionKey01D58D69.Arn}"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "PipelineArtifactsBucket22248F97": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "KMSMasterKeyID": "${PipelineArtifactsBucketEncryptionKey01D58D69.Arn}",
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "PipelineArtifactsBucketPolicyD4F9712A": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${PipelineArtifactsBucket22248F97}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        "${PipelineArtifactsBucket22248F97.Arn}",
+        "${PipelineArtifactsBucket22248F97.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "PipelineRoleD68726F7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codepipeline.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "PipelineRoleDefaultPolicyC7A05455": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${PipelineArtifactsBucket22248F97.Arn}",
+        "${PipelineArtifactsBucket22248F97.Arn}/*"
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey*",
+        "kms:ReEncrypt*"
+       ],
+       "Effect": "Allow",
+       "Resource": "${PipelineArtifactsBucketEncryptionKey01D58D69.Arn}"
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": [
+        "${PipelinebuildmanualCodePipelineActionRoleE3306AB0.Arn}",
+        "${PipelinesourceCodePipelineActionRoleB7E0306A.Arn}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "PipelineRoleDefaultPolicyC7A05455",
+    "Roles": [
+     "${PipelineRoleD68726F7}"
+    ]
+   }
+  },
+  "PipelineC660917D": {
+   "Type": "AWS::CodePipeline::Pipeline",
+   "Properties": {
+    "ArtifactStore": {
+     "EncryptionKey": {
+      "Id": "${PipelineArtifactsBucketEncryptionKey01D58D69.Arn}",
+      "Type": "KMS"
+     },
+     "Location": "${PipelineArtifactsBucket22248F97}",
+     "Type": "S3"
+    },
+    "Name": "IntegCustomEventPipeline",
+    "RoleArn": "${PipelineRoleD68726F7.Arn}",
+    "Stages": [
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "AWS",
+         "Provider": "CodeCommit",
+         "Version": "1"
+        },
+        "Configuration": {
+         "RepositoryName": "${MyRepoF4F48043.Name}",
+         "BranchName": "main",
+         "PollForSourceChanges": false
+        },
+        "Name": "source",
+        "OutputArtifacts": [
+         {
+          "Name": "SourceArtifact"
+         }
+        ],
+        "RoleArn": "${PipelinesourceCodePipelineActionRoleB7E0306A.Arn}",
+        "RunOrder": 1
+       }
+      ],
+      "Name": "source"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Approval",
+         "Owner": "AWS",
+         "Provider": "Manual",
+         "Version": "1"
+        },
+        "Name": "manual",
+        "RoleArn": "${PipelinebuildmanualCodePipelineActionRoleE3306AB0.Arn}",
+        "RunOrder": 1
+       }
+      ],
+      "Name": "build"
+     }
+    ]
+   },
+   "DependsOn": [
+    "PipelineRoleDefaultPolicyC7A05455",
+    "PipelineRoleD68726F7"
+   ]
+  },
+  "PipelinesourceCodePipelineActionRoleB7E0306A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "PipelinesourceCodePipelineActionRoleDefaultPolicy9E69DE83": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${PipelineArtifactsBucket22248F97.Arn}",
+        "${PipelineArtifactsBucket22248F97.Arn}/*"
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey*",
+        "kms:ReEncrypt*"
+       ],
+       "Effect": "Allow",
+       "Resource": "${PipelineArtifactsBucketEncryptionKey01D58D69.Arn}"
+      },
+      {
+       "Action": [
+        "codecommit:CancelUploadArchive",
+        "codecommit:GetBranch",
+        "codecommit:GetCommit",
+        "codecommit:GetUploadArchiveStatus",
+        "codecommit:UploadArchive"
+       ],
+       "Effect": "Allow",
+       "Resource": "${MyRepoF4F48043.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "PipelinesourceCodePipelineActionRoleDefaultPolicy9E69DE83",
+    "Roles": [
+     "${PipelinesourceCodePipelineActionRoleB7E0306A}"
+    ]
+   }
+  },
+  "PipelinebuildmanualCodePipelineActionRoleE3306AB0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputFnGetAttMyRepoF4F48043NameA9AA4464": {
+   "Value": "${MyRepoF4F48043.Name}",
+   "Export": {
+    "Name": "aws-cdk-codepipeline-codecommit-custom-event:ExportsOutputFnGetAttMyRepoF4F48043NameA9AA4464"
+   }
+  },
+  "ExportsOutputRefPipelineC660917DEB540586": {
+   "Value": "${PipelineC660917D}",
+   "Export": {
+    "Name": "aws-cdk-codepipeline-codecommit-custom-event:ExportsOutputRefPipelineC660917DEB540586"
+   }
+  }
+ },
+ "unresolved": []
+}

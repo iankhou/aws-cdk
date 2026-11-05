@@ -1,0 +1,211 @@
+{
+ "version": "1",
+ "stackName": "cdk-backup",
+ "resources": {
+  "TableCD117FA1": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "id",
+      "AttributeType": "S"
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "id",
+      "KeyType": "HASH"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "FileSystem": {
+   "Type": "AWS::EFS::FileSystem",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "Vault23237E5B": {
+   "Type": "AWS::Backup::BackupVault",
+   "Properties": {
+    "BackupVaultName": "cdkbackupVaultC2A6D3CB",
+    "LockConfiguration": {
+     "MinRetentionDays": 5
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SecondaryVault67665B5E": {
+   "Type": "AWS::Backup::BackupVault",
+   "Properties": {
+    "BackupVaultName": "cdkbackupSecondaryVaultA01C2A0E",
+    "LockConfiguration": {
+     "MinRetentionDays": 5
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ThirdVault3441C01E": {
+   "Type": "AWS::Backup::BackupVault",
+   "Properties": {
+    "BackupVaultName": "backupVault-test",
+    "LockConfiguration": {
+     "MinRetentionDays": 5
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "PlanDAF4E53A": {
+   "Type": "AWS::Backup::BackupPlan",
+   "Properties": {
+    "BackupPlan": {
+     "BackupPlanName": "Plan",
+     "BackupPlanRule": [
+      {
+       "Lifecycle": {
+        "DeleteAfterDays": 35
+       },
+       "RuleName": "Daily",
+       "ScheduleExpression": "cron(0 5 * * ? *)",
+       "TargetBackupVault": "${Vault23237E5B.BackupVaultName}"
+      },
+      {
+       "Lifecycle": {
+        "DeleteAfterDays": 90
+       },
+       "RuleName": "Weekly",
+       "ScheduleExpression": "cron(0 5 ? * SAT *)",
+       "TargetBackupVault": "${Vault23237E5B.BackupVaultName}"
+      },
+      {
+       "Lifecycle": {
+        "DeleteAfterDays": 1825,
+        "MoveToColdStorageAfterDays": 90
+       },
+       "RuleName": "Monthly5Year",
+       "ScheduleExpression": "cron(0 5 1 * ? *)",
+       "TargetBackupVault": "${Vault23237E5B.BackupVaultName}"
+      },
+      {
+       "CopyActions": [
+        {
+         "DestinationBackupVaultArn": "${SecondaryVault67665B5E.BackupVaultArn}",
+         "Lifecycle": {
+          "DeleteAfterDays": 120,
+          "MoveToColdStorageAfterDays": 30
+         }
+        }
+       ],
+       "IndexActions": [
+        {
+         "ResourceTypes": [
+          "S3"
+         ]
+        }
+       ],
+       "RecoveryPointTags": {
+        "stage": "prod"
+       },
+       "RuleName": "PlanRule3",
+       "TargetBackupVault": "${Vault23237E5B.BackupVaultName}"
+      },
+      {
+       "RuleName": "PlanRule4",
+       "ScheduleExpression": "cron(30 3 15 * ? *)",
+       "ScheduleExpressionTimezone": "Etc/UTC",
+       "TargetBackupVault": "${Vault23237E5B.BackupVaultName}"
+      }
+     ]
+    }
+   }
+  },
+  "PlanSelectionRole6D10F4B7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "backup.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+    ]
+   }
+  },
+  "PlanSelectionF88CBC04": {
+   "Type": "AWS::Backup::BackupSelection",
+   "Properties": {
+    "BackupPlanId": "${PlanDAF4E53A.BackupPlanId}",
+    "BackupSelection": {
+     "IamRoleArn": "${PlanSelectionRole6D10F4B7.Arn}",
+     "ListOfTags": [
+      {
+       "ConditionKey": "stage",
+       "ConditionType": "STRINGEQUALS",
+       "ConditionValue": "prod"
+      }
+     ],
+     "Resources": [
+      "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableCD117FA1}",
+      "arn:${AWS::Partition}:elasticfilesystem:${AWS::Region}:${AWS::AccountId}:file-system/${FileSystem}"
+     ],
+     "SelectionName": "Selection"
+    }
+   }
+  },
+  "TokenLockVaultDE8332F2": {
+   "Type": "AWS::Backup::BackupVault",
+   "Properties": {
+    "BackupVaultName": "cdkbackupTokenLockVault2FFC41FE",
+    "LockConfiguration": {
+     "MinRetentionDays": "5"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "TokenPlan40E6C026": {
+   "Type": "AWS::Backup::BackupPlan",
+   "Properties": {
+    "BackupPlan": {
+     "BackupPlanName": "TokenPlan",
+     "BackupPlanRule": [
+      {
+       "CopyActions": [
+        {
+         "DestinationBackupVaultArn": "${SecondaryVault67665B5E.BackupVaultArn}",
+         "Lifecycle": {
+          "DeleteAfterDays": "120",
+          "MoveToColdStorageAfterDays": "30"
+         }
+        }
+       ],
+       "Lifecycle": {
+        "DeleteAfterDays": "120",
+        "MoveToColdStorageAfterDays": "30"
+       },
+       "RuleName": "TokenPlanRule0",
+       "TargetBackupVault": "${TokenLockVaultDE8332F2.BackupVaultName}"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,337 @@
+{
+ "version": "1",
+ "stackName": "stepfunctions-integration",
+ "resources": {
+  "RouteStateMachineRoleF32EE107": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "RouteStateMachineC11CAF3B": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"Pass1\",\"States\":{\"Pass1\":{\"Type\":\"Pass\",\"End\":true}}}",
+    "RoleArn": "${RouteStateMachineRoleF32EE107.Arn}"
+   },
+   "DependsOn": [
+    "RouteStateMachineRoleF32EE107"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ExpressStateMachineRole4C3738D2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ExpressStateMachineE90FFF22": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"Pass2\",\"States\":{\"Pass2\":{\"Type\":\"Pass\",\"End\":true}}}",
+    "RoleArn": "${ExpressStateMachineRole4C3738D2.Arn}",
+    "StateMachineType": "EXPRESS"
+   },
+   "DependsOn": [
+    "ExpressStateMachineRole4C3738D2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ApiF70053CD": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "Api",
+    "ProtocolType": "HTTP"
+   }
+  },
+  "ApiDefaultStage189A7074": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "AutoDeploy": true,
+    "StageName": "$default"
+   }
+  },
+  "ApiPOSTdefaultInvokeRole9137E4F5": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "states:StartExecution",
+       "Effect": "Allow",
+       "Resource": "${RouteStateMachineC11CAF3B}",
+       "Sid": "AllowStepFunctionsExecution"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+    "Roles": [
+     "${ApiPOSTdefaultInvokeRole9137E4F5}"
+    ]
+   }
+  },
+  "ApiPOSTdefaultIntegration15333EAA": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "ConnectionType": "INTERNET",
+    "CredentialsArn": "${ApiPOSTdefaultInvokeRole9137E4F5.Arn}",
+    "IntegrationSubtype": "StepFunctions-StartExecution",
+    "IntegrationType": "AWS_PROXY",
+    "PayloadFormatVersion": "1.0",
+    "RequestParameters": {
+     "StateMachineArn": "${RouteStateMachineC11CAF3B}"
+    }
+   }
+  },
+  "ApiPOSTdefault1EEA0D1D": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "POST /default",
+    "Target": "integrations/${ApiPOSTdefaultIntegration15333EAA}"
+   }
+  },
+  "ApiPOSTstartInvokeRoleA9D6BD6A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ApiPOSTstartInvokeRoleDefaultPolicy495BCE0C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "states:StartExecution",
+       "Effect": "Allow",
+       "Resource": "${RouteStateMachineC11CAF3B}",
+       "Sid": "AllowStepFunctionsExecution"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ApiPOSTstartInvokeRoleDefaultPolicy495BCE0C",
+    "Roles": [
+     "${ApiPOSTstartInvokeRoleA9D6BD6A}"
+    ]
+   }
+  },
+  "ApiPOSTstartIntegration373B2B85": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "ConnectionType": "INTERNET",
+    "CredentialsArn": "${ApiPOSTstartInvokeRoleA9D6BD6A.Arn}",
+    "IntegrationSubtype": "StepFunctions-StartExecution",
+    "IntegrationType": "AWS_PROXY",
+    "PayloadFormatVersion": "1.0",
+    "RequestParameters": {
+     "StateMachineArn": "${RouteStateMachineC11CAF3B}"
+    }
+   }
+  },
+  "ApiPOSTstartB39FD25E": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "POST /start",
+    "Target": "integrations/${ApiPOSTstartIntegration373B2B85}"
+   }
+  },
+  "ApiPOSTstartsyncInvokeRoleC429A7AB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ApiPOSTstartsyncInvokeRoleDefaultPolicy244CA8B0": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "states:StartSyncExecution",
+       "Effect": "Allow",
+       "Resource": "${ExpressStateMachineE90FFF22}",
+       "Sid": "AllowStepFunctionsExecution"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ApiPOSTstartsyncInvokeRoleDefaultPolicy244CA8B0",
+    "Roles": [
+     "${ApiPOSTstartsyncInvokeRoleC429A7AB}"
+    ]
+   }
+  },
+  "ApiPOSTstartsyncIntegrationB86BBC38": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "ConnectionType": "INTERNET",
+    "CredentialsArn": "${ApiPOSTstartsyncInvokeRoleC429A7AB.Arn}",
+    "IntegrationSubtype": "StepFunctions-StartSyncExecution",
+    "IntegrationType": "AWS_PROXY",
+    "PayloadFormatVersion": "1.0",
+    "RequestParameters": {
+     "StateMachineArn": "${ExpressStateMachineE90FFF22}"
+    }
+   }
+  },
+  "ApiPOSTstartsync3659F9A0": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "POST /start-sync",
+    "Target": "integrations/${ApiPOSTstartsyncIntegrationB86BBC38}"
+   }
+  },
+  "ApiPOSTstopInvokeRoleB9DFDAA9": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ApiPOSTstopInvokeRoleDefaultPolicy4B17C921": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "states:StopExecution",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${RouteStateMachineC11CAF3B.Name}:*",
+       "Sid": "AllowStepFunctionsExecution"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ApiPOSTstopInvokeRoleDefaultPolicy4B17C921",
+    "Roles": [
+     "${ApiPOSTstopInvokeRoleB9DFDAA9}"
+    ]
+   }
+  },
+  "ApiPOSTstopIntegrationDA24B606": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "ConnectionType": "INTERNET",
+    "CredentialsArn": "${ApiPOSTstopInvokeRoleB9DFDAA9.Arn}",
+    "IntegrationSubtype": "StepFunctions-StopExecution",
+    "IntegrationType": "AWS_PROXY",
+    "PayloadFormatVersion": "1.0",
+    "RequestParameters": {
+     "ExecutionArn": "$request.querystring.executionArn"
+    }
+   }
+  },
+  "ApiPOSTstopBDBE4015": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${ApiF70053CD}",
+    "AuthorizationType": "NONE",
+    "RouteKey": "POST /stop",
+    "Target": "integrations/${ApiPOSTstopIntegrationDA24B606}"
+   }
+  }
+ },
+ "unresolved": []
+}

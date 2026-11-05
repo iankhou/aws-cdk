@@ -1,0 +1,816 @@
+{
+ "stackName": "aws-cdk-bedrock-agentcore-identity-grants-1",
+ "summary": {
+  "no handler": 3,
+  "pass": 48
+ },
+ "results": [
+  {
+   "logicalId": "ApiKeyProvider7AFC53BE",
+   "type": "AWS::BedrockAgentCore::ApiKeyCredentialProvider",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "OAuthProvider867E90F1",
+   "type": "AWS::BedrockAgentCore::OAuth2CredentialProvider",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "WorkloadIdentityC18104DE",
+   "type": "AWS::BedrockAgentCore::WorkloadIdentity",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "GrantReadFnServiceRole2BDB7895",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantReadFnServiceRole2BDB7895",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "GrantReadFnServiceRole2BDB7895",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "GrantReadFnServiceRoleDefaultPolicy2D760BAD",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantReadFnServiceRoleDefaultPolicy2D760BAD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GrantReadFnServiceRoleDefaultPolicy2D760BAD",
+   "actual": "GrantReadFnServiceRoleDefaultPolicy2D760BAD"
+  },
+  {
+   "logicalId": "GrantReadFnServiceRoleDefaultPolicy2D760BAD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "bedrock-agentcore:GetApiKeyCredentialProvider",
+       "bedrock-agentcore:ListApiKeyCredentialProviders"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${ApiKeyProvider7AFC53BE}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/apikeycredentialprovider"
+      ]
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:GetOauth2CredentialProvider",
+       "bedrock-agentcore:ListOauth2CredentialProviders"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${OAuthProvider867E90F1}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/oauth2credentialprovider"
+      ]
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:GetWorkloadIdentity",
+       "bedrock-agentcore:ListWorkloadIdentities"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "bedrock-agentcore:GetApiKeyCredentialProvider",
+       "bedrock-agentcore:ListApiKeyCredentialProviders"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${ApiKeyProvider7AFC53BE}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/apikeycredentialprovider"
+      ]
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:GetOauth2CredentialProvider",
+       "bedrock-agentcore:ListOauth2CredentialProviders"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${OAuthProvider867E90F1}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/oauth2credentialprovider"
+      ]
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:GetWorkloadIdentity",
+       "bedrock-agentcore:ListWorkloadIdentities"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "GrantReadFnServiceRoleDefaultPolicy2D760BAD",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${GrantReadFnServiceRole2BDB7895}",
+   "actual": "${GrantReadFnServiceRole2BDB7895}"
+  },
+  {
+   "logicalId": "GrantReadFnE0C69452",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantReadFnE0C69452",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "GrantReadFnE0C69452",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "GrantReadFnE0C69452",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${GrantReadFnServiceRole2BDB7895}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${GrantReadFnServiceRole2BDB7895}"
+  },
+  {
+   "logicalId": "GrantReadFnE0C69452",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 120,
+   "actual": 120
+  },
+  {
+   "logicalId": "GrantReadFnE0C69452",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "API_KEY_PROVIDER_ARN": "${ApiKeyProvider7AFC53BE}",
+    "OAUTH_PROVIDER_ARN": "${OAuthProvider867E90F1}",
+    "WORKLOAD_IDENTITY_ARN": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+    "EXPECTED_DENIED": "[\"admin\",\"use\"]"
+   },
+   "actual": {
+    "EXPECTED_DENIED": "[\"admin\",\"use\"]",
+    "WORKLOAD_IDENTITY_ARN": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+    "OAUTH_PROVIDER_ARN": "${OAuthProvider867E90F1}",
+    "API_KEY_PROVIDER_ARN": "${ApiKeyProvider7AFC53BE}"
+   }
+  },
+  {
+   "logicalId": "GrantReadFnLogGroupCA43EA14",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantReadFnLogGroupCA43EA14",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${GrantReadFnE0C69452}",
+   "actual": "/aws/lambda/${GrantReadFnE0C69452}"
+  },
+  {
+   "logicalId": "GrantReadFnLogGroupCA43EA14",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "GrantAdminFnServiceRoleC7CF110A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantAdminFnServiceRoleC7CF110A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "GrantAdminFnServiceRoleC7CF110A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "GrantAdminFnServiceRoleDefaultPolicy930D9FD6",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantAdminFnServiceRoleDefaultPolicy930D9FD6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GrantAdminFnServiceRoleDefaultPolicy930D9FD6",
+   "actual": "GrantAdminFnServiceRoleDefaultPolicy930D9FD6"
+  },
+  {
+   "logicalId": "GrantAdminFnServiceRoleDefaultPolicy930D9FD6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "bedrock-agentcore:CreateApiKeyCredentialProvider",
+       "bedrock-agentcore:DeleteApiKeyCredentialProvider",
+       "bedrock-agentcore:GetApiKeyCredentialProvider",
+       "bedrock-agentcore:UpdateApiKeyCredentialProvider"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${ApiKeyProvider7AFC53BE}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/apikeycredentialprovider"
+      ]
+     },
+     {
+      "Action": "secretsmanager:PutSecretValue",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:bedrock-agentcore-identity!*"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:CreateOauth2CredentialProvider",
+       "bedrock-agentcore:DeleteOauth2CredentialProvider",
+       "bedrock-agentcore:GetOauth2CredentialProvider",
+       "bedrock-agentcore:UpdateOauth2CredentialProvider"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${OAuthProvider867E90F1}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/oauth2credentialprovider"
+      ]
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:CreateWorkloadIdentity",
+       "bedrock-agentcore:DeleteWorkloadIdentity",
+       "bedrock-agentcore:GetWorkloadIdentity",
+       "bedrock-agentcore:UpdateWorkloadIdentity"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "bedrock-agentcore:CreateApiKeyCredentialProvider",
+       "bedrock-agentcore:DeleteApiKeyCredentialProvider",
+       "bedrock-agentcore:GetApiKeyCredentialProvider",
+       "bedrock-agentcore:UpdateApiKeyCredentialProvider"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${ApiKeyProvider7AFC53BE}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/apikeycredentialprovider"
+      ]
+     },
+     {
+      "Action": "secretsmanager:PutSecretValue",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:bedrock-agentcore-identity!*"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:CreateOauth2CredentialProvider",
+       "bedrock-agentcore:DeleteOauth2CredentialProvider",
+       "bedrock-agentcore:GetOauth2CredentialProvider",
+       "bedrock-agentcore:UpdateOauth2CredentialProvider"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${OAuthProvider867E90F1}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/oauth2credentialprovider"
+      ]
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:CreateWorkloadIdentity",
+       "bedrock-agentcore:DeleteWorkloadIdentity",
+       "bedrock-agentcore:GetWorkloadIdentity",
+       "bedrock-agentcore:UpdateWorkloadIdentity"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "GrantAdminFnServiceRoleDefaultPolicy930D9FD6",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${GrantAdminFnServiceRoleC7CF110A}",
+   "actual": "${GrantAdminFnServiceRoleC7CF110A}"
+  },
+  {
+   "logicalId": "GrantAdminFn61A4D6B3",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantAdminFn61A4D6B3",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "GrantAdminFn61A4D6B3",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "GrantAdminFn61A4D6B3",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${GrantAdminFnServiceRoleC7CF110A}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${GrantAdminFnServiceRoleC7CF110A}"
+  },
+  {
+   "logicalId": "GrantAdminFn61A4D6B3",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 120,
+   "actual": 120
+  },
+  {
+   "logicalId": "GrantAdminFn61A4D6B3",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "API_KEY_PROVIDER_ARN": "${ApiKeyProvider7AFC53BE}",
+    "OAUTH_PROVIDER_ARN": "${OAuthProvider867E90F1}",
+    "WORKLOAD_IDENTITY_ARN": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+    "EXPECTED_DENIED": "[\"use\"]"
+   },
+   "actual": {
+    "EXPECTED_DENIED": "[\"use\"]",
+    "WORKLOAD_IDENTITY_ARN": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+    "OAUTH_PROVIDER_ARN": "${OAuthProvider867E90F1}",
+    "API_KEY_PROVIDER_ARN": "${ApiKeyProvider7AFC53BE}"
+   }
+  },
+  {
+   "logicalId": "GrantAdminFnLogGroup6CF7EC6F",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantAdminFnLogGroup6CF7EC6F",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${GrantAdminFn61A4D6B3}",
+   "actual": "/aws/lambda/${GrantAdminFn61A4D6B3}"
+  },
+  {
+   "logicalId": "GrantAdminFnLogGroup6CF7EC6F",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "GrantFullAccessFnServiceRole8147BD37",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantFullAccessFnServiceRole8147BD37",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "GrantFullAccessFnServiceRole8147BD37",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "GrantFullAccessFnServiceRoleDefaultPolicy8EEDD57B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantFullAccessFnServiceRoleDefaultPolicy8EEDD57B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GrantFullAccessFnServiceRoleDefaultPolicy8EEDD57B",
+   "actual": "GrantFullAccessFnServiceRoleDefaultPolicy8EEDD57B"
+  },
+  {
+   "logicalId": "GrantFullAccessFnServiceRoleDefaultPolicy8EEDD57B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "bedrock-agentcore:CreateApiKeyCredentialProvider",
+       "bedrock-agentcore:DeleteApiKeyCredentialProvider",
+       "bedrock-agentcore:GetApiKeyCredentialProvider",
+       "bedrock-agentcore:GetResourceApiKey",
+       "bedrock-agentcore:ListApiKeyCredentialProviders",
+       "bedrock-agentcore:UpdateApiKeyCredentialProvider"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${ApiKeyProvider7AFC53BE}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/apikeycredentialprovider",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/*"
+      ]
+     },
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue",
+       "secretsmanager:PutSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:bedrock-agentcore-identity!*"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:CompleteResourceTokenAuth",
+       "bedrock-agentcore:CreateOauth2CredentialProvider",
+       "bedrock-agentcore:DeleteOauth2CredentialProvider",
+       "bedrock-agentcore:GetOauth2CredentialProvider",
+       "bedrock-agentcore:GetResourceOauth2Token",
+       "bedrock-agentcore:ListOauth2CredentialProviders",
+       "bedrock-agentcore:UpdateOauth2CredentialProvider"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${OAuthProvider867E90F1}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/oauth2credentialprovider",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/*"
+      ]
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:CreateWorkloadIdentity",
+       "bedrock-agentcore:DeleteWorkloadIdentity",
+       "bedrock-agentcore:GetWorkloadAccessToken",
+       "bedrock-agentcore:GetWorkloadAccessTokenForJWT",
+       "bedrock-agentcore:GetWorkloadAccessTokenForUserId",
+       "bedrock-agentcore:GetWorkloadIdentity",
+       "bedrock-agentcore:ListWorkloadIdentities",
+       "bedrock-agentcore:UpdateWorkloadIdentity"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "bedrock-agentcore:CreateApiKeyCredentialProvider",
+       "bedrock-agentcore:DeleteApiKeyCredentialProvider",
+       "bedrock-agentcore:GetApiKeyCredentialProvider",
+       "bedrock-agentcore:GetResourceApiKey",
+       "bedrock-agentcore:ListApiKeyCredentialProviders",
+       "bedrock-agentcore:UpdateApiKeyCredentialProvider"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${ApiKeyProvider7AFC53BE}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/apikeycredentialprovider",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/*"
+      ]
+     },
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue",
+       "secretsmanager:PutSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:bedrock-agentcore-identity!*"
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:CompleteResourceTokenAuth",
+       "bedrock-agentcore:CreateOauth2CredentialProvider",
+       "bedrock-agentcore:DeleteOauth2CredentialProvider",
+       "bedrock-agentcore:GetOauth2CredentialProvider",
+       "bedrock-agentcore:GetResourceOauth2Token",
+       "bedrock-agentcore:ListOauth2CredentialProviders",
+       "bedrock-agentcore:UpdateOauth2CredentialProvider"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${OAuthProvider867E90F1}",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:token-vault/default/oauth2credentialprovider",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/*"
+      ]
+     },
+     {
+      "Action": [
+       "bedrock-agentcore:CreateWorkloadIdentity",
+       "bedrock-agentcore:DeleteWorkloadIdentity",
+       "bedrock-agentcore:GetWorkloadAccessToken",
+       "bedrock-agentcore:GetWorkloadAccessTokenForJWT",
+       "bedrock-agentcore:GetWorkloadAccessTokenForUserId",
+       "bedrock-agentcore:GetWorkloadIdentity",
+       "bedrock-agentcore:ListWorkloadIdentities",
+       "bedrock-agentcore:UpdateWorkloadIdentity"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default",
+       "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "GrantFullAccessFnServiceRoleDefaultPolicy8EEDD57B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${GrantFullAccessFnServiceRole8147BD37}",
+   "actual": "${GrantFullAccessFnServiceRole8147BD37}"
+  },
+  {
+   "logicalId": "GrantFullAccessFn15A36E8E",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantFullAccessFn15A36E8E",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "GrantFullAccessFn15A36E8E",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "GrantFullAccessFn15A36E8E",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${GrantFullAccessFnServiceRole8147BD37}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${GrantFullAccessFnServiceRole8147BD37}"
+  },
+  {
+   "logicalId": "GrantFullAccessFn15A36E8E",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 120,
+   "actual": 120
+  },
+  {
+   "logicalId": "GrantFullAccessFn15A36E8E",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "API_KEY_PROVIDER_ARN": "${ApiKeyProvider7AFC53BE}",
+    "OAUTH_PROVIDER_ARN": "${OAuthProvider867E90F1}",
+    "WORKLOAD_IDENTITY_ARN": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+    "EXPECTED_DENIED": "[]"
+   },
+   "actual": {
+    "EXPECTED_DENIED": "[]",
+    "WORKLOAD_IDENTITY_ARN": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default/workload-identity/integ-grants-workload-identity",
+    "OAUTH_PROVIDER_ARN": "${OAuthProvider867E90F1}",
+    "API_KEY_PROVIDER_ARN": "${ApiKeyProvider7AFC53BE}"
+   }
+  },
+  {
+   "logicalId": "GrantFullAccessFnLogGroup6B6F1B5A",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GrantFullAccessFnLogGroup6B6F1B5A",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${GrantFullAccessFn15A36E8E}",
+   "actual": "/aws/lambda/${GrantFullAccessFn15A36E8E}"
+  },
+  {
+   "logicalId": "GrantFullAccessFnLogGroup6B6F1B5A",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  }
+ ]
+}

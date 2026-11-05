@@ -1,0 +1,79 @@
+{
+ "stackName": "aws-cdk-codecommit-events",
+ "summary": {
+  "no handler": 1,
+  "pass": 5
+ },
+ "results": [
+  {
+   "logicalId": "Repo02AC86CF",
+   "type": "AWS::CodeCommit::Repository",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "RepoOnReferenceCreatedF1C66FF1",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RepoOnReferenceCreatedF1C66FF1",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "RepoOnReferenceCreatedF1C66FF1",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "aws.codecommit"
+    ],
+    "resources": [
+     "arn:${AWS::Partition}:codecommit:${AWS::Region}:${AWS::AccountId}:aws-cdk-codecommit-events"
+    ],
+    "detail-type": [
+     "CodeCommit Repository State Change"
+    ],
+    "detail": {
+     "event": [
+      "referenceCreated"
+     ]
+    }
+   },
+   "actual": "{\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"arn:${AWS::Partition}:codecommit:${AWS::Region}:${AWS::AccountId}:aws-cdk-codecommit-events\"],\"source\":[\"aws.codecommit\"],\"detail\":{\"event\":[\"referenceCreated\"]}}"
+  },
+  {
+   "logicalId": "RepoOnReferenceCreatedF1C66FF1",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${MyTopic86869434}",
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${MyTopic86869434}"
+    }
+   ]
+  },
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  }
+ ]
+}

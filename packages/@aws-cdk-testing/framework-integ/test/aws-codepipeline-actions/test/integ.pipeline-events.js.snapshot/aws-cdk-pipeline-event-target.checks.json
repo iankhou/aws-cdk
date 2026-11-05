@@ -1,0 +1,936 @@
+{
+ "stackName": "aws-cdk-pipeline-event-target",
+ "summary": {
+  "pass": 48,
+  "no handler": 4
+ },
+ "results": [
+  {
+   "logicalId": "MyPipelineArtifactsBucketEncryptionKey8BF0A7F3",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineArtifactsBucketEncryptionKey8BF0A7F3",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "MyPipelineArtifactsBucketEncryptionKeyAlias9D4F8C59",
+   "type": "AWS::KMS::Alias",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyPipelineArtifactsBucket727923DD",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineArtifactsBucket727923DD",
+   "type": "AWS::S3::Bucket",
+   "property": "PublicAccessBlockConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "BlockPublicAcls": true,
+    "BlockPublicPolicy": true,
+    "IgnorePublicAcls": true,
+    "RestrictPublicBuckets": true
+   },
+   "actual": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   }
+  },
+  {
+   "logicalId": "MyPipelineArtifactsBucket727923DD",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyPipelineArtifactsBucketEncryptionKey8BF0A7F3}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyPipelineArtifactsBucketEncryptionKey8BF0A7F3}"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "MyPipelineArtifactsBucketPolicyDFDA675B",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineArtifactsBucketPolicyDFDA675B",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyPipelineArtifactsBucket727923DD}",
+   "actual": "${MyPipelineArtifactsBucket727923DD}"
+  },
+  {
+   "logicalId": "MyPipelineArtifactsBucketPolicyDFDA675B",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}",
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}",
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyPipelineRoleC0D47CA4",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineRoleC0D47CA4",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codepipeline.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codepipeline.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyPipelineRoleDefaultPolicy34F09EFA",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineRoleDefaultPolicy34F09EFA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyPipelineRoleDefaultPolicy34F09EFA",
+   "actual": "MyPipelineRoleDefaultPolicy34F09EFA"
+  },
+  {
+   "logicalId": "MyPipelineRoleDefaultPolicy34F09EFA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}",
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyPipelineArtifactsBucketEncryptionKey8BF0A7F3}"
+     },
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyPipelineBuildCodeBuildActionCodePipelineActionRole3185ADC7}",
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyPipelineSourceCodeCommitSourceCodePipelineActionRole0B6D0F4F}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}",
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyPipelineArtifactsBucketEncryptionKey8BF0A7F3}"
+     },
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyPipelineBuildCodeBuildActionCodePipelineActionRole3185ADC7}",
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyPipelineSourceCodeCommitSourceCodePipelineActionRole0B6D0F4F}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyPipelineRoleDefaultPolicy34F09EFA",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyPipelineRoleC0D47CA4}",
+   "actual": "${MyPipelineRoleC0D47CA4}"
+  },
+  {
+   "logicalId": "MyPipelineAED38ECF",
+   "type": "AWS::CodePipeline::Pipeline",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceCodePipelineActionRole0B6D0F4F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceCodePipelineActionRole0B6D0F4F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Aroot%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicyE6664925",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicyE6664925",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyPipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicyE6664925",
+   "actual": "MyPipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicyE6664925"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicyE6664925",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}",
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyPipelineArtifactsBucketEncryptionKey8BF0A7F3}"
+     },
+     {
+      "Action": [
+       "codecommit:CancelUploadArchive",
+       "codecommit:GetBranch",
+       "codecommit:GetCommit",
+       "codecommit:GetUploadArchiveStatus",
+       "codecommit:UploadArchive"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codecommit:${AWS::Region}:${AWS::AccountId}:foo"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}",
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyPipelineArtifactsBucketEncryptionKey8BF0A7F3}"
+     },
+     {
+      "Action": [
+       "codecommit:CancelUploadArchive",
+       "codecommit:GetBranch",
+       "codecommit:GetCommit",
+       "codecommit:GetUploadArchiveStatus",
+       "codecommit:UploadArchive"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codecommit:${AWS::Region}:${AWS::AccountId}:foo"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicyE6664925",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyPipelineSourceCodeCommitSourceCodePipelineActionRole0B6D0F4F}",
+   "actual": "${MyPipelineSourceCodeCommitSourceCodePipelineActionRole0B6D0F4F}"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceOnActionStateChangeDCAF781A",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceOnActionStateChangeDCAF781A",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceOnActionStateChangeDCAF781A",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "detail-type": [
+     "CodePipeline Action Execution State Change"
+    ],
+    "source": [
+     "aws.codepipeline"
+    ],
+    "resources": [
+     "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${MyPipelineAED38ECF}"
+    ],
+    "detail": {
+     "stage": [
+      "Source"
+     ],
+     "action": [
+      "CodeCommitSource"
+     ],
+     "state": [
+      "STARTED"
+     ]
+    }
+   },
+   "actual": "{\"detail-type\":[\"CodePipeline Action Execution State Change\"],\"resources\":[\"arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${MyPipelineAED38ECF}\"],\"source\":[\"aws.codepipeline\"],\"detail\":{\"stage\":[\"Source\"],\"action\":[\"CodeCommitSource\"],\"state\":[\"STARTED\"]}}"
+  },
+  {
+   "logicalId": "MyPipelineSourceCodeCommitSourceOnActionStateChangeDCAF781A",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${MyTopic86869434}",
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${MyTopic86869434}"
+    }
+   ]
+  },
+  {
+   "logicalId": "MyPipelineSourceOnSourceStateChange6DEE3A75",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineSourceOnSourceStateChange6DEE3A75",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyPipelineSourceOnSourceStateChange6DEE3A75",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "detail-type": [
+     "CodePipeline Stage Execution State Change"
+    ],
+    "source": [
+     "aws.codepipeline"
+    ],
+    "resources": [
+     "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${MyPipelineAED38ECF}"
+    ],
+    "detail": {
+     "stage": [
+      "Source"
+     ]
+    }
+   },
+   "actual": "{\"detail-type\":[\"CodePipeline Stage Execution State Change\"],\"resources\":[\"arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${MyPipelineAED38ECF}\"],\"source\":[\"aws.codepipeline\"],\"detail\":{\"stage\":[\"Source\"]}}"
+  },
+  {
+   "logicalId": "MyPipelineSourceOnSourceStateChange6DEE3A75",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${MyTopic86869434}",
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${MyTopic86869434}"
+    }
+   ]
+  },
+  {
+   "logicalId": "MyPipelineBuildCodeBuildActionCodePipelineActionRole3185ADC7",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineBuildCodeBuildActionCodePipelineActionRole3185ADC7",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Aroot%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyPipelineBuildCodeBuildActionCodePipelineActionRoleDefaultPolicy96378DF6",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineBuildCodeBuildActionCodePipelineActionRoleDefaultPolicy96378DF6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyPipelineBuildCodeBuildActionCodePipelineActionRoleDefaultPolicy96378DF6",
+   "actual": "MyPipelineBuildCodeBuildActionCodePipelineActionRoleDefaultPolicy96378DF6"
+  },
+  {
+   "logicalId": "MyPipelineBuildCodeBuildActionCodePipelineActionRoleDefaultPolicy96378DF6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "codebuild:BatchGetBuilds",
+       "codebuild:StartBuild",
+       "codebuild:StopBuild"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/${BuildProject097C5DB7}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "codebuild:BatchGetBuilds",
+       "codebuild:StartBuild",
+       "codebuild:StopBuild"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/${BuildProject097C5DB7}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyPipelineBuildCodeBuildActionCodePipelineActionRoleDefaultPolicy96378DF6",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyPipelineBuildCodeBuildActionCodePipelineActionRole3185ADC7}",
+   "actual": "${MyPipelineBuildCodeBuildActionCodePipelineActionRole3185ADC7}"
+  },
+  {
+   "logicalId": "MyPipelineOnPipelineStateChangeA017E4B1",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPipelineOnPipelineStateChangeA017E4B1",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyPipelineOnPipelineStateChangeA017E4B1",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "aws.codepipeline"
+    ],
+    "resources": [
+     "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${MyPipelineAED38ECF}"
+    ],
+    "detail-type": [
+     "CodePipeline Pipeline Execution State Change"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"CodePipeline Pipeline Execution State Change\"],\"resources\":[\"arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${MyPipelineAED38ECF}\"],\"source\":[\"aws.codepipeline\"]}"
+  },
+  {
+   "logicalId": "MyPipelineOnPipelineStateChangeA017E4B1",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${MyTopic86869434}",
+     "Id": "Target0",
+     "InputTransformer": {
+      "InputPathsMap": {
+       "detail-pipeline": "$.detail.pipeline",
+       "detail-state": "$.detail.state"
+      },
+      "InputTemplate": "\"Pipeline <detail-pipeline> changed state to <detail-state>\""
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${MyTopic86869434}",
+     "InputTransformer": {
+      "InputTemplate": "\"Pipeline <detail-pipeline> changed state to <detail-state>\"",
+      "InputPathsMap": {
+       "detail-pipeline": "$.detail.pipeline",
+       "detail-state": "$.detail.state"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "CodeCommitRepoDC6A41F9",
+   "type": "AWS::CodeCommit::Repository",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "BuildProjectRoleAA92C755",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BuildProjectRoleAA92C755",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codebuild.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codebuild.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "BuildProjectRoleDefaultPolicy3E9F248C",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BuildProjectRoleDefaultPolicy3E9F248C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "BuildProjectRoleDefaultPolicy3E9F248C",
+   "actual": "BuildProjectRoleDefaultPolicy3E9F248C"
+  },
+  {
+   "logicalId": "BuildProjectRoleDefaultPolicy3E9F248C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${BuildProject097C5DB7}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${BuildProject097C5DB7}"
+      ]
+     },
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}",
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyPipelineArtifactsBucketEncryptionKey8BF0A7F3}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${BuildProject097C5DB7}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${BuildProject097C5DB7}"
+      ]
+     },
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}",
+       "arn:${AWS::Partition}:s3:::${MyPipelineArtifactsBucket727923DD}/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyPipelineArtifactsBucketEncryptionKey8BF0A7F3}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "BuildProjectRoleDefaultPolicy3E9F248C",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BuildProjectRoleAA92C755}",
+   "actual": "${BuildProjectRoleAA92C755}"
+  },
+  {
+   "logicalId": "BuildProject097C5DB7",
+   "type": "AWS::CodeBuild::Project",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Publish",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "${MyTopic86869434}",
+      "Sid": "0"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"0\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"sns:Publish\",\"Resource\":\"${MyTopic86869434}\"}]}"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${MyTopic86869434}"
+   ],
+   "actual": [
+    "${MyTopic86869434}"
+   ]
+  }
+ ]
+}

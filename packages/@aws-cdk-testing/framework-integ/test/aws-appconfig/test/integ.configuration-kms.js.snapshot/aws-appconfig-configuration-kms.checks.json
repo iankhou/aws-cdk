@@ -1,0 +1,60 @@
+{
+ "stackName": "aws-appconfig-configuration-kms",
+ "summary": {
+  "pass": 2,
+  "no handler": 4
+ },
+ "results": [
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "MyAppConfigB4B63E75",
+   "type": "AWS::AppConfig::Application",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyHostedConfigFromFileDeploymentStrategyCAF37A7C",
+   "type": "AWS::AppConfig::DeploymentStrategy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyHostedConfigFromFileConfigurationProfile32B2D26F",
+   "type": "AWS::AppConfig::ConfigurationProfile",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyHostedConfigFromFile943CF9F9",
+   "type": "AWS::AppConfig::HostedConfigurationVersion",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

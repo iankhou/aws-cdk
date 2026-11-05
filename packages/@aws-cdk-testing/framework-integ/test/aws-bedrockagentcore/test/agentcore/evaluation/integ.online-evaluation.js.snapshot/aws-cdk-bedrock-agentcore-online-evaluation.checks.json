@@ -1,0 +1,241 @@
+{
+ "stackName": "aws-cdk-bedrock-agentcore-online-evaluation",
+ "summary": {
+  "pass": 10,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "AgentLogGroupFDA72973",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AgentLogGroupFDA72973",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/bedrock-agentcore/integ-test-agent",
+   "actual": "/aws/bedrock-agentcore/integ-test-agent"
+  },
+  {
+   "logicalId": "AgentLogGroupFDA72973",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "CustomEvaluator9FEA397A",
+   "type": "AWS::BedrockAgentCore::Evaluator",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "BasicEvaluationExecutionRoleFB7E4913",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BasicEvaluationExecutionRoleFB7E4913",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}",
+        "aws:ResourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": [
+         "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:evaluator/*",
+         "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:online-evaluation-config/*"
+        ]
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3AResourceAccount%22%3A%22${AWS::AccountId}%22%2C%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%5B%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Aevaluator%2F%2A%22%2C%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Aonline-evaluation-config%2F%2A%22%5D%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "BasicEvaluationExecutionRoleFB7E4913",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Execution role for Bedrock AgentCore Online Evaluation",
+   "actual": "Execution role for Bedrock AgentCore Online Evaluation"
+  },
+  {
+   "logicalId": "BasicEvaluationExecutionRoleDefaultPolicy6E0AF966",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BasicEvaluationExecutionRoleDefaultPolicy6E0AF966",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "BasicEvaluationExecutionRoleDefaultPolicy6E0AF966",
+   "actual": "BasicEvaluationExecutionRoleDefaultPolicy6E0AF966"
+  },
+  {
+   "logicalId": "BasicEvaluationExecutionRoleDefaultPolicy6E0AF966",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "logs:DescribeLogGroups",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Sid": "CloudWatchLogDescribeStatement"
+     },
+     {
+      "Action": [
+       "logs:GetQueryResults",
+       "logs:StartQuery"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/bedrock-agentcore/integ-test-agent:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/bedrock-agentcore/integ-test-agent",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:aws/spans",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:aws/spans:*"
+      ],
+      "Sid": "CloudWatchLogQueryStatement"
+     },
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/bedrock-agentcore/evaluations/*",
+      "Sid": "CloudWatchLogWriteStatement"
+     },
+     {
+      "Action": [
+       "logs:DescribeIndexPolicies",
+       "logs:PutIndexPolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:aws/spans",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:aws/spans:*"
+      ],
+      "Sid": "CloudWatchIndexPolicyStatement"
+     },
+     {
+      "Action": [
+       "bedrock:InvokeModel",
+       "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock:*:${AWS::AccountId}:inference-profile/*",
+       "arn:${AWS::Partition}:bedrock:*::foundation-model/*"
+      ],
+      "Sid": "BedrockInvokeStatement"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "logs:DescribeLogGroups",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Sid": "CloudWatchLogDescribeStatement"
+     },
+     {
+      "Action": [
+       "logs:GetQueryResults",
+       "logs:StartQuery"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/bedrock-agentcore/integ-test-agent:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/bedrock-agentcore/integ-test-agent",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:aws/spans",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:aws/spans:*"
+      ],
+      "Sid": "CloudWatchLogQueryStatement"
+     },
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/bedrock-agentcore/evaluations/*",
+      "Sid": "CloudWatchLogWriteStatement"
+     },
+     {
+      "Action": [
+       "logs:DescribeIndexPolicies",
+       "logs:PutIndexPolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:aws/spans",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:aws/spans:*"
+      ],
+      "Sid": "CloudWatchIndexPolicyStatement"
+     },
+     {
+      "Action": [
+       "bedrock:InvokeModel",
+       "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock:*:${AWS::AccountId}:inference-profile/*",
+       "arn:${AWS::Partition}:bedrock:*::foundation-model/*"
+      ],
+      "Sid": "BedrockInvokeStatement"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "BasicEvaluationExecutionRoleDefaultPolicy6E0AF966",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${BasicEvaluationExecutionRoleFB7E4913}",
+   "actual": "${BasicEvaluationExecutionRoleFB7E4913}"
+  },
+  {
+   "logicalId": "BasicEvaluationB20A0A46",
+   "type": "AWS::BedrockAgentCore::OnlineEvaluationConfig",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

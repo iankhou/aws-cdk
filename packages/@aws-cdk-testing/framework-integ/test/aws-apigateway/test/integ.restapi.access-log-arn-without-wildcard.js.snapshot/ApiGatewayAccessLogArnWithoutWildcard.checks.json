@@ -1,0 +1,224 @@
+{
+ "stackName": "ApiGatewayAccessLogArnWithoutWildcard",
+ "summary": {
+  "pass": 22,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "AccessLogs8B620ECA",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AccessLogs8B620ECA",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "ApiF70053CD",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiF70053CD",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Api",
+   "actual": "Api"
+  },
+  {
+   "logicalId": "ApiCloudWatchRole73EC6FC4",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiCloudWatchRole73EC6FC4",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiCloudWatchRole73EC6FC4",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ]
+  },
+  {
+   "logicalId": "ApiAccountA18C9B29",
+   "type": "AWS::ApiGateway::Account",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiAccountA18C9B29",
+   "type": "AWS::ApiGateway::Account",
+   "property": "CloudWatchRoleArn",
+   "status": "fail",
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ApiCloudWatchRole73EC6FC4}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/test-apigateway-access-lo-MyApiCloudWatchRole2BEC1A-c6PPknxvEiLU"
+  },
+  {
+   "logicalId": "ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiF70053CD}",
+   "actual": "${ApiF70053CD}"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiF70053CD}",
+   "actual": "${ApiF70053CD}"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73}",
+   "actual": "${ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73}"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "AccessLogSetting",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "destinationArn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${AccessLogs8B620ECA}",
+    "format": "{\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"user\":\"$context.identity.user\",\"caller\":\"$context.identity.caller\",\"requestTime\":\"$context.requestTime\",\"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\",\"status\":\"$context.status\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"
+   },
+   "actual": {
+    "format": "{\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"user\":\"$context.identity.user\",\"caller\":\"$context.identity.caller\",\"requestTime\":\"$context.requestTime\",\"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\",\"status\":\"$context.status\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}",
+    "destinationArn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${AccessLogs8B620ECA}"
+   }
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiF70053CD}",
+   "actual": "${ApiF70053CD}"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiGET9257B917[1]}",
+   "actual": "${ApiGET9257B917[1]}"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK"
+   },
+   "actual": {
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${ApiGET9257B917[1]}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  }
+ ]
+}

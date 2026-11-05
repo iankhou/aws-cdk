@@ -1,0 +1,223 @@
+{
+ "stackName": "aws-cdk-agentcore-memory-stream-delivery",
+ "summary": {
+  "no handler": 4,
+  "pass": 12
+ },
+ "results": [
+  {
+   "logicalId": "MemoryEventStream982A05ED",
+   "type": "AWS::Kinesis::Stream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MemoryWithStreamDeliveryServiceRole890B7A55",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MemoryWithStreamDeliveryServiceRole890B7A55",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:memory/memory_with_stream_delivery*"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Amemory%2Fmemory_with_stream_delivery%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "MemoryWithStreamDeliveryServiceRoleDefaultPolicy0FFA2F76",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MemoryWithStreamDeliveryServiceRoleDefaultPolicy0FFA2F76",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MemoryWithStreamDeliveryServiceRoleDefaultPolicy0FFA2F76",
+   "actual": "MemoryWithStreamDeliveryServiceRoleDefaultPolicy0FFA2F76"
+  },
+  {
+   "logicalId": "MemoryWithStreamDeliveryServiceRoleDefaultPolicy0FFA2F76",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "kinesis:DescribeStream",
+       "kinesis:ListShards",
+       "kinesis:PutRecord",
+       "kinesis:PutRecords"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${MemoryEventStream982A05ED}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "kinesis:DescribeStream",
+       "kinesis:ListShards",
+       "kinesis:PutRecord",
+       "kinesis:PutRecords"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${MemoryEventStream982A05ED}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MemoryWithStreamDeliveryServiceRoleDefaultPolicy0FFA2F76",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MemoryWithStreamDeliveryServiceRole890B7A55}",
+   "actual": "${MemoryWithStreamDeliveryServiceRole890B7A55}"
+  },
+  {
+   "logicalId": "MemoryWithStreamDeliveryMemoryE85ED633",
+   "type": "AWS::BedrockAgentCore::Memory",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MetadataEventStream1F94DDBA",
+   "type": "AWS::Kinesis::Stream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MemoryWithMetadataOnlyStreamDeliveryServiceRoleF96B730C",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MemoryWithMetadataOnlyStreamDeliveryServiceRoleF96B730C",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:memory/memory_with_metadata_only_stream_delivery*"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Amemory%2Fmemory_with_metadata_only_stream_delivery%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "MemoryWithMetadataOnlyStreamDeliveryServiceRoleDefaultPolicyD1780D99",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MemoryWithMetadataOnlyStreamDeliveryServiceRoleDefaultPolicyD1780D99",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MemoryWithMetadataOnlyStreamDeliveryServiceRoleDefaultPolicyD1780D99",
+   "actual": "MemoryWithMetadataOnlyStreamDeliveryServiceRoleDefaultPolicyD1780D99"
+  },
+  {
+   "logicalId": "MemoryWithMetadataOnlyStreamDeliveryServiceRoleDefaultPolicyD1780D99",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "kinesis:DescribeStream",
+       "kinesis:ListShards",
+       "kinesis:PutRecord",
+       "kinesis:PutRecords"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${MetadataEventStream1F94DDBA}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "kinesis:DescribeStream",
+       "kinesis:ListShards",
+       "kinesis:PutRecord",
+       "kinesis:PutRecords"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${MetadataEventStream1F94DDBA}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MemoryWithMetadataOnlyStreamDeliveryServiceRoleDefaultPolicyD1780D99",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MemoryWithMetadataOnlyStreamDeliveryServiceRoleF96B730C}",
+   "actual": "${MemoryWithMetadataOnlyStreamDeliveryServiceRoleF96B730C}"
+  },
+  {
+   "logicalId": "MemoryWithMetadataOnlyStreamDeliveryMemory89060772",
+   "type": "AWS::BedrockAgentCore::Memory",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

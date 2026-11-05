@@ -1,0 +1,205 @@
+{
+ "stackName": "stack",
+ "summary": {
+  "pass": 10,
+  "no handler": 6
+ },
+ "results": [
+  {
+   "logicalId": "ApidsServiceRoleADC7D124",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApidsServiceRoleADC7D124",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "appsync.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22appsync.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "actual": "ApidsServiceRoleDefaultPolicyE5E18D6D"
+  },
+  {
+   "logicalId": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TestTable5769773A}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TestTable5769773A}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApidsServiceRoleADC7D124}",
+   "actual": "${ApidsServiceRoleADC7D124}"
+  },
+  {
+   "logicalId": "Apids0DB53FEA",
+   "type": "AWS::AppSync::DataSource",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApidsQuerygetTestsResolver952F49EE",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApidsMutationaddTestResolverBCF0400B",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestTable5769773A",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestTable5769773A",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TestTable5769773A",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TestTable5769773A",
+   "type": "AWS::DynamoDB::Table",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "api2noneC88DB89F",
+   "type": "AWS::AppSync::DataSource",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "api2nonepipelinefunctionFunction2426F465",
+   "type": "AWS::AppSync::FunctionConfiguration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "pipelineresolver843133EA",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

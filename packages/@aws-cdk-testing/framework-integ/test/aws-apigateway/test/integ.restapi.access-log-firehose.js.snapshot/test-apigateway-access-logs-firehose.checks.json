@@ -1,0 +1,442 @@
+{
+ "stackName": "test-apigateway-access-logs-firehose",
+ "summary": {
+  "pass": 38,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "test-apigateway-access-logs-firehose"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "Bucket83908E77"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ]
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Bucket83908E77}",
+   "actual": "${Bucket83908E77}"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lambda function for auto-deleting objects in ${Bucket83908E77} S3 bucket.",
+   "actual": "Lambda function for auto-deleting objects in ${Bucket83908E77} S3 bucket."
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 128,
+   "actual": 128
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyStream",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyApi49610EDF",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyApi49610EDF",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyApi",
+   "actual": "MyApi"
+  },
+  {
+   "logicalId": "MyApiCloudWatchRole2BEC1A9C",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyApiCloudWatchRole2BEC1A9C",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyApiCloudWatchRole2BEC1A9C",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ]
+  },
+  {
+   "logicalId": "MyApiAccount13882D84",
+   "type": "AWS::ApiGateway::Account",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyApiAccount13882D84",
+   "type": "AWS::ApiGateway::Account",
+   "property": "CloudWatchRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyApiCloudWatchRole2BEC1A9C}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyApiCloudWatchRole2BEC1A9C}"
+  },
+  {
+   "logicalId": "MyApiDeploymentECB0D05E81594d6748b4b291f993111a5070d710",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyApiDeploymentECB0D05E81594d6748b4b291f993111a5070d710",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "MyApiDeploymentECB0D05E81594d6748b4b291f993111a5070d710",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyApi49610EDF}",
+   "actual": "${MyApi49610EDF}"
+  },
+  {
+   "logicalId": "MyApiDeploymentStageprodE1054AF0",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyApiDeploymentStageprodE1054AF0",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "MyApiDeploymentStageprodE1054AF0",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyApi49610EDF}",
+   "actual": "${MyApi49610EDF}"
+  },
+  {
+   "logicalId": "MyApiDeploymentStageprodE1054AF0",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyApiDeploymentECB0D05E81594d6748b4b291f993111a5070d710}",
+   "actual": "${MyApiDeploymentECB0D05E81594d6748b4b291f993111a5070d710}"
+  },
+  {
+   "logicalId": "MyApiDeploymentStageprodE1054AF0",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "AccessLogSetting",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "destinationArn": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/amazon-apigateway-delivery-stream",
+    "format": "{\"requestId\":\"$context.requestId\",\"sourceIp\":\"$context.identity.sourceIp\",\"method\":\"$context.httpMethod\",\"callerAccountId\":\"$context.identity.accountId\",\"ownerAccountId\":\"$context.accountId\",\"userContext\":{\"sub\":\"$context.authorizer.claims.sub\",\"email\":\"$context.authorizer.claims.email\"},\"clientCertPem\":\"$context.identity.clientCert.clientCertPem\",\"subjectDN\":\"$context.identity.clientCert.subjectDN\",\"issunerDN\":\"$context.identity.clientCert.issuerDN\",\"serialNumber\":\"$context.identity.clientCert.serialNumber\",\"validityNotBefore\":\"$context.identity.clientCert.validity.notBefore\",\"validityNotAfter\":\"$context.identity.clientCert.validity.notAfter\"}"
+   },
+   "actual": {
+    "format": "{\"requestId\":\"$context.requestId\",\"sourceIp\":\"$context.identity.sourceIp\",\"method\":\"$context.httpMethod\",\"callerAccountId\":\"$context.identity.accountId\",\"ownerAccountId\":\"$context.accountId\",\"userContext\":{\"sub\":\"$context.authorizer.claims.sub\",\"email\":\"$context.authorizer.claims.email\"},\"clientCertPem\":\"$context.identity.clientCert.clientCertPem\",\"subjectDN\":\"$context.identity.clientCert.subjectDN\",\"issunerDN\":\"$context.identity.clientCert.issuerDN\",\"serialNumber\":\"$context.identity.clientCert.serialNumber\",\"validityNotBefore\":\"$context.identity.clientCert.validity.notBefore\",\"validityNotAfter\":\"$context.identity.clientCert.validity.notAfter\"}",
+    "destinationArn": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/amazon-apigateway-delivery-stream"
+   }
+  },
+  {
+   "logicalId": "MyApiGETD0C7AA0C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyApiGETD0C7AA0C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyApi49610EDF}",
+   "actual": "${MyApi49610EDF}"
+  },
+  {
+   "logicalId": "MyApiGETD0C7AA0C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyApiGETD0C7AA0C[1]}",
+   "actual": "${MyApiGETD0C7AA0C[1]}"
+  },
+  {
+   "logicalId": "MyApiGETD0C7AA0C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "MyApiGETD0C7AA0C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "MyApiGETD0C7AA0C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK"
+   },
+   "actual": {
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${MyApiGETD0C7AA0C[1]}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "version": "1",
+ "stackName": "baseStack",
+ "resources": {
+  "baseApiCDA4D43A": {
+   "Type": "AWS::AppSync::GraphQLApi",
+   "Properties": {
+    "AuthenticationType": "API_KEY",
+    "Name": "baseApi"
+   }
+  },
+  "baseApiSchemaB12C7BB0": {
+   "Type": "AWS::AppSync::GraphQLSchema",
+   "Properties": {
+    "ApiId": "${baseApiCDA4D43A.ApiId}",
+    "Definition": "type test {\n  version: String!\n}\ntype Query {\n  getTests: [test]!\n}\ntype Mutation {\n  addTest(version: String!): test\n}\n"
+   }
+  },
+  "baseApiDefaultApiKeyA3A0A16A": {
+   "Type": "AWS::AppSync::ApiKey",
+   "Properties": {
+    "ApiId": "${baseApiCDA4D43A.ApiId}"
+   },
+   "DependsOn": [
+    "baseApiSchemaB12C7BB0"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputFnGetAttbaseApiCDA4D43AApiId50287E68": {
+   "Value": "${baseApiCDA4D43A.ApiId}",
+   "Export": {
+    "Name": "baseStack:ExportsOutputFnGetAttbaseApiCDA4D43AApiId50287E68"
+   }
+  }
+ },
+ "unresolved": []
+}

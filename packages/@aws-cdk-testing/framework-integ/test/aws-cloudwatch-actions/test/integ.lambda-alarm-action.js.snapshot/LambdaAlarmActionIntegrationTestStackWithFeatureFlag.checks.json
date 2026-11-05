@@ -1,0 +1,880 @@
+{
+ "stackName": "LambdaAlarmActionIntegrationTestStackWithFeatureFlag",
+ "summary": {
+  "pass": 83,
+  "fail": 5,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "inAlarmLambdaFeatureServiceRoleA2CD21D1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeatureServiceRoleA2CD21D1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeatureServiceRoleA2CD21D1",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "inAlarmLambdaFeature6C78D351",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeature6C78D351",
+   "type": "AWS::Lambda::Function",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "inAlarmLambdaFeature",
+   "actual": "inAlarmLambdaFeature"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeature6C78D351",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeature6C78D351",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeature6C78D351",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${inAlarmLambdaFeatureServiceRoleA2CD21D1}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${inAlarmLambdaFeatureServiceRoleA2CD21D1}"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeatureLogGroupA38B15F5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeatureLogGroupA38B15F5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/inAlarmLambdaFeature",
+   "actual": "/aws/lambda/inAlarmLambdaFeature"
+  },
+  {
+   "logicalId": "inAlarmLambdaFeatureLogGroupA38B15F5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ActionsEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "AlarmActions",
+   "status": "fail",
+   "expected": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ],
+   "actual": [
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ]
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "OKActions",
+   "status": "fail",
+   "expected": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ],
+   "actual": [
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ]
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "InsufficientDataActions",
+   "status": "fail",
+   "expected": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ],
+   "actual": [
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ]
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanThreshold",
+   "actual": "GreaterThanThreshold"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "TreatMissingData",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "notBreaching",
+   "actual": "notBreaching"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Errors",
+   "actual": "Errors"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/Lambda",
+   "actual": "AWS/Lambda"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "FunctionName",
+     "Value": "inAlarmLambdaFeature"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "FunctionName",
+     "Value": "inAlarmLambdaFeature"
+    }
+   ]
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 60,
+   "actual": 60
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Sum",
+   "actual": "Sum"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureServiceRole853A864D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureServiceRole853A864D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureServiceRole853A864D",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "alarmLambdaFeatureD560800F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureD560800F",
+   "type": "AWS::Lambda::Function",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "alarmLambdaFeature",
+   "actual": "alarmLambdaFeature"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureD560800F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureD560800F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureD560800F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${alarmLambdaFeatureServiceRole853A864D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${alarmLambdaFeatureServiceRole853A864D}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureLogGroup7E7A9C9E",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureLogGroup7E7A9C9E",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/alarmLambdaFeature",
+   "actual": "/aws/lambda/alarmLambdaFeature"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureLogGroup7E7A9C9E",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9",
+   "type": "AWS::Lambda::Version",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9",
+   "type": "AWS::Lambda::Version",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "alarmLambdaFeature",
+   "actual": "alarmLambdaFeature"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmAlarmPermissionA0D80E66",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmAlarmPermissionA0D80E66",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmAlarmPermissionA0D80E66",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+   "actual": "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmAlarmPermissionA0D80E66",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   },
+   "actual": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmAlarmPermissionA0D80E66",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}",
+   "actual": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmAlarmPermissionA0D80E66",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceAccount",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS::AccountId}",
+   "actual": "${AWS::AccountId}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmFeatureAlarmPermission192451B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmFeatureAlarmPermission192451B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmFeatureAlarmPermission192451B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+   "actual": "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmFeatureAlarmPermission192451B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   },
+   "actual": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmFeatureAlarmPermission192451B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${AlarmFeature9DD74C42}",
+   "actual": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${AlarmFeature9DD74C42}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureCurrentVersionAlarmFeatureAlarmPermission192451B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceAccount",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS::AccountId}",
+   "actual": "${AWS::AccountId}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasName16F91D34",
+   "type": "AWS::Lambda::Alias",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmAlarmPermissionE344338D",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmAlarmPermissionE344338D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmAlarmPermissionE344338D",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${alarmLambdaFeatureAliasaliasName16F91D34}",
+   "actual": "${alarmLambdaFeatureAliasaliasName16F91D34}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmAlarmPermissionE344338D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   },
+   "actual": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmAlarmPermissionE344338D",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}",
+   "actual": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmAlarmPermissionE344338D",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceAccount",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS::AccountId}",
+   "actual": "${AWS::AccountId}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmFeatureAlarmPermission6A0A5797",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmFeatureAlarmPermission6A0A5797",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmFeatureAlarmPermission6A0A5797",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${alarmLambdaFeatureAliasaliasName16F91D34}",
+   "actual": "${alarmLambdaFeatureAliasaliasName16F91D34}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmFeatureAlarmPermission6A0A5797",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   },
+   "actual": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmFeatureAlarmPermission6A0A5797",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${AlarmFeature9DD74C42}",
+   "actual": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${AlarmFeature9DD74C42}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAliasaliasNameAlarmFeatureAlarmPermission6A0A5797",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceAccount",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS::AccountId}",
+   "actual": "${AWS::AccountId}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmAlarmPermissionCF637A1C",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmAlarmPermissionCF637A1C",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmAlarmPermissionCF637A1C",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmAlarmPermissionCF637A1C",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   },
+   "actual": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmAlarmPermissionCF637A1C",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}",
+   "actual": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${Alarm7103F465}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmAlarmPermissionCF637A1C",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceAccount",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS::AccountId}",
+   "actual": "${AWS::AccountId}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmFeatureAlarmPermission7032FB2D",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmFeatureAlarmPermission7032FB2D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmFeatureAlarmPermission7032FB2D",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmFeatureAlarmPermission7032FB2D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   },
+   "actual": {
+    "Service": "lambda.alarms.cloudwatch.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmFeatureAlarmPermission7032FB2D",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${AlarmFeature9DD74C42}",
+   "actual": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:${AlarmFeature9DD74C42}"
+  },
+  {
+   "logicalId": "alarmLambdaFeatureAlarmFeatureAlarmPermission7032FB2D",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceAccount",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS::AccountId}",
+   "actual": "${AWS::AccountId}"
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ActionsEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "AlarmActions",
+   "status": "fail",
+   "expected": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ],
+   "actual": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}"
+   ]
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "OKActions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ],
+   "actual": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ]
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "InsufficientDataActions",
+   "status": "fail",
+   "expected": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature"
+   ],
+   "actual": [
+    "${alarmLambdaFeatureCurrentVersionCF397519118ea382b759443816673e96bc3a64e9}",
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:alarmLambdaFeature",
+    "${alarmLambdaFeatureAliasaliasName16F91D34}"
+   ]
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanThreshold",
+   "actual": "GreaterThanThreshold"
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "TreatMissingData",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "notBreaching",
+   "actual": "notBreaching"
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Errors",
+   "actual": "Errors"
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/Lambda",
+   "actual": "AWS/Lambda"
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "FunctionName",
+     "Value": "inAlarmLambdaFeature"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "FunctionName",
+     "Value": "inAlarmLambdaFeature"
+    }
+   ]
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 60,
+   "actual": 60
+  },
+  {
+   "logicalId": "AlarmFeature9DD74C42",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Sum",
+   "actual": "Sum"
+  }
+ ]
+}

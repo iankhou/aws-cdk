@@ -1,0 +1,103 @@
+{
+ "stackName": "grant-service-principal-test-stack",
+ "summary": {
+  "pass": 5
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ResourcePolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "Service": [
+        "glue.amazonaws.com",
+        "redshift.amazonaws.com",
+        "replication.dynamodb.amazonaws.com"
+       ]
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":[\"replication.dynamodb.amazonaws.com\",\"glue.amazonaws.com\",\"redshift.amazonaws.com\"]},\"Action\":[\"dynamodb:BatchGetItem\",\"dynamodb:BatchWriteItem\",\"dynamodb:ConditionCheckItem\",\"dynamodb:DeleteItem\",\"dynamodb:DescribeTable\",\"dynamodb:GetItem\",\"dynamodb:PutItem\",\"dynamodb:Query\",\"dynamodb:Scan\",\"dynamodb:UpdateItem\"],\"Resource\":\"*\"}]}"
+  }
+ ]
+}

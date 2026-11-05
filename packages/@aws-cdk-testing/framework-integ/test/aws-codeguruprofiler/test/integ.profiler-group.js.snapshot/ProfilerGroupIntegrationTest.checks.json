@@ -1,0 +1,181 @@
+{
+ "stackName": "ProfilerGroupIntegrationTest",
+ "summary": {
+  "no handler": 1,
+  "pass": 12
+ },
+ "results": [
+  {
+   "logicalId": "MyProfilingGroup829F0507",
+   "type": "AWS::CodeGuruProfiler::ProfilingGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "PublishAppRole9FEBD682",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PublishAppRole9FEBD682",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Aroot%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "PublishAppRoleDefaultPolicyCA1E15C3",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "PublishAppRoleDefaultPolicyCA1E15C3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PublishAppRoleDefaultPolicyCA1E15C3",
+   "actual": "PublishAppRoleDefaultPolicyCA1E15C3"
+  },
+  {
+   "logicalId": "PublishAppRoleDefaultPolicyCA1E15C3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "codeguru-profiler:ConfigureAgent",
+       "codeguru-profiler:PostAgentProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/ProfilerGroupIntegrationTestMyProfilingGroup81DA69A3"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "codeguru-profiler:ConfigureAgent",
+       "codeguru-profiler:PostAgentProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/ProfilerGroupIntegrationTestMyProfilingGroup81DA69A3"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "PublishAppRoleDefaultPolicyCA1E15C3",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${PublishAppRole9FEBD682}",
+   "actual": "${PublishAppRole9FEBD682}"
+  },
+  {
+   "logicalId": "ReadAppRole52FE6317",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ReadAppRole52FE6317",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Aroot%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ReadAppRoleDefaultPolicy4BB8955C",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ReadAppRoleDefaultPolicy4BB8955C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ReadAppRoleDefaultPolicy4BB8955C",
+   "actual": "ReadAppRoleDefaultPolicy4BB8955C"
+  },
+  {
+   "logicalId": "ReadAppRoleDefaultPolicy4BB8955C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "codeguru-profiler:DescribeProfilingGroup",
+       "codeguru-profiler:GetProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/ProfilerGroupIntegrationTestMyProfilingGroup81DA69A3"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "codeguru-profiler:DescribeProfilingGroup",
+       "codeguru-profiler:GetProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/ProfilerGroupIntegrationTestMyProfilingGroup81DA69A3"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ReadAppRoleDefaultPolicy4BB8955C",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ReadAppRole52FE6317}",
+   "actual": "${ReadAppRole52FE6317}"
+  }
+ ]
+}

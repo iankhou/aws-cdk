@@ -1,0 +1,134 @@
+{
+ "stackName": "warm-throughput-stack",
+ "summary": {
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "TableTest143E55AA2",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableTest143E55AA2",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "gsi1pk",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "gsi1pk",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableTest143E55AA2",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableTest143E55AA2",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableTest143E55AA2",
+   "type": "AWS::DynamoDB::Table",
+   "property": "WarmThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadUnitsPerSecond": 14000,
+    "WriteUnitsPerSecond": 5000
+   },
+   "actual": {
+    "ReadUnitsPerSecond": 14000,
+    "WriteUnitsPerSecond": 5000,
+    "Status": "ACTIVE"
+   }
+  },
+  {
+   "logicalId": "TableTest143E55AA2",
+   "type": "AWS::DynamoDB::Table",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "my-index",
+     "KeySchema": [
+      {
+       "AttributeName": "gsi1pk",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "my-index",
+     "KeySchema": [
+      {
+       "AttributeName": "gsi1pk",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ]
+  }
+ ]
+}

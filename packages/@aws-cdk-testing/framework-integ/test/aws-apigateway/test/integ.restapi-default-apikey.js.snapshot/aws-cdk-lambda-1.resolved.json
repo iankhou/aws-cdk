@@ -1,0 +1,140 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-lambda-1",
+ "resources": {
+  "MyLambdaServiceRole4539ECB6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MyLambdaCCE802FB": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "foo"
+    },
+    "Handler": "index.handler",
+    "Role": "${MyLambdaServiceRole4539ECB6.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "MyLambdaServiceRole4539ECB6"
+   ]
+  },
+  "MyRestApi2D1F47A9": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "MyRestApi"
+   }
+  },
+  "MyRestApiDeploymentB555B582f86f07eb1bf053df446e77125b5ae767": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${MyRestApi2D1F47A9}"
+   },
+   "DependsOn": [
+    "MyRestApiGETE3827D1C",
+    "MyRestApiPOST2EE84297"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "MyRestApiDeploymentStageprodC33B8E5F": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${MyRestApiDeploymentB555B582f86f07eb1bf053df446e77125b5ae767}",
+    "RestApiId": "${MyRestApi2D1F47A9}",
+    "StageName": "prod"
+   }
+  },
+  "MyRestApiGETApiPermissionawscdklambda1MyRestApi20890E8FGET6B62C72C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${MyLambdaCCE802FB.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/${MyRestApiDeploymentStageprodC33B8E5F}/GET/"
+   }
+  },
+  "MyRestApiGETApiPermissionTestawscdklambda1MyRestApi20890E8FGETB5733BDE": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${MyLambdaCCE802FB.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/test-invoke-stage/GET/"
+   }
+  },
+  "MyRestApiGETE3827D1C": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": true,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${MyLambdaCCE802FB.Arn}/invocations"
+    },
+    "ResourceId": "${MyRestApi2D1F47A9.RootResourceId}",
+    "RestApiId": "${MyRestApi2D1F47A9}"
+   }
+  },
+  "MyRestApiPOSTApiPermissionawscdklambda1MyRestApi20890E8FPOST70683B77": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${MyLambdaCCE802FB.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/${MyRestApiDeploymentStageprodC33B8E5F}/POST/"
+   }
+  },
+  "MyRestApiPOSTApiPermissionTestawscdklambda1MyRestApi20890E8FPOST931BCBA1": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${MyLambdaCCE802FB.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/test-invoke-stage/POST/"
+   }
+  },
+  "MyRestApiPOST2EE84297": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${MyLambdaCCE802FB.Arn}/invocations"
+    },
+    "ResourceId": "${MyRestApi2D1F47A9.RootResourceId}",
+    "RestApiId": "${MyRestApi2D1F47A9}"
+   }
+  }
+ },
+ "outputs": {
+  "MyRestApiEndpoint4C55E4CB": {
+   "Value": "https://${MyRestApi2D1F47A9}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${MyRestApiDeploymentStageprodC33B8E5F}/"
+  }
+ },
+ "unresolved": []
+}

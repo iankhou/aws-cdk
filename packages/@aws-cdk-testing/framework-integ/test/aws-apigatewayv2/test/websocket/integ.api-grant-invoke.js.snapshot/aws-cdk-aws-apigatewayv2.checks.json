@@ -1,0 +1,81 @@
+{
+ "stackName": "aws-cdk-aws-apigatewayv2",
+ "summary": {
+  "no handler": 2,
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "webocketapiD5DB5DB0",
+   "type": "AWS::ApiGatewayV2::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "websocketstageA39DAC37",
+   "type": "AWS::ApiGatewayV2::Stage",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "testiamrole05EFDD08",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "testiamrole05EFDD08",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "testiamrole05EFDD08",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "webSocketAccess"
+   ],
+   "actual": [
+    "webSocketAccess"
+   ]
+  },
+  {
+   "logicalId": "testiamrole05EFDD08",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "execute-api:Invoke",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${webocketapiD5DB5DB0}/*/*",
+       "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${webocketapiD5DB5DB0}/prod/connect"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22execute-api%3AInvoke%22%2C%22Resource%22%3A%5B%22arn%3Aaws%3Aexecute-api%3A${AWS::Region}%3A${AWS::AccountId}%3A${webocketapiD5DB5DB0}%2F%2A%2F%2A%22%2C%22arn%3Aaws%3Aexecute-api%3A${AWS::Region}%3A${AWS::AccountId}%3A${webocketapiD5DB5DB0}%2Fprod%2Fconnect%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  }
+ ]
+}

@@ -1,0 +1,241 @@
+{
+ "stackName": "cdk-agentcore-gateway-auto-generated-name",
+ "summary": {
+  "pass": 17,
+  "no handler": 6
+ },
+ "results": [
+  {
+   "logicalId": "GatewayServiceRole162DEA77",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GatewayServiceRole162DEA77",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/cdkagentcoregatewayageneratednamegateway094c76d5-??????????"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Agateway%2Fcdkagentcoregatewayageneratednamegateway094c76d5-%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "GatewayServiceRole162DEA77",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Service role for Bedrock AgentCore Gateway cdkagentcoregatewayageneratednameGateway094C76D5",
+   "actual": "Service role for Bedrock AgentCore Gateway cdkagentcoregatewayageneratednameGateway094C76D5"
+  },
+  {
+   "logicalId": "GatewayServiceRoleDefaultPolicy5A851A93",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GatewayServiceRoleDefaultPolicy5A851A93",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GatewayServiceRoleDefaultPolicy5A851A93",
+   "actual": "GatewayServiceRoleDefaultPolicy5A851A93"
+  },
+  {
+   "logicalId": "GatewayServiceRoleDefaultPolicy5A851A93",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${TestFunction22AD90FC}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${TestFunction22AD90FC}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${TestFunction22AD90FC}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${TestFunction22AD90FC}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "GatewayServiceRoleDefaultPolicy5A851A93",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${GatewayServiceRole162DEA77}",
+   "actual": "${GatewayServiceRole162DEA77}"
+  },
+  {
+   "logicalId": "GatewayUserPoolAC9C51BE",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "GatewayUserPoolResourceServerA9AA7EAD",
+   "type": "AWS::Cognito::UserPoolResourceServer",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "GatewayUserPoolDefaultClient48FC6ADE",
+   "type": "AWS::Cognito::UserPoolClient",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "GatewayUserPoolDomainCD8A1197",
+   "type": "AWS::Cognito::UserPoolDomain",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Gateway43CB3636",
+   "type": "AWS::BedrockAgentCore::Gateway",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "GatewayTarget05FE5E2C",
+   "type": "AWS::BedrockAgentCore::GatewayTarget",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestFunctionServiceRole6ABD93C7",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestFunctionServiceRole6ABD93C7",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TestFunctionServiceRole6ABD93C7",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TestFunctionServiceRole6ABD93C7}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TestFunctionServiceRole6ABD93C7}"
+  },
+  {
+   "logicalId": "TestFunctionLogGroupE7744A08",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestFunctionLogGroupE7744A08",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${TestFunction22AD90FC}",
+   "actual": "/aws/lambda/${TestFunction22AD90FC}"
+  },
+  {
+   "logicalId": "TestFunctionLogGroupE7744A08",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  }
+ ]
+}

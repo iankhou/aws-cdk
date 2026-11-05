@@ -1,0 +1,74 @@
+{
+ "version": "1",
+ "stackName": "integ-cloudtrail-defaults",
+ "resources": {
+  "TrailS30071F172": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "TrailS3PolicyE42170FE": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${TrailS30071F172}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        "${TrailS30071F172.Arn}",
+        "${TrailS30071F172.Arn}/*"
+       ]
+      },
+      {
+       "Action": "s3:GetBucketAcl",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudtrail.amazonaws.com"
+       },
+       "Resource": "${TrailS30071F172.Arn}"
+      },
+      {
+       "Action": "s3:PutObject",
+       "Condition": {
+        "StringEquals": {
+         "s3:x-amz-acl": "bucket-owner-full-control"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudtrail.amazonaws.com"
+       },
+       "Resource": "${TrailS30071F172.Arn}/AWSLogs/${AWS::AccountId}/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "Trail022F0CF2": {
+   "Type": "AWS::CloudTrail::Trail",
+   "Properties": {
+    "IsLogging": true,
+    "S3BucketName": "${TrailS30071F172}",
+    "EnableLogFileValidation": true,
+    "EventSelectors": [],
+    "IncludeGlobalServiceEvents": true,
+    "IsMultiRegionTrail": true
+   },
+   "DependsOn": [
+    "TrailS3PolicyE42170FE"
+   ]
+  }
+ },
+ "unresolved": []
+}

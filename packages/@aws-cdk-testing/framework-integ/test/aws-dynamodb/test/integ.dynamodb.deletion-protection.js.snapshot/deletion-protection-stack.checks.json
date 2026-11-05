@@ -1,0 +1,76 @@
+{
+ "stackName": "deletion-protection-stack",
+ "summary": {
+  "pass": 4,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "pk",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "pk",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "pk",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "pk",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "DeletionProtectionEnabled",
+   "status": "fail",
+   "expected": true,
+   "actual": false
+  }
+ ]
+}

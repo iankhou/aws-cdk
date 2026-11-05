@@ -1,0 +1,240 @@
+{
+ "stackName": "nested-stacks-test",
+ "summary": {
+  "pass": 16,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "SubscriberQueueC193DC66",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscriberQueuePolicy25A0799E",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscriberQueuePolicy25A0799E",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic096865AFD-qPBE7amum2UX"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+     },
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic119487C5C-vdPydyuyif1R"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+     },
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic2EE13C5A5-LndDOp8YLqfK"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic096865AFD-qPBE7amum2UX"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+     },
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic119487C5C-vdPydyuyif1R"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+     },
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic2EE13C5A5-LndDOp8YLqfK"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SubscriberQueuePolicy25A0799E",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${SubscriberQueueC193DC66}"
+   ],
+   "actual": [
+    "${SubscriberQueueC193DC66}"
+   ]
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic089C5EB1396F65087",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic089C5EB1396F65087",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic096865AFD-qPBE7amum2UX",
+   "actual": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic096865AFD-qPBE7amum2UX"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic089C5EB1396F65087",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "sqs",
+   "actual": "sqs"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic089C5EB1396F65087",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}",
+   "actual": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic1150E1A929A2C267E",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic1150E1A929A2C267E",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic119487C5C-vdPydyuyif1R",
+   "actual": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic119487C5C-vdPydyuyif1R"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic1150E1A929A2C267E",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "sqs",
+   "actual": "sqs"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic1150E1A929A2C267E",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}",
+   "actual": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic209B8719858511914",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic209B8719858511914",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic2EE13C5A5-LndDOp8YLqfK",
+   "actual": "arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:nested-stacks-test-NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52-92K34X352H4T-topic2EE13C5A5-LndDOp8YLqfK"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic209B8719858511914",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "sqs",
+   "actual": "sqs"
+  },
+  {
+   "logicalId": "SubscriberQueuenestedstackstestNestedStack1topic209B8719858511914",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}",
+   "actual": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SubscriberQueueC193DC66.Name}"
+  },
+  {
+   "logicalId": "NestedStack1NestedStackNestedStack1NestedStackResource7E64AD52",
+   "type": "AWS::CloudFormation::Stack",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "NestedStack2NestedStackNestedStack2NestedStackResourceFDF82E43",
+   "type": "AWS::CloudFormation::Stack",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

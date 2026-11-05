@@ -1,0 +1,350 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-codebuild-file-system-locations",
+ "resources": {
+  "MyVPCAFB07A31": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-codebuild-file-system-locations/MyVPC"
+     }
+    ]
+   }
+  },
+  "MyVPCPublicSubnet1Subnet0C75866A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": "${MyVPCAFB07A31}",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/17",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-codebuild-file-system-locations/MyVPC/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVPCPublicSubnet1RouteTable538A9511": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": "${MyVPCAFB07A31}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-codebuild-file-system-locations/MyVPC/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVPCPublicSubnet1RouteTableAssociation8A950D8E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${MyVPCPublicSubnet1RouteTable538A9511}",
+    "SubnetId": "${MyVPCPublicSubnet1Subnet0C75866A}"
+   }
+  },
+  "MyVPCPublicSubnet1DefaultRouteAF81AA9B": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": "${MyVPCPublicSubnet1RouteTable538A9511}",
+    "DestinationCidrBlock": "${MyVPCPrivateSubnet1DefaultRouteA8EE6636[1]}",
+    "GatewayId": "${MyVPCIGW30AB6DD6}"
+   },
+   "DependsOn": [
+    "MyVPCVPCGWE6F260E1"
+   ]
+  },
+  "MyVPCPublicSubnet1EIP5EB6147D": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-codebuild-file-system-locations/MyVPC/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVPCPublicSubnet1NATGateway838228A5": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": "${MyVPCPublicSubnet1Subnet0C75866A}",
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "MyVPCPublicSubnet1EIP5EB6147D",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-codebuild-file-system-locations/MyVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "MyVPCPublicSubnet1DefaultRouteAF81AA9B",
+    "MyVPCPublicSubnet1RouteTableAssociation8A950D8E"
+   ]
+  },
+  "MyVPCPrivateSubnet1Subnet641543F4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": "${MyVPCAFB07A31}",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/17",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-codebuild-file-system-locations/MyVPC/PrivateSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVPCPrivateSubnet1RouteTable133BD901": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": "${MyVPCAFB07A31}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-codebuild-file-system-locations/MyVPC/PrivateSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVPCPrivateSubnet1RouteTableAssociation85DFBFBB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${MyVPCPrivateSubnet1RouteTable133BD901}",
+    "SubnetId": "${MyVPCPrivateSubnet1Subnet641543F4}"
+   }
+  },
+  "MyVPCPrivateSubnet1DefaultRouteA8EE6636": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": "${MyVPCPrivateSubnet1RouteTable133BD901}",
+    "DestinationCidrBlock": "${MyVPCPrivateSubnet1DefaultRouteA8EE6636[1]}",
+    "NatGatewayId": "${MyVPCPublicSubnet1NATGateway838228A5}"
+   }
+  },
+  "MyVPCIGW30AB6DD6": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-codebuild-file-system-locations/MyVPC"
+     }
+    ]
+   }
+  },
+  "MyVPCVPCGWE6F260E1": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": "${MyVPCAFB07A31}",
+    "InternetGatewayId": "${MyVPCIGW30AB6DD6}"
+   }
+  },
+  "SecurityGroup1F554B36F": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Example",
+    "GroupName": "Jane",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${MyVPCPrivateSubnet1DefaultRouteA8EE6636[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "${MyVPCAFB07A31}"
+   }
+  },
+  "MyProjectRole9BBE5233": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyProjectRoleDefaultPolicyB19B7C29": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ec2:CreateNetworkInterfacePermission",
+       "Condition": {
+        "StringEquals": {
+         "ec2:Subnet": [
+          "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${MyVPCPrivateSubnet1Subnet641543F4}"
+         ],
+         "ec2:AuthorizedService": "codebuild.amazonaws.com"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:network-interface/*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectRoleDefaultPolicyB19B7C29",
+    "Roles": [
+     "${MyProjectRole9BBE5233}"
+    ]
+   }
+  },
+  "MyProject39F7B0AE": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:7.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": true,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": "${MyProjectRole9BBE5233.Arn}",
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\"\n}",
+     "Type": "NO_SOURCE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "FileSystemLocations": [
+     {
+      "Identifier": "myidentifier",
+      "Location": "fs-c8d04839.efs.${AWS::Region}.amazonaws.com:/mnt",
+      "MountOptions": "nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2",
+      "MountPoint": "/media",
+      "Type": "EFS"
+     }
+    ],
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      "${SecurityGroup1F554B36F.GroupId}"
+     ],
+     "Subnets": [
+      "${MyVPCPrivateSubnet1Subnet641543F4}"
+     ],
+     "VpcId": "${MyVPCAFB07A31}"
+    }
+   },
+   "DependsOn": [
+    "MyProjectPolicyDocument646EE0F2"
+   ]
+  },
+  "MyProjectPolicyDocument646EE0F2": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectPolicyDocument646EE0F2",
+    "Roles": [
+     "${MyProjectRole9BBE5233}"
+    ]
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.MyVPCPublicSubnet1Subnet0C75866A.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.MyVPCPublicSubnet1NATGateway838228A5.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${MyVPCPublicSubnet1EIP5EB6147D}' does not exist (Service: Ec2, Status Code: 400, Request ID: 1c1fe68b-6d5e-46d6-8bc5-6bfdcc3a94ef) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 87a79785-6258-4d8c-9e60-ddde5c748b0c)'"
+  },
+  {
+   "path": "Resources.MyVPCPrivateSubnet1Subnet641543F4.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}

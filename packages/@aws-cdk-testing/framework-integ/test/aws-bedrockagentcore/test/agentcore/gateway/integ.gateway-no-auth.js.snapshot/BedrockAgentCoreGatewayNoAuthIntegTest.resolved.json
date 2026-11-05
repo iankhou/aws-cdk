@@ -1,0 +1,159 @@
+{
+ "version": "1",
+ "stackName": "BedrockAgentCoreGatewayNoAuthIntegTest",
+ "resources": {
+  "NoAuthGatewayServiceRole73E92F41": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/integ-test-no-auth-gateway-??????????"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "bedrock-agentcore.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Service role for Bedrock AgentCore Gateway integ-test-no-auth-gateway"
+   }
+  },
+  "NoAuthGatewayServiceRoleDefaultPolicy21867BE2": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        "${TestFunction22AD90FC.Arn}",
+        "${TestFunction22AD90FC.Arn}:*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NoAuthGatewayServiceRoleDefaultPolicy21867BE2",
+    "Roles": [
+     "${NoAuthGatewayServiceRole73E92F41}"
+    ]
+   }
+  },
+  "NoAuthGateway34D8B21F": {
+   "Type": "AWS::BedrockAgentCore::Gateway",
+   "Properties": {
+    "AuthorizerType": "NONE",
+    "Description": "Integration test gateway with No Auth authorizer",
+    "Name": "integ-test-no-auth-gateway",
+    "ProtocolConfiguration": {
+     "Mcp": {
+      "Instructions": "Default gateway to connect to external MCP tools",
+      "SearchType": "SEMANTIC",
+      "SupportedVersions": [
+       "2025-03-26"
+      ]
+     }
+    },
+    "ProtocolType": "MCP",
+    "RoleArn": "${NoAuthGatewayServiceRole73E92F41.Arn}"
+   }
+  },
+  "NoAuthGatewayLambdaTarget244BAC7C": {
+   "Type": "AWS::BedrockAgentCore::GatewayTarget",
+   "Properties": {
+    "CredentialProviderConfigurations": [
+     {
+      "CredentialProviderType": "GATEWAY_IAM_ROLE"
+     }
+    ],
+    "Description": "Lambda target for No Auth gateway",
+    "GatewayIdentifier": "${NoAuthGateway34D8B21F.GatewayIdentifier}",
+    "Name": "lambda-public-target",
+    "TargetConfiguration": {
+     "Mcp": {
+      "Lambda": {
+       "LambdaArn": "${TestFunction22AD90FC.Arn}",
+       "ToolSchema": {
+        "InlinePayload": [
+         {
+          "Description": "A public tool that can be discovered without authentication",
+          "InputSchema": {
+           "Properties": {
+            "query": {
+             "Description": "Query parameter",
+             "Type": "string"
+            }
+           },
+           "Required": [
+            "query"
+           ],
+           "Type": "object"
+          },
+          "Name": "public_tool"
+         }
+        ]
+       }
+      }
+     }
+    }
+   }
+  },
+  "TestFunctionServiceRole6ABD93C7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "TestFunction22AD90FC": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n    exports.handler = async (event) => {\n      console.log('Received event:', JSON.stringify(event));\n      return {\n        statusCode: 200,\n        body: JSON.stringify({\n          message: 'Hello from Lambda!',\n          input: event,\n        }),\n      };\n    };\n  "
+    },
+    "Description": "Lambda function for No Auth Gateway integration test",
+    "FunctionName": "integ-test-no-auth-gateway-lambda",
+    "Handler": "index.handler",
+    "Role": "${TestFunctionServiceRole6ABD93C7.Arn}",
+    "Runtime": "nodejs22.x"
+   },
+   "DependsOn": [
+    "TestFunctionServiceRole6ABD93C7"
+   ]
+  },
+  "TestFunctionLogGroupE7744A08": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/${TestFunction22AD90FC}",
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": []
+}

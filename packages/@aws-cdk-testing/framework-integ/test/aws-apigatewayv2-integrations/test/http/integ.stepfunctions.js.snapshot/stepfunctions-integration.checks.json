@@ -1,0 +1,542 @@
+{
+ "stackName": "stepfunctions-integration",
+ "summary": {
+  "pass": 35,
+  "no handler": 10
+ },
+ "results": [
+  {
+   "logicalId": "RouteStateMachineRoleF32EE107",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RouteStateMachineRoleF32EE107",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "RouteStateMachineC11CAF3B",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RouteStateMachineC11CAF3B",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Pass1",
+    "States": {
+     "Pass1": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Pass1",
+    "States": {
+     "Pass1": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "RouteStateMachineC11CAF3B",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${RouteStateMachineRoleF32EE107}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${RouteStateMachineRoleF32EE107}"
+  },
+  {
+   "logicalId": "ExpressStateMachineRole4C3738D2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ExpressStateMachineRole4C3738D2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "ExpressStateMachineE90FFF22",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ExpressStateMachineE90FFF22",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Pass2",
+    "States": {
+     "Pass2": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Pass2",
+    "States": {
+     "Pass2": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "ExpressStateMachineE90FFF22",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ExpressStateMachineRole4C3738D2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ExpressStateMachineRole4C3738D2}"
+  },
+  {
+   "logicalId": "ExpressStateMachineE90FFF22",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "StateMachineType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "EXPRESS",
+   "actual": "EXPRESS"
+  },
+  {
+   "logicalId": "ApiF70053CD",
+   "type": "AWS::ApiGatewayV2::Api",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiDefaultStage189A7074",
+   "type": "AWS::ApiGatewayV2::Stage",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRole9137E4F5",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRole9137E4F5",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "actual": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${RouteStateMachineC11CAF3B}",
+      "Sid": "AllowStepFunctionsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${RouteStateMachineC11CAF3B}",
+      "Sid": "AllowStepFunctionsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTdefaultInvokeRoleDefaultPolicy603C0AF3",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTdefaultInvokeRole9137E4F5}",
+   "actual": "${ApiPOSTdefaultInvokeRole9137E4F5}"
+  },
+  {
+   "logicalId": "ApiPOSTdefaultIntegration15333EAA",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTdefault1EEA0D1D",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTstartInvokeRoleA9D6BD6A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTstartInvokeRoleA9D6BD6A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTstartInvokeRoleDefaultPolicy495BCE0C",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTstartInvokeRoleDefaultPolicy495BCE0C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTstartInvokeRoleDefaultPolicy495BCE0C",
+   "actual": "ApiPOSTstartInvokeRoleDefaultPolicy495BCE0C"
+  },
+  {
+   "logicalId": "ApiPOSTstartInvokeRoleDefaultPolicy495BCE0C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${RouteStateMachineC11CAF3B}",
+      "Sid": "AllowStepFunctionsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${RouteStateMachineC11CAF3B}",
+      "Sid": "AllowStepFunctionsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTstartInvokeRoleDefaultPolicy495BCE0C",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTstartInvokeRoleA9D6BD6A}",
+   "actual": "${ApiPOSTstartInvokeRoleA9D6BD6A}"
+  },
+  {
+   "logicalId": "ApiPOSTstartIntegration373B2B85",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTstartB39FD25E",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTstartsyncInvokeRoleC429A7AB",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTstartsyncInvokeRoleC429A7AB",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTstartsyncInvokeRoleDefaultPolicy244CA8B0",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTstartsyncInvokeRoleDefaultPolicy244CA8B0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTstartsyncInvokeRoleDefaultPolicy244CA8B0",
+   "actual": "ApiPOSTstartsyncInvokeRoleDefaultPolicy244CA8B0"
+  },
+  {
+   "logicalId": "ApiPOSTstartsyncInvokeRoleDefaultPolicy244CA8B0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartSyncExecution",
+      "Effect": "Allow",
+      "Resource": "${ExpressStateMachineE90FFF22}",
+      "Sid": "AllowStepFunctionsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartSyncExecution",
+      "Effect": "Allow",
+      "Resource": "${ExpressStateMachineE90FFF22}",
+      "Sid": "AllowStepFunctionsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTstartsyncInvokeRoleDefaultPolicy244CA8B0",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTstartsyncInvokeRoleC429A7AB}",
+   "actual": "${ApiPOSTstartsyncInvokeRoleC429A7AB}"
+  },
+  {
+   "logicalId": "ApiPOSTstartsyncIntegrationB86BBC38",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTstartsync3659F9A0",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTstopInvokeRoleB9DFDAA9",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTstopInvokeRoleB9DFDAA9",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiPOSTstopInvokeRoleDefaultPolicy4B17C921",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiPOSTstopInvokeRoleDefaultPolicy4B17C921",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApiPOSTstopInvokeRoleDefaultPolicy4B17C921",
+   "actual": "ApiPOSTstopInvokeRoleDefaultPolicy4B17C921"
+  },
+  {
+   "logicalId": "ApiPOSTstopInvokeRoleDefaultPolicy4B17C921",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StopExecution",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${RouteStateMachineC11CAF3B.Name}:*",
+      "Sid": "AllowStepFunctionsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StopExecution",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${RouteStateMachineC11CAF3B.Name}:*",
+      "Sid": "AllowStepFunctionsExecution"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApiPOSTstopInvokeRoleDefaultPolicy4B17C921",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiPOSTstopInvokeRoleB9DFDAA9}",
+   "actual": "${ApiPOSTstopInvokeRoleB9DFDAA9}"
+  },
+  {
+   "logicalId": "ApiPOSTstopIntegrationDA24B606",
+   "type": "AWS::ApiGatewayV2::Integration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiPOSTstopBDBE4015",
+   "type": "AWS::ApiGatewayV2::Route",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

@@ -1,0 +1,94 @@
+{
+ "stackName": "aws-cdk-dynamodb-kinesis-stream",
+ "summary": {
+  "no handler": 1,
+  "pass": 5
+ },
+ "results": [
+  {
+   "logicalId": "Stream790BDEE4",
+   "type": "AWS::Kinesis::Stream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KinesisStreamSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "StreamArn": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${Stream790BDEE4}",
+     "DestinationStatus": "ACTIVE"
+    }
+   ],
+   "actual": [
+    {
+     "StreamArn": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${Stream790BDEE4}",
+     "DestinationStatus": "ACTIVE",
+     "ApproximateCreationDateTimePrecision": "MILLISECOND"
+    }
+   ]
+  }
+ ]
+}

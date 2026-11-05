@@ -1,0 +1,59 @@
+{
+ "version": "1",
+ "stackName": "BedrockAgentCoreGatewayMcpProtocolVersionsIntegTest",
+ "resources": {
+  "GatewayServiceRole162DEA77": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/integ-gateway-mcp-protocol-versions-??????????"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "bedrock-agentcore.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Service role for Bedrock AgentCore Gateway integ-gateway-mcp-protocol-versions"
+   }
+  },
+  "Gateway43CB3636": {
+   "Type": "AWS::BedrockAgentCore::Gateway",
+   "Properties": {
+    "AuthorizerType": "AWS_IAM",
+    "Description": "Gateway with MCP protocol versions 2025-11-25 and 2026-07-28",
+    "Name": "integ-gateway-mcp-protocol-versions",
+    "ProtocolConfiguration": {
+     "Mcp": {
+      "SupportedVersions": [
+       "2025-11-25",
+       "2026-07-28"
+      ]
+     }
+    },
+    "ProtocolType": "MCP",
+    "RoleArn": "${GatewayServiceRole162DEA77.Arn}"
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputFnGetAttGateway43CB3636GatewayIdentifier8B82BE81": {
+   "Value": "${Gateway43CB3636.GatewayIdentifier}",
+   "Export": {
+    "Name": "BedrockAgentCoreGatewayMcpProtocolVersionsIntegTest:ExportsOutputFnGetAttGateway43CB3636GatewayIdentifier8B82BE81"
+   }
+  }
+ },
+ "unresolved": []
+}

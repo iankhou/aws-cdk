@@ -1,0 +1,82 @@
+{
+ "version": "1",
+ "stackName": "GrantExecute",
+ "resources": {
+  "user2C2B57AE": {
+   "Type": "AWS::IAM::User"
+  },
+  "userDefaultPolicy083DF682": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "execute-api:Invoke",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${testapiD6451F70}/${testapiDeploymentStageprod5C9E92A4}/GET/pets"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "userDefaultPolicy083DF682",
+    "Users": [
+     "${user2C2B57AE}"
+    ]
+   }
+  },
+  "testapiD6451F70": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "test-api"
+   }
+  },
+  "testapiDeployment356D2C358af14d7f8fefbad1c57a65ea01cc6136": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${testapiD6451F70}"
+   },
+   "DependsOn": [
+    "testapipetsGET25A78130",
+    "testapipets981F319E"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "testapiDeploymentStageprod5C9E92A4": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${testapiDeployment356D2C358af14d7f8fefbad1c57a65ea01cc6136}",
+    "RestApiId": "${testapiD6451F70}",
+    "StageName": "prod"
+   }
+  },
+  "testapipets981F319E": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": "${testapiD6451F70.RootResourceId}",
+    "PathPart": "pets",
+    "RestApiId": "${testapiD6451F70}"
+   }
+  },
+  "testapipetsGET25A78130": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${testapipets981F319E}",
+    "RestApiId": "${testapiD6451F70}"
+   }
+  }
+ },
+ "outputs": {
+  "testapiEndpoint4AE34D29": {
+   "Value": "https://${testapiD6451F70}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${testapiDeploymentStageprod5C9E92A4}/"
+  }
+ },
+ "unresolved": []
+}

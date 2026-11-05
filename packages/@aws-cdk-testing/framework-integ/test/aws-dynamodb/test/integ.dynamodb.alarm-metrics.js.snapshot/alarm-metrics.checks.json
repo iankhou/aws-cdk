@@ -1,0 +1,355 @@
+{
+ "stackName": "alarm-metrics",
+ "summary": {
+  "pass": 14
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "metric",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "metric",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "metric",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "metric",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableThrottleAlarm606592BC",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableThrottleAlarm606592BC",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "TableThrottleAlarm606592BC",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "TableThrottleAlarm606592BC",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "TableThrottleAlarm606592BC",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Metrics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Expression": "putitem + scan",
+     "Id": "expr_1",
+     "Label": "Sum of throttled requests across all operations",
+     "ReturnData": true
+    },
+    {
+     "Id": "putitem",
+     "MetricStat": {
+      "Metric": {
+       "Dimensions": [
+        {
+         "Name": "Operation",
+         "Value": "PutItem"
+        },
+        {
+         "Name": "TableName",
+         "Value": "${TableCD117FA1}"
+        }
+       ],
+       "MetricName": "ThrottledRequests",
+       "Namespace": "AWS/DynamoDB"
+      },
+      "Period": 60,
+      "Stat": "Sum"
+     },
+     "ReturnData": false
+    },
+    {
+     "Id": "scan",
+     "MetricStat": {
+      "Metric": {
+       "Dimensions": [
+        {
+         "Name": "Operation",
+         "Value": "Scan"
+        },
+        {
+         "Name": "TableName",
+         "Value": "${TableCD117FA1}"
+        }
+       ],
+       "MetricName": "ThrottledRequests",
+       "Namespace": "AWS/DynamoDB"
+      },
+      "Period": 60,
+      "Stat": "Sum"
+     },
+     "ReturnData": false
+    }
+   ],
+   "actual": [
+    {
+     "Id": "expr_1",
+     "Expression": "putitem + scan",
+     "Label": "Sum of throttled requests across all operations",
+     "ReturnData": true
+    },
+    {
+     "Id": "putitem",
+     "MetricStat": {
+      "Metric": {
+       "Namespace": "AWS/DynamoDB",
+       "MetricName": "ThrottledRequests",
+       "Dimensions": [
+        {
+         "Name": "Operation",
+         "Value": "PutItem"
+        },
+        {
+         "Name": "TableName",
+         "Value": "${TableCD117FA1}"
+        }
+       ]
+      },
+      "Period": 60,
+      "Stat": "Sum"
+     },
+     "ReturnData": false
+    },
+    {
+     "Id": "scan",
+     "MetricStat": {
+      "Metric": {
+       "Namespace": "AWS/DynamoDB",
+       "MetricName": "ThrottledRequests",
+       "Dimensions": [
+        {
+         "Name": "Operation",
+         "Value": "Scan"
+        },
+        {
+         "Name": "TableName",
+         "Value": "${TableCD117FA1}"
+        }
+       ]
+      },
+      "Period": 60,
+      "Stat": "Sum"
+     },
+     "ReturnData": false
+    }
+   ]
+  },
+  {
+   "logicalId": "TableErrorAlarm12A4E2F3",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableErrorAlarm12A4E2F3",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "TableErrorAlarm12A4E2F3",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "TableErrorAlarm12A4E2F3",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "TableErrorAlarm12A4E2F3",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Metrics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Expression": "putitem + scan",
+     "Id": "expr_1",
+     "Label": "Sum of errors across all operations",
+     "ReturnData": true
+    },
+    {
+     "Id": "putitem",
+     "MetricStat": {
+      "Metric": {
+       "Dimensions": [
+        {
+         "Name": "Operation",
+         "Value": "PutItem"
+        },
+        {
+         "Name": "TableName",
+         "Value": "${TableCD117FA1}"
+        }
+       ],
+       "MetricName": "SystemErrors",
+       "Namespace": "AWS/DynamoDB"
+      },
+      "Period": 60,
+      "Stat": "Sum"
+     },
+     "ReturnData": false
+    },
+    {
+     "Id": "scan",
+     "MetricStat": {
+      "Metric": {
+       "Dimensions": [
+        {
+         "Name": "Operation",
+         "Value": "Scan"
+        },
+        {
+         "Name": "TableName",
+         "Value": "${TableCD117FA1}"
+        }
+       ],
+       "MetricName": "SystemErrors",
+       "Namespace": "AWS/DynamoDB"
+      },
+      "Period": 60,
+      "Stat": "Sum"
+     },
+     "ReturnData": false
+    }
+   ],
+   "actual": [
+    {
+     "Id": "expr_1",
+     "Expression": "putitem + scan",
+     "Label": "Sum of errors across all operations",
+     "ReturnData": true
+    },
+    {
+     "Id": "putitem",
+     "MetricStat": {
+      "Metric": {
+       "Namespace": "AWS/DynamoDB",
+       "MetricName": "SystemErrors",
+       "Dimensions": [
+        {
+         "Name": "Operation",
+         "Value": "PutItem"
+        },
+        {
+         "Name": "TableName",
+         "Value": "${TableCD117FA1}"
+        }
+       ]
+      },
+      "Period": 60,
+      "Stat": "Sum"
+     },
+     "ReturnData": false
+    },
+    {
+     "Id": "scan",
+     "MetricStat": {
+      "Metric": {
+       "Namespace": "AWS/DynamoDB",
+       "MetricName": "SystemErrors",
+       "Dimensions": [
+        {
+         "Name": "Operation",
+         "Value": "Scan"
+        },
+        {
+         "Name": "TableName",
+         "Value": "${TableCD117FA1}"
+        }
+       ]
+      },
+      "Period": 60,
+      "Stat": "Sum"
+     },
+     "ReturnData": false
+    }
+   ]
+  }
+ ]
+}

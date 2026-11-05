@@ -1,0 +1,36 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-cloudwatch-alarms",
+ "resources": {
+  "queue": {
+   "Type": "AWS::SQS::Queue"
+  },
+  "Alarm7103F465": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "DatapointsToAlarm": 2,
+    "Dimensions": [
+     {
+      "Name": "QueueName",
+      "Value": "${queue.QueueName}"
+     }
+    ],
+    "EvaluationPeriods": 3,
+    "MetricName": "ApproximateNumberOfMessagesVisible",
+    "Namespace": "AWS/SQS",
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 100
+   }
+  },
+  "DashCCD7F836": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": "{\"start\":\"-9H\",\"end\":\"2018-12-17T06:00:00.000Z\",\"periodOverride\":\"inherit\",\"widgets\":[{\"type\":\"text\",\"width\":6,\"height\":2,\"x\":0,\"y\":0,\"properties\":{\"markdown\":\"# This is my dashboard\",\"background\":\"transparent\"}},{\"type\":\"text\",\"width\":6,\"height\":2,\"x\":6,\"y\":0,\"properties\":{\"markdown\":\"you like?\",\"background\":\"transparent\"}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":2,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Messages in queue\",\"region\":\"${AWS::Region}\",\"annotations\":{\"alarms\":[\"${Alarm7103F465.Arn}\"]},\"yAxis\":{}}},{\"type\":\"alarm\",\"width\":6,\"height\":3,\"x\":0,\"y\":8,\"properties\":{\"title\":\"Firing alarms\",\"alarms\":[\"${Alarm7103F465.Arn}\"]}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":11,\"properties\":{\"view\":\"timeSeries\",\"title\":\"More messages in queue with alarm annotation\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.QueueName}\"]],\"annotations\":{\"horizontal\":[{\"label\":\"ApproximateNumberOfMessagesVisible >= 100 for 2 datapoints within 15 minutes\",\"value\":100,\"yAxis\":\"left\"}]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":17,\"properties\":{\"view\":\"singleValue\",\"title\":\"Current messages in queue\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"ApproximateNumberOfMessagesVisible\",\"QueueName\",\"${queue.QueueName}\"]]}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":20,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":26,\"properties\":{\"view\":\"bar\",\"title\":\"Errors in my log group - bar\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":32,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors in my log group - line\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\",\"stacked\":false}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":38,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Errors in my log group - stacked\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\",\"stacked\":true}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":44,\"properties\":{\"view\":\"pie\",\"title\":\"Errors in my log group - pie\",\"region\":\"${AWS::Region}\",\"accountId\":\"123456789012\",\"query\":\"SOURCE 'my-log-group' | fields @message\\n                | filter @message like /Error/\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":50,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group - SQL\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | SELECT count(*) as count FROM 'my-log-group'\",\"queryLanguage\":\"SQL\"}},{\"type\":\"log\",\"width\":6,\"height\":6,\"x\":0,\"y\":56,\"properties\":{\"view\":\"table\",\"title\":\"Errors in my log group - PPL\",\"region\":\"${AWS::Region}\",\"query\":\"SOURCE 'my-log-group' | fields `@message` | sort - `@timestamp`\",\"queryLanguage\":\"PPL\"}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":62,\"properties\":{\"view\":\"singleValue\",\"title\":\"Sent message size\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.QueueName}\"]],\"singleValueFullPrecision\":false}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":65,\"properties\":{\"view\":\"singleValue\",\"title\":\"Sent message size with full precision\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.QueueName}\"]],\"singleValueFullPrecision\":true}},{\"type\":\"metric\",\"width\":6,\"height\":3,\"x\":0,\"y\":68,\"properties\":{\"view\":\"singleValue\",\"title\":\"Live data of sent message size\",\"region\":\"${AWS::Region}\",\"metrics\":[[\"AWS/SQS\",\"SentMessageSize\",\"QueueName\",\"${queue.QueueName}\"]],\"liveData\":true}},{\"type\":\"custom\",\"width\":6,\"height\":6,\"x\":0,\"y\":71,\"properties\":{\"endpoint\":\"arn:${AWS::Partition}:lambda:us-west-2:123456789012:function:my-function\",\"title\":\"My custom alarm\",\"updateOn\":{\"refresh\":true,\"resize\":true,\"timeRange\":true}}}]}",
+    "DashboardName": "MyCustomDashboardName"
+   }
+  }
+ },
+ "unresolved": []
+}

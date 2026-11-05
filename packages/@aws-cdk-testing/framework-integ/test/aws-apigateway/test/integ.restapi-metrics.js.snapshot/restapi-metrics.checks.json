@@ -1,0 +1,490 @@
+{
+ "stackName": "restapi-metrics",
+ "summary": {
+  "pass": 47
+ },
+ "results": [
+  {
+   "logicalId": "ApiF70053CD",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiF70053CD",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Api",
+   "actual": "Api"
+  },
+  {
+   "logicalId": "ApiCloudWatchRole73EC6FC4",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiCloudWatchRole73EC6FC4",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApiCloudWatchRole73EC6FC4",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ]
+  },
+  {
+   "logicalId": "ApiAccountA18C9B29",
+   "type": "AWS::ApiGateway::Account",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiAccountA18C9B29",
+   "type": "AWS::ApiGateway::Account",
+   "property": "CloudWatchRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ApiCloudWatchRole73EC6FC4}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ApiCloudWatchRole73EC6FC4}"
+  },
+  {
+   "logicalId": "ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiF70053CD}",
+   "actual": "${ApiF70053CD}"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiF70053CD}",
+   "actual": "${ApiF70053CD}"
+  },
+  {
+   "logicalId": "ApiDeploymentStageprod3EB9684E",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73}",
+   "actual": "${ApiDeploymentB17BE62Df672ad8455f9678e4a3db5854bdb8d73}"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiF70053CD}",
+   "actual": "${ApiF70053CD}"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApiGET9257B917[1]}",
+   "actual": "${ApiGET9257B917[1]}"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "ApiGET9257B917",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK"
+   },
+   "actual": {
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${ApiGET9257B917[1]}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "4XXError",
+   "actual": "4XXError"
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/ApiGateway",
+   "actual": "AWS/ApiGateway"
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "ApiName",
+     "Value": "Api"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "ApiName",
+     "Value": "Api"
+    }
+   ]
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "RestApiAlarm9B915321",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Sum",
+   "actual": "Sum"
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "5XXError",
+   "actual": "5XXError"
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/ApiGateway",
+   "actual": "AWS/ApiGateway"
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "ApiName",
+     "Value": "Api"
+    },
+    {
+     "Name": "Method",
+     "Value": "GET"
+    },
+    {
+     "Name": "Resource",
+     "Value": "/"
+    },
+    {
+     "Name": "Stage",
+     "Value": "prod"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "ApiName",
+     "Value": "Api"
+    },
+    {
+     "Name": "Method",
+     "Value": "GET"
+    },
+    {
+     "Name": "Resource",
+     "Value": "/"
+    },
+    {
+     "Name": "Stage",
+     "Value": "prod"
+    }
+   ]
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "MethodAlarm14370C32",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Sum",
+   "actual": "Sum"
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Count",
+   "actual": "Count"
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/ApiGateway",
+   "actual": "AWS/ApiGateway"
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "ApiName",
+     "Value": "Api"
+    },
+    {
+     "Name": "Stage",
+     "Value": "prod"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "ApiName",
+     "Value": "Api"
+    },
+    {
+     "Name": "Stage",
+     "Value": "prod"
+    }
+   ]
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "StageAlarm5DB1CE5B",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SampleCount",
+   "actual": "SampleCount"
+  }
+ ]
+}

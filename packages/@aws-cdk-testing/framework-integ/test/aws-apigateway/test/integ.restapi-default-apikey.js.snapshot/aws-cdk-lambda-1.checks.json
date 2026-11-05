@@ -1,0 +1,482 @@
+{
+ "stackName": "aws-cdk-lambda-1",
+ "summary": {
+  "pass": 50
+ },
+ "results": [
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaServiceRole4539ECB6}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaServiceRole4539ECB6}"
+  },
+  {
+   "logicalId": "MyRestApi2D1F47A9",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApi2D1F47A9",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyRestApi",
+   "actual": "MyRestApi"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentB555B582f86f07eb1bf053df446e77125b5ae767",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentB555B582f86f07eb1bf053df446e77125b5ae767",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentB555B582f86f07eb1bf053df446e77125b5ae767",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApi2D1F47A9}",
+   "actual": "${MyRestApi2D1F47A9}"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApi2D1F47A9}",
+   "actual": "${MyRestApi2D1F47A9}"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApiDeploymentB555B582f86f07eb1bf053df446e77125b5ae767}",
+   "actual": "${MyRestApiDeploymentB555B582f86f07eb1bf053df446e77125b5ae767}"
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionawscdklambda1MyRestApi20890E8FGET6B62C72C",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionawscdklambda1MyRestApi20890E8FGET6B62C72C",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionawscdklambda1MyRestApi20890E8FGET6B62C72C",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}"
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionawscdklambda1MyRestApi20890E8FGET6B62C72C",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionawscdklambda1MyRestApi20890E8FGET6B62C72C",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/prod/GET/",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/prod/GET/"
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionTestawscdklambda1MyRestApi20890E8FGETB5733BDE",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionTestawscdklambda1MyRestApi20890E8FGETB5733BDE",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionTestawscdklambda1MyRestApi20890E8FGETB5733BDE",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}"
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionTestawscdklambda1MyRestApi20890E8FGETB5733BDE",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "MyRestApiGETApiPermissionTestawscdklambda1MyRestApi20890E8FGETB5733BDE",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/test-invoke-stage/GET/",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/test-invoke-stage/GET/"
+  },
+  {
+   "logicalId": "MyRestApiGETE3827D1C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiGETE3827D1C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApi2D1F47A9}",
+   "actual": "${MyRestApi2D1F47A9}"
+  },
+  {
+   "logicalId": "MyRestApiGETE3827D1C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApiGETE3827D1C[1]}",
+   "actual": "${MyRestApiGETE3827D1C[1]}"
+  },
+  {
+   "logicalId": "MyRestApiGETE3827D1C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "MyRestApiGETE3827D1C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "MyRestApiGETE3827D1C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ApiKeyRequired",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "MyRestApiGETE3827D1C",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${MyRestApiGETE3827D1C[1]}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionawscdklambda1MyRestApi20890E8FPOST70683B77",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionawscdklambda1MyRestApi20890E8FPOST70683B77",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionawscdklambda1MyRestApi20890E8FPOST70683B77",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}"
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionawscdklambda1MyRestApi20890E8FPOST70683B77",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionawscdklambda1MyRestApi20890E8FPOST70683B77",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/prod/POST/",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/prod/POST/"
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionTestawscdklambda1MyRestApi20890E8FPOST931BCBA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionTestawscdklambda1MyRestApi20890E8FPOST931BCBA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionTestawscdklambda1MyRestApi20890E8FPOST931BCBA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}"
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionTestawscdklambda1MyRestApi20890E8FPOST931BCBA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "MyRestApiPOSTApiPermissionTestawscdklambda1MyRestApi20890E8FPOST931BCBA1",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/test-invoke-stage/POST/",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MyRestApi2D1F47A9}/test-invoke-stage/POST/"
+  },
+  {
+   "logicalId": "MyRestApiPOST2EE84297",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiPOST2EE84297",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApi2D1F47A9}",
+   "actual": "${MyRestApi2D1F47A9}"
+  },
+  {
+   "logicalId": "MyRestApiPOST2EE84297",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRestApiGETE3827D1C[1]}",
+   "actual": "${MyRestApiGETE3827D1C[1]}"
+  },
+  {
+   "logicalId": "MyRestApiPOST2EE84297",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "POST",
+   "actual": "POST"
+  },
+  {
+   "logicalId": "MyRestApiPOST2EE84297",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "MyRestApiPOST2EE84297",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ApiKeyRequired",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "MyRestApiPOST2EE84297",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}/invocations"
+   },
+   "actual": {
+    "type": "AWS_PROXY",
+    "httpMethod": "POST",
+    "uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}/invocations",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${MyRestApiGETE3827D1C[1]}",
+    "cacheKeyParameters": [],
+    "responseTransferMode": "BUFFERED"
+   }
+  }
+ ]
+}

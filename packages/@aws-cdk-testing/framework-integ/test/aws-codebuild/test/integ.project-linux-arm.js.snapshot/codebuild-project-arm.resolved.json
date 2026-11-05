@@ -1,0 +1,397 @@
+{
+ "version": "1",
+ "stackName": "codebuild-project-arm",
+ "resources": {
+  "MyProjectMediumRole1F3769C8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyProjectMediumRoleDefaultPolicy08D66D98": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectMediumE40D9677}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectMediumE40D9677}"
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectMediumE40D9677}-*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectMediumRoleDefaultPolicy08D66D98",
+    "Roles": [
+     "${MyProjectMediumRole1F3769C8}"
+    ]
+   }
+  },
+  "MyProjectMediumE40D9677": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_MEDIUM",
+     "Image": "aws/codebuild/amazonlinux2-aarch64-standard:3.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "ARM_CONTAINER"
+    },
+    "ServiceRole": "${MyProjectMediumRole1F3769C8.Arn}",
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\"\n}",
+     "Type": "NO_SOURCE"
+    }
+   }
+  },
+  "MyProjectXLargeRoleC17867F7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyProjectXLargeRoleDefaultPolicyACC3F91E": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectXLarge21A68AC6}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectXLarge21A68AC6}"
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectXLarge21A68AC6}-*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectXLargeRoleDefaultPolicyACC3F91E",
+    "Roles": [
+     "${MyProjectXLargeRoleC17867F7}"
+    ]
+   }
+  },
+  "MyProjectXLarge21A68AC6": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_XLARGE",
+     "Image": "aws/codebuild/amazonlinux2-aarch64-standard:3.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "ARM_CONTAINER"
+    },
+    "ServiceRole": "${MyProjectXLargeRoleC17867F7.Arn}",
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\"\n}",
+     "Type": "NO_SOURCE"
+    }
+   }
+  },
+  "MyProjectX2LargeRole65F64577": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyProjectX2LargeRoleDefaultPolicy241428C8": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectX2Large715B77CC}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectX2Large715B77CC}"
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectX2Large715B77CC}-*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectX2LargeRoleDefaultPolicy241428C8",
+    "Roles": [
+     "${MyProjectX2LargeRole65F64577}"
+    ]
+   }
+  },
+  "MyProjectX2Large715B77CC": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_2XLARGE",
+     "Image": "aws/codebuild/amazonlinux2-aarch64-standard:3.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "ARM_CONTAINER"
+    },
+    "ServiceRole": "${MyProjectX2LargeRole65F64577.Arn}",
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\"\n}",
+     "Type": "NO_SOURCE"
+    }
+   }
+  },
+  "MyProjectAL2023Arm4MediumRoleDC1E6ACC": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyProjectAL2023Arm4MediumRoleDefaultPolicy7B84EC3C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4Medium5FE6B809}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4Medium5FE6B809}"
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectAL2023Arm4Medium5FE6B809}-*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectAL2023Arm4MediumRoleDefaultPolicy7B84EC3C",
+    "Roles": [
+     "${MyProjectAL2023Arm4MediumRoleDC1E6ACC}"
+    ]
+   }
+  },
+  "MyProjectAL2023Arm4Medium5FE6B809": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_MEDIUM",
+     "Image": "aws/codebuild/amazonlinux-aarch64-standard:4.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "ARM_CONTAINER"
+    },
+    "ServiceRole": "${MyProjectAL2023Arm4MediumRoleDC1E6ACC.Arn}",
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\"\n}",
+     "Type": "NO_SOURCE"
+    }
+   }
+  },
+  "MyProjectAL2023Arm4XLargeRole65C75B1D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyProjectAL2023Arm4XLargeRoleDefaultPolicy9BD6C968": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4XLargeCE68ACAF}:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProjectAL2023Arm4XLargeCE68ACAF}"
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProjectAL2023Arm4XLargeCE68ACAF}-*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "MyProjectAL2023Arm4XLargeRoleDefaultPolicy9BD6C968",
+    "Roles": [
+     "${MyProjectAL2023Arm4XLargeRole65C75B1D}"
+    ]
+   }
+  },
+  "MyProjectAL2023Arm4XLargeCE68ACAF": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_XLARGE",
+     "Image": "aws/codebuild/amazonlinux-aarch64-standard:4.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "ARM_CONTAINER"
+    },
+    "ServiceRole": "${MyProjectAL2023Arm4XLargeRole65C75B1D.Arn}",
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\"\n}",
+     "Type": "NO_SOURCE"
+    }
+   }
+  }
+ },
+ "unresolved": []
+}

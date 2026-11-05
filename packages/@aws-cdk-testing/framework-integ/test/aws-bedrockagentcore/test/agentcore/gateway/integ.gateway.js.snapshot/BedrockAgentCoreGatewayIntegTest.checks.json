@@ -1,0 +1,525 @@
+{
+ "stackName": "BedrockAgentCoreGatewayIntegTest",
+ "summary": {
+  "pass": 43,
+  "no handler": 7
+ },
+ "results": [
+  {
+   "logicalId": "TestGatewayServiceRole426CDA0F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestGatewayServiceRole426CDA0F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       },
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/integ-test-gateway-??????????"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "bedrock-agentcore.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22bedrock-agentcore.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Abedrock-agentcore%3A${AWS::Region}%3A${AWS::AccountId}%3Agateway%2Finteg-test-gateway-%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "TestGatewayServiceRole426CDA0F",
+   "type": "AWS::IAM::Role",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Service role for Bedrock AgentCore Gateway integ-test-gateway",
+   "actual": "Service role for Bedrock AgentCore Gateway integ-test-gateway"
+  },
+  {
+   "logicalId": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "actual": "TestGatewayServiceRoleDefaultPolicyCFEDA895"
+  },
+  {
+   "logicalId": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-request-interceptor",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-response-interceptor",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-lambda",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-request-interceptor:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-response-interceptor:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-lambda:*"
+      ]
+     },
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-request-interceptor",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-response-interceptor",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-lambda",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-request-interceptor:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-response-interceptor:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:integ-test-gateway-lambda:*"
+      ]
+     },
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TestGatewayServiceRoleDefaultPolicyCFEDA895",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestGatewayServiceRole426CDA0F}",
+   "actual": "${TestGatewayServiceRole426CDA0F}"
+  },
+  {
+   "logicalId": "TestGatewayUserPool545AA49A",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGatewayUserPoolResourceServer7A34B6B2",
+   "type": "AWS::Cognito::UserPoolResourceServer",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGatewayUserPoolDefaultClient3AC9C728",
+   "type": "AWS::Cognito::UserPoolClient",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGatewayUserPoolDomainB64B616E",
+   "type": "AWS::Cognito::UserPoolDomain",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGateway7394A071",
+   "type": "AWS::BedrockAgentCore::Gateway",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGatewayLambdaTargetBE2E7E0C",
+   "type": "AWS::BedrockAgentCore::GatewayTarget",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestGatewaySmithyTarget2C1ACC84",
+   "type": "AWS::BedrockAgentCore::GatewayTarget",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "RequestInterceptorServiceRoleD8815DF9",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RequestInterceptorServiceRoleD8815DF9",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "RequestInterceptorServiceRoleD8815DF9",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "RequestInterceptorBE1C44C8",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RequestInterceptorBE1C44C8",
+   "type": "AWS::Lambda::Function",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "integ-test-gateway-request-interceptor",
+   "actual": "integ-test-gateway-request-interceptor"
+  },
+  {
+   "logicalId": "RequestInterceptorBE1C44C8",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "REQUEST interceptor for Gateway integration test",
+   "actual": "REQUEST interceptor for Gateway integration test"
+  },
+  {
+   "logicalId": "RequestInterceptorBE1C44C8",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "RequestInterceptorBE1C44C8",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.12",
+   "actual": "python3.12"
+  },
+  {
+   "logicalId": "RequestInterceptorBE1C44C8",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${RequestInterceptorServiceRoleD8815DF9}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${RequestInterceptorServiceRoleD8815DF9}"
+  },
+  {
+   "logicalId": "RequestInterceptorLogGroup72E7DA80",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RequestInterceptorLogGroup72E7DA80",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/integ-test-gateway-request-interceptor",
+   "actual": "/aws/lambda/integ-test-gateway-request-interceptor"
+  },
+  {
+   "logicalId": "RequestInterceptorLogGroup72E7DA80",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "ResponseInterceptorServiceRoleDC649E6F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ResponseInterceptorServiceRoleDC649E6F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ResponseInterceptorServiceRoleDC649E6F",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "ResponseInterceptor986DF12E",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ResponseInterceptor986DF12E",
+   "type": "AWS::Lambda::Function",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "integ-test-gateway-response-interceptor",
+   "actual": "integ-test-gateway-response-interceptor"
+  },
+  {
+   "logicalId": "ResponseInterceptor986DF12E",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "RESPONSE interceptor for Gateway integration test",
+   "actual": "RESPONSE interceptor for Gateway integration test"
+  },
+  {
+   "logicalId": "ResponseInterceptor986DF12E",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "ResponseInterceptor986DF12E",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.12",
+   "actual": "python3.12"
+  },
+  {
+   "logicalId": "ResponseInterceptor986DF12E",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ResponseInterceptorServiceRoleDC649E6F}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ResponseInterceptorServiceRoleDC649E6F}"
+  },
+  {
+   "logicalId": "ResponseInterceptorLogGroup1A3F0648",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ResponseInterceptorLogGroup1A3F0648",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/integ-test-gateway-response-interceptor",
+   "actual": "/aws/lambda/integ-test-gateway-response-interceptor"
+  },
+  {
+   "logicalId": "ResponseInterceptorLogGroup1A3F0648",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "TestFunctionServiceRole6ABD93C7",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestFunctionServiceRole6ABD93C7",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TestFunctionServiceRole6ABD93C7",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "integ-test-gateway-lambda",
+   "actual": "integ-test-gateway-lambda"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lambda function for Gateway integration test",
+   "actual": "Lambda function for Gateway integration test"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs22.x",
+   "actual": "nodejs22.x"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TestFunctionServiceRole6ABD93C7}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TestFunctionServiceRole6ABD93C7}"
+  },
+  {
+   "logicalId": "TestFunctionLogGroupE7744A08",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestFunctionLogGroupE7744A08",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/integ-test-gateway-lambda",
+   "actual": "/aws/lambda/integ-test-gateway-lambda"
+  },
+  {
+   "logicalId": "TestFunctionLogGroupE7744A08",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  }
+ ]
+}

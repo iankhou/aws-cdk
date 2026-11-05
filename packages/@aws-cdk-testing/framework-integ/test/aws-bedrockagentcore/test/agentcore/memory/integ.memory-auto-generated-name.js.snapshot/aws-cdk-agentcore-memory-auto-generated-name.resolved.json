@@ -1,0 +1,40 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-agentcore-memory-auto-generated-name",
+ "resources": {
+  "MemoryServiceRoleC95D1642": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:memory/awscdkagentcorememorogeneratednameMemory11979D3F*"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "bedrock-agentcore.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "Memory3232ACAB": {
+   "Type": "AWS::BedrockAgentCore::Memory",
+   "Properties": {
+    "EventExpiryDuration": 90,
+    "MemoryExecutionRoleArn": "${MemoryServiceRoleC95D1642.Arn}",
+    "Name": "awscdkagentcorememorogeneratednameMemory11979D3F"
+   }
+  }
+ },
+ "unresolved": []
+}

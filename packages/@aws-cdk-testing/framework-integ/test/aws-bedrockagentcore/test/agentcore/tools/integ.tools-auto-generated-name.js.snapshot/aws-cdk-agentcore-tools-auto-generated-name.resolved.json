@@ -1,0 +1,83 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-agentcore-tools-auto-generated-name",
+ "resources": {
+  "BrowserServiceRoleE2CB4014": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:browser-custom/awscdkagentcoretoolsgeneratednameBrowser81EEA593*"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "bedrock-agentcore.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "Browser5046F7C9": {
+   "Type": "AWS::BedrockAgentCore::BrowserCustom",
+   "Properties": {
+    "BrowserSigning": {
+     "Enabled": false
+    },
+    "ExecutionRoleArn": "${BrowserServiceRoleE2CB4014.Arn}",
+    "Name": "awscdkagentcoretoolsgeneratednameBrowser81EEA593",
+    "NetworkConfiguration": {
+     "NetworkMode": "PUBLIC"
+    },
+    "RecordingConfig": {
+     "Enabled": false
+    }
+   }
+  },
+  "CodeInterpreterServiceRole79E429DF": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:code-interpreter-custom/awscdkagentcoretoolsdnameCodeInterpreter3D76AD09*"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "bedrock-agentcore.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "CodeInterpreterA1155DAC": {
+   "Type": "AWS::BedrockAgentCore::CodeInterpreterCustom",
+   "Properties": {
+    "ExecutionRoleArn": "${CodeInterpreterServiceRole79E429DF.Arn}",
+    "Name": "awscdkagentcoretoolsdnameCodeInterpreter3D76AD09",
+    "NetworkConfiguration": {
+     "NetworkMode": "PUBLIC"
+    }
+   }
+  }
+ },
+ "unresolved": []
+}

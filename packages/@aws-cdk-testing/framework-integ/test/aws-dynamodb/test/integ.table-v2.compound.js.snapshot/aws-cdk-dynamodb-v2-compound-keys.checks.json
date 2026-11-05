@@ -1,0 +1,450 @@
+{
+ "stackName": "aws-cdk-dynamodb-v2-compound-keys",
+ "summary": {
+  "pass": 7
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "TableName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "cdk-test-tableV2-compound",
+   "actual": "cdk-test-tableV2-compound"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "bar",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "baz",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "GSIAPK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "GSIAPK2",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "GSIASK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "GSIASK2",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "PK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "PK2",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "PK3",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "PK4",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "pkey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "SK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "SK2",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "SK3",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "SK4",
+     "AttributeType": "N"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "bar",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "baz",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "GSIAPK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "GSIAPK2",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "GSIASK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "GSIASK2",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "PK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "PK2",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "PK3",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "PK4",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "pkey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "SK1",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "SK2",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "SK3",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "SK4",
+     "AttributeType": "N"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "pkey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "pkey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "IndexA",
+     "KeySchema": [
+      {
+       "AttributeName": "GSIAPK1",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "GSIAPK2",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "GSIASK1",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "GSIASK2",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "IndexB",
+     "KeySchema": [
+      {
+       "AttributeName": "PK1",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "PK2",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "SK1",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "SK2",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "NonKeyAttributes": [
+       "bar"
+      ],
+      "ProjectionType": "INCLUDE"
+     }
+    },
+    {
+     "IndexName": "IndexC",
+     "KeySchema": [
+      {
+       "AttributeName": "baz",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "bar",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "NonKeyAttributes": [
+       "blah"
+      ],
+      "ProjectionType": "INCLUDE"
+     }
+    },
+    {
+     "IndexName": "IndexD",
+     "KeySchema": [
+      {
+       "AttributeName": "PK3",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "PK4",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "SK3",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "SK4",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "IndexA",
+     "KeySchema": [
+      {
+       "AttributeName": "GSIAPK1",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "GSIAPK2",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "GSIASK1",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "GSIASK2",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "IndexStatus": "ACTIVE",
+     "ProvisionedThroughput": {
+      "NumberOfDecreasesToday": 0,
+      "ReadCapacityUnits": 0,
+      "WriteCapacityUnits": 0
+     },
+     "IndexSizeBytes": 0,
+     "ItemCount": 0,
+     "IndexArn": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/cdk-test-tableV2-compound/index/IndexA",
+     "WarmThroughput": {
+      "ReadUnitsPerSecond": 12000,
+      "WriteUnitsPerSecond": 4000,
+      "Status": "ACTIVE"
+     }
+    },
+    {
+     "IndexName": "IndexD",
+     "KeySchema": [
+      {
+       "AttributeName": "PK3",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "PK4",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "SK3",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "SK4",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "IndexStatus": "ACTIVE",
+     "ProvisionedThroughput": {
+      "NumberOfDecreasesToday": 0,
+      "ReadCapacityUnits": 0,
+      "WriteCapacityUnits": 0
+     },
+     "IndexSizeBytes": 0,
+     "ItemCount": 0,
+     "IndexArn": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/cdk-test-tableV2-compound/index/IndexD",
+     "WarmThroughput": {
+      "ReadUnitsPerSecond": 12000,
+      "WriteUnitsPerSecond": 4000,
+      "Status": "ACTIVE"
+     }
+    },
+    {
+     "IndexName": "IndexB",
+     "KeySchema": [
+      {
+       "AttributeName": "PK1",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "PK2",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "SK1",
+       "KeyType": "RANGE"
+      },
+      {
+       "AttributeName": "SK2",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "bar"
+      ]
+     },
+     "IndexStatus": "ACTIVE",
+     "ProvisionedThroughput": {
+      "NumberOfDecreasesToday": 0,
+      "ReadCapacityUnits": 0,
+      "WriteCapacityUnits": 0
+     },
+     "IndexSizeBytes": 0,
+     "ItemCount": 0,
+     "IndexArn": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/cdk-test-tableV2-compound/index/IndexB",
+     "WarmThroughput": {
+      "ReadUnitsPerSecond": 12000,
+      "WriteUnitsPerSecond": 4000,
+      "Status": "ACTIVE"
+     }
+    },
+    {
+     "IndexName": "IndexC",
+     "KeySchema": [
+      {
+       "AttributeName": "baz",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "bar",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "blah"
+      ]
+     },
+     "IndexStatus": "ACTIVE",
+     "ProvisionedThroughput": {
+      "NumberOfDecreasesToday": 0,
+      "ReadCapacityUnits": 0,
+      "WriteCapacityUnits": 0
+     },
+     "IndexSizeBytes": 0,
+     "ItemCount": 0,
+     "IndexArn": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/cdk-test-tableV2-compound/index/IndexC",
+     "WarmThroughput": {
+      "ReadUnitsPerSecond": 12000,
+      "WriteUnitsPerSecond": 4000,
+      "Status": "ACTIVE"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "Replicas",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${AWS::Region}"
+   ],
+   "actual": [
+    "${AWS::Region}"
+   ]
+  }
+ ]
+}

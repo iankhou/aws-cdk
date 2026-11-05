@@ -1,0 +1,38 @@
+{
+ "stackName": "integtest-specrestapi-import-deployment-stage",
+ "summary": {
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myapi4C7BF186",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "my-api",
+   "actual": "my-api"
+  },
+  {
+   "logicalId": "MyManualDeployment92F2175C1dcdcb8f1c24d86b6090e78df1fafcd3",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyManualDeployment92F2175C1dcdcb8f1c24d86b6090e78df1fafcd3",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${myapi4C7BF186}",
+   "actual": "${myapi4C7BF186}"
+  }
+ ]
+}
