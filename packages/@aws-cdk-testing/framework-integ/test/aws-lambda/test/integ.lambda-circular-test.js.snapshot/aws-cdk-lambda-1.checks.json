@@ -1,0 +1,184 @@
+{
+ "stackName": "aws-cdk-lambda-1",
+ "summary": {
+  "pass": 16,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaServiceRole4539ECB6}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaServiceRole4539ECB6}"
+  },
+  {
+   "logicalId": "MyLambdainlinePolicyAddedToExecutionRole0E0144580",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdainlinePolicyAddedToExecutionRole0E0144580",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyLambdainlinePolicyAddedToExecutionRole0E0144580",
+   "actual": "MyLambdainlinePolicyAddedToExecutionRole0E0144580"
+  },
+  {
+   "logicalId": "MyLambdainlinePolicyAddedToExecutionRole0E0144580",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "cognito:*",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${myUserPoolTestD44472FC}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "cognito:*",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${myUserPoolTestD44472FC}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyLambdainlinePolicyAddedToExecutionRole0E0144580",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyLambdaServiceRole4539ECB6}",
+   "actual": "${MyLambdaServiceRole4539ECB6}"
+  },
+  {
+   "logicalId": "myUserPoolTestFnCognito7EF64C97",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myUserPoolTestFnCognito7EF64C97",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "myUserPoolTestFnCognito7EF64C97",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyLambdaCCE802FB}"
+  },
+  {
+   "logicalId": "myUserPoolTestFnCognito7EF64C97",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "cognito-idp.amazonaws.com"
+   },
+   "actual": {
+    "Service": "cognito-idp.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "myUserPoolTestFnCognito7EF64C97",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${myUserPoolTestD44472FC}",
+   "actual": "arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${myUserPoolTestD44472FC}"
+  },
+  {
+   "logicalId": "myUserPoolTestD44472FC",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

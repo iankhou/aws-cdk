@@ -1,0 +1,189 @@
+{
+ "stackName": "cdk-ses-email-identity-from-arn-integ",
+ "summary": {
+  "no handler": 7,
+  "pass": 12
+ },
+ "results": [
+  {
+   "logicalId": "HostedZoneDB99F866",
+   "type": "AWS::Route53::HostedZone",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EmailIdentityDkimDnsToken1BA32ACB3",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EmailIdentityDkimDnsToken2BBEBB8EC",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EmailIdentityDkimDnsToken3BB5E8A49",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EmailIdentity7187767D",
+   "type": "AWS::SES::EmailIdentity",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EmailIdentityMailFromMxRecordCEAAECD0",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EmailIdentityMailFromTxtRecordE6B5E5D0",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "FunctionServiceRole675BB04A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FunctionServiceRole675BB04A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FunctionServiceRole675BB04A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "FunctionServiceRoleDefaultPolicy2F49994A",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FunctionServiceRoleDefaultPolicy2F49994A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "FunctionServiceRoleDefaultPolicy2F49994A",
+   "actual": "FunctionServiceRoleDefaultPolicy2F49994A"
+  },
+  {
+   "logicalId": "FunctionServiceRoleDefaultPolicy2F49994A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ses:SendEmail",
+       "ses:SendRawEmail"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:identity/cdk.dev"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ses:SendEmail",
+       "ses:SendRawEmail"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:identity/cdk.dev"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "FunctionServiceRoleDefaultPolicy2F49994A",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${FunctionServiceRole675BB04A}",
+   "actual": "${FunctionServiceRole675BB04A}"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::Lambda::Function",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "email-sending-lambda-from-arn",
+   "actual": "email-sending-lambda-from-arn"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.lambda_handler",
+   "actual": "index.lambda_handler"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.11",
+   "actual": "python3.11"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FunctionServiceRole675BB04A}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FunctionServiceRole675BB04A}"
+  }
+ ]
+}

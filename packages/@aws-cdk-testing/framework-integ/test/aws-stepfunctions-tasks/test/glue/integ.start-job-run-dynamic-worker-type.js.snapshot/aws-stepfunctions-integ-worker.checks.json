@@ -1,0 +1,288 @@
+{
+ "stackName": "aws-stepfunctions-integ-worker",
+ "summary": {
+  "pass": 16,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "GlueJobRole1CD031E0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GlueJobRole1CD031E0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "glue.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22glue.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "GlueJobRole1CD031E0",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSGlueServiceRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSGlueServiceRole"
+   ]
+  },
+  {
+   "logicalId": "GlueJobRoleDefaultPolicy3D94D6F1",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GlueJobRoleDefaultPolicy3D94D6F1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GlueJobRoleDefaultPolicy3D94D6F1",
+   "actual": "GlueJobRoleDefaultPolicy3D94D6F1"
+  },
+  {
+   "logicalId": "GlueJobRoleDefaultPolicy3D94D6F1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "GlueJobRoleDefaultPolicy3D94D6F1",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${GlueJobRole1CD031E0}",
+   "actual": "${GlueJobRole1CD031E0}"
+  },
+  {
+   "logicalId": "GlueJob",
+   "type": "AWS::Glue::Job",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "StateMachineRole543B9670",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRole543B9670",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDA5F7DA8",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDA5F7DA8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineRoleDefaultPolicyDA5F7DA8",
+   "actual": "StateMachineRoleDefaultPolicyDA5F7DA8"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDA5F7DA8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "glue:BatchStopJobRun",
+       "glue:GetJobRun",
+       "glue:GetJobRuns",
+       "glue:StartJobRun"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:job/My Glue Job"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "glue:BatchStopJobRun",
+       "glue:GetJobRun",
+       "glue:GetJobRuns",
+       "glue:StartJobRun"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:job/My Glue Job"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDA5F7DA8",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineRole543B9670}",
+   "actual": "${StateMachineRole543B9670}"
+  },
+  {
+   "logicalId": "StateMachine81935E76",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine81935E76",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Start Task",
+    "States": {
+     "Start Task": {
+      "Type": "Pass",
+      "Next": "Glue Job Task"
+     },
+     "Glue Job Task": {
+      "Next": "End Task",
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::glue:startJobRun.sync",
+      "Parameters": {
+       "JobName": "My Glue Job",
+       "Arguments": {
+        "--enable-metrics": "true"
+       },
+       "WorkerType.$": "$.glue_jobs_configs.executor_type",
+       "NumberOfWorkers.$": "$.glue_jobs_configs.max_number_workers"
+      }
+     },
+     "End Task": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Start Task",
+    "States": {
+     "Start Task": {
+      "Type": "Pass",
+      "Next": "Glue Job Task"
+     },
+     "Glue Job Task": {
+      "Next": "End Task",
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::glue:startJobRun.sync",
+      "Parameters": {
+       "JobName": "My Glue Job",
+       "Arguments": {
+        "--enable-metrics": "true"
+       },
+       "WorkerType.$": "$.glue_jobs_configs.executor_type",
+       "NumberOfWorkers.$": "$.glue_jobs_configs.max_number_workers"
+      }
+     },
+     "End Task": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "StateMachine81935E76",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRole543B9670}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRole543B9670}"
+  }
+ ]
+}

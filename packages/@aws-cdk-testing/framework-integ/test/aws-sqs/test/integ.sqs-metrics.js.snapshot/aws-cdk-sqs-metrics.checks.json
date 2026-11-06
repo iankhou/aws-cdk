@@ -1,0 +1,142 @@
+{
+ "stackName": "aws-cdk-sqs-metrics",
+ "summary": {
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "OutstandingMessages1A7D645F",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "OutstandingMessages1A7D645F",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "OutstandingMessages1A7D645F",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 3,
+   "actual": 3
+  },
+  {
+   "logicalId": "OutstandingMessages1A7D645F",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "OutstandingMessages1A7D645F",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Metrics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Expression": "visible + notVisible",
+     "Id": "expr_1",
+     "Label": "Approximate number of messages outstanding",
+     "ReturnData": true
+    },
+    {
+     "Id": "visible",
+     "MetricStat": {
+      "Metric": {
+       "Dimensions": [
+        {
+         "Name": "QueueName",
+         "Value": "${Queue4A7E3555.Name}"
+        }
+       ],
+       "MetricName": "ApproximateNumberOfMessagesVisible",
+       "Namespace": "AWS/SQS"
+      },
+      "Period": 60,
+      "Stat": "Maximum"
+     },
+     "ReturnData": false
+    },
+    {
+     "Id": "notVisible",
+     "MetricStat": {
+      "Metric": {
+       "Dimensions": [
+        {
+         "Name": "QueueName",
+         "Value": "${Queue4A7E3555.Name}"
+        }
+       ],
+       "MetricName": "ApproximateNumberOfMessagesNotVisible",
+       "Namespace": "AWS/SQS"
+      },
+      "Period": 60,
+      "Stat": "Maximum"
+     },
+     "ReturnData": false
+    }
+   ],
+   "actual": [
+    {
+     "Id": "expr_1",
+     "Expression": "visible + notVisible",
+     "Label": "Approximate number of messages outstanding",
+     "ReturnData": true
+    },
+    {
+     "Id": "visible",
+     "MetricStat": {
+      "Metric": {
+       "Namespace": "AWS/SQS",
+       "MetricName": "ApproximateNumberOfMessagesVisible",
+       "Dimensions": [
+        {
+         "Name": "QueueName",
+         "Value": "${Queue4A7E3555.Name}"
+        }
+       ]
+      },
+      "Period": 60,
+      "Stat": "Maximum"
+     },
+     "ReturnData": false
+    },
+    {
+     "Id": "notVisible",
+     "MetricStat": {
+      "Metric": {
+       "Namespace": "AWS/SQS",
+       "MetricName": "ApproximateNumberOfMessagesNotVisible",
+       "Dimensions": [
+        {
+         "Name": "QueueName",
+         "Value": "${Queue4A7E3555.Name}"
+        }
+       ]
+      },
+      "Period": 60,
+      "Stat": "Maximum"
+     },
+     "ReturnData": false
+    }
+   ]
+  }
+ ]
+}

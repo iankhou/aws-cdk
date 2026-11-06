@@ -1,0 +1,203 @@
+{
+ "stackName": "lambda-event-source-filter-criteria-null",
+ "summary": {
+  "pass": 17
+ },
+ "results": [
+  {
+   "logicalId": "FuncServiceRole49680D06",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FuncServiceRole49680D06",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FuncServiceRole49680D06",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "FuncServiceRoleDefaultPolicy588DA782",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FuncServiceRoleDefaultPolicy588DA782",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "FuncServiceRoleDefaultPolicy588DA782",
+   "actual": "FuncServiceRoleDefaultPolicy588DA782"
+  },
+  {
+   "logicalId": "FuncServiceRoleDefaultPolicy588DA782",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:ChangeMessageVisibility",
+       "sqs:DeleteMessage",
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:ReceiveMessage"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:ChangeMessageVisibility",
+       "sqs:DeleteMessage",
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:ReceiveMessage"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "FuncServiceRoleDefaultPolicy588DA782",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${FuncServiceRole49680D06}",
+   "actual": "${FuncServiceRole49680D06}"
+  },
+  {
+   "logicalId": "Func217E03A4",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Func217E03A4",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Func217E03A4",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Func217E03A4",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FuncServiceRole49680D06}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FuncServiceRole49680D06}"
+  },
+  {
+   "logicalId": "FuncSqsEventSourcelambdaeventsourcefiltercriterianullQueueCEF92D9AD2F13C0B",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FuncSqsEventSourcelambdaeventsourcefiltercriterianullQueueCEF92D9AD2F13C0B",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Func217E03A4}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Func217E03A4}"
+  },
+  {
+   "logicalId": "FuncSqsEventSourcelambdaeventsourcefiltercriterianullQueueCEF92D9AD2F13C0B",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "EventSourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+   "actual": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+  },
+  {
+   "logicalId": "FuncSqsEventSourcelambdaeventsourcefiltercriterianullQueueCEF92D9AD2F13C0B",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 5,
+   "actual": 5
+  },
+  {
+   "logicalId": "FuncSqsEventSourcelambdaeventsourcefiltercriterianullQueueCEF92D9AD2F13C0B",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FilterCriteria",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Filters": [
+     {
+      "Pattern": "{\"body\":{\"id\":[null]}}"
+     }
+    ]
+   },
+   "actual": {
+    "Filters": [
+     {
+      "Pattern": "{\"body\":{\"id\":[null]}}"
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  }
+ ]
+}

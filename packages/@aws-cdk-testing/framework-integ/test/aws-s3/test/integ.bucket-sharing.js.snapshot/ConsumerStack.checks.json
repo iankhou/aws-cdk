@@ -1,0 +1,94 @@
+{
+ "stackName": "ConsumerStack",
+ "summary": {
+  "no handler": 1,
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "MyUserDC45028B",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyUserDefaultPolicy7B897426",
+   "actual": "MyUserDefaultPolicy7B897426"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::producerstack-mybucketf68f3ff0-ew4ov6hphoxk",
+       "arn:${AWS::Partition}:s3:::producerstack-mybucketf68f3ff0-ew4ov6hphoxk/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::producerstack-mybucketf68f3ff0-ew4ov6hphoxk",
+       "arn:${AWS::Partition}:s3:::producerstack-mybucketf68f3ff0-ew4ov6hphoxk/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyUserDC45028B}",
+   "actual": "${MyUserDC45028B}"
+  }
+ ]
+}

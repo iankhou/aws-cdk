@@ -1,0 +1,136 @@
+{
+ "version": "1",
+ "stackName": "MyStack",
+ "resources": {
+  "TableCD117FA1": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "id",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "id",
+      "KeyType": "HASH"
+     }
+    ],
+    "StreamSpecification": {
+     "StreamViewType": "NEW_AND_OLD_IMAGES"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "TableSourceTableAttachedManagedPolicyMyStackawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRoleD593864897023A5A": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "Description": "DynamoDB replication managed policy for table ${TableCD117FA1}",
+    "Path": "/",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "dynamodb:*",
+       "Effect": "Allow",
+       "Resource": [
+        "${TableCD117FA1.Arn}",
+        "arn:${AWS::Partition}:dynamodb:us-east-2:${AWS::AccountId}:table/${TableCD117FA1}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Roles": [
+     "${awscdkawsdynamodbReplicaProviderNestedStackawscdkawsdynamodbReplicaProviderNestedStackResource18E3F12D.Outputs.MyStackawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRole4467C87ARef}"
+    ]
+   }
+  },
+  "TableSourceTableAttachedManagedPolicyMyStackawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRole16B7E1B480CD9B37": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "Description": "DynamoDB replication managed policy for table ${TableCD117FA1}",
+    "Path": "/",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "dynamodb:DescribeTable",
+       "Effect": "Allow",
+       "Resource": [
+        "${TableCD117FA1.Arn}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Roles": [
+     "${awscdkawsdynamodbReplicaProviderNestedStackawscdkawsdynamodbReplicaProviderNestedStackResource18E3F12D.Outputs.MyStackawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleE7639AB2Ref}"
+    ]
+   }
+  },
+  "TableReplicauseast28A15C236": {
+   "Type": "Custom::DynamoDBReplica",
+   "Properties": {
+    "ServiceToken": "${awscdkawsdynamodbReplicaProviderNestedStackawscdkawsdynamodbReplicaProviderNestedStackResource18E3F12D.Outputs.MyStackawscdkawsdynamodbReplicaProviderframeworkonEvent53643CD7Arn}",
+    "TableName": "${TableCD117FA1}",
+    "Region": "us-east-2",
+    "SkipReplicaDeletion": false
+   },
+   "DependsOn": [
+    "TableSourceTableAttachedManagedPolicyMyStackawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRole16B7E1B480CD9B37",
+    "TableSourceTableAttachedManagedPolicyMyStackawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRoleD593864897023A5A"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Condition": "TableStackRegionNotEqualsuseast2D20A1E77"
+  },
+  "awscdkawsdynamodbReplicaProviderNestedStackawscdkawsdynamodbReplicaProviderNestedStackResource18E3F12D": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "Parameters": {
+     "referencetoMyStackTableA7B7AF97Ref": "${TableCD117FA1}"
+    },
+    "TemplateURL": "https://s3.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/223b5819c91ab38e2d15b0ac98e3d464bf309a5aa9cf4be8b5a6dfc36a5907e3.json"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "nonCrLambdaServiceRole10AF9D14": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "nonCrLambda31AAECAA": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "helloWorld"
+    },
+    "Handler": "index.handler",
+    "Role": "${nonCrLambdaServiceRole10AF9D14.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "nonCrLambdaServiceRole10AF9D14"
+   ]
+  }
+ },
+ "unresolved": []
+}

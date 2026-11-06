@@ -1,0 +1,124 @@
+{
+ "stackName": "SnsToSqsStack",
+ "summary": {
+  "pass": 10
+ },
+ "results": [
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueueE6CA6235",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "${MyTopic86869434}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "${MyTopic86869434}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${MyQueueE6CA6235}"
+   ],
+   "actual": [
+    "${MyQueueE6CA6235}"
+   ]
+  },
+  {
+   "logicalId": "MyQueueSnsToSqsStackMyTopic3F1182C25E300A0F",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueueSnsToSqsStackMyTopic3F1182C25E300A0F",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "MyQueueSnsToSqsStackMyTopic3F1182C25E300A0F",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "sqs",
+   "actual": "sqs"
+  },
+  {
+   "logicalId": "MyQueueSnsToSqsStackMyTopic3F1182C25E300A0F",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}",
+   "actual": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+  },
+  {
+   "logicalId": "MyQueueSnsToSqsStackMyTopic3F1182C25E300A0F",
+   "type": "AWS::SNS::Subscription",
+   "property": "RawMessageDelivery",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  }
+ ]
+}

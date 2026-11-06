@@ -1,0 +1,160 @@
+{
+ "version": "1",
+ "stackName": "ses-configuration-set-firehose",
+ "resources": {
+  "ConfigurationSet3DD38186": {
+   "Type": "AWS::SES::ConfigurationSet",
+   "Properties": {
+    "DeliveryOptions": {
+     "MaxDeliverySeconds": 600
+    }
+   }
+  },
+  "ConfigurationSetFirehoseDestinationFirehoseDeliveryStreamIamRoleA664ACA2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceAccount": "${AWS::AccountId}",
+         "AWS:SourceArn": "arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:configuration-set/${ConfigurationSet3DD38186}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ses.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": "firehose:PutRecordBatch",
+         "Effect": "Allow",
+         "Resource": "${FirehoseEF5AC2A2.Arn}"
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "AllowFirehoseDeliveryStreamPublish"
+     }
+    ]
+   }
+  },
+  "ConfigurationSetFirehoseDestination6BB494C9": {
+   "Type": "AWS::SES::ConfigurationSetEventDestination",
+   "Properties": {
+    "ConfigurationSetName": "${ConfigurationSet3DD38186}",
+    "EventDestination": {
+     "Enabled": true,
+     "KinesisFirehoseDestination": {
+      "DeliveryStreamARN": "${FirehoseEF5AC2A2.Arn}",
+      "IAMRoleARN": "${ConfigurationSetFirehoseDestinationFirehoseDeliveryStreamIamRoleA664ACA2.Arn}"
+     },
+     "MatchingEventTypes": [
+      "send",
+      "reject",
+      "bounce",
+      "complaint",
+      "delivery",
+      "open",
+      "click",
+      "renderingFailure",
+      "deliveryDelay",
+      "subscription"
+     ]
+    }
+   }
+  },
+  "Bucket83908E77": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "Role1ABCC5F0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "firehose.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "RoleDefaultPolicy5FFB7DAB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${Bucket83908E77.Arn}",
+        "${Bucket83908E77.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "RoleDefaultPolicy5FFB7DAB",
+    "Roles": [
+     "${Role1ABCC5F0}"
+    ]
+   }
+  },
+  "FirehoseEF5AC2A2": {
+   "Type": "AWS::KinesisFirehose::DeliveryStream",
+   "Properties": {
+    "DeliveryStreamType": "DirectPut",
+    "ExtendedS3DestinationConfiguration": {
+     "BucketARN": "${Bucket83908E77.Arn}",
+     "RoleARN": "${Role1ABCC5F0.Arn}"
+    }
+   },
+   "DependsOn": [
+    "RoleDefaultPolicy5FFB7DAB"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputFnGetAttFirehoseEF5AC2A2ArnC3360F61": {
+   "Value": "${FirehoseEF5AC2A2.Arn}",
+   "Export": {
+    "Name": "ses-configuration-set-firehose:ExportsOutputFnGetAttFirehoseEF5AC2A2ArnC3360F61"
+   }
+  },
+  "ExportsOutputRefConfigurationSet3DD381867BBB7945": {
+   "Value": "${ConfigurationSet3DD38186}",
+   "Export": {
+    "Name": "ses-configuration-set-firehose:ExportsOutputRefConfigurationSet3DD381867BBB7945"
+   }
+  }
+ },
+ "unresolved": []
+}

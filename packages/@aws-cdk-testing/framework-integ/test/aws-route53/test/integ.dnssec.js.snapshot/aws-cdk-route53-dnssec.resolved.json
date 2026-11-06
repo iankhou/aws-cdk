@@ -1,0 +1,83 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-route53-dnssec",
+ "resources": {
+  "KmsKskBaseF6291F14": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "kms:DescribeKey",
+        "kms:GetPublicKey",
+        "kms:Sign"
+       ],
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": "arn:${AWS::Partition}:route53:::hostedzone/${HostedZoneDB99F866}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "dnssec-route53.amazonaws.com"
+       },
+       "Resource": "*"
+      },
+      {
+       "Action": "kms:CreateGrant",
+       "Condition": {
+        "Bool": {
+         "kms:GrantIsForAWSResource": true
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "dnssec-route53.amazonaws.com"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "KeySpec": "ECC_NIST_P256",
+    "KeyUsage": "SIGN_VERIFY"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "HostedZoneDB99F866": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "cdk.test."
+   }
+  },
+  "HostedZoneKeySigningKey3418AFB4": {
+   "Type": "AWS::Route53::KeySigningKey",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "KeyManagementServiceArn": "${KmsKskBaseF6291F14.Arn}",
+    "Name": "${HostedZoneKeySigningKey3418AFB4[1]}",
+    "Status": "ACTIVE"
+   }
+  },
+  "HostedZoneDNSSEC79297416": {
+   "Type": "AWS::Route53::DNSSEC",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}"
+   },
+   "DependsOn": [
+    "HostedZoneKeySigningKey3418AFB4"
+   ]
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,585 @@
+{
+ "stackName": "integ-distribution-policies",
+ "summary": {
+  "no handler": 4,
+  "pass": 19
+ },
+ "results": [
+  {
+   "logicalId": "CachePolicy26D8A535",
+   "type": "AWS::CloudFront::CachePolicy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CachePolicyWithRefD7C98251",
+   "type": "AWS::CloudFront::CachePolicy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "OriginRequestPolicy3EFDB4FA",
+   "type": "AWS::CloudFront::OriginRequestPolicy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ResponseHeadersPolicy13DBF9E0",
+   "type": "AWS::CloudFront::ResponseHeadersPolicy",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "integdistributionpoliciesDistOrigin17849EF2C",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "${CachePolicy26D8A535}",
+    "OriginRequestPolicyId": "${OriginRequestPolicy3EFDB4FA}",
+    "ResponseHeadersPolicyId": "${ResponseHeadersPolicy13DBF9E0}"
+   },
+   "actual": {
+    "TargetOriginId": "integdistributionpoliciesDistOrigin17849EF2C",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "${CachePolicy26D8A535}",
+    "OriginRequestPolicyId": "${OriginRequestPolicy3EFDB4FA}",
+    "ResponseHeadersPolicyId": "${ResponseHeadersPolicy13DBF9E0}"
+   }
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionpoliciesDistOrigin17849EF2C",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionpoliciesDistOrigin17849EF2C",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "Dist24014FEC1",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Dist24014FEC1",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Dist24014FEC1",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "Dist24014FEC1",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Dist24014FEC1",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "integdistributionpoliciesDist2Origin16AFA66C6",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "${CachePolicyWithRefD7C98251}",
+    "OriginRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac",
+    "ResponseHeadersPolicyId": "${ResponseHeadersPolicy13DBF9E0}"
+   },
+   "actual": {
+    "TargetOriginId": "integdistributionpoliciesDist2Origin16AFA66C6",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "${CachePolicyWithRefD7C98251}",
+    "OriginRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac",
+    "ResponseHeadersPolicyId": "${ResponseHeadersPolicy13DBF9E0}"
+   }
+  },
+  {
+   "logicalId": "Dist24014FEC1",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionpoliciesDist2Origin16AFA66C6",
+      "DomainName": "www.example-2.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionpoliciesDist2Origin16AFA66C6",
+      "DomainName": "www.example-2.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "DistManagedPolicy49A90409",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DistManagedPolicy49A90409",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "DistManagedPolicy49A90409",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "DistManagedPolicy49A90409",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "DistManagedPolicy49A90409",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   },
+   "actual": {
+    "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   }
+  },
+  {
+   "logicalId": "DistManagedPolicy49A90409",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.CacheBehaviors",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 18,
+    "Items": [
+     {
+      "PathPattern": "/cache-policy/AMPLIFY",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "2e54312d-136d-493c-8eb9-b001f22f67d2"
+     },
+     {
+      "PathPattern": "/cache-policy/CACHING_OPTIMIZED",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     },
+     {
+      "PathPattern": "/cache-policy/CACHING_OPTIMIZED_FOR_UNCOMPRESSED_OBJECTS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "b2884449-e4de-46a7-ac36-70bc7f1ddd6d"
+     },
+     {
+      "PathPattern": "/cache-policy/CACHING_DISABLED",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+     },
+     {
+      "PathPattern": "/cache-policy/ELEMENTAL_MEDIA_PACKAGE",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "08627262-05a9-4f76-9ded-b50ca2e3a84f"
+     },
+     {
+      "PathPattern": "/origin-request-policy/USER_AGENT_REFERER_HEADERS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "acba4595-bd28-49b8-b9fe-13317c0390fa"
+     },
+     {
+      "PathPattern": "/origin-request-policy/CORS_CUSTOM_ORIGIN",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "59781a5b-3903-41f3-afcb-af62929ccde1"
+     },
+     {
+      "PathPattern": "/origin-request-policy/CORS_S3_ORIGIN",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "88a5eaf4-2fd4-4709-b370-b4c650ea3fcf"
+     },
+     {
+      "PathPattern": "/origin-request-policy/ALL_VIEWER",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "216adef6-5c7f-47e4-b989-5492eafa07d3"
+     },
+     {
+      "PathPattern": "/origin-request-policy/ELEMENTAL_MEDIA_TAILOR",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "775133bc-15f2-49f9-abea-afb2e0bf67d2"
+     },
+     {
+      "PathPattern": "/origin-request-policy/ALL_VIEWER_AND_CLOUDFRONT_2022",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "33f36d7e-f396-46d9-90e0-52428a34d9dc"
+     },
+     {
+      "PathPattern": "/origin-request-policy/ALL_VIEWER_EXCEPT_HOST_HEADER",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac"
+     },
+     {
+      "PathPattern": "/origin-request-policy/HOST_HEADER_ONLY",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "bf0718e1-ba1e-49d1-88b1-f726733018ae"
+     },
+     {
+      "PathPattern": "/response-headers-policy/CORS_ALLOW_ALL_ORIGINS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "60669652-455b-4ae9-85a4-c4c02393f86c"
+     },
+     {
+      "PathPattern": "/response-headers-policy/CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "5cc3b908-e619-4b99-88e5-2cf7f45965bd"
+     },
+     {
+      "PathPattern": "/response-headers-policy/SECURITY_HEADERS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "67f7725c-6f97-4210-82d7-5512b31e9d03"
+     },
+     {
+      "PathPattern": "/response-headers-policy/CORS_ALLOW_ALL_ORIGINS_AND_SECURITY_HEADERS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "e61eb60c-9c35-4d20-a928-2b84e02af89c"
+     },
+     {
+      "PathPattern": "/response-headers-policy/CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 18,
+    "Items": [
+     {
+      "PathPattern": "/cache-policy/AMPLIFY",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "2e54312d-136d-493c-8eb9-b001f22f67d2"
+     },
+     {
+      "PathPattern": "/cache-policy/CACHING_OPTIMIZED",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     },
+     {
+      "PathPattern": "/cache-policy/CACHING_OPTIMIZED_FOR_UNCOMPRESSED_OBJECTS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "b2884449-e4de-46a7-ac36-70bc7f1ddd6d"
+     },
+     {
+      "PathPattern": "/cache-policy/CACHING_DISABLED",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+     },
+     {
+      "PathPattern": "/cache-policy/ELEMENTAL_MEDIA_PACKAGE",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "08627262-05a9-4f76-9ded-b50ca2e3a84f"
+     },
+     {
+      "PathPattern": "/origin-request-policy/USER_AGENT_REFERER_HEADERS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "acba4595-bd28-49b8-b9fe-13317c0390fa"
+     },
+     {
+      "PathPattern": "/origin-request-policy/CORS_CUSTOM_ORIGIN",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "59781a5b-3903-41f3-afcb-af62929ccde1"
+     },
+     {
+      "PathPattern": "/origin-request-policy/CORS_S3_ORIGIN",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "88a5eaf4-2fd4-4709-b370-b4c650ea3fcf"
+     },
+     {
+      "PathPattern": "/origin-request-policy/ALL_VIEWER",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "216adef6-5c7f-47e4-b989-5492eafa07d3"
+     },
+     {
+      "PathPattern": "/origin-request-policy/ELEMENTAL_MEDIA_TAILOR",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "775133bc-15f2-49f9-abea-afb2e0bf67d2"
+     },
+     {
+      "PathPattern": "/origin-request-policy/ALL_VIEWER_AND_CLOUDFRONT_2022",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "33f36d7e-f396-46d9-90e0-52428a34d9dc"
+     },
+     {
+      "PathPattern": "/origin-request-policy/ALL_VIEWER_EXCEPT_HOST_HEADER",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac"
+     },
+     {
+      "PathPattern": "/origin-request-policy/HOST_HEADER_ONLY",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "OriginRequestPolicyId": "bf0718e1-ba1e-49d1-88b1-f726733018ae"
+     },
+     {
+      "PathPattern": "/response-headers-policy/CORS_ALLOW_ALL_ORIGINS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "60669652-455b-4ae9-85a4-c4c02393f86c"
+     },
+     {
+      "PathPattern": "/response-headers-policy/CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "5cc3b908-e619-4b99-88e5-2cf7f45965bd"
+     },
+     {
+      "PathPattern": "/response-headers-policy/SECURITY_HEADERS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "67f7725c-6f97-4210-82d7-5512b31e9d03"
+     },
+     {
+      "PathPattern": "/response-headers-policy/CORS_ALLOW_ALL_ORIGINS_AND_SECURITY_HEADERS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "e61eb60c-9c35-4d20-a928-2b84e02af89c"
+     },
+     {
+      "PathPattern": "/response-headers-policy/CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS",
+      "TargetOriginId": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "ResponseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "DistManagedPolicy49A90409",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionpoliciesDistManagedPolicyOrigin1E69AEA56",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

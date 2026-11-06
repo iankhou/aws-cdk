@@ -1,0 +1,284 @@
+{
+ "stackName": "aws-ecr-integ-stack",
+ "summary": {
+  "no handler": 4,
+  "pass": 20
+ },
+ "results": [
+  {
+   "logicalId": "Repo02AC86CF",
+   "type": "AWS::ECR::Repository",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyIamUser046086A4",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyIamUserDefaultPolicy4B9C0A95",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyIamUserDefaultPolicy4B9C0A95",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyIamUserDefaultPolicy4B9C0A95",
+   "actual": "MyIamUserDefaultPolicy4B9C0A95"
+  },
+  {
+   "logicalId": "MyIamUserDefaultPolicy4B9C0A95",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ecr:BatchCheckLayerAvailability",
+       "ecr:BatchGetImage",
+       "ecr:CompleteLayerUpload",
+       "ecr:DescribeImages",
+       "ecr:DescribeRepositories",
+       "ecr:GetDownloadUrlForLayer",
+       "ecr:InitiateLayerUpload",
+       "ecr:PutImage",
+       "ecr:UploadLayerPart"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/${Repo02AC86CF}"
+     },
+     {
+      "Action": "ecr:GetAuthorizationToken",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ecr:BatchCheckLayerAvailability",
+       "ecr:BatchGetImage",
+       "ecr:CompleteLayerUpload",
+       "ecr:DescribeImages",
+       "ecr:DescribeRepositories",
+       "ecr:GetDownloadUrlForLayer",
+       "ecr:InitiateLayerUpload",
+       "ecr:PutImage",
+       "ecr:UploadLayerPart"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/${Repo02AC86CF}"
+     },
+     {
+      "Action": "ecr:GetAuthorizationToken",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyIamUserDefaultPolicy4B9C0A95",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyIamUser046086A4}",
+   "actual": "${MyIamUser046086A4}"
+  },
+  {
+   "logicalId": "RepoWithEmptyOnDeleteCA5C67FA",
+   "type": "AWS::ECR::Repository",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "RepoOnEvent13B6ADDB",
+   "type": "AWS::ECR::Repository",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambda2934FA99",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambda2934FA99",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambda2934FA99",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "aws.ecr"
+    ],
+    "detail": {
+     "repository-name": [
+      "${RepoOnEvent13B6ADDB}"
+     ]
+    }
+   },
+   "actual": "{\"source\":[\"aws.ecr\"],\"detail\":{\"repository-name\":[\"${RepoOnEvent13B6ADDB}\"]}}"
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambda2934FA99",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunctionBF21E41F}",
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunctionBF21E41F}"
+    }
+   ]
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambdaAllowEventRuleawsecrintegstackLambdaFunctionB6045AA7FBA3AA33",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambdaAllowEventRuleawsecrintegstackLambdaFunctionB6045AA7FBA3AA33",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambdaAllowEventRuleawsecrintegstackLambdaFunctionB6045AA7FBA3AA33",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunctionBF21E41F}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunctionBF21E41F}"
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambdaAllowEventRuleawsecrintegstackLambdaFunctionB6045AA7FBA3AA33",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "RepoOnEventOnEventTargetLambdaAllowEventRuleawsecrintegstackLambdaFunctionB6045AA7FBA3AA33",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${RepoOnEventOnEventTargetLambda2934FA99}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${RepoOnEventOnEventTargetLambda2934FA99}"
+  },
+  {
+   "logicalId": "LambdaFunctionServiceRoleC555A460",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaFunctionServiceRoleC555A460",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaFunctionServiceRoleC555A460",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaFunctionBF21E41F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaFunctionBF21E41F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaFunctionBF21E41F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.12",
+   "actual": "python3.12"
+  },
+  {
+   "logicalId": "LambdaFunctionBF21E41F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaFunctionServiceRoleC555A460}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaFunctionServiceRoleC555A460}"
+  }
+ ]
+}

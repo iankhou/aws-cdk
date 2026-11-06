@@ -1,0 +1,42 @@
+{
+ "version": "1",
+ "stackName": "cdk-integ-lambda-nodejs-shell-bundling",
+ "resources": {
+  "tshandlerServiceRole8876B8E7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "tshandler4E1C6929": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "5fd5332ac0f100f1845842d79d110a7cf0957bd31419a7aabaedf8d3043ddf09.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${tshandlerServiceRole8876B8E7.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "tshandlerServiceRole8876B8E7"
+   ]
+  }
+ },
+ "unresolved": []
+}

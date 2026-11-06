@@ -1,0 +1,130 @@
+{
+ "stackName": "GlueWorkflowTriggerStack",
+ "summary": {
+  "no handler": 5,
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "Workflow193EF7C1",
+   "type": "AWS::Glue::Workflow",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "WorkflowOnDemandTriggerEE8E75A1",
+   "type": "AWS::Glue::Trigger",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "WorkflowConditionalTrigger133C0CA8",
+   "type": "AWS::Glue::Trigger",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "JobRole014917C6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "JobRole014917C6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "glue.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22glue.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "JobRoleDefaultPolicy5DE0D8F9",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "JobRoleDefaultPolicy5DE0D8F9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "JobRoleDefaultPolicy5DE0D8F9",
+   "actual": "JobRoleDefaultPolicy5DE0D8F9"
+  },
+  {
+   "logicalId": "JobRoleDefaultPolicy5DE0D8F9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "JobRoleDefaultPolicy5DE0D8F9",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${JobRole014917C6}",
+   "actual": "${JobRole014917C6}"
+  },
+  {
+   "logicalId": "OutboundJobB5826414",
+   "type": "AWS::Glue::Job",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "InboundJobEDA3CBF4",
+   "type": "AWS::Glue::Job",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

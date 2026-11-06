@@ -1,0 +1,35 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-metricfilter-dimensions-integ",
+ "resources": {
+  "LogGroupF5B46931": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MetricFilter1B93B6E5": {
+   "Type": "AWS::Logs::MetricFilter",
+   "Properties": {
+    "FilterPattern": "{ $.latency = \"*\" }",
+    "LogGroupName": "${LogGroupF5B46931}",
+    "MetricTransformations": [
+     {
+      "Dimensions": [
+       {
+        "Key": "ErrorCode",
+        "Value": "$.errorCode"
+       }
+      ],
+      "MetricName": "Latency",
+      "MetricNamespace": "MyApp",
+      "MetricValue": "$.latency"
+     }
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,296 @@
+{
+ "stackName": "aws-stepfunctions-statemachine-and-activity-with-cmk-encryptionconfig",
+ "summary": {
+  "pass": 15,
+  "no handler": 1,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "StateMachineKeyE4B4725B",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineKeyE4B4725B",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "ActivityKey371097A6",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ActivityKey371097A6",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:GenerateDataKey"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "kms:EncryptionContext:aws:states:activityArn": "${ActivityWithCMKEncryptionConfiguration3D01813A}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  }, {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"states.amazonaws.com\"\n    },\n    \"Action\" : [ \"kms:Decrypt\", \"kms:GenerateDataKey\" ],\n    \"Resource\" : \"*\",\n    \"Condition\" : {\n      \"StringEquals\" : {\n        \"kms:EncryptionContext:aws:states:activityArn\" : \"${ActivityWithCMKEncryptionConfiguration3D01813A}\"\n      }\n    }\n  } ]\n}"
+  },
+  {
+   "logicalId": "ActivityWithCMKEncryptionConfiguration3D01813A",
+   "type": "AWS::StepFunctions::Activity",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfigurationRoleA49EBB18",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfigurationRoleA49EBB18",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfigurationRoleDefaultPolicy55B46C35",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfigurationRoleDefaultPolicy55B46C35",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineWithCMKEncryptionConfigurationRoleDefaultPolicy55B46C35",
+   "actual": "StateMachineWithCMKEncryptionConfigurationRoleDefaultPolicy55B46C35"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfigurationRoleDefaultPolicy55B46C35",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:GenerateDataKey"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "kms:EncryptionContext:aws:states:activityArn": "${ActivityWithCMKEncryptionConfiguration3D01813A}"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${ActivityKey371097A6}"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:GenerateDataKey"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "kms:EncryptionContext:aws:states:stateMachineArn": "${StateMachineWithCMKEncryptionConfiguration10773462}"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${StateMachineKeyE4B4725B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:GenerateDataKey"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "kms:EncryptionContext:aws:states:activityArn": "${ActivityWithCMKEncryptionConfiguration3D01813A}"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${ActivityKey371097A6}"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:GenerateDataKey"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "kms:EncryptionContext:aws:states:stateMachineArn": "${StateMachineWithCMKEncryptionConfiguration10773462}"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${StateMachineKeyE4B4725B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfigurationRoleDefaultPolicy55B46C35",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineWithCMKEncryptionConfigurationRoleA49EBB18}",
+   "actual": "${StateMachineWithCMKEncryptionConfigurationRoleA49EBB18}"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfiguration10773462",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfiguration10773462",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Activity",
+    "States": {
+     "Activity": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "${ActivityWithCMKEncryptionConfiguration3D01813A}",
+      "Parameters": {
+       "Hello": "World"
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Activity",
+    "States": {
+     "Activity": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "${ActivityWithCMKEncryptionConfiguration3D01813A}",
+      "Parameters": {
+       "Hello": "World"
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfiguration10773462",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineWithCMKEncryptionConfigurationRoleA49EBB18}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineWithCMKEncryptionConfigurationRoleA49EBB18}"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfiguration10773462",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "StateMachineName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineWithCMKEncryptionConfiguration",
+   "actual": "StateMachineWithCMKEncryptionConfiguration"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfiguration10773462",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "StateMachineType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "STANDARD",
+   "actual": "STANDARD"
+  },
+  {
+   "logicalId": "StateMachineWithCMKEncryptionConfiguration10773462",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "EncryptionConfiguration",
+   "status": "fail",
+   "expected": {
+    "type": "CUSTOMER_MANAGED_KMS_KEY",
+    "kmsKeyId": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${StateMachineKeyE4B4725B}",
+    "kmsDataKeyReusePeriodSeconds": 75
+   },
+   "actual": {
+    "type": "CUSTOMER_MANAGED_KMS_KEY",
+    "kmsKeyId": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${StateMachineKeyE4B4725B}",
+    "kmsDataKeyReusePeriodSeconds": 75,
+    "__type": "com.amazonaws.swf.base.model#EncryptionConfiguration"
+   }
+  }
+ ]
+}

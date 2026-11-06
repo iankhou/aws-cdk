@@ -1,0 +1,89 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-scheduler-targets-kinesis-stream-put-record",
+ "resources": {
+  "MyStream5C050E93": {
+   "Type": "AWS::Kinesis::Stream",
+   "Properties": {
+    "Name": "my-stream",
+    "RetentionPeriodHours": 24,
+    "ShardCount": 1,
+    "StreamEncryption": {
+     "EncryptionType": "KMS",
+     "KeyId": "alias/aws/kinesis"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "Schedule83A77FD1": {
+   "Type": "AWS::Scheduler::Schedule",
+   "Properties": {
+    "FlexibleTimeWindow": {
+     "Mode": "OFF"
+    },
+    "ScheduleExpression": "rate(1 minute)",
+    "ScheduleExpressionTimezone": "Etc/UTC",
+    "State": "ENABLED",
+    "Target": {
+     "Arn": "${MyStream5C050E93.Arn}",
+     "Input": "{\"Data\":\"record\"}",
+     "KinesisParameters": {
+      "PartitionKey": "key"
+     },
+     "RetryPolicy": {
+      "MaximumEventAgeInSeconds": 86400,
+      "MaximumRetryAttempts": 185
+     },
+     "RoleArn": "${SchedulerRoleForTargetb38bb9039D30C1.Arn}"
+    }
+   }
+  },
+  "SchedulerRoleForTargetb38bb9039D30C1": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}",
+         "aws:SourceArn": "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule-group/default"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "scheduler.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "SchedulerRoleForTargetb38bb9DefaultPolicy31225C1C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "kinesis:PutRecord",
+        "kinesis:PutRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "${MyStream5C050E93.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SchedulerRoleForTargetb38bb9DefaultPolicy31225C1C",
+    "Roles": [
+     "${SchedulerRoleForTargetb38bb9039D30C1}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

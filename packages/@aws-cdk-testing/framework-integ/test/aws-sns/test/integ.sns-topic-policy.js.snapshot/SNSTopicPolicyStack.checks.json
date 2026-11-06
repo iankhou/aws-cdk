@@ -1,0 +1,212 @@
+{
+ "stackName": "SNSTopicPolicyStack",
+ "summary": {
+  "pass": 16
+ },
+ "results": [
+  {
+   "logicalId": "TopicBFC7AF6E",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TopicBFC7AF6E",
+   "type": "AWS::SNS::Topic",
+   "property": "TopicName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "fooTopic",
+   "actual": "fooTopic"
+  },
+  {
+   "logicalId": "TopicBFC7AF6E",
+   "type": "AWS::SNS::Topic",
+   "property": "DisplayName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "fooDisplay",
+   "actual": "fooDisplay"
+  },
+  {
+   "logicalId": "TopicPolicyA24B096F",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TopicPolicyA24B096F",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Publish",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      },
+      "Resource": "${TopicBFC7AF6E}",
+      "Sid": "0"
+     },
+     {
+      "Action": "sns:Publish",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": "*",
+      "Resource": "${TopicBFC7AF6E}",
+      "Sid": "AllowPublishThroughSSLOnly"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"0\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"sns:Publish\",\"Resource\":\"${TopicBFC7AF6E}\"},{\"Sid\":\"AllowPublishThroughSSLOnly\",\"Effect\":\"Deny\",\"Principal\":\"*\",\"Action\":\"sns:Publish\",\"Resource\":\"${TopicBFC7AF6E}\",\"Condition\":{\"Bool\":{\"aws:SecureTransport\":\"false\"}}}]}"
+  },
+  {
+   "logicalId": "TopicPolicyA24B096F",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${TopicBFC7AF6E}"
+   ],
+   "actual": [
+    "${TopicBFC7AF6E}"
+   ]
+  },
+  {
+   "logicalId": "TopicAddPolicy7DB03706",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TopicAddPolicy7DB03706",
+   "type": "AWS::SNS::Topic",
+   "property": "TopicName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "topicAddPolicy",
+   "actual": "topicAddPolicy"
+  },
+  {
+   "logicalId": "TopicAddPolicy7DB03706",
+   "type": "AWS::SNS::Topic",
+   "property": "DisplayName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "topicDisplayNameAddPolicy",
+   "actual": "topicDisplayNameAddPolicy"
+  },
+  {
+   "logicalId": "TopicAddPolicyAEA24A5A",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TopicAddPolicyAEA24A5A",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Publish",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": "*",
+      "Resource": "${TopicAddPolicy7DB03706}",
+      "Sid": "AllowPublishThroughSSLOnly"
+     },
+     {
+      "Action": "sns:Publish",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      },
+      "Resource": "${TopicAddPolicy7DB03706}",
+      "Sid": "1"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowPublishThroughSSLOnly\",\"Effect\":\"Deny\",\"Principal\":\"*\",\"Action\":\"sns:Publish\",\"Resource\":\"${TopicAddPolicy7DB03706}\",\"Condition\":{\"Bool\":{\"aws:SecureTransport\":\"false\"}}},{\"Sid\":\"1\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"sns:Publish\",\"Resource\":\"${TopicAddPolicy7DB03706}\"}]}"
+  },
+  {
+   "logicalId": "TopicAddPolicyAEA24A5A",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${TopicAddPolicy7DB03706}"
+   ],
+   "actual": [
+    "${TopicAddPolicy7DB03706}"
+   ]
+  },
+  {
+   "logicalId": "TopicWithSSLC879A4EA",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TopicWithSSLPolicy3E7ECD75",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TopicWithSSLPolicy3E7ECD75",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Publish",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": "*",
+      "Resource": "${TopicWithSSLC879A4EA}",
+      "Sid": "AllowPublishThroughSSLOnly"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowPublishThroughSSLOnly\",\"Effect\":\"Deny\",\"Principal\":\"*\",\"Action\":\"sns:Publish\",\"Resource\":\"${TopicWithSSLC879A4EA}\",\"Condition\":{\"Bool\":{\"aws:SecureTransport\":\"false\"}}}]}"
+  },
+  {
+   "logicalId": "TopicWithSSLPolicy3E7ECD75",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${TopicWithSSLC879A4EA}"
+   ],
+   "actual": [
+    "${TopicWithSSLC879A4EA}"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,107 @@
+{
+ "stackName": "cloudfront-http-origin",
+ "summary": {
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "cloudfronthttporiginDistributionOrigin162B02709",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   },
+   "actual": {
+    "TargetOriginId": "cloudfronthttporiginDistributionOrigin162B02709",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "cloudfronthttporiginDistributionOrigin162B02709",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       },
+       "OriginReadTimeout": 100,
+       "OriginKeepaliveTimeout": 200
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "cloudfronthttporiginDistributionOrigin162B02709",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       },
+       "OriginReadTimeout": 100,
+       "OriginKeepaliveTimeout": 200
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

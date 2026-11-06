@@ -1,0 +1,89 @@
+{
+ "version": "1",
+ "stackName": "core-cfn-mapping-1",
+ "resources": {
+  "CfnMappingFindInMapBucket6F72FEE7": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "outputs": {
+  "Output0": {
+   "Value": {
+    "Fn::FindInMap": [
+     "Regularmapping",
+     "TopLevelKey1",
+     "SecondLevelKey1",
+     {
+      "DefaultValue": "foob"
+     }
+    ]
+   }
+  },
+  "Output1": {
+   "Value": {
+    "Fn::FindInMap": [
+     "Regularmapping",
+     "TopLevelKey1",
+     "${AWS::Region}",
+     {
+      "DefaultValue": "foob"
+     }
+    ]
+   }
+  },
+  "Output2": {
+   "Value": {
+    "Fn::FindInMap": [
+     "Regularmapping",
+     "TopLevelKey1",
+     "SecondLevelKey3",
+     {
+      "DefaultValue": "foob"
+     }
+    ]
+   }
+  },
+  "Output3": {
+   "Value": "No"
+  },
+  "Output4": {
+   "Value": "bart"
+  },
+  "Output5": {
+   "Value": {
+    "Fn::FindInMap": [
+     "Lazymapping",
+     "${AWS::Region}",
+     "SecondLevelKey2",
+     {
+      "DefaultValue": "bart"
+     }
+    ]
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Outputs.Output0.Value",
+   "intrinsic": "Fn::FindInMap",
+   "reason": "CloudFormation function Fn::FindInMap is not supported"
+  },
+  {
+   "path": "Outputs.Output1.Value",
+   "intrinsic": "Fn::FindInMap",
+   "reason": "CloudFormation function Fn::FindInMap is not supported"
+  },
+  {
+   "path": "Outputs.Output2.Value",
+   "intrinsic": "Fn::FindInMap",
+   "reason": "CloudFormation function Fn::FindInMap is not supported"
+  },
+  {
+   "path": "Outputs.Output5.Value",
+   "intrinsic": "Fn::FindInMap",
+   "reason": "CloudFormation function Fn::FindInMap is not supported"
+  }
+ ]
+}

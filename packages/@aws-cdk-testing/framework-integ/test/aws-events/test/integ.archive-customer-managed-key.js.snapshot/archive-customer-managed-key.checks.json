@@ -1,0 +1,69 @@
+{
+ "stackName": "archive-customer-managed-key",
+ "summary": {
+  "pass": 2,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "KmsKey46693ADD",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KmsKey46693ADD",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:GenerateDataKey",
+       "kms:ReEncrypt*"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "kms:EncryptionContext:aws:events:event-bus:arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "*",
+      "Sid": "Allow EventBridge to use kms operations"
+     },
+     {
+      "Action": "kms:DescribeKey",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "*",
+      "Sid": "Allow EventBridge to call kms:DescribeKey"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  }, {\n    \"Sid\" : \"Allow EventBridge to use kms operations\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"events.amazonaws.com\"\n    },\n    \"Action\" : [ \"kms:Decrypt\", \"kms:GenerateDataKey\", \"kms:ReEncrypt*\" ],\n    \"Resource\" : \"*\",\n    \"Condition\" : {\n      \"StringEquals\" : {\n        \"kms:EncryptionContext:aws:events:event-bus:arn\" : \"arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default\"\n      }\n    }\n  }, {\n    \"Sid\" : \"Allow EventBridge to call kms:DescribeKey\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"events.amazonaws.com\"\n    },\n    \"Action\" : \"kms:DescribeKey\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "Archive4DBC1EC9",
+   "type": "AWS::Events::Archive",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

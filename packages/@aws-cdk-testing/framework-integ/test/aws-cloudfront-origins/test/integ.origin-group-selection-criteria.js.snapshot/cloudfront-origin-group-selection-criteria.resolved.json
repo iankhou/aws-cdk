@@ -1,0 +1,94 @@
+{
+ "version": "1",
+ "stackName": "cloudfront-origin-group-selection-criteria",
+ "resources": {
+  "cg1": {
+   "Type": "AWS::MediaPackageV2::ChannelGroup",
+   "Properties": {
+    "ChannelGroupName": "${cg1.Name}"
+   }
+  },
+  "cg2": {
+   "Type": "AWS::MediaPackageV2::ChannelGroup",
+   "Properties": {
+    "ChannelGroupName": "${cg2.Name}"
+   }
+  },
+  "Distribution830FAC52": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "CacheBehaviors": [
+      {
+       "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+       "Compress": true,
+       "PathPattern": "/video",
+       "TargetOriginId": "cloudfrontorigingroupselectioncriteriaDistributionOriginGroup1518D308D",
+       "ViewerProtocolPolicy": "allow-all"
+      }
+     ],
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "cloudfrontorigingroupselectioncriteriaDistributionOriginGroup1518D308D",
+      "ViewerProtocolPolicy": "allow-all"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "OriginGroups": {
+      "Items": [
+       {
+        "FailoverCriteria": {
+         "StatusCodes": {
+          "Items": [
+           404
+          ],
+          "Quantity": 1
+         }
+        },
+        "Id": "cloudfrontorigingroupselectioncriteriaDistributionOriginGroup1518D308D",
+        "Members": {
+         "Items": [
+          {
+           "OriginId": "cloudfrontorigingroupselectioncriteriaDistributionOrigin1AA511FA4"
+          },
+          {
+           "OriginId": "cloudfrontorigingroupselectioncriteriaDistributionOrigin2AFDC8F08"
+          }
+         ],
+         "Quantity": 2
+        },
+        "SelectionCriteria": "media-quality-based"
+       }
+      ],
+      "Quantity": 1
+     },
+     "Origins": [
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only",
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": "${cg1.EgressDomain}",
+       "Id": "cloudfrontorigingroupselectioncriteriaDistributionOrigin1AA511FA4"
+      },
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only",
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": "${cg2.EgressDomain}",
+       "Id": "cloudfrontorigingroupselectioncriteriaDistributionOrigin2AFDC8F08"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "unresolved": []
+}

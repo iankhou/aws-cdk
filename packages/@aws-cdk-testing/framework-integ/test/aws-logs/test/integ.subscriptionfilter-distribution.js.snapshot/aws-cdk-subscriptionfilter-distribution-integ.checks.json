@@ -1,0 +1,185 @@
+{
+ "stackName": "aws-cdk-subscriptionfilter-distribution-integ",
+ "summary": {
+  "pass": 15,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logs.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22logs.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314",
+   "actual": "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "kinesis:ListShards",
+       "kinesis:PutRecord",
+       "kinesis:PutRecords"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${Stream790BDEE4}"
+     },
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "kinesis:ListShards",
+       "kinesis:PutRecord",
+       "kinesis:PutRecords"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${Stream790BDEE4}"
+     },
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851}",
+   "actual": "${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851}"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionE3573E29",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionE3573E29",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "FilterName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomSubscriptionFilterName",
+   "actual": "CustomSubscriptionFilterName"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionE3573E29",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${LogGroupF5B46931}",
+   "actual": "${LogGroupF5B46931}"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionE3573E29",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "DestinationArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${Stream790BDEE4}",
+   "actual": "arn:${AWS::Partition}:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${Stream790BDEE4}"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionE3573E29",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "FilterPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "\"ERROR\" \"MainThread\"",
+   "actual": "\"ERROR\" \"MainThread\""
+  },
+  {
+   "logicalId": "LogGroupSubscriptionE3573E29",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851}"
+  },
+  {
+   "logicalId": "LogGroupSubscriptionE3573E29",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "Distribution",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Random",
+   "actual": "Random"
+  },
+  {
+   "logicalId": "Stream790BDEE4",
+   "type": "AWS::Kinesis::Stream",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

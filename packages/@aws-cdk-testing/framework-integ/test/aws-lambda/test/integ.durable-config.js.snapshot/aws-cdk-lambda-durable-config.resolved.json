@@ -1,0 +1,54 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-lambda-durable-config",
+ "resources": {
+  "DurableFunctionServiceRole4F9882F4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicDurableExecutionRolePolicy"
+    ]
+   }
+  },
+  "DurableFunction8FC9485F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "exports.handler = async () => ({ statusCode: 200, body: \"Hello World\" });"
+    },
+    "DurableConfig": {
+     "ExecutionTimeout": 3600,
+     "RetentionPeriodInDays": 30
+    },
+    "Handler": "index.handler",
+    "Role": "${DurableFunctionServiceRole4F9882F4.Arn}",
+    "Runtime": "nodejs22.x"
+   },
+   "DependsOn": [
+    "DurableFunctionServiceRole4F9882F4"
+   ]
+  },
+  "DurableFunctionLogGroup96FE3B84": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/${DurableFunction8FC9485F}",
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": []
+}

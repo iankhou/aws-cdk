@@ -1,0 +1,308 @@
+{
+ "stackName": "S3-RTC-TestStack",
+ "summary": {
+  "pass": 18,
+  "gap": 2
+ },
+ "results": [
+  {
+   "logicalId": "DstBucket3E241BF2",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DstBucket3E241BF2",
+   "type": "AWS::S3::Bucket",
+   "property": "VersioningConfiguration.Status",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Enabled",
+   "actual": "Enabled"
+  },
+  {
+   "logicalId": "S3SourceBucket1ReplicationRoleD6E982E6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "S3SourceBucket1ReplicationRoleD6E982E6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22s3.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "S3SourceBucket1ReplicationRoleDefaultPolicy61FC49E2",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "S3SourceBucket1ReplicationRoleDefaultPolicy61FC49E2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "S3SourceBucket1ReplicationRoleDefaultPolicy61FC49E2",
+   "actual": "S3SourceBucket1ReplicationRoleDefaultPolicy61FC49E2"
+  },
+  {
+   "logicalId": "S3SourceBucket1ReplicationRoleDefaultPolicy61FC49E2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetReplicationConfiguration",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${S3SourceBucket1FB05F2D8}"
+     },
+     {
+      "Action": [
+       "s3:GetObjectVersionAcl",
+       "s3:GetObjectVersionForReplication",
+       "s3:GetObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${S3SourceBucket1FB05F2D8}/*"
+     },
+     {
+      "Action": [
+       "s3:ObjectOwnerOverrideToBucketOwner",
+       "s3:ReplicateDelete",
+       "s3:ReplicateObject",
+       "s3:ReplicateTags"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${DstBucket3E241BF2}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetReplicationConfiguration",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${S3SourceBucket1FB05F2D8}"
+     },
+     {
+      "Action": [
+       "s3:GetObjectVersionAcl",
+       "s3:GetObjectVersionForReplication",
+       "s3:GetObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${S3SourceBucket1FB05F2D8}/*"
+     },
+     {
+      "Action": [
+       "s3:ObjectOwnerOverrideToBucketOwner",
+       "s3:ReplicateDelete",
+       "s3:ReplicateObject",
+       "s3:ReplicateTags"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${DstBucket3E241BF2}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "S3SourceBucket1ReplicationRoleDefaultPolicy61FC49E2",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3SourceBucket1ReplicationRoleD6E982E6}",
+   "actual": "${S3SourceBucket1ReplicationRoleD6E982E6}"
+  },
+  {
+   "logicalId": "S3SourceBucket1FB05F2D8",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "S3SourceBucket1FB05F2D8",
+   "type": "AWS::S3::Bucket",
+   "property": "VersioningConfiguration.Status",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Enabled",
+   "actual": "Enabled"
+  },
+  {
+   "logicalId": "S3SourceBucket1FB05F2D8",
+   "type": "AWS::S3::Bucket",
+   "property": "ReplicationConfiguration",
+   "status": "gap"
+  },
+  {
+   "logicalId": "S3SourceBucket2ReplicationRole68101260",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "S3SourceBucket2ReplicationRole68101260",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22s3.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "S3SourceBucket2ReplicationRoleDefaultPolicy414F29F2",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "S3SourceBucket2ReplicationRoleDefaultPolicy414F29F2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "S3SourceBucket2ReplicationRoleDefaultPolicy414F29F2",
+   "actual": "S3SourceBucket2ReplicationRoleDefaultPolicy414F29F2"
+  },
+  {
+   "logicalId": "S3SourceBucket2ReplicationRoleDefaultPolicy414F29F2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetReplicationConfiguration",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${S3SourceBucket278BFBAF8}"
+     },
+     {
+      "Action": [
+       "s3:GetObjectVersionAcl",
+       "s3:GetObjectVersionForReplication",
+       "s3:GetObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${S3SourceBucket278BFBAF8}/*"
+     },
+     {
+      "Action": [
+       "s3:ObjectOwnerOverrideToBucketOwner",
+       "s3:ReplicateDelete",
+       "s3:ReplicateObject",
+       "s3:ReplicateTags"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${DstBucket3E241BF2}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetReplicationConfiguration",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${S3SourceBucket278BFBAF8}"
+     },
+     {
+      "Action": [
+       "s3:GetObjectVersionAcl",
+       "s3:GetObjectVersionForReplication",
+       "s3:GetObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${S3SourceBucket278BFBAF8}/*"
+     },
+     {
+      "Action": [
+       "s3:ObjectOwnerOverrideToBucketOwner",
+       "s3:ReplicateDelete",
+       "s3:ReplicateObject",
+       "s3:ReplicateTags"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${DstBucket3E241BF2}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "S3SourceBucket2ReplicationRoleDefaultPolicy414F29F2",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3SourceBucket2ReplicationRole68101260}",
+   "actual": "${S3SourceBucket2ReplicationRole68101260}"
+  },
+  {
+   "logicalId": "S3SourceBucket278BFBAF8",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "S3SourceBucket278BFBAF8",
+   "type": "AWS::S3::Bucket",
+   "property": "VersioningConfiguration.Status",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Enabled",
+   "actual": "Enabled"
+  },
+  {
+   "logicalId": "S3SourceBucket278BFBAF8",
+   "type": "AWS::S3::Bucket",
+   "property": "ReplicationConfiguration",
+   "status": "gap"
+  }
+ ]
+}

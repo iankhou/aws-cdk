@@ -1,0 +1,532 @@
+{
+ "stackName": "aws-stepfunctions-tasks-http-invoke-integ",
+ "summary": {
+  "pass": 42,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "AuthorizerHandlerServiceRole5F40A014",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AuthorizerHandlerServiceRole5F40A014",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "AuthorizerHandlerServiceRole5F40A014",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "AuthorizerHandler0112B303",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AuthorizerHandler0112B303",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "AuthorizerHandler0112B303",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "AuthorizerHandler0112B303",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AuthorizerHandlerServiceRole5F40A014}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AuthorizerHandlerServiceRole5F40A014}"
+  },
+  {
+   "logicalId": "AuthorizerHandlerawsstepfunctionstaskshttpinvokeintegAuthorizerECFD3F1CPermissions7F5D78AD",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AuthorizerHandlerawsstepfunctionstaskshttpinvokeintegAuthorizerECFD3F1CPermissions7F5D78AD",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "AuthorizerHandlerawsstepfunctionstaskshttpinvokeintegAuthorizerECFD3F1CPermissions7F5D78AD",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AuthorizerHandler0112B303}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AuthorizerHandler0112B303}"
+  },
+  {
+   "logicalId": "AuthorizerHandlerawsstepfunctionstaskshttpinvokeintegAuthorizerECFD3F1CPermissions7F5D78AD",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "apigateway.amazonaws.com"
+   },
+   "actual": {
+    "Service": "apigateway.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "AuthorizerHandlerawsstepfunctionstaskshttpinvokeintegAuthorizerECFD3F1CPermissions7F5D78AD",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${IntegRestApiF8B59B0D}/authorizers/5gsnn0",
+   "actual": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${IntegRestApiF8B59B0D}/authorizers/5gsnn0"
+  },
+  {
+   "logicalId": "AuthorizerBD825682",
+   "type": "AWS::ApiGateway::Authorizer",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "IntegRestApiF8B59B0D",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IntegRestApiF8B59B0D",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "IntegRestApi",
+   "actual": "IntegRestApi"
+  },
+  {
+   "logicalId": "IntegRestApiDeploymentD67E59EC852098a1c127ca9d7d16d22086273910",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IntegRestApiDeploymentD67E59EC852098a1c127ca9d7d16d22086273910",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "IntegRestApiDeploymentD67E59EC852098a1c127ca9d7d16d22086273910",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${IntegRestApiF8B59B0D}",
+   "actual": "${IntegRestApiF8B59B0D}"
+  },
+  {
+   "logicalId": "IntegRestApiDeploymentStageprod29E2686A",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IntegRestApiDeploymentStageprod29E2686A",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "IntegRestApiDeploymentStageprod29E2686A",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${IntegRestApiF8B59B0D}",
+   "actual": "${IntegRestApiF8B59B0D}"
+  },
+  {
+   "logicalId": "IntegRestApiDeploymentStageprod29E2686A",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${IntegRestApiDeploymentD67E59EC852098a1c127ca9d7d16d22086273910}",
+   "actual": "${IntegRestApiDeploymentD67E59EC852098a1c127ca9d7d16d22086273910}"
+  },
+  {
+   "logicalId": "IntegRestApitest58FEA9C5",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IntegRestApitest58FEA9C5",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "ParentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ymmp6o6eug",
+   "actual": "ymmp6o6eug"
+  },
+  {
+   "logicalId": "IntegRestApitest58FEA9C5",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "PathPart",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "test",
+   "actual": "test"
+  },
+  {
+   "logicalId": "IntegRestApitest58FEA9C5",
+   "type": "AWS::ApiGateway::Resource",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${IntegRestApiF8B59B0D}",
+   "actual": "${IntegRestApiF8B59B0D}"
+  },
+  {
+   "logicalId": "IntegRestApitestGET52631013",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IntegRestApitestGET52631013",
+   "type": "AWS::ApiGateway::Method",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${IntegRestApiF8B59B0D}",
+   "actual": "${IntegRestApiF8B59B0D}"
+  },
+  {
+   "logicalId": "IntegRestApitestGET52631013",
+   "type": "AWS::ApiGateway::Method",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${IntegRestApitest58FEA9C5}",
+   "actual": "${IntegRestApitest58FEA9C5}"
+  },
+  {
+   "logicalId": "IntegRestApitestGET52631013",
+   "type": "AWS::ApiGateway::Method",
+   "property": "HttpMethod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GET",
+   "actual": "GET"
+  },
+  {
+   "logicalId": "IntegRestApitestGET52631013",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizationType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CUSTOM",
+   "actual": "CUSTOM"
+  },
+  {
+   "logicalId": "IntegRestApitestGET52631013",
+   "type": "AWS::ApiGateway::Method",
+   "property": "AuthorizerId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AuthorizerBD825682}",
+   "actual": "${AuthorizerBD825682}"
+  },
+  {
+   "logicalId": "IntegRestApitestGET52631013",
+   "type": "AWS::ApiGateway::Method",
+   "property": "MethodResponses",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "200": {
+     "statusCode": "200"
+    }
+   },
+   "actual": {
+    "200": {
+     "statusCode": "200"
+    }
+   }
+  },
+  {
+   "logicalId": "IntegRestApitestGET52631013",
+   "type": "AWS::ApiGateway::Method",
+   "property": "Integration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ \"statusCode\": 200 }"
+    },
+    "passthroughBehavior": "NEVER",
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200",
+      "responseTemplates": {
+       "application/json": "{\"message\":\"Hello, tester!\"}"
+      }
+     }
+    }
+   },
+   "actual": {
+    "type": "MOCK",
+    "requestTemplates": {
+     "application/json": "{ \"statusCode\": 200 }"
+    },
+    "passthroughBehavior": "NEVER",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "${IntegRestApitest58FEA9C5}",
+    "cacheKeyParameters": [],
+    "integrationResponses": {
+     "200": {
+      "statusCode": "200",
+      "responseTemplates": {
+       "application/json": "{\"message\":\"Hello, tester!\"}"
+      }
+     }
+    },
+    "responseTransferMode": "BUFFERED"
+   }
+  },
+  {
+   "logicalId": "Connection07624BCD",
+   "type": "AWS::Events::Connection",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineRoleDefaultPolicyDF1E6607",
+   "actual": "StateMachineRoleDefaultPolicyDF1E6607"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "events:RetrieveConnectionCredentials",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:connection/${Connection07624BCD}/c41bff09-6320-44ae-9728-b0004d507af8"
+     },
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:events!connection/${Connection07624BCD}/047226d6-3a41-455f-9ed6-7d937122e5d5-byVZW1"
+     },
+     {
+      "Action": "states:InvokeHTTPEndpoint",
+      "Condition": {
+       "StringLike": {
+        "states:HTTPEndpoint": "https://${IntegRestApiF8B59B0D}.execute-api.${AWS::Region}.amazonaws.com/prod/*"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "events:RetrieveConnectionCredentials",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:connection/${Connection07624BCD}/c41bff09-6320-44ae-9728-b0004d507af8"
+     },
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:events!connection/${Connection07624BCD}/047226d6-3a41-455f-9ed6-7d937122e5d5-byVZW1"
+     },
+     {
+      "Action": "states:InvokeHTTPEndpoint",
+      "Condition": {
+       "StringLike": {
+        "states:HTTPEndpoint": "https://${IntegRestApiF8B59B0D}.execute-api.${AWS::Region}.amazonaws.com/prod/*"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineRoleB840431D}",
+   "actual": "${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Invoke HTTP Endpoint",
+    "States": {
+     "Invoke HTTP Endpoint": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::http:invoke",
+      "Parameters": {
+       "ApiEndpoint.$": "States.Format('{}/{}', 'https://${IntegRestApiF8B59B0D}.execute-api.${AWS::Region}.amazonaws.com/prod/', '/test')",
+       "Authentication": {
+        "ConnectionArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:connection/${Connection07624BCD}/c41bff09-6320-44ae-9728-b0004d507af8"
+       },
+       "Method": "GET"
+      }
+     }
+    },
+    "TimeoutSeconds": 30
+   },
+   "actual": {
+    "StartAt": "Invoke HTTP Endpoint",
+    "States": {
+     "Invoke HTTP Endpoint": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::http:invoke",
+      "Parameters": {
+       "ApiEndpoint.$": "States.Format('{}/{}', 'https://${IntegRestApiF8B59B0D}.execute-api.${AWS::Region}.amazonaws.com/prod/', '/test')",
+       "Authentication": {
+        "ConnectionArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:connection/${Connection07624BCD}/c41bff09-6320-44ae-9728-b0004d507af8"
+       },
+       "Method": "GET"
+      }
+     }
+    },
+    "TimeoutSeconds": 30
+   }
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}"
+  }
+ ]
+}

@@ -1,0 +1,92 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-log-retention-integ",
+ "resources": {
+  "MyLambdaCCE802FB": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": "${LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A.Arn}",
+    "LogGroupName": "logRetentionLogGroup",
+    "RetentionInDays": 1,
+    "RemovalPolicy": "destroy"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:DeleteRetentionPolicy",
+        "logs:PutRetentionPolicy"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "logs:DeleteLogGroup",
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:logRetentionLogGroup2:*",
+        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:logRetentionLogGroup:*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "Roles": [
+     "${LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB}"
+    ]
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Handler": "index.handler",
+    "Runtime": "nodejs24.x",
+    "Timeout": 900,
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "c9e084a249774d97a978bed2e1976874a70517128a904136b8737f0792322c1f.zip"
+    },
+    "Role": "${LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB.Arn}"
+   },
+   "DependsOn": [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+   ]
+  },
+  "MyLambda2254B54D5": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": "${LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A.Arn}",
+    "LogGroupName": "logRetentionLogGroup2",
+    "RetentionInDays": 1,
+    "RemovalPolicy": "destroy"
+   }
+  }
+ },
+ "unresolved": []
+}

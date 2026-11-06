@@ -1,0 +1,245 @@
+{
+ "stackName": "cdk-integ-lambda-nodejs-dependencies-for-sdk-v3",
+ "summary": {
+  "pass": 18
+ },
+ "results": [
+  {
+   "logicalId": "SdkCallee1DA14178",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SdkCallee1DA14178",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "TableName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "external-sdk-table",
+   "actual": "external-sdk-table"
+  },
+  {
+   "logicalId": "SdkCallee1DA14178",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "call",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "call",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "SdkCallee1DA14178",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "call",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "call",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "SdkCallee1DA14178",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "SdkCallee1DA14178",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "Replicas",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${AWS::Region}"
+   ],
+   "actual": [
+    "${AWS::Region}"
+   ]
+  },
+  {
+   "logicalId": "externalsdkv3ServiceRole9C835365",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "externalsdkv3ServiceRole9C835365",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "externalsdkv3ServiceRole9C835365",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "externalsdkv3ServiceRoleDefaultPolicy08CC919E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "externalsdkv3ServiceRoleDefaultPolicy08CC919E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "externalsdkv3ServiceRoleDefaultPolicy08CC919E",
+   "actual": "externalsdkv3ServiceRoleDefaultPolicy08CC919E"
+  },
+  {
+   "logicalId": "externalsdkv3ServiceRoleDefaultPolicy08CC919E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/external-sdk-table"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/external-sdk-table"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "externalsdkv3ServiceRoleDefaultPolicy08CC919E",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${externalsdkv3ServiceRole9C835365}",
+   "actual": "${externalsdkv3ServiceRole9C835365}"
+  },
+  {
+   "logicalId": "externalsdkv3B69F9D99",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "externalsdkv3B69F9D99",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "externalsdkv3B69F9D99",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "externalsdkv3B69F9D99",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${externalsdkv3ServiceRole9C835365}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${externalsdkv3ServiceRole9C835365}"
+  },
+  {
+   "logicalId": "externalsdkv3B69F9D99",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TABLE_NAME": "external-sdk-table"
+   },
+   "actual": {
+    "TABLE_NAME": "external-sdk-table"
+   }
+  }
+ ]
+}

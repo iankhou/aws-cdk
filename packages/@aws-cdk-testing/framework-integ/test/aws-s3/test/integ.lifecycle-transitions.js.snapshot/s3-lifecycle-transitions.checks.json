@@ -1,0 +1,151 @@
+{
+ "stackName": "s3-lifecycle-transitions",
+ "summary": {
+  "pass": 2,
+  "fail": 2
+ },
+ "results": [
+  {
+   "logicalId": "AllStorageClasses128KB8241761",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AllStorageClasses128KB8241761",
+   "type": "AWS::S3::Bucket",
+   "property": "LifecycleConfiguration.Rules",
+   "status": "fail",
+   "expected": [
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "Prefix": ""
+     },
+     "Transitions": [
+      {
+       "StorageClass": "DEEP_ARCHIVE",
+       "Days": 30
+      }
+     ]
+    },
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "And": {
+       "ObjectSizeGreaterThan": 200000,
+       "ObjectSizeLessThan": 300000
+      }
+     },
+     "Transitions": [
+      {
+       "StorageClass": "ONEZONE_IA",
+       "Days": 30
+      }
+     ]
+    }
+   ],
+   "actual": [
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "Prefix": ""
+     },
+     "Transitions": [
+      {
+       "Days": 30,
+       "StorageClass": "DEEP_ARCHIVE"
+      }
+     ]
+    },
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "And": {
+       "Prefix": "",
+       "ObjectSizeGreaterThan": 200000,
+       "ObjectSizeLessThan": 300000
+      }
+     },
+     "Transitions": [
+      {
+       "Days": 30,
+       "StorageClass": "ONEZONE_IA"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "logicalId": "VariesByStorageClassCD3C88D5",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VariesByStorageClassCD3C88D5",
+   "type": "AWS::S3::Bucket",
+   "property": "LifecycleConfiguration.Rules",
+   "status": "fail",
+   "expected": [
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "Prefix": ""
+     },
+     "Transitions": [
+      {
+       "StorageClass": "DEEP_ARCHIVE",
+       "Days": 30
+      }
+     ]
+    },
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "And": {
+       "ObjectSizeGreaterThan": 200000,
+       "ObjectSizeLessThan": 300000
+      }
+     },
+     "Transitions": [
+      {
+       "StorageClass": "ONEZONE_IA",
+       "Days": 30
+      }
+     ]
+    }
+   ],
+   "actual": [
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "Prefix": ""
+     },
+     "Transitions": [
+      {
+       "Days": 30,
+       "StorageClass": "DEEP_ARCHIVE"
+      }
+     ]
+    },
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "And": {
+       "Prefix": "",
+       "ObjectSizeGreaterThan": 200000,
+       "ObjectSizeLessThan": 300000
+      }
+     },
+     "Transitions": [
+      {
+       "Days": 30,
+       "StorageClass": "ONEZONE_IA"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

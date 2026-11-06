@@ -1,0 +1,53 @@
+{
+ "version": "1",
+ "stackName": "log-group-class",
+ "resources": {
+  "loggroupdefaultAF2B13AE": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "loggroupstandard035A0C26": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupClass": "STANDARD",
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "loggroupinfrequentaccessBE348C18": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupClass": "INFREQUENT_ACCESS",
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefloggroupdefaultAF2B13AEA68E3E99": {
+   "Value": "${loggroupdefaultAF2B13AE}",
+   "Export": {
+    "Name": "log-group-class:ExportsOutputRefloggroupdefaultAF2B13AEA68E3E99"
+   }
+  },
+  "ExportsOutputRefloggroupstandard035A0C267EF270A0": {
+   "Value": "${loggroupstandard035A0C26}",
+   "Export": {
+    "Name": "log-group-class:ExportsOutputRefloggroupstandard035A0C267EF270A0"
+   }
+  },
+  "ExportsOutputRefloggroupinfrequentaccessBE348C18D714344D": {
+   "Value": "${loggroupinfrequentaccessBE348C18}",
+   "Export": {
+    "Name": "log-group-class:ExportsOutputRefloggroupinfrequentaccessBE348C18D714344D"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,160 @@
+{
+ "stackName": "cloudfront-s3-origin-oai",
+ "summary": {
+  "pass": 12
+ },
+ "results": [
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Bucket83908E77}",
+   "actual": "${Bucket83908E77}"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Principal": {
+       "CanonicalUser": "8505ed68a94a18423c37c7c234674e0188a16f753bfd5f363ade20dc2a42097f3ac310fdc4bee108178dfea89572fbde"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Principal": {
+       "CanonicalUser": "8505ed68a94a18423c37c7c234674e0188a16f753bfd5f363ade20dc2a42097f3ac310fdc4bee108178dfea89572fbde"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "OriginAccessIdentityDF1E3CAC",
+   "type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "OriginAccessIdentityDF1E3CAC",
+   "type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+   "property": "CloudFrontOriginAccessIdentityConfig.Comment",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Identity for bucket provided by test",
+   "actual": "Identity for bucket provided by test"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "cloudfronts3originoaiDistributionOrigin1516C5A91",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   },
+   "actual": {
+    "TargetOriginId": "cloudfronts3originoaiDistributionOrigin1516C5A91",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "cloudfronts3originoaiDistributionOrigin1516C5A91",
+      "DomainName": "${Bucket83908E77}.s3.${AWS::Region}.amazonaws.com",
+      "S3OriginConfig": {
+       "OriginAccessIdentity": "origin-access-identity/cloudfront/${OriginAccessIdentityDF1E3CAC}"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "cloudfronts3originoaiDistributionOrigin1516C5A91",
+      "DomainName": "${Bucket83908E77}.s3.${AWS::Region}.amazonaws.com",
+      "S3OriginConfig": {
+       "OriginAccessIdentity": "origin-access-identity/cloudfront/${OriginAccessIdentityDF1E3CAC}"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

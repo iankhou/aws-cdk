@@ -1,0 +1,560 @@
+{
+ "stackName": "aws-stepfunctions-tasks-bedrock-invoke-model-integ",
+ "summary": {
+  "pass": 18
+ },
+ "results": [
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineRoleDefaultPolicyDF1E6607",
+   "actual": "StateMachineRoleDefaultPolicyDF1E6607"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "bedrock:InvokeModel",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1"
+     },
+     {
+      "Action": [
+       "s3:GetObject",
+       "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "bedrock:InvokeModel",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1"
+     },
+     {
+      "Action": [
+       "s3:GetObject",
+       "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineRoleB840431D}",
+   "actual": "${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Prompt1",
+    "States": {
+     "Prompt1": {
+      "Next": "Prompt2",
+      "Type": "Task",
+      "ResultPath": "$",
+      "ResultSelector": {
+       "names.$": "$.Body.results[0].outputText"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1",
+       "Body": {
+        "inputText": "Generate a list of five first names.",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "Prompt2": {
+      "Next": "Prompt3",
+      "Type": "Task",
+      "ResultPath": "$",
+      "ResultSelector": {
+       "names.$": "$.Body.results[0].outputText"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1",
+       "Body": {
+        "inputText.$": "States.Format('Alphabetize this list of first names:/n{}', $.names)",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "Prompt3": {
+      "Next": "Prompt4",
+      "Type": "Task",
+      "OutputPath": "$.Body.results[0].outputText",
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1",
+       "Body": {
+        "inputText.$": "States.Format('Echo list of first names: {}', $.names)",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "Prompt4": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1",
+       "Input": {
+        "S3Uri": "$.names"
+       },
+       "Output": {
+        "S3Uri": "$.names"
+       }
+      }
+     }
+    },
+    "TimeoutSeconds": 30
+   },
+   "actual": {
+    "StartAt": "Prompt1",
+    "States": {
+     "Prompt1": {
+      "Next": "Prompt2",
+      "Type": "Task",
+      "ResultPath": "$",
+      "ResultSelector": {
+       "names.$": "$.Body.results[0].outputText"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1",
+       "Body": {
+        "inputText": "Generate a list of five first names.",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "Prompt2": {
+      "Next": "Prompt3",
+      "Type": "Task",
+      "ResultPath": "$",
+      "ResultSelector": {
+       "names.$": "$.Body.results[0].outputText"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1",
+       "Body": {
+        "inputText.$": "States.Format('Alphabetize this list of first names:/n{}', $.names)",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "Prompt3": {
+      "Next": "Prompt4",
+      "Type": "Task",
+      "OutputPath": "$.Body.results[0].outputText",
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1",
+       "Body": {
+        "inputText.$": "States.Format('Echo list of first names: {}', $.names)",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "Prompt4": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1",
+       "Input": {
+        "S3Uri": "$.names"
+       },
+       "Output": {
+        "S3Uri": "$.names"
+       }
+      }
+     }
+    },
+    "TimeoutSeconds": 30
+   }
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "LlamaStateMachineRoleA1E51172",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LlamaStateMachineRoleA1E51172",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "LlamaStateMachineRoleDefaultPolicy36666B63",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LlamaStateMachineRoleDefaultPolicy36666B63",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "LlamaStateMachineRoleDefaultPolicy36666B63",
+   "actual": "LlamaStateMachineRoleDefaultPolicy36666B63"
+  },
+  {
+   "logicalId": "LlamaStateMachineRoleDefaultPolicy36666B63",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "bedrock:InvokeModel",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-11b-instruct-v1:0",
+       "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-1b-instruct-v1:0",
+       "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-3b-instruct-v1:0",
+       "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-90b-instruct-v1:0"
+      ]
+     },
+     {
+      "Action": [
+       "s3:GetObject",
+       "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "bedrock:InvokeModel",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-11b-instruct-v1:0",
+       "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-1b-instruct-v1:0",
+       "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-3b-instruct-v1:0",
+       "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-90b-instruct-v1:0"
+      ]
+     },
+     {
+      "Action": [
+       "s3:GetObject",
+       "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "LlamaStateMachineRoleDefaultPolicy36666B63",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${LlamaStateMachineRoleA1E51172}",
+   "actual": "${LlamaStateMachineRoleA1E51172}"
+  },
+  {
+   "logicalId": "LlamaStateMachineD0B74BA3",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LlamaStateMachineD0B74BA3",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "LlamaPrompt1",
+    "States": {
+     "LlamaPrompt1": {
+      "Next": "LlamaPrompt2",
+      "Type": "Task",
+      "ResultPath": "$",
+      "ResultSelector": {
+       "names.$": "$.Body.results[0].outputText"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-1b-instruct-v1:0",
+       "Body": {
+        "inputText": "Generate a list of five first names.",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "LlamaPrompt2": {
+      "Next": "LlamaPrompt3",
+      "Type": "Task",
+      "ResultPath": "$",
+      "ResultSelector": {
+       "names.$": "$.Body.results[0].outputText"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-3b-instruct-v1:0",
+       "Body": {
+        "inputText.$": "States.Format('Alphabetize this list of first names:/n{}', $.names)",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "LlamaPrompt3": {
+      "Next": "LlamaPrompt4",
+      "Type": "Task",
+      "OutputPath": "$.Body.results[0].outputText",
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-11b-instruct-v1:0",
+       "Body": {
+        "inputText.$": "States.Format('Echo list of first names: {}', $.names)",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "LlamaPrompt4": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-90b-instruct-v1:0",
+       "Input": {
+        "S3Uri": "$.names"
+       },
+       "Output": {
+        "S3Uri": "$.names"
+       }
+      }
+     }
+    },
+    "TimeoutSeconds": 30
+   },
+   "actual": {
+    "StartAt": "LlamaPrompt1",
+    "States": {
+     "LlamaPrompt1": {
+      "Next": "LlamaPrompt2",
+      "Type": "Task",
+      "ResultPath": "$",
+      "ResultSelector": {
+       "names.$": "$.Body.results[0].outputText"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-1b-instruct-v1:0",
+       "Body": {
+        "inputText": "Generate a list of five first names.",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "LlamaPrompt2": {
+      "Next": "LlamaPrompt3",
+      "Type": "Task",
+      "ResultPath": "$",
+      "ResultSelector": {
+       "names.$": "$.Body.results[0].outputText"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-3b-instruct-v1:0",
+       "Body": {
+        "inputText.$": "States.Format('Alphabetize this list of first names:/n{}', $.names)",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "LlamaPrompt3": {
+      "Next": "LlamaPrompt4",
+      "Type": "Task",
+      "OutputPath": "$.Body.results[0].outputText",
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-11b-instruct-v1:0",
+       "Body": {
+        "inputText.$": "States.Format('Echo list of first names: {}', $.names)",
+        "textGenerationConfig": {
+         "maxTokenCount": 100,
+         "temperature": 1
+        }
+       }
+      }
+     },
+     "LlamaPrompt4": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::bedrock:invokeModel",
+      "Parameters": {
+       "ModelId": "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/meta.llama3-2-90b-instruct-v1:0",
+       "Input": {
+        "S3Uri": "$.names"
+       },
+       "Output": {
+        "S3Uri": "$.names"
+       }
+      }
+     }
+    },
+    "TimeoutSeconds": 30
+   }
+  },
+  {
+   "logicalId": "LlamaStateMachineD0B74BA3",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LlamaStateMachineRoleA1E51172}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LlamaStateMachineRoleA1E51172}"
+  }
+ ]
+}

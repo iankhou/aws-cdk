@@ -1,0 +1,83 @@
+{
+ "version": "1",
+ "stackName": "aws-ecs-task-definition-enable-fault-injection",
+ "resources": {
+  "Ec2TaskDefinitionTaskRole0B78BC85": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "Ec2TaskDefinitionB25030BE": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest",
+      "Memory": 512,
+      "Name": "Ec2Container"
+     }
+    ],
+    "EnableFaultInjection": true,
+    "Family": "awsecstaskdefinitionenablefaultinjectionEc2TaskDefinition28DF45DB",
+    "NetworkMode": "host",
+    "RequiresCompatibilities": [
+     "EC2"
+    ],
+    "TaskRoleArn": "${Ec2TaskDefinitionTaskRole0B78BC85.Arn}"
+   }
+  },
+  "FargateTaskDefinitionTaskRoleE3C2BCAA": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "FargateTaskDefinition8E3B365E": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest",
+      "Memory": 512,
+      "Name": "FargateContainer"
+     }
+    ],
+    "Cpu": "256",
+    "EnableFaultInjection": true,
+    "Family": "awsecstaskdefinitionenablefaultinjectionFargateTaskDefinition203B68EF",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": "${FargateTaskDefinitionTaskRoleE3C2BCAA.Arn}"
+   }
+  }
+ },
+ "unresolved": []
+}

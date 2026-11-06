@@ -1,0 +1,37 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-s3",
+ "resources": {
+  "MyBucketF68F3FF0": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "IntelligentTieringConfigurations": [
+     {
+      "Id": "foo",
+      "Prefix": "bar",
+      "Status": "Enabled",
+      "TagFilters": [
+       {
+        "Key": "test",
+        "Value": "bazz"
+       }
+      ],
+      "Tierings": [
+       {
+        "AccessTier": "ARCHIVE_ACCESS",
+        "Days": 90
+       },
+       {
+        "AccessTier": "DEEP_ARCHIVE_ACCESS",
+        "Days": 180
+       }
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": []
+}

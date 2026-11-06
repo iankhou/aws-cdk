@@ -1,0 +1,111 @@
+{
+ "version": "1",
+ "stackName": "stack",
+ "resources": {
+  "LambdaWithRecursionLoopProtectionServiceRoleA7B94605": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "LambdaWithRecursionLoopProtectionA3FC83DA": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "foo"
+    },
+    "Handler": "index.handler",
+    "RecursiveLoop": "Terminate",
+    "Role": "${LambdaWithRecursionLoopProtectionServiceRoleA7B94605.Arn}",
+    "Runtime": "python3.9"
+   },
+   "DependsOn": [
+    "LambdaWithRecursionLoopProtectionServiceRoleA7B94605"
+   ]
+  },
+  "LambdaWithoutRecursionLoopProtectionServiceRole72AE2C03": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "LambdaWithoutRecursionLoopProtectionB8E30B60": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "foo"
+    },
+    "Handler": "index.handler",
+    "RecursiveLoop": "Allow",
+    "Role": "${LambdaWithoutRecursionLoopProtectionServiceRole72AE2C03.Arn}",
+    "Runtime": "python3.9"
+   },
+   "DependsOn": [
+    "LambdaWithoutRecursionLoopProtectionServiceRole72AE2C03"
+   ]
+  },
+  "LambdaWithDefaultRecursionLoopProtectionServiceRoleFFB5B9DB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "LambdaWithDefaultRecursionLoopProtectionAAC84758": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "foo"
+    },
+    "Handler": "index.handler",
+    "Role": "${LambdaWithDefaultRecursionLoopProtectionServiceRoleFFB5B9DB.Arn}",
+    "Runtime": "python3.9"
+   },
+   "DependsOn": [
+    "LambdaWithDefaultRecursionLoopProtectionServiceRoleFFB5B9DB"
+   ]
+  }
+ },
+ "unresolved": []
+}

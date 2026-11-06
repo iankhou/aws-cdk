@@ -1,0 +1,67 @@
+{
+ "version": "1",
+ "stackName": "archive-customer-managed-key",
+ "resources": {
+  "KmsKey46693ADD": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:ReEncrypt*"
+       ],
+       "Condition": {
+        "StringEquals": {
+         "kms:EncryptionContext:aws:events:event-bus:arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       },
+       "Resource": "*",
+       "Sid": "Allow EventBridge to use kms operations"
+      },
+      {
+       "Action": "kms:DescribeKey",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       },
+       "Resource": "*",
+       "Sid": "Allow EventBridge to call kms:DescribeKey"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "Archive4DBC1EC9": {
+   "Type": "AWS::Events::Archive",
+   "Properties": {
+    "EventPattern": {
+     "source": [
+      "test"
+     ]
+    },
+    "KmsKeyIdentifier": "${KmsKey46693ADD.Arn}",
+    "RetentionDays": 0,
+    "SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+   }
+  }
+ },
+ "unresolved": []
+}

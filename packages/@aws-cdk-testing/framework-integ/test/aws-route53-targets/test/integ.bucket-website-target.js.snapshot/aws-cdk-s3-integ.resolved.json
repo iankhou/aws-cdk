@@ -1,0 +1,43 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-s3-integ",
+ "resources": {
+  "Bucket83908E77": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HostedZoneDB99F866": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "test.public."
+   }
+  },
+  "Alias325C5727": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": "s3-website-${AWS::Region}.amazonaws.com",
+     "HostedZoneId": "Z3AQBSTGFYJSTF"
+    },
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${Alias325C5727}.",
+    "Type": "A"
+   }
+  },
+  "AliasWithHealthCheck61B4E872": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": "s3-website-${AWS::Region}.amazonaws.com",
+     "EvaluateTargetHealth": true,
+     "HostedZoneId": "Z3AQBSTGFYJSTF"
+    },
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${AliasWithHealthCheck61B4E872}.",
+    "Type": "A"
+   }
+  }
+ },
+ "unresolved": []
+}

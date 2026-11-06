@@ -1,0 +1,2122 @@
+{
+ "stackName": "aws-ecs-patterns-queue-health-check",
+ "summary": {
+  "pass": 165,
+  "unresolved": 6
+ },
+ "results": [
+  {
+   "logicalId": "VPCB9E5F0B4",
+   "type": "AWS::EC2::VPC",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCB9E5F0B4",
+   "type": "AWS::EC2::VPC",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/16",
+   "actual": "10.0.0.0/16"
+  },
+  {
+   "logicalId": "VPCB9E5F0B4",
+   "type": "AWS::EC2::VPC",
+   "property": "InstanceTenancy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "default",
+   "actual": "default"
+  },
+  {
+   "logicalId": "VPCB9E5F0B4",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsSupport",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "VPCB9E5F0B4",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsHostnames",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "VPCB9E5F0B4",
+   "type": "AWS::EC2::VPC",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCB9E5F0B4"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPublicSubnet1SubnetB4246D30",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1SubnetB4246D30",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1SubnetB4246D30",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1SubnetB4246D30",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/18",
+   "actual": "10.0.0.0/18"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1SubnetB4246D30",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "VPCPublicSubnet1SubnetB4246D30",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPublicSubnet1SubnetB4246D30"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet1"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPublicSubnet1RouteTableFEE4B781",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1RouteTableFEE4B781",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1RouteTableFEE4B781",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPublicSubnet1RouteTableFEE4B781"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPublicSubnet1RouteTableAssociation0B0896DC",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1RouteTableAssociation0B0896DC",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet1RouteTableFEE4B781}",
+   "actual": "${VPCPublicSubnet1RouteTableFEE4B781}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1RouteTableAssociation0B0896DC",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet1SubnetB4246D30}",
+   "actual": "${VPCPublicSubnet1SubnetB4246D30}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1DefaultRoute91CEF279",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1DefaultRoute91CEF279",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet1RouteTableFEE4B781}",
+   "actual": "${VPCPublicSubnet1RouteTableFEE4B781}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1DefaultRoute91CEF279",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+   "actual": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1DefaultRoute91CEF279",
+   "type": "AWS::EC2::Route",
+   "property": "GatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCIGWB7E252D3}",
+   "actual": "${VPCIGWB7E252D3}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1EIP6AD938E8",
+   "type": "AWS::EC2::EIP",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1EIP6AD938E8",
+   "type": "AWS::EC2::EIP",
+   "property": "Domain",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "vpc",
+   "actual": "vpc"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1EIP6AD938E8",
+   "type": "AWS::EC2::EIP",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPublicSubnet1EIP6AD938E8"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPublicSubnet1NATGatewayE0556630",
+   "type": "AWS::EC2::NatGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1NATGatewayE0556630",
+   "type": "AWS::EC2::NatGateway",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet1SubnetB4246D30}",
+   "actual": "${VPCPublicSubnet1SubnetB4246D30}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1NATGatewayE0556630",
+   "type": "AWS::EC2::NatGateway",
+   "property": "AllocationId",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VPCPublicSubnet1NATGatewayE0556630",
+   "type": "AWS::EC2::NatGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPublicSubnet1NATGatewayE0556630"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet1"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPublicSubnet2Subnet74179F39",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2Subnet74179F39",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2Subnet74179F39",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2Subnet74179F39",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.64.0/18",
+   "actual": "10.0.64.0/18"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2Subnet74179F39",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "VPCPublicSubnet2Subnet74179F39",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPublicSubnet2Subnet74179F39"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet2"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPublicSubnet2RouteTable6F1A15F1",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2RouteTable6F1A15F1",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2RouteTable6F1A15F1",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPublicSubnet2RouteTable6F1A15F1"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet2"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPublicSubnet2RouteTableAssociation5A808732",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2RouteTableAssociation5A808732",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet2RouteTable6F1A15F1}",
+   "actual": "${VPCPublicSubnet2RouteTable6F1A15F1}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2RouteTableAssociation5A808732",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet2Subnet74179F39}",
+   "actual": "${VPCPublicSubnet2Subnet74179F39}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2DefaultRouteB7481BBA",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2DefaultRouteB7481BBA",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet2RouteTable6F1A15F1}",
+   "actual": "${VPCPublicSubnet2RouteTable6F1A15F1}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2DefaultRouteB7481BBA",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+   "actual": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2DefaultRouteB7481BBA",
+   "type": "AWS::EC2::Route",
+   "property": "GatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCIGWB7E252D3}",
+   "actual": "${VPCIGWB7E252D3}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2EIP4947BC00",
+   "type": "AWS::EC2::EIP",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2EIP4947BC00",
+   "type": "AWS::EC2::EIP",
+   "property": "Domain",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "vpc",
+   "actual": "vpc"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2EIP4947BC00",
+   "type": "AWS::EC2::EIP",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet2"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPublicSubnet2EIP4947BC00"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPublicSubnet2NATGateway3C070193",
+   "type": "AWS::EC2::NatGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2NATGateway3C070193",
+   "type": "AWS::EC2::NatGateway",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet2Subnet74179F39}",
+   "actual": "${VPCPublicSubnet2Subnet74179F39}"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2NATGateway3C070193",
+   "type": "AWS::EC2::NatGateway",
+   "property": "AllocationId",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VPCPublicSubnet2NATGateway3C070193",
+   "type": "AWS::EC2::NatGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPublicSubnet2NATGateway3C070193"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PublicSubnet2"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1Subnet8BCA10E0",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1Subnet8BCA10E0",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1Subnet8BCA10E0",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1Subnet8BCA10E0",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.128.0/18",
+   "actual": "10.0.128.0/18"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1Subnet8BCA10E0",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1Subnet8BCA10E0",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PrivateSubnet1"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPrivateSubnet1Subnet8BCA10E0"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1RouteTableBE8A6027",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1RouteTableBE8A6027",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1RouteTableBE8A6027",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PrivateSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPrivateSubnet1RouteTableBE8A6027"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1RouteTableAssociation347902D1",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1RouteTableAssociation347902D1",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet1RouteTableBE8A6027}",
+   "actual": "${VPCPrivateSubnet1RouteTableBE8A6027}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1RouteTableAssociation347902D1",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet1Subnet8BCA10E0}",
+   "actual": "${VPCPrivateSubnet1Subnet8BCA10E0}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1DefaultRouteAE1D6490",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1DefaultRouteAE1D6490",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet1RouteTableBE8A6027}",
+   "actual": "${VPCPrivateSubnet1RouteTableBE8A6027}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1DefaultRouteAE1D6490",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+   "actual": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet1DefaultRouteAE1D6490",
+   "type": "AWS::EC2::Route",
+   "property": "NatGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet1NATGatewayE0556630}",
+   "actual": "${VPCPublicSubnet1NATGatewayE0556630}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2SubnetCFCDAA7A",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2SubnetCFCDAA7A",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2SubnetCFCDAA7A",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2SubnetCFCDAA7A",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.192.0/18",
+   "actual": "10.0.192.0/18"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2SubnetCFCDAA7A",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2SubnetCFCDAA7A",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PrivateSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPrivateSubnet2SubnetCFCDAA7A"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PrivateSubnet2"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2RouteTable0A19E10E",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2RouteTable0A19E10E",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2RouteTable0A19E10E",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PrivateSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC/PrivateSubnet2"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCPrivateSubnet2RouteTable0A19E10E"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2RouteTableAssociation0C73D413",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2RouteTableAssociation0C73D413",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet2RouteTable0A19E10E}",
+   "actual": "${VPCPrivateSubnet2RouteTable0A19E10E}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2RouteTableAssociation0C73D413",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet2SubnetCFCDAA7A}",
+   "actual": "${VPCPrivateSubnet2SubnetCFCDAA7A}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2DefaultRouteF4F5CFD2",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2DefaultRouteF4F5CFD2",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet2RouteTable0A19E10E}",
+   "actual": "${VPCPrivateSubnet2RouteTable0A19E10E}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2DefaultRouteF4F5CFD2",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+   "actual": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}"
+  },
+  {
+   "logicalId": "VPCPrivateSubnet2DefaultRouteF4F5CFD2",
+   "type": "AWS::EC2::Route",
+   "property": "NatGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCPublicSubnet2NATGateway3C070193}",
+   "actual": "${VPCPublicSubnet2NATGateway3C070193}"
+  },
+  {
+   "logicalId": "VPCIGWB7E252D3",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCIGWB7E252D3",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VPCIGWB7E252D3"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-patterns-queue-health-check/VPC"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-patterns-queue-health-check"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VPCVPCGW99B986DC",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VPCVPCGW99B986DC",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "InternetGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${VPCIGWB7E252D3}"
+   ],
+   "actual": [
+    "${VPCIGWB7E252D3}"
+   ]
+  },
+  {
+   "logicalId": "VPCVPCGW99B986DC",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${VPCB9E5F0B4}"
+   ],
+   "actual": [
+    "${VPCB9E5F0B4}"
+   ]
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceEcsProcessingDeadLetterQueueE3547724",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceEcsProcessingDeadLetterQueueE3547724",
+   "type": "AWS::SQS::Queue",
+   "property": "MessageRetentionPeriod",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1209600,
+   "actual": "1209600"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D",
+   "type": "AWS::SQS::Queue",
+   "property": "RedrivePolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "deadLetterTargetArn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${HealthCheckQueueServiceEcsProcessingDeadLetterQueueE3547724.Name}",
+    "maxReceiveCount": 3
+   },
+   "actual": "{\"deadLetterTargetArn\":\"arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${HealthCheckQueueServiceEcsProcessingDeadLetterQueueE3547724.Name}\",\"maxReceiveCount\":3}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefTaskRole75C9B3DF",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefTaskRole75C9B3DF",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ecs-tasks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ecs-tasks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefTaskRoleDefaultPolicyDE6F15AA",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefTaskRoleDefaultPolicyDE6F15AA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "HealthCheckQueueServiceQueueProcessingTaskDefTaskRoleDefaultPolicyDE6F15AA",
+   "actual": "HealthCheckQueueServiceQueueProcessingTaskDefTaskRoleDefaultPolicyDE6F15AA"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefTaskRoleDefaultPolicyDE6F15AA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:ChangeMessageVisibility",
+       "sqs:DeleteMessage",
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:ReceiveMessage"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:ChangeMessageVisibility",
+       "sqs:DeleteMessage",
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:ReceiveMessage"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefTaskRoleDefaultPolicyDE6F15AA",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingTaskDefTaskRole75C9B3DF}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingTaskDefTaskRole75C9B3DF}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "ContainerDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "environment": [
+      {
+       "name": "QUEUE_NAME",
+       "value": "${HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D.Name}"
+      }
+     ],
+     "essential": true,
+     "healthCheck": {
+      "command": [
+       "CMD-SHELL",
+       "cat /tmp/health_status | grep -q \"1\" || exit 1"
+      ],
+      "interval": 10,
+      "retries": 10,
+      "timeout": 5
+     },
+     "image": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:205c5d917605ee59cc93dc29526bc4f73b315ae613cdfbc52b8179f388041a03",
+     "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+       "awslogs-group": "${HealthCheckQueueServiceQueueProcessingTaskDefQueueProcessingContainerLogGroupA6BFC460}",
+       "awslogs-stream-prefix": "HealthCheckQueueService",
+       "awslogs-region": "${AWS::Region}"
+      }
+     },
+     "name": "QueueProcessingContainer"
+    }
+   ],
+   "actual": [
+    {
+     "name": "QueueProcessingContainer",
+     "image": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:205c5d917605ee59cc93dc29526bc4f73b315ae613cdfbc52b8179f388041a03",
+     "cpu": 0,
+     "links": [],
+     "portMappings": [],
+     "essential": true,
+     "entryPoint": [],
+     "command": [],
+     "environment": [
+      {
+       "name": "QUEUE_NAME",
+       "value": "${HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D.Name}"
+      }
+     ],
+     "environmentFiles": [],
+     "mountPoints": [],
+     "volumesFrom": [],
+     "secrets": [],
+     "dnsServers": [],
+     "dnsSearchDomains": [],
+     "extraHosts": [],
+     "dockerSecurityOptions": [],
+     "dockerLabels": {},
+     "ulimits": [],
+     "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+       "awslogs-group": "${HealthCheckQueueServiceQueueProcessingTaskDefQueueProcessingContainerLogGroupA6BFC460}",
+       "awslogs-region": "${AWS::Region}",
+       "awslogs-stream-prefix": "HealthCheckQueueService"
+      },
+      "secretOptions": []
+     },
+     "healthCheck": {
+      "command": [
+       "CMD-SHELL",
+       "cat /tmp/health_status | grep -q \"1\" || exit 1"
+      ],
+      "interval": 10,
+      "timeout": 5,
+      "retries": 10
+     },
+     "systemControls": [],
+     "credentialSpecs": []
+    }
+   ]
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Cpu",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "256",
+   "actual": "256"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Memory",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "512",
+   "actual": "512"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "ExecutionRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${HealthCheckQueueServiceQueueProcessingTaskDefExecutionRole90BAC61F}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${HealthCheckQueueServiceQueueProcessingTaskDefExecutionRole90BAC61F}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "TaskRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${HealthCheckQueueServiceQueueProcessingTaskDefTaskRole75C9B3DF}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${HealthCheckQueueServiceQueueProcessingTaskDefTaskRole75C9B3DF}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Family",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "awsecspatternsqueuehealthcheckHealthCheckQueueServiceQueueProcessingTaskDef531E773A",
+   "actual": "awsecspatternsqueuehealthcheckHealthCheckQueueServiceQueueProcessingTaskDef531E773A"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "NetworkMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "awsvpc",
+   "actual": "awsvpc"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "RequiresCompatibilities",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "FARGATE"
+   ],
+   "actual": [
+    "FARGATE"
+   ]
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefQueueProcessingContainerLogGroupA6BFC460",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefExecutionRole90BAC61F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefExecutionRole90BAC61F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ecs-tasks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ecs-tasks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefExecutionRoleDefaultPolicy7AC42DD5",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefExecutionRoleDefaultPolicy7AC42DD5",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "HealthCheckQueueServiceQueueProcessingTaskDefExecutionRoleDefaultPolicy7AC42DD5",
+   "actual": "HealthCheckQueueServiceQueueProcessingTaskDefExecutionRoleDefaultPolicy7AC42DD5"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefExecutionRoleDefaultPolicy7AC42DD5",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ecr:BatchCheckLayerAvailability",
+       "ecr:BatchGetImage",
+       "ecr:GetDownloadUrlForLayer"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     {
+      "Action": "ecr:GetAuthorizationToken",
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${HealthCheckQueueServiceQueueProcessingTaskDefQueueProcessingContainerLogGroupA6BFC460}:*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ecr:BatchCheckLayerAvailability",
+       "ecr:BatchGetImage",
+       "ecr:GetDownloadUrlForLayer"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     {
+      "Action": "ecr:GetAuthorizationToken",
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${HealthCheckQueueServiceQueueProcessingTaskDefQueueProcessingContainerLogGroupA6BFC460}:*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingTaskDefExecutionRoleDefaultPolicy7AC42DD5",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingTaskDefExecutionRole90BAC61F}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingTaskDefExecutionRole90BAC61F}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateService3FF69405",
+   "type": "AWS::ECS::Service",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateService3FF69405",
+   "type": "AWS::ECS::Service",
+   "property": "Cluster",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3}",
+   "actual": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateService3FF69405",
+   "type": "AWS::ECS::Service",
+   "property": "TaskDefinition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingTaskDefE2DEF18C}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateService3FF69405",
+   "type": "AWS::ECS::Service",
+   "property": "LaunchType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "FARGATE",
+   "actual": "FARGATE"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateService3FF69405",
+   "type": "AWS::ECS::Service",
+   "property": "EnableECSManagedTags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateService3FF69405",
+   "type": "AWS::ECS::Service",
+   "property": "DeploymentConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "alarms": {
+     "alarmNames": [],
+     "enable": false,
+     "rollback": false
+    },
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 50
+   },
+   "actual": {
+    "deploymentCircuitBreaker": {
+     "enable": false,
+     "rollback": false,
+     "resetOnHealthyTask": true,
+     "thresholdConfiguration": {
+      "type": "BOUNDED_PERCENT",
+      "value": 50
+     }
+    },
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 50,
+    "alarms": {
+     "alarmNames": [],
+     "rollback": false,
+     "enable": false
+    },
+    "strategy": "ROLLING",
+    "bakeTimeInMinutes": 0
+   }
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateService3FF69405",
+   "type": "AWS::ECS::Service",
+   "property": "NetworkConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "awsvpcConfiguration": {
+     "assignPublicIp": "ENABLED",
+     "securityGroups": [
+      "${HealthCheckQueueServiceQueueProcessingFargateServiceSecurityGroupC3F38AFD}"
+     ],
+     "subnets": [
+      "${VPCPublicSubnet1SubnetB4246D30}",
+      "${VPCPublicSubnet2Subnet74179F39}"
+     ]
+    }
+   },
+   "actual": {
+    "awsvpcConfiguration": {
+     "assignPublicIp": "ENABLED",
+     "securityGroups": [
+      "${HealthCheckQueueServiceQueueProcessingFargateServiceSecurityGroupC3F38AFD}"
+     ],
+     "subnets": [
+      "${VPCPublicSubnet1SubnetB4246D30}",
+      "${VPCPublicSubnet2Subnet74179F39}"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceSecurityGroupC3F38AFD",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceSecurityGroupC3F38AFD",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "aws-ecs-patterns-queue-health-check/HealthCheckQueueService/QueueProcessingFargateService/SecurityGroup",
+   "actual": "aws-ecs-patterns-queue-health-check/HealthCheckQueueService/QueueProcessingFargateService/SecurityGroup"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceSecurityGroupC3F38AFD",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VPCB9E5F0B4}",
+   "actual": "${VPCB9E5F0B4}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceSecurityGroupC3F38AFD",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0[0]}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0[0]}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ScalableDimension",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ecs:service:DesiredCount",
+   "actual": "ecs:service:DesiredCount"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ServiceNamespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ecs",
+   "actual": "ecs"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "MinCapacity",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "MaxCapacity",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 2,
+   "actual": 2
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "RoleARN",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetCpuScalingE6C00530",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetCpuScalingE6C00530",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetCpuScalingE6C00530.Name}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetCpuScalingE6C00530.Name}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetCpuScalingE6C00530",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TargetTrackingScaling",
+   "actual": "TargetTrackingScaling"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetCpuScalingE6C00530",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "ScalingTargetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetCpuScalingE6C00530",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "TargetTrackingScalingPolicyConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetValue": 50,
+    "PredefinedMetricSpecification": {
+     "PredefinedMetricType": "ECSServiceAverageCPUUtilization"
+    }
+   },
+   "actual": {
+    "TargetValue": 50,
+    "PredefinedMetricSpecification": {
+     "PredefinedMetricType": "ECSServiceAverageCPUUtilization"
+    }
+   }
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F.Name}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F.Name}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StepScaling",
+   "actual": "StepScaling"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "ScalingTargetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "StepScalingPolicyConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AdjustmentType": "ChangeInCapacity",
+    "MetricAggregationType": "Maximum",
+    "StepAdjustments": [
+     {
+      "MetricIntervalUpperBound": 0,
+      "ScalingAdjustment": -1
+     }
+    ]
+   },
+   "actual": {
+    "AdjustmentType": "ChangeInCapacity",
+    "StepAdjustments": [
+     {
+      "ScalingAdjustment": -1,
+      "MetricIntervalUpperBound": 0
+     }
+    ],
+    "MetricAggregationType": "Maximum"
+   }
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "AlarmDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lower threshold scaling alarm",
+   "actual": "Lower threshold scaling alarm"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "AlarmActions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F}"
+   ],
+   "actual": [
+    "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy350CBF9F}"
+   ]
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "LessThanOrEqualToThreshold",
+   "actual": "LessThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 0,
+   "actual": 0
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApproximateNumberOfMessagesVisible",
+   "actual": "ApproximateNumberOfMessagesVisible"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/SQS",
+   "actual": "AWS/SQS"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "QueueName",
+     "Value": "${HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D.Name}"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "QueueName",
+     "Value": "${HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D.Name}"
+    }
+   ]
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm9F271C45",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Maximum",
+   "actual": "Maximum"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785.Name}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785.Name}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StepScaling",
+   "actual": "StepScaling"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "ScalingTargetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0}",
+   "actual": "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTarget1FE1D4C0}"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "StepScalingPolicyConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AdjustmentType": "ChangeInCapacity",
+    "MetricAggregationType": "Maximum",
+    "StepAdjustments": [
+     {
+      "MetricIntervalLowerBound": 0,
+      "MetricIntervalUpperBound": 400,
+      "ScalingAdjustment": 1
+     },
+     {
+      "MetricIntervalLowerBound": 400,
+      "ScalingAdjustment": 5
+     }
+    ]
+   },
+   "actual": {
+    "AdjustmentType": "ChangeInCapacity",
+    "StepAdjustments": [
+     {
+      "ScalingAdjustment": 1,
+      "MetricIntervalLowerBound": 0,
+      "MetricIntervalUpperBound": 400
+     },
+     {
+      "ScalingAdjustment": 5,
+      "MetricIntervalLowerBound": 400
+     }
+    ],
+    "MetricAggregationType": "Maximum"
+   }
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "AlarmDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Upper threshold scaling alarm",
+   "actual": "Upper threshold scaling alarm"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "AlarmActions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785}"
+   ],
+   "actual": [
+    "${HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyAABD0785}"
+   ]
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApproximateNumberOfMessagesVisible",
+   "actual": "ApproximateNumberOfMessagesVisible"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/SQS",
+   "actual": "AWS/SQS"
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "QueueName",
+     "Value": "${HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D.Name}"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "QueueName",
+     "Value": "${HealthCheckQueueServiceEcsProcessingQueue2FE4AB4D.Name}"
+    }
+   ]
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "HealthCheckQueueServiceQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm0ADEAC2A",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Maximum",
+   "actual": "Maximum"
+  },
+  {
+   "logicalId": "EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3",
+   "type": "AWS::ECS::Cluster",
+   "property": "(exists)",
+   "status": "pass"
+  }
+ ]
+}

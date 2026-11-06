@@ -1,0 +1,122 @@
+{
+ "stackName": "aws-cdk-s3",
+ "summary": {
+  "pass": 8,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "Deleter1FEDC09A",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DeleterDefaultPolicyCD33B8A0",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeleterDefaultPolicyCD33B8A0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DeleterDefaultPolicyCD33B8A0",
+   "actual": "DeleterDefaultPolicyCD33B8A0"
+  },
+  {
+   "logicalId": "DeleterDefaultPolicyCD33B8A0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:DeleteObject*",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:DeleteObject*",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "DeleterDefaultPolicyCD33B8A0",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Deleter1FEDC09A}",
+   "actual": "${Deleter1FEDC09A}"
+  },
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKey6AB29FA6}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKey6AB29FA6}"
+     }
+    }
+   ]
+  }
+ ]
+}

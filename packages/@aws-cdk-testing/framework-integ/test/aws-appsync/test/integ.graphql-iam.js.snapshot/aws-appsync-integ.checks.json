@@ -1,0 +1,431 @@
+{
+ "stackName": "aws-appsync-integ",
+ "summary": {
+  "no handler": 7,
+  "pass": 29
+ },
+ "results": [
+  {
+   "logicalId": "PoolD3F588B8",
+   "type": "AWS::Cognito::UserPool",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiF70053CD",
+   "type": "AWS::AppSync::GraphQLApi",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiSchema510EECD7",
+   "type": "AWS::AppSync::GraphQLSchema",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApidsServiceRoleADC7D124",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApidsServiceRoleADC7D124",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "appsync.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22appsync.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "actual": "ApidsServiceRoleDefaultPolicyE5E18D6D"
+  },
+  {
+   "logicalId": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TestTable5769773A}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:BatchWriteItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DeleteItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:PutItem",
+       "dynamodb:Query",
+       "dynamodb:Scan",
+       "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TestTable5769773A}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ApidsServiceRoleDefaultPolicyE5E18D6D",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ApidsServiceRoleADC7D124}",
+   "actual": "${ApidsServiceRoleADC7D124}"
+  },
+  {
+   "logicalId": "Apids0DB53FEA",
+   "type": "AWS::AppSync::DataSource",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiQueryGetTest0BEAD0F2",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiQueryGetTestsF8C40170",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ApiMutationAddTestBF148084",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestTable5769773A",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestTable5769773A",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TestTable5769773A",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TestTable5769773A",
+   "type": "AWS::DynamoDB::Table",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "LambdaIAM687B49AF",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaIAM687B49AF",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaIAMDefaultPolicy96DEA124",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaIAMDefaultPolicy96DEA124",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "LambdaIAMDefaultPolicy96DEA124",
+   "actual": "LambdaIAMDefaultPolicy96DEA124"
+  },
+  {
+   "logicalId": "LambdaIAMDefaultPolicy96DEA124",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:graphql",
+      "Effect": "Allow",
+      "Resource": "${ApiF70053CD}/types/Query/fields/getTests"
+     },
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": [
+       "${ApiF70053CD}/types/Mutation/fields/addTest",
+       "${ApiF70053CD}/types/test/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:graphql",
+      "Effect": "Allow",
+      "Resource": "${ApiF70053CD}/types/Query/fields/getTests"
+     },
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": [
+       "${ApiF70053CD}/types/Mutation/fields/addTest",
+       "${ApiF70053CD}/types/test/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "LambdaIAMDefaultPolicy96DEA124",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${LambdaIAM687B49AF}",
+   "actual": "${LambdaIAM687B49AF}"
+  },
+  {
+   "logicalId": "testQuery6695AADE",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "testQuery6695AADE",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "iam-query.handler",
+   "actual": "iam-query.handler"
+  },
+  {
+   "logicalId": "testQuery6695AADE",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "testQuery6695AADE",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaIAM687B49AF}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaIAM687B49AF}"
+  },
+  {
+   "logicalId": "testQuery6695AADE",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "APPSYNC_ENDPOINT": "https://qg3ab3pmsrcqvams4spoedzuxm.appsync-api.${AWS::Region}.amazonaws.com/graphql"
+   },
+   "actual": {
+    "APPSYNC_ENDPOINT": "https://qg3ab3pmsrcqvams4spoedzuxm.appsync-api.${AWS::Region}.amazonaws.com/graphql"
+   }
+  },
+  {
+   "logicalId": "testFailServiceRole9FF22F85",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "testFailServiceRole9FF22F85",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "testFailServiceRole9FF22F85",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "testFail33CE01D1",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "testFail33CE01D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "iam-query.handler",
+   "actual": "iam-query.handler"
+  },
+  {
+   "logicalId": "testFail33CE01D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "testFail33CE01D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${testFailServiceRole9FF22F85}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${testFailServiceRole9FF22F85}"
+  },
+  {
+   "logicalId": "testFail33CE01D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "APPSYNC_ENDPOINT": "https://qg3ab3pmsrcqvams4spoedzuxm.appsync-api.${AWS::Region}.amazonaws.com/graphql"
+   },
+   "actual": {
+    "APPSYNC_ENDPOINT": "https://qg3ab3pmsrcqvams4spoedzuxm.appsync-api.${AWS::Region}.amazonaws.com/graphql"
+   }
+  }
+ ]
+}

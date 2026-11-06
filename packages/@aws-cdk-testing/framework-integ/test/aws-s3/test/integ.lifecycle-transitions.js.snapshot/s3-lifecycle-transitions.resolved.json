@@ -1,0 +1,71 @@
+{
+ "version": "1",
+ "stackName": "s3-lifecycle-transitions",
+ "resources": {
+  "AllStorageClasses128KB8241761": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "LifecycleConfiguration": {
+     "Rules": [
+      {
+       "Status": "Enabled",
+       "Transitions": [
+        {
+         "StorageClass": "DEEP_ARCHIVE",
+         "TransitionInDays": 30
+        }
+       ]
+      },
+      {
+       "ObjectSizeGreaterThan": 200000,
+       "ObjectSizeLessThan": 300000,
+       "Status": "Enabled",
+       "Transitions": [
+        {
+         "StorageClass": "ONEZONE_IA",
+         "TransitionInDays": 30
+        }
+       ]
+      }
+     ],
+     "TransitionDefaultMinimumObjectSize": "all_storage_classes_128K"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "VariesByStorageClassCD3C88D5": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "LifecycleConfiguration": {
+     "Rules": [
+      {
+       "Status": "Enabled",
+       "Transitions": [
+        {
+         "StorageClass": "DEEP_ARCHIVE",
+         "TransitionInDays": 30
+        }
+       ]
+      },
+      {
+       "ObjectSizeGreaterThan": 200000,
+       "ObjectSizeLessThan": 300000,
+       "Status": "Enabled",
+       "Transitions": [
+        {
+         "StorageClass": "ONEZONE_IA",
+         "TransitionInDays": 30
+        }
+       ]
+      }
+     ],
+     "TransitionDefaultMinimumObjectSize": "varies_by_storage_class"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

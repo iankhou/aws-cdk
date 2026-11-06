@@ -1,0 +1,139 @@
+{
+ "stackName": "aws-ecs-integ",
+ "summary": {
+  "pass": 10
+ },
+ "results": [
+  {
+   "logicalId": "TaskDefinitionTaskRoleFD40A61D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskDefinitionTaskRoleFD40A61D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ecs-tasks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ecs-tasks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TaskDefinitionB36D86D9",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskDefinitionB36D86D9",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "ContainerDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "essential": true,
+     "image": "amazon/amazon-ecs-sample",
+     "interactive": true,
+     "name": "Container"
+    }
+   ],
+   "actual": [
+    {
+     "name": "Container",
+     "image": "amazon/amazon-ecs-sample",
+     "cpu": 0,
+     "links": [],
+     "portMappings": [],
+     "essential": true,
+     "entryPoint": [],
+     "command": [],
+     "environment": [],
+     "environmentFiles": [],
+     "mountPoints": [],
+     "volumesFrom": [],
+     "secrets": [],
+     "dnsServers": [],
+     "dnsSearchDomains": [],
+     "extraHosts": [],
+     "dockerSecurityOptions": [],
+     "interactive": true,
+     "dockerLabels": {},
+     "ulimits": [],
+     "systemControls": [],
+     "credentialSpecs": []
+    }
+   ]
+  },
+  {
+   "logicalId": "TaskDefinitionB36D86D9",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Cpu",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "256",
+   "actual": "256"
+  },
+  {
+   "logicalId": "TaskDefinitionB36D86D9",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Memory",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "512",
+   "actual": "512"
+  },
+  {
+   "logicalId": "TaskDefinitionB36D86D9",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "TaskRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskDefinitionTaskRoleFD40A61D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskDefinitionTaskRoleFD40A61D}"
+  },
+  {
+   "logicalId": "TaskDefinitionB36D86D9",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Family",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "awsecsintegTaskDefinition11DF163D",
+   "actual": "awsecsintegTaskDefinition11DF163D"
+  },
+  {
+   "logicalId": "TaskDefinitionB36D86D9",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "NetworkMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "awsvpc",
+   "actual": "awsvpc"
+  },
+  {
+   "logicalId": "TaskDefinitionB36D86D9",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "RequiresCompatibilities",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "FARGATE"
+   ],
+   "actual": [
+    "FARGATE"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "version": "1",
+ "stackName": "KeyStack",
+ "resources": {
+  "MyKey6AB29FA6": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "ExportsOutputFnGetAttMyKey6AB29FA6Arn4FA82736": {
+   "Value": "${MyKey6AB29FA6.Arn}",
+   "Export": {
+    "Name": "KeyStack:ExportsOutputFnGetAttMyKey6AB29FA6Arn4FA82736"
+   }
+  }
+ },
+ "unresolved": []
+}

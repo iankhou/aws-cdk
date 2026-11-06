@@ -1,0 +1,820 @@
+{
+ "stackName": "integ-provider-with-waiter-state-machine-custom-role",
+ "summary": {
+  "pass": 61
+ },
+ "results": [
+  {
+   "logicalId": "OnEventServiceRole6D9476C1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "OnEventServiceRole6D9476C1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "OnEventServiceRole6D9476C1",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "OnEvent74718524",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "OnEvent74718524",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.onEvent",
+   "actual": "index.onEvent"
+  },
+  {
+   "logicalId": "OnEvent74718524",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "OnEvent74718524",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${OnEventServiceRole6D9476C1}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${OnEventServiceRole6D9476C1}"
+  },
+  {
+   "logicalId": "IsCompleteServiceRole1399DF19",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IsCompleteServiceRole1399DF19",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "IsCompleteServiceRole1399DF19",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "IsComplete544AE5AD",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IsComplete544AE5AD",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.isComplete",
+   "actual": "index.isComplete"
+  },
+  {
+   "logicalId": "IsComplete544AE5AD",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "IsComplete544AE5AD",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${IsCompleteServiceRole1399DF19}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${IsCompleteServiceRole1399DF19}"
+  },
+  {
+   "logicalId": "MyRoleF48FFE04",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRoleF48FFE04",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyRoleF48FFE04",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyRoleDefaultPolicyA36BE1DD",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRoleDefaultPolicyA36BE1DD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyRoleDefaultPolicyA36BE1DD",
+   "actual": "MyRoleDefaultPolicyA36BE1DD"
+  },
+  {
+   "logicalId": "MyRoleDefaultPolicyA36BE1DD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}:*"
+      ]
+     },
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}"
+      ]
+     },
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${MyProviderWithCustomRolewaiterstatemachineA313C5FC}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}:*"
+      ]
+     },
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}"
+      ]
+     },
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${MyProviderWithCustomRolewaiterstatemachineA313C5FC}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyRoleDefaultPolicyA36BE1DD",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRoleF48FFE04}",
+   "actual": "${MyRoleF48FFE04}"
+  },
+  {
+   "logicalId": "MyRole23935D052",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRole23935D052",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyRole23935D052",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyRole2DefaultPolicy05107F99",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRole2DefaultPolicy05107F99",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyRole2DefaultPolicy05107F99",
+   "actual": "MyRole2DefaultPolicy05107F99"
+  },
+  {
+   "logicalId": "MyRole2DefaultPolicy05107F99",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}:*"
+      ]
+     },
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}:*"
+      ]
+     },
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyRole2DefaultPolicy05107F99",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyRole23935D052}",
+   "actual": "${MyRole23935D052}"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonEventCE6B50CD",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonEventCE6B50CD",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS CDK resource provider framework - onEvent (integ-provider-with-waiter-state-machine-custom-role/MyProviderWithCustomRole)",
+   "actual": "AWS CDK resource provider framework - onEvent (integ-provider-with-waiter-state-machine-custom-role/MyProviderWithCustomRole)"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonEventCE6B50CD",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "framework.onEvent",
+   "actual": "framework.onEvent"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonEventCE6B50CD",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonEventCE6B50CD",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRoleF48FFE04}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRoleF48FFE04}"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonEventCE6B50CD",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonEventCE6B50CD",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+    "USER_IS_COMPLETE_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}",
+    "WAITER_STATE_MACHINE_ARN": "${MyProviderWithCustomRolewaiterstatemachineA313C5FC}"
+   },
+   "actual": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+    "WAITER_STATE_MACHINE_ARN": "${MyProviderWithCustomRolewaiterstatemachineA313C5FC}",
+    "USER_IS_COMPLETE_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}"
+   }
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonEventCE6B50CD",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "FATAL",
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "FATAL",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${MyProviderWithCustomRoleframeworkonEventCE6B50CD}"
+   }
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkisComplete10E48A2A",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkisComplete10E48A2A",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS CDK resource provider framework - isComplete (integ-provider-with-waiter-state-machine-custom-role/MyProviderWithCustomRole)",
+   "actual": "AWS CDK resource provider framework - isComplete (integ-provider-with-waiter-state-machine-custom-role/MyProviderWithCustomRole)"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkisComplete10E48A2A",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "framework.isComplete",
+   "actual": "framework.isComplete"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkisComplete10E48A2A",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkisComplete10E48A2A",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRole23935D052}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRole23935D052}"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkisComplete10E48A2A",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkisComplete10E48A2A",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+    "USER_IS_COMPLETE_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}"
+   },
+   "actual": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+    "USER_IS_COMPLETE_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}"
+   }
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkisComplete10E48A2A",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "FATAL",
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "FATAL",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${MyProviderWithCustomRoleframeworkisComplete10E48A2A}"
+   }
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonTimeout1A7D4C59",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonTimeout1A7D4C59",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS CDK resource provider framework - onTimeout (integ-provider-with-waiter-state-machine-custom-role/MyProviderWithCustomRole)",
+   "actual": "AWS CDK resource provider framework - onTimeout (integ-provider-with-waiter-state-machine-custom-role/MyProviderWithCustomRole)"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonTimeout1A7D4C59",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "framework.onTimeout",
+   "actual": "framework.onTimeout"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonTimeout1A7D4C59",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonTimeout1A7D4C59",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRole23935D052}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRole23935D052}"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonTimeout1A7D4C59",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonTimeout1A7D4C59",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+    "USER_IS_COMPLETE_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}"
+   },
+   "actual": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${OnEvent74718524}",
+    "USER_IS_COMPLETE_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${IsComplete544AE5AD}"
+   }
+  },
+  {
+   "logicalId": "MyProviderWithCustomRoleframeworkonTimeout1A7D4C59",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "FATAL",
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "FATAL",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${MyProviderWithCustomRoleframeworkonTimeout1A7D4C59}"
+   }
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineRoleED93441A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineRoleED93441A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineRoleDefaultPolicy4808872B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineRoleDefaultPolicy4808872B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyProviderWithCustomRolewaiterstatemachineRoleDefaultPolicy4808872B",
+   "actual": "MyProviderWithCustomRolewaiterstatemachineRoleDefaultPolicy4808872B"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineRoleDefaultPolicy4808872B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkisComplete10E48A2A}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkonTimeout1A7D4C59}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkisComplete10E48A2A}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkonTimeout1A7D4C59}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkisComplete10E48A2A}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkonTimeout1A7D4C59}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkisComplete10E48A2A}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkonTimeout1A7D4C59}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineRoleDefaultPolicy4808872B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyProviderWithCustomRolewaiterstatemachineRoleED93441A}",
+   "actual": "${MyProviderWithCustomRolewaiterstatemachineRoleED93441A}"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineA313C5FC",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineA313C5FC",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "framework-isComplete-task",
+    "States": {
+     "framework-isComplete-task": {
+      "End": true,
+      "Retry": [
+       {
+        "ErrorEquals": [
+         "States.ALL"
+        ],
+        "IntervalSeconds": 5,
+        "MaxAttempts": 360,
+        "BackoffRate": 1
+       }
+      ],
+      "Catch": [
+       {
+        "ErrorEquals": [
+         "States.ALL"
+        ],
+        "Next": "framework-onTimeout-task"
+       }
+      ],
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkisComplete10E48A2A}"
+     },
+     "framework-onTimeout-task": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkonTimeout1A7D4C59}"
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "framework-isComplete-task",
+    "States": {
+     "framework-isComplete-task": {
+      "End": true,
+      "Retry": [
+       {
+        "ErrorEquals": [
+         "States.ALL"
+        ],
+        "IntervalSeconds": 5,
+        "MaxAttempts": 360,
+        "BackoffRate": 1
+       }
+      ],
+      "Catch": [
+       {
+        "ErrorEquals": [
+         "States.ALL"
+        ],
+        "Next": "framework-onTimeout-task"
+       }
+      ],
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkisComplete10E48A2A}"
+     },
+     "framework-onTimeout-task": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyProviderWithCustomRoleframeworkonTimeout1A7D4C59}"
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "MyProviderWithCustomRolewaiterstatemachineA313C5FC",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyProviderWithCustomRolewaiterstatemachineRoleED93441A}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyProviderWithCustomRolewaiterstatemachineRoleED93441A}"
+  }
+ ]
+}

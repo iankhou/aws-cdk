@@ -1,0 +1,122 @@
+{
+ "stackName": "integ-distribution-logbucket",
+ "summary": {
+  "pass": 8
+ },
+ "results": [
+  {
+   "logicalId": "LogBucketCC3B17E8",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogBucketCC3B17E8",
+   "type": "AWS::S3::Bucket",
+   "property": "OwnershipControls.Rules",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ObjectOwnership": "ObjectWriter"
+    }
+   ],
+   "actual": [
+    {
+     "ObjectOwnership": "ObjectWriter"
+    }
+   ]
+  },
+  {
+   "logicalId": "MyDistDB88FD9A",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyDistDB88FD9A",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "MyDistDB88FD9A",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "MyDistDB88FD9A",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "MyDistDB88FD9A",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "integdistributionlogbucketMyDistOrigin16148F85F",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   },
+   "actual": {
+    "TargetOriginId": "integdistributionlogbucketMyDistOrigin16148F85F",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   }
+  },
+  {
+   "logicalId": "MyDistDB88FD9A",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionlogbucketMyDistOrigin16148F85F",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      },
+      "OriginShield": {
+       "Enabled": true,
+       "OriginShieldRegion": "us-west-2"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionlogbucketMyDistOrigin16148F85F",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      },
+      "OriginShield": {
+       "Enabled": true,
+       "OriginShieldRegion": "us-west-2"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

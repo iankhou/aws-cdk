@@ -1,0 +1,136 @@
+{
+ "stackName": "integ-distribution-origin-id",
+ "summary": {
+  "pass": 7
+ },
+ "results": [
+  {
+   "logicalId": "TestDistribution94EC811C",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestDistribution94EC811C",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "TestDistribution94EC811C",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "TestDistribution94EC811C",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "TestDistribution94EC811C",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "my-custom-origin-id",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   },
+   "actual": {
+    "TargetOriginId": "my-custom-origin-id",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   }
+  },
+  {
+   "logicalId": "TestDistribution94EC811C",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.CacheBehaviors",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 2,
+    "Items": [
+     {
+      "PathPattern": "/second",
+      "TargetOriginId": "my-custom-origin-id",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     },
+     {
+      "PathPattern": "/third",
+      "TargetOriginId": "my-custom-origin-id",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 2,
+    "Items": [
+     {
+      "PathPattern": "/second",
+      "TargetOriginId": "my-custom-origin-id",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     },
+     {
+      "PathPattern": "/third",
+      "TargetOriginId": "my-custom-origin-id",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "TestDistribution94EC811C",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "my-custom-origin-id",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "my-custom-origin-id",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,378 @@
+{
+ "stackName": "cdk-integ-opensearch",
+ "summary": {
+  "pass": 32,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "Domain1SlowSearchLogs8F3B0506",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Domain1SlowSearchLogs8F3B0506",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  },
+  {
+   "logicalId": "Domain1AppLogs6E8D1D67",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Domain1AppLogs6E8D1D67",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  },
+  {
+   "logicalId": "Domain1${Domain1ESLogGroupPolicyc881416c4fcb1ec2b4bf7f47a5cde4097f01ec50fc3D726D58}CustomResourcePolicyBE9BFE5D",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Domain1${Domain1ESLogGroupPolicyc881416c4fcb1ec2b4bf7f47a5cde4097f01ec50fc3D726D58}CustomResourcePolicyBE9BFE5D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Domain1${Domain1ESLogGroupPolicyc881416c4fcb1ec2b4bf7f47a5cde4097f01ec50fc3D726D58}CustomResourcePolicyBE9BFE5D",
+   "actual": "Domain1${Domain1ESLogGroupPolicyc881416c4fcb1ec2b4bf7f47a5cde4097f01ec50fc3D726D58}CustomResourcePolicyBE9BFE5D"
+  },
+  {
+   "logicalId": "Domain1${Domain1ESLogGroupPolicyc881416c4fcb1ec2b4bf7f47a5cde4097f01ec50fc3D726D58}CustomResourcePolicyBE9BFE5D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Domain1${Domain1ESLogGroupPolicyc881416c4fcb1ec2b4bf7f47a5cde4097f01ec50fc3D726D58}CustomResourcePolicyBE9BFE5D",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "Domain19FCBCB91",
+   "type": "AWS::OpenSearchService::Domain",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Domain1AccessPolicyCustomResourcePolicy3BA04487",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Domain1AccessPolicyCustomResourcePolicy3BA04487",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Domain1AccessPolicyCustomResourcePolicy3BA04487",
+   "actual": "Domain1AccessPolicyCustomResourcePolicy3BA04487"
+  },
+  {
+   "logicalId": "Domain1AccessPolicyCustomResourcePolicy3BA04487",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "es:UpdateDomainConfig",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:es:${AWS::Region}:${AWS::AccountId}:domain/${Domain19FCBCB91}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "es:UpdateDomainConfig",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:es:${AWS::Region}:${AWS::AccountId}:domain/${Domain19FCBCB91}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Domain1AccessPolicyCustomResourcePolicy3BA04487",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 120,
+   "actual": 120
+  },
+  {
+   "logicalId": "Domain2SlowSearchLogs0C75F64B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Domain2SlowSearchLogs0C75F64B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  },
+  {
+   "logicalId": "Domain2AppLogs810876E2",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Domain2AppLogs810876E2",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  },
+  {
+   "logicalId": "Domain2${Domain2ESLogGroupPolicyc80140a7754e9c0dd4e81167ef19e15da5b55dca0286FF1B15}CustomResourcePolicy2DB46870",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Domain2${Domain2ESLogGroupPolicyc80140a7754e9c0dd4e81167ef19e15da5b55dca0286FF1B15}CustomResourcePolicy2DB46870",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Domain2${Domain2ESLogGroupPolicyc80140a7754e9c0dd4e81167ef19e15da5b55dca0286FF1B15}CustomResourcePolicy2DB46870",
+   "actual": "Domain2${Domain2ESLogGroupPolicyc80140a7754e9c0dd4e81167ef19e15da5b55dca0286FF1B15}CustomResourcePolicy2DB46870"
+  },
+  {
+   "logicalId": "Domain2${Domain2ESLogGroupPolicyc80140a7754e9c0dd4e81167ef19e15da5b55dca0286FF1B15}CustomResourcePolicy2DB46870",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Domain2${Domain2ESLogGroupPolicyc80140a7754e9c0dd4e81167ef19e15da5b55dca0286FF1B15}CustomResourcePolicy2DB46870",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "Domain2644FE48C",
+   "type": "AWS::OpenSearchService::Domain",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Domain2AccessPolicyCustomResourcePolicy7C8260FD",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Domain2AccessPolicyCustomResourcePolicy7C8260FD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Domain2AccessPolicyCustomResourcePolicy7C8260FD",
+   "actual": "Domain2AccessPolicyCustomResourcePolicy7C8260FD"
+  },
+  {
+   "logicalId": "Domain2AccessPolicyCustomResourcePolicy7C8260FD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "es:UpdateDomainConfig",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:es:${AWS::Region}:${AWS::AccountId}:domain/${Domain2644FE48C}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "es:UpdateDomainConfig",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:es:${AWS::Region}:${AWS::AccountId}:domain/${Domain2644FE48C}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Domain2AccessPolicyCustomResourcePolicy7C8260FD",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  }
+ ]
+}

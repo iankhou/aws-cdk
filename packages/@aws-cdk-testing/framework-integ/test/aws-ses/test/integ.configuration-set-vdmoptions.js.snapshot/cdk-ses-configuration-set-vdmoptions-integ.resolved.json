@@ -1,0 +1,72 @@
+{
+ "version": "1",
+ "stackName": "cdk-ses-configuration-set-vdmoptions-integ",
+ "resources": {
+  "VdmOptionsEnabled69EBE7CE": {
+   "Type": "AWS::SES::ConfigurationSet",
+   "Properties": {
+    "Name": "vdmoptions-enabled",
+    "VdmOptions": {
+     "DashboardOptions": {
+      "EngagementMetrics": "ENABLED"
+     },
+     "GuardianOptions": {
+      "OptimizedSharedDelivery": "ENABLED"
+     }
+    }
+   }
+  },
+  "VdmOptionsDisabledE1F2258E": {
+   "Type": "AWS::SES::ConfigurationSet",
+   "Properties": {
+    "Name": "vdmoptions-disabled",
+    "VdmOptions": {
+     "DashboardOptions": {
+      "EngagementMetrics": "DISABLED"
+     },
+     "GuardianOptions": {
+      "OptimizedSharedDelivery": "DISABLED"
+     }
+    }
+   }
+  },
+  "VdmOptionsNotConfigured273D3326": {
+   "Type": "AWS::SES::ConfigurationSet",
+   "Properties": {
+    "Name": "vdmoptions-not-configured"
+   }
+  },
+  "VdmAccountLevelSettings4BBA5196": {
+   "Type": "AWS::SES::VdmAttributes",
+   "Properties": {
+    "DashboardAttributes": {
+     "EngagementMetrics": "ENABLED"
+    },
+    "GuardianAttributes": {
+     "OptimizedSharedDelivery": "ENABLED"
+    }
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefVdmOptionsEnabled69EBE7CE3C47B59E": {
+   "Value": "${VdmOptionsEnabled69EBE7CE}",
+   "Export": {
+    "Name": "cdk-ses-configuration-set-vdmoptions-integ:ExportsOutputRefVdmOptionsEnabled69EBE7CE3C47B59E"
+   }
+  },
+  "ExportsOutputRefVdmOptionsDisabledE1F2258ECF65F287": {
+   "Value": "${VdmOptionsDisabledE1F2258E}",
+   "Export": {
+    "Name": "cdk-ses-configuration-set-vdmoptions-integ:ExportsOutputRefVdmOptionsDisabledE1F2258ECF65F287"
+   }
+  },
+  "ExportsOutputRefVdmOptionsNotConfigured273D33265DF527D8": {
+   "Value": "${VdmOptionsNotConfigured273D3326}",
+   "Export": {
+    "Name": "cdk-ses-configuration-set-vdmoptions-integ:ExportsOutputRefVdmOptionsNotConfigured273D33265DF527D8"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,70 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-subscriptionfilter-integ",
+ "resources": {
+  "LogGroupF5B46931": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "LogGroupSubscriptionCanInvokeLambdaE05AC235": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${Function76856677.Arn}",
+    "Principal": "logs.amazonaws.com",
+    "SourceArn": "${LogGroupF5B46931.Arn}"
+   }
+  },
+  "LogGroupSubscriptionE3573E29": {
+   "Type": "AWS::Logs::SubscriptionFilter",
+   "Properties": {
+    "DestinationArn": "${Function76856677.Arn}",
+    "FilterName": "CustomSubscriptionFilterName",
+    "FilterPattern": "\"ERROR\" \"MainThread\"",
+    "LogGroupName": "${LogGroupF5B46931}"
+   },
+   "DependsOn": [
+    "LogGroupSubscriptionCanInvokeLambdaE05AC235"
+   ]
+  },
+  "FunctionServiceRole675BB04A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "Function76856677": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "foo"
+    },
+    "Handler": "index.handler",
+    "Role": "${FunctionServiceRole675BB04A.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "FunctionServiceRole675BB04A"
+   ]
+  }
+ },
+ "unresolved": []
+}

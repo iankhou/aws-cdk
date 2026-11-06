@@ -1,0 +1,84 @@
+{
+ "version": "1",
+ "stackName": "aws-events-targets-api-gatewayv2-integ",
+ "resources": {
+  "HttpApiF5A9A8A7": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "HttpApi",
+    "ProtocolType": "HTTP"
+   }
+  },
+  "HttpApiDefaultStage3EEB07D6": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${HttpApiF5A9A8A7}",
+    "AutoDeploy": true,
+    "StageName": "$default"
+   }
+  },
+  "HttpApiEventsRole7DE25890": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "HttpApiEventsRoleDefaultPolicyB9125EA7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "execute-api:Invoke",
+        "execute-api:ManageConnections"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiF5A9A8A7}/$default/*/"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "HttpApiEventsRoleDefaultPolicyB9125EA7",
+    "Roles": [
+     "${HttpApiEventsRole7DE25890}"
+    ]
+   }
+  },
+  "Rule4C995B7F": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "ScheduleExpression": "rate(1 minute)",
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiF5A9A8A7}/$default/*/",
+      "HttpParameters": {},
+      "Id": "Target0",
+      "RoleArn": "${HttpApiEventsRole7DE25890.Arn}"
+     }
+    ]
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefRule4C995B7FC04CD733": {
+   "Value": "${Rule4C995B7F}",
+   "Export": {
+    "Name": "aws-events-targets-api-gatewayv2-integ:ExportsOutputRefRule4C995B7FC04CD733"
+   }
+  }
+ },
+ "unresolved": []
+}

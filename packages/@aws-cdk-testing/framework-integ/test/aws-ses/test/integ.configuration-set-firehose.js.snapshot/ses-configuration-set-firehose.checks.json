@@ -1,0 +1,201 @@
+{
+ "stackName": "ses-configuration-set-firehose",
+ "summary": {
+  "no handler": 3,
+  "pass": 11
+ },
+ "results": [
+  {
+   "logicalId": "ConfigurationSet3DD38186",
+   "type": "AWS::SES::ConfigurationSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ConfigurationSetFirehoseDestinationFirehoseDeliveryStreamIamRoleA664ACA2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfigurationSetFirehoseDestinationFirehoseDeliveryStreamIamRoleA664ACA2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "AWS:SourceAccount": "${AWS::AccountId}",
+        "AWS:SourceArn": "arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:configuration-set/${ConfigurationSet3DD38186}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ses.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ses.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22AWS%3ASourceAccount%22%3A%22${AWS::AccountId}%22%2C%22AWS%3ASourceArn%22%3A%22arn%3Aaws%3Ases%3A${AWS::Region}%3A${AWS::AccountId}%3Aconfiguration-set%2F${ConfigurationSet3DD38186}%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "ConfigurationSetFirehoseDestinationFirehoseDeliveryStreamIamRoleA664ACA2",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "AllowFirehoseDeliveryStreamPublish"
+   ],
+   "actual": [
+    "AllowFirehoseDeliveryStreamPublish"
+   ]
+  },
+  {
+   "logicalId": "ConfigurationSetFirehoseDestinationFirehoseDeliveryStreamIamRoleA664ACA2",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "firehose:PutRecordBatch",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/${FirehoseEF5AC2A2}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22firehose%3APutRecordBatch%22%2C%22Resource%22%3A%22arn%3Aaws%3Afirehose%3A${AWS::Region}%3A${AWS::AccountId}%3Adeliverystream%2F${FirehoseEF5AC2A2}%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ConfigurationSetFirehoseDestination6BB494C9",
+   "type": "AWS::SES::ConfigurationSetEventDestination",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "RoleDefaultPolicy5FFB7DAB",
+   "actual": "RoleDefaultPolicy5FFB7DAB"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Role1ABCC5F0}",
+   "actual": "${Role1ABCC5F0}"
+  },
+  {
+   "logicalId": "FirehoseEF5AC2A2",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

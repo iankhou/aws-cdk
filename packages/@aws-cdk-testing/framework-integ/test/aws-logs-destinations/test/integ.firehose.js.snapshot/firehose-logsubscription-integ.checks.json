@@ -1,0 +1,271 @@
+{
+ "stackName": "firehose-logsubscription-integ",
+ "summary": {
+  "pass": 20,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyStreamS3DestinationRole5E0BA960",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyStreamS3DestinationRole5E0BA960",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyStreamS3DestinationRoleDefaultPolicy401EF6F2",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyStreamS3DestinationRoleDefaultPolicy401EF6F2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyStreamS3DestinationRoleDefaultPolicy401EF6F2",
+   "actual": "MyStreamS3DestinationRoleDefaultPolicy401EF6F2"
+  },
+  {
+   "logicalId": "MyStreamS3DestinationRoleDefaultPolicy401EF6F2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}",
+       "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}",
+       "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyStreamS3DestinationRoleDefaultPolicy401EF6F2",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyStreamS3DestinationRole5E0BA960}",
+   "actual": "${MyStreamS3DestinationRole5E0BA960}"
+  },
+  {
+   "logicalId": "MyStream5C050E93",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "SubscriptionCloudWatchLogsCanPutRecords9C1223EC",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscriptionCloudWatchLogsCanPutRecords9C1223EC",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:*"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logs.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22logs.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Alogs%3A${AWS::Region}%3A${AWS::AccountId}%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F",
+   "actual": "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F"
+  },
+  {
+   "logicalId": "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "firehose:PutRecord",
+       "firehose:PutRecordBatch"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/${MyStream5C050E93}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "firehose:PutRecord",
+       "firehose:PutRecordBatch"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/${MyStream5C050E93}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SubscriptionCloudWatchLogsCanPutRecords9C1223EC}",
+   "actual": "${SubscriptionCloudWatchLogsCanPutRecords9C1223EC}"
+  },
+  {
+   "logicalId": "Subscription391C9821",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Subscription391C9821",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${LogGroupF5B46931}",
+   "actual": "${LogGroupF5B46931}"
+  },
+  {
+   "logicalId": "Subscription391C9821",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "DestinationArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/${MyStream5C050E93}",
+   "actual": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/${MyStream5C050E93}"
+  },
+  {
+   "logicalId": "Subscription391C9821",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "FilterPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "",
+   "actual": ""
+  },
+  {
+   "logicalId": "Subscription391C9821",
+   "type": "AWS::Logs::SubscriptionFilter",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SubscriptionCloudWatchLogsCanPutRecords9C1223EC}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SubscriptionCloudWatchLogsCanPutRecords9C1223EC}"
+  }
+ ]
+}

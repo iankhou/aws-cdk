@@ -1,0 +1,329 @@
+{
+ "version": "1",
+ "stackName": "pipeline-events",
+ "resources": {
+  "Repo02AC86CF": {
+   "Type": "AWS::CodeCommit::Repository",
+   "Properties": {
+    "RepositoryName": "TestRepository"
+   }
+  },
+  "pipelinePipeline22F2A91DArtifactsBucketEncryptionKey87C796D2": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "pipelinePipeline22F2A91DArtifactsBucketEncryptionKeyAlias9530209A": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/codepipeline-pipeline-events-pipelinepipeline22f2a91d-fbb66895",
+    "TargetKeyId": "${pipelinePipeline22F2A91DArtifactsBucketEncryptionKey87C796D2.Arn}"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "pipelinePipeline22F2A91DArtifactsBucketC1799DCD": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "KMSMasterKeyID": "${pipelinePipeline22F2A91DArtifactsBucketEncryptionKey87C796D2.Arn}",
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "pipelinePipeline22F2A91DArtifactsBucketPolicy269103C2": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${pipelinePipeline22F2A91DArtifactsBucketC1799DCD}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        "${pipelinePipeline22F2A91DArtifactsBucketC1799DCD.Arn}",
+        "${pipelinePipeline22F2A91DArtifactsBucketC1799DCD.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "pipelinePipeline22F2A91DRole58B7B05E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codepipeline.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "pipelinePipeline22F2A91DRoleDefaultPolicyCDEE9D19": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${pipelinePipeline22F2A91DArtifactsBucketC1799DCD.Arn}",
+        "${pipelinePipeline22F2A91DArtifactsBucketC1799DCD.Arn}/*"
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey*",
+        "kms:ReEncrypt*"
+       ],
+       "Effect": "Allow",
+       "Resource": "${pipelinePipeline22F2A91DArtifactsBucketEncryptionKey87C796D2.Arn}"
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": [
+        "${pipelinePipeline22F2A91DBuildHelloCodePipelineActionRoleA9729116.Arn}",
+        "${pipelinePipeline22F2A91DSourceCodeCommitCodePipelineActionRoleE54633E5.Arn}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "pipelinePipeline22F2A91DRoleDefaultPolicyCDEE9D19",
+    "Roles": [
+     "${pipelinePipeline22F2A91DRole58B7B05E}"
+    ]
+   }
+  },
+  "pipelinePipeline22F2A91DEB5D089B": {
+   "Type": "AWS::CodePipeline::Pipeline",
+   "Properties": {
+    "ArtifactStore": {
+     "EncryptionKey": {
+      "Id": "${pipelinePipeline22F2A91DArtifactsBucketEncryptionKey87C796D2.Arn}",
+      "Type": "KMS"
+     },
+     "Location": "${pipelinePipeline22F2A91DArtifactsBucketC1799DCD}",
+     "Type": "S3"
+    },
+    "RoleArn": "${pipelinePipeline22F2A91DRole58B7B05E.Arn}",
+    "Stages": [
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "AWS",
+         "Provider": "CodeCommit",
+         "Version": "1"
+        },
+        "Configuration": {
+         "RepositoryName": {
+          "Fn::GetAtt": [
+           "Repo02AC86CF",
+           "Name"
+          ]
+         },
+         "BranchName": "master"
+        },
+        "Name": "CodeCommit",
+        "OutputArtifacts": [
+         {
+          "Name": "Src"
+         }
+        ],
+        "RoleArn": "${pipelinePipeline22F2A91DSourceCodeCommitCodePipelineActionRoleE54633E5.Arn}",
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Source"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Approval",
+         "Owner": "AWS",
+         "Provider": "Manual",
+         "Version": "1"
+        },
+        "Name": "Hello",
+        "RoleArn": "${pipelinePipeline22F2A91DBuildHelloCodePipelineActionRoleA9729116.Arn}",
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Build"
+     }
+    ]
+   },
+   "DependsOn": [
+    "pipelinePipeline22F2A91DRoleDefaultPolicyCDEE9D19",
+    "pipelinePipeline22F2A91DRole58B7B05E"
+   ]
+  },
+  "pipelinePipeline22F2A91DSourceCodeCommitCodePipelineActionRoleE54633E5": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "${pipelinePipeline22F2A91DRole58B7B05E.Arn}"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "pipelinePipeline22F2A91DBuildHelloCodePipelineActionRoleA9729116": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "${pipelinePipeline22F2A91DRole58B7B05E.Arn}"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "pipelinePipeline22F2A91DEventsRole048D7F59": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "pipelinePipeline22F2A91DEventsRoleDefaultPolicyEED1010F": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "codepipeline:StartPipelineExecution",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${pipelinePipeline22F2A91DEB5D089B}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "pipelinePipeline22F2A91DEventsRoleDefaultPolicyEED1010F",
+    "Roles": [
+     "${pipelinePipeline22F2A91DEventsRole048D7F59}"
+    ]
+   }
+  },
+  "dlq09C78ACC": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ruleF2C1DCDC": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "ScheduleExpression": "rate(1 minute)",
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": "arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:${pipelinePipeline22F2A91DEB5D089B}",
+      "DeadLetterConfig": {
+       "Arn": "${dlq09C78ACC.Arn}"
+      },
+      "Id": "Target0",
+      "RetryPolicy": {
+       "MaximumEventAgeInSeconds": 7200,
+       "MaximumRetryAttempts": 2
+      },
+      "RoleArn": "${pipelinePipeline22F2A91DEventsRole048D7F59.Arn}"
+     }
+    ]
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.pipelinePipeline22F2A91DEB5D089B.Properties.Stages.0.Actions.0.Configuration.RepositoryName",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Name' attribute of the 'AWS::CodeCommit::Repository' resource because an error occurred while attempting to retrieve the information: 'AccessDeniedException:AWS::CodeCommit::Repository Handler returned status FAILED: AWS CodeCommit is not authorized to access the KMS key arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/c0a8fde2-2e1e-4c5d-9a11-ecb519183055 (Service: CodeCommit, Status Code: 400, Request ID: ee13c608-8284-4140-ad77-d0582f25dfc7) (SDK Attempt Count: 1) (HandlerErrorCode: AccessDenied, RequestToken: 2eb75e05-be21-4731-84ee-2f306b85368f)'"
+  }
+ ]
+}

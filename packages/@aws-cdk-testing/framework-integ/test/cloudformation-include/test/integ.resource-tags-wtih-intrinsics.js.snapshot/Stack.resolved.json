@@ -1,0 +1,29 @@
+{
+ "version": "1",
+ "stackName": "Stack",
+ "resources": {
+  "Bucket": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": {
+       "Fn::Select": [
+        0,
+        "key,value"
+       ]
+      },
+      "Value": "TagValue"
+     }
+    ]
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.Bucket.Properties.Tags.0.Fn::If.1.Key",
+   "intrinsic": "Fn::Select",
+   "reason": "Fn::Select: expected an array, got \"key,value\""
+  }
+ ]
+}

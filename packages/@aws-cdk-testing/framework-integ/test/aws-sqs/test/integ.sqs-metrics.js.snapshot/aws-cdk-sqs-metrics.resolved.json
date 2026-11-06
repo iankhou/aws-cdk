@@ -1,0 +1,72 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-sqs-metrics",
+ "resources": {
+  "Queue4A7E3555": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "OutstandingMessages1A7D645F": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "EvaluationPeriods": 3,
+    "Metrics": [
+     {
+      "Expression": "visible + notVisible",
+      "Id": "expr_1",
+      "Label": "Approximate number of messages outstanding",
+      "ReturnData": true
+     },
+     {
+      "Id": "visible",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "QueueName",
+          "Value": "${Queue4A7E3555.QueueName}"
+         }
+        ],
+        "MetricName": "ApproximateNumberOfMessagesVisible",
+        "Namespace": "AWS/SQS"
+       },
+       "Period": 60,
+       "Stat": "Maximum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "notVisible",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "QueueName",
+          "Value": "${Queue4A7E3555.QueueName}"
+         }
+        ],
+        "MetricName": "ApproximateNumberOfMessagesNotVisible",
+        "Namespace": "AWS/SQS"
+       },
+       "Period": 60,
+       "Stat": "Maximum"
+      },
+      "ReturnData": false
+     }
+    ],
+    "Threshold": 100
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefOutstandingMessages1A7D645F140C34BA": {
+   "Value": "${OutstandingMessages1A7D645F}",
+   "Export": {
+    "Name": "aws-cdk-sqs-metrics:ExportsOutputRefOutstandingMessages1A7D645F140C34BA"
+   }
+  }
+ },
+ "unresolved": []
+}

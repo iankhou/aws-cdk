@@ -1,0 +1,291 @@
+{
+ "stackName": "integ-cloudfront-function-url-origin-oac",
+ "summary": {
+  "pass": 24,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunctionServiceRole3C357FF2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunctionServiceRole3C357FF2}"
+  },
+  {
+   "logicalId": "MyFunctionFunctionUrlFF6DE78C",
+   "type": "AWS::Lambda::Url",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DistributionOrigin1FunctionUrlOriginAccessControl1DA0EA55",
+   "type": "AWS::CloudFront::OriginAccessControl",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFromApiForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D87785748A6F",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFromApiForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D87785748A6F",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunctionUrl",
+   "actual": "lambda:InvokeFunctionUrl"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFromApiForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D87785748A6F",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunction3BAA72D1}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunction3BAA72D1}"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFromApiForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D87785748A6F",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "cloudfront.amazonaws.com"
+   },
+   "actual": {
+    "Service": "cloudfront.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFromApiForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D87785748A6F",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution830FAC52}",
+   "actual": "arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution830FAC52}"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFunctionFromCloudFrontForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D877B0412846",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFunctionFromCloudFrontForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D877B0412846",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFunctionFromCloudFrontForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D877B0412846",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunction3BAA72D1}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunction3BAA72D1}"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFunctionFromCloudFrontForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D877B0412846",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "cloudfront.amazonaws.com"
+   },
+   "actual": {
+    "Service": "cloudfront.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFunctionFromCloudFrontForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D877B0412846",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution830FAC52}",
+   "actual": "arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution830FAC52}"
+  },
+  {
+   "logicalId": "DistributionOrigin1InvokeFunctionFromCloudFrontForintegcloudfrontfunctionurloriginoacDistributionOrigin112C3D877B0412846",
+   "type": "AWS::Lambda::Permission",
+   "property": "InvokedViaFunctionUrl",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "integcloudfrontfunctionurloriginoacDistributionOrigin112C3D877",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   },
+   "actual": {
+    "TargetOriginId": "integcloudfrontfunctionurloriginoacDistributionOrigin112C3D877",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integcloudfrontfunctionurloriginoacDistributionOrigin112C3D877",
+      "DomainName": "mkdc4in4uzjqihcu3z23hc3bkm0psnml.lambda-url.${AWS::Region}.on.aws",
+      "OriginAccessControlId": "${DistributionOrigin1FunctionUrlOriginAccessControl1DA0EA55}",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       }
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integcloudfrontfunctionurloriginoacDistributionOrigin112C3D877",
+      "DomainName": "mkdc4in4uzjqihcu3z23hc3bkm0psnml.lambda-url.${AWS::Region}.on.aws",
+      "OriginAccessControlId": "${DistributionOrigin1FunctionUrlOriginAccessControl1DA0EA55}",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

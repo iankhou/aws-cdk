@@ -1,0 +1,120 @@
+{
+ "stackName": "redshift-query-events",
+ "summary": {
+  "no handler": 3,
+  "pass": 9,
+  "unresolved": 2
+ },
+ "results": [
+  {
+   "logicalId": "Namespace",
+   "type": "AWS::RedshiftServerless::Namespace",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "WorkGroup",
+   "type": "AWS::RedshiftServerless::Workgroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "dlq09C78ACC",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecretA720EF05",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "Timer3EventsRole909B99A1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer3EventsRole909B99A1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Timer3EventsRoleDefaultPolicy3A2ECE32",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer3EventsRoleDefaultPolicy3A2ECE32",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Timer3EventsRoleDefaultPolicy3A2ECE32",
+   "actual": "Timer3EventsRoleDefaultPolicy3A2ECE32"
+  },
+  {
+   "logicalId": "Timer3EventsRoleDefaultPolicy3A2ECE32",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "Timer3EventsRoleDefaultPolicy3A2ECE32",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Timer3EventsRole909B99A1}",
+   "actual": "${Timer3EventsRole909B99A1}"
+  }
+ ]
+}

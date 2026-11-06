@@ -1,0 +1,317 @@
+{
+ "stackName": "aws-cdk-dynamodb-global-replicas-provisioned",
+ "summary": {
+  "pass": 27,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "StreamSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StreamEnabled": true,
+    "StreamViewType": "NEW_AND_OLD_IMAGES"
+   },
+   "actual": {
+    "StreamEnabled": true,
+    "StreamViewType": "NEW_AND_OLD_IMAGES"
+   }
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRoleD9856B771F8F2CCB",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRoleD9856B771F8F2CCB",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DynamoDB replication managed policy for table ${TableCD117FA1}",
+   "actual": "DynamoDB replication managed policy for table ${TableCD117FA1}"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRoleD9856B771F8F2CCB",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Path",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/",
+   "actual": "/"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRoleD9856B771F8F2CCB",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "dynamodb:*",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:${TableWriteScalingTargetE5669214[0]}",
+       "arn:${AWS::Partition}:dynamodb:eu-west-3:${AWS::AccountId}:${TableWriteScalingTargetE5669214[0]}",
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:${TableWriteScalingTargetE5669214[0]}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22dynamodb%3A%2A%22%2C%22Resource%22%3A%5B%22arn%3Aaws%3Adynamodb%3A${AWS::Region}%3A${AWS::AccountId}%3Atable%2F${TableCD117FA1}%22%2C%22arn%3Aaws%3Adynamodb%3Aeu-west-3%3A${AWS::AccountId}%3Atable%2F${TableCD117FA1}%22%2C%22arn%3Aaws%3Adynamodb%3A${AWS::Region}%3A${AWS::AccountId}%3Atable%2F${TableCD117FA1}%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRoleD9856B771F8F2CCB",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Roles",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "aws-cdk-dynamodb-global-r-OnEventHandlerServiceRole-Y9fUlWYzDETe"
+   ],
+   "actual": [
+    "aws-cdk-dynamodb-global-r-OnEventHandlerServiceRole-Y9fUlWYzDETe"
+   ]
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleBE2B1C1A5DC546D2",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleBE2B1C1A5DC546D2",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DynamoDB replication managed policy for table ${TableCD117FA1}",
+   "actual": "DynamoDB replication managed policy for table ${TableCD117FA1}"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleBE2B1C1A5DC546D2",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Path",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/",
+   "actual": "/"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleBE2B1C1A5DC546D2",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "dynamodb:DescribeTable",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:${TableWriteScalingTargetE5669214[0]}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22dynamodb%3ADescribeTable%22%2C%22Resource%22%3A%5B%22arn%3Aaws%3Adynamodb%3A${AWS::Region}%3A${AWS::AccountId}%3Atable%2F${TableCD117FA1}%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicyawscdkdynamodbglobalreplicasprovisionedawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleBE2B1C1A5DC546D2",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Roles",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "aws-cdk-dynamodb-global-r-IsCompleteHandlerServiceR-3N6Yobn88bQm"
+   ],
+   "actual": [
+    "aws-cdk-dynamodb-global-r-IsCompleteHandlerServiceR-3N6Yobn88bQm"
+   ]
+  },
+  {
+   "logicalId": "TableWriteScalingTargetE5669214",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetE5669214",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ResourceId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableWriteScalingTargetE5669214[0]}",
+   "actual": "${TableWriteScalingTargetE5669214[0]}"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetE5669214",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ScalableDimension",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "dynamodb:table:WriteCapacityUnits",
+   "actual": "dynamodb:table:WriteCapacityUnits"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetE5669214",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "ServiceNamespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "dynamodb",
+   "actual": "dynamodb"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetE5669214",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "MinCapacity",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 5,
+   "actual": 5
+  },
+  {
+   "logicalId": "TableWriteScalingTargetE5669214",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "MaxCapacity",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 10,
+   "actual": 10
+  },
+  {
+   "logicalId": "TableWriteScalingTargetE5669214",
+   "type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "property": "RoleARN",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetTrackingD78DCCD8",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetTrackingD78DCCD8",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableWriteScalingTargetTrackingD78DCCD8.Name}",
+   "actual": "${TableWriteScalingTargetTrackingD78DCCD8.Name}"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetTrackingD78DCCD8",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "PolicyType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TargetTrackingScaling",
+   "actual": "TargetTrackingScaling"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetTrackingD78DCCD8",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "ScalingTargetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableWriteScalingTargetE5669214}",
+   "actual": "${TableWriteScalingTargetE5669214}"
+  },
+  {
+   "logicalId": "TableWriteScalingTargetTrackingD78DCCD8",
+   "type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "property": "TargetTrackingScalingPolicyConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetValue": 75,
+    "PredefinedMetricSpecification": {
+     "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+    }
+   },
+   "actual": {
+    "TargetValue": 75,
+    "PredefinedMetricSpecification": {
+     "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+    }
+   }
+  },
+  {
+   "logicalId": "awscdkawsdynamodbReplicaProviderNestedStackawscdkawsdynamodbReplicaProviderNestedStackResource18E3F12D",
+   "type": "AWS::CloudFormation::Stack",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

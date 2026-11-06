@@ -1,0 +1,52 @@
+{
+ "version": "1",
+ "stackName": "aws-stepfunctions-state-machine-variables-integ",
+ "resources": {
+  "StateMachineRoleB840431D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachine2E01A3A5": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"Step1\",\"States\":{\"Step1\":{\"Type\":\"Pass\",\"QueryLanguage\":\"JSONata\",\"Next\":\"Step2\",\"Assign\":{\"count\":\"{% $states.input.init + 1 %}\"}},\"Step2\":{\"Type\":\"Pass\",\"Next\":\"Step3\",\"Assign\":{\"count.$\":\"States.MathAdd($count, 1)\"}},\"Step3\":{\"Type\":\"Pass\",\"QueryLanguage\":\"JSONata\",\"Next\":\"Step4\",\"Assign\":{\"count\":\"{% $count + 1 %}\"}},\"Step4\":{\"Type\":\"Pass\",\"Next\":\"Step5\",\"Assign\":{\"count.$\":\"States.MathAdd($count, 1)\"}},\"Step5\":{\"Type\":\"Pass\",\"QueryLanguage\":\"JSONata\",\"Output\":{\"count\":\"{% $count + 1 %}\"},\"End\":true}}}",
+    "RoleArn": "${StateMachineRoleB840431D.Arn}"
+   },
+   "DependsOn": [
+    "StateMachineRoleB840431D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefStateMachine2E01A3A5BA46F753": {
+   "Value": "${StateMachine2E01A3A5}",
+   "Export": {
+    "Name": "aws-stepfunctions-state-machine-variables-integ:ExportsOutputRefStateMachine2E01A3A5BA46F753"
+   }
+  }
+ },
+ "unresolved": []
+}

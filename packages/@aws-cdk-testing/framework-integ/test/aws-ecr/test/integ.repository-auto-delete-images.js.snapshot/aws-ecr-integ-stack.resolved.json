@@ -1,0 +1,21 @@
+{
+ "version": "1",
+ "stackName": "aws-ecr-integ-stack",
+ "resources": {
+  "Repo02AC86CF": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "EmptyOnDelete": true,
+    "RepositoryName": "delete-even-if-containing-images"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "RepositoryURI": {
+   "Value": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/delete-even-if-containing-images"
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,350 @@
+{
+ "stackName": "ZoneDelegationStack",
+ "summary": {
+  "no handler": 3,
+  "pass": 24
+ },
+ "results": [
+  {
+   "logicalId": "ParentZoneECA3B259",
+   "type": "AWS::Route53::HostedZone",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ZoneDelegationRoleD3AA833E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ZoneDelegationRoleD3AA833E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:PrincipalArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/ZoneDelegationStack-*"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Aroot%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22ArnLike%22%3A%7B%22aws%3APrincipalArn%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Arole%2FZoneDelegationStack-%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "ZoneDelegationRoleD3AA833E",
+   "type": "AWS::IAM::Role",
+   "property": "RoleName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ExampleDelegationRole",
+   "actual": "ExampleDelegationRole"
+  },
+  {
+   "logicalId": "ZoneDelegationRoleDefaultPolicy2187EBE7",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ZoneDelegationRoleDefaultPolicy2187EBE7",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ZoneDelegationRoleDefaultPolicy2187EBE7",
+   "actual": "ZoneDelegationRoleDefaultPolicy2187EBE7"
+  },
+  {
+   "logicalId": "ZoneDelegationRoleDefaultPolicy2187EBE7",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "route53:ChangeResourceRecordSets",
+      "Condition": {
+       "ForAllValues:StringEquals": {
+        "route53:ChangeResourceRecordSetsActions": [
+         "UPSERT",
+         "DELETE"
+        ],
+        "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+         "sub1.uniqueexample.com",
+         "sub2_\\052\\044.uniqueexample.com"
+        ],
+        "route53:ChangeResourceRecordSetsRecordTypes": [
+         "NS"
+        ]
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:route53:::hostedzone/${ParentZoneECA3B259}"
+     },
+     {
+      "Action": "route53:ListHostedZonesByName",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "route53:ChangeResourceRecordSets",
+      "Condition": {
+       "ForAllValues:StringEquals": {
+        "route53:ChangeResourceRecordSetsActions": [
+         "UPSERT",
+         "DELETE"
+        ],
+        "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+         "sub1.uniqueexample.com",
+         "sub2_\\052\\044.uniqueexample.com"
+        ],
+        "route53:ChangeResourceRecordSetsRecordTypes": [
+         "NS"
+        ]
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:route53:::hostedzone/${ParentZoneECA3B259}"
+     },
+     {
+      "Action": "route53:ListHostedZonesByName",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ZoneDelegationRoleDefaultPolicy2187EBE7",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ExampleDelegationRole",
+   "actual": "ExampleDelegationRole"
+  },
+  {
+   "logicalId": "SubZoneF7955E1A",
+   "type": "AWS::Route53::HostedZone",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SubZoneZoneDelegationcrossaccountzonedelegationhandlerrolePolicyZoneDelegationStackSubZoneZoneDelegationcrossaccountzonedelegationhandlerrole9EBB2EA476FBB2F1",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubZoneZoneDelegationcrossaccountzonedelegationhandlerrolePolicyZoneDelegationStackSubZoneZoneDelegationcrossaccountzonedelegationhandlerrole9EBB2EA476FBB2F1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PolicyZoneDelegationStackSubZoneZoneDelegationcrossaccountzonedelegationhandlerrole9EBB2EA4",
+   "actual": "PolicyZoneDelegationStackSubZoneZoneDelegationcrossaccountzonedelegationhandlerrole9EBB2EA4"
+  },
+  {
+   "logicalId": "SubZoneZoneDelegationcrossaccountzonedelegationhandlerrolePolicyZoneDelegationStackSubZoneZoneDelegationcrossaccountzonedelegationhandlerrole9EBB2EA476FBB2F1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/ExampleDelegationRole"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/ExampleDelegationRole"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SubZoneZoneDelegationcrossaccountzonedelegationhandlerrolePolicyZoneDelegationStackSubZoneZoneDelegationcrossaccountzonedelegationhandlerrole9EBB2EA476FBB2F1",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B}",
+   "actual": "${CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B}"
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderHandler44A84265",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderHandler44A84265",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "__entrypoint__.handler",
+   "actual": "__entrypoint__.handler"
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderHandler44A84265",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderHandler44A84265",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B}"
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderHandler44A84265",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "CustomCrossAccountZoneDelegationCustomResourceProviderHandler44A84265",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 128,
+   "actual": 128
+  },
+  {
+   "logicalId": "SubZoneSpecialChars13B7A67B",
+   "type": "AWS::Route53::HostedZone",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerrolePolicyZoneDelegationStackSubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerroleD01CC77D6D37D8F2",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerrolePolicyZoneDelegationStackSubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerroleD01CC77D6D37D8F2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PolicyZoneDelegationStackSubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerroleD01CC77D",
+   "actual": "PolicyZoneDelegationStackSubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerroleD01CC77D"
+  },
+  {
+   "logicalId": "SubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerrolePolicyZoneDelegationStackSubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerroleD01CC77D6D37D8F2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/ExampleDelegationRole"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/ExampleDelegationRole"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerrolePolicyZoneDelegationStackSubZoneSpecialCharsZoneDelegationcrossaccountzonedelegationhandlerroleD01CC77D6D37D8F2",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B}",
+   "actual": "${CustomCrossAccountZoneDelegationCustomResourceProviderRoleED64687B}"
+  }
+ ]
+}

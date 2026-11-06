@@ -1,0 +1,137 @@
+{
+ "stackName": "aws-cdk-expose-metric-integ",
+ "summary": {
+  "pass": 14
+ },
+ "results": [
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "MetricFilter1B93B6E5",
+   "type": "AWS::Logs::MetricFilter",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MetricFilter1B93B6E5",
+   "type": "AWS::Logs::MetricFilter",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${LogGroupF5B46931}",
+   "actual": "${LogGroupF5B46931}"
+  },
+  {
+   "logicalId": "MetricFilter1B93B6E5",
+   "type": "AWS::Logs::MetricFilter",
+   "property": "FilterPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "{ $.latency = \"*\" }",
+   "actual": "{ $.latency = \"*\" }"
+  },
+  {
+   "logicalId": "MetricFilter1B93B6E5",
+   "type": "AWS::Logs::MetricFilter",
+   "property": "MetricTransformations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "metricName": "Latency",
+     "metricNamespace": "MyApp",
+     "metricValue": "$.latency"
+    }
+   ],
+   "actual": [
+    {
+     "metricName": "Latency",
+     "metricNamespace": "MyApp",
+     "metricValue": "$.latency"
+    }
+   ]
+  },
+  {
+   "logicalId": "alarmfrommetricfilterF546D67D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "alarmfrommetricfilterF546D67D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "alarmfrommetricfilterF546D67D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 2,
+   "actual": 2
+  },
+  {
+   "logicalId": "alarmfrommetricfilterF546D67D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "alarmfrommetricfilterF546D67D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Latency",
+   "actual": "Latency"
+  },
+  {
+   "logicalId": "alarmfrommetricfilterF546D67D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyApp",
+   "actual": "MyApp"
+  },
+  {
+   "logicalId": "alarmfrommetricfilterF546D67D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "alarmfrommetricfilterF546D67D",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Average",
+   "actual": "Average"
+  }
+ ]
+}

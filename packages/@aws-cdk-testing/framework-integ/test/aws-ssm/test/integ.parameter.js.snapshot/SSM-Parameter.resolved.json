@@ -1,0 +1,70 @@
+{
+ "version": "1",
+ "stackName": "SSM-Parameter",
+ "resources": {
+  "UserRoleB7C3739B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "UserRoleDefaultPolicyBC5E062B": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ssm:DescribeParameters",
+        "ssm:GetParameter",
+        "ssm:GetParameterHistory",
+        "ssm:GetParameters"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${StringParameter472EED0E}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "UserRoleDefaultPolicyBC5E062B",
+    "Roles": [
+     "${UserRoleB7C3739B}"
+    ]
+   }
+  },
+  "StringParameter472EED0E": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "Initial parameter value"
+   }
+  },
+  "StringListParameterFAC8EDDC": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "StringList",
+    "Value": "Initial parameter value A,Initial parameter value B"
+   }
+  }
+ },
+ "outputs": {
+  "StringListOutput": {
+   "Value": "Initial parameter value A+Initial parameter value B"
+  },
+  "ParamArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${StringParameter472EED0E}"
+  }
+ },
+ "unresolved": []
+}

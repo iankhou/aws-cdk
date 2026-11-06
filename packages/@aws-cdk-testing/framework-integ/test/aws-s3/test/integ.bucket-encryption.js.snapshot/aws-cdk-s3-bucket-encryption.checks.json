@@ -1,0 +1,185 @@
+{
+ "stackName": "aws-cdk-s3-bucket-encryption",
+ "summary": {
+  "pass": 12
+ },
+ "results": [
+  {
+   "logicalId": "MyDSSEBucket8A2A1D0C",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyDSSEBucket8A2A1D0C",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms:dsse"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms:dsse"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "MySSES3Bucket6973690D",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MySSES3Bucket6973690D",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     },
+     "BucketKeyEnabled": true
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     },
+     "BucketKeyEnabled": true
+    }
+   ]
+  },
+  {
+   "logicalId": "MyKMSBucketKey9CACDA9E",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyKMSBucketKey9CACDA9E",
+   "type": "AWS::KMS::Key",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Created by aws-cdk-s3-bucket-encryption/MyKMSBucket",
+   "actual": "Created by aws-cdk-s3-bucket-encryption/MyKMSBucket"
+  },
+  {
+   "logicalId": "MyKMSBucketKey9CACDA9E",
+   "type": "AWS::KMS::Key",
+   "property": "EnableKeyRotation",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "MyKMSBucketKey9CACDA9E",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "MyKMSBucketDF8715AC",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyKMSBucketDF8715AC",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKMSBucketKey9CACDA9E}"
+     },
+     "BlockedEncryptionTypes": {
+      "EncryptionType": [
+       "NONE"
+      ]
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKMSBucketKey9CACDA9E}"
+     },
+     "BlockedEncryptionTypes": {
+      "EncryptionType": [
+       "NONE"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "MySSECBlockedBucket184125AB",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MySSECBlockedBucket184125AB",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     },
+     "BlockedEncryptionTypes": {
+      "EncryptionType": [
+       "SSE-C"
+      ]
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     },
+     "BlockedEncryptionTypes": {
+      "EncryptionType": [
+       "SSE-C"
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

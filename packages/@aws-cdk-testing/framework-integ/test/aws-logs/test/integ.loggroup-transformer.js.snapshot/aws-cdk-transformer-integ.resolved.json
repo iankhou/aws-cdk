@@ -1,0 +1,49 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-transformer-integ",
+ "resources": {
+  "MyLogGroup5C0DAD85": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MyLogGroupResourceTransformer00531468": {
+   "Type": "AWS::Logs::Transformer",
+   "Properties": {
+    "LogGroupIdentifier": "${MyLogGroup5C0DAD85}",
+    "TransformerConfig": [
+     {
+      "ParseJSON": {
+       "Source": "customField"
+      }
+     },
+     {
+      "AddKeys": {
+       "Entries": [
+        {
+         "Key": "test_key1",
+         "OverwriteIfExists": true,
+         "Value": "test_value1"
+        },
+        {
+         "Key": "test_key2",
+         "OverwriteIfExists": false,
+         "Value": "test_value2"
+        },
+        {
+         "Key": "test_key3",
+         "OverwriteIfExists": false,
+         "Value": "test_value3"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

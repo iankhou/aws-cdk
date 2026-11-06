@@ -1,0 +1,219 @@
+{
+ "stackName": "Stack2",
+ "summary": {
+  "no handler": 2,
+  "pass": 13,
+  "unresolved": 1
+ },
+ "results": [
+  {
+   "logicalId": "Parameter9E1B4FBA",
+   "type": "AWS::SSM::Parameter",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MySecret8FE80B51",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyFuncServiceRole54065130",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFuncServiceRole54065130",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFuncServiceRole54065130",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFuncServiceRoleDefaultPolicyF3C36699",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFuncServiceRoleDefaultPolicyF3C36699",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyFuncServiceRoleDefaultPolicyF3C36699",
+   "actual": "MyFuncServiceRoleDefaultPolicyF3C36699"
+  },
+  {
+   "logicalId": "MyFuncServiceRoleDefaultPolicyF3C36699",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "${MySecret8FE80B51}"
+     },
+     {
+      "Action": [
+       "ssm:DescribeParameters",
+       "ssm:GetParameter",
+       "ssm:GetParameterHistory",
+       "ssm:GetParameters"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/email_url_Stack2"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "${MySecret8FE80B51}"
+     },
+     {
+      "Action": [
+       "ssm:DescribeParameters",
+       "ssm:GetParameter",
+       "ssm:GetParameterHistory",
+       "ssm:GetParameters"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/email_url_Stack2"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyFuncServiceRoleDefaultPolicyF3C36699",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyFuncServiceRole54065130}",
+   "actual": "${MyFuncServiceRole54065130}"
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFuncServiceRole54065130}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFuncServiceRole54065130}"
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Architectures",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arm64"
+   ],
+   "actual": [
+    "arm64"
+   ]
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "PARAMETERS_SECRETS_EXTENSION_CACHE_ENABLED": "true",
+    "PARAMETERS_SECRETS_EXTENSION_CACHE_SIZE": "100",
+    "PARAMETERS_SECRETS_EXTENSION_HTTP_PORT": "8080",
+    "PARAMETERS_SECRETS_EXTENSION_LOG_LEVEL": "debug",
+    "PARAMETERS_SECRETS_EXTENSION_MAX_CONNECTIONS": "5",
+    "SECRETS_MANAGER_TIMEOUT_MILLIS": "0",
+    "SECRETS_MANAGER_TTL": "100",
+    "SSM_PARAMETER_STORE_TIMEOUT_MILLIS": "0",
+    "SSM_PARAMETER_STORE_TTL": "100"
+   },
+   "actual": {
+    "PARAMETERS_SECRETS_EXTENSION_CACHE_SIZE": "100",
+    "SECRETS_MANAGER_TTL": "100",
+    "PARAMETERS_SECRETS_EXTENSION_LOG_LEVEL": "debug",
+    "SECRETS_MANAGER_TIMEOUT_MILLIS": "0",
+    "SSM_PARAMETER_STORE_TIMEOUT_MILLIS": "0",
+    "PARAMETERS_SECRETS_EXTENSION_CACHE_ENABLED": "true",
+    "PARAMETERS_SECRETS_EXTENSION_MAX_CONNECTIONS": "5",
+    "PARAMETERS_SECRETS_EXTENSION_HTTP_PORT": "8080",
+    "SSM_PARAMETER_STORE_TTL": "100"
+   }
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "unresolved"
+  }
+ ]
+}

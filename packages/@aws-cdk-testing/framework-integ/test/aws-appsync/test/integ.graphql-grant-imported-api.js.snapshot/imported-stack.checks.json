@@ -1,0 +1,316 @@
+{
+ "stackName": "imported-stack",
+ "summary": {
+  "pass": 24
+ },
+ "results": [
+  {
+   "logicalId": "lambdaRoleC844FDB1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "lambdaRoleC844FDB1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "lambdaRoleDefaultPolicyA63A8A92",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "lambdaRoleDefaultPolicyA63A8A92",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambdaRoleDefaultPolicyA63A8A92",
+   "actual": "lambdaRoleDefaultPolicyA63A8A92"
+  },
+  {
+   "logicalId": "lambdaRoleDefaultPolicyA63A8A92",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/dfdd6g27nrborbup766os3nj3i/types/Query/fields/getPost"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/dfdd6g27nrborbup766os3nj3i/types/Query/fields/getPost"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "lambdaRoleDefaultPolicyA63A8A92",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${lambdaRoleC844FDB1}",
+   "actual": "${lambdaRoleC844FDB1}"
+  },
+  {
+   "logicalId": "mutatioLambdaRole7F96C419",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "mutatioLambdaRole7F96C419",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "mutatioLambdaRoleDefaultPolicyCB07404D",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "mutatioLambdaRoleDefaultPolicyCB07404D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "mutatioLambdaRoleDefaultPolicyCB07404D",
+   "actual": "mutatioLambdaRoleDefaultPolicyCB07404D"
+  },
+  {
+   "logicalId": "mutatioLambdaRoleDefaultPolicyCB07404D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/dfdd6g27nrborbup766os3nj3i/types/Mutation/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/dfdd6g27nrborbup766os3nj3i/types/Mutation/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "mutatioLambdaRoleDefaultPolicyCB07404D",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${mutatioLambdaRole7F96C419}",
+   "actual": "${mutatioLambdaRole7F96C419}"
+  },
+  {
+   "logicalId": "queryLambdaRole5A00034A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "queryLambdaRole5A00034A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "queryLambdaRoleDefaultPolicyC3CBAE04",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "queryLambdaRoleDefaultPolicyC3CBAE04",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "queryLambdaRoleDefaultPolicyC3CBAE04",
+   "actual": "queryLambdaRoleDefaultPolicyC3CBAE04"
+  },
+  {
+   "logicalId": "queryLambdaRoleDefaultPolicyC3CBAE04",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/dfdd6g27nrborbup766os3nj3i/types/Query/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/dfdd6g27nrborbup766os3nj3i/types/Query/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "queryLambdaRoleDefaultPolicyC3CBAE04",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${queryLambdaRole5A00034A}",
+   "actual": "${queryLambdaRole5A00034A}"
+  },
+  {
+   "logicalId": "subscriptionLambdaRoleB3A245CA",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "subscriptionLambdaRoleB3A245CA",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "subscriptionLambdaRoleDefaultPolicy11B257BC",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "subscriptionLambdaRoleDefaultPolicy11B257BC",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "subscriptionLambdaRoleDefaultPolicy11B257BC",
+   "actual": "subscriptionLambdaRoleDefaultPolicy11B257BC"
+  },
+  {
+   "logicalId": "subscriptionLambdaRoleDefaultPolicy11B257BC",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/dfdd6g27nrborbup766os3nj3i/types/Subscription/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/dfdd6g27nrborbup766os3nj3i/types/Subscription/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "subscriptionLambdaRoleDefaultPolicy11B257BC",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${subscriptionLambdaRoleB3A245CA}",
+   "actual": "${subscriptionLambdaRoleB3A245CA}"
+  }
+ ]
+}

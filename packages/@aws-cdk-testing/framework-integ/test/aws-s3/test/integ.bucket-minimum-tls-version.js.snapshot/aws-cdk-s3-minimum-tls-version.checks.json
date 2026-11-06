@@ -1,0 +1,110 @@
+{
+ "stackName": "aws-cdk-s3-minimum-tls-version",
+ "summary": {
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Bucket83908E77}",
+   "actual": "${Bucket83908E77}"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "NumericLessThan": {
+        "s3:TlsVersion": 1.2
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "NumericLessThan": {
+        "s3:TlsVersion": "1.2"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  }
+ ]
+}

@@ -1,0 +1,175 @@
+{
+ "version": "1",
+ "stackName": "aws-appconfig-environment",
+ "resources": {
+  "MyApplicationForEnv1F597ED9": {
+   "Type": "AWS::AppConfig::Application",
+   "Properties": {
+    "Name": "AppForEnvTest"
+   }
+  },
+  "StartDeploymentCallCountAlarm6846E07B": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ActionsEnabled": false,
+    "AlarmName": "AppConfigStartDeploymentCallCountAlarm",
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "Resource",
+      "Value": "StartDeployment"
+     },
+     {
+      "Name": "Service",
+      "Value": "AWS AppConfig"
+     },
+     {
+      "Name": "Type",
+      "Value": "API"
+     }
+    ],
+    "EvaluationPeriods": 3,
+    "MetricName": "CallCount",
+    "Namespace": "AWS/AppConfig",
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 300,
+    "TreatMissingData": "notBreaching"
+   }
+  },
+  "MyRoleF48FFE04": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "appconfig.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": "cloudwatch:DescribeAlarms",
+         "Effect": "Allow",
+         "Resource": "*"
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "AllowAppConfigMonitorAlarmPolicy"
+     }
+    ]
+   }
+  },
+  "MyCompositeAlarm0F045229": {
+   "Type": "AWS::CloudWatch::CompositeAlarm",
+   "Properties": {
+    "AlarmName": "awsappconfigenvironmentMyCompositeAlarm730A7A48",
+    "AlarmRule": "ALARM(\"${StartDeploymentCallCountAlarm6846E07B.Arn}\")"
+   }
+  },
+  "MyEnvironmentRole1963C404EAE3E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "appconfig.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": "cloudwatch:DescribeAlarms",
+         "Effect": "Allow",
+         "Resource": "*"
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "AllowAppConfigMonitorAlarmPolicy"
+     }
+    ]
+   }
+  },
+  "MyEnvironment465E4DEA": {
+   "Type": "AWS::AppConfig::Environment",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "DeletionProtectionCheck": "ACCOUNT_DEFAULT",
+    "Description": "This is the environment for integ testing",
+    "Monitors": [
+     {
+      "AlarmArn": "${StartDeploymentCallCountAlarm6846E07B.Arn}",
+      "AlarmRoleArn": "${MyEnvironmentRole1963C404EAE3E.Arn}"
+     },
+     {
+      "AlarmArn": "${StartDeploymentCallCountAlarm6846E07B.Arn}",
+      "AlarmRoleArn": "${MyRoleF48FFE04.Arn}"
+     },
+     {
+      "AlarmArn": "${MyCompositeAlarm0F045229.Arn}",
+      "AlarmRoleArn": "${MyEnvironmentRole1963C404EAE3E.Arn}"
+     }
+    ],
+    "Name": "awsappconfigenvironment-MyEnvironment-C8813182"
+   }
+  },
+  "MyDeploymentStrategy60D31FB0": {
+   "Type": "AWS::AppConfig::DeploymentStrategy",
+   "Properties": {
+    "DeploymentDurationInMinutes": 1,
+    "GrowthFactor": 50,
+    "GrowthType": "LINEAR",
+    "Name": "awsappconfigenvironment-MyDeploymentStrategy-28486041",
+    "ReplicateTo": "NONE"
+   }
+  },
+  "MyConfigConfigurationProfileCF3951C3": {
+   "Type": "AWS::AppConfig::ConfigurationProfile",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "LocationUri": "hosted",
+    "Name": "awsappconfigenvironment-MyConfig-24828868"
+   }
+  },
+  "MyConfigFA92D419": {
+   "Type": "AWS::AppConfig::HostedConfigurationVersion",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "ConfigurationProfileId": "${MyConfigConfigurationProfileCF3951C3}",
+    "Content": "config content",
+    "ContentType": "application/octet-stream"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MyConfigDeployment1963CC374E8A4": {
+   "Type": "AWS::AppConfig::Deployment",
+   "Properties": {
+    "ApplicationId": "${MyApplicationForEnv1F597ED9}",
+    "ConfigurationProfileId": "${MyConfigConfigurationProfileCF3951C3}",
+    "ConfigurationVersion": "${MyConfigFA92D419}",
+    "DeploymentStrategyId": "${MyDeploymentStrategy60D31FB0}",
+    "EnvironmentId": "${MyEnvironment465E4DEA}"
+   }
+  }
+ },
+ "unresolved": []
+}

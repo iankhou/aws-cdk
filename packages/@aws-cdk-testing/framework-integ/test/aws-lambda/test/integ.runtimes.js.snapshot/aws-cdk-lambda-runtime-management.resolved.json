@@ -1,0 +1,77 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-lambda-runtime-management",
+ "resources": {
+  "LambdaServiceRoleA8ED4D3B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "LambdaD247545B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "a328343cb12aa16bf2c12bfa98f28509923cf8a0e9771cccbbe967d9e15c08f6.zip"
+    },
+    "Handler": "Handler",
+    "Role": "${LambdaServiceRoleA8ED4D3B.Arn}",
+    "Runtime": "dotnet8"
+   },
+   "DependsOn": [
+    "LambdaServiceRoleA8ED4D3B"
+   ]
+  },
+  "DotNet10LambdaServiceRoleE0F5696E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "DotNet10Lambda24A96444": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "a328343cb12aa16bf2c12bfa98f28509923cf8a0e9771cccbbe967d9e15c08f6.zip"
+    },
+    "Handler": "Handler",
+    "Role": "${DotNet10LambdaServiceRoleE0F5696E.Arn}",
+    "Runtime": "dotnet10"
+   },
+   "DependsOn": [
+    "DotNet10LambdaServiceRoleE0F5696E"
+   ]
+  }
+ },
+ "unresolved": []
+}

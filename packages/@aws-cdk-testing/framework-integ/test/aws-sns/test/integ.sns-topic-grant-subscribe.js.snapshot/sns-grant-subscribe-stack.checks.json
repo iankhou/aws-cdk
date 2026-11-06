@@ -1,0 +1,108 @@
+{
+ "stackName": "sns-grant-subscribe-stack",
+ "summary": {
+  "pass": 8,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "CustomKey1E6D0D07",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomKey1E6D0D07",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "KmsMasterKeyId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${CustomKey1E6D0D07}",
+   "actual": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${CustomKey1E6D0D07}"
+  },
+  {
+   "logicalId": "MyUserDC45028B",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyUserDefaultPolicy7B897426",
+   "actual": "MyUserDefaultPolicy7B897426"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Subscribe",
+      "Effect": "Allow",
+      "Resource": "${MyTopic86869434}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sns:Subscribe",
+      "Effect": "Allow",
+      "Resource": "${MyTopic86869434}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyUserDC45028B}",
+   "actual": "${MyUserDC45028B}"
+  }
+ ]
+}

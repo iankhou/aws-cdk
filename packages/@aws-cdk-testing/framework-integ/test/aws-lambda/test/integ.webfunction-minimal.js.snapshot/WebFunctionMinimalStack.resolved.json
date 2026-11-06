@@ -1,0 +1,431 @@
+{
+ "version": "1",
+ "stackName": "WebFunctionMinimalStack",
+ "resources": {
+  "CodeBucketFF4C7AD6": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     },
+     {
+      "Key": "aws-cdk:cr-owned:10e7eda2",
+      "Value": "true"
+     }
+    ],
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CodeBucketPolicy637E7C14": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${CodeBucketFF4C7AD6}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092.Arn}"
+       },
+       "Resource": [
+        "${CodeBucketFF4C7AD6.Arn}",
+        "${CodeBucketFF4C7AD6.Arn}/*"
+       ]
+      },
+      {
+       "Action": [
+        "s3:GetObject",
+        "s3:GetObjectVersion"
+       ],
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:web-function/${MinimalBucketFunction70777F34.Name}/revision/*"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "${CodeBucketFF4C7AD6.Arn}",
+          "/",
+          {
+           "Fn::Select": [
+            0,
+            {
+             "Fn::GetAtt": [
+              "DeployCodeCustomResource46A14DA0",
+              "SourceObjectKeys"
+             ]
+            }
+           ]
+          }
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "CodeBucketAutoDeleteObjectsCustomResourceA4EDF0CF": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": "${CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F.Arn}",
+    "BucketName": "${CodeBucketFF4C7AD6}"
+   },
+   "DependsOn": [
+    "CodeBucketPolicy637E7C14"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "44e9c4d7a5d3fd2d677e1a7e416b2b56f6b0104bd5eff9cac5557b4c65a9dc61.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": "${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092.Arn}",
+    "Runtime": "nodejs24.x",
+    "Description": "Lambda function for auto-deleting objects in ${CodeBucketFF4C7AD6} S3 bucket."
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ]
+  },
+  "DeployCodeAwsCliLayerB38BC350": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "98f62bef9320f8c0a0a7be21d7c746f069131f196f51ffe3008a6bb730b368ec.zip"
+    },
+    "Description": "/opt/awscli/aws"
+   }
+  },
+  "DeployCodeCustomResource46A14DA0": {
+   "Type": "Custom::CDKBucketDeployment",
+   "Properties": {
+    "ServiceToken": "${CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536.Arn}",
+    "SourceBucketNames": [
+     "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+    ],
+    "SourceObjectKeys": [
+     "3437dc7d3d65e4b56b80ec84ded8af0f79779de4328120cca5195282b97295b0.zip"
+    ],
+    "DestinationBucketName": "${CodeBucketFF4C7AD6}",
+    "WaitForDistributionInvalidation": true,
+    "Extract": false,
+    "Prune": true,
+    "OutputObjectKeys": true,
+    "OutputObjectVersionIds": true
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+        "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+       ]
+      },
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${CodeBucketFF4C7AD6.Arn}",
+        "${CodeBucketFF4C7AD6.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+    "Roles": [
+     "${CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265}"
+    ]
+   }
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "35328da138f26fbd9160297abc9a2522d93dbf75878cd5114a9c050419fc1ce0.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "AWS_CA_BUNDLE": "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
+     }
+    },
+    "Handler": "index.handler",
+    "Layers": [
+     "${DeployCodeAwsCliLayerB38BC350}"
+    ],
+    "MemorySize": 1024,
+    "Role": "${CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265.Arn}",
+    "Runtime": "python3.13",
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+   ]
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CLogGroup817B64E9": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/${CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536}",
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MinimalBucketServiceRoleA9DCB6ED": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ],
+    "Tags": [
+     {
+      "Key": "App",
+      "Value": "integ-test"
+     }
+    ]
+   },
+   "DependsOn": [
+    "CodeBucketPolicy637E7C14"
+   ]
+  },
+  "MinimalBucketLogGroup04559959": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731,
+    "Tags": [
+     {
+      "Key": "App",
+      "Value": "integ-test"
+     }
+    ]
+   },
+   "DependsOn": [
+    "CodeBucketPolicy637E7C14"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MinimalBucketFunction70777F34": {
+   "Type": "AWS::Lambda::WebFunction",
+   "Properties": {
+    "FunctionName": "${MinimalBucketFunction70777F34.Name}",
+    "Tags": [
+     {
+      "Key": "App",
+      "Value": "integ-test"
+     }
+    ]
+   },
+   "DependsOn": [
+    "CodeBucketPolicy637E7C14"
+   ]
+  },
+  "MinimalBucketRevision0400274F": {
+   "Type": "AWS::Lambda::WebFunctionRevision",
+   "Properties": {
+    "BuildConfig": {
+     "CodeConfig": {
+      "S3Object": {
+       "Bucket": "${CodeBucketFF4C7AD6}",
+       "Key": {
+        "Fn::Select": [
+         0,
+         {
+          "Fn::GetAtt": [
+           "DeployCodeCustomResource46A14DA0",
+           "SourceObjectKeys"
+          ]
+         }
+        ]
+       },
+       "VersionId": {
+        "Fn::Select": [
+         0,
+         {
+          "Fn::GetAtt": [
+           "DeployCodeCustomResource46A14DA0",
+           "SourceObjectVersionIds"
+          ]
+         }
+        ]
+       }
+      }
+     },
+     "RuntimeConfig": {
+      "Runtime": "nodejs24.x"
+     }
+    },
+    "FunctionName": "${MinimalBucketFunction70777F34}",
+    "ServiceConfig": {
+     "ExecutionRoleArn": "${MinimalBucketServiceRoleA9DCB6ED.Arn}",
+     "TelemetryConfig": {
+      "LoggingConfig": {
+       "LogGroup": "${MinimalBucketLogGroup04559959}"
+      }
+     },
+     "TimeoutSeconds": 30
+    }
+   },
+   "DependsOn": [
+    "CodeBucketPolicy637E7C14",
+    "MinimalBucketFunction70777F34"
+   ]
+  },
+  "MinimalBucketEndpoint910239E5": {
+   "Type": "AWS::Lambda::WebFunctionEndpoint",
+   "Properties": {
+    "AuthType": "IamAuth",
+    "EndpointName": "prod",
+    "EndpointType": "HomeRegion",
+    "FunctionName": "${MinimalBucketFunction70777F34.FunctionArn}",
+    "RevisionWeights": [
+     {
+      "RevisionId": "${MinimalBucketRevision0400274F.RevisionId}",
+      "Weight": 100
+     }
+    ]
+   },
+   "DependsOn": [
+    "CodeBucketPolicy637E7C14",
+    "MinimalBucketFunction70777F34",
+    "MinimalBucketRevision0400274F"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputFnGetAttMinimalBucketEndpoint910239E5DomainName9EFF7663": {
+   "Value": "${MinimalBucketEndpoint910239E5.DomainName}",
+   "Export": {
+    "Name": "WebFunctionMinimalStack:ExportsOutputFnGetAttMinimalBucketEndpoint910239E5DomainName9EFF7663"
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.CodeBucketPolicy637E7C14.Properties.PolicyDocument.Statement.1.Resource.Fn::Join.1.2.Fn::Select.1",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'SourceObjectKeys' attribute of the 'Custom::CDKBucketDeployment' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::CDKBucketDeployment' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  },
+  {
+   "path": "Resources.MinimalBucketRevision0400274F.Properties.BuildConfig.CodeConfig.S3Object.Key.Fn::Select.1",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'SourceObjectKeys' attribute of the 'Custom::CDKBucketDeployment' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::CDKBucketDeployment' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  },
+  {
+   "path": "Resources.MinimalBucketRevision0400274F.Properties.BuildConfig.CodeConfig.S3Object.VersionId.Fn::Select.1",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'SourceObjectVersionIds' attribute of the 'Custom::CDKBucketDeployment' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::CDKBucketDeployment' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  }
+ ]
+}

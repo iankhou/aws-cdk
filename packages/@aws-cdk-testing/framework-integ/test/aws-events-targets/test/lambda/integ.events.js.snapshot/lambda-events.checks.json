@@ -1,0 +1,431 @@
+{
+ "stackName": "lambda-events",
+ "summary": {
+  "pass": 38
+ },
+ "results": [
+  {
+   "logicalId": "MyFuncServiceRole54065130",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFuncServiceRole54065130",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFuncServiceRole54065130",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyFunc8A243A2C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFuncServiceRole54065130}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFuncServiceRole54065130}"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}",
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}"
+    }
+   ]
+  },
+  {
+   "logicalId": "TimerAllowEventRulelambdaeventsMyFunc910E580F793D7BBB",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TimerAllowEventRulelambdaeventsMyFunc910E580F793D7BBB",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "TimerAllowEventRulelambdaeventsMyFunc910E580F793D7BBB",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}"
+  },
+  {
+   "logicalId": "TimerAllowEventRulelambdaeventsMyFunc910E580F793D7BBB",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "TimerAllowEventRulelambdaeventsMyFunc910E580F793D7BBB",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${TimerBF6F831F}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${TimerBF6F831F}"
+  },
+  {
+   "logicalId": "Timer2B6F162E9",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer2B6F162E9",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "Timer2B6F162E9",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(2 minutes)",
+   "actual": "rate(2 minutes)"
+  },
+  {
+   "logicalId": "Timer2B6F162E9",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}",
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}"
+    }
+   ]
+  },
+  {
+   "logicalId": "Timer2AllowEventRulelambdaeventsMyFunc910E580FCCD9CDCE",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer2AllowEventRulelambdaeventsMyFunc910E580FCCD9CDCE",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "Timer2AllowEventRulelambdaeventsMyFunc910E580FCCD9CDCE",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}"
+  },
+  {
+   "logicalId": "Timer2AllowEventRulelambdaeventsMyFunc910E580FCCD9CDCE",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "Timer2AllowEventRulelambdaeventsMyFunc910E580FCCD9CDCE",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${Timer2B6F162E9}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${Timer2B6F162E9}"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(2 minutes)",
+   "actual": "rate(2 minutes)"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+     },
+     "Id": "Target0",
+     "RetryPolicy": {
+      "MaximumEventAgeInSeconds": 7200,
+      "MaximumRetryAttempts": 0
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+     },
+     "RetryPolicy": {
+      "MaximumRetryAttempts": 0,
+      "MaximumEventAgeInSeconds": 7200
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "Timer3AllowEventRulelambdaeventsMyFunc910E580F79317F73",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer3AllowEventRulelambdaeventsMyFunc910E580F79317F73",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "Timer3AllowEventRulelambdaeventsMyFunc910E580F79317F73",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${MyFunc8A243A2C}"
+  },
+  {
+   "logicalId": "Timer3AllowEventRulelambdaeventsMyFunc910E580F79317F73",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "Timer3AllowEventRulelambdaeventsMyFunc910E580F79317F73",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${Timer30894E3BB}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${Timer30894E3BB}"
+  },
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${Timer30894E3BB}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowEventRulelambdaeventsTimer3107B9373"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${Timer30894E3BB}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowEventRulelambdaeventsTimer3107B9373"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${Queue4A7E3555}"
+   ],
+   "actual": [
+    "${Queue4A7E3555}"
+   ]
+  }
+ ]
+}

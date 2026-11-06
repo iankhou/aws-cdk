@@ -1,0 +1,235 @@
+{
+ "stackName": "CallRestApiInteg-ApiStack",
+ "summary": {
+  "missing": 8,
+  "pass": 12,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyRestApi2D1F47A9",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "NotFoundException: Invalid API identifier specified ${AWS::AccountId}:${MyRestApi2D1F47A9}"
+  },
+  {
+   "logicalId": "MyRestApiCloudWatchRoleD4042E8E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiCloudWatchRoleD4042E8E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "apigateway.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22apigateway.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyRestApiCloudWatchRoleD4042E8E",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+   ]
+  },
+  {
+   "logicalId": "MyRestApiAccount2FB6DB7A",
+   "type": "AWS::ApiGateway::Account",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRestApiAccount2FB6DB7A",
+   "type": "AWS::ApiGateway::Account",
+   "property": "CloudWatchRoleArn",
+   "status": "fail",
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRestApiCloudWatchRoleD4042E8E}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/SecondStack-BooksApiCloudWatchRoleB120ADBA-SIWPd0t0N15y"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentB555B5824a2dace0b77d6e14d0cc32d4d28422f3",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "NotFoundException: Invalid Deployment identifier specified"
+  },
+  {
+   "logicalId": "MyRestApiDeploymentStageprodC33B8E5F",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "NotFoundException: Invalid stage identifier specified"
+  },
+  {
+   "logicalId": "MyRestApiANYApiPermissionCallRestApiIntegApiStackMyRestApiC2593C7AANY7E91F016",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: Functions from '${AWS::Region}' are not reachable in this region ('us-east-1')"
+  },
+  {
+   "logicalId": "MyRestApiANYApiPermissionTestCallRestApiIntegApiStackMyRestApiC2593C7AANY4B5F396C",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: Functions from '${AWS::Region}' are not reachable in this region ('us-east-1')"
+  },
+  {
+   "logicalId": "MyRestApiANY05143F93",
+   "type": "AWS::ApiGateway::Method",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "NotFoundException: Invalid Resource identifier specified"
+  },
+  {
+   "logicalId": "HelloServiceRole1E55EA16",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HelloServiceRole1E55EA16",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "HelloServiceRole1E55EA16",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Hello4A628BD4",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: Function not found: arn:${AWS::Partition}:lambda:us-east-1:${AWS::AccountId}:function:${Hello4A628BD4}"
+  },
+  {
+   "logicalId": "CustomCrossRegionExportWriterCustomResourceProviderRoleC951B1E1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomCrossRegionExportWriterCustomResourceProviderRoleC951B1E1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomCrossRegionExportWriterCustomResourceProviderRoleC951B1E1",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomCrossRegionExportWriterCustomResourceProviderRoleC951B1E1",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "Inline"
+   ],
+   "actual": [
+    "Inline"
+   ]
+  },
+  {
+   "logicalId": "CustomCrossRegionExportWriterCustomResourceProviderRoleC951B1E1",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:ssm:us-east-1:${AWS::AccountId}:parameter/cdk/exports/*"
+      ],
+      "Action": [
+       "ssm:DeleteParameters",
+       "ssm:ListTagsForResource",
+       "ssm:GetParameters",
+       "ssm:PutParameter"
+      ]
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22ssm%3ADeleteParameters%22%2C%22ssm%3AListTagsForResource%22%2C%22ssm%3AGetParameters%22%2C%22ssm%3APutParameter%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Assm%3Aus-east-1%3A${AWS::AccountId}%3Aparameter%2Fcdk%2Fexports%2F%2A%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomCrossRegionExportWriterCustomResourceProviderHandlerD8786E8A",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: Function not found: arn:${AWS::Partition}:lambda:us-east-1:${AWS::AccountId}:function:${CustomCrossRegionExportWriterCustomResourceProviderHandlerD8786E8A}"
+  }
+ ]
+}

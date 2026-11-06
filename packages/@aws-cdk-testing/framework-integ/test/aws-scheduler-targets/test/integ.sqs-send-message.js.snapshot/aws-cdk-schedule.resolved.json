@@ -1,0 +1,89 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-schedule",
+ "resources": {
+  "MyQueueE6CA6235": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "ContentBasedDeduplication": true,
+    "FifoQueue": true
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "Schedule83A77FD1": {
+   "Type": "AWS::Scheduler::Schedule",
+   "Properties": {
+    "FlexibleTimeWindow": {
+     "Mode": "OFF"
+    },
+    "ScheduleExpression": "rate(1 minute)",
+    "ScheduleExpressionTimezone": "Etc/UTC",
+    "State": "ENABLED",
+    "Target": {
+     "Arn": "${MyQueueE6CA6235.Arn}",
+     "Input": "test",
+     "RetryPolicy": {
+      "MaximumEventAgeInSeconds": 86400,
+      "MaximumRetryAttempts": 185
+     },
+     "RoleArn": "${SchedulerRoleForTarget9afb73C641D024.Arn}",
+     "SqsParameters": {
+      "MessageGroupId": "id"
+     }
+    }
+   }
+  },
+  "SchedulerRoleForTarget9afb73C641D024": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}",
+         "aws:SourceArn": "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule-group/default"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "scheduler.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "SchedulerRoleForTarget9afb73DefaultPolicy6B1C3331": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Effect": "Allow",
+       "Resource": "${MyQueueE6CA6235.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SchedulerRoleForTarget9afb73DefaultPolicy6B1C3331",
+    "Roles": [
+     "${SchedulerRoleForTarget9afb73C641D024}"
+    ]
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefMyQueueE6CA623512A57419": {
+   "Value": "${MyQueueE6CA6235}",
+   "Export": {
+    "Name": "aws-cdk-schedule:ExportsOutputRefMyQueueE6CA623512A57419"
+   }
+  }
+ },
+ "unresolved": []
+}

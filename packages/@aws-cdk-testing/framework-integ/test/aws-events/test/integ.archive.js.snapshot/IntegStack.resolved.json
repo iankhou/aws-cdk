@@ -1,0 +1,26 @@
+{
+ "version": "1",
+ "stackName": "IntegStack",
+ "resources": {
+  "EventBridgeF6D0CF9D": {
+   "Type": "AWS::Events::EventBus",
+   "Properties": {
+    "Name": "IntegStackEventBridgeF828A2C9"
+   }
+  },
+  "MyCustomArchive": {
+   "Type": "AWS::Events::Archive",
+   "Properties": {
+    "EventPattern": {
+     "account": [
+      "${AWS::AccountId}"
+     ]
+    },
+    "KmsKeyIdentifier": "",
+    "RetentionDays": 0,
+    "SourceArn": "${EventBridgeF6D0CF9D.Arn}"
+   }
+  }
+ },
+ "unresolved": []
+}

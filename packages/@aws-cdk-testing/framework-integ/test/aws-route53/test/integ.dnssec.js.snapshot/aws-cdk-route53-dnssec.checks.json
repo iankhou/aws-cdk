@@ -1,0 +1,102 @@
+{
+ "stackName": "aws-cdk-route53-dnssec",
+ "summary": {
+  "pass": 4,
+  "no handler": 3
+ },
+ "results": [
+  {
+   "logicalId": "KmsKskBaseF6291F14",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KmsKskBaseF6291F14",
+   "type": "AWS::KMS::Key",
+   "property": "KeyUsage",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SIGN_VERIFY",
+   "actual": "SIGN_VERIFY"
+  },
+  {
+   "logicalId": "KmsKskBaseF6291F14",
+   "type": "AWS::KMS::Key",
+   "property": "KeySpec",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ECC_NIST_P256",
+   "actual": "ECC_NIST_P256"
+  },
+  {
+   "logicalId": "KmsKskBaseF6291F14",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:DescribeKey",
+       "kms:GetPublicKey",
+       "kms:Sign"
+      ],
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:route53:::hostedzone/${HostedZoneDB99F866}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "dnssec-route53.amazonaws.com"
+      },
+      "Resource": "*"
+     },
+     {
+      "Action": "kms:CreateGrant",
+      "Condition": {
+       "Bool": {
+        "kms:GrantIsForAWSResource": true
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "dnssec-route53.amazonaws.com"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  }, {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"dnssec-route53.amazonaws.com\"\n    },\n    \"Action\" : [ \"kms:DescribeKey\", \"kms:GetPublicKey\", \"kms:Sign\" ],\n    \"Resource\" : \"*\",\n    \"Condition\" : {\n      \"ArnEquals\" : {\n        \"aws:SourceArn\" : \"arn:${AWS::Partition}:route53:::hostedzone/${HostedZoneDB99F866}\"\n      }\n    }\n  }, {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"dnssec-route53.amazonaws.com\"\n    },\n    \"Action\" : \"kms:CreateGrant\",\n    \"Resource\" : \"*\",\n    \"Condition\" : {\n      \"Bool\" : {\n        \"kms:GrantIsForAWSResource\" : \"true\"\n      }\n    }\n  } ]\n}"
+  },
+  {
+   "logicalId": "HostedZoneDB99F866",
+   "type": "AWS::Route53::HostedZone",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HostedZoneKeySigningKey3418AFB4",
+   "type": "AWS::Route53::KeySigningKey",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HostedZoneDNSSEC79297416",
+   "type": "AWS::Route53::DNSSEC",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+ "version": "1",
+ "stackName": "aws-ecs-task-definition-container-restart-policy",
+ "resources": {
+  "TaskDefTaskRole1EDB4A67": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TaskDef54694570": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest",
+      "Name": "Container",
+      "RestartPolicy": {
+       "Enabled": true,
+       "IgnoredExitCodes": [
+        0,
+        127
+       ],
+       "RestartAttemptPeriod": 360
+      }
+     }
+    ],
+    "Cpu": "256",
+    "Family": "awsecstaskdefinitioncontainerrestartpolicyTaskDef3A6394C1",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": "${TaskDefTaskRole1EDB4A67.Arn}"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,493 @@
+{
+ "stackName": "log-group-events",
+ "summary": {
+  "pass": 41
+ },
+ "results": [
+  {
+   "logicalId": "loggroupB02AAEB1",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "loggroupB02AAEB1",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "loggroup2F19C5C9B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "loggroup2F19C5C9B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "loggroupimportedD91682B5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "loggroupimportedD91682B5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyLogGroupNameToBeImported",
+   "actual": "MyLogGroupNameToBeImported"
+  },
+  {
+   "logicalId": "loggroupimportedD91682B5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${loggroupB02AAEB1}",
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${loggroupB02AAEB1}"
+    }
+   ]
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsTimerC63340B0C92153CD}CustomResourcePolicy67B796AA",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsTimerC63340B0C92153CD}CustomResourcePolicy67B796AA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${EventsLogGroupPolicyloggroupeventsTimerC63340B0C92153CD}CustomResourcePolicy67B796AA",
+   "actual": "${EventsLogGroupPolicyloggroupeventsTimerC63340B0C92153CD}CustomResourcePolicy67B796AA"
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsTimerC63340B0C92153CD}CustomResourcePolicy67B796AA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsTimerC63340B0C92153CD}CustomResourcePolicy67B796AA",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 120,
+   "actual": 120
+  },
+  {
+   "logicalId": "CustomRuleB1CBBADE",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomRuleB1CBBADE",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "CustomRuleB1CBBADE",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "cdk-integ"
+    ],
+    "detail-type": [
+     "cdk-integ-custom-rule"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"cdk-integ-custom-rule\"],\"source\":[\"cdk-integ\"]}"
+  },
+  {
+   "logicalId": "CustomRuleB1CBBADE",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${loggroup2F19C5C9B}",
+     "Id": "Target0",
+     "InputTransformer": {
+      "InputPathsMap": {
+       "time": "$.time",
+       "detail-date": "$.detail.date"
+      },
+      "InputTemplate": "{\"timestamp\":<time>,\"message\":<detail-date>}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${loggroup2F19C5C9B}",
+     "InputTransformer": {
+      "InputTemplate": "{\"timestamp\":<time>,\"message\":<detail-date>}",
+      "InputPathsMap": {
+       "detail-date": "$.detail.date",
+       "time": "$.time"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsCustomRule99E1EEF6C647CDBC}CustomResourcePolicy361E9A96",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsCustomRule99E1EEF6C647CDBC}CustomResourcePolicy361E9A96",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${EventsLogGroupPolicyloggroupeventsCustomRule99E1EEF6C647CDBC}CustomResourcePolicy361E9A96",
+   "actual": "${EventsLogGroupPolicyloggroupeventsCustomRule99E1EEF6C647CDBC}CustomResourcePolicy361E9A96"
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsCustomRule99E1EEF6C647CDBC}CustomResourcePolicy361E9A96",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsCustomRule99E1EEF6C647CDBC}CustomResourcePolicy361E9A96",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "dlq09C78ACC",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "dlq09C78ACC",
+   "type": "AWS::SQS::Queue",
+   "property": "SqsManagedSseEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "Timer30894E3BB",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:MyLogGroupNameToBeImported",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${dlq09C78ACC.Name}"
+     },
+     "Id": "Target0",
+     "RetryPolicy": {
+      "MaximumEventAgeInSeconds": 7200,
+      "MaximumRetryAttempts": 2
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:MyLogGroupNameToBeImported",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${dlq09C78ACC.Name}"
+     },
+     "RetryPolicy": {
+      "MaximumRetryAttempts": 2,
+      "MaximumEventAgeInSeconds": 7200
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsTimer37DF74C174B3D705D}CustomResourcePolicyAE930E1E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsTimer37DF74C174B3D705D}CustomResourcePolicyAE930E1E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${EventsLogGroupPolicyloggroupeventsTimer37DF74C174B3D705D}CustomResourcePolicyAE930E1E",
+   "actual": "${EventsLogGroupPolicyloggroupeventsTimer37DF74C174B3D705D}CustomResourcePolicyAE930E1E"
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsTimer37DF74C174B3D705D}CustomResourcePolicyAE930E1E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:DeleteResourcePolicy",
+       "logs:PutResourcePolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "${EventsLogGroupPolicyloggroupeventsTimer37DF74C174B3D705D}CustomResourcePolicyAE930E1E",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  }
+ ]
+}

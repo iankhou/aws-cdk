@@ -1,0 +1,500 @@
+{
+ "stackName": "aws-cdk-glue-partition-projection",
+ "summary": {
+  "no handler": 6,
+  "pass": 25
+ },
+ "results": [
+  {
+   "logicalId": "DatabaseB269D8BB",
+   "type": "AWS::Glue::Database",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TableIntegerBucketD9685175",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableIntegerBucketD9685175",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableIntegerBucketPolicy55B680EC",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableIntegerBucketPolicy55B680EC",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableIntegerBucketD9685175}",
+   "actual": "${TableIntegerBucketD9685175}"
+  },
+  {
+   "logicalId": "TableIntegerBucketPolicy55B680EC",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableIntegerBucketD9685175}",
+       "arn:${AWS::Partition}:s3:::${TableIntegerBucketD9685175}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableIntegerBucketD9685175}",
+       "arn:${AWS::Partition}:s3:::${TableIntegerBucketD9685175}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TableIntegerTableFDD1B215",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TableDateBucket859C392D",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableDateBucket859C392D",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableDateBucketPolicy2BF90355",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableDateBucketPolicy2BF90355",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableDateBucket859C392D}",
+   "actual": "${TableDateBucket859C392D}"
+  },
+  {
+   "logicalId": "TableDateBucketPolicy2BF90355",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableDateBucket859C392D}",
+       "arn:${AWS::Partition}:s3:::${TableDateBucket859C392D}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableDateBucket859C392D}",
+       "arn:${AWS::Partition}:s3:::${TableDateBucket859C392D}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TableDateTable95A0F4A1",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TableEnumBucket1019891D",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableEnumBucket1019891D",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableEnumBucketPolicy91FAB493",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableEnumBucketPolicy91FAB493",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableEnumBucket1019891D}",
+   "actual": "${TableEnumBucket1019891D}"
+  },
+  {
+   "logicalId": "TableEnumBucketPolicy91FAB493",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableEnumBucket1019891D}",
+       "arn:${AWS::Partition}:s3:::${TableEnumBucket1019891D}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableEnumBucket1019891D}",
+       "arn:${AWS::Partition}:s3:::${TableEnumBucket1019891D}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TableEnumTableF18874FE",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TableInjectedBucketD6778F64",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableInjectedBucketD6778F64",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableInjectedBucketPolicy6C7F0A8C",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableInjectedBucketPolicy6C7F0A8C",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableInjectedBucketD6778F64}",
+   "actual": "${TableInjectedBucketD6778F64}"
+  },
+  {
+   "logicalId": "TableInjectedBucketPolicy6C7F0A8C",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableInjectedBucketD6778F64}",
+       "arn:${AWS::Partition}:s3:::${TableInjectedBucketD6778F64}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableInjectedBucketD6778F64}",
+       "arn:${AWS::Partition}:s3:::${TableInjectedBucketD6778F64}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TableInjectedTable7165BACE",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TableMultipleBucketC9DE89BA",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableMultipleBucketC9DE89BA",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "AES256"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableMultipleBucketPolicy7F0D5A02",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableMultipleBucketPolicy7F0D5A02",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TableMultipleBucketC9DE89BA}",
+   "actual": "${TableMultipleBucketC9DE89BA}"
+  },
+  {
+   "logicalId": "TableMultipleBucketPolicy7F0D5A02",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableMultipleBucketC9DE89BA}",
+       "arn:${AWS::Partition}:s3:::${TableMultipleBucketC9DE89BA}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TableMultipleBucketC9DE89BA}",
+       "arn:${AWS::Partition}:s3:::${TableMultipleBucketC9DE89BA}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TableMultipleTable3A543510",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

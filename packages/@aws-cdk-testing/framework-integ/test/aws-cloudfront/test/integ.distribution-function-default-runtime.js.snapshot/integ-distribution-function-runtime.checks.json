@@ -1,0 +1,151 @@
+{
+ "stackName": "integ-distribution-function-runtime",
+ "summary": {
+  "pass": 11
+ },
+ "results": [
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::CloudFront::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::CloudFront::Function",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Function76856677.Name}",
+   "actual": "${Function76856677.Name}"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::CloudFront::Function",
+   "property": "FunctionConfig.Comment",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Function76856677.Name}",
+   "actual": "${Function76856677.Name}"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::CloudFront::Function",
+   "property": "FunctionConfig.Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "cloudfront-js-2.0",
+   "actual": "cloudfront-js-2.0"
+  },
+  {
+   "logicalId": "Function76856677",
+   "type": "AWS::CloudFront::Function",
+   "property": "FunctionCode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "function handler(event) { return event.request }",
+   "actual": "function handler(event) { return event.request }"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "integdistributionfunctionruntimeDistributionOrigin1E541E07D",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+    "FunctionAssociations": {
+     "Quantity": 1,
+     "Items": [
+      {
+       "FunctionARN": "${Function76856677}",
+       "EventType": "viewer-request"
+      }
+     ]
+    }
+   },
+   "actual": {
+    "TargetOriginId": "integdistributionfunctionruntimeDistributionOrigin1E541E07D",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+    "FunctionAssociations": {
+     "Quantity": 1,
+     "Items": [
+      {
+       "FunctionARN": "${Function76856677}",
+       "EventType": "viewer-request"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionfunctionruntimeDistributionOrigin1E541E07D",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionfunctionruntimeDistributionOrigin1E541E07D",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

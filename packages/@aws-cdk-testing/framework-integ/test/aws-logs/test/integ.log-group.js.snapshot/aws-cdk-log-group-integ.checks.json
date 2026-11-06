@@ -1,0 +1,107 @@
+{
+ "stackName": "aws-cdk-log-group-integ",
+ "summary": {
+  "pass": 6,
+  "gap": 1
+ },
+ "results": [
+  {
+   "logicalId": "LogGroupLambdaAuditF8F47F46",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupLambdaAuditF8F47F46",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "auditbucketidE6660EBD",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupLambdaAC756C5B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupLambdaAC756C5B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "LogGroupLambdaAC756C5B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "DataProtectionPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Name": "policy-name",
+    "Description": "policy description",
+    "Version": "2021-06-01",
+    "Statement": [
+     {
+      "Sid": "audit-statement-cdk",
+      "DataIdentifier": [
+       "arn:${AWS::Partition}:dataprotection::aws:data-identifier/DriversLicense-US",
+       "arn:${AWS::Partition}:dataprotection::aws:data-identifier/EmailAddress",
+       "EmployeeId"
+      ],
+      "Operation": {
+       "Audit": {
+        "FindingsDestination": {
+         "CloudWatchLogs": {
+          "LogGroup": "${LogGroupLambdaAuditF8F47F46}"
+         },
+         "S3": {
+          "Bucket": "${auditbucketidE6660EBD}"
+         }
+        }
+       }
+      }
+     },
+     {
+      "Sid": "redact-statement-cdk",
+      "DataIdentifier": [
+       "arn:${AWS::Partition}:dataprotection::aws:data-identifier/DriversLicense-US",
+       "arn:${AWS::Partition}:dataprotection::aws:data-identifier/EmailAddress",
+       "EmployeeId"
+      ],
+      "Operation": {
+       "Deidentify": {
+        "MaskConfig": {}
+       }
+      }
+     }
+    ],
+    "Configuration": {
+     "CustomDataIdentifier": [
+      {
+       "Name": "EmployeeId",
+       "Regex": "EmployeeId-\\d{9}"
+      }
+     ]
+    }
+   },
+   "actual": "{\"Description\":\"policy description\",\"Configuration\":{\"CustomDataIdentifier\":[{\"Regex\":\"EmployeeId-\\\\d{9}\",\"Name\":\"EmployeeId\"}]},\"Version\":\"2021-06-01\",\"Statement\":[{\"DataIdentifier\":[\"arn:${AWS::Partition}:dataprotection::aws:data-identifier/DriversLicense-US\",\"arn:${AWS::Partition}:dataprotection::aws:data-identifier/EmailAddress\",\"EmployeeId\"],\"Operation\":{\"Audit\":{\"FindingsDestination\":{\"S3\":{\"Bucket\":\"${auditbucketidE6660EBD}\"},\"CloudWatchLogs\":{\"LogGroup\":\"${LogGroupLambdaAuditF8F47F46}\"}}}},\"Sid\":\"audit-statement-cdk\"},{\"DataIdentifier\":[\"arn:${AWS::Partition}:dataprotection::aws:data-identifier/DriversLicense-US\",\"arn:${AWS::Partition}:dataprotection::aws:data-identifier/EmailAddress\",\"EmployeeId\"],\"Operation\":{\"Deidentify\":{\"MaskConfig\":{}}},\"Sid\":\"redact-statement-cdk\"}],\"Name\":\"policy-name\"}"
+  },
+  {
+   "logicalId": "LogGroupLambdaAC756C5B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "FieldIndexPolicies",
+   "status": "gap"
+  }
+ ]
+}

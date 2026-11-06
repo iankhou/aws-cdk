@@ -1,0 +1,41 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-aws-apigatewayv2-websockets",
+ "resources": {
+  "MyWebsocketApiEBAC53DF": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "MyWebsocketApi",
+    "ProtocolType": "WEBSOCKET",
+    "RouteSelectionExpression": "$request.body.action"
+   }
+  },
+  "MyWebsocketApitestRouteSendMessageIntegration526C7CB6": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": "${MyWebsocketApiEBAC53DF}",
+    "IntegrationType": "MOCK",
+    "IntegrationUri": ""
+   }
+  },
+  "MyWebsocketApitestRoute893E635A": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": "${MyWebsocketApiEBAC53DF}",
+    "RouteKey": "test",
+    "AuthorizationType": "NONE",
+    "RouteResponseSelectionExpression": "$default",
+    "Target": "integrations/${MyWebsocketApitestRouteSendMessageIntegration526C7CB6}"
+   }
+  },
+  "MyWebsocketApitestRouteResponse5A88D743": {
+   "Type": "AWS::ApiGatewayV2::RouteResponse",
+   "Properties": {
+    "ApiId": "${MyWebsocketApiEBAC53DF}",
+    "RouteId": "${MyWebsocketApitestRoute893E635A}",
+    "RouteResponseKey": "$default"
+   }
+  }
+ },
+ "unresolved": []
+}

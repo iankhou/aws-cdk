@@ -1,0 +1,747 @@
+{
+ "stackName": "aws-cdk-lambda-logging-config",
+ "summary": {
+  "pass": 69
+ },
+ "results": [
+  {
+   "logicalId": "MyLogGroupWithLogGroupNameB577EB65",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLogGroupWithLogGroupNameB577EB65",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "customLogGroup",
+   "actual": "customLogGroup"
+  },
+  {
+   "logicalId": "MyLogGroupWithLogGroupNameB577EB65",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "LambdaWithLogGroupServiceRoleC5DDB031",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupServiceRoleC5DDB031",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupServiceRoleC5DDB031",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaWithLogGroupC3B62A1A",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupC3B62A1A",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupC3B62A1A",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupC3B62A1A",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithLogGroupServiceRoleC5DDB031}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithLogGroupServiceRoleC5DDB031}"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupC3B62A1A",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "LogGroup": "customLogGroup"
+   },
+   "actual": {
+    "LogFormat": "Text",
+    "LogGroup": "customLogGroup"
+   }
+  },
+  {
+   "logicalId": "MyLogGroupWithoutLogGroupName385E46B7",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLogGroupWithoutLogGroupName385E46B7",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "LambdaWithLogGroupAndNoLogGroupNameServiceRoleFEE6AF87",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupAndNoLogGroupNameServiceRoleFEE6AF87",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupAndNoLogGroupNameServiceRoleFEE6AF87",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaWithLogGroupAndNoLogGroupName1F5C7375",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupAndNoLogGroupName1F5C7375",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupAndNoLogGroupName1F5C7375",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupAndNoLogGroupName1F5C7375",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithLogGroupAndNoLogGroupNameServiceRoleFEE6AF87}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithLogGroupAndNoLogGroupNameServiceRoleFEE6AF87}"
+  },
+  {
+   "logicalId": "LambdaWithLogGroupAndNoLogGroupName1F5C7375",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "LogGroup": "${MyLogGroupWithoutLogGroupName385E46B7}"
+   },
+   "actual": {
+    "LogFormat": "Text",
+    "LogGroup": "${MyLogGroupWithoutLogGroupName385E46B7}"
+   }
+  },
+  {
+   "logicalId": "LambdaWithTextFormatServiceRoleABCC0E93",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithTextFormatServiceRoleABCC0E93",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaWithTextFormatServiceRoleABCC0E93",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaWithTextFormatA0EDE227",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithTextFormatA0EDE227",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaWithTextFormatA0EDE227",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaWithTextFormatA0EDE227",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithTextFormatServiceRoleABCC0E93}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithTextFormatServiceRoleABCC0E93}"
+  },
+  {
+   "logicalId": "LambdaWithTextFormatA0EDE227",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "LogFormat": "Text"
+   },
+   "actual": {
+    "LogFormat": "Text",
+    "LogGroup": "/aws/lambda/${LambdaWithTextFormatA0EDE227}"
+   }
+  },
+  {
+   "logicalId": "LambdaWithJSONFormatServiceRole37FFB486",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithJSONFormatServiceRole37FFB486",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaWithJSONFormatServiceRole37FFB486",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaWithJSONFormat20E01C00",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithJSONFormat20E01C00",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaWithJSONFormat20E01C00",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaWithJSONFormat20E01C00",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithJSONFormatServiceRole37FFB486}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithJSONFormatServiceRole37FFB486}"
+  },
+  {
+   "logicalId": "LambdaWithJSONFormat20E01C00",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "INFO",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${LambdaWithJSONFormat20E01C00}"
+   }
+  },
+  {
+   "logicalId": "LambdaWithTextLoggingFormatServiceRole3ADC91E1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithTextLoggingFormatServiceRole3ADC91E1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaWithTextLoggingFormatServiceRole3ADC91E1",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaWithTextLoggingFormatD614C37E",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithTextLoggingFormatD614C37E",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaWithTextLoggingFormatD614C37E",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaWithTextLoggingFormatD614C37E",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithTextLoggingFormatServiceRole3ADC91E1}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithTextLoggingFormatServiceRole3ADC91E1}"
+  },
+  {
+   "logicalId": "LambdaWithTextLoggingFormatD614C37E",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "LogFormat": "Text"
+   },
+   "actual": {
+    "LogFormat": "Text",
+    "LogGroup": "/aws/lambda/${LambdaWithTextLoggingFormatD614C37E}"
+   }
+  },
+  {
+   "logicalId": "LambdaWithJSONLoggingFormatServiceRole0B3D5672",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithJSONLoggingFormatServiceRole0B3D5672",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaWithJSONLoggingFormatServiceRole0B3D5672",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaWithJSONLoggingFormatFA0D6903",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithJSONLoggingFormatFA0D6903",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaWithJSONLoggingFormatFA0D6903",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaWithJSONLoggingFormatFA0D6903",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithJSONLoggingFormatServiceRole0B3D5672}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithJSONLoggingFormatServiceRole0B3D5672}"
+  },
+  {
+   "logicalId": "LambdaWithJSONLoggingFormatFA0D6903",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "INFO",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${LambdaWithJSONLoggingFormatFA0D6903}"
+   }
+  },
+  {
+   "logicalId": "LambdaWithLogLevelServiceRole90A45743",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelServiceRole90A45743",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelServiceRole90A45743",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaWithLogLevelCBBBEFFC",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelCBBBEFFC",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelCBBBEFFC",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelCBBBEFFC",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithLogLevelServiceRole90A45743}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithLogLevelServiceRole90A45743}"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelCBBBEFFC",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "INFO",
+    "LogFormat": "JSON",
+    "SystemLogLevel": "INFO"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "INFO",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${LambdaWithLogLevelCBBBEFFC}"
+   }
+  },
+  {
+   "logicalId": "LambdaWithLogLevelV2ServiceRoleD184382A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelV2ServiceRoleD184382A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelV2ServiceRoleD184382A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaWithLogLevelV2D4FB10AC",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelV2D4FB10AC",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelV2D4FB10AC",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelV2D4FB10AC",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithLogLevelV2ServiceRoleD184382A}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaWithLogLevelV2ServiceRoleD184382A}"
+  },
+  {
+   "logicalId": "LambdaWithLogLevelV2D4FB10AC",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "INFO",
+    "LogFormat": "JSON",
+    "SystemLogLevel": "INFO"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "INFO",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${LambdaWithLogLevelV2D4FB10AC}"
+   }
+  }
+ ]
+}

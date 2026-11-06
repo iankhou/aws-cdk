@@ -1,0 +1,95 @@
+{
+ "stackName": "aws-cdk-kms-1",
+ "summary": {
+  "pass": 5,
+  "fail": 1,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "fail",
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     },
+     {
+      "Action": "kms:encrypt",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "${AWS::AccountId}"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  }, {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:encrypt\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "MyKeyAlias1B45D9DA",
+   "type": "AWS::KMS::Alias",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AsymmetricKey26BBC514",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AsymmetricKey26BBC514",
+   "type": "AWS::KMS::Key",
+   "property": "KeyUsage",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SIGN_VERIFY",
+   "actual": "SIGN_VERIFY"
+  },
+  {
+   "logicalId": "AsymmetricKey26BBC514",
+   "type": "AWS::KMS::Key",
+   "property": "KeySpec",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ECC_NIST_P256",
+   "actual": "ECC_NIST_P256"
+  },
+  {
+   "logicalId": "AsymmetricKey26BBC514",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  }
+ ]
+}

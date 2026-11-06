@@ -1,0 +1,80 @@
+{
+ "version": "1",
+ "stackName": "integ-distribution-function-runtime",
+ "resources": {
+  "FunctionRequest95528B2F": {
+   "Type": "AWS::CloudFront::Function",
+   "Properties": {
+    "AutoPublish": true,
+    "FunctionCode": "function handler(event) { return event.request }",
+    "FunctionConfig": {
+     "Comment": "${AWS::Region}integ-distributieFunctionRequest639FA6FB",
+     "Runtime": "cloudfront-js-1.0"
+    },
+    "Name": "${AWS::Region}integ-distributieFunctionRequest639FA6FB"
+   }
+  },
+  "FunctionResponse4EF2D1D3": {
+   "Type": "AWS::CloudFront::Function",
+   "Properties": {
+    "AutoPublish": true,
+    "FunctionCode": "function handler(event) { return event.response }",
+    "FunctionConfig": {
+     "Comment": "${AWS::Region}integ-distributiFunctionResponseB5F8E92A",
+     "Runtime": "cloudfront-js-2.0"
+    },
+    "Name": "${AWS::Region}integ-distributiFunctionResponseB5F8E92A"
+   }
+  },
+  "DistB3B78991": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+      "Compress": true,
+      "FunctionAssociations": [
+       {
+        "EventType": "viewer-request",
+        "FunctionARN": "${FunctionRequest95528B2F.FunctionARN}"
+       },
+       {
+        "EventType": "viewer-response",
+        "FunctionARN": "${FunctionResponse4EF2D1D3.FunctionARN}"
+       }
+      ],
+      "TargetOriginId": "integdistributionfunctionruntimeDistOrigin1B2424F8B",
+      "ViewerProtocolPolicy": "allow-all"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only"
+       },
+       "DomainName": "www.example.com",
+       "Id": "integdistributionfunctionruntimeDistOrigin1B2424F8B"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "outputs": {
+  "RequestFunctionArn": {
+   "Value": "${FunctionRequest95528B2F.FunctionARN}"
+  },
+  "RequestFunctionStage": {
+   "Value": "${FunctionRequest95528B2F.Stage}"
+  },
+  "ResponseFunctionArn": {
+   "Value": "${FunctionResponse4EF2D1D3.FunctionARN}"
+  },
+  "ResponseFunctionStage": {
+   "Value": "${FunctionResponse4EF2D1D3.Stage}"
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,848 @@
+{
+ "stackName": "BucketReplicationMultipleSourcesTestStack",
+ "summary": {
+  "pass": 46,
+  "gap": 2
+ },
+ "results": [
+  {
+   "logicalId": "DestinationBucket4BECDB47",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DestinationBucket4BECDB47",
+   "type": "AWS::S3::Bucket",
+   "property": "VersioningConfiguration.Status",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Enabled",
+   "actual": "Enabled"
+  },
+  {
+   "logicalId": "DestinationBucket4BECDB47",
+   "type": "AWS::S3::Bucket",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "BucketReplicationMultipleSourcesTestStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "DestinationBucket4BECDB47"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ]
+  },
+  {
+   "logicalId": "DestinationBucketPolicyFCD81088",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DestinationBucketPolicyFCD81088",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${DestinationBucket4BECDB47}",
+   "actual": "${DestinationBucket4BECDB47}"
+  },
+  {
+   "logicalId": "DestinationBucketPolicyFCD81088",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${DestinationBucket4BECDB47}",
+       "arn:${AWS::Partition}:s3:::${DestinationBucket4BECDB47}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${DestinationBucket4BECDB47}",
+       "arn:${AWS::Partition}:s3:::${DestinationBucket4BECDB47}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lambda function for auto-deleting objects in ${DestinationBucket4BECDB47} S3 bucket.",
+   "actual": "Lambda function for auto-deleting objects in ${DestinationBucket4BECDB47} S3 bucket."
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 128,
+   "actual": 128
+  },
+  {
+   "logicalId": "DestinationKmsKey0D94AA3C",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DestinationKmsKey0D94AA3C",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "SourceKmsKeyFE472F1C",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceKmsKeyFE472F1C",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "SourceBucket1ReplicationRole97D56E8A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceBucket1ReplicationRole97D56E8A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22s3.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SourceBucket1ReplicationRoleDefaultPolicyE54E1AA3",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceBucket1ReplicationRoleDefaultPolicyE54E1AA3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SourceBucket1ReplicationRoleDefaultPolicyE54E1AA3",
+   "actual": "SourceBucket1ReplicationRoleDefaultPolicyE54E1AA3"
+  },
+  {
+   "logicalId": "SourceBucket1ReplicationRoleDefaultPolicyE54E1AA3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetReplicationConfiguration",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${SourceBucket1CCDBD520}"
+     },
+     {
+      "Action": [
+       "s3:GetObjectVersionAcl",
+       "s3:GetObjectVersionForReplication",
+       "s3:GetObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${SourceBucket1CCDBD520}/*"
+     },
+     {
+      "Action": [
+       "s3:ObjectOwnerOverrideToBucketOwner",
+       "s3:ReplicateDelete",
+       "s3:ReplicateObject",
+       "s3:ReplicateTags"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${DestinationBucket4BECDB47}/*"
+     },
+     {
+      "Action": [
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${DestinationKmsKey0D94AA3C}"
+     },
+     {
+      "Action": "kms:Decrypt",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SourceKmsKeyFE472F1C}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetReplicationConfiguration",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${SourceBucket1CCDBD520}"
+     },
+     {
+      "Action": [
+       "s3:GetObjectVersionAcl",
+       "s3:GetObjectVersionForReplication",
+       "s3:GetObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${SourceBucket1CCDBD520}/*"
+     },
+     {
+      "Action": [
+       "s3:ObjectOwnerOverrideToBucketOwner",
+       "s3:ReplicateDelete",
+       "s3:ReplicateObject",
+       "s3:ReplicateTags"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${DestinationBucket4BECDB47}/*"
+     },
+     {
+      "Action": [
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${DestinationKmsKey0D94AA3C}"
+     },
+     {
+      "Action": "kms:Decrypt",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SourceKmsKeyFE472F1C}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SourceBucket1ReplicationRoleDefaultPolicyE54E1AA3",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SourceBucket1ReplicationRole97D56E8A}",
+   "actual": "${SourceBucket1ReplicationRole97D56E8A}"
+  },
+  {
+   "logicalId": "SourceBucket1CCDBD520",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceBucket1CCDBD520",
+   "type": "AWS::S3::Bucket",
+   "property": "VersioningConfiguration.Status",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Enabled",
+   "actual": "Enabled"
+  },
+  {
+   "logicalId": "SourceBucket1CCDBD520",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SourceKmsKeyFE472F1C}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SourceKmsKeyFE472F1C}"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "SourceBucket1CCDBD520",
+   "type": "AWS::S3::Bucket",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "BucketReplicationMultipleSourcesTestStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "SourceBucket1CCDBD520"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ]
+  },
+  {
+   "logicalId": "SourceBucket1CCDBD520",
+   "type": "AWS::S3::Bucket",
+   "property": "ReplicationConfiguration",
+   "status": "gap"
+  },
+  {
+   "logicalId": "SourceBucket1Policy221A9741",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceBucket1Policy221A9741",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SourceBucket1CCDBD520}",
+   "actual": "${SourceBucket1CCDBD520}"
+  },
+  {
+   "logicalId": "SourceBucket1Policy221A9741",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${SourceBucket1CCDBD520}",
+       "arn:${AWS::Partition}:s3:::${SourceBucket1CCDBD520}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${SourceBucket1CCDBD520}",
+       "arn:${AWS::Partition}:s3:::${SourceBucket1CCDBD520}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SourceBucket2ReplicationRole080358A2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceBucket2ReplicationRole080358A2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22s3.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SourceBucket2ReplicationRoleDefaultPolicyB9F2C513",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceBucket2ReplicationRoleDefaultPolicyB9F2C513",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SourceBucket2ReplicationRoleDefaultPolicyB9F2C513",
+   "actual": "SourceBucket2ReplicationRoleDefaultPolicyB9F2C513"
+  },
+  {
+   "logicalId": "SourceBucket2ReplicationRoleDefaultPolicyB9F2C513",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetReplicationConfiguration",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${SourceBucket27086FD01}"
+     },
+     {
+      "Action": [
+       "s3:GetObjectVersionAcl",
+       "s3:GetObjectVersionForReplication",
+       "s3:GetObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${SourceBucket27086FD01}/*"
+     },
+     {
+      "Action": [
+       "s3:ObjectOwnerOverrideToBucketOwner",
+       "s3:ReplicateDelete",
+       "s3:ReplicateObject",
+       "s3:ReplicateTags"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${DestinationBucket4BECDB47}/*"
+     },
+     {
+      "Action": [
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${DestinationKmsKey0D94AA3C}"
+     },
+     {
+      "Action": "kms:Decrypt",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SourceKmsKeyFE472F1C}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetReplicationConfiguration",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${SourceBucket27086FD01}"
+     },
+     {
+      "Action": [
+       "s3:GetObjectVersionAcl",
+       "s3:GetObjectVersionForReplication",
+       "s3:GetObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${SourceBucket27086FD01}/*"
+     },
+     {
+      "Action": [
+       "s3:ObjectOwnerOverrideToBucketOwner",
+       "s3:ReplicateDelete",
+       "s3:ReplicateObject",
+       "s3:ReplicateTags"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::${DestinationBucket4BECDB47}/*"
+     },
+     {
+      "Action": [
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${DestinationKmsKey0D94AA3C}"
+     },
+     {
+      "Action": "kms:Decrypt",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SourceKmsKeyFE472F1C}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SourceBucket2ReplicationRoleDefaultPolicyB9F2C513",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SourceBucket2ReplicationRole080358A2}",
+   "actual": "${SourceBucket2ReplicationRole080358A2}"
+  },
+  {
+   "logicalId": "SourceBucket27086FD01",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceBucket27086FD01",
+   "type": "AWS::S3::Bucket",
+   "property": "VersioningConfiguration.Status",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Enabled",
+   "actual": "Enabled"
+  },
+  {
+   "logicalId": "SourceBucket27086FD01",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SourceKmsKeyFE472F1C}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SourceKmsKeyFE472F1C}"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "SourceBucket27086FD01",
+   "type": "AWS::S3::Bucket",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "BucketReplicationMultipleSourcesTestStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "SourceBucket27086FD01"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ]
+  },
+  {
+   "logicalId": "SourceBucket27086FD01",
+   "type": "AWS::S3::Bucket",
+   "property": "ReplicationConfiguration",
+   "status": "gap"
+  },
+  {
+   "logicalId": "SourceBucket2Policy4FF2CD51",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceBucket2Policy4FF2CD51",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SourceBucket27086FD01}",
+   "actual": "${SourceBucket27086FD01}"
+  },
+  {
+   "logicalId": "SourceBucket2Policy4FF2CD51",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${SourceBucket27086FD01}",
+       "arn:${AWS::Partition}:s3:::${SourceBucket27086FD01}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${SourceBucket27086FD01}",
+       "arn:${AWS::Partition}:s3:::${SourceBucket27086FD01}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  }
+ ]
+}

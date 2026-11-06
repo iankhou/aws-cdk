@@ -1,0 +1,112 @@
+{
+ "version": "1",
+ "stackName": "integ-spec-rest-api-origin-custom-origin",
+ "resources": {
+  "RestApi0C43BF4B": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Body": {
+     "openapi": "3.0.2",
+     "info": {
+      "version": "1.0.0",
+      "title": "Test API for CDK"
+     },
+     "paths": {
+      "/pets": {
+       "get": {
+        "summary": "Test Method",
+        "operationId": "testMethod",
+        "responses": {
+         "200": {
+          "description": "A paged array of pets",
+          "content": {
+           "application/json": {
+            "schema": {
+             "$ref": "#/components/schemas/Empty"
+            }
+           }
+          }
+         }
+        },
+        "x-amazon-apigateway-integration": {
+         "responses": {
+          "default": {
+           "statusCode": "200"
+          }
+         },
+         "requestTemplates": {
+          "application/json": "{\"statusCode\": 200}"
+         },
+         "passthroughBehavior": "when_no_match",
+         "type": "mock"
+        }
+       }
+      }
+     },
+     "components": {
+      "schemas": {
+       "Empty": {
+        "title": "Empty Schema",
+        "type": "object"
+       }
+      }
+     }
+    },
+    "Name": "RestApi"
+   }
+  },
+  "RestApiDeployment180EC503edd77c5c8fffabb2e523387cd087d12f": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${RestApi0C43BF4B}"
+   },
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "RestApiDeploymentStageprod3855DE66": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${RestApiDeployment180EC503edd77c5c8fffabb2e523387cd087d12f}",
+    "RestApiId": "${RestApi0C43BF4B}",
+    "StageName": "prod"
+   }
+  },
+  "Distribution830FAC52": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "integspecrestapiorigincustomoriginDistributionOrigin1C1368952",
+      "ViewerProtocolPolicy": "allow-all"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only",
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": "${RestApi0C43BF4B}.execute-api.${AWS::Region}.amazonaws.com",
+       "Id": "integspecrestapiorigincustomoriginDistributionOrigin1C1368952",
+       "OriginPath": ""
+      }
+     ]
+    }
+   }
+  }
+ },
+ "outputs": {
+  "RestApiEndpoint0551178A": {
+   "Value": "https://${RestApi0C43BF4B}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${RestApiDeploymentStageprod3855DE66}/"
+  }
+ },
+ "unresolved": []
+}

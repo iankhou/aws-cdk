@@ -1,0 +1,57 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-kms",
+ "resources": {
+  "Role1ABCC5F0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "RoleDefaultPolicy5FFB7DAB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKey*",
+        "kms:GenerateMac",
+        "kms:ReEncrypt*",
+        "kms:Sign",
+        "kms:Verify",
+        "kms:VerifyMac"
+       ],
+       "Condition": {
+        "ForAnyValue:StringEquals": {
+         "kms:ResourceAliases": "alias/MyKey"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "RoleDefaultPolicy5FFB7DAB",
+    "Roles": [
+     "${Role1ABCC5F0}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

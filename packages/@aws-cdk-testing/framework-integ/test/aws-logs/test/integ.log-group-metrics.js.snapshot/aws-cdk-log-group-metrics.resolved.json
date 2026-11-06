@@ -1,0 +1,40 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-log-group-metrics",
+ "resources": {
+  "MyLogGroup5C0DAD85": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "my-log-group",
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "IncomingBytesPerInstanceAlarmFA8EEFDB": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "EvaluationPeriods": 1,
+    "MetricName": "IncomingBytes",
+    "Namespace": "AWS/Logs",
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1
+   }
+  },
+  "IncomingEventsPerInstanceAlarmA9670D55": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "EvaluationPeriods": 1,
+    "MetricName": "IncomingLogs",
+    "Namespace": "AWS/Logs",
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1
+   }
+  }
+ },
+ "unresolved": []
+}

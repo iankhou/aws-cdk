@@ -1,0 +1,45 @@
+{
+ "version": "1",
+ "stackName": "aws-ecr-tag-mutability-exclusion-stack",
+ "resources": {
+  "ImmutableRepoWithExclusions905B5191": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "EmptyOnDelete": true,
+    "ImageTagMutability": "IMMUTABLE_WITH_EXCLUSION",
+    "ImageTagMutabilityExclusionFilters": [
+     {
+      "ImageTagMutabilityExclusionFilterType": "WILDCARD",
+      "ImageTagMutabilityExclusionFilterValue": "dev-*"
+     },
+     {
+      "ImageTagMutabilityExclusionFilterType": "WILDCARD",
+      "ImageTagMutabilityExclusionFilterValue": "test-*"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MutableRepoWithExclusions16D45AB8": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "EmptyOnDelete": true,
+    "ImageTagMutability": "MUTABLE_WITH_EXCLUSION",
+    "ImageTagMutabilityExclusionFilters": [
+     {
+      "ImageTagMutabilityExclusionFilterType": "WILDCARD",
+      "ImageTagMutabilityExclusionFilterValue": "prod-*"
+     },
+     {
+      "ImageTagMutabilityExclusionFilterType": "WILDCARD",
+      "ImageTagMutabilityExclusionFilterValue": "release-v*"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

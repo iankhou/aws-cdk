@@ -1,0 +1,400 @@
+{
+ "stackName": "aws-cdk-sqs-event-target",
+ "summary": {
+  "pass": 25
+ },
+ "results": [
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  }, {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"events.amazonaws.com\"\n    },\n    \"Action\" : [ \"kms:Decrypt\", \"kms:Encrypt\", \"kms:GenerateDataKey*\", \"kms:ReEncrypt*\" ],\n    \"Resource\" : \"*\",\n    \"Condition\" : {\n      \"StringEquals\" : {\n        \"aws:SourceAccount\" : \"${AWS::AccountId}\"\n      }\n    }\n  } ]\n}"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyDeadLetterQueueD997968A.Name}"
+     },
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyDeadLetterQueueD997968A.Name}"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "MyQueueE6CA6235",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueueE6CA6235",
+   "type": "AWS::SQS::Queue",
+   "property": "KmsMasterKeyId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKey6AB29FA6}",
+   "actual": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKey6AB29FA6}"
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:SendMessage"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:SendMessage"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${MyQueueE6CA6235}"
+   ],
+   "actual": [
+    "${MyQueueE6CA6235}"
+   ]
+  },
+  {
+   "logicalId": "MyDeadLetterQueueD997968A",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyDeadLetterQueueD997968A",
+   "type": "AWS::SQS::Queue",
+   "property": "SqsManagedSseEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "MyDeadLetterQueuePolicyCC35D52C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyDeadLetterQueuePolicyCC35D52C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${MyRuleA44AB831}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyDeadLetterQueueD997968A.Name}",
+      "Sid": "AllowEventRuleawscdksqseventtargetMyRule0027A8F4"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${MyRuleA44AB831}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyDeadLetterQueueD997968A.Name}",
+      "Sid": "AllowEventRuleawscdksqseventtargetMyRule0027A8F4"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyDeadLetterQueuePolicyCC35D52C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${MyDeadLetterQueueD997968A}"
+   ],
+   "actual": [
+    "${MyDeadLetterQueueD997968A}"
+   ]
+  },
+  {
+   "logicalId": "StandardQueueD43B45BD",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StandardQueueD43B45BD",
+   "type": "AWS::SQS::Queue",
+   "property": "SqsManagedSseEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "StandardQueuePolicy21A6CBEE",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StandardQueuePolicy21A6CBEE",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:SendMessage"
+      ],
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${StandardQueueRule82F7813E}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${StandardQueueD43B45BD.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "sqs:GetQueueAttributes",
+       "sqs:GetQueueUrl",
+       "sqs:SendMessage"
+      ],
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${StandardQueueRule82F7813E}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${StandardQueueD43B45BD.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StandardQueuePolicy21A6CBEE",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${StandardQueueD43B45BD}"
+   ],
+   "actual": [
+    "${StandardQueueD43B45BD}"
+   ]
+  },
+  {
+   "logicalId": "StandardQueueRule82F7813E",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StandardQueueRule82F7813E",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "StandardQueueRule82F7813E",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "StandardQueueRule82F7813E",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${StandardQueueD43B45BD.Name}",
+     "Id": "Target0",
+     "SqsParameters": {
+      "MessageGroupId": "MyMessageGroupId"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${StandardQueueD43B45BD.Name}",
+     "SqsParameters": {
+      "MessageGroupId": "MyMessageGroupId"
+     }
+    }
+   ]
+  }
+ ]
+}

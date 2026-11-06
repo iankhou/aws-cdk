@@ -1,0 +1,49 @@
+{
+ "version": "1",
+ "stackName": "IntegBinaryPayload",
+ "resources": {
+  "fnServiceRole5D180AFD": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "fn5FF616E3": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\n    exports.handler = async (event) => {\n      return event;\n    };\n  "
+    },
+    "Handler": "index.handler",
+    "Role": "${fnServiceRole5D180AFD.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "fnServiceRole5D180AFD"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputReffn5FF616E3BE1A8BD6": {
+   "Value": "${fn5FF616E3}",
+   "Export": {
+    "Name": "IntegBinaryPayload:ExportsOutputReffn5FF616E3BE1A8BD6"
+   }
+  }
+ },
+ "unresolved": []
+}

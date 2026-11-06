@@ -1,0 +1,311 @@
+{
+ "stackName": "aws-cdk-s3-access-logs",
+ "summary": {
+  "pass": 14
+ },
+ "results": [
+  {
+   "logicalId": "MyAccessLogsBucketF7FE6635",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAccessLogsBucketPolicyEA9AB063",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAccessLogsBucketPolicyEA9AB063",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyAccessLogsBucketF7FE6635}",
+   "actual": "${MyAccessLogsBucketF7FE6635}"
+  },
+  {
+   "logicalId": "MyAccessLogsBucketPolicyEA9AB063",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example*"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucket26E0C3623}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example2*"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucket3CC4F8735}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example3*"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucket43E0A113B}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example4*"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucket53983D51A}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example5*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example*"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucket26E0C3623}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example2*"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucket3CC4F8735}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example3*"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucket43E0A113B}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example4*"
+     },
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucket53983D51A}"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "logging.s3.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${MyAccessLogsBucketF7FE6635}/example5*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "LoggingConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example"
+   },
+   "actual": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example"
+   }
+  },
+  {
+   "logicalId": "MyBucket26E0C3623",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucket26E0C3623",
+   "type": "AWS::S3::Bucket",
+   "property": "LoggingConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example2"
+   },
+   "actual": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example2"
+   }
+  },
+  {
+   "logicalId": "MyBucket3CC4F8735",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucket3CC4F8735",
+   "type": "AWS::S3::Bucket",
+   "property": "LoggingConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example3"
+   },
+   "actual": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example3"
+   }
+  },
+  {
+   "logicalId": "MyBucket43E0A113B",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucket43E0A113B",
+   "type": "AWS::S3::Bucket",
+   "property": "LoggingConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example4"
+   },
+   "actual": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example4"
+   }
+  },
+  {
+   "logicalId": "MyBucket53983D51A",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucket53983D51A",
+   "type": "AWS::S3::Bucket",
+   "property": "LoggingConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example5"
+   },
+   "actual": {
+    "TargetBucket": "${MyAccessLogsBucketF7FE6635}",
+    "TargetPrefix": "example5"
+   }
+  }
+ ]
+}

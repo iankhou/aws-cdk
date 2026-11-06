@@ -1,0 +1,120 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-ses-receipt",
+ "resources": {
+  "RuleSetE30C6C48": {
+   "Type": "AWS::SES::ReceiptRuleSet"
+  },
+  "RuleSetDropSpamRule5809F51B": {
+   "Type": "AWS::SES::ReceiptRule",
+   "Properties": {
+    "Rule": {
+     "Actions": [
+      {
+       "LambdaAction": {
+        "FunctionArn": "${SingletonLambda224e77f9a32e4b4dac32983477abba164533EA15.Arn}",
+        "InvocationType": "RequestResponse"
+       }
+      }
+     ],
+     "Enabled": true,
+     "ScanEnabled": true
+    },
+    "RuleSetName": "${RuleSetE30C6C48}"
+   }
+  },
+  "RuleSetFirstRule0A27C8CC": {
+   "Type": "AWS::SES::ReceiptRule",
+   "Properties": {
+    "After": "${RuleSetDropSpamRule5809F51B}",
+    "Rule": {
+     "Enabled": true,
+     "Name": "FirstRule",
+     "Recipients": [
+      "cdk-ses-receipt-test@yopmail.com"
+     ],
+     "ScanEnabled": true,
+     "TlsPolicy": "Require"
+    },
+    "RuleSetName": "${RuleSetE30C6C48}"
+   }
+  },
+  "RuleSetSecondRule03178AD4": {
+   "Type": "AWS::SES::ReceiptRule",
+   "Properties": {
+    "After": "${RuleSetFirstRule0A27C8CC}",
+    "Rule": {
+     "Enabled": true
+    },
+    "RuleSetName": "${RuleSetE30C6C48}"
+   }
+  },
+  "SingletonLambda224e77f9a32e4b4dac32983477abba16ServiceRole3037F5B4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "SingletonLambda224e77f9a32e4b4dac32983477abba164533EA15": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "793fa21dab8ffc39027127c61f7ed6acb3a00bd9e65c0814dab21597cfceb81e.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${SingletonLambda224e77f9a32e4b4dac32983477abba16ServiceRole3037F5B4.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "SingletonLambda224e77f9a32e4b4dac32983477abba16ServiceRole3037F5B4"
+   ]
+  },
+  "SingletonLambda224e77f9a32e4b4dac32983477abba16AllowSesB42DF904": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${SingletonLambda224e77f9a32e4b4dac32983477abba164533EA15.Arn}",
+    "Principal": "ses.amazonaws.com",
+    "SourceAccount": "${AWS::AccountId}"
+   }
+  },
+  "AllowlistBlockAll7E0A7F11": {
+   "Type": "AWS::SES::ReceiptFilter",
+   "Properties": {
+    "Filter": {
+     "IpFilter": {
+      "Cidr": "0.0.0.0/0",
+      "Policy": "Block"
+     }
+    }
+   }
+  },
+  "AllowlistAllow1000016E9465A18": {
+   "Type": "AWS::SES::ReceiptFilter",
+   "Properties": {
+    "Filter": {
+     "IpFilter": {
+      "Cidr": "10.0.0.0/16",
+      "Policy": "Allow"
+     }
+    }
+   }
+  }
+ },
+ "unresolved": []
+}

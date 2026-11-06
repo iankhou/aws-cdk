@@ -1,0 +1,29 @@
+{
+ "version": "1",
+ "stackName": "s3-bucket-routing",
+ "resources": {
+  "MyBucketWithRoutingRulesC6E1CAA2": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "WebsiteConfiguration": {
+     "IndexDocument": "index.html",
+     "RoutingRules": [
+      {
+       "RedirectRule": {
+        "HostName": "example.com",
+        "Protocol": "https",
+        "ReplaceKeyWith": "/"
+       },
+       "RoutingRuleCondition": {
+        "KeyPrefixEquals": ""
+       }
+      }
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

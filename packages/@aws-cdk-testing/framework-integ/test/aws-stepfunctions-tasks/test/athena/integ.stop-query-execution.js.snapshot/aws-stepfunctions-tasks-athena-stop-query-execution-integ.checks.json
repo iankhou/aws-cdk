@@ -1,0 +1,281 @@
+{
+ "stackName": "aws-stepfunctions-tasks-athena-stop-query-execution-integ",
+ "summary": {
+  "pass": 9
+ },
+ "results": [
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineRoleDefaultPolicyDF1E6607",
+   "actual": "StateMachineRoleDefaultPolicyDF1E6607"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "athena:getDataCatalog",
+       "athena:getQueryExecution",
+       "athena:startQueryExecution"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:athena:${AWS::Region}:${AWS::AccountId}:datacatalog/AwsDataCatalog",
+       "arn:${AWS::Partition}:athena:${AWS::Region}:${AWS::AccountId}:workgroup/primary"
+      ]
+     },
+     {
+      "Action": [
+       "athena:stopQueryExecution",
+       "lakeformation:GetDataAccess",
+       "s3:AbortMultipartUpload",
+       "s3:CreateBucket",
+       "s3:GetBucketLocation",
+       "s3:GetObject",
+       "s3:ListBucket",
+       "s3:ListBucketMultipartUploads",
+       "s3:ListMultipartUploadParts",
+       "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "glue:BatchCreatePartition",
+       "glue:BatchDeletePartition",
+       "glue:BatchDeleteTable",
+       "glue:BatchGetPartition",
+       "glue:CreateDatabase",
+       "glue:CreatePartition",
+       "glue:CreateTable",
+       "glue:DeleteDatabase",
+       "glue:DeletePartition",
+       "glue:DeleteTable",
+       "glue:GetDatabase",
+       "glue:GetDatabases",
+       "glue:GetPartition",
+       "glue:GetPartitions",
+       "glue:GetTable",
+       "glue:GetTables",
+       "glue:UpdateDatabase",
+       "glue:UpdatePartition",
+       "glue:UpdateTable"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/mydatabase",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/mydatabase/*",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:userDefinedFunction/mydatabase/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "athena:getDataCatalog",
+       "athena:getQueryExecution",
+       "athena:startQueryExecution"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:athena:${AWS::Region}:${AWS::AccountId}:datacatalog/AwsDataCatalog",
+       "arn:${AWS::Partition}:athena:${AWS::Region}:${AWS::AccountId}:workgroup/primary"
+      ]
+     },
+     {
+      "Action": [
+       "athena:stopQueryExecution",
+       "lakeformation:GetDataAccess",
+       "s3:AbortMultipartUpload",
+       "s3:CreateBucket",
+       "s3:GetBucketLocation",
+       "s3:GetObject",
+       "s3:ListBucket",
+       "s3:ListBucketMultipartUploads",
+       "s3:ListMultipartUploadParts",
+       "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "glue:BatchCreatePartition",
+       "glue:BatchDeletePartition",
+       "glue:BatchDeleteTable",
+       "glue:BatchGetPartition",
+       "glue:CreateDatabase",
+       "glue:CreatePartition",
+       "glue:CreateTable",
+       "glue:DeleteDatabase",
+       "glue:DeletePartition",
+       "glue:DeleteTable",
+       "glue:GetDatabase",
+       "glue:GetDatabases",
+       "glue:GetPartition",
+       "glue:GetPartitions",
+       "glue:GetTable",
+       "glue:GetTables",
+       "glue:UpdateDatabase",
+       "glue:UpdatePartition",
+       "glue:UpdateTable"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/mydatabase",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/mydatabase/*",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:userDefinedFunction/mydatabase/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineRoleB840431D}",
+   "actual": "${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Start Athena Query",
+    "States": {
+     "Start Athena Query": {
+      "Next": "Stop Query Execution",
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::athena:startQueryExecution",
+      "Parameters": {
+       "QueryString.$": "$.queryString",
+       "QueryExecutionContext": {
+        "Database": "mydatabase"
+       },
+       "ResultConfiguration": {
+        "EncryptionConfiguration": {
+         "EncryptionOption": "SSE_S3"
+        }
+       }
+      }
+     },
+     "Stop Query Execution": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::athena:stopQueryExecution",
+      "Parameters": {
+       "QueryExecutionId.$": "$.QueryExecutionId"
+      }
+     }
+    },
+    "TimeoutSeconds": 30
+   },
+   "actual": {
+    "StartAt": "Start Athena Query",
+    "States": {
+     "Start Athena Query": {
+      "Next": "Stop Query Execution",
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::athena:startQueryExecution",
+      "Parameters": {
+       "QueryString.$": "$.queryString",
+       "QueryExecutionContext": {
+        "Database": "mydatabase"
+       },
+       "ResultConfiguration": {
+        "EncryptionConfiguration": {
+         "EncryptionOption": "SSE_S3"
+        }
+       }
+      }
+     },
+     "Stop Query Execution": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::athena:stopQueryExecution",
+      "Parameters": {
+       "QueryExecutionId.$": "$.QueryExecutionId"
+      }
+     }
+    },
+    "TimeoutSeconds": 30
+   }
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}"
+  }
+ ]
+}

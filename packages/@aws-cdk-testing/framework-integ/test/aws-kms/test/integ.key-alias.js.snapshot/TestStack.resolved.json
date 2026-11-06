@@ -1,0 +1,34 @@
+{
+ "version": "1",
+ "stackName": "TestStack",
+ "resources": {
+  "keyFEDD6EC0": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "keyAliasCEB16DF2": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/MyKey${AWS::AccountId}",
+    "TargetKeyId": "${keyFEDD6EC0.Arn}"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,108 @@
+{
+ "version": "1",
+ "stackName": "aws-StepFunctionsTasks-rest-api-JSONataExpression",
+ "resources": {
+  "examplestepfunctionsrestapi2B22AE87": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "example-stepfunctions-rest-api"
+   }
+  },
+  "examplestepfunctionsrestapiDeploymentA06E43AD85a1acfb00c77d0a0782f87a5ba7b421": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${examplestepfunctionsrestapi2B22AE87}"
+   },
+   "DependsOn": [
+    "examplestepfunctionsrestapiGET18556D73"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "examplestepfunctionsrestapiDeploymentStageprod0494BB5F": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${examplestepfunctionsrestapiDeploymentA06E43AD85a1acfb00c77d0a0782f87a5ba7b421}",
+    "RestApiId": "${examplestepfunctionsrestapi2B22AE87}",
+    "StageName": "prod"
+   }
+  },
+  "examplestepfunctionsrestapiGET18556D73": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${examplestepfunctionsrestapi2B22AE87.RootResourceId}",
+    "RestApiId": "${examplestepfunctionsrestapi2B22AE87}"
+   }
+  },
+  "StateMachineRoleB840431D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachineRoleDefaultPolicyDF1E6607": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "execute-api:Invoke",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${examplestepfunctionsrestapi2B22AE87}/prod/GET/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StateMachineRoleDefaultPolicyDF1E6607",
+    "Roles": [
+     "${StateMachineRoleB840431D}"
+    ]
+   }
+  },
+  "StateMachine2E01A3A5": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"StateExample\",\"States\":{\"StateExample\":{\"End\":true,\"Type\":\"Task\",\"TimeoutSeconds\":30,\"Arguments\":{\"ApiEndpoint\":\"${examplestepfunctionsrestapi2B22AE87}.execute-api.${AWS::Region}.${AWS::URLSuffix}\",\"Method\":\"GET\",\"Stage\":\"prod\",\"Path\":\"{% \\\"/path/\\\" & $states.input.path_suffix %}\",\"AuthType\":\"IAM_ROLE\"},\"Resource\":\"arn:${AWS::Partition}:states:::apigateway:invoke\"}},\"QueryLanguage\":\"JSONata\"}",
+    "RoleArn": "${StateMachineRoleB840431D.Arn}"
+   },
+   "DependsOn": [
+    "StateMachineRoleDefaultPolicyDF1E6607",
+    "StateMachineRoleB840431D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "examplestepfunctionsrestapiEndpoint9942D237": {
+   "Value": "https://${examplestepfunctionsrestapi2B22AE87}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${examplestepfunctionsrestapiDeploymentStageprod0494BB5F}/"
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,139 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-iam-grant-resource-policy-conditions",
+ "resources": {
+  "ServicePrincipalQueue52127C16": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "SqsManagedSseEnabled": true
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ServicePrincipalQueuePolicyEC9710CB": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:s3:::trusted-source-bucket"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "s3.amazonaws.com"
+       },
+       "Resource": "${ServicePrincipalQueue52127C16.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     "${ServicePrincipalQueue52127C16}"
+    ]
+   }
+  },
+  "PrincipalAndResourceQueueFE589206": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "SqsManagedSseEnabled": true
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "PrincipalAndResourceQueuePolicyBD4F1F3F": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:s3:::trusted-source-bucket"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "${Role1ABCC5F0.Arn}"
+       },
+       "Resource": "${PrincipalAndResourceQueueFE589206.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     "${PrincipalAndResourceQueueFE589206}"
+    ]
+   }
+  },
+  "Role1ABCC5F0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "RoleDefaultPolicy5FFB7DAB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:s3:::trusted-source-bucket"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "${PrincipalAndResourceQueueFE589206.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "RoleDefaultPolicy5FFB7DAB",
+    "Roles": [
+     "${Role1ABCC5F0}"
+    ]
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefServicePrincipalQueue52127C168A31709C": {
+   "Value": "${ServicePrincipalQueue52127C16}",
+   "Export": {
+    "Name": "aws-cdk-iam-grant-resource-policy-conditions:ExportsOutputRefServicePrincipalQueue52127C168A31709C"
+   }
+  },
+  "ExportsOutputRefPrincipalAndResourceQueueFE589206D6DAB762": {
+   "Value": "${PrincipalAndResourceQueueFE589206}",
+   "Export": {
+    "Name": "aws-cdk-iam-grant-resource-policy-conditions:ExportsOutputRefPrincipalAndResourceQueueFE589206D6DAB762"
+   }
+  }
+ },
+ "unresolved": []
+}

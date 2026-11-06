@@ -1,0 +1,259 @@
+{
+ "stackName": "integ-sfn-start-execution-jsonata",
+ "summary": {
+  "pass": 14
+ },
+ "results": [
+  {
+   "logicalId": "ChildRole1E3E0EF5",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ChildRole1E3E0EF5",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "ChildDAB30558",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ChildDAB30558",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Pass",
+    "States": {
+     "Pass": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Pass",
+    "States": {
+     "Pass": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "ChildDAB30558",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ChildRole1E3E0EF5}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ChildRole1E3E0EF5}"
+  },
+  {
+   "logicalId": "ParentRole5F0C366C",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ParentRole5F0C366C",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "ParentRoleDefaultPolicy9BDC56DC",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ParentRoleDefaultPolicy9BDC56DC",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ParentRoleDefaultPolicy9BDC56DC",
+   "actual": "ParentRoleDefaultPolicy9BDC56DC"
+  },
+  {
+   "logicalId": "ParentRoleDefaultPolicy9BDC56DC",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${ChildDAB30558}"
+     },
+     {
+      "Action": [
+       "states:DescribeExecution",
+       "states:StopExecution"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${ChildDAB30558.Name}*"
+     },
+     {
+      "Action": [
+       "events:DescribeRule",
+       "events:PutRule",
+       "events:PutTargets"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/StepFunctionsGetEventsForStepFunctionsExecutionRule"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${ChildDAB30558}"
+     },
+     {
+      "Action": [
+       "states:DescribeExecution",
+       "states:StopExecution"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${ChildDAB30558.Name}*"
+     },
+     {
+      "Action": [
+       "events:DescribeRule",
+       "events:PutRule",
+       "events:PutTargets"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/StepFunctionsGetEventsForStepFunctionsExecutionRule"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ParentRoleDefaultPolicy9BDC56DC",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ParentRole5F0C366C}",
+   "actual": "${ParentRole5F0C366C}"
+  },
+  {
+   "logicalId": "Parent8B210403",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Parent8B210403",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Task",
+    "States": {
+     "Task": {
+      "QueryLanguage": "JSONata",
+      "End": true,
+      "Type": "Task",
+      "Arguments": {
+       "Input": {
+        "hello": "{% $states.input.hello %}",
+        "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID": "{% $states.context.Execution.Id %}"
+       },
+       "StateMachineArn": "${ChildDAB30558}"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::states:startExecution.sync:2"
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Task",
+    "States": {
+     "Task": {
+      "QueryLanguage": "JSONata",
+      "End": true,
+      "Type": "Task",
+      "Arguments": {
+       "Input": {
+        "hello": "{% $states.input.hello %}",
+        "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID": "{% $states.context.Execution.Id %}"
+       },
+       "StateMachineArn": "${ChildDAB30558}"
+      },
+      "Resource": "arn:${AWS::Partition}:states:::states:startExecution.sync:2"
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "Parent8B210403",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ParentRole5F0C366C}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ParentRole5F0C366C}"
+  }
+ ]
+}

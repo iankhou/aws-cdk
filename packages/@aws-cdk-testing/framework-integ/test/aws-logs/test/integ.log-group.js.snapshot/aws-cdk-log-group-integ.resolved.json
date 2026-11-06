@@ -1,0 +1,84 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-log-group-integ",
+ "resources": {
+  "LogGroupLambdaAuditF8F47F46": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "auditbucketidE6660EBD": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "LogGroupLambdaAC756C5B": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "DataProtectionPolicy": {
+     "Name": "policy-name",
+     "Description": "policy description",
+     "Version": "2021-06-01",
+     "Statement": [
+      {
+       "Sid": "audit-statement-cdk",
+       "DataIdentifier": [
+        "arn:${AWS::Partition}:dataprotection::aws:data-identifier/DriversLicense-US",
+        "arn:${AWS::Partition}:dataprotection::aws:data-identifier/EmailAddress",
+        "EmployeeId"
+       ],
+       "Operation": {
+        "Audit": {
+         "FindingsDestination": {
+          "CloudWatchLogs": {
+           "LogGroup": "${LogGroupLambdaAuditF8F47F46}"
+          },
+          "S3": {
+           "Bucket": "${auditbucketidE6660EBD}"
+          }
+         }
+        }
+       }
+      },
+      {
+       "Sid": "redact-statement-cdk",
+       "DataIdentifier": [
+        "arn:${AWS::Partition}:dataprotection::aws:data-identifier/DriversLicense-US",
+        "arn:${AWS::Partition}:dataprotection::aws:data-identifier/EmailAddress",
+        "EmployeeId"
+       ],
+       "Operation": {
+        "Deidentify": {
+         "MaskConfig": {}
+        }
+       }
+      }
+     ],
+     "Configuration": {
+      "CustomDataIdentifier": [
+       {
+        "Name": "EmployeeId",
+        "Regex": "EmployeeId-\\d{9}"
+       }
+      ]
+     }
+    },
+    "FieldIndexPolicies": [
+     {
+      "Fields": [
+       "Operation",
+       "RequestId"
+      ]
+     }
+    ],
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": []
+}

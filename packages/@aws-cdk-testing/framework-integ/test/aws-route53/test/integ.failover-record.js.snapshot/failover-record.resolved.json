@@ -1,0 +1,57 @@
+{
+ "version": "1",
+ "stackName": "failover-record",
+ "resources": {
+  "HostedZoneDB99F866": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "cdk.dev."
+   }
+  },
+  "HealthCheckA1C381C7": {
+   "Type": "AWS::Route53::HealthCheck",
+   "Properties": {
+    "HealthCheckConfig": {
+     "FailureThreshold": 3,
+     "FullyQualifiedDomainName": "example.com",
+     "Inverted": false,
+     "MeasureLatency": false,
+     "Port": 80,
+     "RequestInterval": 30,
+     "ResourcePath": "/health",
+     "Type": "HTTP"
+    }
+   }
+  },
+  "ARecordFailoverPrimary99B7E3AE": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "Failover": "PRIMARY",
+    "HealthCheckId": "${HealthCheckA1C381C7}",
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${ARecordFailoverPrimary99B7E3AE}.",
+    "ResourceRecords": [
+     "1.2.3.4"
+    ],
+    "SetIdentifier": "failover-primary",
+    "TTL": "60",
+    "Type": "A"
+   }
+  },
+  "ARecordFailoverSecondaryD176C0A2": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "Failover": "SECONDARY",
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${ARecordFailoverPrimary99B7E3AE}.",
+    "ResourceRecords": [
+     "5.6.7.8"
+    ],
+    "SetIdentifier": "failover-secondary",
+    "TTL": "60",
+    "Type": "A"
+   }
+  }
+ },
+ "unresolved": []
+}

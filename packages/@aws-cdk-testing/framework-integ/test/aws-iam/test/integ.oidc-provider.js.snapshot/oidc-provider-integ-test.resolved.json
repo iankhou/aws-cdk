@@ -1,0 +1,148 @@
+{
+ "version": "1",
+ "stackName": "oidc-provider-integ-test",
+ "resources": {
+  "NoClientsNoThumbprint8BF1533F": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": "${CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0.Arn}",
+    "Url": "https://oidc.eks.us-east-1.amazonaws.com/id/${NoClientsNoThumbprint8BF1533F.Name}",
+    "RejectUnauthorized": false,
+    "CodeHash": "a6c501b56f95db60850de11c6ca7d936d88fdfc2f444fb39d5f76faaab8c1815"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Resource": "*",
+         "Action": [
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:RemoveClientIDFromOpenIDConnectProvider"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "a6c501b56f95db60850de11c6ca7d936d88fdfc2f444fb39d5f76faaab8c1815.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": "${CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+   ]
+  },
+  "Clients67031123": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": "${CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0.Arn}",
+    "ClientIDList": [
+     "foo",
+     "bar"
+    ],
+    "Url": "https://oidc.eks.us-east-1.amazonaws.com/id/${Clients67031123.Name}",
+    "RejectUnauthorized": false,
+    "CodeHash": "a6c501b56f95db60850de11c6ca7d936d88fdfc2f444fb39d5f76faaab8c1815"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "Thumbprints9CD6AB02": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": "${CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0.Arn}",
+    "ThumbprintList": [
+     "aa00aa1122aa00aa1122aa00aa1122aa00aa1122",
+     "aa00aa1122aa00aa1122aa00aa1122aa00aa1111"
+    ],
+    "Url": "https://oidc.eks.us-east-1.amazonaws.com/id/${Thumbprints9CD6AB02.Name}",
+    "RejectUnauthorized": false,
+    "CodeHash": "a6c501b56f95db60850de11c6ca7d936d88fdfc2f444fb39d5f76faaab8c1815"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "NoClientsThumbprints": {
+   "Value": {
+    "Fn::GetAtt": [
+     "NoClientsNoThumbprint8BF1533F",
+     "Thumbprints"
+    ]
+   }
+  },
+  "ClientsThumbprints": {
+   "Value": {
+    "Fn::GetAtt": [
+     "Clients67031123",
+     "Thumbprints"
+    ]
+   }
+  },
+  "ThumbprintsThumbprints": {
+   "Value": {
+    "Fn::GetAtt": [
+     "Thumbprints9CD6AB02",
+     "Thumbprints"
+    ]
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Outputs.NoClientsThumbprints.Value",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Thumbprints' attribute of the 'Custom::AWSCDKOpenIdConnectProvider' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWSCDKOpenIdConnectProvider' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  },
+  {
+   "path": "Outputs.ClientsThumbprints.Value",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Thumbprints' attribute of the 'Custom::AWSCDKOpenIdConnectProvider' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWSCDKOpenIdConnectProvider' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  },
+  {
+   "path": "Outputs.ThumbprintsThumbprints.Value",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Thumbprints' attribute of the 'Custom::AWSCDKOpenIdConnectProvider' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWSCDKOpenIdConnectProvider' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  }
+ ]
+}

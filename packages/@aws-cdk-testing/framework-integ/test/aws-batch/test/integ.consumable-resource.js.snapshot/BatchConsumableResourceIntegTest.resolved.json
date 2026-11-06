@@ -1,0 +1,37 @@
+{
+ "version": "1",
+ "stackName": "BatchConsumableResourceIntegTest",
+ "resources": {
+  "ReplenishableResourceA1CB5048": {
+   "Type": "AWS::Batch::ConsumableResource",
+   "Properties": {
+    "ConsumableResourceName": "test-replenishable-license",
+    "ResourceType": "REPLENISHABLE",
+    "TotalQuantity": 100
+   }
+  },
+  "NonReplenishableResourceA53BF4E2": {
+   "Type": "AWS::Batch::ConsumableResource",
+   "Properties": {
+    "ConsumableResourceName": "test-non-replenishable-license",
+    "ResourceType": "NON_REPLENISHABLE",
+    "TotalQuantity": 50
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefReplenishableResourceA1CB5048B849E5AD": {
+   "Value": "${ReplenishableResourceA1CB5048}",
+   "Export": {
+    "Name": "BatchConsumableResourceIntegTest:ExportsOutputRefReplenishableResourceA1CB5048B849E5AD"
+   }
+  },
+  "ExportsOutputRefNonReplenishableResourceA53BF4E2EFAB513D": {
+   "Value": "${NonReplenishableResourceA53BF4E2}",
+   "Export": {
+    "Name": "BatchConsumableResourceIntegTest:ExportsOutputRefNonReplenishableResourceA53BF4E2EFAB513D"
+   }
+  }
+ },
+ "unresolved": []
+}

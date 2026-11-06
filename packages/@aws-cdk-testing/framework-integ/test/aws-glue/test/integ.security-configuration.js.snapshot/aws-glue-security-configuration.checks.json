@@ -1,0 +1,90 @@
+{
+ "stackName": "aws-glue-security-configuration",
+ "summary": {
+  "pass": 5,
+  "no handler": 3
+ },
+ "results": [
+  {
+   "logicalId": "Key961B73FD",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Key961B73FD",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "KeyedSC862A23F3",
+   "type": "AWS::Glue::SecurityConfiguration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "KeylessSCKey4D3DE803",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KeylessSCKey4D3DE803",
+   "type": "AWS::KMS::Key",
+   "property": "EnableKeyRotation",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "KeylessSCKey4D3DE803",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "KeylessSC42E312EC",
+   "type": "AWS::Glue::SecurityConfiguration",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "S3SCE31C83BE",
+   "type": "AWS::Glue::SecurityConfiguration",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

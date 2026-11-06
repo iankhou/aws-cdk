@@ -1,0 +1,391 @@
+{
+ "stackName": "aws-cdk-cloudfront-custom",
+ "summary": {
+  "pass": 18,
+  "fail": 2
+ },
+ "results": [
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "OwnershipControls.Rules",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ObjectOwnership": "BucketOwnerPreferred"
+    }
+   ],
+   "actual": [
+    {
+     "ObjectOwnership": "BucketOwnerPreferred"
+    }
+   ]
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbablyCFDistribution47E3983B",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbablyCFDistribution47E3983B",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbablyCFDistribution47E3983B",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultRootObject",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.html",
+   "actual": "index.html"
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbablyCFDistribution47E3983B",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbablyCFDistribution47E3983B",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbablyCFDistribution47E3983B",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.PriceClass",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PriceClass_100",
+   "actual": "PriceClass_100"
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbablyCFDistribution47E3983B",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "fail",
+   "expected": {
+    "TargetOriginId": "origin1",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "AllowedMethods": {
+     "Quantity": 2,
+     "Items": [
+      "GET",
+      "HEAD"
+     ],
+     "CachedMethods": {
+      "Quantity": 2,
+      "Items": [
+       "GET",
+       "HEAD"
+      ]
+     }
+    }
+   },
+   "actual": {
+    "TargetOriginId": "origin1",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "AllowedMethods": {
+     "Quantity": 2,
+     "Items": [
+      "HEAD",
+      "GET"
+     ],
+     "CachedMethods": {
+      "Quantity": 2,
+      "Items": [
+       "HEAD",
+       "GET"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbablyCFDistribution47E3983B",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "origin1",
+      "DomainName": "brelandm.a2z.com",
+      "ConnectionAttempts": 3,
+      "ConnectionTimeout": 10,
+      "CustomOriginConfig": {
+       "HTTPPort": 80,
+       "HTTPSPort": 443,
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       },
+       "OriginReadTimeout": 30,
+       "OriginKeepaliveTimeout": 5
+      },
+      "CustomHeaders": {
+       "Quantity": 1,
+       "Items": [
+        {
+         "HeaderName": "X-Custom-Header",
+         "HeaderValue": "somevalue"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "origin1",
+      "DomainName": "brelandm.a2z.com",
+      "ConnectionAttempts": 3,
+      "ConnectionTimeout": 10,
+      "CustomOriginConfig": {
+       "HTTPPort": 80,
+       "HTTPSPort": 443,
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       },
+       "OriginReadTimeout": 30,
+       "OriginKeepaliveTimeout": 5
+      },
+      "CustomHeaders": {
+       "Quantity": 1,
+       "Items": [
+        {
+         "HeaderName": "X-Custom-Header",
+         "HeaderValue": "somevalue"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "LoggingBucket2CD4C98D8",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LoggingBucket2CD4C98D8",
+   "type": "AWS::S3::Bucket",
+   "property": "OwnershipControls.Rules",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ObjectOwnership": "BucketOwnerPreferred"
+    }
+   ],
+   "actual": [
+    {
+     "ObjectOwnership": "BucketOwnerPreferred"
+    }
+   ]
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbably2CFDistribution7C1CCD12",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbably2CFDistribution7C1CCD12",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbably2CFDistribution7C1CCD12",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultRootObject",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.html",
+   "actual": "index.html"
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbably2CFDistribution7C1CCD12",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbably2CFDistribution7C1CCD12",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbably2CFDistribution7C1CCD12",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.PriceClass",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PriceClass_100",
+   "actual": "PriceClass_100"
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbably2CFDistribution7C1CCD12",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "fail",
+   "expected": {
+    "TargetOriginId": "origin1",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "AllowedMethods": {
+     "Quantity": 2,
+     "Items": [
+      "GET",
+      "HEAD"
+     ],
+     "CachedMethods": {
+      "Quantity": 2,
+      "Items": [
+       "GET",
+       "HEAD"
+      ]
+     }
+    }
+   },
+   "actual": {
+    "TargetOriginId": "origin1",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "AllowedMethods": {
+     "Quantity": 2,
+     "Items": [
+      "HEAD",
+      "GET"
+     ],
+     "CachedMethods": {
+      "Quantity": 2,
+      "Items": [
+       "HEAD",
+       "GET"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "AnAmazingWebsiteProbably2CFDistribution7C1CCD12",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "origin1",
+      "DomainName": "brelandm.a2z.com",
+      "ConnectionAttempts": 3,
+      "ConnectionTimeout": 10,
+      "CustomOriginConfig": {
+       "HTTPPort": 80,
+       "HTTPSPort": 443,
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       },
+       "OriginReadTimeout": 30,
+       "OriginKeepaliveTimeout": 5
+      },
+      "CustomHeaders": {
+       "Quantity": 1,
+       "Items": [
+        {
+         "HeaderName": "X-Custom-Header",
+         "HeaderValue": "somevalue"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "origin1",
+      "DomainName": "brelandm.a2z.com",
+      "ConnectionAttempts": 3,
+      "ConnectionTimeout": 10,
+      "CustomOriginConfig": {
+       "HTTPPort": 80,
+       "HTTPSPort": 443,
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       },
+       "OriginReadTimeout": 30,
+       "OriginKeepaliveTimeout": 5
+      },
+      "CustomHeaders": {
+       "Quantity": 1,
+       "Items": [
+        {
+         "HeaderName": "X-Custom-Header",
+         "HeaderValue": "somevalue"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

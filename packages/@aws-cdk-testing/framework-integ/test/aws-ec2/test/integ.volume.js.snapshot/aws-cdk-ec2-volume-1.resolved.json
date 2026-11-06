@@ -1,0 +1,32 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-ec2-volume-1",
+ "resources": {
+  "TestVolume24F725A4": {
+   "Type": "AWS::EC2::Volume",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "MultiAttachEnabled": false,
+    "Size": 1,
+    "Throughput": 200,
+    "VolumeType": "gp3"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.TestVolume24F725A4.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}

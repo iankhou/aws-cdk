@@ -1,0 +1,477 @@
+{
+ "stackName": "aws-cdk-glue",
+ "summary": {
+  "pass": 16,
+  "no handler": 12
+ },
+ "results": [
+  {
+   "logicalId": "DataBucketE3889A50",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyDatabase1E2517DB",
+   "type": "AWS::Glue::Database",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AVROTable58646ABF",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CSVTableE499CABA",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "JSONTable00348F1D",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ParquetTableE84E985F",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyKey6AB29FA6",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "MyEncryptedTableBucket7B28486D",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyEncryptedTableBucket7B28486D",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKey6AB29FA6}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKey6AB29FA6}"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "MyEncryptedTableBucketPolicy458C373C",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyEncryptedTableBucketPolicy458C373C",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyEncryptedTableBucket7B28486D}",
+   "actual": "${MyEncryptedTableBucket7B28486D}"
+  },
+  {
+   "logicalId": "MyEncryptedTableBucketPolicy458C373C",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyEncryptedTableBucket7B28486D}",
+       "arn:${AWS::Partition}:s3:::${MyEncryptedTableBucket7B28486D}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:*",
+      "Condition": {
+       "Bool": {
+        "aws:SecureTransport": "false"
+       }
+      },
+      "Effect": "Deny",
+      "Principal": {
+       "AWS": "*"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${MyEncryptedTableBucket7B28486D}",
+       "arn:${AWS::Partition}:s3:::${MyEncryptedTableBucket7B28486D}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyEncryptedTable981A88C6",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyPartitionFilteredTable324BA27A",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyTableWithConnectionTable4BCA8495",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyTableWithStorageDescriptorParametersTable1A347345",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyTableWithParametersTable39568AB8",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyUserDC45028B",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyUserDefaultPolicy7B897426",
+   "actual": "MyUserDefaultPolicy7B897426"
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "glue:BatchCreatePartition",
+       "glue:BatchDeletePartition",
+       "glue:BatchGetPartition",
+       "glue:CreatePartition",
+       "glue:DeletePartition",
+       "glue:GetPartition",
+       "glue:GetPartitions",
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions",
+       "glue:GetTables",
+       "glue:UpdatePartition"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/csv_table",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/my_encrypted_table"
+      ]
+     },
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${DataBucketE3889A50}",
+       "arn:${AWS::Partition}:s3:::${MyEncryptedTableBucket7B28486D}",
+       "arn:${AWS::Partition}:s3:::${DataBucketE3889A50}/*",
+       "arn:${AWS::Partition}:s3:::${MyEncryptedTableBucket7B28486D}/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKey6AB29FA6}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "glue:BatchCreatePartition",
+       "glue:BatchDeletePartition",
+       "glue:BatchGetPartition",
+       "glue:CreatePartition",
+       "glue:DeletePartition",
+       "glue:GetPartition",
+       "glue:GetPartitions",
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions",
+       "glue:GetTables",
+       "glue:UpdatePartition"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/csv_table",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/my_encrypted_table"
+      ]
+     },
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${DataBucketE3889A50}",
+       "arn:${AWS::Partition}:s3:::${MyEncryptedTableBucket7B28486D}",
+       "arn:${AWS::Partition}:s3:::${DataBucketE3889A50}/*",
+       "arn:${AWS::Partition}:s3:::${MyEncryptedTableBucket7B28486D}/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${MyKey6AB29FA6}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyUserDefaultPolicy7B897426",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyUserDC45028B}",
+   "actual": "${MyUserDC45028B}"
+  },
+  {
+   "logicalId": "AnotherUser254B09E3",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AnotherUserDefaultPolicyDBDB9923",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AnotherUserDefaultPolicyDBDB9923",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AnotherUserDefaultPolicyDBDB9923",
+   "actual": "AnotherUserDefaultPolicyDBDB9923"
+  },
+  {
+   "logicalId": "AnotherUserDefaultPolicyDBDB9923",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "glue:BatchCreatePartition",
+       "glue:BatchDeletePartition",
+       "glue:BatchGetPartition",
+       "glue:CreatePartition",
+       "glue:DeletePartition",
+       "glue:GetPartition",
+       "glue:GetPartitions",
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions",
+       "glue:GetTables",
+       "glue:UpdatePartition"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/avro_table",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/json_table",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/parquet_table"
+      ]
+     },
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${DataBucketE3889A50}",
+       "arn:${AWS::Partition}:s3:::${DataBucketE3889A50}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "glue:BatchCreatePartition",
+       "glue:BatchDeletePartition",
+       "glue:BatchGetPartition",
+       "glue:CreatePartition",
+       "glue:DeletePartition",
+       "glue:GetPartition",
+       "glue:GetPartitions",
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions",
+       "glue:GetTables",
+       "glue:UpdatePartition"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/avro_table",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/json_table",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/my_database/parquet_table"
+      ]
+     },
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${DataBucketE3889A50}",
+       "arn:${AWS::Partition}:s3:::${DataBucketE3889A50}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "AnotherUserDefaultPolicyDBDB9923",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AnotherUser254B09E3}",
+   "actual": "${AnotherUser254B09E3}"
+  }
+ ]
+}

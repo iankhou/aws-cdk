@@ -1,0 +1,809 @@
+{
+ "stackName": "aws-stepfunctions-integ-sagemaker",
+ "summary": {
+  "pass": 29
+ },
+ "results": [
+  {
+   "logicalId": "EncryptionKey1B843E66",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EncryptionKey1B843E66",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "TrainingData3FDB6D34",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TrainingData3FDB6D34",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketEncryption.ServerSideEncryptionConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${EncryptionKey1B843E66}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "ApplyServerSideEncryptionByDefault": {
+      "SSEAlgorithm": "aws:kms",
+      "KMSMasterKeyID": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${EncryptionKey1B843E66}"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TrainTaskSagemakerRoleD5A6F967",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TrainTaskSagemakerRoleD5A6F967",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sagemaker.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22sagemaker.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TrainTaskSagemakerRoleD5A6F967",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "CreateTrainingJob"
+   ],
+   "actual": [
+    "CreateTrainingJob",
+    "TrainTaskSagemakerRoleDefaultPolicy163CCC72"
+   ]
+  },
+  {
+   "logicalId": "TrainTaskSagemakerRoleD5A6F967",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "cloudwatch:PutMetricData",
+       "ecr:GetAuthorizationToken",
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:DescribeLogStreams",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22cloudwatch%3APutMetricData%22%2C%22ecr%3AGetAuthorizationToken%22%2C%22logs%3ACreateLogGroup%22%2C%22logs%3ACreateLogStream%22%2C%22logs%3ADescribeLogStreams%22%2C%22logs%3APutLogEvents%22%5D%2C%22Resource%22%3A%22%2A%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TrainTaskSagemakerRoleDefaultPolicy163CCC72",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TrainTaskSagemakerRoleDefaultPolicy163CCC72",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TrainTaskSagemakerRoleDefaultPolicy163CCC72",
+   "actual": "TrainTaskSagemakerRoleDefaultPolicy163CCC72"
+  },
+  {
+   "logicalId": "TrainTaskSagemakerRoleDefaultPolicy163CCC72",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TrainingData3FDB6D34}",
+       "arn:${AWS::Partition}:s3:::${TrainingData3FDB6D34}/data/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${EncryptionKey1B843E66}"
+     },
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TrainingData3FDB6D34}",
+       "arn:${AWS::Partition}:s3:::${TrainingData3FDB6D34}/result/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TrainingData3FDB6D34}",
+       "arn:${AWS::Partition}:s3:::${TrainingData3FDB6D34}/data/*"
+      ]
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${EncryptionKey1B843E66}"
+     },
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${TrainingData3FDB6D34}",
+       "arn:${AWS::Partition}:s3:::${TrainingData3FDB6D34}/result/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TrainTaskSagemakerRoleDefaultPolicy163CCC72",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TrainTaskSagemakerRoleD5A6F967}",
+   "actual": "${TrainTaskSagemakerRoleD5A6F967}"
+  },
+  {
+   "logicalId": "CreateModelSagemakerRoleC2E07FC0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CreateModelSagemakerRoleC2E07FC0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sagemaker.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22sagemaker.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CreateModelSagemakerRoleC2E07FC0",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "CreateModel"
+   ],
+   "actual": [
+    "CreateModel",
+    "CreateModelSagemakerRoleDefaultPolicyD7EAA79E"
+   ]
+  },
+  {
+   "logicalId": "CreateModelSagemakerRoleC2E07FC0",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "cloudwatch:PutMetricData",
+       "ecr:GetAuthorizationToken",
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:DescribeLogStreams",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22cloudwatch%3APutMetricData%22%2C%22ecr%3AGetAuthorizationToken%22%2C%22logs%3ACreateLogGroup%22%2C%22logs%3ACreateLogStream%22%2C%22logs%3ADescribeLogStreams%22%2C%22logs%3APutLogEvents%22%5D%2C%22Resource%22%3A%22%2A%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CreateModelSagemakerRoleDefaultPolicyD7EAA79E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CreateModelSagemakerRoleDefaultPolicyD7EAA79E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CreateModelSagemakerRoleDefaultPolicyD7EAA79E",
+   "actual": "CreateModelSagemakerRoleDefaultPolicyD7EAA79E"
+  },
+  {
+   "logicalId": "CreateModelSagemakerRoleDefaultPolicyD7EAA79E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ecr:BatchCheckLayerAvailability",
+       "ecr:BatchGetImage",
+       "ecr:GetDownloadUrlForLayer",
+       "s3:GetObject",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ecr:BatchCheckLayerAvailability",
+       "ecr:BatchGetImage",
+       "ecr:GetDownloadUrlForLayer",
+       "s3:GetObject",
+       "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CreateModelSagemakerRoleDefaultPolicyD7EAA79E",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CreateModelSagemakerRoleC2E07FC0}",
+   "actual": "${CreateModelSagemakerRoleC2E07FC0}"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineRoleDefaultPolicyDF1E6607",
+   "actual": "StateMachineRoleDefaultPolicyDF1E6607"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "sagemaker:AddTags",
+       "sagemaker:CreateTrainingJob",
+       "sagemaker:DescribeTrainingJob",
+       "sagemaker:StopTrainingJob"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:training-job/mytrainingjob*"
+     },
+     {
+      "Action": "sagemaker:ListTags",
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": "iam:PassRole",
+      "Condition": {
+       "StringEquals": {
+        "iam:PassedToService": "sagemaker.amazonaws.com"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CreateModelSagemakerRoleC2E07FC0}",
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TrainTaskSagemakerRoleD5A6F967}"
+      ]
+     },
+     {
+      "Action": "sagemaker:CreateModel",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:model/*"
+     },
+     {
+      "Action": "sagemaker:CreateEndpointConfig",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint-config/*"
+     },
+     {
+      "Action": [
+       "sagemaker:createEndpoint",
+       "sagemaker:updateEndpoint"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint-config/*",
+       "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "sagemaker:AddTags",
+       "sagemaker:CreateTrainingJob",
+       "sagemaker:DescribeTrainingJob",
+       "sagemaker:StopTrainingJob"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:training-job/mytrainingjob*"
+     },
+     {
+      "Action": "sagemaker:ListTags",
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": "iam:PassRole",
+      "Condition": {
+       "StringEquals": {
+        "iam:PassedToService": "sagemaker.amazonaws.com"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CreateModelSagemakerRoleC2E07FC0}",
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TrainTaskSagemakerRoleD5A6F967}"
+      ]
+     },
+     {
+      "Action": "sagemaker:CreateModel",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:model/*"
+     },
+     {
+      "Action": "sagemaker:CreateEndpointConfig",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint-config/*"
+     },
+     {
+      "Action": [
+       "sagemaker:createEndpoint",
+       "sagemaker:updateEndpoint"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint-config/*",
+       "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineRoleB840431D}",
+   "actual": "${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Start",
+    "States": {
+     "Start": {
+      "Type": "Pass",
+      "Result": {
+       "Endpoint": {
+        "Image": "ImageArn",
+        "Config": "MyEndpointConfig",
+        "Name": "MyEndpointName",
+        "Model": "MyEndpointModelName"
+       }
+      },
+      "Next": "Train Task"
+     },
+     "Train Task": {
+      "Next": "Create Model",
+      "Type": "Task",
+      "ResultPath": "$.TrainingJob",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createTrainingJob",
+      "Parameters": {
+       "TrainingJobName": "mytrainingjob",
+       "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TrainTaskSagemakerRoleD5A6F967}",
+       "AlgorithmSpecification": {
+        "TrainingInputMode": "File",
+        "AlgorithmName": "arn:${AWS::Partition}:sagemaker:us-east-1:865070037744:algorithm/scikit-decision-trees-15423055-57b73412d2e93e9239e4e16f83298b8f"
+       },
+       "InputDataConfig": [
+        {
+         "ChannelName": "InputData",
+         "DataSource": {
+          "S3DataSource": {
+           "S3Uri": "https://s3.${AWS::Region}.amazonaws.com/${TrainingData3FDB6D34}/data/",
+           "S3DataType": "S3Prefix"
+          }
+         }
+        }
+       ],
+       "OutputDataConfig": {
+        "S3OutputPath": "https://s3.${AWS::Region}.amazonaws.com/${TrainingData3FDB6D34}/result/"
+       },
+       "ResourceConfig": {
+        "InstanceCount": 1,
+        "InstanceType": "ml.m4.xlarge",
+        "VolumeSizeInGB": 10
+       },
+       "StoppingCondition": {
+        "MaxRuntimeInSeconds": 3600
+       }
+      }
+     },
+     "Create Model": {
+      "Next": "Create enpoint config",
+      "Type": "Task",
+      "ResultPath": "$.Model",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createModel",
+      "Parameters": {
+       "ExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CreateModelSagemakerRoleC2E07FC0}",
+       "ModelName.$": "$.Endpoint.Model",
+       "PrimaryContainer": {
+        "Image.$": "$.Endpoint.Image",
+        "Mode": "SingleModel",
+        "ModelDataUrl.$": "$.TrainingJob.ModelArtifacts.S3ModelArtifacts"
+       }
+      }
+     },
+     "Create enpoint config": {
+      "Next": "Create endpoint",
+      "Type": "Task",
+      "ResultPath": "$.EndpointConfig",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createEndpointConfig",
+      "Parameters": {
+       "EndpointConfigName.$": "$.Endpoint.Config",
+       "ProductionVariants": [
+        {
+         "InitialInstanceCount": 1,
+         "InstanceType": "ml.m5.xlarge",
+         "ModelName.$": "$.Endpoint.Model",
+         "VariantName": "awesome-variant"
+        }
+       ]
+      }
+     },
+     "Create endpoint": {
+      "End": true,
+      "Catch": [
+       {
+        "ErrorEquals": [
+         "States.TaskFailed"
+        ],
+        "ResultPath": "$.EndpointDeployed",
+        "Next": "Update endpoint"
+       }
+      ],
+      "Type": "Task",
+      "ResultPath": "$.EndpointDeployed",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createEndpoint",
+      "Parameters": {
+       "EndpointConfigName.$": "$.Endpoint.Config",
+       "EndpointName.$": "$.Endpoint.Name",
+       "Tags": [
+        {
+         "Key": "Endpoint",
+         "Value": "New"
+        }
+       ]
+      }
+     },
+     "Update endpoint": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:updateEndpoint",
+      "Parameters": {
+       "EndpointConfigName.$": "$.Endpoint.Config",
+       "EndpointName.$": "$.Endpoint.Name"
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Start",
+    "States": {
+     "Start": {
+      "Type": "Pass",
+      "Result": {
+       "Endpoint": {
+        "Image": "ImageArn",
+        "Config": "MyEndpointConfig",
+        "Name": "MyEndpointName",
+        "Model": "MyEndpointModelName"
+       }
+      },
+      "Next": "Train Task"
+     },
+     "Train Task": {
+      "Next": "Create Model",
+      "Type": "Task",
+      "ResultPath": "$.TrainingJob",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createTrainingJob",
+      "Parameters": {
+       "TrainingJobName": "mytrainingjob",
+       "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TrainTaskSagemakerRoleD5A6F967}",
+       "AlgorithmSpecification": {
+        "TrainingInputMode": "File",
+        "AlgorithmName": "arn:${AWS::Partition}:sagemaker:us-east-1:865070037744:algorithm/scikit-decision-trees-15423055-57b73412d2e93e9239e4e16f83298b8f"
+       },
+       "InputDataConfig": [
+        {
+         "ChannelName": "InputData",
+         "DataSource": {
+          "S3DataSource": {
+           "S3Uri": "https://s3.${AWS::Region}.amazonaws.com/${TrainingData3FDB6D34}/data/",
+           "S3DataType": "S3Prefix"
+          }
+         }
+        }
+       ],
+       "OutputDataConfig": {
+        "S3OutputPath": "https://s3.${AWS::Region}.amazonaws.com/${TrainingData3FDB6D34}/result/"
+       },
+       "ResourceConfig": {
+        "InstanceCount": 1,
+        "InstanceType": "ml.m4.xlarge",
+        "VolumeSizeInGB": 10
+       },
+       "StoppingCondition": {
+        "MaxRuntimeInSeconds": 3600
+       }
+      }
+     },
+     "Create Model": {
+      "Next": "Create enpoint config",
+      "Type": "Task",
+      "ResultPath": "$.Model",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createModel",
+      "Parameters": {
+       "ExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CreateModelSagemakerRoleC2E07FC0}",
+       "ModelName.$": "$.Endpoint.Model",
+       "PrimaryContainer": {
+        "Image.$": "$.Endpoint.Image",
+        "Mode": "SingleModel",
+        "ModelDataUrl.$": "$.TrainingJob.ModelArtifacts.S3ModelArtifacts"
+       }
+      }
+     },
+     "Create enpoint config": {
+      "Next": "Create endpoint",
+      "Type": "Task",
+      "ResultPath": "$.EndpointConfig",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createEndpointConfig",
+      "Parameters": {
+       "EndpointConfigName.$": "$.Endpoint.Config",
+       "ProductionVariants": [
+        {
+         "InitialInstanceCount": 1,
+         "InstanceType": "ml.m5.xlarge",
+         "ModelName.$": "$.Endpoint.Model",
+         "VariantName": "awesome-variant"
+        }
+       ]
+      }
+     },
+     "Create endpoint": {
+      "End": true,
+      "Catch": [
+       {
+        "ErrorEquals": [
+         "States.TaskFailed"
+        ],
+        "ResultPath": "$.EndpointDeployed",
+        "Next": "Update endpoint"
+       }
+      ],
+      "Type": "Task",
+      "ResultPath": "$.EndpointDeployed",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createEndpoint",
+      "Parameters": {
+       "EndpointConfigName.$": "$.Endpoint.Config",
+       "EndpointName.$": "$.Endpoint.Name",
+       "Tags": [
+        {
+         "Key": "Endpoint",
+         "Value": "New"
+        }
+       ]
+      }
+     },
+     "Update endpoint": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:updateEndpoint",
+      "Parameters": {
+       "EndpointConfigName.$": "$.Endpoint.Config",
+       "EndpointName.$": "$.Endpoint.Name"
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}"
+  }
+ ]
+}

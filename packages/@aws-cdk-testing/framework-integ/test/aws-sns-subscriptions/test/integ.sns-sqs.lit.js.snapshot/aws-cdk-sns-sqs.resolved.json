@@ -1,0 +1,123 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-sns-sqs",
+ "resources": {
+  "MyTopic86869434": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "EncryptionMasterKey5BD393B9": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
+       ],
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": "${MyTopic86869434}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MyQueueE6CA6235": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "KmsMasterKeyId": "${EncryptionMasterKey5BD393B9.Arn}"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MyQueuePolicy6BBEDDAC": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": "${MyTopic86869434}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": "${MyQueueE6CA6235.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     "${MyQueueE6CA6235}"
+    ]
+   }
+  },
+  "MyQueueawscdksnssqsMyTopic9361DEA223429051": {
+   "DependsOn": "MyQueuePolicy6BBEDDAC",
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Protocol": "sqs",
+    "TopicArn": "${MyTopic86869434}",
+    "Endpoint": "${MyQueueE6CA6235.Arn}",
+    "RedrivePolicy": {
+     "deadLetterTargetArn": "${DeadLetterQueue9F481546.Arn}"
+    }
+   }
+  },
+  "DeadLetterQueue9F481546": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "DeadLetterQueuePolicyB1FB890C": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": "${MyTopic86869434}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": "${DeadLetterQueue9F481546.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     "${DeadLetterQueue9F481546}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

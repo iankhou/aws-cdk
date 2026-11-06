@@ -1,0 +1,161 @@
+{
+ "stackName": "aws-cdk-s3",
+ "summary": {
+  "pass": 9,
+  "gap": 1
+ },
+ "results": [
+  {
+   "logicalId": "InventoryBucketA869B8CB",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "InventoryBucketPolicyEDF94353",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "InventoryBucketPolicyEDF94353",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${InventoryBucketA869B8CB}",
+   "actual": "${InventoryBucketA869B8CB}"
+  },
+  {
+   "logicalId": "InventoryBucketPolicyEDF94353",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${InventoryBucketA869B8CB}",
+       "arn:${AWS::Partition}:s3:::${InventoryBucketA869B8CB}/reports*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${InventoryBucketA869B8CB}",
+       "arn:${AWS::Partition}:s3:::${InventoryBucketA869B8CB}/reports*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "InventoryConfigurations",
+   "status": "gap"
+  },
+  {
+   "logicalId": "SecondBucketAC350874",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecondBucketPolicy844C4343",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecondBucketPolicy844C4343",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SecondBucketAC350874}",
+   "actual": "${SecondBucketAC350874}"
+  },
+  {
+   "logicalId": "SecondBucketPolicy844C4343",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${SecondBucketAC350874}",
+       "arn:${AWS::Partition}:s3:::${SecondBucketAC350874}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${MyBucketF68F3FF0}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${SecondBucketAC350874}",
+       "arn:${AWS::Partition}:s3:::${SecondBucketAC350874}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  }
+ ]
+}

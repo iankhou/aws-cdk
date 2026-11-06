@@ -1,0 +1,56 @@
+{
+ "version": "1",
+ "stackName": "oidc-provider-native-integ-stack",
+ "resources": {
+  "Provider2281708E": {
+   "Type": "AWS::IAM::OIDCProvider",
+   "Properties": {
+    "ClientIdList": [
+     "foo",
+     "bar"
+    ],
+    "ThumbprintList": [
+     "aa00aa1122aa00aa1122aa00aa1122aa00aa1122",
+     "aa00aa1122aa00aa1122aa00aa1122aa00aa1111"
+    ],
+    "Url": "https://oidc.eks.us-east-1.amazonaws.com/id/test1"
+   }
+  },
+  "Minimal107EFE55": {
+   "Type": "AWS::IAM::OIDCProvider",
+   "Properties": {
+    "ThumbprintList": [
+     "aa00aa1122aa00aa1122aa00aa1122aa00aa1122"
+    ],
+    "Url": "https://oidc.eks.us-east-1.amazonaws.com/id/test2"
+   }
+  }
+ },
+ "outputs": {
+  "Arn": {
+   "Value": "${Provider2281708E}"
+  },
+  "Issuer": {
+   "Value": "oidc.eks.us-east-1.amazonaws.com/id/test1"
+  },
+  "MinimalArn": {
+   "Value": "${Minimal107EFE55}"
+  },
+  "MinimalIssuer": {
+   "Value": "oidc.eks.us-east-1.amazonaws.com/id/test2"
+  },
+  "ExportsOutputRefProvider2281708E9B27F851": {
+   "Value": "${Provider2281708E}",
+   "Export": {
+    "Name": "oidc-provider-native-integ-stack:ExportsOutputRefProvider2281708E9B27F851"
+   }
+  },
+  "ExportsOutputRefMinimal107EFE55C8EECFEF": {
+   "Value": "${Minimal107EFE55}",
+   "Export": {
+    "Name": "oidc-provider-native-integ-stack:ExportsOutputRefMinimal107EFE55C8EECFEF"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,137 @@
+{
+ "stackName": "aws-cdk-layer-version-1",
+ "summary": {
+  "pass": 12,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyLayer38944FA5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLayer38944FA5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "A layer to test the L2 construct",
+   "actual": "A layer to test the L2 construct"
+  },
+  {
+   "logicalId": "MyLayer38944FA5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "CompatibleRuntimes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "nodejs24.x"
+   ],
+   "actual": [
+    "nodejs24.x"
+   ]
+  },
+  {
+   "logicalId": "MyLayer38944FA5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "LicenseInfo",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Apache-2.0",
+   "actual": "Apache-2.0"
+  },
+  {
+   "logicalId": "MyLayerremoteaccountgrant715E5D21",
+   "type": "AWS::Lambda::LayerVersionPermission",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyLayeredLambdaServiceRole1A7DC118",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLayeredLambdaServiceRole1A7DC118",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyLayeredLambdaServiceRole1A7DC118",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyLayeredLambda9A3008D1",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLayeredLambda9A3008D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyLayeredLambda9A3008D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyLayeredLambda9A3008D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLayeredLambdaServiceRole1A7DC118}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLayeredLambdaServiceRole1A7DC118}"
+  },
+  {
+   "logicalId": "MyLayeredLambda9A3008D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${MyLayer38944FA5}"
+   ],
+   "actual": [
+    "${MyLayer38944FA5}"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,117 @@
+{
+ "version": "1",
+ "stackName": "SNSTopicPolicyStack",
+ "resources": {
+  "TopicBFC7AF6E": {
+   "Type": "AWS::SNS::Topic",
+   "Properties": {
+    "DisplayName": "fooDisplay",
+    "TopicName": "fooTopic"
+   }
+  },
+  "TopicPolicyA24B096F": {
+   "Type": "AWS::SNS::TopicPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sns:Publish",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "s3.amazonaws.com"
+       },
+       "Resource": "${TopicBFC7AF6E}",
+       "Sid": "0"
+      },
+      {
+       "Action": "sns:Publish",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": "*",
+       "Resource": "${TopicBFC7AF6E}",
+       "Sid": "AllowPublishThroughSSLOnly"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Topics": [
+     "${TopicBFC7AF6E}"
+    ]
+   }
+  },
+  "TopicAddPolicy7DB03706": {
+   "Type": "AWS::SNS::Topic",
+   "Properties": {
+    "DisplayName": "topicDisplayNameAddPolicy",
+    "TopicName": "topicAddPolicy"
+   }
+  },
+  "TopicAddPolicyAEA24A5A": {
+   "Type": "AWS::SNS::TopicPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sns:Publish",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": "*",
+       "Resource": "${TopicAddPolicy7DB03706}",
+       "Sid": "AllowPublishThroughSSLOnly"
+      },
+      {
+       "Action": "sns:Publish",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "s3.amazonaws.com"
+       },
+       "Resource": "${TopicAddPolicy7DB03706}",
+       "Sid": "1"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Topics": [
+     "${TopicAddPolicy7DB03706}"
+    ]
+   }
+  },
+  "TopicWithSSLC879A4EA": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "TopicWithSSLPolicy3E7ECD75": {
+   "Type": "AWS::SNS::TopicPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sns:Publish",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": "*",
+       "Resource": "${TopicWithSSLC879A4EA}",
+       "Sid": "AllowPublishThroughSSLOnly"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Topics": [
+     "${TopicWithSSLC879A4EA}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

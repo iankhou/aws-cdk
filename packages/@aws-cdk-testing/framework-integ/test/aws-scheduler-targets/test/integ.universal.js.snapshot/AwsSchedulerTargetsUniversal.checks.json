@@ -1,0 +1,98 @@
+{
+ "stackName": "AwsSchedulerTargetsUniversal",
+ "summary": {
+  "no handler": 1,
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "Schedule83A77FD1",
+   "type": "AWS::Scheduler::Schedule",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget5cddf726972933",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget5cddf726972933",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}",
+        "aws:SourceArn": "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule-group/default"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "scheduler.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22scheduler.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Ascheduler%3A${AWS::Region}%3A${AWS::AccountId}%3Aschedule-group%2Fdefault%22%2C%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget5cddf7DefaultPolicy3159C97B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget5cddf7DefaultPolicy3159C97B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SchedulerRoleForTarget5cddf7DefaultPolicy3159C97B",
+   "actual": "SchedulerRoleForTarget5cddf7DefaultPolicy3159C97B"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget5cddf7DefaultPolicy3159C97B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:CreateQueue",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:CreateQueue",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget5cddf7DefaultPolicy3159C97B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SchedulerRoleForTarget5cddf726972933}",
+   "actual": "${SchedulerRoleForTarget5cddf726972933}"
+  }
+ ]
+}

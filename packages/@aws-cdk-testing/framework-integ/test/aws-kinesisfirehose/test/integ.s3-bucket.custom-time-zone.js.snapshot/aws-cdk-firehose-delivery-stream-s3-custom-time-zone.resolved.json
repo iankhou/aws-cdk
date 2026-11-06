@@ -1,0 +1,204 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-firehose-delivery-stream-s3-custom-time-zone",
+ "resources": {
+  "Bucket83908E77": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "BucketPolicyE9A3008A": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${Bucket83908E77}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092.Arn}"
+       },
+       "Resource": [
+        "${Bucket83908E77.Arn}",
+        "${Bucket83908E77.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "BucketAutoDeleteObjectsCustomResourceBAFD23C2": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": "${CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F.Arn}",
+    "BucketName": "${Bucket83908E77}"
+   },
+   "DependsOn": [
+    "BucketPolicyE9A3008A"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "44e9c4d7a5d3fd2d677e1a7e416b2b56f6b0104bd5eff9cac5557b4c65a9dc61.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": "${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092.Arn}",
+    "Runtime": "nodejs24.x",
+    "Description": "Lambda function for auto-deleting objects in ${Bucket83908E77} S3 bucket."
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ]
+  },
+  "DeliveryStreamS3DestinationRoleD96B8345": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "firehose.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${Bucket83908E77.Arn}",
+        "${Bucket83908E77.Arn}/*"
+       ]
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "${DeliveryStreamLogGroupA92E8EA0.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65",
+    "Roles": [
+     "${DeliveryStreamS3DestinationRoleD96B8345}"
+    ]
+   }
+  },
+  "DeliveryStreamLogGroupA92E8EA0": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "DeliveryStreamLogGroupS3DestinationF045EA13": {
+   "Type": "AWS::Logs::LogStream",
+   "Properties": {
+    "LogGroupName": "${DeliveryStreamLogGroupA92E8EA0}"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "DeliveryStream58CF96DB": {
+   "Type": "AWS::KinesisFirehose::DeliveryStream",
+   "Properties": {
+    "DeliveryStreamType": "DirectPut",
+    "ExtendedS3DestinationConfiguration": {
+     "BucketARN": "${Bucket83908E77.Arn}",
+     "CloudWatchLoggingOptions": {
+      "Enabled": true,
+      "LogGroupName": "${DeliveryStreamLogGroupA92E8EA0}",
+      "LogStreamName": "${DeliveryStreamLogGroupS3DestinationF045EA13}"
+     },
+     "CustomTimeZone": "UTC",
+     "RoleARN": "${DeliveryStreamS3DestinationRoleD96B8345.Arn}"
+    }
+   },
+   "DependsOn": [
+    "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefDeliveryStream58CF96DB919FEA68": {
+   "Value": "${DeliveryStream58CF96DB}",
+   "Export": {
+    "Name": "aws-cdk-firehose-delivery-stream-s3-custom-time-zone:ExportsOutputRefDeliveryStream58CF96DB919FEA68"
+   }
+  },
+  "ExportsOutputRefBucket83908E7781C90AC0": {
+   "Value": "${Bucket83908E77}",
+   "Export": {
+    "Name": "aws-cdk-firehose-delivery-stream-s3-custom-time-zone:ExportsOutputRefBucket83908E7781C90AC0"
+   }
+  }
+ },
+ "unresolved": []
+}

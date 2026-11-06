@@ -1,0 +1,66 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-layer-version-1",
+ "resources": {
+  "MyLayer38944FA5": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "CompatibleRuntimes": [
+     "nodejs24.x"
+    ],
+    "Content": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "8190cbaf621223fb86e7062ea533415579c095416939dfc49a60f72b1b96c397.zip"
+    },
+    "Description": "A layer to test the L2 construct",
+    "LicenseInfo": "Apache-2.0"
+   }
+  },
+  "MyLayerremoteaccountgrant715E5D21": {
+   "Type": "AWS::Lambda::LayerVersionPermission",
+   "Properties": {
+    "Action": "lambda:GetLayerVersion",
+    "LayerVersionArn": "${MyLayer38944FA5}",
+    "Principal": "${AWS::AccountId}"
+   }
+  },
+  "MyLayeredLambdaServiceRole1A7DC118": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MyLayeredLambda9A3008D1": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "foo"
+    },
+    "Handler": "index.handler",
+    "Layers": [
+     "${MyLayer38944FA5}"
+    ],
+    "Role": "${MyLayeredLambdaServiceRole1A7DC118.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "MyLayeredLambdaServiceRole1A7DC118"
+   ]
+  }
+ },
+ "unresolved": []
+}

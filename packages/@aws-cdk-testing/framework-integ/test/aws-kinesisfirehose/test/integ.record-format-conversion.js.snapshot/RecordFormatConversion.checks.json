@@ -1,0 +1,2061 @@
+{
+ "stackName": "RecordFormatConversion",
+ "summary": {
+  "pass": 95,
+  "no handler": 22
+ },
+ "results": [
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RecordFormatConversion"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "Bucket83908E77"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ]
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Bucket83908E77}",
+   "actual": "${Bucket83908E77}"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lambda function for auto-deleting objects in ${Bucket83908E77} S3 bucket.",
+   "actual": "Lambda function for auto-deleting objects in ${Bucket83908E77} S3 bucket."
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 128,
+   "actual": 128
+  },
+  {
+   "logicalId": "Database",
+   "type": "AWS::Glue::Database",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "InlineSchemaTable",
+   "type": "AWS::Glue::Table",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcS3DestinationRole0A77EF4A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcS3DestinationRole0A77EF4A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcS3DestinationRoleDefaultPolicy3385F735",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcS3DestinationRoleDefaultPolicy3385F735",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DefaultHiveJsonOrcS3DestinationRoleDefaultPolicy3385F735",
+   "actual": "DefaultHiveJsonOrcS3DestinationRoleDefaultPolicy3385F735"
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcS3DestinationRoleDefaultPolicy3385F735",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${DefaultHiveJsonOrcLogGroupE45B2BEC}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${DefaultHiveJsonOrcLogGroupE45B2BEC}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcS3DestinationRoleDefaultPolicy3385F735",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${DefaultHiveJsonOrcS3DestinationRole0A77EF4A}",
+   "actual": "${DefaultHiveJsonOrcS3DestinationRole0A77EF4A}"
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcLogGroupE45B2BEC",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcLogGroupE45B2BEC",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrcLogGroupS3Destination51B88CDA",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DefaultHiveJsonOrc16EE3C90",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetS3DestinationRole11E1A1BD",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetS3DestinationRole11E1A1BD",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetS3DestinationRoleDefaultPolicy87714BCD",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetS3DestinationRoleDefaultPolicy87714BCD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DefaultOpenXJsonParquetS3DestinationRoleDefaultPolicy87714BCD",
+   "actual": "DefaultOpenXJsonParquetS3DestinationRoleDefaultPolicy87714BCD"
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetS3DestinationRoleDefaultPolicy87714BCD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${DefaultOpenXJsonParquetLogGroupEBB4026F}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${DefaultOpenXJsonParquetLogGroupEBB4026F}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetS3DestinationRoleDefaultPolicy87714BCD",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${DefaultOpenXJsonParquetS3DestinationRole11E1A1BD}",
+   "actual": "${DefaultOpenXJsonParquetS3DestinationRole11E1A1BD}"
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetLogGroupEBB4026F",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetLogGroupEBB4026F",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetLogGroupS3Destination368F89E9",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DefaultOpenXJsonParquetEB3F4442",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomHiveJsonS3DestinationRole9C57602D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomHiveJsonS3DestinationRole9C57602D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomHiveJsonS3DestinationRoleDefaultPolicyACED2367",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomHiveJsonS3DestinationRoleDefaultPolicyACED2367",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomHiveJsonS3DestinationRoleDefaultPolicyACED2367",
+   "actual": "CustomHiveJsonS3DestinationRoleDefaultPolicyACED2367"
+  },
+  {
+   "logicalId": "CustomHiveJsonS3DestinationRoleDefaultPolicyACED2367",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomHiveJsonLogGroupB373D61F}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomHiveJsonLogGroupB373D61F}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomHiveJsonS3DestinationRoleDefaultPolicyACED2367",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomHiveJsonS3DestinationRole9C57602D}",
+   "actual": "${CustomHiveJsonS3DestinationRole9C57602D}"
+  },
+  {
+   "logicalId": "CustomHiveJsonLogGroupB373D61F",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomHiveJsonLogGroupB373D61F",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "CustomHiveJsonLogGroupS3DestinationD213FD89",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomHiveJsonEF2911B4",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomOpenXJsonS3DestinationRole07AAE423",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOpenXJsonS3DestinationRole07AAE423",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomOpenXJsonS3DestinationRoleDefaultPolicy83F691AA",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOpenXJsonS3DestinationRoleDefaultPolicy83F691AA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomOpenXJsonS3DestinationRoleDefaultPolicy83F691AA",
+   "actual": "CustomOpenXJsonS3DestinationRoleDefaultPolicy83F691AA"
+  },
+  {
+   "logicalId": "CustomOpenXJsonS3DestinationRoleDefaultPolicy83F691AA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomOpenXJsonLogGroup22FF7B23}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomOpenXJsonLogGroup22FF7B23}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomOpenXJsonS3DestinationRoleDefaultPolicy83F691AA",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomOpenXJsonS3DestinationRole07AAE423}",
+   "actual": "${CustomOpenXJsonS3DestinationRole07AAE423}"
+  },
+  {
+   "logicalId": "CustomOpenXJsonLogGroup22FF7B23",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOpenXJsonLogGroup22FF7B23",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "CustomOpenXJsonLogGroupS3Destination672CF942",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomOpenXJsonEA227FEF",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomOrcS3DestinationRoleE1E7001A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcS3DestinationRoleE1E7001A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomOrcS3DestinationRoleDefaultPolicy5A89ECB3",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcS3DestinationRoleDefaultPolicy5A89ECB3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomOrcS3DestinationRoleDefaultPolicy5A89ECB3",
+   "actual": "CustomOrcS3DestinationRoleDefaultPolicy5A89ECB3"
+  },
+  {
+   "logicalId": "CustomOrcS3DestinationRoleDefaultPolicy5A89ECB3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomOrcLogGroup0ECA964A}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomOrcLogGroup0ECA964A}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomOrcS3DestinationRoleDefaultPolicy5A89ECB3",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomOrcS3DestinationRoleE1E7001A}",
+   "actual": "${CustomOrcS3DestinationRoleE1E7001A}"
+  },
+  {
+   "logicalId": "CustomOrcLogGroup0ECA964A",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcLogGroup0ECA964A",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "CustomOrcLogGroupS3DestinationD3E81901",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomOrc77119986",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomOrcZlibS3DestinationRoleE46A456E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcZlibS3DestinationRoleE46A456E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomOrcZlibS3DestinationRoleDefaultPolicyE3B696C4",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcZlibS3DestinationRoleDefaultPolicyE3B696C4",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomOrcZlibS3DestinationRoleDefaultPolicyE3B696C4",
+   "actual": "CustomOrcZlibS3DestinationRoleDefaultPolicyE3B696C4"
+  },
+  {
+   "logicalId": "CustomOrcZlibS3DestinationRoleDefaultPolicyE3B696C4",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomOrcZlibLogGroup87CF80F5}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomOrcZlibLogGroup87CF80F5}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomOrcZlibS3DestinationRoleDefaultPolicyE3B696C4",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomOrcZlibS3DestinationRoleE46A456E}",
+   "actual": "${CustomOrcZlibS3DestinationRoleE46A456E}"
+  },
+  {
+   "logicalId": "CustomOrcZlibLogGroup87CF80F5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcZlibLogGroup87CF80F5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "CustomOrcZlibLogGroupS3Destination870D296F",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomOrcZlibAAA13E0C",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomOrcSnappyS3DestinationRole995AB685",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcSnappyS3DestinationRole995AB685",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomOrcSnappyS3DestinationRoleDefaultPolicyF25E97AE",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcSnappyS3DestinationRoleDefaultPolicyF25E97AE",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomOrcSnappyS3DestinationRoleDefaultPolicyF25E97AE",
+   "actual": "CustomOrcSnappyS3DestinationRoleDefaultPolicyF25E97AE"
+  },
+  {
+   "logicalId": "CustomOrcSnappyS3DestinationRoleDefaultPolicyF25E97AE",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomOrcSnappyLogGroup4F6B90CA}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomOrcSnappyLogGroup4F6B90CA}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomOrcSnappyS3DestinationRoleDefaultPolicyF25E97AE",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomOrcSnappyS3DestinationRole995AB685}",
+   "actual": "${CustomOrcSnappyS3DestinationRole995AB685}"
+  },
+  {
+   "logicalId": "CustomOrcSnappyLogGroup4F6B90CA",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomOrcSnappyLogGroup4F6B90CA",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "CustomOrcSnappyLogGroupS3Destination7CFC2383",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomOrcSnappy0596CCDA",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomParquetS3DestinationRole22BF6D43",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetS3DestinationRole22BF6D43",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomParquetS3DestinationRoleDefaultPolicyC988AB56",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetS3DestinationRoleDefaultPolicyC988AB56",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomParquetS3DestinationRoleDefaultPolicyC988AB56",
+   "actual": "CustomParquetS3DestinationRoleDefaultPolicyC988AB56"
+  },
+  {
+   "logicalId": "CustomParquetS3DestinationRoleDefaultPolicyC988AB56",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomParquetLogGroup676E9A45}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomParquetLogGroup676E9A45}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomParquetS3DestinationRoleDefaultPolicyC988AB56",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomParquetS3DestinationRole22BF6D43}",
+   "actual": "${CustomParquetS3DestinationRole22BF6D43}"
+  },
+  {
+   "logicalId": "CustomParquetLogGroup676E9A45",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetLogGroup676E9A45",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "CustomParquetLogGroupS3Destination57EC9E48",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomParquet17BE2343",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomParquetGzipS3DestinationRoleD295866D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetGzipS3DestinationRoleD295866D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomParquetGzipS3DestinationRoleDefaultPolicy5968D435",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetGzipS3DestinationRoleDefaultPolicy5968D435",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomParquetGzipS3DestinationRoleDefaultPolicy5968D435",
+   "actual": "CustomParquetGzipS3DestinationRoleDefaultPolicy5968D435"
+  },
+  {
+   "logicalId": "CustomParquetGzipS3DestinationRoleDefaultPolicy5968D435",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomParquetGzipLogGroup504E4231}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomParquetGzipLogGroup504E4231}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomParquetGzipS3DestinationRoleDefaultPolicy5968D435",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomParquetGzipS3DestinationRoleD295866D}",
+   "actual": "${CustomParquetGzipS3DestinationRoleD295866D}"
+  },
+  {
+   "logicalId": "CustomParquetGzipLogGroup504E4231",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetGzipLogGroup504E4231",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "CustomParquetGzipLogGroupS3DestinationB3D25C36",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomParquetGzipD2370D52",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomParquetSnappyS3DestinationRole5E1ADD26",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetSnappyS3DestinationRole5E1ADD26",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomParquetSnappyS3DestinationRoleDefaultPolicyED54CDC3",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetSnappyS3DestinationRoleDefaultPolicyED54CDC3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "CustomParquetSnappyS3DestinationRoleDefaultPolicyED54CDC3",
+   "actual": "CustomParquetSnappyS3DestinationRoleDefaultPolicyED54CDC3"
+  },
+  {
+   "logicalId": "CustomParquetSnappyS3DestinationRoleDefaultPolicyED54CDC3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomParquetSnappyLogGroup3EC6F154}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     },
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${CustomParquetSnappyLogGroup3EC6F154}:*"
+     },
+     {
+      "Action": [
+       "glue:GetTable",
+       "glue:GetTableVersion",
+       "glue:GetTableVersions"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:catalog",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:database/${Database}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:table/${Database}/${InlineSchemaTable}"
+      ]
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomParquetSnappyS3DestinationRoleDefaultPolicyED54CDC3",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${CustomParquetSnappyS3DestinationRole5E1ADD26}",
+   "actual": "${CustomParquetSnappyS3DestinationRole5E1ADD26}"
+  },
+  {
+   "logicalId": "CustomParquetSnappyLogGroup3EC6F154",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomParquetSnappyLogGroup3EC6F154",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "CustomParquetSnappyLogGroupS3DestinationDDDB5ADC",
+   "type": "AWS::Logs::LogStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomParquetSnappyDCECB34C",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

@@ -1,0 +1,239 @@
+{
+ "stackName": "aws-cdk-aws-appsync-target-integ",
+ "summary": {
+  "no handler": 4,
+  "pass": 14
+ },
+ "results": [
+  {
+   "logicalId": "baseApiCDA4D43A",
+   "type": "AWS::AppSync::GraphQLApi",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "baseApiSchemaB12C7BB0",
+   "type": "AWS::AppSync::GraphQLSchema",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "baseApinone7DDDEE3D",
+   "type": "AWS::AppSync::DataSource",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "baseApipublisherC3F47EA2",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "baseApiEventsRoleAC472BD7",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "baseApiEventsRoleAC472BD7",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "baseApiEventsRoleDefaultPolicy94199357",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "baseApiEventsRoleDefaultPolicy94199357",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "baseApiEventsRoleDefaultPolicy94199357",
+   "actual": "baseApiEventsRoleDefaultPolicy94199357"
+  },
+  {
+   "logicalId": "baseApiEventsRoleDefaultPolicy94199357",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "${baseApiCDA4D43A}/types/Mutation/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "appsync:GraphQL",
+      "Effect": "Allow",
+      "Resource": "${baseApiCDA4D43A}/types/Mutation/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "baseApiEventsRoleDefaultPolicy94199357",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${baseApiEventsRoleAC472BD7}",
+   "actual": "${baseApiEventsRoleAC472BD7}"
+  },
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${TimerBF6F831F}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowEventRuleawscdkawsappsynctargetintegTimer2A2187F8"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${TimerBF6F831F}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowEventRuleawscdkawsappsynctargetintegTimer2A2187F8"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${Queue4A7E3555}"
+   ],
+   "actual": [
+    "${Queue4A7E3555}"
+   ]
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AppSyncParameters": {
+      "GraphQLOperation": "mutation Publish($message: String!){ publish(message: $message) { message } }"
+     },
+     "Arn": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:endpoints/graphql-api/dlcovz3njrccjpqmdnrtesdz54",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+     },
+     "Id": "Target0",
+     "Input": "{\"message\":\"hello world\"}",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${baseApiEventsRoleAC472BD7}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:endpoints/graphql-api/dlcovz3njrccjpqmdnrtesdz54",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${baseApiEventsRoleAC472BD7}",
+     "Input": "{\"message\":\"hello world\"}",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+     },
+     "AppSyncParameters": {
+      "GraphQLOperation": "mutation Publish($message: String!){ publish(message: $message) { message } }"
+     }
+    }
+   ]
+  }
+ ]
+}

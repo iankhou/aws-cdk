@@ -1,0 +1,694 @@
+{
+ "stackName": "lambda-layer-kubectl-integ-stack",
+ "summary": {
+  "pass": 61
+ },
+ "results": [
+  {
+   "logicalId": "KubectlLayer600207B5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KubectlLayer600207B5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/opt/kubectl/kubectl 1.31.9; /opt/helm/helm 3.17.3",
+   "actual": "/opt/kubectl/kubectl 1.31.9; /opt/helm/helm 3.17.3"
+  },
+  {
+   "logicalId": "KubectlLayer600207B5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "LicenseInfo",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Apache-2.0",
+   "actual": "Apache-2.0"
+  },
+  {
+   "logicalId": "Lambdapython39ServiceRoleE2CFED77",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Lambdapython39ServiceRoleE2CFED77",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Lambdapython39ServiceRoleE2CFED77",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Lambdapython39426A0480",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Lambdapython39426A0480",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Lambdapython39426A0480",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "Lambdapython39426A0480",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Lambdapython39ServiceRoleE2CFED77}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Lambdapython39ServiceRoleE2CFED77}"
+  },
+  {
+   "logicalId": "Lambdapython39426A0480",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  },
+  {
+   "logicalId": "Lambdapython39426A0480",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 512,
+   "actual": 512
+  },
+  {
+   "logicalId": "Lambdapython39426A0480",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${KubectlLayer600207B5}"
+   ],
+   "actual": [
+    "${KubectlLayer600207B5}"
+   ]
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventServiceRoleA299F5C1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventServiceRoleA299F5C1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventServiceRoleA299F5C1",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventServiceRoleDefaultPolicy16A4767C",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventServiceRoleDefaultPolicy16A4767C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Providerpython39frameworkonEventServiceRoleDefaultPolicy16A4767C",
+   "actual": "Providerpython39frameworkonEventServiceRoleDefaultPolicy16A4767C"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventServiceRoleDefaultPolicy16A4767C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython39426A0480}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython39426A0480}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython39426A0480}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython39426A0480}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventServiceRoleDefaultPolicy16A4767C",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Providerpython39frameworkonEventServiceRoleA299F5C1}",
+   "actual": "${Providerpython39frameworkonEventServiceRoleA299F5C1}"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEvent00AFA742",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEvent00AFA742",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS CDK resource provider framework - onEvent (lambda-layer-kubectl-integ-stack/Providerpython3.9)",
+   "actual": "AWS CDK resource provider framework - onEvent (lambda-layer-kubectl-integ-stack/Providerpython3.9)"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEvent00AFA742",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "framework.onEvent",
+   "actual": "framework.onEvent"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEvent00AFA742",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEvent00AFA742",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Providerpython39frameworkonEventServiceRoleA299F5C1}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Providerpython39frameworkonEventServiceRoleA299F5C1}"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEvent00AFA742",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEvent00AFA742",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython39426A0480}"
+   },
+   "actual": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython39426A0480}"
+   }
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEvent00AFA742",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "FATAL",
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "FATAL",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${Providerpython39frameworkonEvent00AFA742}"
+   }
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventinlinePolicyAddedToExecutionRole0012C4340",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventinlinePolicyAddedToExecutionRole0012C4340",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Providerpython39frameworkonEventinlinePolicyAddedToExecutionRole0012C4340",
+   "actual": "Providerpython39frameworkonEventinlinePolicyAddedToExecutionRole0012C4340"
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventinlinePolicyAddedToExecutionRole0012C4340",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython39426A0480}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython39426A0480}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Providerpython39frameworkonEventinlinePolicyAddedToExecutionRole0012C4340",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Providerpython39frameworkonEventServiceRoleA299F5C1}",
+   "actual": "${Providerpython39frameworkonEventServiceRoleA299F5C1}"
+  },
+  {
+   "logicalId": "Lambdapython310ServiceRoleD185E0B6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Lambdapython310ServiceRoleD185E0B6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Lambdapython310ServiceRoleD185E0B6",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Lambdapython310815BD7E9",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Lambdapython310815BD7E9",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Lambdapython310815BD7E9",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.10",
+   "actual": "python3.10"
+  },
+  {
+   "logicalId": "Lambdapython310815BD7E9",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Lambdapython310ServiceRoleD185E0B6}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Lambdapython310ServiceRoleD185E0B6}"
+  },
+  {
+   "logicalId": "Lambdapython310815BD7E9",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  },
+  {
+   "logicalId": "Lambdapython310815BD7E9",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 512,
+   "actual": 512
+  },
+  {
+   "logicalId": "Lambdapython310815BD7E9",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${KubectlLayer600207B5}"
+   ],
+   "actual": [
+    "${KubectlLayer600207B5}"
+   ]
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventServiceRoleB6DF2879",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventServiceRoleB6DF2879",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventServiceRoleB6DF2879",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventServiceRoleDefaultPolicyC0E8697B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventServiceRoleDefaultPolicyC0E8697B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Providerpython310frameworkonEventServiceRoleDefaultPolicyC0E8697B",
+   "actual": "Providerpython310frameworkonEventServiceRoleDefaultPolicyC0E8697B"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventServiceRoleDefaultPolicyC0E8697B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython310815BD7E9}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython310815BD7E9}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython310815BD7E9}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython310815BD7E9}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventServiceRoleDefaultPolicyC0E8697B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Providerpython310frameworkonEventServiceRoleB6DF2879}",
+   "actual": "${Providerpython310frameworkonEventServiceRoleB6DF2879}"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEvent7294D715",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEvent7294D715",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS CDK resource provider framework - onEvent (lambda-layer-kubectl-integ-stack/Providerpython3.10)",
+   "actual": "AWS CDK resource provider framework - onEvent (lambda-layer-kubectl-integ-stack/Providerpython3.10)"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEvent7294D715",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "framework.onEvent",
+   "actual": "framework.onEvent"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEvent7294D715",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEvent7294D715",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Providerpython310frameworkonEventServiceRoleB6DF2879}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Providerpython310frameworkonEventServiceRoleB6DF2879}"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEvent7294D715",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEvent7294D715",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython310815BD7E9}"
+   },
+   "actual": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython310815BD7E9}"
+   }
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEvent7294D715",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "FATAL",
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "FATAL",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${Providerpython310frameworkonEvent7294D715}"
+   }
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventinlinePolicyAddedToExecutionRole0B240717D",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventinlinePolicyAddedToExecutionRole0B240717D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Providerpython310frameworkonEventinlinePolicyAddedToExecutionRole0B240717D",
+   "actual": "Providerpython310frameworkonEventinlinePolicyAddedToExecutionRole0B240717D"
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventinlinePolicyAddedToExecutionRole0B240717D",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython310815BD7E9}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Lambdapython310815BD7E9}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Providerpython310frameworkonEventinlinePolicyAddedToExecutionRole0B240717D",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Providerpython310frameworkonEventServiceRoleB6DF2879}",
+   "actual": "${Providerpython310frameworkonEventServiceRoleB6DF2879}"
+  }
+ ]
+}

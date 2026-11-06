@@ -1,0 +1,47 @@
+{
+ "version": "1",
+ "stackName": "ses-configuration-set-event-bus",
+ "resources": {
+  "ConfigurationSet3DD38186": {
+   "Type": "AWS::SES::ConfigurationSet",
+   "Properties": {
+    "DeliveryOptions": {
+     "MaxDeliverySeconds": 600
+    }
+   }
+  },
+  "ConfigurationSetEventBridgeABB541C9": {
+   "Type": "AWS::SES::ConfigurationSetEventDestination",
+   "Properties": {
+    "ConfigurationSetName": "${ConfigurationSet3DD38186}",
+    "EventDestination": {
+     "Enabled": true,
+     "EventBridgeDestination": {
+      "EventBusArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+     },
+     "MatchingEventTypes": [
+      "send",
+      "reject",
+      "bounce",
+      "complaint",
+      "delivery",
+      "open",
+      "click",
+      "renderingFailure",
+      "deliveryDelay",
+      "subscription"
+     ]
+    }
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefConfigurationSet3DD381867BBB7945": {
+   "Value": "${ConfigurationSet3DD38186}",
+   "Export": {
+    "Name": "ses-configuration-set-event-bus:ExportsOutputRefConfigurationSet3DD381867BBB7945"
+   }
+  }
+ },
+ "unresolved": []
+}

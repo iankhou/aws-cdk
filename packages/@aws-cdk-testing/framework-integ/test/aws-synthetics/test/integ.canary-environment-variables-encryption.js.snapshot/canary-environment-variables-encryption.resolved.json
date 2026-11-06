@@ -1,0 +1,156 @@
+{
+ "version": "1",
+ "stackName": "canary-environment-variables-encryption",
+ "resources": {
+  "EnvKeyCD7B3BF3": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CanaryArtifactsBucket4A60D32B": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "CanaryArtifactsBucketPolicy63096C41": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${CanaryArtifactsBucket4A60D32B}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        "${CanaryArtifactsBucket4A60D32B.Arn}",
+        "${CanaryArtifactsBucket4A60D32B.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "CanaryServiceRoleD132250E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": "s3:ListAllMyBuckets",
+         "Effect": "Allow",
+         "Resource": "*"
+        },
+        {
+         "Action": "s3:GetBucketLocation",
+         "Effect": "Allow",
+         "Resource": "${CanaryArtifactsBucket4A60D32B.Arn}"
+        },
+        {
+         "Action": "s3:PutObject",
+         "Effect": "Allow",
+         "Resource": "${CanaryArtifactsBucket4A60D32B.Arn}/*"
+        },
+        {
+         "Action": "cloudwatch:PutMetricData",
+         "Condition": {
+          "StringEquals": {
+           "cloudwatch:namespace": "CloudWatchSynthetics"
+          }
+         },
+         "Effect": "Allow",
+         "Resource": "*"
+        },
+        {
+         "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+         ],
+         "Effect": "Allow",
+         "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/cwsyn-*"
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "canaryPolicy"
+     }
+    ]
+   }
+  },
+  "Canary11957FE2": {
+   "Type": "AWS::Synthetics::Canary",
+   "Properties": {
+    "ArtifactS3Location": "s3://${CanaryArtifactsBucket4A60D32B}",
+    "Code": {
+     "Handler": "index.handler",
+     "Script": "\n      exports.handler = async () => {\n        console.log('hello world');\n      };"
+    },
+    "ExecutionRoleArn": "${CanaryServiceRoleD132250E.Arn}",
+    "KmsKeyArn": "${EnvKeyCD7B3BF3.Arn}",
+    "Name": "canaryenvironme1a98b0",
+    "ProvisionedResourceCleanup": "AUTOMATIC",
+    "RunConfig": {
+     "EnvironmentVariables": {
+      "stage": "prod"
+     }
+    },
+    "RuntimeVersion": "syn-nodejs-puppeteer-13.0",
+    "Schedule": {
+     "DurationInSeconds": "0",
+     "Expression": "rate(1 minute)"
+    },
+    "StartCanaryAfterCreation": true
+   }
+  }
+ },
+ "unresolved": []
+}

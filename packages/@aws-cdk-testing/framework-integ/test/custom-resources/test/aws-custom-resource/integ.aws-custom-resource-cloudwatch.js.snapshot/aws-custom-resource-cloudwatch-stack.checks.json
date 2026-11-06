@@ -1,0 +1,218 @@
+{
+ "stackName": "aws-custom-resource-cloudwatch-stack",
+ "summary": {
+  "pass": 21
+ },
+ "results": [
+  {
+   "logicalId": "myAlarmF2E38AF2",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myAlarmF2E38AF2",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "myAlarmF2E38AF2",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1,
+   "actual": 1
+  },
+  {
+   "logicalId": "myAlarmF2E38AF2",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 0,
+   "actual": 0
+  },
+  {
+   "logicalId": "myAlarmF2E38AF2",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "myMetricName",
+   "actual": "myMetricName"
+  },
+  {
+   "logicalId": "myAlarmF2E38AF2",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "myNamespace",
+   "actual": "myNamespace"
+  },
+  {
+   "logicalId": "myAlarmF2E38AF2",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 300,
+   "actual": 300
+  },
+  {
+   "logicalId": "myAlarmF2E38AF2",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Average",
+   "actual": "Average"
+  },
+  {
+   "logicalId": "myCRCustomResourcePolicy05AD5A90",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "myCRCustomResourcePolicy05AD5A90",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "myCRCustomResourcePolicy05AD5A90",
+   "actual": "myCRCustomResourcePolicy05AD5A90"
+  },
+  {
+   "logicalId": "myCRCustomResourcePolicy05AD5A90",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "cloudwatch:TagResource",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "cloudwatch:TagResource",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "myCRCustomResourcePolicy05AD5A90",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 120,
+   "actual": 120
+  },
+  {
+   "logicalId": "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1024,
+   "actual": 1024
+  }
+ ]
+}

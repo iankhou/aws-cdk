@@ -1,0 +1,63 @@
+{
+ "stackName": "aws-cdk-sqs",
+ "summary": {
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "SourceQueue1F4BBA4BB",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceQueue1F4BBA4BB",
+   "type": "AWS::SQS::Queue",
+   "property": "RedriveAllowPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "redrivePermission": "allowAll"
+   },
+   "actual": "{\"redrivePermission\":\"allowAll\"}"
+  },
+  {
+   "logicalId": "SourceQueue22481CB5A",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceQueue22481CB5A",
+   "type": "AWS::SQS::Queue",
+   "property": "RedriveAllowPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "redrivePermission": "denyAll"
+   },
+   "actual": "{\"redrivePermission\":\"denyAll\"}"
+  },
+  {
+   "logicalId": "DeadLetterQueue9F481546",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeadLetterQueue9F481546",
+   "type": "AWS::SQS::Queue",
+   "property": "RedriveAllowPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "redrivePermission": "byQueue",
+    "sourceQueueArns": [
+     "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SourceQueue1F4BBA4BB.Name}",
+     "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SourceQueue22481CB5A.Name}"
+    ]
+   },
+   "actual": "{\"redrivePermission\":\"byQueue\",\"sourceQueueArns\":[\"arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SourceQueue1F4BBA4BB.Name}\",\"arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${SourceQueue22481CB5A.Name}\"]}"
+  }
+ ]
+}

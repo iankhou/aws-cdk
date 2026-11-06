@@ -1,0 +1,59 @@
+{
+ "version": "1",
+ "stackName": "cdk-integ-lambda-nodejs-modules-cjs",
+ "resources": {
+  "cjsentryServiceRole2A625525": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "cjsentry87844059": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "28de77e42ea798836445f0dd73c84320861bfe911d58e603bee8767c2d6e9e8a.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${cjsentryServiceRole2A625525.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "cjsentryServiceRole2A625525"
+   ]
+  },
+  "cjsentryLogGroupEFB1A826": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/${cjsentry87844059}",
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefcjsentry878440591D57A63C": {
+   "Value": "${cjsentry87844059}",
+   "Export": {
+    "Name": "cdk-integ-lambda-nodejs-modules-cjs:ExportsOutputRefcjsentry878440591D57A63C"
+   }
+  }
+ },
+ "unresolved": []
+}

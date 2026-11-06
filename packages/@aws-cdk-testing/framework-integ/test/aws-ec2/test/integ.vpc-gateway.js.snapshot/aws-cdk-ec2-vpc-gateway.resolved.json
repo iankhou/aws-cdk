@@ -1,0 +1,168 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-ec2-vpc-gateway",
+ "resources": {
+  "MyVpcF9F0CA6F": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-ec2-vpc-gateway/MyVpc"
+     }
+    ]
+   }
+  },
+  "MyVpcPublicSubnet1SubnetF6608456": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": "${MyVpcF9F0CA6F}",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/17",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-ec2-vpc-gateway/MyVpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVpcPublicSubnet1RouteTableC46AB2F4": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": "${MyVpcF9F0CA6F}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-ec2-vpc-gateway/MyVpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVpcPublicSubnet1RouteTableAssociation2ECEE1CB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${MyVpcPublicSubnet1RouteTableC46AB2F4}",
+    "SubnetId": "${MyVpcPublicSubnet1SubnetF6608456}"
+   }
+  },
+  "MyVpcPublicSubnet1DefaultRoute95FDF9EB": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": "${MyVpcPublicSubnet1RouteTableC46AB2F4}",
+    "DestinationCidrBlock": "${MyVpcPublicSubnet1DefaultRoute95FDF9EB[1]}",
+    "GatewayId": "${MyVpcIGW5C4A4F63}"
+   },
+   "DependsOn": [
+    "MyVpcVPCGW488ACE0D"
+   ]
+  },
+  "MyVpcIsolatedSubnet1Subnet2259FE9F": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": "${MyVpcF9F0CA6F}",
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/17",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-ec2-vpc-gateway/MyVpc/IsolatedSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVpcIsolatedSubnet1RouteTable67AEA7B8": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": "${MyVpcF9F0CA6F}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-ec2-vpc-gateway/MyVpc/IsolatedSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVpcIsolatedSubnet1RouteTableAssociationCDAE5449": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${MyVpcIsolatedSubnet1RouteTable67AEA7B8}",
+    "SubnetId": "${MyVpcIsolatedSubnet1Subnet2259FE9F}"
+   }
+  },
+  "MyVpcIsolatedSubnet1MyRouteCDD7D172": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": "${MyVpcIsolatedSubnet1RouteTable67AEA7B8}",
+    "DestinationCidrBlock": "${MyVpcIsolatedSubnet1MyRouteCDD7D172[1]}",
+    "GatewayId": "${MyVpcIGW5C4A4F63}"
+   }
+  },
+  "MyVpcIGW5C4A4F63": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-cdk-ec2-vpc-gateway/MyVpc"
+     }
+    ]
+   }
+  },
+  "MyVpcVPCGW488ACE0D": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": "${MyVpcF9F0CA6F}",
+    "InternetGatewayId": "${MyVpcIGW5C4A4F63}"
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.MyVpcPublicSubnet1SubnetF6608456.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.MyVpcIsolatedSubnet1Subnet2259FE9F.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}

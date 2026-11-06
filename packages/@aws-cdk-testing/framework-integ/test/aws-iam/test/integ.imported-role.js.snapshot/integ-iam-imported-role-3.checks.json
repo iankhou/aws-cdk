@@ -1,0 +1,167 @@
+{
+ "stackName": "integ-iam-imported-role-3",
+ "summary": {
+  "pass": 15
+ },
+ "results": [
+  {
+   "logicalId": "roleToBeImportedCAC1213C",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "roleToBeImportedCAC1213C",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sqs.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22sqs.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "roleToBeImportedCAC1213C",
+   "type": "AWS::IAM::Role",
+   "property": "RoleName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "mutableRoleToBeImported",
+   "actual": "mutableRoleToBeImported"
+  },
+  {
+   "logicalId": "ManagedPolicy7BAB786E",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManagedPolicy7BAB786E",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true
+  },
+  {
+   "logicalId": "ManagedPolicy7BAB786E",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Path",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/",
+   "actual": "/"
+  },
+  {
+   "logicalId": "ManagedPolicy7BAB786E",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "ManagedPolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManagedPolicy7BAB786E.Name}",
+   "actual": "${ManagedPolicy7BAB786E.Name}"
+  },
+  {
+   "logicalId": "ManagedPolicy7BAB786E",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:ListBucket",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::my-bucket"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22s3%3AListBucket%22%2C%22Resource%22%3A%22arn%3Aaws%3As3%3A%3A%3Amy-bucket%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ManagedPolicy7BAB786E",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Roles",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "mutableRoleToBeImported"
+   ],
+   "actual": [
+    "mutableRoleToBeImported"
+   ]
+  },
+  {
+   "logicalId": "ManagedPolicy135BDEF37",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManagedPolicy135BDEF37",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true
+  },
+  {
+   "logicalId": "ManagedPolicy135BDEF37",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Path",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/",
+   "actual": "/"
+  },
+  {
+   "logicalId": "ManagedPolicy135BDEF37",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "ManagedPolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManagedPolicy135BDEF37.Name}",
+   "actual": "${ManagedPolicy135BDEF37.Name}"
+  },
+  {
+   "logicalId": "ManagedPolicy135BDEF37",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:ListBucket",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::my-bucket"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22s3%3AListBucket%22%2C%22Resource%22%3A%22arn%3Aaws%3As3%3A%3A%3Amy-bucket%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ManagedPolicy135BDEF37",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Roles",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "mutableRoleToBeImported"
+   ],
+   "actual": [
+    "mutableRoleToBeImported"
+   ]
+  }
+ ]
+}

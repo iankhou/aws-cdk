@@ -1,0 +1,317 @@
+{
+ "stackName": "Stack1",
+ "summary": {
+  "pass": 24,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyLambdaServiceRole4539ECB6",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyLambdaServiceRoleDefaultPolicy5BBC6F68",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaServiceRoleDefaultPolicy5BBC6F68",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyLambdaServiceRoleDefaultPolicy5BBC6F68",
+   "actual": "MyLambdaServiceRoleDefaultPolicy5BBC6F68"
+  },
+  {
+   "logicalId": "MyLambdaServiceRoleDefaultPolicy5BBC6F68",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "codeguru-profiler:ConfigureAgent",
+       "codeguru-profiler:PostAgentProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/Stack1MyLambdaProfilingGroup4E659BDC"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "codeguru-profiler:ConfigureAgent",
+       "codeguru-profiler:PostAgentProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/Stack1MyLambdaProfilingGroup4E659BDC"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyLambdaServiceRoleDefaultPolicy5BBC6F68",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyLambdaServiceRole4539ECB6}",
+   "actual": "${MyLambdaServiceRole4539ECB6}"
+  },
+  {
+   "logicalId": "MyLambdaProfilingGroupEC6DE32F",
+   "type": "AWS::CodeGuruProfiler::ProfilingGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaServiceRole4539ECB6}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaServiceRole4539ECB6}"
+  },
+  {
+   "logicalId": "MyLambdaCCE802FB",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_CODEGURU_PROFILER_GROUP_NAME": "Stack1MyLambdaProfilingGroup4E659BDC",
+    "AWS_CODEGURU_PROFILER_TARGET_REGION": "${AWS::Region}",
+    "AWS_CODEGURU_PROFILER_GROUP_ARN": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/Stack1MyLambdaProfilingGroup4E659BDC",
+    "AWS_CODEGURU_PROFILER_ENABLED": "TRUE"
+   },
+   "actual": {
+    "AWS_CODEGURU_PROFILER_ENABLED": "TRUE",
+    "AWS_CODEGURU_PROFILER_TARGET_REGION": "${AWS::Region}",
+    "AWS_CODEGURU_PROFILER_GROUP_NAME": "Stack1MyLambdaProfilingGroup4E659BDC",
+    "AWS_CODEGURU_PROFILER_GROUP_ARN": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/Stack1MyLambdaProfilingGroup4E659BDC"
+   }
+  },
+  {
+   "logicalId": "MyImportedProfilingGroup175F0B7F",
+   "type": "AWS::CodeGuruProfiler::ProfilingGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyOtherLambdaServiceRoleF8A9A330",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyOtherLambdaServiceRoleF8A9A330",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyOtherLambdaServiceRoleF8A9A330",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyOtherLambdaServiceRoleDefaultPolicy64BD7A04",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyOtherLambdaServiceRoleDefaultPolicy64BD7A04",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyOtherLambdaServiceRoleDefaultPolicy64BD7A04",
+   "actual": "MyOtherLambdaServiceRoleDefaultPolicy64BD7A04"
+  },
+  {
+   "logicalId": "MyOtherLambdaServiceRoleDefaultPolicy64BD7A04",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "codeguru-profiler:ConfigureAgent",
+       "codeguru-profiler:PostAgentProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/Stack1MyImportedProfilingGroupAD6F50FF"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "codeguru-profiler:ConfigureAgent",
+       "codeguru-profiler:PostAgentProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/Stack1MyImportedProfilingGroupAD6F50FF"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyOtherLambdaServiceRoleDefaultPolicy64BD7A04",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyOtherLambdaServiceRoleF8A9A330}",
+   "actual": "${MyOtherLambdaServiceRoleF8A9A330}"
+  },
+  {
+   "logicalId": "MyOtherLambda51E8857A",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyOtherLambda51E8857A",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyOtherLambda51E8857A",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "MyOtherLambda51E8857A",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyOtherLambdaServiceRoleF8A9A330}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyOtherLambdaServiceRoleF8A9A330}"
+  },
+  {
+   "logicalId": "MyOtherLambda51E8857A",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_CODEGURU_PROFILER_GROUP_NAME": "Stack1MyImportedProfilingGroupAD6F50FF",
+    "AWS_CODEGURU_PROFILER_TARGET_REGION": "${AWS::Region}",
+    "AWS_CODEGURU_PROFILER_GROUP_ARN": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/Stack1MyImportedProfilingGroupAD6F50FF",
+    "AWS_CODEGURU_PROFILER_ENABLED": "TRUE"
+   },
+   "actual": {
+    "AWS_CODEGURU_PROFILER_ENABLED": "TRUE",
+    "AWS_CODEGURU_PROFILER_TARGET_REGION": "${AWS::Region}",
+    "AWS_CODEGURU_PROFILER_GROUP_NAME": "Stack1MyImportedProfilingGroupAD6F50FF",
+    "AWS_CODEGURU_PROFILER_GROUP_ARN": "arn:${AWS::Partition}:codeguru-profiler:${AWS::Region}:${AWS::AccountId}:profilingGroup/Stack1MyImportedProfilingGroupAD6F50FF"
+   }
+  }
+ ]
+}

@@ -1,0 +1,1222 @@
+{
+ "stackName": "aws-cdk-dynamodb",
+ "summary": {
+  "pass": 45,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ResourcePolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:Query",
+       "dynamodb:Scan"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"},\"Action\":[\"dynamodb:BatchGetItem\",\"dynamodb:ConditionCheckItem\",\"dynamodb:DescribeTable\",\"dynamodb:GetItem\",\"dynamodb:Query\",\"dynamodb:Scan\"],\"Resource\":\"*\"}]}"
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "gsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "lsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "sortKey",
+     "AttributeType": "N"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "gsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "lsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "sortKey",
+     "AttributeType": "N"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sortKey",
+     "KeyType": "RANGE"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sortKey",
+     "KeyType": "RANGE"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "GSI-PartitionKeyOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "GSI-PartitionAndSortKeyWithReadAndWriteCapacity",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 10,
+      "WriteCapacityUnits": 10
+     }
+    },
+    {
+     "IndexName": "GSI-ProjectionTypeKeysOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "KEYS_ONLY"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "GSI-ProjectionTypeInclude",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "A",
+       "B",
+       "C",
+       "D",
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J"
+      ]
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "GSI-InverseTableKeySchema",
+     "KeySchema": [
+      {
+       "AttributeName": "sortKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "GSI-InverseTableKeySchema",
+     "KeySchema": [
+      {
+       "AttributeName": "sortKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "GSI-PartitionAndSortKeyWithReadAndWriteCapacity",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 10,
+      "WriteCapacityUnits": 10
+     }
+    },
+    {
+     "IndexName": "GSI-ProjectionTypeKeysOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "KEYS_ONLY"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "GSI-PartitionKeyOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    },
+    {
+     "IndexName": "GSI-ProjectionTypeInclude",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "A",
+       "B",
+       "C",
+       "D",
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J"
+      ]
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "LocalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "LSI-PartitionAndTableSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "LSI-PartitionAndSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "sortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "LSI-ProjectionTypeKeysOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "KEYS_ONLY"
+     }
+    },
+    {
+     "IndexName": "LSI-ProjectionTypeInclude",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "K",
+       "L",
+       "M",
+       "N",
+       "O",
+       "P",
+       "Q",
+       "R",
+       "S",
+       "T"
+      ]
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "LSI-ProjectionTypeInclude",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "Q",
+       "R",
+       "S",
+       "T",
+       "K",
+       "L",
+       "M",
+       "N",
+       "O",
+       "P"
+      ]
+     }
+    },
+    {
+     "IndexName": "LSI-PartitionAndSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "sortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "LSI-PartitionAndTableSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "LSI-ProjectionTypeKeysOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "KEYS_ONLY"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "StreamSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StreamEnabled": true,
+    "StreamViewType": "KEYS_ONLY"
+   },
+   "actual": {
+    "StreamEnabled": true,
+    "StreamViewType": "KEYS_ONLY"
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "SSESpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Status": "ENABLED",
+    "SSEType": "KMS"
+   },
+   "actual": {
+    "Status": "ENABLED",
+    "SSEType": "KMS",
+    "KMSMasterKeyArn": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/a79c06f4-d3da-448f-bb26-7b049af332cb"
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "PointInTimeRecoverySpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "PointInTimeRecoveryStatus": "ENABLED",
+    "RecoveryPeriodInDays": 35
+   },
+   "actual": {
+    "PointInTimeRecoveryStatus": "ENABLED",
+    "RecoveryPeriodInDays": 35
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "TimeToLiveSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AttributeName": "timeToLive",
+    "TimeToLiveStatus": "ENABLED"
+   },
+   "actual": {
+    "AttributeName": "timeToLive",
+    "TimeToLiveStatus": "ENABLED"
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Environment",
+     "Value": "Production"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Environment",
+     "Value": "Production"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "GSI-PartitionKeyOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "GSI-PartitionKeyOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "lsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "sortKey",
+     "AttributeType": "N"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "lsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "sortKey",
+     "AttributeType": "N"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sortKey",
+     "KeyType": "RANGE"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sortKey",
+     "KeyType": "RANGE"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "LocalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "LSI-PartitionAndSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "LSI-PartitionAndSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "Key961B73FD",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Key961B73FD",
+   "type": "AWS::KMS::Key",
+   "property": "EnableKeyRotation",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Key961B73FD",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "TableWithCustomerManagedKeyD5C58807",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWithCustomerManagedKeyD5C58807",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithCustomerManagedKeyD5C58807",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithCustomerManagedKeyD5C58807",
+   "type": "AWS::DynamoDB::Table",
+   "property": "ProvisionedThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   },
+   "actual": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+   }
+  },
+  {
+   "logicalId": "TableWithCustomerManagedKeyD5C58807",
+   "type": "AWS::DynamoDB::Table",
+   "property": "StreamSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StreamEnabled": true,
+    "StreamViewType": "NEW_AND_OLD_IMAGES"
+   },
+   "actual": {
+    "StreamEnabled": true,
+    "StreamViewType": "NEW_AND_OLD_IMAGES"
+   }
+  },
+  {
+   "logicalId": "TableWithCustomerManagedKeyD5C58807",
+   "type": "AWS::DynamoDB::Table",
+   "property": "SSESpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Status": "ENABLED",
+    "SSEType": "KMS",
+    "KMSMasterKeyArn": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${Key961B73FD}"
+   },
+   "actual": {
+    "Status": "ENABLED",
+    "SSEType": "KMS",
+    "KMSMasterKeyArn": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${Key961B73FD}"
+   }
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sqs.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22sqs.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "RoleDefaultPolicy5FFB7DAB",
+   "actual": "RoleDefaultPolicy5FFB7DAB"
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "dynamodb:ListStreams",
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${Key961B73FD}"
+     },
+     {
+      "Action": [
+       "dynamodb:DescribeStream",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableWithCustomerManagedKeyD5C58807}/stream/2026-11-06T06:53:53.245"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "dynamodb:ListStreams",
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${Key961B73FD}"
+     },
+     {
+      "Action": [
+       "dynamodb:DescribeStream",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableWithCustomerManagedKeyD5C58807}/stream/2026-11-06T06:53:53.245"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "RoleDefaultPolicy5FFB7DAB",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Role1ABCC5F0}",
+   "actual": "${Role1ABCC5F0}"
+  },
+  {
+   "logicalId": "User00B015A1",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "UserDefaultPolicy1F97781E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "UserDefaultPolicy1F97781E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "UserDefaultPolicy1F97781E",
+   "actual": "UserDefaultPolicy1F97781E"
+  },
+  {
+   "logicalId": "UserDefaultPolicy1F97781E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:Query",
+       "dynamodb:Scan"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableCD117FA1}",
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableWithGlobalAndLocalSecondaryIndexBC540710}",
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableWithGlobalAndLocalSecondaryIndexBC540710}/index/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "dynamodb:BatchGetItem",
+       "dynamodb:ConditionCheckItem",
+       "dynamodb:DescribeTable",
+       "dynamodb:GetItem",
+       "dynamodb:GetRecords",
+       "dynamodb:GetShardIterator",
+       "dynamodb:Query",
+       "dynamodb:Scan"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableCD117FA1}",
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableWithGlobalAndLocalSecondaryIndexBC540710}",
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableWithGlobalAndLocalSecondaryIndexBC540710}/index/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "UserDefaultPolicy1F97781E",
+   "type": "AWS::IAM::Policy",
+   "property": "Users.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${User00B015A1}",
+   "actual": "${User00B015A1}"
+  }
+ ]
+}

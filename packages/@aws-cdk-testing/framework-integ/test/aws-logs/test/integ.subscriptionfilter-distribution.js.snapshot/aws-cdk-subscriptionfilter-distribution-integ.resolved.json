@@ -1,0 +1,87 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-subscriptionfilter-distribution-integ",
+ "resources": {
+  "LogGroupF5B46931": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "logs.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "kinesis:ListShards",
+        "kinesis:PutRecord",
+        "kinesis:PutRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "${Stream790BDEE4.Arn}"
+      },
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": "${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314",
+    "Roles": [
+     "${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851}"
+    ]
+   }
+  },
+  "LogGroupSubscriptionE3573E29": {
+   "Type": "AWS::Logs::SubscriptionFilter",
+   "Properties": {
+    "DestinationArn": "${Stream790BDEE4.Arn}",
+    "Distribution": "Random",
+    "FilterName": "CustomSubscriptionFilterName",
+    "FilterPattern": "\"ERROR\" \"MainThread\"",
+    "LogGroupName": "${LogGroupF5B46931}",
+    "RoleArn": "${LogGroupSubscriptionCloudWatchLogsCanPutRecords29011851.Arn}"
+   },
+   "DependsOn": [
+    "LogGroupSubscriptionCloudWatchLogsCanPutRecordsDefaultPolicyB7125314"
+   ]
+  },
+  "Stream790BDEE4": {
+   "Type": "AWS::Kinesis::Stream",
+   "Properties": {
+    "RetentionPeriodHours": 24,
+    "ShardCount": 1,
+    "StreamEncryption": {
+     "EncryptionType": "KMS",
+     "KeyId": "alias/aws/kinesis"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": []
+}

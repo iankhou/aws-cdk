@@ -1,0 +1,570 @@
+{
+ "stackName": "aws-cdk-aws-api-target-integ",
+ "summary": {
+  "pass": 47,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "ScheduleRuleDA5BD877",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ScheduleRuleDA5BD877",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "ScheduleRuleDA5BD877",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "cron(0 0 * * ? *)",
+   "actual": "cron(0 0 * * ? *)"
+  },
+  {
+   "logicalId": "ScheduleRuleDA5BD877",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+     "Id": "Target0",
+     "Input": "{\"service\":\"ECS\",\"action\":\"updateService\",\"parameters\":{\"service\":\"cool-service\",\"forceNewDeployment\":true}}"
+    },
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+     "Id": "Target1",
+     "Input": "{\"service\":\"RDS\",\"action\":\"stopDBInstance\",\"parameters\":{\"DBInstanceIdentifier\":\"dev-instance\"}}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+     "Input": "{\"service\":\"ECS\",\"action\":\"updateService\",\"parameters\":{\"service\":\"cool-service\",\"forceNewDeployment\":true}}"
+    },
+    {
+     "Id": "Target1",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+     "Input": "{\"service\":\"RDS\",\"action\":\"stopDBInstance\",\"parameters\":{\"DBInstanceIdentifier\":\"dev-instance\"}}"
+    }
+   ]
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget0HandlerF2C0C898874A4805",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget0HandlerF2C0C898874A4805",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget0HandlerF2C0C898874A4805",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}"
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget0HandlerF2C0C898874A4805",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget0HandlerF2C0C898874A4805",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${ScheduleRuleDA5BD877}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${ScheduleRuleDA5BD877}"
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget1Handler4688817C0179F894",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget1Handler4688817C0179F894",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget1Handler4688817C0179F894",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}"
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget1Handler4688817C0179F894",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "ScheduleRuleAllowEventRuleawscdkawsapitargetintegScheduleRuleScheduleRuleTarget1Handler4688817C0179F894",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${ScheduleRuleDA5BD877}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${ScheduleRuleDA5BD877}"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRoleDefaultPolicy4D43A7C1",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRoleDefaultPolicy4D43A7C1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRoleDefaultPolicy4D43A7C1",
+   "actual": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRoleDefaultPolicy4D43A7C1"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRoleDefaultPolicy4D43A7C1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ecs:UpdateService",
+       "kms:Encrypt",
+       "rds:StopDBInstance",
+       "ssm:PutParameter"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ecs:UpdateService",
+       "kms:Encrypt",
+       "rds:StopDBInstance",
+       "ssm:PutParameter"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRoleDefaultPolicy4D43A7C1",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50}",
+   "actual": "${AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50}"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50}"
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 60,
+   "actual": 60
+  },
+  {
+   "logicalId": "AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 256,
+   "actual": 256
+  },
+  {
+   "logicalId": "TestParameter95DD6E25",
+   "type": "AWS::SSM::Parameter",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "UpdateSSMRule6532685F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "UpdateSSMRule6532685F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "UpdateSSMRule6532685F",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "cdk.integ"
+    ],
+    "detail-type": [
+     "SSMUpdateParameter"
+    ],
+    "detail": {
+     "Name": [
+      "/cdk-integ/aws-event-targets/aws-api-target/default-param"
+     ]
+    }
+   },
+   "actual": "{\"detail-type\":[\"SSMUpdateParameter\"],\"source\":[\"cdk.integ\"],\"detail\":{\"Name\":[\"/cdk-integ/aws-event-targets/aws-api-target/default-param\"]}}"
+  },
+  {
+   "logicalId": "UpdateSSMRule6532685F",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+     "Id": "Target0",
+     "InputTransformer": {
+      "InputPathsMap": {
+       "detail-Name": "$.detail.Name",
+       "detail-Value": "$.detail.Value"
+      },
+      "InputTemplate": "{\"service\":\"SSM\",\"action\":\"putParameter\",\"parameters\":{\"Name\":<detail-Name>,\"Value\":<detail-Value>,\"Overwrite\":true}}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+     "InputTransformer": {
+      "InputTemplate": "{\"service\":\"SSM\",\"action\":\"putParameter\",\"parameters\":{\"Name\":<detail-Name>,\"Value\":<detail-Value>,\"Overwrite\":true}}",
+      "InputPathsMap": {
+       "detail-Name": "$.detail.Name",
+       "detail-Value": "$.detail.Value"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "UpdateSSMRuleAllowEventRuleawscdkawsapitargetintegUpdateSSMRuleUpdateSSMRuleTarget0Handler573B788B9ACEE6B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "UpdateSSMRuleAllowEventRuleawscdkawsapitargetintegUpdateSSMRuleUpdateSSMRuleTarget0Handler573B788B9ACEE6B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "UpdateSSMRuleAllowEventRuleawscdkawsapitargetintegUpdateSSMRuleUpdateSSMRuleTarget0Handler573B788B9ACEE6B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}"
+  },
+  {
+   "logicalId": "UpdateSSMRuleAllowEventRuleawscdkawsapitargetintegUpdateSSMRuleUpdateSSMRuleTarget0Handler573B788B9ACEE6B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "UpdateSSMRuleAllowEventRuleawscdkawsapitargetintegUpdateSSMRuleUpdateSSMRuleTarget0Handler573B788B9ACEE6B4",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${UpdateSSMRule6532685F}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${UpdateSSMRule6532685F}"
+  },
+  {
+   "logicalId": "EncryptionKey1B843E66",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EncryptionKey1B843E66",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "EncryptDataRule79774425",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EncryptDataRule79774425",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "EncryptDataRule79774425",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "cdk.integ"
+    ],
+    "detail-type": [
+     "EncryptData"
+    ],
+    "detail": {
+     "KeyId": [
+      "${EncryptionKey1B843E66}"
+     ]
+    }
+   },
+   "actual": "{\"detail-type\":[\"EncryptData\"],\"source\":[\"cdk.integ\"],\"detail\":{\"KeyId\":[\"${EncryptionKey1B843E66}\"]}}"
+  },
+  {
+   "logicalId": "EncryptDataRule79774425",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+     "Id": "Target0",
+     "InputTransformer": {
+      "InputPathsMap": {
+       "detail-KeyId": "$.detail.KeyId",
+       "detail-Plaintext": "$.detail.Plaintext"
+      },
+      "InputTemplate": "{\"service\":\"KMS\",\"action\":\"encrypt\",\"parameters\":{\"KeyId\":<detail-KeyId>,\"Plaintext\":<detail-Plaintext>}}"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+     "InputTransformer": {
+      "InputTemplate": "{\"service\":\"KMS\",\"action\":\"encrypt\",\"parameters\":{\"KeyId\":<detail-KeyId>,\"Plaintext\":<detail-Plaintext>}}",
+      "InputPathsMap": {
+       "detail-KeyId": "$.detail.KeyId",
+       "detail-Plaintext": "$.detail.Plaintext"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "EncryptDataRuleAllowEventRuleawscdkawsapitargetintegEncryptDataRuleEncryptDataRuleTarget0HandlerC3017ED86520046E",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EncryptDataRuleAllowEventRuleawscdkawsapitargetintegEncryptDataRuleEncryptDataRuleTarget0HandlerC3017ED86520046E",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "EncryptDataRuleAllowEventRuleawscdkawsapitargetintegEncryptDataRuleEncryptDataRuleTarget0HandlerC3017ED86520046E",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWSb4cf1abd4e4f4bc699441af7ccd9ec371511E620}"
+  },
+  {
+   "logicalId": "EncryptDataRuleAllowEventRuleawscdkawsapitargetintegEncryptDataRuleEncryptDataRuleTarget0HandlerC3017ED86520046E",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "EncryptDataRuleAllowEventRuleawscdkawsapitargetintegEncryptDataRuleEncryptDataRuleTarget0HandlerC3017ED86520046E",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${EncryptDataRule79774425}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${EncryptDataRule79774425}"
+  }
+ ]
+}

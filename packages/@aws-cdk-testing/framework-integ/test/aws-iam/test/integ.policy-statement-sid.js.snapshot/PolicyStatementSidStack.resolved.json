@@ -1,0 +1,50 @@
+{
+ "version": "1",
+ "stackName": "PolicyStatementSidStack",
+ "resources": {
+  "TestRole6C9272DF": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TestRoleDefaultPolicyD1C92014": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:GetObject",
+       "Effect": "Allow",
+       "Resource": "*",
+       "Sid": "ValidAlphanumericSid"
+      },
+      {
+       "Action": "dynamodb:PutItem",
+       "Effect": "Allow",
+       "Resource": "*",
+       "Sid": "AnotherValidSid123"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "TestRoleDefaultPolicyD1C92014",
+    "Roles": [
+     "${TestRole6C9272DF}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

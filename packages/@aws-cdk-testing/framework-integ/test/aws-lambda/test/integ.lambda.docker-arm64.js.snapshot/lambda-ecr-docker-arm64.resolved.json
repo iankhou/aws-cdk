@@ -1,0 +1,43 @@
+{
+ "version": "1",
+ "stackName": "lambda-ecr-docker-arm64",
+ "resources": {
+  "MyLambdaServiceRole4539ECB6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MyLambdaCCE802FB": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ImageUri": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:027b9b499ce9e488d4c3cfa41abdbdc6afe203989a5bd77258f471da03f3f040"
+    },
+    "Role": "${MyLambdaServiceRole4539ECB6.Arn}",
+    "Architectures": [
+     "arm64"
+    ],
+    "PackageType": "Image"
+   },
+   "DependsOn": [
+    "MyLambdaServiceRole4539ECB6"
+   ]
+  }
+ },
+ "unresolved": []
+}

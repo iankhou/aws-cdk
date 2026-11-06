@@ -1,0 +1,68 @@
+{
+ "stackName": "aws-cdk-s3",
+ "summary": {
+  "pass": 1,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucketF68F3FF0",
+   "type": "AWS::S3::Bucket",
+   "property": "LifecycleConfiguration.Rules",
+   "status": "fail",
+   "expected": [
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "Prefix": ""
+     },
+     "Expiration": {
+      "Date": "2019-10-01T00:00:00.000Z"
+     }
+    },
+    {
+     "Status": "Enabled",
+     "Filter": {
+      "And": {
+       "ObjectSizeGreaterThan": 500,
+       "ObjectSizeLessThan": 600
+      }
+     },
+     "Expiration": {
+      "Date": "2019-10-01T00:00:00.000Z"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Status": "Enabled",
+     "Expiration": {
+      "Date": "2019-10-01T00:00:00.000Z"
+     },
+     "Filter": {
+      "Prefix": ""
+     }
+    },
+    {
+     "Status": "Enabled",
+     "Expiration": {
+      "Date": "2019-10-01T00:00:00.000Z"
+     },
+     "Filter": {
+      "And": {
+       "Prefix": "",
+       "ObjectSizeGreaterThan": 500,
+       "ObjectSizeLessThan": 600
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

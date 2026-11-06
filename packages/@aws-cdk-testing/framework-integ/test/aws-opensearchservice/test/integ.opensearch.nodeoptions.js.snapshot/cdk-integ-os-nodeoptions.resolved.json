@@ -1,0 +1,53 @@
+{
+ "version": "1",
+ "stackName": "cdk-integ-os-nodeoptions",
+ "resources": {
+  "Domain19FCBCB91": {
+   "Type": "AWS::OpenSearchService::Domain",
+   "Properties": {
+    "ClusterConfig": {
+     "DedicatedMasterCount": 3,
+     "DedicatedMasterEnabled": true,
+     "DedicatedMasterType": "r5.large.search",
+     "InstanceCount": 2,
+     "InstanceType": "r5.large.search",
+     "MultiAZWithStandbyEnabled": false,
+     "NodeOptions": [
+      {
+       "NodeConfig": {
+        "Count": 2,
+        "Enabled": true,
+        "Type": "m5.large.search"
+       },
+       "NodeType": "coordinator"
+      }
+     ],
+     "ZoneAwarenessConfig": {
+      "AvailabilityZoneCount": 2
+     },
+     "ZoneAwarenessEnabled": true
+    },
+    "DomainEndpointOptions": {
+     "EnforceHTTPS": false,
+     "TLSSecurityPolicy": "Policy-Min-TLS-1-2-2019-07"
+    },
+    "EBSOptions": {
+     "EBSEnabled": true,
+     "VolumeSize": 10,
+     "VolumeType": "gp3"
+    },
+    "EncryptionAtRestOptions": {
+     "Enabled": false
+    },
+    "EngineVersion": "OpenSearch_2.15",
+    "LogPublishingOptions": {},
+    "NodeToNodeEncryptionOptions": {
+     "Enabled": false
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

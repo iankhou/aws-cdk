@@ -1,0 +1,37 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-r53-record-alias-target-integ",
+ "resources": {
+  "HostedZoneDB99F866": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "${Alias325C5727}."
+   }
+  },
+  "WWW9F8609DA": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "Name": "${WWW9F8609DA}.",
+    "Type": "A",
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "ResourceRecords": [
+     "1.2.3.4"
+    ],
+    "TTL": "1800"
+   }
+  },
+  "Alias325C5727": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "Name": "${Alias325C5727}.",
+    "Type": "A",
+    "AliasTarget": {
+     "DNSName": "${WWW9F8609DA}",
+     "HostedZoneId": "${HostedZoneDB99F866}"
+    },
+    "HostedZoneId": "${HostedZoneDB99F866}"
+   }
+  }
+ },
+ "unresolved": []
+}

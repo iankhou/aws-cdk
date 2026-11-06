@@ -1,0 +1,743 @@
+{
+ "stackName": "S3ObjectsItemReaderTestStack",
+ "summary": {
+  "pass": 43,
+  "gap": 1
+ },
+ "results": [
+  {
+   "logicalId": "S3ObjectsItemReaderTestBucket7B2E5D7A",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "S3ObjectsItemReaderTestBucket7B2E5D7A",
+   "type": "AWS::S3::Bucket",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "S3ObjectsItemReaderTestStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "S3ObjectsItemReaderTestBucket7B2E5D7A"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:auto-delete-objects",
+     "Value": "true"
+    }
+   ]
+  },
+  {
+   "logicalId": "S3ObjectsItemReaderTestBucket7B2E5D7A",
+   "type": "AWS::S3::Bucket",
+   "property": "BucketName",
+   "status": "gap"
+  },
+  {
+   "logicalId": "S3ObjectsItemReaderTestBucketPolicy7C87DA11",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "S3ObjectsItemReaderTestBucketPolicy7C87DA11",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}",
+   "actual": "bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}"
+  },
+  {
+   "logicalId": "S3ObjectsItemReaderTestBucketPolicy7C87DA11",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}",
+       "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:List*",
+       "s3:PutBucketPolicy"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}",
+       "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lambda function for auto-deleting objects in bucket-item-reader-path-${AWS::AccountId}-${AWS::Region} S3 bucket.",
+   "actual": "Lambda function for auto-deleting objects in bucket-item-reader-path-${AWS::AccountId}-${AWS::Region} S3 bucket."
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092}"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 128,
+   "actual": 128
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}Role1C87327D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}Role1C87327D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}RoleDefaultPolicyC67E192F",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}RoleDefaultPolicyC67E192F",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}RoleDefaultPolicyC67E192F",
+   "actual": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}RoleDefaultPolicyC67E192F"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}RoleDefaultPolicyC67E192F",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:ListBucket",
+      "Effect": "Allow",
+      "Resource": [
+       "*",
+       "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}"
+      ]
+     },
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:ListBucket",
+      "Effect": "Allow",
+      "Resource": [
+       "*",
+       "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}"
+      ]
+     },
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}RoleDefaultPolicyC67E192F",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineDynamicRole1C87327D}",
+   "actual": "${S3ObjectsItemReaderTestStateMachineDynamicRole1C87327D}"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}A0EE584C",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}A0EE584C",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "S3ObjectsItemReaderTestDynamicMap",
+    "States": {
+     "S3ObjectsItemReaderTestDynamicMap": {
+      "Type": "Map",
+      "End": true,
+      "ItemProcessor": {
+       "ProcessorConfig": {
+        "Mode": "DISTRIBUTED",
+        "ExecutionType": "STANDARD"
+       },
+       "StartAt": "S3ObjectsItemReaderTestDynamicPass",
+       "States": {
+        "S3ObjectsItemReaderTestDynamicPass": {
+         "Type": "Pass",
+         "End": true
+        }
+       }
+      },
+      "ItemReader": {
+       "Resource": "arn:${AWS::Partition}:states:::s3:listObjectsV2",
+       "Parameters": {
+        "Bucket.$": "$.bucketName",
+        "Prefix.$": "$.prefix"
+       }
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "S3ObjectsItemReaderTestDynamicMap",
+    "States": {
+     "S3ObjectsItemReaderTestDynamicMap": {
+      "Type": "Map",
+      "End": true,
+      "ItemProcessor": {
+       "ProcessorConfig": {
+        "Mode": "DISTRIBUTED",
+        "ExecutionType": "STANDARD"
+       },
+       "StartAt": "S3ObjectsItemReaderTestDynamicPass",
+       "States": {
+        "S3ObjectsItemReaderTestDynamicPass": {
+         "Type": "Pass",
+         "End": true
+        }
+       }
+      },
+      "ItemReader": {
+       "Resource": "arn:${AWS::Partition}:states:::s3:listObjectsV2",
+       "Parameters": {
+        "Bucket.$": "$.bucketName",
+        "Prefix.$": "$.prefix"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}A0EE584C",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${S3ObjectsItemReaderTestStateMachineDynamicRole1C87327D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${S3ObjectsItemReaderTestStateMachineDynamicRole1C87327D}"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}A0EE584C",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "StateMachineName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}",
+   "actual": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}DistributedMapPolicy78C957C3",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}DistributedMapPolicy78C957C3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}DistributedMapPolicy78C957C3",
+   "actual": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}DistributedMapPolicy78C957C3"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}DistributedMapPolicy78C957C3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C}"
+     },
+     {
+      "Action": [
+       "states:DescribeExecution",
+       "states:StopExecution"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}:*"
+     },
+     {
+      "Action": "states:RedriveExecution",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}/*:*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C}"
+     },
+     {
+      "Action": [
+       "states:DescribeExecution",
+       "states:StopExecution"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}:*"
+     },
+     {
+      "Action": "states:RedriveExecution",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}/*:*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineDynamicA0EE584C.Name}DistributedMapPolicy78C957C3",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineDynamicRole1C87327D}",
+   "actual": "${S3ObjectsItemReaderTestStateMachineDynamicRole1C87327D}"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}Role145DBAF2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}Role145DBAF2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}RoleDefaultPolicy0FDD8C1C",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}RoleDefaultPolicy0FDD8C1C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}RoleDefaultPolicy0FDD8C1C",
+   "actual": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}RoleDefaultPolicy0FDD8C1C"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}RoleDefaultPolicy0FDD8C1C",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:ListBucket",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}"
+     },
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:ListBucket",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}"
+     },
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:s3:::bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}RoleDefaultPolicy0FDD8C1C",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineStaticRole145DBAF2}",
+   "actual": "${S3ObjectsItemReaderTestStateMachineStaticRole145DBAF2}"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}A6D1B6C2",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}A6D1B6C2",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "S3ObjectsItemReaderTestStaticMap",
+    "States": {
+     "S3ObjectsItemReaderTestStaticMap": {
+      "Type": "Map",
+      "End": true,
+      "ItemProcessor": {
+       "ProcessorConfig": {
+        "Mode": "DISTRIBUTED",
+        "ExecutionType": "STANDARD"
+       },
+       "StartAt": "S3ObjectsItemReaderTestStaticPass",
+       "States": {
+        "S3ObjectsItemReaderTestStaticPass": {
+         "Type": "Pass",
+         "End": true
+        }
+       }
+      },
+      "ItemReader": {
+       "Resource": "arn:${AWS::Partition}:states:::s3:listObjectsV2",
+       "Parameters": {
+        "Bucket": "bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}",
+        "Prefix.$": "$.prefix"
+       }
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "S3ObjectsItemReaderTestStaticMap",
+    "States": {
+     "S3ObjectsItemReaderTestStaticMap": {
+      "Type": "Map",
+      "End": true,
+      "ItemProcessor": {
+       "ProcessorConfig": {
+        "Mode": "DISTRIBUTED",
+        "ExecutionType": "STANDARD"
+       },
+       "StartAt": "S3ObjectsItemReaderTestStaticPass",
+       "States": {
+        "S3ObjectsItemReaderTestStaticPass": {
+         "Type": "Pass",
+         "End": true
+        }
+       }
+      },
+      "ItemReader": {
+       "Resource": "arn:${AWS::Partition}:states:::s3:listObjectsV2",
+       "Parameters": {
+        "Bucket": "bucket-item-reader-path-${AWS::AccountId}-${AWS::Region}",
+        "Prefix.$": "$.prefix"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}A6D1B6C2",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${S3ObjectsItemReaderTestStateMachineStaticRole145DBAF2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${S3ObjectsItemReaderTestStateMachineStaticRole145DBAF2}"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}A6D1B6C2",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "StateMachineName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}",
+   "actual": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}DistributedMapPolicy60032339",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}DistributedMapPolicy60032339",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}DistributedMapPolicy60032339",
+   "actual": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}DistributedMapPolicy60032339"
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}DistributedMapPolicy60032339",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2}"
+     },
+     {
+      "Action": [
+       "states:DescribeExecution",
+       "states:StopExecution"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}:*"
+     },
+     {
+      "Action": "states:RedriveExecution",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}/*:*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2}"
+     },
+     {
+      "Action": [
+       "states:DescribeExecution",
+       "states:StopExecution"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}:*"
+     },
+     {
+      "Action": "states:RedriveExecution",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:execution:${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}/*:*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "${S3ObjectsItemReaderTestStateMachineStaticA6D1B6C2.Name}DistributedMapPolicy60032339",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${S3ObjectsItemReaderTestStateMachineStaticRole145DBAF2}",
+   "actual": "${S3ObjectsItemReaderTestStateMachineStaticRole145DBAF2}"
+  }
+ ]
+}

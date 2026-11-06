@@ -1,0 +1,799 @@
+{
+ "stackName": "aws-cdk-lambda-chain",
+ "summary": {
+  "pass": 71,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "FirstServiceRole097DB3A5",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FirstServiceRole097DB3A5",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FirstServiceRole097DB3A5",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "FirstServiceRoleDefaultPolicyB5EF41C4",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FirstServiceRoleDefaultPolicyB5EF41C4",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "FirstServiceRoleDefaultPolicyB5EF41C4",
+   "actual": "FirstServiceRoleDefaultPolicyB5EF41C4"
+  },
+  {
+   "logicalId": "FirstServiceRoleDefaultPolicyB5EF41C4",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "events:PutEvents",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "events:PutEvents",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "FirstServiceRoleDefaultPolicyB5EF41C4",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${FirstServiceRole097DB3A5}",
+   "actual": "${FirstServiceRole097DB3A5}"
+  },
+  {
+   "logicalId": "First8D4707F1",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "First8D4707F1",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "First8D4707F1",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "First8D4707F1",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FirstServiceRole097DB3A5}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FirstServiceRole097DB3A5}"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureA1E005BC",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureA1E005BC",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureA1E005BC",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "detail-type": [
+     "Lambda Function Invocation Result - Failure"
+    ],
+    "resources": [
+     "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${First8D4707F1}:$LATEST"
+    ],
+    "source": [
+     "lambda"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"Lambda Function Invocation Result - Failure\"],\"resources\":[\"arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${First8D4707F1}:$LATEST\"],\"source\":[\"lambda\"]}"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureA1E005BC",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ErrorD9F0B79D}",
+     "Id": "Target0",
+     "InputPath": "$.detail.responsePayload"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ErrorD9F0B79D}",
+     "InputPath": "$.detail.responsePayload"
+    }
+   ]
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureAllowEventRuleawscdklambdachainErrorC073CD8DCAD68018",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureAllowEventRuleawscdklambdachainErrorC073CD8DCAD68018",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureAllowEventRuleawscdklambdachainErrorC073CD8DCAD68018",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ErrorD9F0B79D}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ErrorD9F0B79D}"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureAllowEventRuleawscdklambdachainErrorC073CD8DCAD68018",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigFailureAllowEventRuleawscdklambdachainErrorC073CD8DCAD68018",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${FirstEventInvokeConfigFailureA1E005BC}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${FirstEventInvokeConfigFailureA1E005BC}"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccess865FF6FF",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccess865FF6FF",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccess865FF6FF",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "detail-type": [
+     "Lambda Function Invocation Result - Success"
+    ],
+    "resources": [
+     "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${First8D4707F1}:$LATEST"
+    ],
+    "source": [
+     "lambda"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"Lambda Function Invocation Result - Success\"],\"resources\":[\"arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${First8D4707F1}:$LATEST\"],\"source\":[\"lambda\"]}"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccess865FF6FF",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Second394350F9}",
+     "Id": "Target0",
+     "InputPath": "$.detail.responsePayload"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Second394350F9}",
+     "InputPath": "$.detail.responsePayload"
+    }
+   ]
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccessAllowEventRuleawscdklambdachainSecond178F48F8A8DE2790",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccessAllowEventRuleawscdklambdachainSecond178F48F8A8DE2790",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccessAllowEventRuleawscdklambdachainSecond178F48F8A8DE2790",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Second394350F9}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Second394350F9}"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccessAllowEventRuleawscdklambdachainSecond178F48F8A8DE2790",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "FirstEventInvokeConfigSuccessAllowEventRuleawscdklambdachainSecond178F48F8A8DE2790",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${FirstEventInvokeConfigSuccess865FF6FF}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${FirstEventInvokeConfigSuccess865FF6FF}"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfig7DE6209E",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfig7DE6209E",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${First8D4707F1}",
+   "actual": "${First8D4707F1}"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfig7DE6209E",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "Qualifier",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "$LATEST",
+   "actual": "$LATEST"
+  },
+  {
+   "logicalId": "FirstEventInvokeConfig7DE6209E",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "MaximumRetryAttempts",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 0,
+   "actual": 0
+  },
+  {
+   "logicalId": "FirstEventInvokeConfig7DE6209E",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "DestinationConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "OnFailure": {
+     "Destination": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+    },
+    "OnSuccess": {
+     "Destination": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+    }
+   },
+   "actual": {
+    "OnSuccess": {
+     "Destination": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+    },
+    "OnFailure": {
+     "Destination": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+    }
+   }
+  },
+  {
+   "logicalId": "SecondServiceRole55940A31",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecondServiceRole55940A31",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SecondServiceRole55940A31",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "SecondServiceRoleDefaultPolicyB593E14A",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecondServiceRoleDefaultPolicyB593E14A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SecondServiceRoleDefaultPolicyB593E14A",
+   "actual": "SecondServiceRoleDefaultPolicyB593E14A"
+  },
+  {
+   "logicalId": "SecondServiceRoleDefaultPolicyB593E14A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "events:PutEvents",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "events:PutEvents",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SecondServiceRoleDefaultPolicyB593E14A",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SecondServiceRole55940A31}",
+   "actual": "${SecondServiceRole55940A31}"
+  },
+  {
+   "logicalId": "Second394350F9",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Second394350F9",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Second394350F9",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Second394350F9",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SecondServiceRole55940A31}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SecondServiceRole55940A31}"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccess53614893",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccess53614893",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccess53614893",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "detail-type": [
+     "Lambda Function Invocation Result - Success"
+    ],
+    "resources": [
+     "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Second394350F9}:$LATEST"
+    ],
+    "source": [
+     "lambda"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"Lambda Function Invocation Result - Success\"],\"resources\":[\"arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Second394350F9}:$LATEST\"],\"source\":[\"lambda\"]}"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccess53614893",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Third1125870F}",
+     "Id": "Target0",
+     "InputPath": "$.detail.responsePayload"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Third1125870F}",
+     "InputPath": "$.detail.responsePayload"
+    }
+   ]
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccessAllowEventRuleawscdklambdachainThird031C7FF6ABA1C15A",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccessAllowEventRuleawscdklambdachainThird031C7FF6ABA1C15A",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccessAllowEventRuleawscdklambdachainThird031C7FF6ABA1C15A",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Third1125870F}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Third1125870F}"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccessAllowEventRuleawscdklambdachainThird031C7FF6ABA1C15A",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "events.amazonaws.com"
+   },
+   "actual": {
+    "Service": "events.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "SecondEventInvokeConfigSuccessAllowEventRuleawscdklambdachainThird031C7FF6ABA1C15A",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${SecondEventInvokeConfigSuccess53614893}",
+   "actual": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${SecondEventInvokeConfigSuccess53614893}"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfig3F9DE36C",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfig3F9DE36C",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Second394350F9}",
+   "actual": "${Second394350F9}"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfig3F9DE36C",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "Qualifier",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "$LATEST",
+   "actual": "$LATEST"
+  },
+  {
+   "logicalId": "SecondEventInvokeConfig3F9DE36C",
+   "type": "AWS::Lambda::EventInvokeConfig",
+   "property": "DestinationConfig",
+   "status": "fail",
+   "expected": {
+    "OnSuccess": {
+     "Destination": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+    }
+   },
+   "actual": {
+    "OnSuccess": {
+     "Destination": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+    },
+    "OnFailure": {}
+   }
+  },
+  {
+   "logicalId": "ThirdServiceRole42701801",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ThirdServiceRole42701801",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ThirdServiceRole42701801",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Third1125870F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Third1125870F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Third1125870F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Third1125870F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ThirdServiceRole42701801}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ThirdServiceRole42701801}"
+  },
+  {
+   "logicalId": "ErrorServiceRoleCE484966",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ErrorServiceRoleCE484966",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ErrorServiceRoleCE484966",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "ErrorD9F0B79D",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ErrorD9F0B79D",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "ErrorD9F0B79D",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "ErrorD9F0B79D",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ErrorServiceRoleCE484966}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ErrorServiceRoleCE484966}"
+  }
+ ]
+}

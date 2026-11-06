@@ -1,0 +1,172 @@
+{
+ "version": "1",
+ "stackName": "sns-sqs-subscription-filter",
+ "resources": {
+  "MyTopic86869434": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "MyQueue13ECD6C63": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MyQueue1Policy0240BB7D": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": "${MyTopic86869434}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": "${MyQueue13ECD6C63.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     "${MyQueue13ECD6C63}"
+    ]
+   }
+  },
+  "MyQueue1snssqssubscriptionfilterMyTopicB7B2DAA4F1B5576D": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": "${MyQueue13ECD6C63.Arn}",
+    "FilterPolicy": {
+     "background": {
+      "color": [
+       "red",
+       "green"
+      ]
+     },
+     "price": [
+      {
+       "numeric": [
+        "=",
+        100
+       ]
+      },
+      {
+       "numeric": [
+        "=",
+        200
+       ]
+      }
+     ],
+     "store": [
+      {
+       "exists": true
+      }
+     ]
+    },
+    "FilterPolicyScope": "MessageBody",
+    "Protocol": "sqs",
+    "RawMessageDelivery": true,
+    "TopicArn": "${MyTopic86869434}"
+   },
+   "DependsOn": [
+    "MyQueue1Policy0240BB7D"
+   ]
+  },
+  "MyQueue22D001D59": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MyQueue2Policy8835A248": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": "${MyTopic86869434}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": "${MyQueue22D001D59.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     "${MyQueue22D001D59}"
+    ]
+   }
+  },
+  "MyQueue2snssqssubscriptionfilterMyTopicB7B2DAA496B040E3": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": "${MyQueue22D001D59.Arn}",
+    "FilterPolicy": {
+     "background": {
+      "color": [
+       {
+        "anything-but": [
+         "red",
+         "green"
+        ]
+       }
+      ]
+     },
+     "price": [
+      {
+       "numeric": [
+        ">",
+        100,
+        "<",
+        200
+       ]
+      }
+     ],
+     "store": [
+      {
+       "exists": false
+      }
+     ]
+    },
+    "FilterPolicyScope": "MessageBody",
+    "Protocol": "sqs",
+    "RawMessageDelivery": true,
+    "TopicArn": "${MyTopic86869434}"
+   },
+   "DependsOn": [
+    "MyQueue2Policy8835A248"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefMyTopic868694349D03D60F": {
+   "Value": "${MyTopic86869434}",
+   "Export": {
+    "Name": "sns-sqs-subscription-filter:ExportsOutputRefMyTopic868694349D03D60F"
+   }
+  },
+  "ExportsOutputRefMyQueue13ECD6C63493C83EE": {
+   "Value": "${MyQueue13ECD6C63}",
+   "Export": {
+    "Name": "sns-sqs-subscription-filter:ExportsOutputRefMyQueue13ECD6C63493C83EE"
+   }
+  },
+  "ExportsOutputRefMyQueue22D001D59CA385180": {
+   "Value": "${MyQueue22D001D59}",
+   "Export": {
+    "Name": "sns-sqs-subscription-filter:ExportsOutputRefMyQueue22D001D59CA385180"
+   }
+  }
+ },
+ "unresolved": []
+}

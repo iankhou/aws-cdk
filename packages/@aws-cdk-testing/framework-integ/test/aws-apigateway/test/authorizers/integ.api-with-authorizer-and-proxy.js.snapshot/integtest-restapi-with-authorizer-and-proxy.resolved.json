@@ -1,0 +1,295 @@
+{
+ "version": "1",
+ "stackName": "integtest-restapi-with-authorizer-and-proxy",
+ "resources": {
+  "UserPool6BA7E5F2": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_phone_number",
+       "Priority": 1
+      },
+      {
+       "Name": "verified_email",
+       "Priority": 2
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": false
+    },
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UsernameAttributes": [
+     "email"
+    ],
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "AuthorizerBD825682": {
+   "Type": "AWS::ApiGateway::Authorizer",
+   "Properties": {
+    "IdentitySource": "method.request.header.Authorization",
+    "Name": "integtestrestapiwithauthorizerandproxyAuthorizer5142DDC8",
+    "ProviderARNs": [
+     "${UserPool6BA7E5F2.Arn}"
+    ],
+    "RestApiId": "${ActionsApiGatewayF80386B7}",
+    "Type": "COGNITO_USER_POOLS"
+   }
+  },
+  "ActionsApiGatewayF80386B7": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "Actions-ApiGateway"
+   }
+  },
+  "ActionsApiGatewayDeployment50B6E6A6b044ca25daae592efce60035930152bc": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${ActionsApiGatewayF80386B7}"
+   },
+   "DependsOn": [
+    "ActionsApiGatewayInitiateActionproxyANY14A167E2",
+    "ActionsApiGatewayInitiateActionproxyOPTIONS041B022A",
+    "ActionsApiGatewayInitiateActionproxyDD433460",
+    "ActionsApiGatewayInitiateActionOPTIONS675242EA",
+    "ActionsApiGatewayInitiateActionA216DA07",
+    "ActionsApiGatewayOPTIONS8EA1F997",
+    "AuthorizerBD825682"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "ActionsApiGatewayDeploymentStageprod812022BF": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${ActionsApiGatewayDeployment50B6E6A6b044ca25daae592efce60035930152bc}",
+    "RestApiId": "${ActionsApiGatewayF80386B7}",
+    "StageName": "prod"
+   }
+  },
+  "ActionsApiGatewayOPTIONS8EA1F997": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+        "method.response.header.Access-Control-Max-Age": "'864000'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true,
+       "method.response.header.Access-Control-Max-Age": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": "${ActionsApiGatewayF80386B7.RootResourceId}",
+    "RestApiId": "${ActionsApiGatewayF80386B7}"
+   }
+  },
+  "ActionsApiGatewayInitiateActionA216DA07": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": "${ActionsApiGatewayF80386B7.RootResourceId}",
+    "PathPart": "InitiateAction",
+    "RestApiId": "${ActionsApiGatewayF80386B7}"
+   }
+  },
+  "ActionsApiGatewayInitiateActionOPTIONS675242EA": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+        "method.response.header.Access-Control-Max-Age": "'864000'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true,
+       "method.response.header.Access-Control-Max-Age": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": "${ActionsApiGatewayInitiateActionA216DA07}",
+    "RestApiId": "${ActionsApiGatewayF80386B7}"
+   }
+  },
+  "ActionsApiGatewayInitiateActionproxyDD433460": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": "${ActionsApiGatewayInitiateActionA216DA07}",
+    "PathPart": "{proxy+}",
+    "RestApiId": "${ActionsApiGatewayF80386B7}"
+   }
+  },
+  "ActionsApiGatewayInitiateActionproxyOPTIONS041B022A": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+        "method.response.header.Access-Control-Max-Age": "'864000'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true,
+       "method.response.header.Access-Control-Max-Age": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": "${ActionsApiGatewayInitiateActionproxyDD433460}",
+    "RestApiId": "${ActionsApiGatewayF80386B7}"
+   }
+  },
+  "ActionsApiGatewayInitiateActionproxyANYApiPermissionintegtestrestapiwithauthorizerandproxyActionsApiGatewayB7F13065ANYInitiateActionproxy1FB876EB": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${lambdas342CE2BBD.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${ActionsApiGatewayF80386B7}/${ActionsApiGatewayDeploymentStageprod812022BF}/*/InitiateAction/*"
+   }
+  },
+  "ActionsApiGatewayInitiateActionproxyANYApiPermissionTestintegtestrestapiwithauthorizerandproxyActionsApiGatewayB7F13065ANYInitiateActionproxyD05DD0B4": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": "${lambdas342CE2BBD.Arn}",
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${ActionsApiGatewayF80386B7}/test-invoke-stage/*/InitiateAction/*"
+   }
+  },
+  "ActionsApiGatewayInitiateActionproxyANY14A167E2": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationScopes": [
+     "scope"
+    ],
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": "${AuthorizerBD825682}",
+    "HttpMethod": "ANY",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdas342CE2BBD.Arn}/invocations"
+    },
+    "ResourceId": "${ActionsApiGatewayInitiateActionproxyDD433460}",
+    "RestApiId": "${ActionsApiGatewayF80386B7}"
+   }
+  },
+  "lambdas3ServiceRoleC9EDE33A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "lambdas342CE2BBD": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "8b7a863f778f5314bab7fdad7a7957ef133c826bb93a8611a3bac36ae684e683.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${lambdas3ServiceRoleC9EDE33A.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "lambdas3ServiceRoleC9EDE33A"
+   ]
+  }
+ },
+ "outputs": {
+  "ActionsApiGatewayEndpoint261B645B": {
+   "Value": "https://${ActionsApiGatewayF80386B7}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${ActionsApiGatewayDeploymentStageprod812022BF}/"
+  }
+ },
+ "unresolved": []
+}

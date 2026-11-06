@@ -1,0 +1,59 @@
+{
+ "version": "1",
+ "stackName": "RepeatedEsbuildArgs",
+ "resources": {
+  "FunctionServiceRole675BB04A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "Function76856677": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "026c762875acc67ccb3633d9eb2c298e6fccefae079c3637ff9ee401fec55ee5.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${FunctionServiceRole675BB04A.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "FunctionServiceRole675BB04A"
+   ]
+  },
+  "FunctionLogGroup55B80E27": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/lambda/${Function76856677}",
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefFunction76856677C48862D5": {
+   "Value": "${Function76856677}",
+   "Export": {
+    "Name": "RepeatedEsbuildArgs:ExportsOutputRefFunction76856677C48862D5"
+   }
+  }
+ },
+ "unresolved": []
+}

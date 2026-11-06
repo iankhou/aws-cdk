@@ -1,0 +1,31 @@
+{
+ "version": "1",
+ "stackName": "SnsToUrlStack",
+ "resources": {
+  "MyTopic86869434": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "MyTopichttpsfoobarcomDEA92AB5": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "DeliveryPolicy": {
+     "healthyRetryPolicy": {
+      "minDelayTarget": 20,
+      "maxDelayTarget": 21,
+      "numRetries": 10
+     },
+     "throttlePolicy": {
+      "maxReceivesPerSecond": 10
+     },
+     "requestPolicy": {
+      "headerContentType": "application/json"
+     }
+    },
+    "Endpoint": "https://foobar.com/",
+    "Protocol": "https",
+    "TopicArn": "${MyTopic86869434}"
+   }
+  }
+ },
+ "unresolved": []
+}

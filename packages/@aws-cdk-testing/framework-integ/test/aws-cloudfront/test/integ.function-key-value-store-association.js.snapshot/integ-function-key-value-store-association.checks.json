@@ -1,0 +1,74 @@
+{
+ "stackName": "integ-function-key-value-store-association",
+ "summary": {
+  "no handler": 1,
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "TestKeyValueStore8D0C09A2",
+   "type": "AWS::CloudFront::KeyValueStore",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::CloudFront::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::CloudFront::Function",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TestKvFunction",
+   "actual": "TestKvFunction"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::CloudFront::Function",
+   "property": "FunctionConfig.Comment",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TestKvFunction",
+   "actual": "TestKvFunction"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::CloudFront::Function",
+   "property": "FunctionConfig.Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "cloudfront-js-2.0",
+   "actual": "cloudfront-js-2.0"
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::CloudFront::Function",
+   "property": "FunctionConfig.KeyValueStoreAssociations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "KeyValueStoreARN": "arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:key-value-store/2c920bf0-89c2-4980-8e27-f9c2244ca65a"
+    }
+   ],
+   "actual": [
+    {
+     "KeyValueStoreARN": "arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:key-value-store/2c920bf0-89c2-4980-8e27-f9c2244ca65a"
+    }
+   ]
+  },
+  {
+   "logicalId": "TestFunction22AD90FC",
+   "type": "AWS::CloudFront::Function",
+   "property": "FunctionCode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "code",
+   "actual": "code"
+  }
+ ]
+}

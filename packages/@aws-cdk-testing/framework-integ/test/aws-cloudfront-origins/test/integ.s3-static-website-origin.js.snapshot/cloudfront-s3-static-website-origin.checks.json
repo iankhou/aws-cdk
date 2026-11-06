@@ -1,0 +1,109 @@
+{
+ "stackName": "cloudfront-s3-static-website-origin",
+ "summary": {
+  "pass": 7
+ },
+ "results": [
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "cloudfronts3staticwebsiteoriginDistributionOrigin106B0E8E0",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   },
+   "actual": {
+    "TargetOriginId": "cloudfronts3staticwebsiteoriginDistributionOrigin106B0E8E0",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "cloudfronts3staticwebsiteoriginDistributionOrigin106B0E8E0",
+      "DomainName": "${Bucket83908E77}.s3-website.${AWS::Region}.amazonaws.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "http-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       }
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "cloudfronts3staticwebsiteoriginDistributionOrigin106B0E8E0",
+      "DomainName": "${Bucket83908E77}.s3-website.${AWS::Region}.amazonaws.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "http-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

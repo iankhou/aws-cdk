@@ -1,0 +1,53 @@
+{
+ "version": "1",
+ "stackName": "eventbue-customer-managed-key",
+ "resources": {
+  "KmsKey46693ADD": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
+       ],
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}",
+         "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/eventbuecustomermanagedkeyBus178EB991",
+         "kms:EncryptionContext:aws:events:event-bus:arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/eventbuecustomermanagedkeyBus178EB991"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "BusEA82B648": {
+   "Type": "AWS::Events::EventBus",
+   "Properties": {
+    "KmsKeyIdentifier": "${KmsKey46693ADD.Arn}",
+    "Name": "eventbuecustomermanagedkeyBus178EB991"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,30 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-metricfilter-integ",
+ "resources": {
+  "LogGroupF5B46931": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MetricFilter1B93B6E5": {
+   "Type": "AWS::Logs::MetricFilter",
+   "Properties": {
+    "FilterPattern": "{ ($.latency = \"*\") && ($.message = %bind: address already in use%) }",
+    "LogGroupName": "${LogGroupF5B46931}",
+    "MetricTransformations": [
+     {
+      "MetricName": "Latency",
+      "MetricNamespace": "MyApp",
+      "MetricValue": "$.latency"
+     }
+    ],
+    "FilterName": "MyFilterName"
+   }
+  }
+ },
+ "unresolved": []
+}

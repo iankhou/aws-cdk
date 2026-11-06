@@ -1,0 +1,51 @@
+{
+ "version": "1",
+ "stackName": "Stack",
+ "resources": {
+  "LaunchTemplate": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "ImageId": "ami-0556a34f1df4b0d81",
+     "InstanceType": "t3.micro"
+    }
+   }
+  },
+  "ASG": {
+   "Type": "AWS::AutoScaling::AutoScalingGroup",
+   "Properties": {
+    "AvailabilityZones": {
+     "Fn::GetAZs": ""
+    },
+    "DesiredCapacity": "2",
+    "LaunchTemplate": {
+     "LaunchTemplateId": "${LaunchTemplate}",
+     "Version": "${LaunchTemplate.LatestVersionNumber}"
+    },
+    "MaxSize": "10",
+    "MinSize": "1"
+   },
+   "UpdatePolicy": {
+    "AutoScalingRollingUpdate": {
+     "MaxBatchSize": 2,
+     "MinInstancesInService": 1,
+     "MinSuccessfulInstancesPercent": 75,
+     "MinActiveInstancesPercent": 50,
+     "PauseTime": "PT5M",
+     "SuspendProcesses": [
+      "HealthCheck",
+      "ReplaceUnhealthy"
+     ],
+     "WaitOnResourceSignals": true
+    }
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.ASG.Properties.AvailabilityZones",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}

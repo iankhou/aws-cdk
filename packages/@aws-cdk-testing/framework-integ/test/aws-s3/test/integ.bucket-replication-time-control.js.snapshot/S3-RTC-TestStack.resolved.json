@@ -1,0 +1,204 @@
+{
+ "version": "1",
+ "stackName": "S3-RTC-TestStack",
+ "resources": {
+  "DstBucket3E241BF2": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "S3SourceBucket1ReplicationRoleD6E982E6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "s3.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "S3SourceBucket1ReplicationRoleDefaultPolicy61FC49E2": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetReplicationConfiguration",
+        "s3:ListBucket"
+       ],
+       "Effect": "Allow",
+       "Resource": "${S3SourceBucket1FB05F2D8.Arn}"
+      },
+      {
+       "Action": [
+        "s3:GetObjectVersionAcl",
+        "s3:GetObjectVersionForReplication",
+        "s3:GetObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": "${S3SourceBucket1FB05F2D8.Arn}/*"
+      },
+      {
+       "Action": [
+        "s3:ObjectOwnerOverrideToBucketOwner",
+        "s3:ReplicateDelete",
+        "s3:ReplicateObject",
+        "s3:ReplicateTags"
+       ],
+       "Effect": "Allow",
+       "Resource": "${DstBucket3E241BF2.Arn}/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "S3SourceBucket1ReplicationRoleDefaultPolicy61FC49E2",
+    "Roles": [
+     "${S3SourceBucket1ReplicationRoleD6E982E6}"
+    ]
+   }
+  },
+  "S3SourceBucket1FB05F2D8": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "ReplicationConfiguration": {
+     "Role": "${S3SourceBucket1ReplicationRoleD6E982E6.Arn}",
+     "Rules": [
+      {
+       "DeleteMarkerReplication": {
+        "Status": "Disabled"
+       },
+       "Destination": {
+        "Bucket": "${DstBucket3E241BF2.Arn}",
+        "Metrics": {
+         "Status": "Enabled"
+        }
+       },
+       "Filter": {
+        "Prefix": ""
+       },
+       "Priority": 1,
+       "Status": "Enabled"
+      }
+     ]
+    },
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "S3SourceBucket2ReplicationRole68101260": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "s3.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "S3SourceBucket2ReplicationRoleDefaultPolicy414F29F2": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetReplicationConfiguration",
+        "s3:ListBucket"
+       ],
+       "Effect": "Allow",
+       "Resource": "${S3SourceBucket278BFBAF8.Arn}"
+      },
+      {
+       "Action": [
+        "s3:GetObjectVersionAcl",
+        "s3:GetObjectVersionForReplication",
+        "s3:GetObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": "${S3SourceBucket278BFBAF8.Arn}/*"
+      },
+      {
+       "Action": [
+        "s3:ObjectOwnerOverrideToBucketOwner",
+        "s3:ReplicateDelete",
+        "s3:ReplicateObject",
+        "s3:ReplicateTags"
+       ],
+       "Effect": "Allow",
+       "Resource": "${DstBucket3E241BF2.Arn}/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "S3SourceBucket2ReplicationRoleDefaultPolicy414F29F2",
+    "Roles": [
+     "${S3SourceBucket2ReplicationRole68101260}"
+    ]
+   }
+  },
+  "S3SourceBucket278BFBAF8": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "ReplicationConfiguration": {
+     "Role": "${S3SourceBucket2ReplicationRole68101260.Arn}",
+     "Rules": [
+      {
+       "DeleteMarkerReplication": {
+        "Status": "Disabled"
+       },
+       "Destination": {
+        "Bucket": "${DstBucket3E241BF2.Arn}",
+        "Metrics": {
+         "EventThreshold": {
+          "Minutes": 15
+         },
+         "Status": "Enabled"
+        },
+        "ReplicationTime": {
+         "Status": "Enabled",
+         "Time": {
+          "Minutes": 15
+         }
+        }
+       },
+       "Filter": {
+        "Prefix": ""
+       },
+       "Priority": 1,
+       "Status": "Enabled"
+      }
+     ]
+    },
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": []
+}

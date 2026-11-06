@@ -1,0 +1,164 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-firehose-delivery-stream-s3-all-properties",
+ "resources": {
+  "DeliveryStreamHttpDestinationRole56341A2A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/*"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "firehose.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "DeliveryStreamHttpDestinationRoleDefaultPolicy9B8736EB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "${DeliveryStreamLogGroupA92E8EA0.Arn}"
+      },
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "${DeliveryStreamBackupBucket48C8465F.Arn}",
+        "${DeliveryStreamBackupBucket48C8465F.Arn}/*"
+       ]
+      },
+      {
+       "Action": [
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetSecretValue"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:DatadogApiKey-??????"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "DeliveryStreamHttpDestinationRoleDefaultPolicy9B8736EB",
+    "Roles": [
+     "${DeliveryStreamHttpDestinationRole56341A2A}"
+    ]
+   }
+  },
+  "DeliveryStreamLogGroupA92E8EA0": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "DeliveryStreamLogGroupHttpDestinationD1DCA6F4": {
+   "Type": "AWS::Logs::LogStream",
+   "Properties": {
+    "LogGroupName": "${DeliveryStreamLogGroupA92E8EA0}"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "DeliveryStreamLogGroupS3BackupD848C05F": {
+   "Type": "AWS::Logs::LogStream",
+   "Properties": {
+    "LogGroupName": "${DeliveryStreamLogGroupA92E8EA0}"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "DeliveryStreamBackupBucket48C8465F": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "DeliveryStream58CF96DB": {
+   "Type": "AWS::KinesisFirehose::DeliveryStream",
+   "Properties": {
+    "DeliveryStreamType": "DirectPut",
+    "HttpEndpointDestinationConfiguration": {
+     "BufferingHints": {
+      "IntervalInSeconds": 60,
+      "SizeInMBs": 4
+     },
+     "CloudWatchLoggingOptions": {
+      "Enabled": true,
+      "LogGroupName": "${DeliveryStreamLogGroupA92E8EA0}",
+      "LogStreamName": "${DeliveryStreamLogGroupHttpDestinationD1DCA6F4}"
+     },
+     "EndpointConfiguration": {
+      "Url": "https://aws-kinesis-http-intake.logs.datadoghq.eu/v1/input"
+     },
+     "RequestConfiguration": {
+      "CommonAttributes": [],
+      "ContentEncoding": "GZIP"
+     },
+     "RetryOptions": {
+      "DurationInSeconds": 60
+     },
+     "RoleARN": "${DeliveryStreamHttpDestinationRole56341A2A.Arn}",
+     "S3BackupMode": "FailedDataOnly",
+     "S3Configuration": {
+      "BucketARN": "${DeliveryStreamBackupBucket48C8465F.Arn}",
+      "CloudWatchLoggingOptions": {
+       "Enabled": true,
+       "LogGroupName": "${DeliveryStreamLogGroupA92E8EA0}",
+       "LogStreamName": "${DeliveryStreamLogGroupS3BackupD848C05F}"
+      },
+      "RoleARN": "${DeliveryStreamHttpDestinationRole56341A2A.Arn}"
+     },
+     "SecretsManagerConfiguration": {
+      "Enabled": true,
+      "RoleARN": "${DeliveryStreamHttpDestinationRole56341A2A.Arn}",
+      "SecretARN": "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:DatadogApiKey"
+     }
+    }
+   },
+   "DependsOn": [
+    "DeliveryStreamHttpDestinationRoleDefaultPolicy9B8736EB"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefDeliveryStream58CF96DB919FEA68": {
+   "Value": "${DeliveryStream58CF96DB}",
+   "Export": {
+    "Name": "aws-cdk-firehose-delivery-stream-s3-all-properties:ExportsOutputRefDeliveryStream58CF96DB919FEA68"
+   }
+  }
+ },
+ "unresolved": []
+}

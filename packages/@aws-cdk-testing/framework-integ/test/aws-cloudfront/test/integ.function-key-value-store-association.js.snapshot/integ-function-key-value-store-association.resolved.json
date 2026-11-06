@@ -1,0 +1,35 @@
+{
+ "version": "1",
+ "stackName": "integ-function-key-value-store-association",
+ "resources": {
+  "TestKeyValueStore8D0C09A2": {
+   "Type": "AWS::CloudFront::KeyValueStore",
+   "Properties": {
+    "Comment": "A test Key Value Store for CloudFront",
+    "ImportSource": {
+     "SourceArn": "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9c0f502203ec9d802046021b8a20affe8fd26234f67dcf2e93db5142bc2991a1.json",
+     "SourceType": "S3"
+    },
+    "Name": "integfunctionkeyvaluestoreassociationTestKeyValueStoreA8304A36"
+   }
+  },
+  "TestFunction22AD90FC": {
+   "Type": "AWS::CloudFront::Function",
+   "Properties": {
+    "AutoPublish": true,
+    "FunctionCode": "code",
+    "FunctionConfig": {
+     "Comment": "TestKvFunction",
+     "KeyValueStoreAssociations": [
+      {
+       "KeyValueStoreARN": "${TestKeyValueStore8D0C09A2.Arn}"
+      }
+     ],
+     "Runtime": "cloudfront-js-2.0"
+    },
+    "Name": "TestKvFunction"
+   }
+  }
+ },
+ "unresolved": []
+}

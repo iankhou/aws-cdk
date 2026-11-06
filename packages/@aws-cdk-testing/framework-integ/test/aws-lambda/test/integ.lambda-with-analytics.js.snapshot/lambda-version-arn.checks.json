@@ -1,0 +1,120 @@
+{
+ "stackName": "lambda-version-arn",
+ "summary": {
+  "pass": 9
+ },
+ "results": [
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFunctionServiceRole3C357FF2",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs18.x",
+   "actual": "nodejs18.x"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunctionServiceRole3C357FF2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunctionServiceRole3C357FF2}"
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 10,
+   "actual": 10
+  },
+  {
+   "logicalId": "MyFunction3BAA72D1",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Foo0": "bar0",
+    "Foo1": "bar1",
+    "Foo2": "bar2",
+    "Foo3": "bar3",
+    "Foo4": "bar4",
+    "Foo5": "bar5",
+    "Foo6": "bar6",
+    "Foo7": "bar7",
+    "Foo8": "bar8",
+    "Foo9": "bar9"
+   },
+   "actual": {
+    "Foo7": "bar7",
+    "Foo6": "bar6",
+    "Foo9": "bar9",
+    "Foo8": "bar8",
+    "Foo1": "bar1",
+    "Foo0": "bar0",
+    "Foo3": "bar3",
+    "Foo2": "bar2",
+    "Foo5": "bar5",
+    "Foo4": "bar4"
+   }
+  }
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "version": "1",
+ "stackName": "integ-parameter-arns",
+ "resources": {
+  "StringAutogenE7E896E4": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "hello, world"
+   }
+  },
+  "StringSimpleA681514D": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "hello, world",
+    "Name": "simple-name"
+   }
+  },
+  "StringPathD8120137": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "hello, world",
+    "Name": "/path/name/foo/bar"
+   }
+  },
+  "ListAutogenC5DA1CAE": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "StringList",
+    "Value": "hello,world"
+   }
+  },
+  "ListSimple9DB641CB": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "StringList",
+    "Value": "hello,world",
+    "Name": "list-simple-name"
+   }
+  },
+  "ListPath120D6FAB": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "StringList",
+    "Value": "hello,world",
+    "Name": "/list/path/name"
+   }
+  },
+  "ParameterizedSimpleB6311859": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "hello, world",
+    "Name": "myParamName"
+   }
+  },
+  "ParameterizedNonSimple23C44BF6": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "hello, world",
+    "Name": "/myParamName/non/simple"
+   }
+  }
+ },
+ "outputs": {
+  "StringAutogenArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${StringAutogenE7E896E4}"
+  },
+  "StringSimpleArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${StringSimpleA681514D}"
+  },
+  "StringPathArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter${StringPathD8120137}"
+  },
+  "ListAutogenArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ListAutogenC5DA1CAE}"
+  },
+  "ListSimpleArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ListSimple9DB641CB}"
+  },
+  "ListPathArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter${ListPath120D6FAB}"
+  },
+  "ParameterizedSimpleArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ParameterizedSimpleB6311859}"
+  },
+  "ParameterizedNonSimpleArn": {
+   "Value": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter${ParameterizedNonSimple23C44BF6}"
+  }
+ },
+ "unresolved": []
+}

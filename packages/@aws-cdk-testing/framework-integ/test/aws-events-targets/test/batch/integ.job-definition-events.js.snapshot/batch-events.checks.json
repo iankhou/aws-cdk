@@ -1,0 +1,422 @@
+{
+ "stackName": "batch-events",
+ "summary": {
+  "pass": 27,
+  "no handler": 3
+ },
+ "results": [
+  {
+   "logicalId": "ComputeEnvironmentBatchServiceRole3533BE31",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ComputeEnvironmentBatchServiceRole3533BE31",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "batch.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22batch.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ComputeEnvironmentBatchServiceRole3533BE31",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBatchServiceRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBatchServiceRole"
+   ]
+  },
+  {
+   "logicalId": "ComputeEnvironmentC570994D",
+   "type": "AWS::Batch::ComputeEnvironment",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyQueueE6CA6235",
+   "type": "AWS::Batch::JobQueue",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "containerExecutionRoleFD602179",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "containerExecutionRoleFD602179",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ecs-tasks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ecs-tasks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "containerExecutionRoleDefaultPolicyF00DA4D6",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "containerExecutionRoleDefaultPolicyF00DA4D6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "containerExecutionRoleDefaultPolicyF00DA4D6",
+   "actual": "containerExecutionRoleDefaultPolicyF00DA4D6"
+  },
+  {
+   "logicalId": "containerExecutionRoleDefaultPolicyF00DA4D6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/batch/job:*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/batch/job:*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "containerExecutionRoleDefaultPolicyF00DA4D6",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${containerExecutionRoleFD602179}",
+   "actual": "${containerExecutionRoleFD602179}"
+  },
+  {
+   "logicalId": "MyJob8719E923",
+   "type": "AWS::Batch::JobDefinition",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyJobEventsRoleCF43C336",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyJobEventsRoleCF43C336",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyJobEventsRoleDefaultPolicy7266D3A7",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyJobEventsRoleDefaultPolicy7266D3A7",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyJobEventsRoleDefaultPolicy7266D3A7",
+   "actual": "MyJobEventsRoleDefaultPolicy7266D3A7"
+  },
+  {
+   "logicalId": "MyJobEventsRoleDefaultPolicy7266D3A7",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "batch:SubmitJob",
+      "Effect": "Allow",
+      "Resource": [
+       "${MyQueueE6CA6235}",
+       "${MyJob8719E923}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "batch:SubmitJob",
+      "Effect": "Allow",
+      "Resource": [
+       "${MyQueueE6CA6235}",
+       "${MyJob8719E923}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyJobEventsRoleDefaultPolicy7266D3A7",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyJobEventsRoleCF43C336}",
+   "actual": "${MyJobEventsRoleCF43C336}"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "TimerBF6F831F",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${MyQueueE6CA6235}",
+     "BatchParameters": {
+      "JobDefinition": "${MyJob8719E923}",
+      "JobName": "batcheventsTimer32212B30"
+     },
+     "Id": "Target0",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyJobEventsRoleCF43C336}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${MyQueueE6CA6235}",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyJobEventsRoleCF43C336}",
+     "BatchParameters": {
+      "JobDefinition": "${MyJob8719E923}",
+      "JobName": "batcheventsTimer32212B30"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "Timer2B6F162E9",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Timer2B6F162E9",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "Timer2B6F162E9",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(2 minutes)",
+   "actual": "rate(2 minutes)"
+  },
+  {
+   "logicalId": "Timer2B6F162E9",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${MyQueueE6CA6235}",
+     "BatchParameters": {
+      "JobDefinition": "${MyJob8719E923}",
+      "JobName": "batcheventsTimer232549135"
+     },
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+     },
+     "Id": "Target0",
+     "RetryPolicy": {
+      "MaximumEventAgeInSeconds": 7200,
+      "MaximumRetryAttempts": 2
+     },
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyJobEventsRoleCF43C336}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${MyQueueE6CA6235}",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyJobEventsRoleCF43C336}",
+     "BatchParameters": {
+      "JobDefinition": "${MyJob8719E923}",
+      "JobName": "batcheventsTimer232549135"
+     },
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}"
+     },
+     "RetryPolicy": {
+      "MaximumRetryAttempts": 2,
+      "MaximumEventAgeInSeconds": 7200
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "Queue4A7E3555",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${Timer2B6F162E9}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowEventRulebatcheventsTimer232549135"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${Timer2B6F162E9}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${Queue4A7E3555.Name}",
+      "Sid": "AllowEventRulebatcheventsTimer232549135"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "QueuePolicy25439813",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${Queue4A7E3555}"
+   ],
+   "actual": [
+    "${Queue4A7E3555}"
+   ]
+  }
+ ]
+}

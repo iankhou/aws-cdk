@@ -1,0 +1,52 @@
+{
+ "version": "1",
+ "stackName": "aws-stepfunctions-StateMachine-Role-TrustPolicy-BestPractices-integ",
+ "resources": {
+  "TestingDefaultRoleStateMachineRole9C0B111D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TestingDefaultRoleStateMachineC0907385": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"Finished\",\"States\":{\"Finished\":{\"Type\":\"Succeed\"}}}",
+    "RoleArn": "${TestingDefaultRoleStateMachineRole9C0B111D.Arn}"
+   },
+   "DependsOn": [
+    "TestingDefaultRoleStateMachineRole9C0B111D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefTestingDefaultRoleStateMachineC09073859D88708C": {
+   "Value": "${TestingDefaultRoleStateMachineC0907385}",
+   "Export": {
+    "Name": "aws-stepfunctions-StateMachine-Role-TrustPolicy-BestPractices-integ:ExportsOutputRefTestingDefaultRoleStateMachineC09073859D88708C"
+   }
+  }
+ },
+ "unresolved": []
+}

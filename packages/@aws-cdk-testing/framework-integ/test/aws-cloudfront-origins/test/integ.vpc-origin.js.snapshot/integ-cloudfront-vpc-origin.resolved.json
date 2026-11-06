@@ -1,0 +1,1017 @@
+{
+ "version": "1",
+ "stackName": "integ-cloudfront-vpc-origin",
+ "resources": {
+  "Vpc8378EB38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcpublicSubnet1Subnet2BB74ED7": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/publicSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcpublicSubnet1RouteTable15C15F8E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/publicSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcpublicSubnet1RouteTableAssociation4E83B6E4": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcpublicSubnet1RouteTable15C15F8E}",
+    "SubnetId": "${VpcpublicSubnet1Subnet2BB74ED7}"
+   }
+  },
+  "VpcpublicSubnet1DefaultRouteB88F9E93": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VpcegressSubnet1DefaultRoute6AA1A794[1]}",
+    "GatewayId": "${VpcIGWD7BA715C}",
+    "RouteTableId": "${VpcpublicSubnet1RouteTable15C15F8E}"
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcpublicSubnet1EIP411541E6": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/publicSubnet1"
+     }
+    ]
+   }
+  },
+  "VpcpublicSubnet1NATGatewayA036E8A6": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VpcpublicSubnet1EIP411541E6",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${VpcpublicSubnet1Subnet2BB74ED7}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/publicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcpublicSubnet1DefaultRouteB88F9E93",
+    "VpcpublicSubnet1RouteTableAssociation4E83B6E4"
+   ]
+  },
+  "VpcpublicSubnet2SubnetE34B022A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.32.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/publicSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcpublicSubnet2RouteTableC5A6DF77": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/publicSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcpublicSubnet2RouteTableAssociationCCE257FF": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcpublicSubnet2RouteTableC5A6DF77}",
+    "SubnetId": "${VpcpublicSubnet2SubnetE34B022A}"
+   }
+  },
+  "VpcpublicSubnet2DefaultRoute732F0BEB": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VpcegressSubnet1DefaultRoute6AA1A794[1]}",
+    "GatewayId": "${VpcIGWD7BA715C}",
+    "RouteTableId": "${VpcpublicSubnet2RouteTableC5A6DF77}"
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcegressSubnet1SubnetEDDDB236": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "egress"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/egressSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcegressSubnet1RouteTable5DEFB688": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/egressSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcegressSubnet1RouteTableAssociation8E46ED5F": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcegressSubnet1RouteTable5DEFB688}",
+    "SubnetId": "${VpcegressSubnet1SubnetEDDDB236}"
+   }
+  },
+  "VpcegressSubnet1DefaultRoute6AA1A794": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VpcegressSubnet1DefaultRoute6AA1A794[1]}",
+    "NatGatewayId": "${VpcpublicSubnet1NATGatewayA036E8A6}",
+    "RouteTableId": "${VpcegressSubnet1RouteTable5DEFB688}"
+   }
+  },
+  "VpcegressSubnet2Subnet8217687B": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.96.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "egress"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/egressSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcegressSubnet2RouteTableBE1FD567": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/egressSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcegressSubnet2RouteTableAssociationB827F494": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcegressSubnet2RouteTableBE1FD567}",
+    "SubnetId": "${VpcegressSubnet2Subnet8217687B}"
+   }
+  },
+  "VpcegressSubnet2DefaultRoute291CE386": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VpcegressSubnet1DefaultRoute6AA1A794[1]}",
+    "NatGatewayId": "${VpcpublicSubnet1NATGatewayA036E8A6}",
+    "RouteTableId": "${VpcegressSubnet2RouteTableBE1FD567}"
+   }
+  },
+  "VpcisolatedSubnet1SubnetE62B1B9B": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/isolatedSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcisolatedSubnet1RouteTableE442650B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/isolatedSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcisolatedSubnet1RouteTableAssociationD259E31A": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcisolatedSubnet1RouteTableE442650B}",
+    "SubnetId": "${VpcisolatedSubnet1SubnetE62B1B9B}"
+   }
+  },
+  "VpcisolatedSubnet2Subnet39217055": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.160.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/isolatedSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcisolatedSubnet2RouteTable334F9764": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc/isolatedSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcisolatedSubnet2RouteTableAssociation25A4716F": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcisolatedSubnet2RouteTable334F9764}",
+    "SubnetId": "${VpcisolatedSubnet2Subnet39217055}"
+   }
+  },
+  "VpcIGWD7BA715C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcVPCGWBF912B6E": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": "${VpcIGWD7BA715C}",
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": "${CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E.Arn}",
+    "DefaultSecurityGroupId": "${Vpc8378EB38.DefaultSecurityGroup}",
+    "Account": "${AWS::AccountId}"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/${Vpc8378EB38.DefaultSecurityGroup}"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "bea78ce725e22a5e0d82378f6b49028c09ba86499286d6945a0506e820854e92.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": "${CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0.Arn}",
+    "Runtime": "nodejs24.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ]
+  },
+  "InstanceInstanceSecurityGroupF0E2D5BE": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "integ-cloudfront-vpc-origin/Instance/InstanceSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${VpcegressSubnet1DefaultRoute6AA1A794[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Instance"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "InstanceInstanceSecurityGroupfromintegcloudfrontvpcoriginALBSecurityGroup49874F1D80899B7004": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "from integcloudfrontvpcoriginALBSecurityGroup49874F1D:80",
+    "FromPort": 80,
+    "GroupId": "${InstanceInstanceSecurityGroupF0E2D5BE.GroupId}",
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": "${ALBSecurityGroup8B8624F8.GroupId}",
+    "ToPort": 80
+   }
+  },
+  "InstanceInstanceSecurityGroupfromintegcloudfrontvpcoriginNLBSGF934A43B80EFD0ED13": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "from integcloudfrontvpcoriginNLBSGF934A43B:80",
+    "FromPort": 80,
+    "GroupId": "${InstanceInstanceSecurityGroupF0E2D5BE.GroupId}",
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": "${NLBSG78A4E61C.GroupId}",
+    "ToPort": 80
+   }
+  },
+  "InstanceInstanceSecurityGroupfromintegcloudfrontvpcoriginVpcOriginsSecurityGroupE007430980B5564570": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "from integcloudfrontvpcoriginVpcOriginsSecurityGroupE0074309:80",
+    "FromPort": 80,
+    "GroupId": "${InstanceInstanceSecurityGroupF0E2D5BE.GroupId}",
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "GetSecurityGroup9A8E2D82",
+      "SecurityGroups.0.GroupId"
+     ]
+    },
+    "ToPort": 80
+   }
+  },
+  "InstanceInstanceRoleE9785DE5": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Instance"
+     }
+    ]
+   }
+  },
+  "InstanceInstanceProfileAB5AEF02": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     "${InstanceInstanceRoleE9785DE5}"
+    ]
+   }
+  },
+  "InstanceC1063A87": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "IamInstanceProfile": "${InstanceInstanceProfileAB5AEF02}",
+    "ImageId": "ami-0820d0c589175bc01",
+    "InstanceType": "t3.micro",
+    "SecurityGroupIds": [
+     "${InstanceInstanceSecurityGroupF0E2D5BE.GroupId}"
+    ],
+    "SubnetId": "${VpcegressSubnet1SubnetEDDDB236}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "integ-cloudfront-vpc-origin/Instance"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash\ndnf install httpd -y\nsystemctl start httpd\nmkdir -p /var/www/html/alb /var/www/html/nlb\ntouch /var/www/html/index.html /var/www/html/alb/index.html /var/www/html/nlb/index.html"
+    }
+   },
+   "DependsOn": [
+    "InstanceInstanceRoleE9785DE5"
+   ]
+  },
+  "ALBTG9414664F": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "deregistration_delay.timeout_seconds",
+      "Value": "${VpcegressSubnet1DefaultRoute6AA1A794.Name}"
+     },
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "instance",
+    "Targets": [
+     {
+      "Id": "${InstanceC1063A87}"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "ALBAEE750D2": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Scheme": "internal",
+    "SecurityGroups": [
+     "${ALBSecurityGroup8B8624F8.GroupId}"
+    ],
+    "Subnets": [
+     "${VpcisolatedSubnet1SubnetE62B1B9B}",
+     "${VpcisolatedSubnet2Subnet39217055}"
+    ],
+    "Type": "application"
+   }
+  },
+  "ALBSecurityGroup8B8624F8": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB integcloudfrontvpcoriginALBE15E4028",
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "ALBSecurityGrouptointegcloudfrontvpcoriginInstanceInstanceSecurityGroupCCCA4C5E805C8D27E9": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "Description": "to integcloudfrontvpcoriginInstanceInstanceSecurityGroupCCCA4C5E:80",
+    "DestinationSecurityGroupId": "${InstanceInstanceSecurityGroupF0E2D5BE.GroupId}",
+    "FromPort": 80,
+    "GroupId": "${ALBSecurityGroup8B8624F8.GroupId}",
+    "IpProtocol": "tcp",
+    "ToPort": 80
+   }
+  },
+  "ALBSecurityGroupfromintegcloudfrontvpcoriginVpcOriginsSecurityGroupE0074309803E56E518": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "from integcloudfrontvpcoriginVpcOriginsSecurityGroupE0074309:80",
+    "FromPort": 80,
+    "GroupId": "${ALBSecurityGroup8B8624F8.GroupId}",
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "GetSecurityGroup9A8E2D82",
+      "SecurityGroups.0.GroupId"
+     ]
+    },
+    "ToPort": 80
+   }
+  },
+  "ALBHTTP3BDC2BD0": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": "${ALBTG9414664F}",
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": "${ALBAEE750D2}",
+    "Port": 80,
+    "Protocol": "HTTP"
+   }
+  },
+  "NLBSG78A4E61C": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "integ-cloudfront-vpc-origin/NLB-SG",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${VpcegressSubnet1DefaultRoute6AA1A794[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "NLBSGfromintegcloudfrontvpcoriginVpcOriginsSecurityGroupE007430980716DE7E3": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "from integcloudfrontvpcoriginVpcOriginsSecurityGroupE0074309:80",
+    "FromPort": 80,
+    "GroupId": "${NLBSG78A4E61C.GroupId}",
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "GetSecurityGroup9A8E2D82",
+      "SecurityGroups.0.GroupId"
+     ]
+    },
+    "ToPort": 80
+   }
+  },
+  "NLBTG89886EBE": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "Port": 80,
+    "Protocol": "TCP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "deregistration_delay.timeout_seconds",
+      "Value": "${VpcegressSubnet1DefaultRoute6AA1A794.Name}"
+     }
+    ],
+    "TargetType": "instance",
+    "Targets": [
+     {
+      "Id": "${InstanceC1063A87}"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "NLB55158F82": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Scheme": "internal",
+    "SecurityGroups": [
+     "${NLBSG78A4E61C.GroupId}"
+    ],
+    "Subnets": [
+     "${VpcisolatedSubnet1SubnetE62B1B9B}",
+     "${VpcisolatedSubnet2Subnet39217055}"
+    ],
+    "Type": "network"
+   }
+  },
+  "NLBHTTP986143C9": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": "${NLBTG89886EBE}",
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": "${NLB55158F82}",
+    "Port": 80,
+    "Protocol": "TCP"
+   }
+  },
+  "DistributionOrigin1VpcOrigin1389D846": {
+   "Type": "AWS::CloudFront::VpcOrigin",
+   "Properties": {
+    "VpcOriginEndpointConfig": {
+     "Arn": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/${InstanceC1063A87}",
+     "Name": "integcloudfrontvpcoriginDistributionOrigin1VpcOrigin2BEED1BD",
+     "OriginProtocolPolicy": "http-only",
+     "OriginSSLProtocols": [
+      "TLSv1.2"
+     ]
+    }
+   }
+  },
+  "DistributionOrigin2VpcOrigin9CDFA022": {
+   "Type": "AWS::CloudFront::VpcOrigin",
+   "Properties": {
+    "VpcOriginEndpointConfig": {
+     "Arn": "${ALBAEE750D2}",
+     "Name": "integcloudfrontvpcoriginDistributionOrigin2VpcOriginDD7AE843",
+     "OriginProtocolPolicy": "http-only",
+     "OriginSSLProtocols": [
+      "TLSv1.2"
+     ]
+    }
+   }
+  },
+  "DistributionOrigin3VpcOrigin92647B05": {
+   "Type": "AWS::CloudFront::VpcOrigin",
+   "Properties": {
+    "VpcOriginEndpointConfig": {
+     "Arn": "${NLB55158F82}",
+     "Name": "integcloudfrontvpcoriginDistributionOrigin3VpcOrigin20A72AC8",
+     "OriginProtocolPolicy": "http-only",
+     "OriginSSLProtocols": [
+      "TLSv1.2"
+     ]
+    }
+   }
+  },
+  "Distribution830FAC52": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "CacheBehaviors": [
+      {
+       "CachePolicyId": "83da9c7e-98b4-4e11-a168-04f0df8e2c65",
+       "Compress": true,
+       "OriginRequestPolicyId": "216adef6-5c7f-47e4-b989-5492eafa07d3",
+       "PathPattern": "/alb/*",
+       "TargetOriginId": "integcloudfrontvpcoriginDistributionOrigin270A81127",
+       "ViewerProtocolPolicy": "allow-all"
+      },
+      {
+       "CachePolicyId": "83da9c7e-98b4-4e11-a168-04f0df8e2c65",
+       "Compress": true,
+       "OriginRequestPolicyId": "216adef6-5c7f-47e4-b989-5492eafa07d3",
+       "PathPattern": "/nlb/*",
+       "TargetOriginId": "integcloudfrontvpcoriginDistributionOrigin3B2FA3471",
+       "ViewerProtocolPolicy": "allow-all"
+      }
+     ],
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "83da9c7e-98b4-4e11-a168-04f0df8e2c65",
+      "Compress": true,
+      "OriginRequestPolicyId": "216adef6-5c7f-47e4-b989-5492eafa07d3",
+      "TargetOriginId": "integcloudfrontvpcoriginDistributionOrigin1B2B5646A",
+      "ViewerProtocolPolicy": "allow-all"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "DomainName": "${InstanceC1063A87.PrivateDnsName}",
+       "Id": "integcloudfrontvpcoriginDistributionOrigin1B2B5646A",
+       "VpcOriginConfig": {
+        "VpcOriginId": "${DistributionOrigin1VpcOrigin1389D846.Id}"
+       }
+      },
+      {
+       "DomainName": "${ALBAEE750D2.DNSName}",
+       "Id": "integcloudfrontvpcoriginDistributionOrigin270A81127",
+       "VpcOriginConfig": {
+        "VpcOriginId": "${DistributionOrigin2VpcOrigin9CDFA022.Id}"
+       }
+      },
+      {
+       "DomainName": "${NLB55158F82.DNSName}",
+       "Id": "integcloudfrontvpcoriginDistributionOrigin3B2FA3471",
+       "VpcOriginConfig": {
+        "VpcOriginId": "${DistributionOrigin3VpcOrigin92647B05.Id}"
+       }
+      }
+     ]
+    }
+   }
+  },
+  "GetSecurityGroup9A8E2D82": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": "${AWS679f53fac002430cb0da5b7982bd22872D164C4C.Arn}",
+    "Create": "{\"service\":\"ec2\",\"action\":\"describeSecurityGroups\",\"parameters\":{\"Filters\":[{\"Name\":\"vpc-id\",\"Values\":[\"${Vpc8378EB38}\"]},{\"Name\":\"group-name\",\"Values\":[\"${GetSecurityGroup9A8E2D82}\"]}]},\"physicalResourceId\":{\"id\":\"${GetSecurityGroup9A8E2D82}\"}}",
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "DistributionOrigin1VpcOrigin1389D846",
+    "DistributionOrigin2VpcOrigin9CDFA022",
+    "DistributionOrigin3VpcOrigin92647B05",
+    "Distribution830FAC52",
+    "GetSecurityGroupCustomResourcePolicyECAB03F2"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "GetSecurityGroupCustomResourcePolicyECAB03F2": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ec2:DescribeSecurityGroups",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "GetSecurityGroupCustomResourcePolicyECAB03F2",
+    "Roles": [
+     "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+    ]
+   },
+   "DependsOn": [
+    "DistributionOrigin1VpcOrigin1389D846",
+    "DistributionOrigin2VpcOrigin9CDFA022",
+    "DistributionOrigin3VpcOrigin92647B05",
+    "Distribution830FAC52"
+   ]
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2.Arn}",
+    "Runtime": "nodejs24.x",
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputFnGetAttDistribution830FAC52DomainNameBEB09E30": {
+   "Value": "${Distribution830FAC52.DomainName}",
+   "Export": {
+    "Name": "integ-cloudfront-vpc-origin:ExportsOutputFnGetAttDistribution830FAC52DomainNameBEB09E30"
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.VpcpublicSubnet1Subnet2BB74ED7.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcpublicSubnet1NATGatewayA036E8A6.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${VpcpublicSubnet1EIP411541E6}' does not exist (Service: Ec2, Status Code: 400, Request ID: 10eb24be-98e6-4505-9294-bceee4a0fe48) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 50ab04aa-9ddb-4eea-a2b2-1440d0a34a18)'"
+  },
+  {
+   "path": "Resources.VpcpublicSubnet2SubnetE34B022A.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcegressSubnet1SubnetEDDDB236.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcegressSubnet2Subnet8217687B.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcisolatedSubnet1SubnetE62B1B9B.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcisolatedSubnet2Subnet39217055.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.InstanceInstanceSecurityGroupfromintegcloudfrontvpcoriginVpcOriginsSecurityGroupE007430980B5564570.Properties.SourceSecurityGroupId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'SecurityGroups.0.GroupId' attribute of the 'Custom::AWS' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWS' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  },
+  {
+   "path": "Resources.InstanceC1063A87.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.InstanceC1063A87.Properties.UserData",
+   "intrinsic": "Fn::Base64",
+   "reason": "CloudFormation function Fn::Base64 is not supported"
+  },
+  {
+   "path": "Resources.ALBSecurityGroupfromintegcloudfrontvpcoriginVpcOriginsSecurityGroupE0074309803E56E518.Properties.SourceSecurityGroupId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'SecurityGroups.0.GroupId' attribute of the 'Custom::AWS' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWS' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  },
+  {
+   "path": "Resources.NLBSGfromintegcloudfrontvpcoriginVpcOriginsSecurityGroupE007430980716DE7E3.Properties.SourceSecurityGroupId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'SecurityGroups.0.GroupId' attribute of the 'Custom::AWS' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWS' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  }
+ ]
+}

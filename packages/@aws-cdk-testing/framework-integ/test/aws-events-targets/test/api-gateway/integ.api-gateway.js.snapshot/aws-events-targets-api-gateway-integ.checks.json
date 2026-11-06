@@ -1,0 +1,210 @@
+{
+ "stackName": "aws-events-targets-api-gateway-integ",
+ "summary": {
+  "pass": 19
+ },
+ "results": [
+  {
+   "logicalId": "MySpecRestApiFB7DB2AB",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MySpecRestApiFB7DB2AB",
+   "type": "AWS::ApiGateway::RestApi",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MySpecRestApi",
+   "actual": "MySpecRestApi"
+  },
+  {
+   "logicalId": "MySpecRestApiDeployment5D02B5D9a8c154dd64ed0abf0243000795ad6206",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MySpecRestApiDeployment5D02B5D9a8c154dd64ed0abf0243000795ad6206",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatically created by the RestApi construct",
+   "actual": "Automatically created by the RestApi construct"
+  },
+  {
+   "logicalId": "MySpecRestApiDeployment5D02B5D9a8c154dd64ed0abf0243000795ad6206",
+   "type": "AWS::ApiGateway::Deployment",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MySpecRestApiFB7DB2AB}",
+   "actual": "${MySpecRestApiFB7DB2AB}"
+  },
+  {
+   "logicalId": "MySpecRestApiDeploymentStageprod8522A503",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MySpecRestApiDeploymentStageprod8522A503",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "StageName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "prod",
+   "actual": "prod"
+  },
+  {
+   "logicalId": "MySpecRestApiDeploymentStageprod8522A503",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "RestApiId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MySpecRestApiFB7DB2AB}",
+   "actual": "${MySpecRestApiFB7DB2AB}"
+  },
+  {
+   "logicalId": "MySpecRestApiDeploymentStageprod8522A503",
+   "type": "AWS::ApiGateway::Stage",
+   "property": "DeploymentId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MySpecRestApiDeployment5D02B5D9a8c154dd64ed0abf0243000795ad6206}",
+   "actual": "${MySpecRestApiDeployment5D02B5D9a8c154dd64ed0abf0243000795ad6206}"
+  },
+  {
+   "logicalId": "MySpecRestApiEventsRole25C1D10F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MySpecRestApiEventsRole25C1D10F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MySpecRestApiEventsRoleDefaultPolicy6616420B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MySpecRestApiEventsRoleDefaultPolicy6616420B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MySpecRestApiEventsRoleDefaultPolicy6616420B",
+   "actual": "MySpecRestApiEventsRoleDefaultPolicy6616420B"
+  },
+  {
+   "logicalId": "MySpecRestApiEventsRoleDefaultPolicy6616420B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "execute-api:Invoke",
+       "execute-api:ManageConnections"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MySpecRestApiFB7DB2AB}/prod/*/"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "execute-api:Invoke",
+       "execute-api:ManageConnections"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MySpecRestApiFB7DB2AB}/prod/*/"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MySpecRestApiEventsRoleDefaultPolicy6616420B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MySpecRestApiEventsRole25C1D10F}",
+   "actual": "${MySpecRestApiEventsRole25C1D10F}"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MySpecRestApiFB7DB2AB}/prod/*/",
+     "HttpParameters": {},
+     "Id": "Target0",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MySpecRestApiEventsRole25C1D10F}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${MySpecRestApiFB7DB2AB}/prod/*/",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MySpecRestApiEventsRole25C1D10F}",
+     "HttpParameters": {}
+    }
+   ]
+  }
+ ]
+}

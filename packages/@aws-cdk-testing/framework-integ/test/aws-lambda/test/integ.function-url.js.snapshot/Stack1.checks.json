@@ -1,0 +1,573 @@
+{
+ "stackName": "Stack1",
+ "summary": {
+  "pass": 58,
+  "no handler": 4
+ },
+ "results": [
+  {
+   "logicalId": "IamAuthFunctionUrlsServiceRole35DF9DE0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IamAuthFunctionUrlsServiceRole35DF9DE0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "IamAuthFunctionUrlsServiceRole35DF9DE0",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "IamAuthFunctionUrls609024A0",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "IamAuthFunctionUrls609024A0",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "IamAuthFunctionUrls609024A0",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.10",
+   "actual": "python3.10"
+  },
+  {
+   "logicalId": "IamAuthFunctionUrls609024A0",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${IamAuthFunctionUrlsServiceRole35DF9DE0}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${IamAuthFunctionUrlsServiceRole35DF9DE0}"
+  },
+  {
+   "logicalId": "IamAuthFunctionUrlsFunctionUrl144E56C2",
+   "type": "AWS::Lambda::Url",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsServiceRole7247E6F2",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsServiceRole7247E6F2",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsServiceRole7247E6F2",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "NoAuthFunctionUrls65ABC157",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrls65ABC157",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrls65ABC157",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.10",
+   "actual": "python3.10"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrls65ABC157",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${NoAuthFunctionUrlsServiceRole7247E6F2}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${NoAuthFunctionUrlsServiceRole7247E6F2}"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsFunctionUrl22F8FCD9",
+   "type": "AWS::Lambda::Url",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunctionurl832C0266",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunctionurl832C0266",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunctionUrl",
+   "actual": "lambda:InvokeFunctionUrl"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunctionurl832C0266",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${NoAuthFunctionUrls65ABC157}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${NoAuthFunctionUrls65ABC157}"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunctionurl832C0266",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "*",
+   "actual": "*"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunctionurl832C0266",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionUrlAuthType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunction95ED1A84",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunction95ED1A84",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunction95ED1A84",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${NoAuthFunctionUrls65ABC157}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${NoAuthFunctionUrls65ABC157}"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunction95ED1A84",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "*",
+   "actual": "*"
+  },
+  {
+   "logicalId": "NoAuthFunctionUrlsinvokefunction95ED1A84",
+   "type": "AWS::Lambda::Permission",
+   "property": "InvokedViaFunctionUrl",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsServiceRole6227B597",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsServiceRole6227B597",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsServiceRole6227B597",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CorsFunctionUrlsD81CF424",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsD81CF424",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsD81CF424",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.10",
+   "actual": "python3.10"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsD81CF424",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CorsFunctionUrlsServiceRole6227B597}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CorsFunctionUrlsServiceRole6227B597}"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsFunctionUrl591106C8",
+   "type": "AWS::Lambda::Url",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionurl5E7D2994",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionurl5E7D2994",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunctionUrl",
+   "actual": "lambda:InvokeFunctionUrl"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionurl5E7D2994",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CorsFunctionUrlsD81CF424}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CorsFunctionUrlsD81CF424}"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionurl5E7D2994",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "*",
+   "actual": "*"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionurl5E7D2994",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionUrlAuthType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionC0E078FD",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionC0E078FD",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionC0E078FD",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CorsFunctionUrlsD81CF424}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CorsFunctionUrlsD81CF424}"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionC0E078FD",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "*",
+   "actual": "*"
+  },
+  {
+   "logicalId": "CorsFunctionUrlsinvokefunctionC0E078FD",
+   "type": "AWS::Lambda::Permission",
+   "property": "InvokedViaFunctionUrl",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsServiceRoleAF76EC5D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsServiceRoleAF76EC5D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsServiceRoleAF76EC5D",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "StreamFunctionUrlsAAB55C9C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsAAB55C9C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsAAB55C9C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.10",
+   "actual": "python3.10"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsAAB55C9C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StreamFunctionUrlsServiceRoleAF76EC5D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StreamFunctionUrlsServiceRoleAF76EC5D}"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsFunctionUrl56476535",
+   "type": "AWS::Lambda::Url",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunctionurl4FD8689D",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunctionurl4FD8689D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunctionUrl",
+   "actual": "lambda:InvokeFunctionUrl"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunctionurl4FD8689D",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${StreamFunctionUrlsAAB55C9C}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${StreamFunctionUrlsAAB55C9C}"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunctionurl4FD8689D",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "*",
+   "actual": "*"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunctionurl4FD8689D",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionUrlAuthType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunction7DC2262A",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunction7DC2262A",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunction7DC2262A",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${StreamFunctionUrlsAAB55C9C}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${StreamFunctionUrlsAAB55C9C}"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunction7DC2262A",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "*",
+   "actual": "*"
+  },
+  {
+   "logicalId": "StreamFunctionUrlsinvokefunction7DC2262A",
+   "type": "AWS::Lambda::Permission",
+   "property": "InvokedViaFunctionUrl",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  }
+ ]
+}

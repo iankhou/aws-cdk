@@ -1,0 +1,149 @@
+{
+ "version": "1",
+ "stackName": "AwsCustomResourceInvokePayloadStack",
+ "resources": {
+  "FunctionServiceRole675BB04A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "Function76856677": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "exports.handler = async () => { return { statusCode: 200, body: 'Hello World' }; };"
+    },
+    "Handler": "index.handler",
+    "Role": "${FunctionServiceRole675BB04A.Arn}",
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "FunctionServiceRole675BB04A"
+   ]
+  },
+  "ListLambdaFunctionsF9FB8E2B": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": "${AWS679f53fac002430cb0da5b7982bd22872D164C4C.Arn}",
+    "Create": "{\"service\":\"Lambda\",\"action\":\"invoke\",\"parameters\":{\"FunctionName\":\"${Function76856677}\"},\"physicalResourceId\":{\"id\":\"${Function76856677.Arn}\"}}",
+    "Update": "{\"service\":\"Lambda\",\"action\":\"invoke\",\"parameters\":{\"FunctionName\":\"${Function76856677}\"},\"physicalResourceId\":{\"id\":\"${Function76856677.Arn}\"}}",
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "ListLambdaFunctionsCustomResourcePolicyCFFF021A"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ListLambdaFunctionsCustomResourcePolicyCFFF021A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "*",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ListLambdaFunctionsCustomResourcePolicyCFFF021A",
+    "Roles": [
+     "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+    ]
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleDefaultPolicyD28E1A5E": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        "${Function76856677.Arn}",
+        "${Function76856677.Arn}:*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleDefaultPolicyD28E1A5E",
+    "Roles": [
+     "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2}"
+    ]
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "f373062318c7a680ecd7371165350d771c5ac1ac7d3a2a377324d6b16a283684.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2.Arn}",
+    "Runtime": "nodejs24.x",
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleDefaultPolicyD28E1A5E",
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+   ]
+  }
+ },
+ "outputs": {
+  "FunctionPayload": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ListLambdaFunctionsF9FB8E2B",
+     "Payload"
+    ]
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Outputs.FunctionPayload.Value",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Payload' attribute of the 'Custom::AWS' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWS' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  }
+ ]
+}

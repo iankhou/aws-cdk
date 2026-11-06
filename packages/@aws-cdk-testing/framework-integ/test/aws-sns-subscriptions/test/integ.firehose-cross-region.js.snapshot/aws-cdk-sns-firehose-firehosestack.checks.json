@@ -1,0 +1,277 @@
+{
+ "stackName": "aws-cdk-sns-firehose-firehosestack",
+ "summary": {
+  "missing": 4,
+  "pass": 15,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "Unknown: UnknownError"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "PermanentRedirect: The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint."
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: Function not found: arn:${AWS::Partition}:lambda:us-west-2:${AWS::AccountId}:function:${CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F}"
+  },
+  {
+   "logicalId": "DeliveryStreamS3DestinationRoleD96B8345",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeliveryStreamS3DestinationRoleD96B8345",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "firehose.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22firehose.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65",
+   "actual": "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65"
+  },
+  {
+   "logicalId": "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:Abort*",
+       "s3:DeleteObject*",
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*",
+       "s3:PutObject",
+       "s3:PutObjectLegalHold",
+       "s3:PutObjectRetention",
+       "s3:PutObjectTagging",
+       "s3:PutObjectVersionTagging"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}",
+       "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "DeliveryStreamS3DestinationRoleDefaultPolicyF652AD65",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${DeliveryStreamS3DestinationRoleD96B8345}",
+   "actual": "${DeliveryStreamS3DestinationRoleD96B8345}"
+  },
+  {
+   "logicalId": "DeliveryStream58CF96DB",
+   "type": "AWS::KinesisFirehose::DeliveryStream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DeliveryStreamTopicSubscriptionRole4964AFE6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeliveryStreamTopicSubscriptionRole4964AFE6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22sns.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "DeliveryStreamTopicSubscriptionRoleDefaultPolicy7B1E3A87",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeliveryStreamTopicSubscriptionRoleDefaultPolicy7B1E3A87",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DeliveryStreamTopicSubscriptionRoleDefaultPolicy7B1E3A87",
+   "actual": "DeliveryStreamTopicSubscriptionRoleDefaultPolicy7B1E3A87"
+  },
+  {
+   "logicalId": "DeliveryStreamTopicSubscriptionRoleDefaultPolicy7B1E3A87",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "firehose:DescribeDeliveryStream",
+       "firehose:ListDeliveryStreams",
+       "firehose:ListTagsForDeliveryStream",
+       "firehose:PutRecord",
+       "firehose:PutRecordBatch"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/${DeliveryStream58CF96DB}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "firehose:DescribeDeliveryStream",
+       "firehose:ListDeliveryStreams",
+       "firehose:ListTagsForDeliveryStream",
+       "firehose:PutRecord",
+       "firehose:PutRecordBatch"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/${DeliveryStream58CF96DB}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "DeliveryStreamTopicSubscriptionRoleDefaultPolicy7B1E3A87",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${DeliveryStreamTopicSubscriptionRole4964AFE6}",
+   "actual": "${DeliveryStreamTopicSubscriptionRole4964AFE6}"
+  },
+  {
+   "logicalId": "DeliveryStreamawscdksnsfirehosetopicstackMyTopic20B70ED07AAF6F8C",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "NotFoundException: Subscription does not exist"
+  }
+ ]
+}

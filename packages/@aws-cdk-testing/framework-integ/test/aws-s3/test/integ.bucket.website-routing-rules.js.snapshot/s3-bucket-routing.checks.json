@@ -1,0 +1,55 @@
+{
+ "stackName": "s3-bucket-routing",
+ "summary": {
+  "pass": 2
+ },
+ "results": [
+  {
+   "logicalId": "MyBucketWithRoutingRulesC6E1CAA2",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyBucketWithRoutingRulesC6E1CAA2",
+   "type": "AWS::S3::Bucket",
+   "property": "WebsiteConfiguration",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "IndexDocument": {
+     "Suffix": "index.html"
+    },
+    "RoutingRules": [
+     {
+      "Condition": {
+       "KeyPrefixEquals": ""
+      },
+      "Redirect": {
+       "HostName": "example.com",
+       "Protocol": "https",
+       "ReplaceKeyWith": "/"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "IndexDocument": {
+     "Suffix": "index.html"
+    },
+    "RoutingRules": [
+     {
+      "Redirect": {
+       "HostName": "example.com",
+       "Protocol": "https",
+       "ReplaceKeyWith": "/"
+      },
+      "Condition": {
+       "KeyPrefixEquals": ""
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

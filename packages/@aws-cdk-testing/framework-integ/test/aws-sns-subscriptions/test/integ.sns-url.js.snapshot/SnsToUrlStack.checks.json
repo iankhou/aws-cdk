@@ -1,0 +1,68 @@
+{
+ "stackName": "SnsToUrlStack",
+ "summary": {
+  "pass": 5,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopichttpsfoobarcomDEA92AB5",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopichttpsfoobarcomDEA92AB5",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "MyTopichttpsfoobarcomDEA92AB5",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "https",
+   "actual": "https"
+  },
+  {
+   "logicalId": "MyTopichttpsfoobarcomDEA92AB5",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "https://foobar.com/",
+   "actual": "https://foobar.com/"
+  },
+  {
+   "logicalId": "MyTopichttpsfoobarcomDEA92AB5",
+   "type": "AWS::SNS::Subscription",
+   "property": "DeliveryPolicy",
+   "status": "fail",
+   "expected": {
+    "healthyRetryPolicy": {
+     "minDelayTarget": 20,
+     "maxDelayTarget": 21,
+     "numRetries": 10
+    },
+    "throttlePolicy": {
+     "maxReceivesPerSecond": 10
+    },
+    "requestPolicy": {
+     "headerContentType": "application/json"
+    }
+   },
+   "actual": "{\"healthyRetryPolicy\":{\"minDelayTarget\":20,\"maxDelayTarget\":21,\"numRetries\":10,\"numMaxDelayRetries\":null,\"numNoDelayRetries\":null,\"numMinDelayRetries\":null,\"backoffFunction\":null},\"sicklyRetryPolicy\":null,\"throttlePolicy\":{\"maxReceivesPerSecond\":10},\"requestPolicy\":{\"headerContentType\":\"application/json\"},\"guaranteed\":false}"
+  }
+ ]
+}

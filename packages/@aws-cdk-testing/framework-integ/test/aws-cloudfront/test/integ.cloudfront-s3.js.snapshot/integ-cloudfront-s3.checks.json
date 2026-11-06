@@ -1,0 +1,207 @@
+{
+ "stackName": "integ-cloudfront-s3",
+ "summary": {
+  "pass": 12,
+  "fail": 2
+ },
+ "results": [
+  {
+   "logicalId": "Bucket83908E77",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Bucket83908E77}",
+   "actual": "${Bucket83908E77}"
+  },
+  {
+   "logicalId": "BucketPolicyE9A3008A",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "fail",
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::cloudfront:user/CloudFront Origin Access Identity ${OAI}"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Principal": {
+       "CanonicalUser": "d73d3d5ca1d6f3dd954f540b90b7a0992d5bb70dad0d8523d56c5cee01663227acc4e3e207c1a5028354a50dfb6e7092"
+      },
+      "Resource": "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "OAI",
+   "type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "OAI",
+   "type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+   "property": "CloudFrontOriginAccessIdentityConfig.Comment",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Allows CloudFront to reach the bucket!",
+   "actual": "Allows CloudFront to reach the bucket!"
+  },
+  {
+   "logicalId": "DistributionCFDistribution882A7313",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DistributionCFDistribution882A7313",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "DistributionCFDistribution882A7313",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultRootObject",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.html",
+   "actual": "index.html"
+  },
+  {
+   "logicalId": "DistributionCFDistribution882A7313",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "DistributionCFDistribution882A7313",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "DistributionCFDistribution882A7313",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.PriceClass",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PriceClass_100",
+   "actual": "PriceClass_100"
+  },
+  {
+   "logicalId": "DistributionCFDistribution882A7313",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "fail",
+   "expected": {
+    "TargetOriginId": "origin1",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "AllowedMethods": {
+     "Quantity": 2,
+     "Items": [
+      "GET",
+      "HEAD"
+     ],
+     "CachedMethods": {
+      "Quantity": 2,
+      "Items": [
+       "GET",
+       "HEAD"
+      ]
+     }
+    }
+   },
+   "actual": {
+    "TargetOriginId": "origin1",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "AllowedMethods": {
+     "Quantity": 2,
+     "Items": [
+      "HEAD",
+      "GET"
+     ],
+     "CachedMethods": {
+      "Quantity": 2,
+      "Items": [
+       "HEAD",
+       "GET"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "DistributionCFDistribution882A7313",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "origin1",
+      "DomainName": "${Bucket83908E77}.s3.${AWS::Region}.amazonaws.com",
+      "ConnectionAttempts": 3,
+      "ConnectionTimeout": 10,
+      "S3OriginConfig": {
+       "OriginAccessIdentity": "origin-access-identity/cloudfront/${OAI}"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "origin1",
+      "DomainName": "${Bucket83908E77}.s3.${AWS::Region}.amazonaws.com",
+      "ConnectionAttempts": 3,
+      "ConnectionTimeout": 10,
+      "S3OriginConfig": {
+       "OriginAccessIdentity": "origin-access-identity/cloudfront/${OAI}"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,159 @@
+{
+ "stackName": "integ-distribution-lambda-cross-region",
+ "summary": {
+  "pass": 10,
+  "missing": 1,
+  "unresolved": 1
+ },
+ "results": [
+  {
+   "logicalId": "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "Inline"
+   ],
+   "actual": [
+    "Inline"
+   ]
+  },
+  {
+   "logicalId": "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ssm:us-east-1:${AWS::AccountId}:parameter/cdk/EdgeFunctionArn/*",
+      "Action": [
+       "ssm:GetParameter"
+      ]
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22ssm%3AGetParameter%22%5D%2C%22Resource%22%3A%22arn%3Aaws%3Assm%3Aus-east-1%3A${AWS::AccountId}%3Aparameter%2Fcdk%2FEdgeFunctionArn%2F%2A%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: Function not found: arn:${AWS::Partition}:lambda:us-east-2:${AWS::AccountId}:function:${CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A}"
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "DistB3B78991",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionlambdacrossregionDistOrigin167A054D5",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributionlambdacrossregionDistOrigin167A054D5",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

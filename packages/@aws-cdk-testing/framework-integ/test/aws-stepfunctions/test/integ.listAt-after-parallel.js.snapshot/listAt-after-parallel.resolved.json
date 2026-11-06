@@ -1,0 +1,44 @@
+{
+ "version": "1",
+ "stackName": "listAt-after-parallel",
+ "resources": {
+  "StateMachineRoleB840431D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachine2E01A3A5": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"PRL\",\"States\":{\"PRL\":{\"Type\":\"Parallel\",\"ResultPath\":\"$\",\"Next\":\"JP\",\"Branches\":[{\"StartAt\":\"PSL\",\"States\":{\"PSL\":{\"Type\":\"Pass\",\"Parameters\":{\"newStringList.$\":\"$.stringList\"},\"End\":true}}},{\"StartAt\":\"PSS\",\"States\":{\"PSS\":{\"Type\":\"Pass\",\"Parameters\":{\"newSingleString.$\":\"$.singleString\"},\"End\":true}}}]},\"JP\":{\"Type\":\"Pass\",\"Parameters\":{\"resultStringList.$.$\":\"$[0].newStringList\",\"newSingleString.$\":\"$[1].newSingleString\"},\"End\":true}},\"TimeoutSeconds\":30}",
+    "RoleArn": "${StateMachineRoleB840431D.Arn}"
+   },
+   "DependsOn": [
+    "StateMachineRoleB840431D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,45 @@
+{
+ "stackName": "integ-principal-with-conditions-and-tags",
+ "summary": {
+  "pass": 2
+ },
+ "results": [
+  {
+   "logicalId": "TestRole25D98AB21",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRole25D98AB21",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "sts:AssumeRole",
+       "sts:TagSession"
+      ],
+      "Condition": {
+       "StringLike": {
+        "aws:PrincipalTag/owner": "foo"
+       },
+       "Bool": {
+        "aws:MultiFactorAuthPresent": "true"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "*"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%22%2A%22%7D%2C%22Action%22%3A%5B%22sts%3AAssumeRole%22%2C%22sts%3ATagSession%22%5D%2C%22Condition%22%3A%7B%22StringLike%22%3A%7B%22aws%3APrincipalTag%2Fowner%22%3A%22foo%22%7D%2C%22Bool%22%3A%7B%22aws%3AMultiFactorAuthPresent%22%3A%22true%22%7D%7D%7D%5D%7D"
+  }
+ ]
+}

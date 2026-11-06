@@ -1,0 +1,28 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-transformer-integ",
+ "resources": {
+  "MyLogGroup5C0DAD85": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "ResourceTransformer": {
+   "Type": "AWS::Logs::Transformer",
+   "Properties": {
+    "LogGroupIdentifier": "${MyLogGroup5C0DAD85}",
+    "TransformerConfig": [
+     {
+      "ParseJSON": {
+       "Source": "customField"
+      }
+     }
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

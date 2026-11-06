@@ -1,0 +1,296 @@
+{
+ "stackName": "aws-cdk-global-table",
+ "summary": {
+  "no handler": 1,
+  "pass": 10,
+  "fail": 1,
+  "error": 1,
+  "gap": 1
+ },
+ "results": [
+  {
+   "logicalId": "Stream790BDEE4",
+   "type": "AWS::Kinesis::Stream",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "pk",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "sk",
+     "AttributeType": "N"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "pk",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "sk",
+     "AttributeType": "N"
+    }
+   ]
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "pk",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sk",
+     "KeyType": "RANGE"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "pk",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sk",
+     "KeyType": "RANGE"
+    }
+   ]
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PROVISIONED",
+   "actual": "PROVISIONED"
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "SSESpecification.SSEEnabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "SSESpecification.SSEType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "KMS",
+   "actual": "KMS"
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "StreamSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StreamEnabled": true,
+    "StreamViewType": "NEW_AND_OLD_IMAGES"
+   },
+   "actual": {
+    "StreamEnabled": true,
+    "StreamViewType": "NEW_AND_OLD_IMAGES"
+   }
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "gsi1",
+     "KeySchema": [
+      {
+       "AttributeName": "pk",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "gsi2",
+     "KeySchema": [
+      {
+       "AttributeName": "pk",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "gsi1",
+     "KeySchema": [
+      {
+       "AttributeName": "pk",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "IndexStatus": "ACTIVE",
+     "ProvisionedThroughput": {
+      "LastIncreaseDateTime": "2026-11-05T21:24:23.710Z",
+      "NumberOfDecreasesToday": 0,
+      "ReadCapacityUnits": 15,
+      "WriteCapacityUnits": 1
+     },
+     "IndexSizeBytes": 0,
+     "ItemCount": 0,
+     "IndexArn": "arn:${AWS::Partition}:dynamodb:us-west-2:${AWS::AccountId}:table/${GlobalTable89F068B2}/index/gsi1",
+     "WarmThroughput": {
+      "ReadUnitsPerSecond": 15,
+      "WriteUnitsPerSecond": 1,
+      "Status": "ACTIVE"
+     }
+    },
+    {
+     "IndexName": "gsi2",
+     "KeySchema": [
+      {
+       "AttributeName": "pk",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "IndexStatus": "ACTIVE",
+     "ProvisionedThroughput": {
+      "NumberOfDecreasesToday": 0,
+      "ReadCapacityUnits": 10,
+      "WriteCapacityUnits": 1
+     },
+     "IndexSizeBytes": 0,
+     "ItemCount": 0,
+     "IndexArn": "arn:${AWS::Partition}:dynamodb:us-west-2:${AWS::AccountId}:table/${GlobalTable89F068B2}/index/gsi2",
+     "WarmThroughput": {
+      "ReadUnitsPerSecond": 10,
+      "WriteUnitsPerSecond": 1,
+      "Status": "ACTIVE"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "LocalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "lsi",
+     "KeySchema": [
+      {
+       "AttributeName": "pk",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "sk",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "lsi",
+     "KeySchema": [
+      {
+       "AttributeName": "pk",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "sk",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "IndexSizeBytes": 0,
+     "ItemCount": 0
+    }
+   ]
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "TimeToLiveSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AttributeName": "attr",
+    "TimeToLiveStatus": "ENABLED"
+   },
+   "actual": {
+    "TimeToLiveStatus": "ENABLED",
+    "AttributeName": "attr"
+   }
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "Replicas",
+   "status": "fail",
+   "expected": [
+    "${AWS::Region}",
+    "us-east-2",
+    "us-west-2"
+   ],
+   "actual": [
+    "${AWS::Region}",
+    "us-east-2"
+   ]
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "Replicas.0.PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled",
+   "status": "error",
+   "detail": "Error: replica 0 is not in the stack region"
+  },
+  {
+   "logicalId": "GlobalTable89F068B2",
+   "type": "AWS::DynamoDB::GlobalTable",
+   "property": "WriteProvisionedThroughputSettings",
+   "status": "gap"
+  }
+ ]
+}

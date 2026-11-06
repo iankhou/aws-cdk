@@ -1,0 +1,52 @@
+{
+ "version": "1",
+ "stackName": "aws-stepfunctions-integ",
+ "resources": {
+  "StateMachineRoleB840431D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachine2E01A3A5": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"ParallelWithParams\",\"States\":{\"ParallelWithParams\":{\"Type\":\"Parallel\",\"End\":true,\"Parameters\":{\"staticValue\":\"hello\",\"dynamicValue.$\":\"$.inputField\",\"execId.$\":\"$$.Execution.Id\"},\"Branches\":[{\"StartAt\":\"Pass Branch 1\",\"States\":{\"Pass Branch 1\":{\"Type\":\"Pass\",\"ResultPath\":null,\"End\":true}}},{\"StartAt\":\"Pass Branch 2\",\"States\":{\"Pass Branch 2\":{\"Type\":\"Pass\",\"ResultPath\":null,\"End\":true}}}]}}}",
+    "RoleArn": "${StateMachineRoleB840431D.Arn}"
+   },
+   "DependsOn": [
+    "StateMachineRoleB840431D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefStateMachine2E01A3A5BA46F753": {
+   "Value": "${StateMachine2E01A3A5}",
+   "Export": {
+    "Name": "aws-stepfunctions-integ:ExportsOutputRefStateMachine2E01A3A5BA46F753"
+   }
+  }
+ },
+ "unresolved": []
+}

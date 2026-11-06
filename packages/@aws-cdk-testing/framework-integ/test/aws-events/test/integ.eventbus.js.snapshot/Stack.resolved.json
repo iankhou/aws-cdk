@@ -1,0 +1,77 @@
+{
+ "version": "1",
+ "stackName": "Stack",
+ "resources": {
+  "DLQ581697C4": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "EventBusRole24766622": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Role for accessing EventBus",
+    "RoleName": "EventBusAccessRole"
+   }
+  },
+  "BusEA82B648": {
+   "Type": "AWS::Events::EventBus",
+   "Properties": {
+    "DeadLetterConfig": {
+     "Arn": "${DLQ581697C4.Arn}"
+    },
+    "Description": "myEventBus",
+    "LogConfig": {
+     "IncludeDetail": "FULL",
+     "Level": "ERROR"
+    },
+    "Name": "${BuscdkStatement1D7D87B9D[0]}"
+   }
+  },
+  "BuscdkStatement1D7D87B9D": {
+   "Type": "AWS::Events::EventBusPolicy",
+   "Properties": {
+    "EventBusName": "${BusEA82B648}",
+    "Statement": {
+     "Action": "events:PutEvents",
+     "Effect": "Allow",
+     "Principal": {
+      "AWS": "${EventBusRole24766622.Arn}"
+     },
+     "Resource": "${BusEA82B648.Arn}",
+     "Sid": "${BuscdkStatement1D7D87B9D[1]}"
+    },
+    "StatementId": "${BuscdkStatement1D7D87B9D[1]}"
+   }
+  },
+  "BuscdkStatement2341A5B58": {
+   "Type": "AWS::Events::EventBusPolicy",
+   "Properties": {
+    "EventBusName": "${BusEA82B648}",
+    "Statement": {
+     "Action": "events:PutRule",
+     "Effect": "Allow",
+     "Principal": {
+      "AWS": "${EventBusRole24766622.Arn}"
+     },
+     "Resource": "${BusEA82B648.Arn}",
+     "Sid": "${BuscdkStatement2341A5B58[1]}"
+    },
+    "StatementId": "${BuscdkStatement2341A5B58[1]}"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,136 @@
+{
+ "stackName": "aws-ecs-task-definition-container-ulimits",
+ "summary": {
+  "pass": 8
+ },
+ "results": [
+  {
+   "logicalId": "TaskDefTaskRole1EDB4A67",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskDefTaskRole1EDB4A67",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ecs-tasks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ecs-tasks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "ContainerDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "essential": true,
+     "image": "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest",
+     "memory": 512,
+     "memoryReservation": 32,
+     "name": "Container",
+     "ulimits": [
+      {
+       "hardLimit": 128,
+       "name": "rss",
+       "softLimit": 128
+      }
+     ]
+    }
+   ],
+   "actual": [
+    {
+     "name": "Container",
+     "image": "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest",
+     "cpu": 0,
+     "memory": 512,
+     "memoryReservation": 32,
+     "links": [],
+     "portMappings": [],
+     "essential": true,
+     "entryPoint": [],
+     "command": [],
+     "environment": [],
+     "environmentFiles": [],
+     "mountPoints": [],
+     "volumesFrom": [],
+     "secrets": [],
+     "dnsServers": [],
+     "dnsSearchDomains": [],
+     "extraHosts": [],
+     "dockerSecurityOptions": [],
+     "dockerLabels": {},
+     "ulimits": [
+      {
+       "name": "rss",
+       "softLimit": 128,
+       "hardLimit": 128
+      }
+     ],
+     "systemControls": [],
+     "credentialSpecs": []
+    }
+   ]
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "TaskRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskDefTaskRole1EDB4A67}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskDefTaskRole1EDB4A67}"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Family",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "awsecstaskdefinitioncontainerulimitsTaskDef0C4534B6",
+   "actual": "awsecstaskdefinitioncontainerulimitsTaskDef0C4534B6"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "NetworkMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "bridge",
+   "actual": "bridge"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "RequiresCompatibilities",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "EC2"
+   ],
+   "actual": [
+    "EC2"
+   ]
+  }
+ ]
+}

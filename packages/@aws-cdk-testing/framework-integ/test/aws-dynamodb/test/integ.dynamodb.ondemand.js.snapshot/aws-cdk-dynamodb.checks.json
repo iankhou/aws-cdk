@@ -1,0 +1,823 @@
+{
+ "stackName": "aws-cdk-dynamodb",
+ "summary": {
+  "pass": 26
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "OnDemandThroughput",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "MaxReadRequestUnits": 100,
+    "MaxWriteRequestUnits": 200
+   },
+   "actual": {
+    "MaxReadRequestUnits": 100,
+    "MaxWriteRequestUnits": 200
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "gsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "lsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "sortKey",
+     "AttributeType": "N"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "gsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "lsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "sortKey",
+     "AttributeType": "N"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sortKey",
+     "KeyType": "RANGE"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sortKey",
+     "KeyType": "RANGE"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "GSI-PartitionKeyOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "OnDemandThroughput": {
+      "MaxReadRequestUnits": 100,
+      "MaxWriteRequestUnits": 100
+     }
+    },
+    {
+     "IndexName": "GSI-PartitionAndSortKeyWithReadAndWriteCapacity",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "GSI-ProjectionTypeKeysOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "KEYS_ONLY"
+     }
+    },
+    {
+     "IndexName": "GSI-ProjectionTypeInclude",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "A",
+       "B",
+       "C",
+       "D",
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J"
+      ]
+     }
+    },
+    {
+     "IndexName": "GSI-InverseTableKeySchema",
+     "KeySchema": [
+      {
+       "AttributeName": "sortKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "GSI-InverseTableKeySchema",
+     "KeySchema": [
+      {
+       "AttributeName": "sortKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "GSI-PartitionAndSortKeyWithReadAndWriteCapacity",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "GSI-ProjectionTypeKeysOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "KEYS_ONLY"
+     }
+    },
+    {
+     "IndexName": "GSI-PartitionKeyOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     },
+     "OnDemandThroughput": {
+      "MaxReadRequestUnits": 100,
+      "MaxWriteRequestUnits": 100
+     }
+    },
+    {
+     "IndexName": "GSI-ProjectionTypeInclude",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "gsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "A",
+       "B",
+       "C",
+       "D",
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "LocalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "LSI-PartitionAndTableSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "LSI-PartitionAndSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "sortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "LSI-ProjectionTypeKeysOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "KEYS_ONLY"
+     }
+    },
+    {
+     "IndexName": "LSI-ProjectionTypeInclude",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "K",
+       "L",
+       "M",
+       "N",
+       "O",
+       "P",
+       "Q",
+       "R",
+       "S",
+       "T"
+      ]
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "LSI-ProjectionTypeInclude",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": [
+       "Q",
+       "R",
+       "S",
+       "T",
+       "K",
+       "L",
+       "M",
+       "N",
+       "O",
+       "P"
+      ]
+     }
+    },
+    {
+     "IndexName": "LSI-PartitionAndSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "sortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "LSI-PartitionAndTableSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    },
+    {
+     "IndexName": "LSI-ProjectionTypeKeysOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "KEYS_ONLY"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "StreamSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StreamEnabled": true,
+    "StreamViewType": "KEYS_ONLY"
+   },
+   "actual": {
+    "StreamEnabled": true,
+    "StreamViewType": "KEYS_ONLY"
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "SSESpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Status": "ENABLED",
+    "SSEType": "KMS"
+   },
+   "actual": {
+    "Status": "ENABLED",
+    "SSEType": "KMS",
+    "KMSMasterKeyArn": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/017d54dc-5e0f-4650-b433-e9ab26012da6"
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "PointInTimeRecoverySpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "PointInTimeRecoveryStatus": "ENABLED",
+    "RecoveryPeriodInDays": 35
+   },
+   "actual": {
+    "PointInTimeRecoveryStatus": "ENABLED",
+    "RecoveryPeriodInDays": 35
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "TimeToLiveSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AttributeName": "timeToLive",
+    "TimeToLiveStatus": "ENABLED"
+   },
+   "actual": {
+    "AttributeName": "timeToLive",
+    "TimeToLiveStatus": "ENABLED"
+   }
+  },
+  {
+   "logicalId": "TableWithGlobalAndLocalSecondaryIndexBC540710",
+   "type": "AWS::DynamoDB::Table",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Environment",
+     "Value": "Production"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Environment",
+     "Value": "Production"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "gsiHashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "TableWithGlobalSecondaryIndexCC8E841E",
+   "type": "AWS::DynamoDB::Table",
+   "property": "GlobalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "GSI-PartitionKeyOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "GSI-PartitionKeyOnly",
+     "KeySchema": [
+      {
+       "AttributeName": "gsiHashKey",
+       "KeyType": "HASH"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "lsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "sortKey",
+     "AttributeType": "N"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "AttributeType": "S"
+    },
+    {
+     "AttributeName": "lsiSortKey",
+     "AttributeType": "N"
+    },
+    {
+     "AttributeName": "sortKey",
+     "AttributeType": "N"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sortKey",
+     "KeyType": "RANGE"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "hashKey",
+     "KeyType": "HASH"
+    },
+    {
+     "AttributeName": "sortKey",
+     "KeyType": "RANGE"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "TableWithLocalSecondaryIndex4DA3D08F",
+   "type": "AWS::DynamoDB::Table",
+   "property": "LocalSecondaryIndexes",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "IndexName": "LSI-PartitionAndSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "IndexName": "LSI-PartitionAndSortKey",
+     "KeySchema": [
+      {
+       "AttributeName": "hashKey",
+       "KeyType": "HASH"
+      },
+      {
+       "AttributeName": "lsiSortKey",
+       "KeyType": "RANGE"
+      }
+     ],
+     "Projection": {
+      "ProjectionType": "ALL"
+     }
+    }
+   ]
+  }
+ ]
+}

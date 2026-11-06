@@ -1,0 +1,42 @@
+{
+ "version": "1",
+ "stackName": "lambda-test-assets-file",
+ "resources": {
+  "MyLambdaServiceRole4539ECB6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MyLambdaCCE802FB": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "d48aac32b23adb22c66a00d01ba33fd5e07e2a4989d4bd1a9518ff8a5a8f5794.zip"
+    },
+    "Handler": "index.main",
+    "Role": "${MyLambdaServiceRole4539ECB6.Arn}",
+    "Runtime": "python3.9"
+   },
+   "DependsOn": [
+    "MyLambdaServiceRole4539ECB6"
+   ]
+  }
+ },
+ "unresolved": []
+}

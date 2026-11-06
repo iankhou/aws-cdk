@@ -1,0 +1,41 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-sqs",
+ "resources": {
+  "SourceQueue1F4BBA4BB": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "RedriveAllowPolicy": {
+     "redrivePermission": "allowAll"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SourceQueue22481CB5A": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "RedriveAllowPolicy": {
+     "redrivePermission": "denyAll"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "DeadLetterQueue9F481546": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "RedriveAllowPolicy": {
+     "redrivePermission": "byQueue",
+     "sourceQueueArns": [
+      "${SourceQueue1F4BBA4BB.Arn}",
+      "${SourceQueue22481CB5A.Arn}"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

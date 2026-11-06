@@ -1,0 +1,67 @@
+{
+ "version": "1",
+ "stackName": "SnsToSqsStack",
+ "resources": {
+  "MyTopic86869434": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "MyQueueE6CA6235": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MyQueuePolicy6BBEDDAC": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": "${MyTopic86869434}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": "${MyQueueE6CA6235.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     "${MyQueueE6CA6235}"
+    ]
+   }
+  },
+  "MyQueueSnsToSqsStackMyTopic3F1182C25E300A0F": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": "${MyQueueE6CA6235.Arn}",
+    "Protocol": "sqs",
+    "RawMessageDelivery": true,
+    "TopicArn": "${MyTopic86869434}"
+   },
+   "DependsOn": [
+    "MyQueuePolicy6BBEDDAC"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefMyTopic868694349D03D60F": {
+   "Value": "${MyTopic86869434}",
+   "Export": {
+    "Name": "SnsToSqsStack:ExportsOutputRefMyTopic868694349D03D60F"
+   }
+  },
+  "ExportsOutputRefMyQueueE6CA623512A57419": {
+   "Value": "${MyQueueE6CA6235}",
+   "Export": {
+    "Name": "SnsToSqsStack:ExportsOutputRefMyQueueE6CA623512A57419"
+   }
+  }
+ },
+ "unresolved": []
+}

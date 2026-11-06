@@ -1,0 +1,39 @@
+{
+ "version": "1",
+ "stackName": "stack",
+ "resources": {
+  "OwnerContactCA72337C": {
+   "Type": "AWS::AppSync::GraphQLApi",
+   "Properties": {
+    "AuthenticationType": "API_KEY",
+    "Name": "OwnerContact",
+    "OwnerContact": "test-owner-contact"
+   }
+  },
+  "OwnerContactSchemaD692A0DE": {
+   "Type": "AWS::AppSync::GraphQLSchema",
+   "Properties": {
+    "ApiId": "${OwnerContactCA72337C.ApiId}",
+    "Definition": "type test {\n  version: String!\n}\ntype Query {\n  getTests: [test]!\n}\ntype Mutation {\n  addTest(version: String!): test\n}\n"
+   }
+  },
+  "OwnerContactDefaultApiKeyF4AD6E80": {
+   "Type": "AWS::AppSync::ApiKey",
+   "Properties": {
+    "ApiId": "${OwnerContactCA72337C.ApiId}"
+   },
+   "DependsOn": [
+    "OwnerContactSchemaD692A0DE"
+   ]
+  },
+  "OwnerContactNoneDS6E9204C8": {
+   "Type": "AWS::AppSync::DataSource",
+   "Properties": {
+    "ApiId": "${OwnerContactCA72337C.ApiId}",
+    "Name": "NoneDS",
+    "Type": "NONE"
+   }
+  }
+ },
+ "unresolved": []
+}

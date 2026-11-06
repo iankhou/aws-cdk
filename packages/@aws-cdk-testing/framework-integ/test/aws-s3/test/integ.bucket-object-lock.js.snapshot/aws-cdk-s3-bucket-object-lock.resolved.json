@@ -1,0 +1,32 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-s3-bucket-object-lock",
+ "resources": {
+  "ObjectLockBucketA9F4F5AC": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "ObjectLockEnabled": true
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "ObjectLockWithRetentionBucket31ED9B51": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "ObjectLockConfiguration": {
+     "ObjectLockEnabled": "Enabled",
+     "Rule": {
+      "DefaultRetention": {
+       "Days": 2,
+       "Mode": "GOVERNANCE"
+      }
+     }
+    },
+    "ObjectLockEnabled": true
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "unresolved": []
+}

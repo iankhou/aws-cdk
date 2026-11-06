@@ -1,0 +1,114 @@
+{
+ "stackName": "cdk-stepfunctions-map-jsonata-maxconcurrency-stack",
+ "summary": {
+  "pass": 5
+ },
+ "results": [
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "My-Map-State",
+    "States": {
+     "My-Map-State": {
+      "Type": "Map",
+      "QueryLanguage": "JSONata",
+      "End": true,
+      "Items": "{% $states.input.items %}",
+      "ItemProcessor": {
+       "ProcessorConfig": {
+        "Mode": "INLINE"
+       },
+       "StartAt": "Pass State",
+       "States": {
+        "Pass State": {
+         "Type": "Pass",
+         "End": true
+        }
+       }
+      },
+      "MaxConcurrency": "{% $states.input.maxConcurrency %}"
+     }
+    },
+    "TimeoutSeconds": 30
+   },
+   "actual": {
+    "StartAt": "My-Map-State",
+    "States": {
+     "My-Map-State": {
+      "Type": "Map",
+      "QueryLanguage": "JSONata",
+      "End": true,
+      "Items": "{% $states.input.items %}",
+      "ItemProcessor": {
+       "ProcessorConfig": {
+        "Mode": "INLINE"
+       },
+       "StartAt": "Pass State",
+       "States": {
+        "Pass State": {
+         "Type": "Pass",
+         "End": true
+        }
+       }
+      },
+      "MaxConcurrency": "{% $states.input.maxConcurrency %}"
+     }
+    },
+    "TimeoutSeconds": 30
+   }
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}"
+  }
+ ]
+}

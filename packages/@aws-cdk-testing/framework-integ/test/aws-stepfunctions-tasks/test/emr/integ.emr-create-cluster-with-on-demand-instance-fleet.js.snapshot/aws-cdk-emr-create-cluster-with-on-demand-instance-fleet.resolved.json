@@ -1,0 +1,170 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-emr-create-cluster-with-on-demand-instance-fleet",
+ "resources": {
+  "EmrCreateClusterServiceRole5251910D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "elasticmapreduce.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2"
+    ]
+   }
+  },
+  "EmrCreateClusterServiceRoleDefaultPolicyA8B4FA32": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": "${EmrCreateClusterInstanceRoleC80466F5.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EmrCreateClusterServiceRoleDefaultPolicyA8B4FA32",
+    "Roles": [
+     "${EmrCreateClusterServiceRole5251910D}"
+    ]
+   }
+  },
+  "EmrCreateClusterInstanceRoleC80466F5": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "EmrCreateClusterInstanceProfileC1729180": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "InstanceProfileName": "${EmrCreateClusterInstanceRoleC80466F5}",
+    "Roles": [
+     "${EmrCreateClusterInstanceRoleC80466F5}"
+    ]
+   }
+  },
+  "SMRole49C19C48": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "SMRoleDefaultPolicy34CA15C7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "elasticmapreduce:AddTags",
+        "elasticmapreduce:DescribeCluster",
+        "elasticmapreduce:RunJobFlow",
+        "elasticmapreduce:TerminateJobFlows"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": [
+        "${EmrCreateClusterInstanceRoleC80466F5.Arn}",
+        "${EmrCreateClusterServiceRole5251910D.Arn}"
+       ]
+      },
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Condition": {
+        "StringEquals": {
+         "iam:AWSServiceName": [
+          "elasticmapreduce.amazonaws.com",
+          "elasticmapreduce.amazonaws.com.cn"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/elasticmapreduce.amazonaws.com*/AWSServiceRoleForEMRCleanup*",
+       "Sid": "ElasticMapReduceServiceLinkedRole"
+      },
+      {
+       "Action": "elasticmapreduce:AddTags",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:elasticmapreduce:${AWS::Region}:${AWS::AccountId}:cluster/*"
+      },
+      {
+       "Action": [
+        "events:DescribeRule",
+        "events:PutRule",
+        "events:PutTargets"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/StepFunctionsGetEventForEMRRunJobFlowRule"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SMRoleDefaultPolicy34CA15C7",
+    "Roles": [
+     "${SMRole49C19C48}"
+    ]
+   }
+  },
+  "SM934E715A": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"EmrCreateCluster\",\"States\":{\"EmrCreateCluster\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"arn:${AWS::Partition}:states:::elasticmapreduce:createCluster.sync\",\"Parameters\":{\"Instances\":{\"InstanceFleets\":[{\"InstanceFleetType\":\"MASTER\",\"InstanceTypeConfigs\":[{\"InstanceType\":\"m5.xlarge\",\"WeightedCapacity\":1}],\"LaunchSpecifications\":{\"OnDemandSpecification\":{\"AllocationStrategy\":\"lowest-price\"}},\"Name\":\"Master\",\"TargetOnDemandCapacity\":1}],\"KeepJobFlowAliveWhenNoSteps\":true},\"JobFlowRole\":\"${EmrCreateClusterInstanceRoleC80466F5}\",\"Name\":\"Cluster\",\"ServiceRole\":\"${EmrCreateClusterServiceRole5251910D}\",\"ReleaseLabel\":\"emr-5.36.1\",\"Tags\":[{\"Key\":\"Key\",\"Value\":\"Value\"},{\"Key\":\"for-use-with-amazon-emr-managed-policies\",\"Value\":\"true\"}],\"VisibleToAllUsers\":true}}}}",
+    "RoleArn": "${SMRole49C19C48.Arn}"
+   },
+   "DependsOn": [
+    "SMRoleDefaultPolicy34CA15C7",
+    "SMRole49C19C48"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,173 @@
+{
+ "stackName": "cloudfront-origin-group-selection-criteria",
+ "summary": {
+  "no handler": 2,
+  "pass": 6,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "cg1",
+   "type": "AWS::MediaPackageV2::ChannelGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "cg2",
+   "type": "AWS::MediaPackageV2::ChannelGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "cloudfrontorigingroupselectioncriteriaDistributionOriginGroup1518D308D",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   },
+   "actual": {
+    "TargetOriginId": "cloudfrontorigingroupselectioncriteriaDistributionOriginGroup1518D308D",
+    "ViewerProtocolPolicy": "allow-all",
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.CacheBehaviors",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "PathPattern": "/video",
+      "TargetOriginId": "cloudfrontorigingroupselectioncriteriaDistributionOriginGroup1518D308D",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "PathPattern": "/video",
+      "TargetOriginId": "cloudfrontorigingroupselectioncriteriaDistributionOriginGroup1518D308D",
+      "ViewerProtocolPolicy": "allow-all",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "fail",
+   "expected": {
+    "Quantity": 2,
+    "Items": [
+     {
+      "Id": "cloudfrontorigingroupselectioncriteriaDistributionOrigin1AA511FA4",
+      "DomainName": "q6hlcw.egress.s4qhei.mediapackagev2.${AWS::Region}.amazonaws.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       }
+      }
+     },
+     {
+      "Id": "cloudfrontorigingroupselectioncriteriaDistributionOrigin2AFDC8F08",
+      "DomainName": "lmu7re.egress.l5uhpo.mediapackagev2.${AWS::Region}.amazonaws.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       }
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 2,
+    "Items": [
+     {
+      "Id": "cloudfrontorigingroupselectioncriteriaDistributionOrigin2AFDC8F08",
+      "DomainName": "lmu7re.egress.l5uhpo.mediapackagev2.${AWS::Region}.amazonaws.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       }
+      }
+     },
+     {
+      "Id": "cloudfrontorigingroupselectioncriteriaDistributionOrigin1AA511FA4",
+      "DomainName": "q6hlcw.egress.s4qhei.mediapackagev2.${AWS::Region}.amazonaws.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only",
+       "OriginSslProtocols": {
+        "Quantity": 1,
+        "Items": [
+         "TLSv1.2"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

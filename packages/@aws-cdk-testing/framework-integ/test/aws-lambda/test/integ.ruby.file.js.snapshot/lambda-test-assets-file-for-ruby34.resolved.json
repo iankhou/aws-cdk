@@ -1,0 +1,50 @@
+{
+ "version": "1",
+ "stackName": "lambda-test-assets-file-for-ruby34",
+ "resources": {
+  "MyRuby34LambdaServiceRoleBF4E7133": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MyRuby34Lambda934E0C6B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "b9d265a7298dcf7774794746a1aac25ee61dc998230526747e062aeaff88af86.zip"
+    },
+    "Handler": "index.main",
+    "Role": "${MyRuby34LambdaServiceRoleBF4E7133.Arn}",
+    "Runtime": "ruby3.4"
+   },
+   "DependsOn": [
+    "MyRuby34LambdaServiceRoleBF4E7133"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefMyRuby34Lambda934E0C6BC97D6137": {
+   "Value": "${MyRuby34Lambda934E0C6B}",
+   "Export": {
+    "Name": "lambda-test-assets-file-for-ruby34:ExportsOutputRefMyRuby34Lambda934E0C6BC97D6137"
+   }
+  }
+ },
+ "unresolved": []
+}

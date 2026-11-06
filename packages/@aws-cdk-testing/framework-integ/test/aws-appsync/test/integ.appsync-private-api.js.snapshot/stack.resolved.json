@@ -1,0 +1,39 @@
+{
+ "version": "1",
+ "stackName": "stack",
+ "resources": {
+  "PrivateApi1FA926D9": {
+   "Type": "AWS::AppSync::GraphQLApi",
+   "Properties": {
+    "AuthenticationType": "API_KEY",
+    "Name": "PrivateApi",
+    "Visibility": "PRIVATE"
+   }
+  },
+  "PrivateApiSchema8313BB1A": {
+   "Type": "AWS::AppSync::GraphQLSchema",
+   "Properties": {
+    "ApiId": "${PrivateApi1FA926D9.ApiId}",
+    "Definition": "type test {\n  version: String!\n}\ntype Query {\n  getTests: [test]!\n}\ntype Mutation {\n  addTest(version: String!): test\n}\n"
+   }
+  },
+  "PrivateApiDefaultApiKey1F26A0C1": {
+   "Type": "AWS::AppSync::ApiKey",
+   "Properties": {
+    "ApiId": "${PrivateApi1FA926D9.ApiId}"
+   },
+   "DependsOn": [
+    "PrivateApiSchema8313BB1A"
+   ]
+  },
+  "PrivateApiNoneDSF76D677A": {
+   "Type": "AWS::AppSync::DataSource",
+   "Properties": {
+    "ApiId": "${PrivateApi1FA926D9.ApiId}",
+    "Name": "NoneDS",
+    "Type": "NONE"
+   }
+  }
+ },
+ "unresolved": []
+}

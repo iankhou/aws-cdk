@@ -1,0 +1,402 @@
+{
+ "stackName": "createScheduleInteg",
+ "summary": {
+  "pass": 19,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "Key961B73FD",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Key961B73FD",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "ScheduleGroup",
+   "type": "AWS::Scheduler::ScheduleGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TargetQueue08AD2B3C",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeadLetterQueue9F481546",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SchedulerRole59E73443",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SchedulerRole59E73443",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "scheduler.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22scheduler.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SchedulerRoleDefaultPolicy66F774B8",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SchedulerRoleDefaultPolicy66F774B8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SchedulerRoleDefaultPolicy66F774B8",
+   "actual": "SchedulerRoleDefaultPolicy66F774B8"
+  },
+  {
+   "logicalId": "SchedulerRoleDefaultPolicy66F774B8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${TargetQueue08AD2B3C.Name}"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${Key961B73FD}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${TargetQueue08AD2B3C.Name}"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:Encrypt",
+       "kms:GenerateDataKey*",
+       "kms:ReEncrypt*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${Key961B73FD}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SchedulerRoleDefaultPolicy66F774B8",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SchedulerRole59E73443}",
+   "actual": "${SchedulerRole59E73443}"
+  },
+  {
+   "logicalId": "stateMachineRole64DF9B42",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "stateMachineRole64DF9B42",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "stateMachineRoleDefaultPolicy9579E9AD",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "stateMachineRoleDefaultPolicy9579E9AD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "stateMachineRoleDefaultPolicy9579E9AD",
+   "actual": "stateMachineRoleDefaultPolicy9579E9AD"
+  },
+  {
+   "logicalId": "stateMachineRoleDefaultPolicy9579E9AD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "scheduler:CreateSchedule",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule/TestGroup/TestScheduleA",
+       "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule/default/TestScheduleB"
+      ]
+     },
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SchedulerRole59E73443}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "scheduler:CreateSchedule",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule/TestGroup/TestScheduleA",
+       "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule/default/TestScheduleB"
+      ]
+     },
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SchedulerRole59E73443}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "stateMachineRoleDefaultPolicy9579E9AD",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${stateMachineRole64DF9B42}",
+   "actual": "${stateMachineRole64DF9B42}"
+  },
+  {
+   "logicalId": "stateMachineE926C166",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "stateMachineE926C166",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Start Task",
+    "States": {
+     "Start Task": {
+      "Type": "Pass",
+      "Next": "createSchedule1"
+     },
+     "createSchedule1": {
+      "Next": "createSchedule2",
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::aws-sdk:scheduler:createSchedule",
+      "Parameters": {
+       "ActionAfterCompletion": "NONE",
+       "ClientToken": "testToken",
+       "Description": "Testdescription",
+       "EndDate": "2030-01-01T01:00:00.000Z",
+       "FlexibleTimeWindow": {
+        "Mode": "FLEXIBLE",
+        "MaximumWindowInMinutes": 5
+       },
+       "GroupName": "TestGroup",
+       "KmsKeyArn": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${Key961B73FD}",
+       "Name": "TestScheduleA",
+       "ScheduleExpression": "rate(1 minutes)",
+       "ScheduleExpressionTimezone": "UTC",
+       "StartDate": "2030-01-01T00:00:00.000Z",
+       "State": "ENABLED",
+       "Target": {
+        "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${TargetQueue08AD2B3C.Name}",
+        "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SchedulerRole59E73443}",
+        "RetryPolicy": {
+         "MaximumEventAgeInSeconds": 300,
+         "MaximumRetryAttempts": 2
+        },
+        "DeadLetterConfig": {
+         "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}"
+        }
+       }
+      }
+     },
+     "createSchedule2": {
+      "Next": "End Task",
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::aws-sdk:scheduler:createSchedule",
+      "Parameters": {
+       "ActionAfterCompletion": "NONE",
+       "FlexibleTimeWindow": {
+        "Mode": "OFF"
+       },
+       "Name": "TestScheduleB",
+       "ScheduleExpression": "rate(1 minutes)",
+       "State": "ENABLED",
+       "Target": {
+        "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${TargetQueue08AD2B3C.Name}",
+        "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SchedulerRole59E73443}"
+       }
+      }
+     },
+     "End Task": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Start Task",
+    "States": {
+     "Start Task": {
+      "Type": "Pass",
+      "Next": "createSchedule1"
+     },
+     "createSchedule1": {
+      "Next": "createSchedule2",
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::aws-sdk:scheduler:createSchedule",
+      "Parameters": {
+       "ActionAfterCompletion": "NONE",
+       "ClientToken": "testToken",
+       "Description": "Testdescription",
+       "EndDate": "2030-01-01T01:00:00.000Z",
+       "FlexibleTimeWindow": {
+        "Mode": "FLEXIBLE",
+        "MaximumWindowInMinutes": 5
+       },
+       "GroupName": "TestGroup",
+       "KmsKeyArn": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${Key961B73FD}",
+       "Name": "TestScheduleA",
+       "ScheduleExpression": "rate(1 minutes)",
+       "ScheduleExpressionTimezone": "UTC",
+       "StartDate": "2030-01-01T00:00:00.000Z",
+       "State": "ENABLED",
+       "Target": {
+        "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${TargetQueue08AD2B3C.Name}",
+        "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SchedulerRole59E73443}",
+        "RetryPolicy": {
+         "MaximumEventAgeInSeconds": 300,
+         "MaximumRetryAttempts": 2
+        },
+        "DeadLetterConfig": {
+         "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}"
+        }
+       }
+      }
+     },
+     "createSchedule2": {
+      "Next": "End Task",
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::aws-sdk:scheduler:createSchedule",
+      "Parameters": {
+       "ActionAfterCompletion": "NONE",
+       "FlexibleTimeWindow": {
+        "Mode": "OFF"
+       },
+       "Name": "TestScheduleB",
+       "ScheduleExpression": "rate(1 minutes)",
+       "State": "ENABLED",
+       "Target": {
+        "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${TargetQueue08AD2B3C.Name}",
+        "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SchedulerRole59E73443}"
+       }
+      }
+     },
+     "End Task": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "stateMachineE926C166",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${stateMachineRole64DF9B42}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${stateMachineRole64DF9B42}"
+  }
+ ]
+}

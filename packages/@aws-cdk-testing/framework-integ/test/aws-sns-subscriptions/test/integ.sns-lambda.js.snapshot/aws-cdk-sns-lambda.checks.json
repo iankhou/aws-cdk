@@ -1,0 +1,625 @@
+{
+ "stackName": "aws-cdk-sns-lambda",
+ "summary": {
+  "pass": 57
+ },
+ "results": [
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EchoServiceRoleBE28060B",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EchoServiceRoleBE28060B",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "EchoServiceRoleBE28060B",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Echo11F3FB29",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Echo11F3FB29",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Echo11F3FB29",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Echo11F3FB29",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${EchoServiceRoleBE28060B}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${EchoServiceRoleBE28060B}"
+  },
+  {
+   "logicalId": "EchoAllowInvokeawscdksnslambdaMyTopic6C62AB907F727CDA",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EchoAllowInvokeawscdksnslambdaMyTopic6C62AB907F727CDA",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "EchoAllowInvokeawscdksnslambdaMyTopic6C62AB907F727CDA",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Echo11F3FB29}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Echo11F3FB29}"
+  },
+  {
+   "logicalId": "EchoAllowInvokeawscdksnslambdaMyTopic6C62AB907F727CDA",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "sns.amazonaws.com"
+   },
+   "actual": {
+    "Service": "sns.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "EchoAllowInvokeawscdksnslambdaMyTopic6C62AB907F727CDA",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "EchoMyTopic4CB8819E",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EchoMyTopic4CB8819E",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "EchoMyTopic4CB8819E",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda",
+   "actual": "lambda"
+  },
+  {
+   "logicalId": "EchoMyTopic4CB8819E",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Echo11F3FB29}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Echo11F3FB29}"
+  },
+  {
+   "logicalId": "EchoMyTopic4CB8819E",
+   "type": "AWS::SNS::Subscription",
+   "property": "RedrivePolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "deadLetterTargetArn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}"
+   },
+   "actual": "{\"deadLetterTargetArn\":\"arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}\"}"
+  },
+  {
+   "logicalId": "DeadLetterQueue9F481546",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeadLetterQueuePolicyB1FB890C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeadLetterQueuePolicyB1FB890C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "${MyTopic86869434}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "${MyTopic86869434}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "DeadLetterQueuePolicyB1FB890C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${DeadLetterQueue9F481546}"
+   ],
+   "actual": [
+    "${DeadLetterQueue9F481546}"
+   ]
+  },
+  {
+   "logicalId": "FilteredServiceRole16D9DDC1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FilteredServiceRole16D9DDC1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FilteredServiceRole16D9DDC1",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Filtered186C0D0A",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Filtered186C0D0A",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Filtered186C0D0A",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Filtered186C0D0A",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FilteredServiceRole16D9DDC1}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FilteredServiceRole16D9DDC1}"
+  },
+  {
+   "logicalId": "FilteredAllowInvokeawscdksnslambdaMyTopic6C62AB90A2EA1666",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FilteredAllowInvokeawscdksnslambdaMyTopic6C62AB90A2EA1666",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "FilteredAllowInvokeawscdksnslambdaMyTopic6C62AB90A2EA1666",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Filtered186C0D0A}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Filtered186C0D0A}"
+  },
+  {
+   "logicalId": "FilteredAllowInvokeawscdksnslambdaMyTopic6C62AB90A2EA1666",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "sns.amazonaws.com"
+   },
+   "actual": {
+    "Service": "sns.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "FilteredAllowInvokeawscdksnslambdaMyTopic6C62AB90A2EA1666",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "FilteredMyTopicC8395C27",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FilteredMyTopicC8395C27",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "FilteredMyTopicC8395C27",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda",
+   "actual": "lambda"
+  },
+  {
+   "logicalId": "FilteredMyTopicC8395C27",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Filtered186C0D0A}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Filtered186C0D0A}"
+  },
+  {
+   "logicalId": "FilteredMyTopicC8395C27",
+   "type": "AWS::SNS::Subscription",
+   "property": "FilterPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "color": [
+     "red",
+     {
+      "prefix": "bl"
+     },
+     {
+      "prefix": "ye"
+     },
+     {
+      "suffix": "ue"
+     },
+     {
+      "suffix": "ow"
+     }
+    ],
+    "size": [
+     {
+      "anything-but": [
+       "small",
+       "medium"
+      ]
+     }
+    ],
+    "price": [
+     {
+      "numeric": [
+       ">=",
+       100,
+       "<=",
+       200
+      ]
+     }
+    ]
+   },
+   "actual": "{\"color\":[\"red\",{\"prefix\":\"bl\"},{\"prefix\":\"ye\"},{\"suffix\":\"ue\"},{\"suffix\":\"ow\"}],\"size\":[{\"anything-but\":[\"small\",\"medium\"]}],\"price\":[{\"numeric\":[\">=\",100,\"<=\",200]}]}"
+  },
+  {
+   "logicalId": "FilteredMessageBodyServiceRoleB2EB82B3",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FilteredMessageBodyServiceRoleB2EB82B3",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FilteredMessageBodyServiceRoleB2EB82B3",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "FilteredMessageBody222AE8F1",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FilteredMessageBody222AE8F1",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "FilteredMessageBody222AE8F1",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "FilteredMessageBody222AE8F1",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FilteredMessageBodyServiceRoleB2EB82B3}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FilteredMessageBodyServiceRoleB2EB82B3}"
+  },
+  {
+   "logicalId": "FilteredMessageBodyAllowInvokeawscdksnslambdaMyTopic6C62AB90FB54CEA4",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FilteredMessageBodyAllowInvokeawscdksnslambdaMyTopic6C62AB90FB54CEA4",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "FilteredMessageBodyAllowInvokeawscdksnslambdaMyTopic6C62AB90FB54CEA4",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${FilteredMessageBody222AE8F1}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${FilteredMessageBody222AE8F1}"
+  },
+  {
+   "logicalId": "FilteredMessageBodyAllowInvokeawscdksnslambdaMyTopic6C62AB90FB54CEA4",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "sns.amazonaws.com"
+   },
+   "actual": {
+    "Service": "sns.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "FilteredMessageBodyAllowInvokeawscdksnslambdaMyTopic6C62AB90FB54CEA4",
+   "type": "AWS::Lambda::Permission",
+   "property": "SourceArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "FilteredMessageBodyMyTopicAD1F55C4",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FilteredMessageBodyMyTopicAD1F55C4",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "FilteredMessageBodyMyTopicAD1F55C4",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda",
+   "actual": "lambda"
+  },
+  {
+   "logicalId": "FilteredMessageBodyMyTopicAD1F55C4",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${FilteredMessageBody222AE8F1}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${FilteredMessageBody222AE8F1}"
+  },
+  {
+   "logicalId": "FilteredMessageBodyMyTopicAD1F55C4",
+   "type": "AWS::SNS::Subscription",
+   "property": "FilterPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "background": {
+     "color": [
+      "red",
+      {
+       "prefix": "bl"
+      },
+      {
+       "prefix": "ye"
+      },
+      {
+       "suffix": "ue"
+      },
+      {
+       "suffix": "ow"
+      }
+     ]
+    }
+   },
+   "actual": "{\"background\":{\"color\":[\"red\",{\"prefix\":\"bl\"},{\"prefix\":\"ye\"},{\"suffix\":\"ue\"},{\"suffix\":\"ow\"}]}}"
+  },
+  {
+   "logicalId": "FilteredMessageBodyMyTopicAD1F55C4",
+   "type": "AWS::SNS::Subscription",
+   "property": "FilterPolicyScope",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MessageBody",
+   "actual": "MessageBody"
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "version": "1",
+ "stackName": "integ-principal-with-conditions-and-tags",
+ "resources": {
+  "TestRole25D98AB21": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "sts:AssumeRole",
+        "sts:TagSession"
+       ],
+       "Condition": {
+        "StringLike": {
+         "aws:PrincipalTag/owner": "foo"
+        },
+        "Bool": {
+         "aws:MultiFactorAuthPresent": "true"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "*"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,27 @@
+{
+ "version": "1",
+ "stackName": "CrossRegionBothRefConsumerInteg",
+ "resources": {
+  "SomeParameterMirroredE2D8F3B8": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "KNOWN_PARAMETER_NAME_BOTH",
+    "Type": "String",
+    "Value": {
+     "Fn::GetStackOutput": {
+      "StackName": "CrossRegionBothRefProducerInteg",
+      "Region": "us-east-1",
+      "OutputName": "PublishOutputFnGetAttSomeParameterB1EDD45BValueA1B1111C"
+     }
+    }
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.SomeParameterMirroredE2D8F3B8.Properties.Value",
+   "intrinsic": "Fn::GetStackOutput",
+   "reason": "CloudFormation function Fn::GetStackOutput is not supported"
+  }
+ ]
+}

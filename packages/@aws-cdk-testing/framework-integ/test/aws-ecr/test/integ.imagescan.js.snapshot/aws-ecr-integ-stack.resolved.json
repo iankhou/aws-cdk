@@ -1,0 +1,44 @@
+{
+ "version": "1",
+ "stackName": "aws-ecr-integ-stack",
+ "resources": {
+  "Repo02AC86CF": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "ImageScanningConfiguration": {
+     "ScanOnPush": true
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "RepoImageScanComplete7BC71935": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "EventPattern": {
+     "source": [
+      "aws.ecr"
+     ],
+     "detail-type": [
+      "ECR Image Scan"
+     ],
+     "detail": {
+      "repository-name": [
+       "${Repo02AC86CF}"
+      ],
+      "scan-status": [
+       "COMPLETE"
+      ]
+     }
+    },
+    "State": "ENABLED"
+   }
+  }
+ },
+ "outputs": {
+  "RepositoryURI": {
+   "Value": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Repo02AC86CF}"
+  }
+ },
+ "unresolved": []
+}

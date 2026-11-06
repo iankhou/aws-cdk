@@ -1,0 +1,69 @@
+{
+ "version": "1",
+ "stackName": "weighted-record",
+ "resources": {
+  "HostedZoneDB99F866": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "cdk.dev."
+   }
+  },
+  "WeightedRecord0183C6356": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${WeightedRecord0183C6356}.",
+    "ResourceRecords": [
+     "1.2.3.4"
+    ],
+    "SetIdentifier": "WEIGHT_20_ID_weightedrecordWeightedRecord036EC06FB",
+    "TTL": "10",
+    "Type": "A",
+    "Weight": 20
+   }
+  },
+  "WeightedRecord1901777B1": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${WeightedRecord0183C6356}.",
+    "ResourceRecords": [
+     "2.3.4.5"
+    ],
+    "SetIdentifier": "WEIGHT_30_ID_weightedrecordWeightedRecord1AB70F3F7",
+    "TTL": "10",
+    "Type": "A",
+    "Weight": 30
+   }
+  },
+  "WeightedRecord2D4D415A2": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${WeightedRecord0183C6356}.",
+    "ResourceRecords": [
+     "3.4.5.6"
+    ],
+    "SetIdentifier": "WEIGHT_50_ID_weightedrecordWeightedRecord2896F8B34",
+    "TTL": "10",
+    "Type": "A",
+    "Weight": 50
+   }
+  },
+  "WeightedRecord328406D0A": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${WeightedRecord0183C6356}.",
+    "ResourceRecords": [
+     "4.5.6.7"
+    ],
+    "SetIdentifier": "WEIGHT_0_ID_weightedrecordWeightedRecord37AA25819",
+    "TTL": "10",
+    "Type": "A",
+    "Weight": 0
+   }
+  }
+ },
+ "unresolved": []
+}

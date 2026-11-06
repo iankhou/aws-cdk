@@ -1,0 +1,91 @@
+{
+ "stackName": "aws-cdk-bucket-inventory",
+ "summary": {
+  "pass": 5,
+  "gap": 1
+ },
+ "results": [
+  {
+   "logicalId": "InventoryBucketA869B8CB",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "InventoryBucketPolicyEDF94353",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "InventoryBucketPolicyEDF94353",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "Bucket",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${InventoryBucketA869B8CB}",
+   "actual": "${InventoryBucketA869B8CB}"
+  },
+  {
+   "logicalId": "InventoryBucketPolicyEDF94353",
+   "type": "AWS::S3::BucketPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${AVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongNodeIdName525AF55D}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${InventoryBucketA869B8CB}",
+       "arn:${AWS::Partition}:s3:::${InventoryBucketA869B8CB}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:PutObject",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:s3:::${AVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongNodeIdName525AF55D}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "s3.amazonaws.com"
+      },
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::${InventoryBucketA869B8CB}",
+       "arn:${AWS::Partition}:s3:::${InventoryBucketA869B8CB}/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "AVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongNodeIdName525AF55D",
+   "type": "AWS::S3::Bucket",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongNodeIdName525AF55D",
+   "type": "AWS::S3::Bucket",
+   "property": "InventoryConfigurations",
+   "status": "gap"
+  }
+ ]
+}

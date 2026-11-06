@@ -1,0 +1,54 @@
+{
+ "stackName": "aws-ecr-integ-stack",
+ "summary": {
+  "no handler": 1,
+  "pass": 3
+ },
+ "results": [
+  {
+   "logicalId": "Repo02AC86CF",
+   "type": "AWS::ECR::Repository",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "RepoImageScanComplete7BC71935",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "RepoImageScanComplete7BC71935",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "RepoImageScanComplete7BC71935",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "aws.ecr"
+    ],
+    "detail-type": [
+     "ECR Image Scan"
+    ],
+    "detail": {
+     "repository-name": [
+      "${Repo02AC86CF}"
+     ],
+     "scan-status": [
+      "COMPLETE"
+     ]
+    }
+   },
+   "actual": "{\"detail-type\":[\"ECR Image Scan\"],\"source\":[\"aws.ecr\"],\"detail\":{\"repository-name\":[\"${Repo02AC86CF}\"],\"scan-status\":[\"COMPLETE\"]}}"
+  }
+ ]
+}

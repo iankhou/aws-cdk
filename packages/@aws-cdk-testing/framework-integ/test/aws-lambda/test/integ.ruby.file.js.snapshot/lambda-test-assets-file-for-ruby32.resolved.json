@@ -1,0 +1,50 @@
+{
+ "version": "1",
+ "stackName": "lambda-test-assets-file-for-ruby32",
+ "resources": {
+  "MyRubyLambdaServiceRoleDC227070": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MyRubyLambdaAFED834F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "b9d265a7298dcf7774794746a1aac25ee61dc998230526747e062aeaff88af86.zip"
+    },
+    "Handler": "index.main",
+    "Role": "${MyRubyLambdaServiceRoleDC227070.Arn}",
+    "Runtime": "ruby3.2"
+   },
+   "DependsOn": [
+    "MyRubyLambdaServiceRoleDC227070"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefMyRubyLambdaAFED834FC50AFB5F": {
+   "Value": "${MyRubyLambdaAFED834F}",
+   "Export": {
+    "Name": "lambda-test-assets-file-for-ruby32:ExportsOutputRefMyRubyLambdaAFED834FC50AFB5F"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,81 @@
+{
+ "version": "1",
+ "stackName": "CidrRoutingConfig",
+ "resources": {
+  "HostedZoneDB99F866": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "${CidrRoutingConfig2AF5DEDB}."
+   }
+  },
+  "CidrCollection": {
+   "Type": "AWS::Route53::CidrCollection",
+   "Properties": {
+    "Locations": [
+     {
+      "CidrList": [
+       "192.168.1.0/24"
+      ],
+      "LocationName": "test_location"
+     }
+    ],
+    "Name": "test-collection"
+   }
+  },
+  "CidrRoutingConfig2AF5DEDB": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "CidrRoutingConfig": {
+     "CollectionId": "${CidrCollection.Id}",
+     "LocationName": "test_location"
+    },
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${CidrRoutingConfig2AF5DEDB}.",
+    "ResourceRecords": [
+     "1.2.3.4"
+    ],
+    "SetIdentifier": "test",
+    "TTL": "1800",
+    "Type": "A"
+   }
+  },
+  "HostedZone280C0117C": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "${DefaultCidrRoutingConfigF2FD2A05}."
+   }
+  },
+  "DefaultCidrCollection": {
+   "Type": "AWS::Route53::CidrCollection",
+   "Properties": {
+    "Locations": [
+     {
+      "CidrList": [
+       "192.168.1.0/24"
+      ],
+      "LocationName": "default_location"
+     }
+    ],
+    "Name": "default-collection"
+   }
+  },
+  "DefaultCidrRoutingConfigF2FD2A05": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "CidrRoutingConfig": {
+     "CollectionId": "${DefaultCidrCollection.Id}",
+     "LocationName": "*"
+    },
+    "HostedZoneId": "${HostedZone280C0117C}",
+    "Name": "${DefaultCidrRoutingConfigF2FD2A05}.",
+    "ResourceRecords": [
+     "5.6.7.8"
+    ],
+    "SetIdentifier": "test2",
+    "TTL": "1800",
+    "Type": "A"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,434 @@
+{
+ "stackName": "RuleStack",
+ "summary": {
+  "pass": 27
+ },
+ "results": [
+  {
+   "logicalId": "MyRoleF48FFE04",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRoleF48FFE04",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "account": [
+     "account1",
+     "account2"
+    ],
+    "detail": {
+     "foo": [
+      1,
+      2
+     ],
+     "strings": [
+      "foo",
+      "bar"
+     ],
+     "rangeMatcher": [
+      {
+       "numeric": [
+        ">=",
+        -1,
+        "<=",
+        1
+       ]
+      }
+     ],
+     "stringMatcher": [
+      "I am just a string"
+     ],
+     "prefixMatcher": [
+      {
+       "prefix": "aws."
+      }
+     ],
+     "ipAddress": [
+      {
+       "cidr": "192.0.2.0/24"
+      }
+     ],
+     "shouldExist": [
+      {
+       "exists": true
+      }
+     ],
+     "shouldNotExist": [
+      {
+       "exists": false
+      }
+     ],
+     "numbers": [
+      {
+       "numeric": [
+        ">",
+        0,
+        "<",
+        5
+       ]
+      }
+     ],
+     "topLevel": {
+      "deeper": [
+       {
+        "numeric": [
+         "=",
+         42
+        ]
+       }
+      ],
+      "oneMoreLevel": {
+       "deepest": [
+        {
+         "numeric": [
+          "<=",
+          -1
+         ]
+        },
+        {
+         "numeric": [
+          ">=",
+          1
+         ]
+        }
+       ]
+      }
+     },
+     "state": [
+      {
+       "anything-but": [
+        "initializing"
+       ]
+      }
+     ],
+     "limit": [
+      {
+       "anything-but": [
+        100,
+        200,
+        300
+       ]
+      }
+     ],
+     "notPrefixedBy": [
+      {
+       "anything-but": {
+        "prefix": "sensitive-"
+       }
+      }
+     ],
+     "suffix": [
+      {
+       "suffix": ".com"
+      }
+     ],
+     "equalsIgnoreCase": [
+      {
+       "equals-ignore-case": "ignore case"
+      }
+     ]
+    },
+    "detail-type": [
+     "detailType1"
+    ],
+    "id": [
+     "id1",
+     "id2"
+    ],
+    "region": [
+     "region1",
+     "region2",
+     "region3"
+    ],
+    "resources": [
+     "r1"
+    ],
+    "source": [
+     "src1",
+     "src2"
+    ],
+    "time": [
+     "t1"
+    ],
+    "version": [
+     "0"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"detailType1\"],\"resources\":[\"r1\"],\"detail\":{\"prefixMatcher\":[{\"prefix\":\"aws.\"}],\"foo\":[1,2],\"stringMatcher\":[\"I am just a string\"],\"ipAddress\":[{\"cidr\":\"192.0.2.0/24\"}],\"numbers\":[{\"numeric\":[\">\",0,\"<\",5]}],\"suffix\":[{\"suffix\":\".com\"}],\"notPrefixedBy\":[{\"anything-but\":{\"prefix\":\"sensitive-\"}}],\"shouldNotExist\":[{\"exists\":false}],\"strings\":[\"foo\",\"bar\"],\"shouldExist\":[{\"exists\":true}],\"topLevel\":{\"oneMoreLevel\":{\"deepest\":[{\"numeric\":[\"<=\",-1]},{\"numeric\":[\">=\",1]}]},\"deeper\":[{\"numeric\":[\"=\",42]}]},\"limit\":[{\"anything-but\":[100,200,300]}],\"state\":[{\"anything-but\":[\"initializing\"]}],\"equalsIgnoreCase\":[{\"equals-ignore-case\":\"ignore case\"}],\"rangeMatcher\":[{\"numeric\":[\">=\",-1,\"<=\",1]}]},\"id\":[\"id1\",\"id2\"],\"source\":[\"src1\",\"src2\"],\"time\":[\"t1\"],\"region\":[\"region1\",\"region2\",\"region3\"],\"version\":[\"0\"],\"account\":[\"account1\",\"account2\"]}"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRoleF48FFE04}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyRoleF48FFE04}"
+  },
+  {
+   "logicalId": "MyWildcardRule477FB0F9",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyWildcardRule477FB0F9",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyWildcardRule477FB0F9",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "account": [
+     {
+      "wildcard": "account*"
+     }
+    ]
+   },
+   "actual": "{\"account\":[{\"wildcard\":\"account*\"}]}"
+  },
+  {
+   "logicalId": "MyAnythingButPrefixRule756FC7C6",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAnythingButPrefixRule756FC7C6",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyAnythingButPrefixRule756FC7C6",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "account": [
+     {
+      "anything-but": {
+       "prefix": "prefix-"
+      }
+     }
+    ]
+   },
+   "actual": "{\"account\":[{\"anything-but\":{\"prefix\":\"prefix-\"}}]}"
+  },
+  {
+   "logicalId": "MyAnythingButSuffixRuleB1E496DF",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAnythingButSuffixRuleB1E496DF",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyAnythingButSuffixRuleB1E496DF",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "account": [
+     {
+      "anything-but": {
+       "suffix": "-suffix"
+      }
+     }
+    ]
+   },
+   "actual": "{\"account\":[{\"anything-but\":{\"suffix\":\"-suffix\"}}]}"
+  },
+  {
+   "logicalId": "MyAnythingButWildcardRuleEED7F44B",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAnythingButWildcardRuleEED7F44B",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyAnythingButWildcardRuleEED7F44B",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "account": [
+     {
+      "anything-but": {
+       "wildcard": "account*"
+      }
+     }
+    ]
+   },
+   "actual": "{\"account\":[{\"anything-but\":{\"wildcard\":\"account*\"}}]}"
+  },
+  {
+   "logicalId": "MyAnythingButEqualsIgnoreCaseEBE7F91F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyAnythingButEqualsIgnoreCaseEBE7F91F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyAnythingButEqualsIgnoreCaseEBE7F91F",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "account": [
+     {
+      "anything-but": {
+       "equals-ignore-case": [
+        "account1",
+        "account2"
+       ]
+      }
+     }
+    ]
+   },
+   "actual": "{\"account\":[{\"anything-but\":{\"equals-ignore-case\":[\"account1\",\"account2\"]}}]}"
+  },
+  {
+   "logicalId": "MyPrefixEqualsIgnoreCaseC9726B40",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPrefixEqualsIgnoreCaseC9726B40",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyPrefixEqualsIgnoreCaseC9726B40",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "account": [
+     {
+      "prefix": {
+       "equals-ignore-case": "prefix-"
+      }
+     }
+    ]
+   },
+   "actual": "{\"account\":[{\"prefix\":{\"equals-ignore-case\":\"prefix-\"}}]}"
+  },
+  {
+   "logicalId": "MySuffixEqualsIgnoreCaseBE2DDE03",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MySuffixEqualsIgnoreCaseBE2DDE03",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MySuffixEqualsIgnoreCaseBE2DDE03",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "account": [
+     {
+      "suffix": {
+       "equals-ignore-case": "-suffix"
+      }
+     }
+    ]
+   },
+   "actual": "{\"account\":[{\"suffix\":{\"equals-ignore-case\":\"-suffix\"}}]}"
+  }
+ ]
+}

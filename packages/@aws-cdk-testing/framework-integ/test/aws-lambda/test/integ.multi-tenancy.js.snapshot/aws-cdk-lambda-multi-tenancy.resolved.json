@@ -1,0 +1,44 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-lambda-multi-tenancy",
+ "resources": {
+  "MultiTenantFunctionServiceRole35BDB41D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "MultiTenantFunctionE34A13A1": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "foo"
+    },
+    "Handler": "index.handler",
+    "Role": "${MultiTenantFunctionServiceRole35BDB41D.Arn}",
+    "Runtime": "nodejs24.x",
+    "TenancyConfig": {
+     "TenantIsolationMode": "PER_TENANT"
+    }
+   },
+   "DependsOn": [
+    "MultiTenantFunctionServiceRole35BDB41D"
+   ]
+  }
+ },
+ "unresolved": []
+}

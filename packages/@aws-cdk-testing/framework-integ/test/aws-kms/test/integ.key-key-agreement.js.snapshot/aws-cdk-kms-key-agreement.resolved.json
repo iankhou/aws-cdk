@@ -1,0 +1,29 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-kms-key-agreement",
+ "resources": {
+  "MyKeyAgreementKey1B696107": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "KeySpec": "ECC_NIST_P256",
+    "KeyUsage": "KEY_AGREEMENT"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": []
+}

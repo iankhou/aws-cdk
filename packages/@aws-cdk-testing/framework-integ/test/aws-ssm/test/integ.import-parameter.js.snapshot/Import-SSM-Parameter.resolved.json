@@ -1,0 +1,59 @@
+{
+ "version": "1",
+ "stackName": "Import-SSM-Parameter",
+ "resources": {
+  "StringParameter472EED0E": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "Initial parameter value",
+    "Name": "import-parameter-test"
+   }
+  }
+ },
+ "outputs": {
+  "ImportedWithNameOutput": {
+   "Value": "ami-0d065802f9b6ad690"
+  },
+  "ImportedWithIntrinsicOutput": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "{{resolve:ssm:",
+      {
+       "Ref": "StringParameter472EED0E"
+      },
+      "}}"
+     ]
+    ]
+   }
+  },
+  "ImportedWithForceFlagOutput": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "{{resolve:ssm:",
+      {
+       "Ref": "StringParameter472EED0E"
+      },
+      "}}"
+     ]
+    ]
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Outputs.ImportedWithIntrinsicOutput.Value",
+   "intrinsic": "Fn::Join",
+   "reason": "evaluates to a dynamic reference, which CloudFormation resolves at deployment"
+  },
+  {
+   "path": "Outputs.ImportedWithForceFlagOutput.Value",
+   "intrinsic": "Fn::Join",
+   "reason": "evaluates to a dynamic reference, which CloudFormation resolves at deployment"
+  }
+ ]
+}

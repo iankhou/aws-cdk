@@ -1,0 +1,75 @@
+{
+ "version": "1",
+ "stackName": "integ-iam-imported-role-3",
+ "resources": {
+  "roleToBeImportedCAC1213C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sqs.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "RoleName": "mutableRoleToBeImported"
+   }
+  },
+  "ManagedPolicy7BAB786E": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "Description": "",
+    "ManagedPolicyName": "${ManagedPolicy7BAB786E.Name}",
+    "Path": "/",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:ListBucket",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:s3:::my-bucket"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Roles": [
+     "mutableRoleToBeImported"
+    ]
+   }
+  },
+  "ManagedPolicy135BDEF37": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "Description": "",
+    "ManagedPolicyName": "${ManagedPolicy135BDEF37.Name}",
+    "Path": "/",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:ListBucket",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:s3:::my-bucket"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Roles": [
+     "mutableRoleToBeImported"
+    ]
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefroleToBeImportedCAC1213CDE38D2C6": {
+   "Value": "${roleToBeImportedCAC1213C}",
+   "Export": {
+    "Name": "integ-iam-imported-role-3:ExportsOutputRefroleToBeImportedCAC1213CDE38D2C6"
+   }
+  }
+ },
+ "unresolved": []
+}

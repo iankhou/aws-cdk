@@ -1,0 +1,30 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-metricfilter-apply-on-transformed-logs-integ",
+ "resources": {
+  "LogGroupF5B46931": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MetricFilter1B93B6E5": {
+   "Type": "AWS::Logs::MetricFilter",
+   "Properties": {
+    "ApplyOnTransformedLogs": true,
+    "FilterPattern": "{ $.latency = \"*\" }",
+    "LogGroupName": "${LogGroupF5B46931}",
+    "MetricTransformations": [
+     {
+      "MetricName": "Latency",
+      "MetricNamespace": "MyApp",
+      "MetricValue": "1"
+     }
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

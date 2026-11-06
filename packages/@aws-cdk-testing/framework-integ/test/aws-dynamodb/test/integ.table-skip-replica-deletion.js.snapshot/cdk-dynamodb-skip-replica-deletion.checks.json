@@ -1,0 +1,198 @@
+{
+ "stackName": "cdk-dynamodb-skip-replica-deletion",
+ "summary": {
+  "pass": 15,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "AttributeDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "AttributeType": "S"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "KeySchema",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ],
+   "actual": [
+    {
+     "AttributeName": "id",
+     "KeyType": "HASH"
+    }
+   ]
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "BillingMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "PAY_PER_REQUEST",
+   "actual": "PAY_PER_REQUEST"
+  },
+  {
+   "logicalId": "TableCD117FA1",
+   "type": "AWS::DynamoDB::Table",
+   "property": "StreamSpecification",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StreamEnabled": true,
+    "StreamViewType": "NEW_AND_OLD_IMAGES"
+   },
+   "actual": {
+    "StreamEnabled": true,
+    "StreamViewType": "NEW_AND_OLD_IMAGES"
+   }
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRole9B3DAE1774B041B9",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRole9B3DAE1774B041B9",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DynamoDB replication managed policy for table ${TableCD117FA1}",
+   "actual": "DynamoDB replication managed policy for table ${TableCD117FA1}"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRole9B3DAE1774B041B9",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Path",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/",
+   "actual": "/"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRole9B3DAE1774B041B9",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "dynamodb:*",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableCD117FA1}",
+       "arn:${AWS::Partition}:dynamodb:eu-west-2:${AWS::AccountId}:table/${TableCD117FA1}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22dynamodb%3A%2A%22%2C%22Resource%22%3A%5B%22arn%3Aaws%3Adynamodb%3A${AWS::Region}%3A${AWS::AccountId}%3Atable%2F${TableCD117FA1}%22%2C%22arn%3Aaws%3Adynamodb%3Aeu-west-2%3A${AWS::AccountId}%3Atable%2F${TableCD117FA1}%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderOnEventHandlerServiceRole9B3DAE1774B041B9",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Roles",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "cdk-dynamodb-skip-replica-OnEventHandlerServiceRole-z9bEBrVNb8os"
+   ],
+   "actual": [
+    "cdk-dynamodb-skip-replica-OnEventHandlerServiceRole-z9bEBrVNb8os"
+   ]
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleE14EFE68A525E1C7",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleE14EFE68A525E1C7",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "DynamoDB replication managed policy for table ${TableCD117FA1}",
+   "actual": "DynamoDB replication managed policy for table ${TableCD117FA1}"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleE14EFE68A525E1C7",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Path",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/",
+   "actual": "/"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleE14EFE68A525E1C7",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "dynamodb:DescribeTable",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableCD117FA1}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%22dynamodb%3ADescribeTable%22%2C%22Resource%22%3A%5B%22arn%3Aaws%3Adynamodb%3A${AWS::Region}%3A${AWS::AccountId}%3Atable%2F${TableCD117FA1}%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TableSourceTableAttachedManagedPolicycdkdynamodbskipreplicadeletionawscdkawsdynamodbReplicaProviderIsCompleteHandlerServiceRoleE14EFE68A525E1C7",
+   "type": "AWS::IAM::ManagedPolicy",
+   "property": "Roles",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "cdk-dynamodb-skip-replica-IsCompleteHandlerServiceR-7K1PlUgSkQ4j"
+   ],
+   "actual": [
+    "cdk-dynamodb-skip-replica-IsCompleteHandlerServiceR-7K1PlUgSkQ4j"
+   ]
+  },
+  {
+   "logicalId": "awscdkawsdynamodbReplicaProviderNestedStackawscdkawsdynamodbReplicaProviderNestedStackResource18E3F12D",
+   "type": "AWS::CloudFormation::Stack",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

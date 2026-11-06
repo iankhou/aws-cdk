@@ -1,0 +1,141 @@
+{
+ "version": "1",
+ "stackName": "cdk-ses-email-identity-from-arn-integ",
+ "resources": {
+  "HostedZoneDB99F866": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "cdk.dev."
+   }
+  },
+  "EmailIdentityDkimDnsToken1BA32ACB3": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${EmailIdentity7187767D.DkimDNSTokenName1}",
+    "ResourceRecords": [
+     "${EmailIdentity7187767D.DkimDNSTokenValue1}"
+    ],
+    "TTL": "1800",
+    "Type": "CNAME"
+   }
+  },
+  "EmailIdentityDkimDnsToken2BBEBB8EC": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${EmailIdentity7187767D.DkimDNSTokenName2}",
+    "ResourceRecords": [
+     "${EmailIdentity7187767D.DkimDNSTokenValue2}"
+    ],
+    "TTL": "1800",
+    "Type": "CNAME"
+   }
+  },
+  "EmailIdentityDkimDnsToken3BB5E8A49": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${EmailIdentity7187767D.DkimDNSTokenName3}",
+    "ResourceRecords": [
+     "${EmailIdentity7187767D.DkimDNSTokenValue3}"
+    ],
+    "TTL": "1800",
+    "Type": "CNAME"
+   }
+  },
+  "EmailIdentity7187767D": {
+   "Type": "AWS::SES::EmailIdentity",
+   "Properties": {
+    "EmailIdentity": "cdk.dev",
+    "MailFromAttributes": {
+     "MailFromDomain": "${EmailIdentityMailFromMxRecordCEAAECD0}"
+    }
+   }
+  },
+  "EmailIdentityMailFromMxRecordCEAAECD0": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${EmailIdentityMailFromMxRecordCEAAECD0}.",
+    "ResourceRecords": [
+     "10 feedback-smtp.${AWS::Region}.amazonses.com"
+    ],
+    "TTL": "1800",
+    "Type": "MX"
+   }
+  },
+  "EmailIdentityMailFromTxtRecordE6B5E5D0": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${EmailIdentityMailFromMxRecordCEAAECD0}.",
+    "ResourceRecords": [
+     "\"v=spf1 include:amazonses.com ~all\""
+    ],
+    "TTL": "1800",
+    "Type": "TXT"
+   }
+  },
+  "FunctionServiceRole675BB04A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "FunctionServiceRoleDefaultPolicy2F49994A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ses:SendEmail",
+        "ses:SendRawEmail"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:identity/${EmailIdentity7187767D}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "FunctionServiceRoleDefaultPolicy2F49994A",
+    "Roles": [
+     "${FunctionServiceRole675BB04A}"
+    ]
+   }
+  },
+  "Function76856677": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "ab3156800c2f322f16da8bff913172139189a387dd64a4e622f82a790561fd4d.zip"
+    },
+    "FunctionName": "email-sending-lambda-from-arn",
+    "Handler": "index.lambda_handler",
+    "Role": "${FunctionServiceRole675BB04A.Arn}",
+    "Runtime": "python3.11"
+   },
+   "DependsOn": [
+    "FunctionServiceRoleDefaultPolicy2F49994A",
+    "FunctionServiceRole675BB04A"
+   ]
+  }
+ },
+ "unresolved": []
+}

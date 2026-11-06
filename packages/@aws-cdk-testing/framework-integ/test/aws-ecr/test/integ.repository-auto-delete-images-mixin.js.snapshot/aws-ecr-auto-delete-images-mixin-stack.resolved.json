@@ -1,0 +1,21 @@
+{
+ "version": "1",
+ "stackName": "aws-ecr-auto-delete-images-mixin-stack",
+ "resources": {
+  "Repo": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "EmptyOnDelete": true,
+    "RepositoryName": "delete-even-if-containing-images-mixin"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "RepositoryName": {
+   "Value": "${Repo}"
+  }
+ },
+ "unresolved": []
+}

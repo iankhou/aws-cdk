@@ -1,0 +1,451 @@
+{
+ "stackName": "aws-cdk-sfn-evaluate-expression-isolation-integ",
+ "summary": {
+  "pass": 35
+ },
+ "results": [
+  {
+   "logicalId": "WriteGlobalEvalFunctionAA712FC7",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "WriteGlobalEvalFunctionAA712FC7",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "WriteGlobalEvalFunctionAA712FC7",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "WriteGlobalEvalFunctionAA712FC7",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${EvalServiceRolef4f556a4ef7a49cd8036c5b0567376fd10E01C41}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${EvalServiceRolef4f556a4ef7a49cd8036c5b0567376fd10E01C41}"
+  },
+  {
+   "logicalId": "WriteGlobalEvalFunctionLogGroup5670EDF6",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "WriteGlobalEvalFunctionLogGroup5670EDF6",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${WriteGlobalEvalFunctionAA712FC7}",
+   "actual": "/aws/lambda/${WriteGlobalEvalFunctionAA712FC7}"
+  },
+  {
+   "logicalId": "WriteGlobalEvalFunctionLogGroup5670EDF6",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "EvalServiceRolef4f556a4ef7a49cd8036c5b0567376fd10E01C41",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EvalServiceRolef4f556a4ef7a49cd8036c5b0567376fd10E01C41",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "EvalServiceRolef4f556a4ef7a49cd8036c5b0567376fd10E01C41",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "WriterStateMachineRole49CD680D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "WriterStateMachineRole49CD680D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "WriterStateMachineRoleDefaultPolicyFCA40AD5",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "WriterStateMachineRoleDefaultPolicyFCA40AD5",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "WriterStateMachineRoleDefaultPolicyFCA40AD5",
+   "actual": "WriterStateMachineRoleDefaultPolicyFCA40AD5"
+  },
+  {
+   "logicalId": "WriterStateMachineRoleDefaultPolicyFCA40AD5",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${WriteGlobalEvalFunctionAA712FC7}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${WriteGlobalEvalFunctionAA712FC7}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${WriteGlobalEvalFunctionAA712FC7}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${WriteGlobalEvalFunctionAA712FC7}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "WriterStateMachineRoleDefaultPolicyFCA40AD5",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${WriterStateMachineRole49CD680D}",
+   "actual": "${WriterStateMachineRole49CD680D}"
+  },
+  {
+   "logicalId": "WriterStateMachine6121E0EB",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "WriterStateMachine6121E0EB",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "WriteGlobal",
+    "States": {
+     "WriteGlobal": {
+      "End": true,
+      "Type": "Task",
+      "ResultPath": "$.written",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${WriteGlobalEvalFunctionAA712FC7}",
+      "Parameters": {
+       "expression": "(globalThis.__evaluateExpressionMarker = $.marker)",
+       "expressionAttributeValues": {
+        "$.marker.$": "$.marker"
+       }
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "WriteGlobal",
+    "States": {
+     "WriteGlobal": {
+      "End": true,
+      "Type": "Task",
+      "ResultPath": "$.written",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${WriteGlobalEvalFunctionAA712FC7}",
+      "Parameters": {
+       "expression": "(globalThis.__evaluateExpressionMarker = $.marker)",
+       "expressionAttributeValues": {
+        "$.marker.$": "$.marker"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "WriterStateMachine6121E0EB",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${WriterStateMachineRole49CD680D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${WriterStateMachineRole49CD680D}"
+  },
+  {
+   "logicalId": "ReadGlobalEvalFunctionB50D576F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ReadGlobalEvalFunctionB50D576F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "ReadGlobalEvalFunctionB50D576F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "ReadGlobalEvalFunctionB50D576F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${EvalServiceRolef4f556a4ef7a49cd8036c5b0567376fd10E01C41}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${EvalServiceRolef4f556a4ef7a49cd8036c5b0567376fd10E01C41}"
+  },
+  {
+   "logicalId": "ReadGlobalEvalFunctionLogGroupCE90F81B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ReadGlobalEvalFunctionLogGroupCE90F81B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${ReadGlobalEvalFunctionB50D576F}",
+   "actual": "/aws/lambda/${ReadGlobalEvalFunctionB50D576F}"
+  },
+  {
+   "logicalId": "ReadGlobalEvalFunctionLogGroupCE90F81B",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "ReaderStateMachineRole2626724F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ReaderStateMachineRole2626724F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "ReaderStateMachineRoleDefaultPolicyE9C050E3",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ReaderStateMachineRoleDefaultPolicyE9C050E3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ReaderStateMachineRoleDefaultPolicyE9C050E3",
+   "actual": "ReaderStateMachineRoleDefaultPolicyE9C050E3"
+  },
+  {
+   "logicalId": "ReaderStateMachineRoleDefaultPolicyE9C050E3",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ReadGlobalEvalFunctionB50D576F}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ReadGlobalEvalFunctionB50D576F}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ReadGlobalEvalFunctionB50D576F}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ReadGlobalEvalFunctionB50D576F}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ReaderStateMachineRoleDefaultPolicyE9C050E3",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ReaderStateMachineRole2626724F}",
+   "actual": "${ReaderStateMachineRole2626724F}"
+  },
+  {
+   "logicalId": "ReaderStateMachine715F784A",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ReaderStateMachine715F784A",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "ReadGlobal",
+    "States": {
+     "ReadGlobal": {
+      "End": true,
+      "Type": "Task",
+      "ResultPath": "$.markerType",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ReadGlobalEvalFunctionB50D576F}",
+      "Parameters": {
+       "expression": "typeof globalThis.__evaluateExpressionMarker",
+       "expressionAttributeValues": {}
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "ReadGlobal",
+    "States": {
+     "ReadGlobal": {
+      "End": true,
+      "Type": "Task",
+      "ResultPath": "$.markerType",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ReadGlobalEvalFunctionB50D576F}",
+      "Parameters": {
+       "expression": "typeof globalThis.__evaluateExpressionMarker",
+       "expressionAttributeValues": {}
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "ReaderStateMachine715F784A",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ReaderStateMachineRole2626724F}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ReaderStateMachineRole2626724F}"
+  }
+ ]
+}

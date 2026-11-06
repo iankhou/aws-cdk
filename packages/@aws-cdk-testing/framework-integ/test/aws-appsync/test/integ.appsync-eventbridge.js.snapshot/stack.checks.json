@@ -1,0 +1,122 @@
+{
+ "stackName": "stack",
+ "summary": {
+  "no handler": 6,
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "EventBridgeApi398AE60D",
+   "type": "AWS::AppSync::GraphQLApi",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventBridgeApiSchema535E9664",
+   "type": "AWS::AppSync::GraphQLSchema",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventBridgeApiDefaultApiKeyC757E0EA",
+   "type": "AWS::AppSync::ApiKey",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventBridgeApiEventBridgeDsServiceRoleF433388F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EventBridgeApiEventBridgeDsServiceRoleF433388F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "appsync.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22appsync.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "EventBridgeApiEventBridgeDsServiceRoleDefaultPolicyF1047C06",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "EventBridgeApiEventBridgeDsServiceRoleDefaultPolicyF1047C06",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "EventBridgeApiEventBridgeDsServiceRoleDefaultPolicyF1047C06",
+   "actual": "EventBridgeApiEventBridgeDsServiceRoleDefaultPolicyF1047C06"
+  },
+  {
+   "logicalId": "EventBridgeApiEventBridgeDsServiceRoleDefaultPolicyF1047C06",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "events:PutEvents",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/stackDestinationEventBus3059F22F"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "events:PutEvents",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/stackDestinationEventBus3059F22F"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "EventBridgeApiEventBridgeDsServiceRoleDefaultPolicyF1047C06",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${EventBridgeApiEventBridgeDsServiceRoleF433388F}",
+   "actual": "${EventBridgeApiEventBridgeDsServiceRoleF433388F}"
+  },
+  {
+   "logicalId": "EventBridgeApiEventBridgeDs3E3BC289",
+   "type": "AWS::AppSync::DataSource",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "EventBridgeApiEventResolverD968F6C6",
+   "type": "AWS::AppSync::Resolver",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "DestinationEventBus776315F0",
+   "type": "AWS::Events::EventBus",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

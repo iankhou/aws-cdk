@@ -1,0 +1,140 @@
+{
+ "version": "1",
+ "stackName": "GlueWorkflowTriggerStack",
+ "resources": {
+  "Workflow193EF7C1": {
+   "Type": "AWS::Glue::Workflow",
+   "Properties": {
+    "Description": "MyWorkflow"
+   }
+  },
+  "WorkflowOnDemandTriggerEE8E75A1": {
+   "Type": "AWS::Glue::Trigger",
+   "Properties": {
+    "Actions": [
+     {
+      "JobName": "${InboundJobEDA3CBF4}"
+     }
+    ],
+    "Type": "ON_DEMAND",
+    "WorkflowName": "${Workflow193EF7C1}"
+   }
+  },
+  "WorkflowConditionalTrigger133C0CA8": {
+   "Type": "AWS::Glue::Trigger",
+   "Properties": {
+    "Actions": [
+     {
+      "JobName": "${OutboundJobB5826414}"
+     }
+    ],
+    "EventBatchingCondition": {
+     "BatchSize": 1,
+     "BatchWindow": 900
+    },
+    "Predicate": {
+     "Conditions": [
+      {
+       "JobName": "${InboundJobEDA3CBF4}",
+       "LogicalOperator": "EQUALS",
+       "State": "SUCCEEDED"
+      }
+     ]
+    },
+    "Type": "CONDITIONAL",
+    "WorkflowName": "${Workflow193EF7C1}"
+   }
+  },
+  "JobRole014917C6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "glue.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "JobRoleDefaultPolicy5DE0D8F9": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+        "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "JobRoleDefaultPolicy5DE0D8F9",
+    "Roles": [
+     "${JobRole014917C6}"
+    ]
+   }
+  },
+  "OutboundJobB5826414": {
+   "Type": "AWS::Glue::Job",
+   "Properties": {
+    "Command": {
+     "Name": "glueetl",
+     "PythonVersion": "3",
+     "ScriptLocation": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/432033e3218068a915d2532fa9be7858a12b228a2ae6e5c10faccd9097b1e855.py"
+    },
+    "DefaultArguments": {
+     "--job-language": "python",
+     "--enable-continuous-cloudwatch-log": "true",
+     "--enable-metrics": "",
+     "--enable-observability-metrics": "true"
+    },
+    "GlueVersion": "4.0",
+    "JobRunQueuingEnabled": false,
+    "NumberOfWorkers": 2,
+    "Role": "${JobRole014917C6.Arn}",
+    "WorkerType": "G.2X"
+   }
+  },
+  "InboundJobEDA3CBF4": {
+   "Type": "AWS::Glue::Job",
+   "Properties": {
+    "Command": {
+     "Name": "glueetl",
+     "PythonVersion": "3",
+     "ScriptLocation": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/432033e3218068a915d2532fa9be7858a12b228a2ae6e5c10faccd9097b1e855.py"
+    },
+    "DefaultArguments": {
+     "--job-language": "python",
+     "--enable-continuous-cloudwatch-log": "true",
+     "--enable-metrics": "",
+     "--enable-observability-metrics": "true"
+    },
+    "GlueVersion": "4.0",
+    "JobRunQueuingEnabled": false,
+    "NumberOfWorkers": 2,
+    "Role": "${JobRole014917C6.Arn}",
+    "WorkerType": "G.2X"
+   }
+  }
+ },
+ "outputs": {
+  "WorkflowName": {
+   "Value": "${Workflow193EF7C1}"
+  }
+ },
+ "unresolved": []
+}

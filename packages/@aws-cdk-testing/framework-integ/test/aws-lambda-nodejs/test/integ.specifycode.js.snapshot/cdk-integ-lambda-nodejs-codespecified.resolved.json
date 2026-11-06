@@ -1,0 +1,50 @@
+{
+ "version": "1",
+ "stackName": "cdk-integ-lambda-nodejs-codespecified",
+ "resources": {
+  "codespecifiedServiceRole6246BDD0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "codespecified4DB27836": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "1a1a5806c7ba6c308e1a83f863e2d6f1f82a6daeb20286116d4a8b049faf1506.zip"
+    },
+    "Handler": "mylambdafile.handler",
+    "Role": "${codespecifiedServiceRole6246BDD0.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "codespecifiedServiceRole6246BDD0"
+   ]
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefcodespecified4DB278361BE8156E": {
+   "Value": "${codespecified4DB27836}",
+   "Export": {
+    "Name": "cdk-integ-lambda-nodejs-codespecified:ExportsOutputRefcodespecified4DB278361BE8156E"
+   }
+  }
+ },
+ "unresolved": []
+}

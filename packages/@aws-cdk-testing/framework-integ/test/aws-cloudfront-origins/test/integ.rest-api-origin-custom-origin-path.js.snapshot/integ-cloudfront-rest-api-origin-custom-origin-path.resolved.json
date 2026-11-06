@@ -1,0 +1,124 @@
+{
+ "version": "1",
+ "stackName": "integ-cloudfront-rest-api-origin-custom-origin-path",
+ "resources": {
+  "RestApi0C43BF4B": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "EndpointConfiguration": {
+     "Types": [
+      "REGIONAL"
+     ]
+    },
+    "Name": "RestApi"
+   }
+  },
+  "RestApiCloudWatchRoleE3ED6605": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "RestApiAccount7C83CF5A": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": "${RestApiCloudWatchRoleE3ED6605.Arn}"
+   },
+   "DependsOn": [
+    "RestApi0C43BF4B"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "RestApiDeployment180EC50368af6d4b358eff290c08cb2de07c4042": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": "${RestApi0C43BF4B}"
+   },
+   "DependsOn": [
+    "RestApiGET0F59260B"
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "RestApiDeploymentStageprod3855DE66": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": "${RestApiDeployment180EC50368af6d4b358eff290c08cb2de07c4042}",
+    "RestApiId": "${RestApi0C43BF4B}",
+    "StageName": "prod"
+   },
+   "DependsOn": [
+    "RestApiAccount7C83CF5A"
+   ]
+  },
+  "RestApiGET0F59260B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": "${RestApi0C43BF4B.RootResourceId}",
+    "RestApiId": "${RestApi0C43BF4B}"
+   }
+  },
+  "Distribution830FAC52": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "integcloudfrontrestapiorigincustomoriginpathDistributionOrigin1635825EA",
+      "ViewerProtocolPolicy": "allow-all"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only",
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": "${RestApi0C43BF4B}.execute-api.${AWS::Region}.amazonaws.com",
+       "Id": "integcloudfrontrestapiorigincustomoriginpathDistributionOrigin1635825EA",
+       "OriginPath": ""
+      }
+     ]
+    }
+   }
+  }
+ },
+ "outputs": {
+  "RestApiEndpoint0551178A": {
+   "Value": "https://${RestApi0C43BF4B}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${RestApiDeploymentStageprod3855DE66}/"
+  }
+ },
+ "unresolved": [],
+ "accountWide": [
+  "RestApiAccount7C83CF5A"
+ ]
+}

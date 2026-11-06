@@ -1,0 +1,65 @@
+{
+ "version": "1",
+ "stackName": "batch-stack",
+ "resources": {
+  "minimalPropsBatchServiceRole9654F574": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "batch.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBatchServiceRole"
+    ]
+   }
+  },
+  "minimalPropsAB6FCC72": {
+   "Type": "AWS::Batch::ComputeEnvironment",
+   "Properties": {
+    "ServiceRole": "${minimalPropsBatchServiceRole9654F574.Arn}",
+    "State": "ENABLED",
+    "Type": "unmanaged"
+   }
+  },
+  "IntegServiceRole5FCF74D8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "batch.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBatchServiceRole"
+    ]
+   }
+  },
+  "maximalProps886802F8": {
+   "Type": "AWS::Batch::ComputeEnvironment",
+   "Properties": {
+    "ComputeEnvironmentName": "unmanagedIntegTestCE",
+    "ServiceRole": "${IntegServiceRole5FCF74D8.Arn}",
+    "State": "ENABLED",
+    "Type": "unmanaged",
+    "UnmanagedvCpus": 256
+   }
+  }
+ },
+ "unresolved": []
+}

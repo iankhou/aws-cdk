@@ -1,0 +1,425 @@
+{
+ "stackName": "aws-stepfunctions-integ",
+ "summary": {
+  "pass": 23
+ },
+ "results": [
+  {
+   "logicalId": "HandlerServiceRoleFCDC14AE",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "HandlerServiceRoleFCDC14AE",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "HandlerServiceRoleFCDC14AE",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Handler886CB40B",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Handler886CB40B",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.main",
+   "actual": "index.main"
+  },
+  {
+   "logicalId": "Handler886CB40B",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "Handler886CB40B",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${HandlerServiceRoleFCDC14AE}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${HandlerServiceRoleFCDC14AE}"
+  },
+  {
+   "logicalId": "CallbackHandlerServiceRole3689695E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CallbackHandlerServiceRole3689695E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CallbackHandlerServiceRole3689695E",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CallbackHandler4434C38D",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CallbackHandler4434C38D",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.main",
+   "actual": "index.main"
+  },
+  {
+   "logicalId": "CallbackHandler4434C38D",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "CallbackHandler4434C38D",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CallbackHandlerServiceRole3689695E}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CallbackHandlerServiceRole3689695E}"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineRoleDefaultPolicyDF1E6607",
+   "actual": "StateMachineRoleDefaultPolicyDF1E6607"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CallbackHandler4434C38D}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Handler886CB40B}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CallbackHandler4434C38D}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Handler886CB40B}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CallbackHandler4434C38D}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Handler886CB40B}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CallbackHandler4434C38D}:*",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Handler886CB40B}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineRoleB840431D}",
+   "actual": "${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Invoke Handler",
+    "States": {
+     "Invoke Handler": {
+      "Next": "Invoke Handler with task token",
+      "Retry": [
+       {
+        "ErrorEquals": [
+         "Lambda.ClientExecutionTimeoutException",
+         "Lambda.ServiceException",
+         "Lambda.AWSLambdaException",
+         "Lambda.SdkClientException"
+        ],
+        "IntervalSeconds": 2,
+        "MaxAttempts": 6,
+        "BackoffRate": 2
+       }
+      ],
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::lambda:invoke",
+      "Parameters": {
+       "FunctionName": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Handler886CB40B}",
+       "Payload.$": "$"
+      }
+     },
+     "Invoke Handler with task token": {
+      "Next": "Job Complete?",
+      "Retry": [
+       {
+        "ErrorEquals": [
+         "Lambda.ClientExecutionTimeoutException",
+         "Lambda.ServiceException",
+         "Lambda.AWSLambdaException",
+         "Lambda.SdkClientException"
+        ],
+        "IntervalSeconds": 2,
+        "MaxAttempts": 6,
+        "BackoffRate": 2
+       }
+      ],
+      "Type": "Task",
+      "InputPath": "$.guid",
+      "ResultPath": "$.status",
+      "Resource": "arn:${AWS::Partition}:states:::lambda:invoke.waitForTaskToken",
+      "Parameters": {
+       "FunctionName": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CallbackHandler4434C38D}",
+       "Payload": {
+        "token.$": "$$.Task.Token"
+       }
+      }
+     },
+     "Job Complete?": {
+      "Type": "Choice",
+      "Choices": [
+       {
+        "Variable": "$.status",
+        "StringEquals": "FAILED",
+        "Next": "Job Failed"
+       },
+       {
+        "Variable": "$.status",
+        "StringEquals": "SUCCEEDED",
+        "Next": "Final step"
+       }
+      ]
+     },
+     "Job Failed": {
+      "Type": "Fail",
+      "Error": "DescribeJob returned FAILED",
+      "Cause": "AWS Batch Job Failed"
+     },
+     "Final step": {
+      "Type": "Pass",
+      "End": true
+     }
+    },
+    "TimeoutSeconds": 30
+   },
+   "actual": {
+    "StartAt": "Invoke Handler",
+    "States": {
+     "Invoke Handler": {
+      "Next": "Invoke Handler with task token",
+      "Retry": [
+       {
+        "ErrorEquals": [
+         "Lambda.ClientExecutionTimeoutException",
+         "Lambda.ServiceException",
+         "Lambda.AWSLambdaException",
+         "Lambda.SdkClientException"
+        ],
+        "IntervalSeconds": 2,
+        "MaxAttempts": 6,
+        "BackoffRate": 2
+       }
+      ],
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::lambda:invoke",
+      "Parameters": {
+       "FunctionName": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Handler886CB40B}",
+       "Payload.$": "$"
+      }
+     },
+     "Invoke Handler with task token": {
+      "Next": "Job Complete?",
+      "Retry": [
+       {
+        "ErrorEquals": [
+         "Lambda.ClientExecutionTimeoutException",
+         "Lambda.ServiceException",
+         "Lambda.AWSLambdaException",
+         "Lambda.SdkClientException"
+        ],
+        "IntervalSeconds": 2,
+        "MaxAttempts": 6,
+        "BackoffRate": 2
+       }
+      ],
+      "Type": "Task",
+      "InputPath": "$.guid",
+      "ResultPath": "$.status",
+      "Resource": "arn:${AWS::Partition}:states:::lambda:invoke.waitForTaskToken",
+      "Parameters": {
+       "FunctionName": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${CallbackHandler4434C38D}",
+       "Payload": {
+        "token.$": "$$.Task.Token"
+       }
+      }
+     },
+     "Job Complete?": {
+      "Type": "Choice",
+      "Choices": [
+       {
+        "Variable": "$.status",
+        "StringEquals": "FAILED",
+        "Next": "Job Failed"
+       },
+       {
+        "Variable": "$.status",
+        "StringEquals": "SUCCEEDED",
+        "Next": "Final step"
+       }
+      ]
+     },
+     "Job Failed": {
+      "Type": "Fail",
+      "Error": "DescribeJob returned FAILED",
+      "Cause": "AWS Batch Job Failed"
+     },
+     "Final step": {
+      "Type": "Pass",
+      "End": true
+     }
+    },
+    "TimeoutSeconds": 30
+   }
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}"
+  }
+ ]
+}

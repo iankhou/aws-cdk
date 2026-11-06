@@ -1,0 +1,841 @@
+{
+ "stackName": "Stack2",
+ "summary": {
+  "pass": 71
+ },
+ "results": [
+  {
+   "logicalId": "MyFunc1ServiceRoleF96C5B5C",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc1ServiceRoleF96C5B5C",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFunc1ServiceRoleF96C5B5C",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunc1ServiceRoleDefaultPolicy3C5E9573",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc1ServiceRoleDefaultPolicy3C5E9573",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyFunc1ServiceRoleDefaultPolicy3C5E9573",
+   "actual": "MyFunc1ServiceRoleDefaultPolicy3C5E9573"
+  },
+  {
+   "logicalId": "MyFunc1ServiceRoleDefaultPolicy3C5E9573",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyFunc1ServiceRoleDefaultPolicy3C5E9573",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyFunc1ServiceRoleF96C5B5C}",
+   "actual": "${MyFunc1ServiceRoleF96C5B5C}"
+  },
+  {
+   "logicalId": "MyFunc11BE70A62",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc11BE70A62",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunc11BE70A62",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyFunc11BE70A62",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc1ServiceRoleF96C5B5C}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc1ServiceRoleF96C5B5C}"
+  },
+  {
+   "logicalId": "MyFunc11BE70A62",
+   "type": "AWS::Lambda::Function",
+   "property": "Architectures",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "x86_64"
+   ],
+   "actual": [
+    "x86_64"
+   ]
+  },
+  {
+   "logicalId": "MyFunc11BE70A62",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-handler"
+   },
+   "actual": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-handler"
+   }
+  },
+  {
+   "logicalId": "MyFunc11BE70A62",
+   "type": "AWS::Lambda::Function",
+   "property": "TracingConfig.Mode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Active",
+   "actual": "Active"
+  },
+  {
+   "logicalId": "MyFunc11BE70A62",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-nodejs-amd64-ver-1-30-1:1"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-nodejs-amd64-ver-1-30-1:1"
+   ]
+  },
+  {
+   "logicalId": "MyFunc2ServiceRole68E50443",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc2ServiceRole68E50443",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFunc2ServiceRole68E50443",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunc2ServiceRoleDefaultPolicyEF3319F6",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc2ServiceRoleDefaultPolicyEF3319F6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyFunc2ServiceRoleDefaultPolicyEF3319F6",
+   "actual": "MyFunc2ServiceRoleDefaultPolicyEF3319F6"
+  },
+  {
+   "logicalId": "MyFunc2ServiceRoleDefaultPolicyEF3319F6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyFunc2ServiceRoleDefaultPolicyEF3319F6",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyFunc2ServiceRole68E50443}",
+   "actual": "${MyFunc2ServiceRole68E50443}"
+  },
+  {
+   "logicalId": "MyFunc242557A97",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc242557A97",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunc242557A97",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "MyFunc242557A97",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc2ServiceRole68E50443}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc2ServiceRole68E50443}"
+  },
+  {
+   "logicalId": "MyFunc242557A97",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-instrument"
+   },
+   "actual": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-instrument"
+   }
+  },
+  {
+   "logicalId": "MyFunc242557A97",
+   "type": "AWS::Lambda::Function",
+   "property": "TracingConfig.Mode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Active",
+   "actual": "Active"
+  },
+  {
+   "logicalId": "MyFunc242557A97",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-python-amd64-ver-1-29-0:1"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-python-amd64-ver-1-29-0:1"
+   ]
+  },
+  {
+   "logicalId": "MyFunc3ServiceRoleA69795ED",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc3ServiceRoleA69795ED",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFunc3ServiceRoleA69795ED",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunc3ServiceRoleDefaultPolicy449C4CBA",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc3ServiceRoleDefaultPolicy449C4CBA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyFunc3ServiceRoleDefaultPolicy449C4CBA",
+   "actual": "MyFunc3ServiceRoleDefaultPolicy449C4CBA"
+  },
+  {
+   "logicalId": "MyFunc3ServiceRoleDefaultPolicy449C4CBA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyFunc3ServiceRoleDefaultPolicy449C4CBA",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyFunc3ServiceRoleA69795ED}",
+   "actual": "${MyFunc3ServiceRoleA69795ED}"
+  },
+  {
+   "logicalId": "MyFunc3666B7A2F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc3666B7A2F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunc3666B7A2F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "MyFunc3666B7A2F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc3ServiceRoleA69795ED}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc3ServiceRoleA69795ED}"
+  },
+  {
+   "logicalId": "MyFunc3666B7A2F",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-instrument"
+   },
+   "actual": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-instrument"
+   }
+  },
+  {
+   "logicalId": "MyFunc3666B7A2F",
+   "type": "AWS::Lambda::Function",
+   "property": "TracingConfig.Mode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Active",
+   "actual": "Active"
+  },
+  {
+   "logicalId": "MyFunc3666B7A2F",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-java-wrapper-amd64-ver-1-32-0:4"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-java-wrapper-amd64-ver-1-32-0:4"
+   ]
+  },
+  {
+   "logicalId": "MyFunc4ServiceRole93C4DEFF",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc4ServiceRole93C4DEFF",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFunc4ServiceRole93C4DEFF",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunc4ServiceRoleDefaultPolicy68C57CB2",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc4ServiceRoleDefaultPolicy68C57CB2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyFunc4ServiceRoleDefaultPolicy68C57CB2",
+   "actual": "MyFunc4ServiceRoleDefaultPolicy68C57CB2"
+  },
+  {
+   "logicalId": "MyFunc4ServiceRoleDefaultPolicy68C57CB2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyFunc4ServiceRoleDefaultPolicy68C57CB2",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyFunc4ServiceRole93C4DEFF}",
+   "actual": "${MyFunc4ServiceRole93C4DEFF}"
+  },
+  {
+   "logicalId": "MyFunc4B88F85C6",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc4B88F85C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunc4B88F85C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "MyFunc4B88F85C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc4ServiceRole93C4DEFF}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc4ServiceRole93C4DEFF}"
+  },
+  {
+   "logicalId": "MyFunc4B88F85C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-instrument"
+   },
+   "actual": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-instrument"
+   }
+  },
+  {
+   "logicalId": "MyFunc4B88F85C6",
+   "type": "AWS::Lambda::Function",
+   "property": "TracingConfig.Mode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Active",
+   "actual": "Active"
+  },
+  {
+   "logicalId": "MyFunc4B88F85C6",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-java-agent-amd64-ver-1-32-0:4"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-java-agent-amd64-ver-1-32-0:4"
+   ]
+  },
+  {
+   "logicalId": "MyFunc5ServiceRoleFE4CE92B",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc5ServiceRoleFE4CE92B",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyFunc5ServiceRoleFE4CE92B",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyFunc5ServiceRoleDefaultPolicy96ABEA66",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc5ServiceRoleDefaultPolicy96ABEA66",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyFunc5ServiceRoleDefaultPolicy96ABEA66",
+   "actual": "MyFunc5ServiceRoleDefaultPolicy96ABEA66"
+  },
+  {
+   "logicalId": "MyFunc5ServiceRoleDefaultPolicy96ABEA66",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "xray:PutTelemetryRecords",
+       "xray:PutTraceSegments"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyFunc5ServiceRoleDefaultPolicy96ABEA66",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyFunc5ServiceRoleFE4CE92B}",
+   "actual": "${MyFunc5ServiceRoleFE4CE92B}"
+  },
+  {
+   "logicalId": "MyFunc586573B53",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyFunc586573B53",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyFunc586573B53",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.9",
+   "actual": "python3.9"
+  },
+  {
+   "logicalId": "MyFunc586573B53",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc5ServiceRoleFE4CE92B}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyFunc5ServiceRoleFE4CE92B}"
+  },
+  {
+   "logicalId": "MyFunc586573B53",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-instrument"
+   },
+   "actual": {
+    "AWS_LAMBDA_EXEC_WRAPPER": "/opt/otel-instrument"
+   }
+  },
+  {
+   "logicalId": "MyFunc586573B53",
+   "type": "AWS::Lambda::Function",
+   "property": "TracingConfig.Mode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Active",
+   "actual": "Active"
+  },
+  {
+   "logicalId": "MyFunc586573B53",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-collector-amd64-ver-0-115-0:2"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:lambda:${AWS::Region}:901920570463:layer:aws-otel-collector-amd64-ver-0-115-0:2"
+   ]
+  }
+ ]
+}

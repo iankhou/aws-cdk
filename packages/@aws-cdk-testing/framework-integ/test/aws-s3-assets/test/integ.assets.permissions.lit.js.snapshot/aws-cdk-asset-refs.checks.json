@@ -1,0 +1,80 @@
+{
+ "stackName": "aws-cdk-asset-refs",
+ "summary": {
+  "no handler": 1,
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "MyUserGroupDA7A39B2",
+   "type": "AWS::IAM::Group",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyUserGroupDefaultPolicy50C5D742",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyUserGroupDefaultPolicy50C5D742",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyUserGroupDefaultPolicy50C5D742",
+   "actual": "MyUserGroupDefaultPolicy50C5D742"
+  },
+  {
+   "logicalId": "MyUserGroupDefaultPolicy50C5D742",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "s3:GetBucket*",
+       "s3:GetObject*",
+       "s3:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/*",
+       "arn:${AWS::Partition}:s3:::cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyUserGroupDefaultPolicy50C5D742",
+   "type": "AWS::IAM::Policy",
+   "property": "Groups.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyUserGroupDA7A39B2}",
+   "actual": "${MyUserGroupDA7A39B2}"
+  }
+ ]
+}

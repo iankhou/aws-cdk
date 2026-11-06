@@ -1,0 +1,270 @@
+{
+ "stackName": "aws-cdk-step-functions-task-create-transform-job-integ",
+ "summary": {
+  "pass": 12
+ },
+ "results": [
+  {
+   "logicalId": "BatchInferenceTaskSagemakerTransformRoleEABCCE1A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "BatchInferenceTaskSagemakerTransformRoleEABCCE1A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sagemaker.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22sagemaker.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "BatchInferenceTaskSagemakerTransformRoleEABCCE1A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonSageMakerFullAccess"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonSageMakerFullAccess"
+   ]
+  },
+  {
+   "logicalId": "SimpleStateMachineRole0CBC135A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SimpleStateMachineRole0CBC135A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "SimpleStateMachineRoleDefaultPolicyF5E1CB8E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SimpleStateMachineRoleDefaultPolicyF5E1CB8E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SimpleStateMachineRoleDefaultPolicyF5E1CB8E",
+   "actual": "SimpleStateMachineRoleDefaultPolicyF5E1CB8E"
+  },
+  {
+   "logicalId": "SimpleStateMachineRoleDefaultPolicyF5E1CB8E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "sagemaker:AddTags",
+       "sagemaker:CreateTransformJob",
+       "sagemaker:DescribeTransformJob",
+       "sagemaker:StopTransformJob"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:transform-job/*"
+     },
+     {
+      "Action": "sagemaker:ListTags",
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": "iam:PassRole",
+      "Condition": {
+       "StringEquals": {
+        "iam:PassedToService": "sagemaker.amazonaws.com"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${BatchInferenceTaskSagemakerTransformRoleEABCCE1A}"
+     },
+     {
+      "Action": [
+       "events:DescribeRule",
+       "events:PutRule",
+       "events:PutTargets"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/StepFunctionsGetEventsForSageMakerTransformJobsRule"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "sagemaker:AddTags",
+       "sagemaker:CreateTransformJob",
+       "sagemaker:DescribeTransformJob",
+       "sagemaker:StopTransformJob"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:sagemaker:${AWS::Region}:${AWS::AccountId}:transform-job/*"
+     },
+     {
+      "Action": "sagemaker:ListTags",
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": "iam:PassRole",
+      "Condition": {
+       "StringEquals": {
+        "iam:PassedToService": "sagemaker.amazonaws.com"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${BatchInferenceTaskSagemakerTransformRoleEABCCE1A}"
+     },
+     {
+      "Action": [
+       "events:DescribeRule",
+       "events:PutRule",
+       "events:PutTargets"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/StepFunctionsGetEventsForSageMakerTransformJobsRule"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SimpleStateMachineRoleDefaultPolicyF5E1CB8E",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SimpleStateMachineRole0CBC135A}",
+   "actual": "${SimpleStateMachineRole0CBC135A}"
+  },
+  {
+   "logicalId": "SimpleStateMachineE8E2CF40",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SimpleStateMachineE8E2CF40",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "BatchInferenceTask",
+    "States": {
+     "BatchInferenceTask": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createTransformJob.sync",
+      "Parameters": {
+       "ModelName": "MyModelName",
+       "TransformInput": {
+        "DataSource": {
+         "S3DataSource": {
+          "S3Uri": "s3://inputbucket/prefix",
+          "S3DataType": "S3Prefix"
+         }
+        }
+       },
+       "TransformJobName": "MyTransformJob",
+       "TransformOutput": {
+        "S3OutputPath": "s3://outputbucket/result"
+       },
+       "TransformResources": {
+        "InstanceCount": 1,
+        "InstanceType": "ml.m4.xlarge"
+       }
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "BatchInferenceTask",
+    "States": {
+     "BatchInferenceTask": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::sagemaker:createTransformJob.sync",
+      "Parameters": {
+       "ModelName": "MyModelName",
+       "TransformInput": {
+        "DataSource": {
+         "S3DataSource": {
+          "S3Uri": "s3://inputbucket/prefix",
+          "S3DataType": "S3Prefix"
+         }
+        }
+       },
+       "TransformJobName": "MyTransformJob",
+       "TransformOutput": {
+        "S3OutputPath": "s3://outputbucket/result"
+       },
+       "TransformResources": {
+        "InstanceCount": 1,
+        "InstanceType": "ml.m4.xlarge"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "SimpleStateMachineE8E2CF40",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SimpleStateMachineRole0CBC135A}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SimpleStateMachineRole0CBC135A}"
+  }
+ ]
+}

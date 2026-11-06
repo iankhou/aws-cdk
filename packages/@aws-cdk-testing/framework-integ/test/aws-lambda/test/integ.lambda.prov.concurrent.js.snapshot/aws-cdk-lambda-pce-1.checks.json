@@ -1,0 +1,398 @@
+{
+ "stackName": "aws-cdk-lambda-pce-1",
+ "summary": {
+  "pass": 37,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "MyLambdaAliasPCEServiceRoleF7C9F212",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCEServiceRoleF7C9F212",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCEServiceRoleF7C9F212",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyLambdaAliasPCEServiceRoleDefaultPolicyE7418D56",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCEServiceRoleDefaultPolicyE7418D56",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyLambdaAliasPCEServiceRoleDefaultPolicyE7418D56",
+   "actual": "MyLambdaAliasPCEServiceRoleDefaultPolicyE7418D56"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCEServiceRoleDefaultPolicyE7418D56",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "*",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "*",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyLambdaAliasPCEServiceRoleDefaultPolicyE7418D56",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyLambdaAliasPCEServiceRoleF7C9F212}",
+   "actual": "${MyLambdaAliasPCEServiceRoleF7C9F212}"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCED0B8D751",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCED0B8D751",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "version-hash:7b7db7b3be081423975b40fb6b8a1b1d",
+   "actual": "version-hash:7b7db7b3be081423975b40fb6b8a1b1d"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCED0B8D751",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCED0B8D751",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCED0B8D751",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaAliasPCEServiceRoleF7C9F212}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaAliasPCEServiceRoleF7C9F212}"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCECurrentVersion072335D37ab574d45753c23192dd39d06f334695",
+   "type": "AWS::Lambda::Version",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaAliasPCECurrentVersion072335D37ab574d45753c23192dd39d06f334695",
+   "type": "AWS::Lambda::Version",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyLambdaAliasPCED0B8D751}",
+   "actual": "${MyLambdaAliasPCED0B8D751}"
+  },
+  {
+   "logicalId": "Alias325C5727",
+   "type": "AWS::Lambda::Alias",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "AliasAliasPermissionAF30F9E8",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AliasAliasPermissionAF30F9E8",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "AliasAliasPermissionAF30F9E8",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Alias325C5727}",
+   "actual": "${Alias325C5727}"
+  },
+  {
+   "logicalId": "AliasAliasPermissionAF30F9E8",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "cloudformation.amazonaws.com"
+   },
+   "actual": {
+    "Service": "cloudformation.amazonaws.com"
+   }
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEServiceRole2ACFB73E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEServiceRole2ACFB73E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEServiceRole2ACFB73E",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEServiceRoleDefaultPolicy229A1552",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEServiceRoleDefaultPolicy229A1552",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyLambdaVersionPCEServiceRoleDefaultPolicy229A1552",
+   "actual": "MyLambdaVersionPCEServiceRoleDefaultPolicy229A1552"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEServiceRoleDefaultPolicy229A1552",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "*",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "*",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEServiceRoleDefaultPolicy229A1552",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyLambdaVersionPCEServiceRole2ACFB73E}",
+   "actual": "${MyLambdaVersionPCEServiceRole2ACFB73E}"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEA3A0D86B",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEA3A0D86B",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "version-hash:0b94eb2f5b03ac57e565c348d24dc820",
+   "actual": "version-hash:0b94eb2f5b03ac57e565c348d24dc820"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEA3A0D86B",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEA3A0D86B",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCEA3A0D86B",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaVersionPCEServiceRole2ACFB73E}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyLambdaVersionPCEServiceRole2ACFB73E}"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCECurrentVersion27FC39322cebb0c49cd3347c94dbeb424f97cc83",
+   "type": "AWS::Lambda::Version",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCECurrentVersion27FC39322cebb0c49cd3347c94dbeb424f97cc83",
+   "type": "AWS::Lambda::Version",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyLambdaVersionPCEA3A0D86B}",
+   "actual": "${MyLambdaVersionPCEA3A0D86B}"
+  },
+  {
+   "logicalId": "MyLambdaVersionPCECurrentVersion27FC39322cebb0c49cd3347c94dbeb424f97cc83",
+   "type": "AWS::Lambda::Version",
+   "property": "ProvisionedConcurrencyConfig.ProvisionedConcurrentExecutions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 5,
+   "actual": 5
+  },
+  {
+   "logicalId": "Alias29455D932",
+   "type": "AWS::Lambda::Alias",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Alias2AliasPermission2448514B6",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Alias2AliasPermission2448514B6",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "Alias2AliasPermission2448514B6",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Alias29455D932}",
+   "actual": "${Alias29455D932}"
+  },
+  {
+   "logicalId": "Alias2AliasPermission2448514B6",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Service": "cloudformation.amazonaws.com"
+   },
+   "actual": {
+    "Service": "cloudformation.amazonaws.com"
+   }
+  }
+ ]
+}

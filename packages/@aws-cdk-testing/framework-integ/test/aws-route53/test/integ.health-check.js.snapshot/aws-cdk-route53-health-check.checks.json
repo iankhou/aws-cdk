@@ -1,0 +1,295 @@
+{
+ "stackName": "aws-cdk-route53-health-check",
+ "summary": {
+  "no handler": 21,
+  "pass": 16
+ },
+ "results": [
+  {
+   "logicalId": "HostedZoneDB99F866",
+   "type": "AWS::Route53::HostedZone",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HealthCheckHttp45CD8FAC",
+   "type": "AWS::Route53::HealthCheck",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordHttp1E242324",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordHttp2C99D5094",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HealthCheckHttpsE7EFCB62",
+   "type": "AWS::Route53::HealthCheck",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordHttps92EB971E",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordHttps2771FA16F",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HealthCheckTcpC39A45DC",
+   "type": "AWS::Route53::HealthCheck",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordTcp8F151AA4",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordTcp21F5B796C",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HealthCheckCalculated4BA910E7",
+   "type": "AWS::Route53::HealthCheck",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordCalculatedFD72BD16",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordCalculated22107FE58",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "LambdaFunctionServiceRoleC555A460",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaFunctionServiceRoleC555A460",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "LambdaFunctionServiceRoleC555A460",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "LambdaFunctionBF21E41F",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LambdaFunctionBF21E41F",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "LambdaFunctionBF21E41F",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs20.x",
+   "actual": "nodejs20.x"
+  },
+  {
+   "logicalId": "LambdaFunctionBF21E41F",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaFunctionServiceRoleC555A460}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${LambdaFunctionServiceRoleC555A460}"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "ComparisonOperator",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GreaterThanOrEqualToThreshold",
+   "actual": "GreaterThanOrEqualToThreshold"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "EvaluationPeriods",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 10,
+   "actual": 10
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Threshold",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "MetricName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Errors",
+   "actual": "Errors"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Namespace",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS/Lambda",
+   "actual": "AWS/Lambda"
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Dimensions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Name": "FunctionName",
+     "Value": "${LambdaFunctionBF21E41F}"
+    }
+   ],
+   "actual": [
+    {
+     "Name": "FunctionName",
+     "Value": "${LambdaFunctionBF21E41F}"
+    }
+   ]
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Period",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 60,
+   "actual": 60
+  },
+  {
+   "logicalId": "Alarm7103F465",
+   "type": "AWS::CloudWatch::Alarm",
+   "property": "Statistic",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Sum",
+   "actual": "Sum"
+  },
+  {
+   "logicalId": "HealthCheckCloudWatch996681BB",
+   "type": "AWS::Route53::HealthCheck",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordCloudWatchD1A5EC36",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordCloudWatch26685731B",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster",
+   "type": "AWS::Route53RecoveryControl::Cluster",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "RoutingControl",
+   "type": "AWS::Route53RecoveryControl::RoutingControl",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "HealthCheckRecoveryControl984D4A84",
+   "type": "AWS::Route53::HealthCheck",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordRecoveryControl04C35A7A",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ARecordRecoveryControl24A358DFD",
+   "type": "AWS::Route53::RecordSet",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

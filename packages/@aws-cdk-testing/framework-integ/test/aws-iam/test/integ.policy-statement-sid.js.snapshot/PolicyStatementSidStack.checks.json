@@ -1,0 +1,99 @@
+{
+ "stackName": "PolicyStatementSidStack",
+ "summary": {
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "TestRole6C9272DF",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRole6C9272DF",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TestRoleDefaultPolicyD1C92014",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TestRoleDefaultPolicyD1C92014",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TestRoleDefaultPolicyD1C92014",
+   "actual": "TestRoleDefaultPolicyD1C92014"
+  },
+  {
+   "logicalId": "TestRoleDefaultPolicyD1C92014",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Sid": "ValidAlphanumericSid"
+     },
+     {
+      "Action": "dynamodb:PutItem",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Sid": "AnotherValidSid123"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Sid": "ValidAlphanumericSid"
+     },
+     {
+      "Action": "dynamodb:PutItem",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Sid": "AnotherValidSid123"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TestRoleDefaultPolicyD1C92014",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TestRole6C9272DF}",
+   "actual": "${TestRole6C9272DF}"
+  }
+ ]
+}

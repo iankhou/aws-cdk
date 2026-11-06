@@ -1,0 +1,61 @@
+{
+ "stackName": "eventbue-customer-managed-key",
+ "summary": {
+  "pass": 2,
+  "no handler": 1
+ },
+ "results": [
+  {
+   "logicalId": "KmsKey46693ADD",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KmsKey46693ADD",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:GenerateDataKey"
+      ],
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}",
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/eventbuecustomermanagedkeyBus178EB991",
+        "kms:EncryptionContext:aws:events:event-bus:arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/eventbuecustomermanagedkeyBus178EB991"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  }, {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"events.amazonaws.com\"\n    },\n    \"Action\" : [ \"kms:Decrypt\", \"kms:DescribeKey\", \"kms:GenerateDataKey\" ],\n    \"Resource\" : \"*\",\n    \"Condition\" : {\n      \"StringEquals\" : {\n        \"aws:SourceAccount\" : \"${AWS::AccountId}\",\n        \"kms:EncryptionContext:aws:events:event-bus:arn\" : \"arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/eventbuecustomermanagedkeyBus178EB991\",\n        \"aws:SourceArn\" : \"arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/eventbuecustomermanagedkeyBus178EB991\"\n      }\n    }\n  } ]\n}"
+  },
+  {
+   "logicalId": "BusEA82B648",
+   "type": "AWS::Events::EventBus",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

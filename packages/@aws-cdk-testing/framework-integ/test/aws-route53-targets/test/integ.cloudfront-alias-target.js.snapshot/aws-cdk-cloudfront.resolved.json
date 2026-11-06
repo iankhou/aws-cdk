@@ -1,0 +1,131 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-cloudfront",
+ "resources": {
+  "HostedZoneDB99F866": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "test.public."
+   }
+  },
+  "HostedZoneAlias40D2E006": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": "${MyDistributionCFDistributionDE147309.DomainName}",
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       "${AWS::Partition}",
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${HostedZoneAaaaAliasD8DDBA5A}.",
+    "Type": "A"
+   }
+  },
+  "HostedZoneAaaaAliasD8DDBA5A": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": "${MyDistributionCFDistributionDE147309.DomainName}",
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       "${AWS::Partition}",
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${HostedZoneAaaaAliasD8DDBA5A}.",
+    "Type": "AAAA"
+   }
+  },
+  "HostedZoneHttpsAlias0D3AF83C": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": "${MyDistributionCFDistributionDE147309.DomainName}",
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       "${AWS::Partition}",
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "${HostedZoneDB99F866}",
+    "Name": "${HostedZoneAaaaAliasD8DDBA5A}.",
+    "Type": "HTTPS"
+   }
+  },
+  "Bucket83908E77": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "MyDistributionCFDistributionDE147309": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "DefaultCacheBehavior": {
+      "AllowedMethods": [
+       "GET",
+       "HEAD"
+      ],
+      "CachedMethods": [
+       "GET",
+       "HEAD"
+      ],
+      "Compress": true,
+      "ForwardedValues": {
+       "Cookies": {
+        "Forward": "none"
+       },
+       "QueryString": false
+      },
+      "TargetOriginId": "origin1",
+      "ViewerProtocolPolicy": "redirect-to-https"
+     },
+     "DefaultRootObject": "index.html",
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "ConnectionAttempts": 3,
+       "ConnectionTimeout": 10,
+       "DomainName": "${Bucket83908E77.RegionalDomainName}",
+       "Id": "origin1",
+       "S3OriginConfig": {}
+      }
+     ],
+     "PriceClass": "PriceClass_100",
+     "ViewerCertificate": {
+      "CloudFrontDefaultCertificate": true
+     }
+    }
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.HostedZoneAlias40D2E006.Properties.AliasTarget.HostedZoneId",
+   "intrinsic": "Fn::FindInMap",
+   "reason": "CloudFormation function Fn::FindInMap is not supported"
+  },
+  {
+   "path": "Resources.HostedZoneAaaaAliasD8DDBA5A.Properties.AliasTarget.HostedZoneId",
+   "intrinsic": "Fn::FindInMap",
+   "reason": "CloudFormation function Fn::FindInMap is not supported"
+  },
+  {
+   "path": "Resources.HostedZoneHttpsAlias0D3AF83C.Properties.AliasTarget.HostedZoneId",
+   "intrinsic": "Fn::FindInMap",
+   "reason": "CloudFormation function Fn::FindInMap is not supported"
+  }
+ ]
+}

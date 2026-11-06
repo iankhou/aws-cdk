@@ -1,0 +1,136 @@
+{
+ "stackName": "integ-distribution-default-viewer-protocol-policy",
+ "summary": {
+  "pass": 7
+ },
+ "results": [
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.HttpVersion",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "http2",
+   "actual": "http2"
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.IPV6Enabled",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.DefaultCacheBehavior",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "TargetOriginId": "integdistributiondefaultviewerprotocolpolicyDistributionOrigin105535DBD",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+   },
+   "actual": {
+    "TargetOriginId": "integdistributiondefaultviewerprotocolpolicyDistributionOrigin105535DBD",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.CacheBehaviors",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 2,
+    "Items": [
+     {
+      "PathPattern": "/images/*",
+      "TargetOriginId": "integdistributiondefaultviewerprotocolpolicyDistributionOrigin105535DBD",
+      "ViewerProtocolPolicy": "redirect-to-https",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     },
+     {
+      "PathPattern": "/api",
+      "TargetOriginId": "integdistributiondefaultviewerprotocolpolicyDistributionOrigin105535DBD",
+      "ViewerProtocolPolicy": "redirect-to-https",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 2,
+    "Items": [
+     {
+      "PathPattern": "/images/*",
+      "TargetOriginId": "integdistributiondefaultviewerprotocolpolicyDistributionOrigin105535DBD",
+      "ViewerProtocolPolicy": "redirect-to-https",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     },
+     {
+      "PathPattern": "/api",
+      "TargetOriginId": "integdistributiondefaultviewerprotocolpolicyDistributionOrigin105535DBD",
+      "ViewerProtocolPolicy": "redirect-to-https",
+      "Compress": true,
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "Distribution830FAC52",
+   "type": "AWS::CloudFront::Distribution",
+   "property": "DistributionConfig.Origins",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributiondefaultviewerprotocolpolicyDistributionOrigin105535DBD",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "Quantity": 1,
+    "Items": [
+     {
+      "Id": "integdistributiondefaultviewerprotocolpolicyDistributionOrigin105535DBD",
+      "DomainName": "www.example.com",
+      "CustomOriginConfig": {
+       "OriginProtocolPolicy": "https-only"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

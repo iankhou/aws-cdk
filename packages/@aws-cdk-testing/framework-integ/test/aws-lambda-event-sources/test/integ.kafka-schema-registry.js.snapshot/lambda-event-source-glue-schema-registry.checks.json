@@ -1,0 +1,357 @@
+{
+ "stackName": "lambda-event-source-glue-schema-registry",
+ "summary": {
+  "pass": 22,
+  "fail": 1,
+  "no handler": 3
+ },
+ "results": [
+  {
+   "logicalId": "GlueFunctionServiceRoleD5EDDC4C",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GlueFunctionServiceRoleD5EDDC4C",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "GlueFunctionServiceRoleD5EDDC4C",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "GlueFunctionServiceRoleDefaultPolicy16E5B38F",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GlueFunctionServiceRoleDefaultPolicy16E5B38F",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "GlueFunctionServiceRoleDefaultPolicy16E5B38F",
+   "actual": "GlueFunctionServiceRoleDefaultPolicy16E5B38F"
+  },
+  {
+   "logicalId": "GlueFunctionServiceRoleDefaultPolicy16E5B38F",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${GlueClientCertSecret3C32AE8A}",
+       "${GlueRootCASecretBD1C20BD}"
+      ]
+     },
+     {
+      "Action": "glue:GetRegistry",
+      "Effect": "Allow",
+      "Resource": "${SchemaRegistry}"
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": [
+       "${SchemaRegistry}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:schema/smk-glue-test-schema-registry/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${GlueClientCertSecret3C32AE8A}",
+       "${GlueRootCASecretBD1C20BD}"
+      ]
+     },
+     {
+      "Action": "glue:GetRegistry",
+      "Effect": "Allow",
+      "Resource": "${SchemaRegistry}"
+     },
+     {
+      "Action": "glue:GetSchemaVersion",
+      "Effect": "Allow",
+      "Resource": [
+       "${SchemaRegistry}",
+       "arn:${AWS::Partition}:glue:${AWS::Region}:${AWS::AccountId}:schema/smk-glue-test-schema-registry/*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "GlueFunctionServiceRoleDefaultPolicy16E5B38F",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${GlueFunctionServiceRoleD5EDDC4C}",
+   "actual": "${GlueFunctionServiceRoleD5EDDC4C}"
+  },
+  {
+   "logicalId": "GlueFunctionEB1182FC",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GlueFunctionEB1182FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "GlueFunctionEB1182FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "GlueFunctionEB1182FC",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${GlueFunctionServiceRoleD5EDDC4C}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${GlueFunctionServiceRoleD5EDDC4C}"
+  },
+  {
+   "logicalId": "GlueFunctionLogGroupEF019AD3",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GlueFunctionLogGroupEF019AD3",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${GlueFunctionEB1182FC}",
+   "actual": "/aws/lambda/${GlueFunctionEB1182FC}"
+  },
+  {
+   "logicalId": "GlueFunctionLogGroupEF019AD3",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${GlueFunctionEB1182FC}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${GlueFunctionEB1182FC}"
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPosition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TRIM_HORIZON",
+   "actual": "TRIM_HORIZON"
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "test-topic-smk-glue"
+   ],
+   "actual": [
+    "test-topic-smk-glue"
+   ]
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SourceAccessConfigurations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${GlueClientCertSecret3C32AE8A}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${GlueRootCASecretBD1C20BD}"
+    }
+   ],
+   "actual": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${GlueClientCertSecret3C32AE8A}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${GlueRootCASecretBD1C20BD}"
+    }
+   ]
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedEventSource",
+   "status": "fail",
+   "expected": {
+    "Endpoints": {
+     "KafkaBootstrapServers": [
+      "kafka-broker-1:9092",
+      "kafka-broker-2:9092",
+      "kafka-broker-3:9092"
+     ]
+    }
+   },
+   "actual": {
+    "Endpoints": {
+     "KAFKA_BOOTSTRAP_SERVERS": [
+      "kafka-broker-3:9092",
+      "kafka-broker-2:9092",
+      "kafka-broker-1:9092"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "ProvisionedPollerConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "MaximumPollers": 3,
+    "MinimumPollers": 1
+   },
+   "actual": {
+    "MinimumPollers": 1,
+    "MaximumPollers": 3
+   }
+  },
+  {
+   "logicalId": "GlueFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkglueBB4DBE04",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedKafkaEventSourceConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ConsumerGroupId": "test-consumer-group-smk-glue",
+    "SchemaRegistryConfig": {
+     "EventRecordFormat": "JSON",
+     "SchemaRegistryURI": "${SchemaRegistry}",
+     "SchemaValidationConfigs": [
+      {
+       "Attribute": "KEY"
+      }
+     ]
+    }
+   },
+   "actual": {
+    "ConsumerGroupId": "test-consumer-group-smk-glue",
+    "SchemaRegistryConfig": {
+     "SchemaRegistryURI": "${SchemaRegistry}",
+     "EventRecordFormat": "JSON",
+     "SchemaValidationConfigs": [
+      {
+       "Attribute": "KEY"
+      }
+     ]
+    },
+    "ConsumptionMode": "Stream"
+   }
+  },
+  {
+   "logicalId": "GlueRootCASecretBD1C20BD",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "GlueClientCertSecret3C32AE8A",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SchemaRegistry",
+   "type": "AWS::Glue::Registry",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

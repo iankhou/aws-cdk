@@ -1,0 +1,85 @@
+{
+ "version": "1",
+ "stackName": "kinesis-logsubscription-integ",
+ "resources": {
+  "MyStream5C050E93": {
+   "Type": "AWS::Kinesis::Stream",
+   "Properties": {
+    "RetentionPeriodHours": 24,
+    "ShardCount": 1,
+    "StreamEncryption": {
+     "EncryptionType": "KMS",
+     "KeyId": "alias/aws/kinesis"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "LogGroupF5B46931": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SubscriptionCloudWatchLogsCanPutRecords9C1223EC": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "logs.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "kinesis:ListShards",
+        "kinesis:PutRecord",
+        "kinesis:PutRecords"
+       ],
+       "Effect": "Allow",
+       "Resource": "${MyStream5C050E93.Arn}"
+      },
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": "${SubscriptionCloudWatchLogsCanPutRecords9C1223EC.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F",
+    "Roles": [
+     "${SubscriptionCloudWatchLogsCanPutRecords9C1223EC}"
+    ]
+   }
+  },
+  "Subscription391C9821": {
+   "Type": "AWS::Logs::SubscriptionFilter",
+   "Properties": {
+    "DestinationArn": "${MyStream5C050E93.Arn}",
+    "FilterPattern": "",
+    "LogGroupName": "${LogGroupF5B46931}",
+    "RoleArn": "${SubscriptionCloudWatchLogsCanPutRecords9C1223EC.Arn}"
+   },
+   "DependsOn": [
+    "SubscriptionCloudWatchLogsCanPutRecordsDefaultPolicy50D4970F"
+   ]
+  }
+ },
+ "unresolved": []
+}

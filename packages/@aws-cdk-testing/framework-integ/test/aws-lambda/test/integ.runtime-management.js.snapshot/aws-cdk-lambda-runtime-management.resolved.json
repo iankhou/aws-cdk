@@ -1,0 +1,44 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-lambda-runtime-management",
+ "resources": {
+  "LambdaServiceRoleA8ED4D3B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "LambdaD247545B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "foo"
+    },
+    "Handler": "index.handler",
+    "Role": "${LambdaServiceRoleA8ED4D3B.Arn}",
+    "Runtime": "nodejs20.x",
+    "RuntimeManagementConfig": {
+     "UpdateRuntimeOn": "Auto"
+    }
+   },
+   "DependsOn": [
+    "LambdaServiceRoleA8ED4D3B"
+   ]
+  }
+ },
+ "unresolved": []
+}

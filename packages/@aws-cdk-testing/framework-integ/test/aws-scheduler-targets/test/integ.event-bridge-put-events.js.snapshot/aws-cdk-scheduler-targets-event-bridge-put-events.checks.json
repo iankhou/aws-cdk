@@ -1,0 +1,404 @@
+{
+ "stackName": "aws-cdk-scheduler-targets-event-bridge-put-events",
+ "summary": {
+  "no handler": 3,
+  "pass": 28
+ },
+ "results": [
+  {
+   "logicalId": "MyParameter18BA547D",
+   "type": "AWS::SSM::Parameter",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleB840431D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineRoleDefaultPolicyDF1E6607",
+   "actual": "StateMachineRoleDefaultPolicyDF1E6607"
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "ssm:putParameter",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "ssm:putParameter",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineRoleDefaultPolicyDF1E6607",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineRoleB840431D}",
+   "actual": "${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "PutParameter",
+    "States": {
+     "PutParameter": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::aws-sdk:ssm:putParameter",
+      "Parameters": {
+       "Name.$": "$.Name",
+       "Value.$": "$.Value",
+       "Type": "String",
+       "Overwrite": true
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "PutParameter",
+    "States": {
+     "PutParameter": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::aws-sdk:ssm:putParameter",
+      "Parameters": {
+       "Name.$": "$.Name",
+       "Value.$": "$.Value",
+       "Type": "String",
+       "Overwrite": true
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "StateMachine2E01A3A5",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineRoleB840431D}"
+  },
+  {
+   "logicalId": "StateMachineEventsRoleDBCDECD1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineEventsRoleDBCDECD1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineEventsRoleDefaultPolicyFB602CA9",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineEventsRoleDefaultPolicyFB602CA9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineEventsRoleDefaultPolicyFB602CA9",
+   "actual": "StateMachineEventsRoleDefaultPolicyFB602CA9"
+  },
+  {
+   "logicalId": "StateMachineEventsRoleDefaultPolicyFB602CA9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${StateMachine2E01A3A5}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${StateMachine2E01A3A5}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineEventsRoleDefaultPolicyFB602CA9",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineEventsRoleDBCDECD1}",
+   "actual": "${StateMachineEventsRoleDBCDECD1}"
+  },
+  {
+   "logicalId": "EventBus7B8748AA",
+   "type": "AWS::Events::EventBus",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Transforms_dog_to_cat",
+   "actual": "Transforms_dog_to_cat"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "EventBusName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "EmojisTransformationEventBus",
+   "actual": "EmojisTransformationEventBus"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Trigger the step function ${StateMachine2E01A3A5.Name} every 10 minutes, which transforms the value of the parameter MyEventBridgePutParameter from 🐶 to 😺",
+   "actual": "Trigger the step function ${StateMachine2E01A3A5.Name} every 10 minutes, which transforms the value of the parameter MyEventBridgePutParameter from 🐶 to 😺"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "detail-type": [
+     "🐶➡️😺"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"🐶➡️😺\"]}"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${StateMachine2E01A3A5}",
+     "Id": "Target0",
+     "Input": "{\"Name\":\"MyEventBridgePutParameter\",\"Value\":\"😺\"}",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineEventsRoleDBCDECD1}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${StateMachine2E01A3A5}",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineEventsRoleDBCDECD1}",
+     "Input": "{\"Name\":\"MyEventBridgePutParameter\",\"Value\":\"😺\"}"
+    }
+   ]
+  },
+  {
+   "logicalId": "Schedule83A77FD1",
+   "type": "AWS::Scheduler::Schedule",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget6ff5322488E9B3",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget6ff5322488E9B3",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}",
+        "aws:SourceArn": "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule-group/default"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "scheduler.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22scheduler.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Ascheduler%3A${AWS::Region}%3A${AWS::AccountId}%3Aschedule-group%2Fdefault%22%2C%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget6ff532DefaultPolicy3F7032D5",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget6ff532DefaultPolicy3F7032D5",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SchedulerRoleForTarget6ff532DefaultPolicy3F7032D5",
+   "actual": "SchedulerRoleForTarget6ff532DefaultPolicy3F7032D5"
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget6ff532DefaultPolicy3F7032D5",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "events:PutEvents",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/EmojisTransformationEventBus"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "events:PutEvents",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/EmojisTransformationEventBus"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SchedulerRoleForTarget6ff532DefaultPolicy3F7032D5",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SchedulerRoleForTarget6ff5322488E9B3}",
+   "actual": "${SchedulerRoleForTarget6ff5322488E9B3}"
+  }
+ ]
+}

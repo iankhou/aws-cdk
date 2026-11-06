@@ -1,0 +1,1623 @@
+{
+ "stackName": "IntegEcsImportedTaskDefStack",
+ "summary": {
+  "pass": 119,
+  "unresolved": 6,
+  "fail": 1
+ },
+ "results": [
+  {
+   "logicalId": "ClusterEB0386A7",
+   "type": "AWS::ECS::Cluster",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcFAA3CEDF",
+   "type": "AWS::EC2::VPC",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcFAA3CEDF",
+   "type": "AWS::EC2::VPC",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/16",
+   "actual": "10.0.0.0/16"
+  },
+  {
+   "logicalId": "ClusterVpcFAA3CEDF",
+   "type": "AWS::EC2::VPC",
+   "property": "InstanceTenancy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "default",
+   "actual": "default"
+  },
+  {
+   "logicalId": "ClusterVpcFAA3CEDF",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsSupport",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "ClusterVpcFAA3CEDF",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsHostnames",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "ClusterVpcFAA3CEDF",
+   "type": "AWS::EC2::VPC",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcFAA3CEDF"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/18",
+   "actual": "10.0.0.0/18"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPublicSubnet1SubnetA9F7E0A5"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet1"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1RouteTable5594A636",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1RouteTable5594A636",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1RouteTable5594A636",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPublicSubnet1RouteTable5594A636"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet1RouteTable5594A636}",
+   "actual": "${ClusterVpcPublicSubnet1RouteTable5594A636}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet1SubnetA9F7E0A5}",
+   "actual": "${ClusterVpcPublicSubnet1SubnetA9F7E0A5}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet1RouteTable5594A636}",
+   "actual": "${ClusterVpcPublicSubnet1RouteTable5594A636}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}",
+   "actual": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+   "type": "AWS::EC2::Route",
+   "property": "GatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcIGW1E358A6E}",
+   "actual": "${ClusterVpcIGW1E358A6E}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1EIP433C56EE",
+   "type": "AWS::EC2::EIP",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1EIP433C56EE",
+   "type": "AWS::EC2::EIP",
+   "property": "Domain",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "vpc",
+   "actual": "vpc"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1EIP433C56EE",
+   "type": "AWS::EC2::EIP",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPublicSubnet1EIP433C56EE"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1NATGateway0693C346",
+   "type": "AWS::EC2::NatGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1NATGateway0693C346",
+   "type": "AWS::EC2::NatGateway",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet1SubnetA9F7E0A5}",
+   "actual": "${ClusterVpcPublicSubnet1SubnetA9F7E0A5}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1NATGateway0693C346",
+   "type": "AWS::EC2::NatGateway",
+   "property": "AllocationId",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet1NATGateway0693C346",
+   "type": "AWS::EC2::NatGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPublicSubnet1NATGateway0693C346"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet1"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2Subnet059113C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2Subnet059113C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2Subnet059113C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2Subnet059113C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.64.0/18",
+   "actual": "10.0.64.0/18"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2Subnet059113C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2Subnet059113C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet2"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPublicSubnet2Subnet059113C4"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2RouteTable7B43F18C",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2RouteTable7B43F18C",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2RouteTable7B43F18C",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet2"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPublicSubnet2RouteTable7B43F18C"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet2RouteTable7B43F18C}",
+   "actual": "${ClusterVpcPublicSubnet2RouteTable7B43F18C}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet2Subnet059113C4}",
+   "actual": "${ClusterVpcPublicSubnet2Subnet059113C4}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet2RouteTable7B43F18C}",
+   "actual": "${ClusterVpcPublicSubnet2RouteTable7B43F18C}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}",
+   "actual": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+   "type": "AWS::EC2::Route",
+   "property": "GatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcIGW1E358A6E}",
+   "actual": "${ClusterVpcIGW1E358A6E}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2EIP203DF3E5",
+   "type": "AWS::EC2::EIP",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2EIP203DF3E5",
+   "type": "AWS::EC2::EIP",
+   "property": "Domain",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "vpc",
+   "actual": "vpc"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2EIP203DF3E5",
+   "type": "AWS::EC2::EIP",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPublicSubnet2EIP203DF3E5"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet2"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2NATGateway00B24686",
+   "type": "AWS::EC2::NatGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2NATGateway00B24686",
+   "type": "AWS::EC2::NatGateway",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet2Subnet059113C4}",
+   "actual": "${ClusterVpcPublicSubnet2Subnet059113C4}"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2NATGateway00B24686",
+   "type": "AWS::EC2::NatGateway",
+   "property": "AllocationId",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ClusterVpcPublicSubnet2NATGateway00B24686",
+   "type": "AWS::EC2::NatGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPublicSubnet2NATGateway00B24686"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PublicSubnet2"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.128.0/18",
+   "actual": "10.0.128.0/18"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PrivateSubnet1"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPrivateSubnet1SubnetA4EB481A"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PrivateSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1RouteTableAssociation9B8A88D9",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1RouteTableAssociation9B8A88D9",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet1RouteTable5AAEDA3F}",
+   "actual": "${ClusterVpcPrivateSubnet1RouteTable5AAEDA3F}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1RouteTableAssociation9B8A88D9",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet1SubnetA4EB481A}",
+   "actual": "${ClusterVpcPrivateSubnet1SubnetA4EB481A}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet1RouteTable5AAEDA3F}",
+   "actual": "${ClusterVpcPrivateSubnet1RouteTable5AAEDA3F}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}",
+   "actual": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD",
+   "type": "AWS::EC2::Route",
+   "property": "NatGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet1NATGateway0693C346}",
+   "actual": "${ClusterVpcPublicSubnet1NATGateway0693C346}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.192.0/18",
+   "actual": "10.0.192.0/18"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PrivateSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PrivateSubnet2"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2RouteTable73064A66",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2RouteTable73064A66",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2RouteTable73064A66",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PrivateSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcPrivateSubnet2RouteTable73064A66"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc/PrivateSubnet2"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2RouteTableAssociationFB21349E",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2RouteTableAssociationFB21349E",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet2RouteTable73064A66}",
+   "actual": "${ClusterVpcPrivateSubnet2RouteTable73064A66}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2RouteTableAssociationFB21349E",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet2SubnetBD1ECB6E}",
+   "actual": "${ClusterVpcPrivateSubnet2SubnetBD1ECB6E}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2DefaultRoute011666AF",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2DefaultRoute011666AF",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet2RouteTable73064A66}",
+   "actual": "${ClusterVpcPrivateSubnet2RouteTable73064A66}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2DefaultRoute011666AF",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}",
+   "actual": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}"
+  },
+  {
+   "logicalId": "ClusterVpcPrivateSubnet2DefaultRoute011666AF",
+   "type": "AWS::EC2::Route",
+   "property": "NatGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcPublicSubnet2NATGateway00B24686}",
+   "actual": "${ClusterVpcPublicSubnet2NATGateway00B24686}"
+  },
+  {
+   "logicalId": "ClusterVpcIGW1E358A6E",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcIGW1E358A6E",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ClusterVpcIGW1E358A6E"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "IntegEcsImportedTaskDefStack"
+    },
+    {
+     "Key": "Name",
+     "Value": "IntegEcsImportedTaskDefStack/Cluster/Vpc"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcVPCGW47AC17E9",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterVpcVPCGW47AC17E9",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "InternetGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${ClusterVpcIGW1E358A6E}"
+   ],
+   "actual": [
+    "${ClusterVpcIGW1E358A6E}"
+   ]
+  },
+  {
+   "logicalId": "ClusterVpcVPCGW47AC17E9",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${ClusterVpcFAA3CEDF}"
+   ],
+   "actual": [
+    "${ClusterVpcFAA3CEDF}"
+   ]
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "Inline"
+   ],
+   "actual": [
+    "Inline"
+   ]
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Effect": "Allow",
+      "Action": [
+       "ec2:AuthorizeSecurityGroupIngress",
+       "ec2:AuthorizeSecurityGroupEgress",
+       "ec2:RevokeSecurityGroupIngress",
+       "ec2:RevokeSecurityGroupEgress"
+      ],
+      "Resource": [
+       "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/sg-08d0d75129b230e42"
+      ]
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22ec2%3AAuthorizeSecurityGroupIngress%22%2C%22ec2%3AAuthorizeSecurityGroupEgress%22%2C%22ec2%3ARevokeSecurityGroupIngress%22%2C%22ec2%3ARevokeSecurityGroupEgress%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Aec2%3A${AWS::Region}%3A${AWS::AccountId}%3Asecurity-group%2Fsg-08d0d75129b230e42%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lambda function for removing all inbound/outbound rules from the VPC default security group",
+   "actual": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "__entrypoint__.handler",
+   "actual": "__entrypoint__.handler"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0}"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 128,
+   "actual": 128
+  },
+  {
+   "logicalId": "TaskRole30FC0FBB",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskRole30FC0FBB",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ecs-tasks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ecs-tasks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "ContainerDefinitions",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "essential": true,
+     "image": "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest",
+     "name": "web",
+     "portMappings": [
+      {
+       "containerPort": 12345,
+       "hostPort": 12345,
+       "protocol": "tcp"
+      }
+     ]
+    }
+   ],
+   "actual": [
+    {
+     "name": "web",
+     "image": "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest",
+     "cpu": 0,
+     "links": [],
+     "portMappings": [
+      {
+       "containerPort": 12345,
+       "hostPort": 12345,
+       "protocol": "tcp"
+      }
+     ],
+     "essential": true,
+     "entryPoint": [],
+     "command": [],
+     "environment": [],
+     "environmentFiles": [],
+     "mountPoints": [],
+     "volumesFrom": [],
+     "secrets": [],
+     "dnsServers": [],
+     "dnsSearchDomains": [],
+     "extraHosts": [],
+     "dockerSecurityOptions": [],
+     "dockerLabels": {},
+     "ulimits": [],
+     "systemControls": [],
+     "credentialSpecs": []
+    }
+   ]
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Cpu",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "1024",
+   "actual": "1024"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Memory",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "2048",
+   "actual": "2048"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "TaskRoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskRole30FC0FBB}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskRole30FC0FBB}"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "Family",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TaskDefinitionA",
+   "actual": "TaskDefinitionA"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "NetworkMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "awsvpc",
+   "actual": "awsvpc"
+  },
+  {
+   "logicalId": "TaskDef54694570",
+   "type": "AWS::ECS::TaskDefinition",
+   "property": "RequiresCompatibilities",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "FARGATE"
+   ],
+   "actual": [
+    "FARGATE"
+   ]
+  },
+  {
+   "logicalId": "TaskDefImportEventsRole9184C90E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskDefImportEventsRole9184C90E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "TaskDefImportEventsRoleDefaultPolicyA6BD21B8",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskDefImportEventsRoleDefaultPolicyA6BD21B8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TaskDefImportEventsRoleDefaultPolicyA6BD21B8",
+   "actual": "TaskDefImportEventsRoleDefaultPolicyA6BD21B8"
+  },
+  {
+   "logicalId": "TaskDefImportEventsRoleDefaultPolicyA6BD21B8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "ecs:RunTask",
+      "Condition": {
+       "ArnEquals": {
+        "ecs:cluster": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${ClusterEB0386A7}"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:task-definition/TaskDefinitionA"
+     },
+     {
+      "Action": "ecs:TagResource",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ecs:${AWS::Region}:*:task/${ClusterEB0386A7}/*"
+     },
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskRole30FC0FBB}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "ecs:RunTask",
+      "Condition": {
+       "ArnEquals": {
+        "ecs:cluster": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${ClusterEB0386A7}"
+       }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:task-definition/TaskDefinitionA"
+     },
+     {
+      "Action": "ecs:TagResource",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ecs:${AWS::Region}:*:task/${ClusterEB0386A7}/*"
+     },
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskRole30FC0FBB}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "TaskDefImportEventsRoleDefaultPolicyA6BD21B8",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${TaskDefImportEventsRole9184C90E}",
+   "actual": "${TaskDefImportEventsRole9184C90E}"
+  },
+  {
+   "logicalId": "TaskDefImportSecurityGroup9D869A93",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TaskDefImportSecurityGroup9D869A93",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "IntegEcsImportedTaskDefStack/TaskDefImport/SecurityGroup",
+   "actual": "IntegEcsImportedTaskDefStack/TaskDefImport/SecurityGroup"
+  },
+  {
+   "logicalId": "TaskDefImportSecurityGroup9D869A93",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterVpcFAA3CEDF}",
+   "actual": "${ClusterVpcFAA3CEDF}"
+  },
+  {
+   "logicalId": "TaskDefImportSecurityGroup9D869A93",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 day)",
+   "actual": "rate(1 day)"
+  },
+  {
+   "logicalId": "Rule4C995B7F",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "fail",
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${ClusterEB0386A7}",
+     "EcsParameters": {
+      "LaunchType": "FARGATE",
+      "NetworkConfiguration": {
+       "AwsVpcConfiguration": {
+        "AssignPublicIp": "DISABLED",
+        "SecurityGroups": [
+         "${TaskDefImportSecurityGroup9D869A93}"
+        ],
+        "Subnets": [
+         "${ClusterVpcPrivateSubnet1SubnetA4EB481A}",
+         "${ClusterVpcPrivateSubnet2SubnetBD1ECB6E}"
+        ]
+       }
+      },
+      "TaskCount": 1,
+      "TaskDefinitionArn": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:task-definition/TaskDefinitionA"
+     },
+     "Id": "Target0",
+     "Input": "{}",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskDefImportEventsRole9184C90E}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${ClusterEB0386A7}",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${TaskDefImportEventsRole9184C90E}",
+     "Input": "{}",
+     "EcsParameters": {
+      "TaskDefinitionArn": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:task-definition/TaskDefinitionA",
+      "TaskCount": 1,
+      "LaunchType": "FARGATE",
+      "NetworkConfiguration": {
+       "awsvpcConfiguration": {
+        "Subnets": [
+         "${ClusterVpcPrivateSubnet1SubnetA4EB481A}",
+         "${ClusterVpcPrivateSubnet2SubnetBD1ECB6E}"
+        ],
+        "SecurityGroups": [
+         "${TaskDefImportSecurityGroup9D869A93}"
+        ],
+        "AssignPublicIp": "DISABLED"
+       }
+      },
+      "EnableECSManagedTags": false,
+      "EnableExecuteCommand": false
+     }
+    }
+   ]
+  }
+ ]
+}

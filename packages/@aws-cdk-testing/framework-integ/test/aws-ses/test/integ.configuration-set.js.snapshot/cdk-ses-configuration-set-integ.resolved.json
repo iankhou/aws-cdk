@@ -1,0 +1,127 @@
+{
+ "version": "1",
+ "stackName": "cdk-ses-configuration-set-integ",
+ "resources": {
+  "ConfigurationSet3DD38186": {
+   "Type": "AWS::SES::ConfigurationSet",
+   "Properties": {
+    "DeliveryOptions": {
+     "MaxDeliverySeconds": 600
+    }
+   }
+  },
+  "ConfigurationSetSns63B38980": {
+   "Type": "AWS::SES::ConfigurationSetEventDestination",
+   "Properties": {
+    "ConfigurationSetName": "${ConfigurationSet3DD38186}",
+    "EventDestination": {
+     "Enabled": true,
+     "MatchingEventTypes": [
+      "send",
+      "reject",
+      "bounce",
+      "complaint",
+      "delivery",
+      "open",
+      "click",
+      "renderingFailure",
+      "deliveryDelay",
+      "subscription"
+     ],
+     "SnsDestination": {
+      "TopicARN": "${TopicBFC7AF6E}"
+     }
+    }
+   },
+   "DependsOn": [
+    "TopicPolicyA1747468"
+   ]
+  },
+  "ConfigurationSetCloudWatch85E06FFB": {
+   "Type": "AWS::SES::ConfigurationSetEventDestination",
+   "Properties": {
+    "ConfigurationSetName": "${ConfigurationSet3DD38186}",
+    "EventDestination": {
+     "CloudWatchDestination": {
+      "DimensionConfigurations": [
+       {
+        "DefaultDimensionValue": "no_domain",
+        "DimensionName": "ses:from-domain",
+        "DimensionValueSource": "messageTag"
+       }
+      ]
+     },
+     "Enabled": true,
+     "MatchingEventTypes": [
+      "send",
+      "reject",
+      "bounce",
+      "complaint",
+      "delivery",
+      "open",
+      "click",
+      "renderingFailure",
+      "deliveryDelay",
+      "subscription"
+     ]
+    }
+   }
+  },
+  "ConfigurationSetEventBridgeABB541C9": {
+   "Type": "AWS::SES::ConfigurationSetEventDestination",
+   "Properties": {
+    "ConfigurationSetName": "${ConfigurationSet3DD38186}",
+    "EventDestination": {
+     "Enabled": true,
+     "EventBridgeDestination": {
+      "EventBusArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default"
+     },
+     "MatchingEventTypes": [
+      "send",
+      "reject",
+      "bounce",
+      "complaint",
+      "delivery",
+      "open",
+      "click",
+      "renderingFailure",
+      "deliveryDelay",
+      "subscription"
+     ]
+    }
+   }
+  },
+  "TopicBFC7AF6E": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "TopicPolicyA1747468": {
+   "Type": "AWS::SNS::TopicPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sns:Publish",
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceAccount": "${AWS::AccountId}",
+         "AWS:SourceArn": "arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:configuration-set/${ConfigurationSet3DD38186}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ses.amazonaws.com"
+       },
+       "Resource": "${TopicBFC7AF6E}",
+       "Sid": "0"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Topics": [
+     "${TopicBFC7AF6E}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

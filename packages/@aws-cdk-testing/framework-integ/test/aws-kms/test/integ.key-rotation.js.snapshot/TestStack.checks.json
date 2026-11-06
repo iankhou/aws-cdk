@@ -1,0 +1,53 @@
+{
+ "stackName": "TestStack",
+ "summary": {
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "keyFEDD6EC0",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "keyFEDD6EC0",
+   "type": "AWS::KMS::Key",
+   "property": "EnableKeyRotation",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "keyFEDD6EC0",
+   "type": "AWS::KMS::Key",
+   "property": "RotationPeriodInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 180,
+   "actual": 180
+  },
+  {
+   "logicalId": "keyFEDD6EC0",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  }
+ ]
+}

@@ -1,0 +1,284 @@
+{
+ "stackName": "aws-stepfunctions-tasks-call-aws-service-sfn-integ",
+ "summary": {
+  "pass": 18
+ },
+ "results": [
+  {
+   "logicalId": "ChildStateMachineRoleA7F7AB78",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ChildStateMachineRoleA7F7AB78",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "ChildStateMachineRoleDefaultPolicy8B4560F0",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ChildStateMachineRoleDefaultPolicy8B4560F0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ChildStateMachineRoleDefaultPolicy8B4560F0",
+   "actual": "ChildStateMachineRoleDefaultPolicy8B4560F0"
+  },
+  {
+   "logicalId": "ChildStateMachineRoleDefaultPolicy8B4560F0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:sendTaskSuccess",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:sendTaskSuccess",
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ChildStateMachineRoleDefaultPolicy8B4560F0",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ChildStateMachineRoleA7F7AB78}",
+   "actual": "${ChildStateMachineRoleA7F7AB78}"
+  },
+  {
+   "logicalId": "ChildStateMachine9133117F",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ChildStateMachine9133117F",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "SendTaskSuccess",
+    "States": {
+     "SendTaskSuccess": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::aws-sdk:sfn:sendTaskSuccess",
+      "Parameters": {
+       "Output.$": "$.output",
+       "TaskToken.$": "$.taskToken"
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "SendTaskSuccess",
+    "States": {
+     "SendTaskSuccess": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::aws-sdk:sfn:sendTaskSuccess",
+      "Parameters": {
+       "Output.$": "$.output",
+       "TaskToken.$": "$.taskToken"
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "ChildStateMachine9133117F",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ChildStateMachineRoleA7F7AB78}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ChildStateMachineRoleA7F7AB78}"
+  },
+  {
+   "logicalId": "ParentStateMachineRoleE902D002",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ParentStateMachineRoleE902D002",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "ParentStateMachineRoleDefaultPolicyA368A0BA",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ParentStateMachineRoleDefaultPolicyA368A0BA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ParentStateMachineRoleDefaultPolicyA368A0BA",
+   "actual": "ParentStateMachineRoleDefaultPolicyA368A0BA"
+  },
+  {
+   "logicalId": "ParentStateMachineRoleDefaultPolicyA368A0BA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${ChildStateMachine9133117F}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "states:StartExecution",
+      "Effect": "Allow",
+      "Resource": "${ChildStateMachine9133117F}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ParentStateMachineRoleDefaultPolicyA368A0BA",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ParentStateMachineRoleE902D002}",
+   "actual": "${ParentStateMachineRoleE902D002}"
+  },
+  {
+   "logicalId": "ParentStateMachine74EA937A",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ParentStateMachine74EA937A",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "StepFunctionsStartExecution",
+    "States": {
+     "StepFunctionsStartExecution": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::states:startExecution.waitForTaskToken",
+      "Parameters": {
+       "Input": {
+        "output.$": "$",
+        "taskToken.$": "$$.Task.Token"
+       },
+       "StateMachineArn": "${ChildStateMachine9133117F}"
+      }
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "StepFunctionsStartExecution",
+    "States": {
+     "StepFunctionsStartExecution": {
+      "End": true,
+      "Type": "Task",
+      "Resource": "arn:${AWS::Partition}:states:::states:startExecution.waitForTaskToken",
+      "Parameters": {
+       "Input": {
+        "output.$": "$",
+        "taskToken.$": "$$.Task.Token"
+       },
+       "StateMachineArn": "${ChildStateMachine9133117F}"
+      }
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "ParentStateMachine74EA937A",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ParentStateMachineRoleE902D002}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ParentStateMachineRoleE902D002}"
+  }
+ ]
+}

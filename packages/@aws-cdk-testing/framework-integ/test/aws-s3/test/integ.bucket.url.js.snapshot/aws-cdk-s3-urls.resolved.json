@@ -1,0 +1,29 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-s3-urls",
+ "resources": {
+  "MyBucketF68F3FF0": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "BucketURL": {
+   "Value": "${MyBucketF68F3FF0.WebsiteURL}"
+  },
+  "ObjectURL": {
+   "Value": "https://s3.${AWS::Region}.${AWS::URLSuffix}/${MyBucketF68F3FF0}/myfolder/myfile.txt"
+  },
+  "VirtualHostedObjectURL": {
+   "Value": "https://${MyBucketF68F3FF0.RegionalDomainName}/myfolder/myfile.txt"
+  },
+  "VirtualHostedObjectURLNonRegional": {
+   "Value": "https://${MyBucketF68F3FF0.DomainName}/myfolder/myfile.txt"
+  },
+  "S3ObjectURL": {
+   "Value": "s3://${MyBucketF68F3FF0}/myfolder/myfile.txt"
+  }
+ },
+ "unresolved": []
+}

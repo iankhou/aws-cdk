@@ -1,0 +1,37 @@
+{
+ "version": "1",
+ "stackName": "SameRegionWeakStringListConsumer",
+ "resources": {
+  "ParamFromList4734ADB9": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "WEAK_STRING_LIST_TEST",
+    "Type": "String",
+    "Value": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::Split": [
+        "||",
+        {
+         "Fn::GetStackOutput": {
+          "StackName": "SameRegionWeakStringListProducer",
+          "Region": "${AWS::Region}",
+          "OutputName": "PublishOutputFnGetAttVpcCidrBlockAssociationsE3E339DA"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.ParamFromList4734ADB9.Properties.Value.Fn::Select.1.Fn::Split.1",
+   "intrinsic": "Fn::GetStackOutput",
+   "reason": "CloudFormation function Fn::GetStackOutput is not supported"
+  }
+ ]
+}

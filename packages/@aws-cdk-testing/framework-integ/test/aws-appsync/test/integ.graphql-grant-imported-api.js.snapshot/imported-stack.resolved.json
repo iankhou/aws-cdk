@@ -1,0 +1,151 @@
+{
+ "version": "1",
+ "stackName": "imported-stack",
+ "resources": {
+  "lambdaRoleC844FDB1": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "lambdaRoleDefaultPolicyA63A8A92": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "appsync:GraphQL",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/${ImportValue:aws-appsync-integ:ExportsOutputFnGetAttApiF70053CDApiIdF185726B}/types/Query/fields/getPost"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "lambdaRoleDefaultPolicyA63A8A92",
+    "Roles": [
+     "${lambdaRoleC844FDB1}"
+    ]
+   }
+  },
+  "mutatioLambdaRole7F96C419": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "mutatioLambdaRoleDefaultPolicyCB07404D": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "appsync:GraphQL",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/${ImportValue:aws-appsync-integ:ExportsOutputFnGetAttApiF70053CDApiIdF185726B}/types/Mutation/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "mutatioLambdaRoleDefaultPolicyCB07404D",
+    "Roles": [
+     "${mutatioLambdaRole7F96C419}"
+    ]
+   }
+  },
+  "queryLambdaRole5A00034A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "queryLambdaRoleDefaultPolicyC3CBAE04": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "appsync:GraphQL",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/${ImportValue:aws-appsync-integ:ExportsOutputFnGetAttApiF70053CDApiIdF185726B}/types/Query/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "queryLambdaRoleDefaultPolicyC3CBAE04",
+    "Roles": [
+     "${queryLambdaRole5A00034A}"
+    ]
+   }
+  },
+  "subscriptionLambdaRoleB3A245CA": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "subscriptionLambdaRoleDefaultPolicy11B257BC": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "appsync:GraphQL",
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:appsync:${AWS::Region}:${AWS::AccountId}:apis/${ImportValue:aws-appsync-integ:ExportsOutputFnGetAttApiF70053CDApiIdF185726B}/types/Subscription/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "subscriptionLambdaRoleDefaultPolicy11B257BC",
+    "Roles": [
+     "${subscriptionLambdaRoleB3A245CA}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

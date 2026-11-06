@@ -1,0 +1,661 @@
+{
+ "stackName": "aws-cdk-codebuild-events",
+ "summary": {
+  "no handler": 2,
+  "pass": 40
+ },
+ "results": [
+  {
+   "logicalId": "MyRepoF4F48043",
+   "type": "AWS::CodeCommit::Repository",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyRepoOnCommit0E80B304",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRepoOnCommit0E80B304",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyRepoOnCommit0E80B304",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "aws.codecommit"
+    ],
+    "resources": [
+     "arn:${AWS::Partition}:codecommit:${AWS::Region}:${AWS::AccountId}:aws-cdk-codebuild-events"
+    ],
+    "detail-type": [
+     "CodeCommit Repository State Change"
+    ],
+    "detail": {
+     "event": [
+      "referenceCreated",
+      "referenceUpdated"
+     ],
+     "referenceName": [
+      "master"
+     ]
+    }
+   },
+   "actual": "{\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"arn:${AWS::Partition}:codecommit:${AWS::Region}:${AWS::AccountId}:aws-cdk-codebuild-events\"],\"source\":[\"aws.codecommit\"],\"detail\":{\"event\":[\"referenceCreated\",\"referenceUpdated\"],\"referenceName\":[\"master\"]}}"
+  },
+  {
+   "logicalId": "MyRepoOnCommit0E80B304",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/${MyProject39F7B0AE}",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}"
+     },
+     "Id": "Target0",
+     "RetryPolicy": {
+      "MaximumEventAgeInSeconds": 7200,
+      "MaximumRetryAttempts": 2
+     },
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyProjectEventsRole5B7D93F5}"
+    },
+    {
+     "Arn": "${MyTopic86869434}",
+     "Id": "Target1",
+     "InputTransformer": {
+      "InputPathsMap": {
+       "detail-repositoryName": "$.detail.repositoryName",
+       "detail-referenceName": "$.detail.referenceName"
+      },
+      "InputTemplate": "\"A commit was pushed to the repository <detail-repositoryName> on branch <detail-referenceName>\""
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/${MyProject39F7B0AE}",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyProjectEventsRole5B7D93F5}",
+     "DeadLetterConfig": {
+      "Arn": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}"
+     },
+     "RetryPolicy": {
+      "MaximumRetryAttempts": 2,
+      "MaximumEventAgeInSeconds": 7200
+     }
+    },
+    {
+     "Id": "Target1",
+     "Arn": "${MyTopic86869434}",
+     "InputTransformer": {
+      "InputTemplate": "\"A commit was pushed to the repository <detail-repositoryName> on branch <detail-referenceName>\"",
+      "InputPathsMap": {
+       "detail-referenceName": "$.detail.referenceName",
+       "detail-repositoryName": "$.detail.repositoryName"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "MyProjectRole9BBE5233",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectRole9BBE5233",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "codebuild.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22codebuild.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyProjectRoleDefaultPolicyB19B7C29",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectRoleDefaultPolicyB19B7C29",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyProjectRoleDefaultPolicyB19B7C29",
+   "actual": "MyProjectRoleDefaultPolicyB19B7C29"
+  },
+  {
+   "logicalId": "MyProjectRoleDefaultPolicyB19B7C29",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "codecommit:GitPull",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codecommit:${AWS::Region}:${AWS::AccountId}:aws-cdk-codebuild-events"
+     },
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProject39F7B0AE}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "codecommit:GitPull",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codecommit:${AWS::Region}:${AWS::AccountId}:aws-cdk-codebuild-events"
+     },
+     {
+      "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}:*",
+       "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${MyProject39F7B0AE}"
+      ]
+     },
+     {
+      "Action": [
+       "codebuild:BatchPutCodeCoverages",
+       "codebuild:BatchPutTestCases",
+       "codebuild:CreateReport",
+       "codebuild:CreateReportGroup",
+       "codebuild:UpdateReport"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:report-group/${MyProject39F7B0AE}-*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyProjectRoleDefaultPolicyB19B7C29",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyProjectRole9BBE5233}",
+   "actual": "${MyProjectRole9BBE5233}"
+  },
+  {
+   "logicalId": "MyProject39F7B0AE",
+   "type": "AWS::CodeBuild::Project",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyProjectStateChange2DAB75B7",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectStateChange2DAB75B7",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyProjectStateChange2DAB75B7",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "aws.codebuild"
+    ],
+    "detail": {
+     "project-name": [
+      "${MyProject39F7B0AE}"
+     ]
+    },
+    "detail-type": [
+     "CodeBuild Build State Change"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"CodeBuild Build State Change\"],\"source\":[\"aws.codebuild\"],\"detail\":{\"project-name\":[\"${MyProject39F7B0AE}\"]}}"
+  },
+  {
+   "logicalId": "MyProjectStateChange2DAB75B7",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${MyTopic86869434}",
+     "Id": "Target0"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${MyTopic86869434}"
+    }
+   ]
+  },
+  {
+   "logicalId": "MyProjectPhaseChangeCE6728A3",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectPhaseChangeCE6728A3",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyProjectPhaseChangeCE6728A3",
+   "type": "AWS::Events::Rule",
+   "property": "EventPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "source": [
+     "aws.codebuild"
+    ],
+    "detail": {
+     "project-name": [
+      "${MyProject39F7B0AE}"
+     ]
+    },
+    "detail-type": [
+     "CodeBuild Build Phase Change"
+    ]
+   },
+   "actual": "{\"detail-type\":[\"CodeBuild Build Phase Change\"],\"source\":[\"aws.codebuild\"],\"detail\":{\"project-name\":[\"${MyProject39F7B0AE}\"]}}"
+  },
+  {
+   "logicalId": "MyProjectPhaseChangeCE6728A3",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "${MyTopic86869434}",
+     "Id": "Target0",
+     "InputTransformer": {
+      "InputPathsMap": {
+       "detail-completed-phase": "$.detail.completed-phase"
+      },
+      "InputTemplate": "\"Build phase changed to <detail-completed-phase>\""
+     }
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "${MyTopic86869434}",
+     "InputTransformer": {
+      "InputTemplate": "\"Build phase changed to <detail-completed-phase>\"",
+      "InputPathsMap": {
+       "detail-completed-phase": "$.detail.completed-phase"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "logicalId": "MyProjectEventsRole5B7D93F5",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectEventsRole5B7D93F5",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyProjectEventsRoleDefaultPolicy397DCBF8",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyProjectEventsRoleDefaultPolicy397DCBF8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyProjectEventsRoleDefaultPolicy397DCBF8",
+   "actual": "MyProjectEventsRoleDefaultPolicy397DCBF8"
+  },
+  {
+   "logicalId": "MyProjectEventsRoleDefaultPolicy397DCBF8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "codebuild:StartBuild",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/${MyProject39F7B0AE}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "codebuild:StartBuild",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/${MyProject39F7B0AE}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyProjectEventsRoleDefaultPolicy397DCBF8",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyProjectEventsRole5B7D93F5}",
+   "actual": "${MyProjectEventsRole5B7D93F5}"
+  },
+  {
+   "logicalId": "MyQueueE6CA6235",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "${MyTopic86869434}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "${MyTopic86869434}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "sns.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyQueuePolicy6BBEDDAC",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${MyQueueE6CA6235}"
+   ],
+   "actual": [
+    "${MyQueueE6CA6235}"
+   ]
+  },
+  {
+   "logicalId": "MyQueueawscdkcodebuildeventsMyTopic550011DCF72DE3ED",
+   "type": "AWS::SNS::Subscription",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyQueueawscdkcodebuildeventsMyTopic550011DCF72DE3ED",
+   "type": "AWS::SNS::Subscription",
+   "property": "TopicArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyTopic86869434}",
+   "actual": "${MyTopic86869434}"
+  },
+  {
+   "logicalId": "MyQueueawscdkcodebuildeventsMyTopic550011DCF72DE3ED",
+   "type": "AWS::SNS::Subscription",
+   "property": "Protocol",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "sqs",
+   "actual": "sqs"
+  },
+  {
+   "logicalId": "MyQueueawscdkcodebuildeventsMyTopic550011DCF72DE3ED",
+   "type": "AWS::SNS::Subscription",
+   "property": "Endpoint",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}",
+   "actual": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${MyQueueE6CA6235.Name}"
+  },
+  {
+   "logicalId": "DeadLetterQueue9F481546",
+   "type": "AWS::SQS::Queue",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeadLetterQueuePolicyB1FB890C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "DeadLetterQueuePolicyB1FB890C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${MyRepoOnCommit0E80B304}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}",
+      "Sid": "AllowEventRuleawscdkcodebuildeventsMyRepoOnCommit0ED1137A"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "sqs:SendMessage",
+      "Condition": {
+       "ArnEquals": {
+        "aws:SourceArn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/${MyRepoOnCommit0E80B304}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:${DeadLetterQueue9F481546.Name}",
+      "Sid": "AllowEventRuleawscdkcodebuildeventsMyRepoOnCommit0ED1137A"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "DeadLetterQueuePolicyB1FB890C",
+   "type": "AWS::SQS::QueuePolicy",
+   "property": "Queues",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${DeadLetterQueue9F481546}"
+   ],
+   "actual": [
+    "${DeadLetterQueue9F481546}"
+   ]
+  },
+  {
+   "logicalId": "MyTopic86869434",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Publish",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      },
+      "Resource": "${MyTopic86869434}",
+      "Sid": "0"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"0\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"sns:Publish\",\"Resource\":\"${MyTopic86869434}\"}]}"
+  },
+  {
+   "logicalId": "MyTopicPolicy12A5EC17",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${MyTopic86869434}"
+   ],
+   "actual": [
+    "${MyTopic86869434}"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "stackName": "integ-iam-role-1",
+ "summary": {
+  "no handler": 7,
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "MyGroupCBA54B1B",
+   "type": "AWS::IAM::Group",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "YourGroup1005140B",
+   "type": "AWS::IAM::Group",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "User1E278A736",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "User21F1486D1",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "User3493EC043",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "User4BBBA4836",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "User5F9E592FE",
+   "type": "AWS::IAM::User",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyPolicy39D66CF6",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyPolicy39D66CF6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyPolicy39D66CF6",
+   "actual": "MyPolicy39D66CF6"
+  },
+  {
+   "logicalId": "MyPolicy39D66CF6",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "iam:*",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:group/${YourGroup1005140B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "iam:*",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:group/${YourGroup1005140B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyPolicy39D66CF6",
+   "type": "AWS::IAM::Policy",
+   "property": "Groups.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyGroupCBA54B1B}",
+   "actual": "${MyGroupCBA54B1B}"
+  }
+ ]
+}

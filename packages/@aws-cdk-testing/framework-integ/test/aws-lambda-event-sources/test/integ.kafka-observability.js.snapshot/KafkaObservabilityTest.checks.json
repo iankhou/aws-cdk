@@ -1,0 +1,540 @@
+{
+ "stackName": "KafkaObservabilityTest",
+ "summary": {
+  "no handler": 1,
+  "pass": 40,
+  "fail": 2
+ },
+ "results": [
+  {
+   "logicalId": "KafkaSecret78EF3770",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionServiceRoleD6EE74B4",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionServiceRoleD6EE74B4",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionServiceRoleD6EE74B4",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "SMKLoggingFunctionServiceRoleDefaultPolicyB1668236",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionServiceRoleDefaultPolicyB1668236",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SMKLoggingFunctionServiceRoleDefaultPolicyB1668236",
+   "actual": "SMKLoggingFunctionServiceRoleDefaultPolicyB1668236"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionServiceRoleDefaultPolicyB1668236",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "${KafkaSecret78EF3770}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "${KafkaSecret78EF3770}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SMKLoggingFunctionServiceRoleDefaultPolicyB1668236",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SMKLoggingFunctionServiceRoleD6EE74B4}",
+   "actual": "${SMKLoggingFunctionServiceRoleD6EE74B4}"
+  },
+  {
+   "logicalId": "SMKLoggingFunction01AC7C26",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SMKLoggingFunction01AC7C26",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "SMKLoggingFunction01AC7C26",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "SMKLoggingFunction01AC7C26",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SMKLoggingFunctionServiceRoleD6EE74B4}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SMKLoggingFunctionServiceRoleD6EE74B4}"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${SMKLoggingFunction01AC7C26}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${SMKLoggingFunction01AC7C26}"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPosition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "LATEST",
+   "actual": "LATEST"
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "logging-topic"
+   ],
+   "actual": [
+    "logging-topic"
+   ]
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SourceAccessConfigurations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Type": "SASL_SCRAM_512_AUTH",
+     "URI": "${KafkaSecret78EF3770}"
+    }
+   ],
+   "actual": [
+    {
+     "Type": "SASL_SCRAM_512_AUTH",
+     "URI": "${KafkaSecret78EF3770}"
+    }
+   ]
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedEventSource",
+   "status": "fail",
+   "expected": {
+    "Endpoints": {
+     "KafkaBootstrapServers": [
+      "kafka-broker-1:9092",
+      "kafka-broker-2:9092"
+     ]
+    }
+   },
+   "actual": {
+    "Endpoints": {
+     "KAFKA_BOOTSTRAP_SERVERS": [
+      "kafka-broker-2:9092",
+      "kafka-broker-1:9092"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SystemLogLevel": "DEBUG"
+   },
+   "actual": {
+    "SystemLogLevel": "DEBUG"
+   }
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "ProvisionedPollerConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "MaximumPollers": 5,
+    "MinimumPollers": 1
+   },
+   "actual": {
+    "MinimumPollers": 1,
+    "MaximumPollers": 5
+   }
+  },
+  {
+   "logicalId": "SMKLoggingFunctionKafkaEventSource5a6b1c61d8107b95746eea47604132b3loggingtopicBE2022A9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedKafkaEventSourceConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ConsumerGroupId": "logging-consumer-group"
+   },
+   "actual": {
+    "ConsumerGroupId": "logging-consumer-group",
+    "ConsumptionMode": "Stream"
+   }
+  },
+  {
+   "logicalId": "SMKMetricsFunctionServiceRoleEF5A318A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionServiceRoleEF5A318A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionServiceRoleEF5A318A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "SMKMetricsFunctionServiceRoleDefaultPolicy2EB14F79",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionServiceRoleDefaultPolicy2EB14F79",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "SMKMetricsFunctionServiceRoleDefaultPolicy2EB14F79",
+   "actual": "SMKMetricsFunctionServiceRoleDefaultPolicy2EB14F79"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionServiceRoleDefaultPolicy2EB14F79",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "${KafkaSecret78EF3770}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": "${KafkaSecret78EF3770}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "SMKMetricsFunctionServiceRoleDefaultPolicy2EB14F79",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${SMKMetricsFunctionServiceRoleEF5A318A}",
+   "actual": "${SMKMetricsFunctionServiceRoleEF5A318A}"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionC9693EA5",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionC9693EA5",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionC9693EA5",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionC9693EA5",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SMKMetricsFunctionServiceRoleEF5A318A}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SMKMetricsFunctionServiceRoleEF5A318A}"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${SMKMetricsFunctionC9693EA5}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${SMKMetricsFunctionC9693EA5}"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPosition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TRIM_HORIZON",
+   "actual": "TRIM_HORIZON"
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "metrics-topic"
+   ],
+   "actual": [
+    "metrics-topic"
+   ]
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SourceAccessConfigurations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Type": "SASL_SCRAM_256_AUTH",
+     "URI": "${KafkaSecret78EF3770}"
+    }
+   ],
+   "actual": [
+    {
+     "Type": "SASL_SCRAM_256_AUTH",
+     "URI": "${KafkaSecret78EF3770}"
+    }
+   ]
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedEventSource",
+   "status": "fail",
+   "expected": {
+    "Endpoints": {
+     "KafkaBootstrapServers": [
+      "kafka-broker-3:9092",
+      "kafka-broker-4:9092"
+     ]
+    }
+   },
+   "actual": {
+    "Endpoints": {
+     "KAFKA_BOOTSTRAP_SERVERS": [
+      "kafka-broker-3:9092",
+      "kafka-broker-4:9092"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "MetricsConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Metrics": [
+     "EventCount",
+     "ErrorCount",
+     "KafkaMetrics"
+    ]
+   },
+   "actual": {
+    "Metrics": [
+     "EventCount",
+     "ErrorCount",
+     "KafkaMetrics"
+    ]
+   }
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "ProvisionedPollerConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "MaximumPollers": 15,
+    "MinimumPollers": 3
+   },
+   "actual": {
+    "MinimumPollers": 3,
+    "MaximumPollers": 15
+   }
+  },
+  {
+   "logicalId": "SMKMetricsFunctionKafkaEventSourceb8ef8e9506cabcc8647039098fb4ee5cmetricstopic44A0D9C9",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedKafkaEventSourceConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ConsumerGroupId": "metrics-consumer-group"
+   },
+   "actual": {
+    "ConsumerGroupId": "metrics-consumer-group",
+    "ConsumptionMode": "Stream"
+   }
+  }
+ ]
+}

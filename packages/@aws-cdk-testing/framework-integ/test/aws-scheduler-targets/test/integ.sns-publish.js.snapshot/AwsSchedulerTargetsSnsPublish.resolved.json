@@ -1,0 +1,123 @@
+{
+ "version": "1",
+ "stackName": "AwsSchedulerTargetsSnsPublish",
+ "resources": {
+  "TopicBFC7AF6E": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "Queue4A7E3555": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "QueuePolicy25439813": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": "${TopicBFC7AF6E}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": "${Queue4A7E3555.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     "${Queue4A7E3555}"
+    ]
+   }
+  },
+  "QueueAwsSchedulerTargetsSnsPublishTopicCB9BF6E1C346AD60": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": "${Queue4A7E3555.Arn}",
+    "Protocol": "sqs",
+    "RawMessageDelivery": true,
+    "TopicArn": "${TopicBFC7AF6E}"
+   },
+   "DependsOn": [
+    "QueuePolicy25439813"
+   ]
+  },
+  "Schedule83A77FD1": {
+   "Type": "AWS::Scheduler::Schedule",
+   "Properties": {
+    "FlexibleTimeWindow": {
+     "Mode": "OFF"
+    },
+    "ScheduleExpression": "rate(1 minute)",
+    "ScheduleExpressionTimezone": "Etc/UTC",
+    "State": "ENABLED",
+    "Target": {
+     "Arn": "${TopicBFC7AF6E}",
+     "Input": "Hello, Scheduler!",
+     "RetryPolicy": {
+      "MaximumEventAgeInSeconds": 86400,
+      "MaximumRetryAttempts": 185
+     },
+     "RoleArn": "${SchedulerRoleForTarget0f6b2b82B558C1.Arn}"
+    }
+   }
+  },
+  "SchedulerRoleForTarget0f6b2b82B558C1": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}",
+         "aws:SourceArn": "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule-group/default"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "scheduler.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "SchedulerRoleForTarget0f6b2bDefaultPolicy6F5310D7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sns:Publish",
+       "Effect": "Allow",
+       "Resource": "${TopicBFC7AF6E}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SchedulerRoleForTarget0f6b2bDefaultPolicy6F5310D7",
+    "Roles": [
+     "${SchedulerRoleForTarget0f6b2b82B558C1}"
+    ]
+   }
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefQueue4A7E3555425E8BD3": {
+   "Value": "${Queue4A7E3555}",
+   "Export": {
+    "Name": "AwsSchedulerTargetsSnsPublish:ExportsOutputRefQueue4A7E3555425E8BD3"
+   }
+  }
+ },
+ "unresolved": []
+}

@@ -1,0 +1,86 @@
+{
+ "stackName": "cdk-ses-configuration-set-integ",
+ "summary": {
+  "no handler": 4,
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "ConfigurationSet3DD38186",
+   "type": "AWS::SES::ConfigurationSet",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ConfigurationSetSns63B38980",
+   "type": "AWS::SES::ConfigurationSetEventDestination",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ConfigurationSetCloudWatch85E06FFB",
+   "type": "AWS::SES::ConfigurationSetEventDestination",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ConfigurationSetEventBridgeABB541C9",
+   "type": "AWS::SES::ConfigurationSetEventDestination",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "TopicBFC7AF6E",
+   "type": "AWS::SNS::Topic",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TopicPolicyA1747468",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "TopicPolicyA1747468",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sns:Publish",
+      "Condition": {
+       "StringEquals": {
+        "AWS:SourceAccount": "${AWS::AccountId}",
+        "AWS:SourceArn": "arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:configuration-set/${ConfigurationSet3DD38186}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ses.amazonaws.com"
+      },
+      "Resource": "${TopicBFC7AF6E}",
+      "Sid": "0"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"0\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ses.amazonaws.com\"},\"Action\":\"sns:Publish\",\"Resource\":\"${TopicBFC7AF6E}\",\"Condition\":{\"StringEquals\":{\"AWS:SourceAccount\":\"${AWS::AccountId}\",\"AWS:SourceArn\":\"arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:configuration-set/${ConfigurationSet3DD38186}\"}}}]}"
+  },
+  {
+   "logicalId": "TopicPolicyA1747468",
+   "type": "AWS::SNS::TopicPolicy",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${TopicBFC7AF6E}"
+   ],
+   "actual": [
+    "${TopicBFC7AF6E}"
+   ]
+  }
+ ]
+}

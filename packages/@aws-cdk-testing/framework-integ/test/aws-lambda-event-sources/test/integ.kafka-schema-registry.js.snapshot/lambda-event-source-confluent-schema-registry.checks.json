@@ -1,0 +1,337 @@
+{
+ "stackName": "lambda-event-source-confluent-schema-registry",
+ "summary": {
+  "pass": 22,
+  "fail": 1,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "ConfluentFunctionServiceRole116DBB1D",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfluentFunctionServiceRole116DBB1D",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ConfluentFunctionServiceRole116DBB1D",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "ConfluentFunctionServiceRoleDefaultPolicy7BF57A6E",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfluentFunctionServiceRoleDefaultPolicy7BF57A6E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ConfluentFunctionServiceRoleDefaultPolicy7BF57A6E",
+   "actual": "ConfluentFunctionServiceRoleDefaultPolicy7BF57A6E"
+  },
+  {
+   "logicalId": "ConfluentFunctionServiceRoleDefaultPolicy7BF57A6E",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${ConfluentClientCertSecret23688D94}",
+       "${ConfluentRootCASecret99CAE53B}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${ConfluentClientCertSecret23688D94}",
+       "${ConfluentRootCASecret99CAE53B}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ConfluentFunctionServiceRoleDefaultPolicy7BF57A6E",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ConfluentFunctionServiceRole116DBB1D}",
+   "actual": "${ConfluentFunctionServiceRole116DBB1D}"
+  },
+  {
+   "logicalId": "ConfluentFunction5D29A9A6",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfluentFunction5D29A9A6",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "ConfluentFunction5D29A9A6",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "ConfluentFunction5D29A9A6",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ConfluentFunctionServiceRole116DBB1D}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ConfluentFunctionServiceRole116DBB1D}"
+  },
+  {
+   "logicalId": "ConfluentFunctionLogGroupD5D16991",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfluentFunctionLogGroupD5D16991",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${ConfluentFunction5D29A9A6}",
+   "actual": "/aws/lambda/${ConfluentFunction5D29A9A6}"
+  },
+  {
+   "logicalId": "ConfluentFunctionLogGroupD5D16991",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ConfluentFunction5D29A9A6}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${ConfluentFunction5D29A9A6}"
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPosition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TRIM_HORIZON",
+   "actual": "TRIM_HORIZON"
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "test-topic-smk-confluent"
+   ],
+   "actual": [
+    "test-topic-smk-confluent"
+   ]
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SourceAccessConfigurations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${ConfluentClientCertSecret23688D94}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${ConfluentRootCASecret99CAE53B}"
+    }
+   ],
+   "actual": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${ConfluentClientCertSecret23688D94}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${ConfluentRootCASecret99CAE53B}"
+    }
+   ]
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedEventSource",
+   "status": "fail",
+   "expected": {
+    "Endpoints": {
+     "KafkaBootstrapServers": [
+      "kafka-broker-1:9092",
+      "kafka-broker-2:9092",
+      "kafka-broker-3:9092"
+     ]
+    }
+   },
+   "actual": {
+    "Endpoints": {
+     "KAFKA_BOOTSTRAP_SERVERS": [
+      "kafka-broker-3:9092",
+      "kafka-broker-2:9092",
+      "kafka-broker-1:9092"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "ProvisionedPollerConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "MaximumPollers": 3,
+    "MinimumPollers": 1
+   },
+   "actual": {
+    "MinimumPollers": 1,
+    "MaximumPollers": 3
+   }
+  },
+  {
+   "logicalId": "ConfluentFunctionKafkaEventSource46eb851822d1a9f28d63dc4ec210952etesttopicsmkconfluent90EB60AA",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedKafkaEventSourceConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ConsumerGroupId": "test-consumer-group-smk-confluent",
+    "SchemaRegistryConfig": {
+     "AccessConfigs": [
+      {
+       "Type": "BASIC_AUTH",
+       "URI": "${ConfluentClientCertSecret23688D94}"
+      }
+     ],
+     "EventRecordFormat": "JSON",
+     "SchemaRegistryURI": "https://schema-registry.example.com",
+     "SchemaValidationConfigs": [
+      {
+       "Attribute": "KEY"
+      }
+     ]
+    }
+   },
+   "actual": {
+    "ConsumerGroupId": "test-consumer-group-smk-confluent",
+    "SchemaRegistryConfig": {
+     "SchemaRegistryURI": "https://schema-registry.example.com",
+     "EventRecordFormat": "JSON",
+     "AccessConfigs": [
+      {
+       "Type": "BASIC_AUTH",
+       "URI": "${ConfluentClientCertSecret23688D94}"
+      }
+     ],
+     "SchemaValidationConfigs": [
+      {
+       "Attribute": "KEY"
+      }
+     ]
+    },
+    "ConsumptionMode": "Stream"
+   }
+  },
+  {
+   "logicalId": "ConfluentRootCASecret99CAE53B",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ConfluentClientCertSecret23688D94",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

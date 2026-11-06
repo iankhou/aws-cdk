@@ -1,0 +1,205 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-scheduler-targets-event-bridge-put-events",
+ "resources": {
+  "MyParameter18BA547D": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "MyEventBridgePutParameter",
+    "Type": "String",
+    "Value": "🐶"
+   }
+  },
+  "StateMachineRoleB840431D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachineRoleDefaultPolicyDF1E6607": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ssm:putParameter",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StateMachineRoleDefaultPolicyDF1E6607",
+    "Roles": [
+     "${StateMachineRoleB840431D}"
+    ]
+   }
+  },
+  "StateMachine2E01A3A5": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"PutParameter\",\"States\":{\"PutParameter\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"arn:${AWS::Partition}:states:::aws-sdk:ssm:putParameter\",\"Parameters\":{\"Name.$\":\"$.Name\",\"Value.$\":\"$.Value\",\"Type\":\"String\",\"Overwrite\":true}}}}",
+    "RoleArn": "${StateMachineRoleB840431D.Arn}"
+   },
+   "DependsOn": [
+    "StateMachineRoleDefaultPolicyDF1E6607",
+    "StateMachineRoleB840431D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "StateMachineEventsRoleDBCDECD1": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachineEventsRoleDefaultPolicyFB602CA9": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "states:StartExecution",
+       "Effect": "Allow",
+       "Resource": "${StateMachine2E01A3A5}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StateMachineEventsRoleDefaultPolicyFB602CA9",
+    "Roles": [
+     "${StateMachineEventsRoleDBCDECD1}"
+    ]
+   }
+  },
+  "EventBus7B8748AA": {
+   "Type": "AWS::Events::EventBus",
+   "Properties": {
+    "Name": "EmojisTransformationEventBus"
+   }
+  },
+  "Rule4C995B7F": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "Description": "Trigger the step function ${StateMachine2E01A3A5.Name} every 10 minutes, which transforms the value of the parameter ${MyParameter18BA547D} from 🐶 to 😺",
+    "EventBusName": "${EventBus7B8748AA}",
+    "EventPattern": {
+     "detail-type": [
+      "🐶➡️😺"
+     ]
+    },
+    "Name": "Transforms_dog_to_cat",
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": "${StateMachine2E01A3A5}",
+      "Id": "Target0",
+      "Input": "{\"Name\":\"MyEventBridgePutParameter\",\"Value\":\"😺\"}",
+      "RoleArn": "${StateMachineEventsRoleDBCDECD1.Arn}"
+     }
+    ]
+   }
+  },
+  "Schedule83A77FD1": {
+   "Type": "AWS::Scheduler::Schedule",
+   "Properties": {
+    "FlexibleTimeWindow": {
+     "Mode": "OFF"
+    },
+    "ScheduleExpression": "rate(10 minutes)",
+    "ScheduleExpressionTimezone": "Etc/UTC",
+    "State": "ENABLED",
+    "Target": {
+     "Arn": "${EventBus7B8748AA.Arn}",
+     "EventBridgeParameters": {
+      "DetailType": "🐶➡️😺",
+      "Source": "emoji-transformation"
+     },
+     "Input": "{\"foo\":\"bar\"}",
+     "RetryPolicy": {
+      "MaximumEventAgeInSeconds": 86400,
+      "MaximumRetryAttempts": 185
+     },
+     "RoleArn": "${SchedulerRoleForTarget6ff5322488E9B3.Arn}"
+    }
+   },
+   "DependsOn": [
+    "Rule4C995B7F"
+   ]
+  },
+  "SchedulerRoleForTarget6ff5322488E9B3": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}",
+         "aws:SourceArn": "arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule-group/default"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "scheduler.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "SchedulerRoleForTarget6ff532DefaultPolicy3F7032D5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "events:PutEvents",
+       "Effect": "Allow",
+       "Resource": "${EventBus7B8748AA.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SchedulerRoleForTarget6ff532DefaultPolicy3F7032D5",
+    "Roles": [
+     "${SchedulerRoleForTarget6ff5322488E9B3}"
+    ]
+   }
+  }
+ },
+ "unresolved": []
+}

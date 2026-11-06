@@ -1,0 +1,53 @@
+{
+ "stackName": "aws-cdk-kms-key-agreement",
+ "summary": {
+  "pass": 4
+ },
+ "results": [
+  {
+   "logicalId": "MyKeyAgreementKey1B696107",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyKeyAgreementKey1B696107",
+   "type": "AWS::KMS::Key",
+   "property": "KeyUsage",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "KEY_AGREEMENT",
+   "actual": "KEY_AGREEMENT"
+  },
+  {
+   "logicalId": "MyKeyAgreementKey1B696107",
+   "type": "AWS::KMS::Key",
+   "property": "KeySpec",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ECC_NIST_P256",
+   "actual": "ECC_NIST_P256"
+  },
+  {
+   "logicalId": "MyKeyAgreementKey1B696107",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  }
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "stackName": "aws-cdk-metricfilter-dimensions-integ",
+ "summary": {
+  "pass": 6
+ },
+ "results": [
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "MetricFilter1B93B6E5",
+   "type": "AWS::Logs::MetricFilter",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MetricFilter1B93B6E5",
+   "type": "AWS::Logs::MetricFilter",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${LogGroupF5B46931}",
+   "actual": "${LogGroupF5B46931}"
+  },
+  {
+   "logicalId": "MetricFilter1B93B6E5",
+   "type": "AWS::Logs::MetricFilter",
+   "property": "FilterPattern",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "{ $.latency = \"*\" }",
+   "actual": "{ $.latency = \"*\" }"
+  },
+  {
+   "logicalId": "MetricFilter1B93B6E5",
+   "type": "AWS::Logs::MetricFilter",
+   "property": "MetricTransformations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "metricName": "Latency",
+     "metricNamespace": "MyApp",
+     "metricValue": "$.latency",
+     "dimensions": {
+      "ErrorCode": "$.errorCode"
+     }
+    }
+   ],
+   "actual": [
+    {
+     "metricName": "Latency",
+     "metricNamespace": "MyApp",
+     "metricValue": "$.latency",
+     "dimensions": {
+      "ErrorCode": "$.errorCode"
+     }
+    }
+   ]
+  }
+ ]
+}

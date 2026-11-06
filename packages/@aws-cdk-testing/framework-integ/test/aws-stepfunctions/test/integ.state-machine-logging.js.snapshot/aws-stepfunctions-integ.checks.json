@@ -1,0 +1,283 @@
+{
+ "stackName": "aws-stepfunctions-integ",
+ "summary": {
+  "pass": 16,
+  "fail": 2
+ },
+ "results": [
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "LogGroupF5B46931",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALLRole0984788E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALLRole0984788E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALLRoleDefaultPolicy12972CD9",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALLRoleDefaultPolicy12972CD9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "StateMachineWithLoggingALLRoleDefaultPolicy12972CD9",
+   "actual": "StateMachineWithLoggingALLRoleDefaultPolicy12972CD9"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALLRoleDefaultPolicy12972CD9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogDelivery",
+       "logs:DeleteLogDelivery",
+       "logs:DescribeLogGroups",
+       "logs:DescribeResourcePolicies",
+       "logs:GetLogDelivery",
+       "logs:ListLogDeliveries",
+       "logs:PutResourcePolicy",
+       "logs:UpdateLogDelivery"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "logs:CreateLogDelivery",
+       "logs:DeleteLogDelivery",
+       "logs:DescribeLogGroups",
+       "logs:DescribeResourcePolicies",
+       "logs:GetLogDelivery",
+       "logs:ListLogDeliveries",
+       "logs:PutResourcePolicy",
+       "logs:UpdateLogDelivery"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALLRoleDefaultPolicy12972CD9",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${StateMachineWithLoggingALLRole0984788E}",
+   "actual": "${StateMachineWithLoggingALLRole0984788E}"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALL687B0F0F",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALL687B0F0F",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Pass",
+    "States": {
+     "Pass": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Pass",
+    "States": {
+     "Pass": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALL687B0F0F",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineWithLoggingALLRole0984788E}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineWithLoggingALLRole0984788E}"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingALL687B0F0F",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "LoggingConfiguration",
+   "status": "fail",
+   "expected": {
+    "level": "ALL",
+    "destinations": [
+     {
+      "cloudWatchLogsLogGroup": {
+       "logGroupArn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${LogGroupF5B46931}:*"
+      }
+     }
+    ]
+   },
+   "actual": {
+    "level": "ALL",
+    "includeExecutionData": false,
+    "destinations": [
+     {
+      "cloudWatchLogsLogGroup": {
+       "logGroupArn": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${LogGroupF5B46931}:*"
+      }
+     }
+    ],
+    "__type": "com.amazonaws.swf.base.model#LoggingConfiguration"
+   }
+  },
+  {
+   "logicalId": "StateMachineWithLoggingOFFRole726E8117",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingOFFRole726E8117",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Condition": {
+       "ArnLike": {
+        "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+       },
+       "StringEquals": {
+        "aws:SourceAccount": "${AWS::AccountId}"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "states.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22states.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22aws%3ASourceAccount%22%3A%22${AWS::AccountId}%22%7D%2C%22ArnLike%22%3A%7B%22aws%3ASourceArn%22%3A%22arn%3Aaws%3Astates%3A${AWS::Region}%3A${AWS::AccountId}%3AstateMachine%3A%2A%22%7D%7D%7D%5D%7D"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingOFFF82B7349",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingOFFF82B7349",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "DefinitionString",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "StartAt": "Pass",
+    "States": {
+     "Pass": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   },
+   "actual": {
+    "StartAt": "Pass",
+    "States": {
+     "Pass": {
+      "Type": "Pass",
+      "End": true
+     }
+    }
+   }
+  },
+  {
+   "logicalId": "StateMachineWithLoggingOFFF82B7349",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "RoleArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineWithLoggingOFFRole726E8117}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${StateMachineWithLoggingOFFRole726E8117}"
+  },
+  {
+   "logicalId": "StateMachineWithLoggingOFFF82B7349",
+   "type": "AWS::StepFunctions::StateMachine",
+   "property": "LoggingConfiguration",
+   "status": "fail",
+   "expected": {
+    "level": "OFF"
+   },
+   "actual": {
+    "level": "OFF",
+    "includeExecutionData": false,
+    "__type": "com.amazonaws.swf.base.model#LoggingConfiguration"
+   }
+  }
+ ]
+}

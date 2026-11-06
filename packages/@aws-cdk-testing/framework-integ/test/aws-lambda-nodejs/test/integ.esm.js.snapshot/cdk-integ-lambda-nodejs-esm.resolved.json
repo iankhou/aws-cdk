@@ -1,0 +1,42 @@
+{
+ "version": "1",
+ "stackName": "cdk-integ-lambda-nodejs-esm",
+ "resources": {
+  "esmServiceRole84AC2522": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "esm9B397D27": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "b1fe61f2900194572e27cce06c685324999fd8e34728c4ffc45e81f234b79e3f.zip"
+    },
+    "Handler": "index.handler",
+    "Role": "${esmServiceRole84AC2522.Arn}",
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "esmServiceRole84AC2522"
+   ]
+  }
+ },
+ "unresolved": []
+}

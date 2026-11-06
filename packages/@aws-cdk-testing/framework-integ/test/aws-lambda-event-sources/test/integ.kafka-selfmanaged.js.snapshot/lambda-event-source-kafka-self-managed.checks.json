@@ -1,0 +1,1146 @@
+{
+ "stackName": "lambda-event-source-kafka-self-managed",
+ "summary": {
+  "pass": 81,
+  "fail": 4,
+  "no handler": 2
+ },
+ "results": [
+  {
+   "logicalId": "FServiceRole3AC82EE1",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FServiceRole3AC82EE1",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FServiceRole3AC82EE1",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "FServiceRoleDefaultPolicy17A19BFA",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FServiceRoleDefaultPolicy17A19BFA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "FServiceRoleDefaultPolicy17A19BFA",
+   "actual": "FServiceRoleDefaultPolicy17A19BFA"
+  },
+  {
+   "logicalId": "FServiceRoleDefaultPolicy17A19BFA",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${S509448A1}",
+       "${SC0855C491}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${S509448A1}",
+       "${SC0855C491}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "FServiceRoleDefaultPolicy17A19BFA",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${FServiceRole3AC82EE1}",
+   "actual": "${FServiceRole3AC82EE1}"
+  },
+  {
+   "logicalId": "FC4345940",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FC4345940",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "FC4345940",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "FC4345940",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FServiceRole3AC82EE1}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FServiceRole3AC82EE1}"
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${FC4345940}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${FC4345940}"
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPosition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TRIM_HORIZON",
+   "actual": "TRIM_HORIZON"
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FilterCriteria",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Filters": [
+     {
+      "Pattern": "{\"numericEquals\":[{\"numeric\":[\"=\",1]}]}"
+     }
+    ]
+   },
+   "actual": {
+    "Filters": [
+     {
+      "Pattern": "{\"numericEquals\":[{\"numeric\":[\"=\",1]}]}"
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "my-test-topic"
+   ],
+   "actual": [
+    "my-test-topic"
+   ]
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SourceAccessConfigurations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${SC0855C491}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${S509448A1}"
+    }
+   ],
+   "actual": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${SC0855C491}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${S509448A1}"
+    }
+   ]
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedEventSource",
+   "status": "fail",
+   "expected": {
+    "Endpoints": {
+     "KafkaBootstrapServers": [
+      "my-self-hosted-kafka-broker-1:9092",
+      "my-self-hosted-kafka-broker-2:9092",
+      "my-self-hosted-kafka-broker-3:9092"
+     ]
+    }
+   },
+   "actual": {
+    "Endpoints": {
+     "KAFKA_BOOTSTRAP_SERVERS": [
+      "my-self-hosted-kafka-broker-1:9092",
+      "my-self-hosted-kafka-broker-3:9092",
+      "my-self-hosted-kafka-broker-2:9092"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "FKafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic1E7A7798",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedKafkaEventSourceConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ConsumerGroupId": "myTestConsumerGroup"
+   },
+   "actual": {
+    "ConsumerGroupId": "myTestConsumerGroup",
+    "ConsumptionMode": "Stream"
+   }
+  },
+  {
+   "logicalId": "S509448A1",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SC0855C491",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "fctestkeyname524AF060",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "fctestkeyname524AF060",
+   "type": "AWS::KMS::Key",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "KMS key for test fc encryption",
+   "actual": "KMS key for test fc encryption"
+  },
+  {
+   "logicalId": "fctestkeyname524AF060",
+   "type": "AWS::KMS::Key",
+   "property": "KeyPolicy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "kms:*",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      },
+      "Resource": "*"
+     },
+     {
+      "Action": "kms:Decrypt",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      },
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:${AWS::Partition}:iam::${AWS::AccountId}:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  }, {\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"lambda.amazonaws.com\"\n    },\n    \"Action\" : \"kms:Decrypt\",\n    \"Resource\" : \"*\"\n  } ]\n}"
+  },
+  {
+   "logicalId": "F2ServiceRole7F7C6006",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F2ServiceRole7F7C6006",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "F2ServiceRole7F7C6006",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "F2ServiceRoleDefaultPolicy999D30A8",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F2ServiceRoleDefaultPolicy999D30A8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "F2ServiceRoleDefaultPolicy999D30A8",
+   "actual": "F2ServiceRoleDefaultPolicy999D30A8"
+  },
+  {
+   "logicalId": "F2ServiceRoleDefaultPolicy999D30A8",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${S509448A1}",
+       "${SC0855C491}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${S509448A1}",
+       "${SC0855C491}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "F2ServiceRoleDefaultPolicy999D30A8",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${F2ServiceRole7F7C6006}",
+   "actual": "${F2ServiceRole7F7C6006}"
+  },
+  {
+   "logicalId": "F23BAC7B9C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F23BAC7B9C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "F23BAC7B9C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "F23BAC7B9C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${F2ServiceRole7F7C6006}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${F2ServiceRole7F7C6006}"
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${F23BAC7B9C}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${F23BAC7B9C}"
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPosition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TRIM_HORIZON",
+   "actual": "TRIM_HORIZON"
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FilterCriteria",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Filters": [
+     {
+      "Pattern": "{\"numericEquals\":[{\"numeric\":[\"=\",2]}]}"
+     }
+    ]
+   },
+   "actual": {
+    "Filters": [
+     {
+      "Pattern": "{\"numericEquals\":[{\"numeric\":[\"=\",2]}]}"
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "KmsKeyArn",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${fctestkeyname524AF060}",
+   "actual": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${fctestkeyname524AF060}"
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "my-test-topic2"
+   ],
+   "actual": [
+    "my-test-topic2"
+   ]
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SourceAccessConfigurations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${SC0855C491}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${S509448A1}"
+    }
+   ],
+   "actual": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${SC0855C491}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${S509448A1}"
+    }
+   ]
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedEventSource",
+   "status": "fail",
+   "expected": {
+    "Endpoints": {
+     "KafkaBootstrapServers": [
+      "my-self-hosted-kafka-broker-1:9092",
+      "my-self-hosted-kafka-broker-2:9092",
+      "my-self-hosted-kafka-broker-3:9092"
+     ]
+    }
+   },
+   "actual": {
+    "Endpoints": {
+     "KAFKA_BOOTSTRAP_SERVERS": [
+      "my-self-hosted-kafka-broker-1:9092",
+      "my-self-hosted-kafka-broker-3:9092",
+      "my-self-hosted-kafka-broker-2:9092"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "F2KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic20A678189",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedKafkaEventSourceConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ConsumerGroupId": "myTestConsumerGroup2"
+   },
+   "actual": {
+    "ConsumerGroupId": "myTestConsumerGroup2",
+    "ConsumptionMode": "Stream"
+   }
+  },
+  {
+   "logicalId": "F3ServiceRole2F65FFC0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F3ServiceRole2F65FFC0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "F3ServiceRole2F65FFC0",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "F3ServiceRoleDefaultPolicy1C0463D1",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F3ServiceRoleDefaultPolicy1C0463D1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "F3ServiceRoleDefaultPolicy1C0463D1",
+   "actual": "F3ServiceRoleDefaultPolicy1C0463D1"
+  },
+  {
+   "logicalId": "F3ServiceRoleDefaultPolicy1C0463D1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${S509448A1}",
+       "${SC0855C491}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${S509448A1}",
+       "${SC0855C491}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "F3ServiceRoleDefaultPolicy1C0463D1",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${F3ServiceRole2F65FFC0}",
+   "actual": "${F3ServiceRole2F65FFC0}"
+  },
+  {
+   "logicalId": "F38FF9B13A",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F38FF9B13A",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "F38FF9B13A",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "F38FF9B13A",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${F3ServiceRole2F65FFC0}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${F3ServiceRole2F65FFC0}"
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${F38FF9B13A}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${F38FF9B13A}"
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPosition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "TRIM_HORIZON",
+   "actual": "TRIM_HORIZON"
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FilterCriteria",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Filters": [
+     {
+      "Pattern": "{\"numericEquals\":[{\"numeric\":[\"=\",1]}]}"
+     }
+    ]
+   },
+   "actual": {
+    "Filters": [
+     {
+      "Pattern": "{\"numericEquals\":[{\"numeric\":[\"=\",1]}]}"
+     }
+    ]
+   }
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "my-test-topic3"
+   ],
+   "actual": [
+    "my-test-topic3"
+   ]
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SourceAccessConfigurations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${SC0855C491}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${S509448A1}"
+    }
+   ],
+   "actual": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${SC0855C491}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${S509448A1}"
+    }
+   ]
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedEventSource",
+   "status": "fail",
+   "expected": {
+    "Endpoints": {
+     "KafkaBootstrapServers": [
+      "my-self-hosted-kafka-broker-1:9092",
+      "my-self-hosted-kafka-broker-2:9092",
+      "my-self-hosted-kafka-broker-3:9092"
+     ]
+    }
+   },
+   "actual": {
+    "Endpoints": {
+     "KAFKA_BOOTSTRAP_SERVERS": [
+      "my-self-hosted-kafka-broker-1:9092",
+      "my-self-hosted-kafka-broker-3:9092",
+      "my-self-hosted-kafka-broker-2:9092"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "ProvisionedPollerConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "MaximumPollers": 3,
+    "MinimumPollers": 1
+   },
+   "actual": {
+    "MinimumPollers": 1,
+    "MaximumPollers": 3
+   }
+  },
+  {
+   "logicalId": "F3KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic3ED015F25",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedKafkaEventSourceConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ConsumerGroupId": "myTestConsumerGroup3"
+   },
+   "actual": {
+    "ConsumerGroupId": "myTestConsumerGroup3",
+    "ConsumptionMode": "Stream"
+   }
+  },
+  {
+   "logicalId": "F4ServiceRole100FF901",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F4ServiceRole100FF901",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "F4ServiceRole100FF901",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "F4ServiceRoleDefaultPolicy1E98EC08",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F4ServiceRoleDefaultPolicy1E98EC08",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "F4ServiceRoleDefaultPolicy1E98EC08",
+   "actual": "F4ServiceRoleDefaultPolicy1E98EC08"
+  },
+  {
+   "logicalId": "F4ServiceRoleDefaultPolicy1E98EC08",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${S509448A1}",
+       "${SC0855C491}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+       "${S509448A1}",
+       "${SC0855C491}"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "F4ServiceRoleDefaultPolicy1E98EC08",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${F4ServiceRole100FF901}",
+   "actual": "${F4ServiceRole100FF901}"
+  },
+  {
+   "logicalId": "F4F1740A13",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F4F1740A13",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "F4F1740A13",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "F4F1740A13",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${F4ServiceRole100FF901}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${F4ServiceRole100FF901}"
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${F4F1740A13}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${F4F1740A13}"
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "BatchSize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 100,
+   "actual": 100
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPosition",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AT_TIMESTAMP",
+   "actual": "AT_TIMESTAMP"
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "StartingPositionTimestamp",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1730270400,
+   "actual": 1730270400
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "Topics",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "my-test-topic4"
+   ],
+   "actual": [
+    "my-test-topic4"
+   ]
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SourceAccessConfigurations",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${SC0855C491}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${S509448A1}"
+    }
+   ],
+   "actual": [
+    {
+     "Type": "CLIENT_CERTIFICATE_TLS_AUTH",
+     "URI": "${SC0855C491}"
+    },
+    {
+     "Type": "SERVER_ROOT_CA_CERTIFICATE",
+     "URI": "${S509448A1}"
+    }
+   ]
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedEventSource",
+   "status": "fail",
+   "expected": {
+    "Endpoints": {
+     "KafkaBootstrapServers": [
+      "my-self-hosted-kafka-broker-1:9092",
+      "my-self-hosted-kafka-broker-2:9092",
+      "my-self-hosted-kafka-broker-3:9092"
+     ]
+    }
+   },
+   "actual": {
+    "Endpoints": {
+     "KAFKA_BOOTSTRAP_SERVERS": [
+      "my-self-hosted-kafka-broker-1:9092",
+      "my-self-hosted-kafka-broker-3:9092",
+      "my-self-hosted-kafka-broker-2:9092"
+     ]
+    }
+   }
+  },
+  {
+   "logicalId": "F4KafkaEventSource838c4d5ff3c99c1a617120adfca83e5bmytesttopic4F6589D62",
+   "type": "AWS::Lambda::EventSourceMapping",
+   "property": "SelfManagedKafkaEventSourceConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ConsumerGroupId": "myTestConsumerGroup4"
+   },
+   "actual": {
+    "ConsumerGroupId": "myTestConsumerGroup4",
+    "ConsumptionMode": "Stream"
+   }
+  }
+ ]
+}

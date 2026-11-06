@@ -1,0 +1,299 @@
+{
+ "stackName": "aws-events-targets-api-destination-integ",
+ "summary": {
+  "no handler": 3,
+  "pass": 22
+ },
+ "results": [
+  {
+   "logicalId": "MySecret8FE80B51",
+   "type": "AWS::SecretsManager::Secret",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyConnection925E5E94",
+   "type": "AWS::Events::Connection",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyDestinationApiDestination78511D9A",
+   "type": "AWS::Events::ApiDestination",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "MyDestinationEventsRole9C7EBBEA",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyDestinationEventsRole9C7EBBEA",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "MyDestinationEventsRoleDefaultPolicy6CA0D88B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyDestinationEventsRoleDefaultPolicy6CA0D88B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyDestinationEventsRoleDefaultPolicy6CA0D88B",
+   "actual": "MyDestinationEventsRoleDefaultPolicy6CA0D88B"
+  },
+  {
+   "logicalId": "MyDestinationEventsRoleDefaultPolicy6CA0D88B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "events:InvokeApiDestination",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "events:InvokeApiDestination",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "MyDestinationEventsRoleDefaultPolicy6CA0D88B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${MyDestinationEventsRole9C7EBBEA}",
+   "actual": "${MyDestinationEventsRole9C7EBBEA}"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyRule",
+   "actual": "MyRule"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "MyRuleA44AB831",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9",
+     "Id": "Target0",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyDestinationEventsRole9C7EBBEA}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${MyDestinationEventsRole9C7EBBEA}"
+    }
+   ]
+  },
+  {
+   "logicalId": "ImportedDestinationEventsRoleEE2E7BB0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ImportedDestinationEventsRoleEE2E7BB0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "events.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22events.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ImportedDestinationEventsRoleDefaultPolicy5955C33B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ImportedDestinationEventsRoleDefaultPolicy5955C33B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ImportedDestinationEventsRoleDefaultPolicy5955C33B",
+   "actual": "ImportedDestinationEventsRoleDefaultPolicy5955C33B"
+  },
+  {
+   "logicalId": "ImportedDestinationEventsRoleDefaultPolicy5955C33B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "events:InvokeApiDestination",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "events:InvokeApiDestination",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ImportedDestinationEventsRoleDefaultPolicy5955C33B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ImportedDestinationEventsRoleEE2E7BB0}",
+   "actual": "${ImportedDestinationEventsRoleEE2E7BB0}"
+  },
+  {
+   "logicalId": "MyOtherRuleF2A0D4EA",
+   "type": "AWS::Events::Rule",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "MyOtherRuleF2A0D4EA",
+   "type": "AWS::Events::Rule",
+   "property": "Name",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "MyOtherRule",
+   "actual": "MyOtherRule"
+  },
+  {
+   "logicalId": "MyOtherRuleF2A0D4EA",
+   "type": "AWS::Events::Rule",
+   "property": "State",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ENABLED",
+   "actual": "ENABLED"
+  },
+  {
+   "logicalId": "MyOtherRuleF2A0D4EA",
+   "type": "AWS::Events::Rule",
+   "property": "ScheduleExpression",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "rate(1 minute)",
+   "actual": "rate(1 minute)"
+  },
+  {
+   "logicalId": "MyOtherRuleF2A0D4EA",
+   "type": "AWS::Events::Rule",
+   "property": "Targets",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9",
+     "Id": "Target0",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ImportedDestinationEventsRoleEE2E7BB0}"
+    },
+    {
+     "Arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9",
+     "Id": "Target1",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ImportedDestinationEventsRoleEE2E7BB0}"
+    }
+   ],
+   "actual": [
+    {
+     "Id": "Target0",
+     "Arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ImportedDestinationEventsRoleEE2E7BB0}"
+    },
+    {
+     "Id": "Target1",
+     "Arn": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:api-destination/MyDestination/40978abf-ad3e-4e9b-9f91-b99293ae49a9",
+     "RoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ImportedDestinationEventsRoleEE2E7BB0}"
+    }
+   ]
+  }
+ ]
+}

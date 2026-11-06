@@ -1,0 +1,730 @@
+{
+ "version": "1",
+ "stackName": "aws-ecs-patterns-queue-custom-cpu-scaling",
+ "resources": {
+  "VPCB9E5F0B4": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC"
+     }
+    ]
+   }
+  },
+  "VPCPublicSubnet1SubnetB4246D30": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "VPCPublicSubnet1RouteTableFEE4B781": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "VPCPublicSubnet1RouteTableAssociation0B0896DC": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VPCPublicSubnet1RouteTableFEE4B781}",
+    "SubnetId": "${VPCPublicSubnet1SubnetB4246D30}"
+   }
+  },
+  "VPCPublicSubnet1DefaultRoute91CEF279": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+    "GatewayId": "${VPCIGWB7E252D3}",
+    "RouteTableId": "${VPCPublicSubnet1RouteTableFEE4B781}"
+   },
+   "DependsOn": [
+    "VPCVPCGW99B986DC"
+   ]
+  },
+  "VPCPublicSubnet1EIP6AD938E8": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "VPCPublicSubnet1NATGatewayE0556630": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VPCPublicSubnet1EIP6AD938E8",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${VPCPublicSubnet1SubnetB4246D30}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VPCPublicSubnet1DefaultRoute91CEF279",
+    "VPCPublicSubnet1RouteTableAssociation0B0896DC"
+   ]
+  },
+  "VPCPublicSubnet2Subnet74179F39": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "VPCPublicSubnet2RouteTable6F1A15F1": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "VPCPublicSubnet2RouteTableAssociation5A808732": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VPCPublicSubnet2RouteTable6F1A15F1}",
+    "SubnetId": "${VPCPublicSubnet2Subnet74179F39}"
+   }
+  },
+  "VPCPublicSubnet2DefaultRouteB7481BBA": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+    "GatewayId": "${VPCIGWB7E252D3}",
+    "RouteTableId": "${VPCPublicSubnet2RouteTable6F1A15F1}"
+   },
+   "DependsOn": [
+    "VPCVPCGW99B986DC"
+   ]
+  },
+  "VPCPublicSubnet2EIP4947BC00": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "VPCPublicSubnet2NATGateway3C070193": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VPCPublicSubnet2EIP4947BC00",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${VPCPublicSubnet2Subnet74179F39}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VPCPublicSubnet2DefaultRouteB7481BBA",
+    "VPCPublicSubnet2RouteTableAssociation5A808732"
+   ]
+  },
+  "VPCPrivateSubnet1Subnet8BCA10E0": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "VPCPrivateSubnet1RouteTableBE8A6027": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "VPCPrivateSubnet1RouteTableAssociation347902D1": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VPCPrivateSubnet1RouteTableBE8A6027}",
+    "SubnetId": "${VPCPrivateSubnet1Subnet8BCA10E0}"
+   }
+  },
+  "VPCPrivateSubnet1DefaultRouteAE1D6490": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+    "NatGatewayId": "${VPCPublicSubnet1NATGatewayE0556630}",
+    "RouteTableId": "${VPCPrivateSubnet1RouteTableBE8A6027}"
+   }
+  },
+  "VPCPrivateSubnet2SubnetCFCDAA7A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "VPCPrivateSubnet2RouteTable0A19E10E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "VPCPrivateSubnet2RouteTableAssociation0C73D413": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VPCPrivateSubnet2RouteTable0A19E10E}",
+    "SubnetId": "${VPCPrivateSubnet2SubnetCFCDAA7A}"
+   }
+  },
+  "VPCPrivateSubnet2DefaultRouteF4F5CFD2": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+    "NatGatewayId": "${VPCPublicSubnet2NATGateway3C070193}",
+    "RouteTableId": "${VPCPrivateSubnet2RouteTable0A19E10E}"
+   }
+  },
+  "VPCIGWB7E252D3": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-ecs-patterns-queue-custom-cpu-scaling/VPC"
+     }
+    ]
+   }
+  },
+  "VPCVPCGW99B986DC": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": "${VPCIGWB7E252D3}",
+    "VpcId": "${VPCB9E5F0B4}"
+   }
+  },
+  "awsecspatternsqueuecustomcpuscalingEcsProcessingDeadLetterQueue018F2F89": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "MessageRetentionPeriod": 1209600
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "awsecspatternsqueuecustomcpuscalingEcsProcessingQueue2AF4CB2C": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "RedrivePolicy": {
+     "deadLetterTargetArn": "${awsecspatternsqueuecustomcpuscalingEcsProcessingDeadLetterQueue018F2F89.Arn}",
+     "maxReceiveCount": 3
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "sqs:ChangeMessageVisibility",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes",
+        "sqs:GetQueueUrl",
+        "sqs:ReceiveMessage"
+       ],
+       "Effect": "Allow",
+       "Resource": "${awsecspatternsqueuecustomcpuscalingEcsProcessingQueue2AF4CB2C.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "Roles": [
+     "${awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3}"
+    ]
+   }
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDef7D327EDA": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Environment": [
+       {
+        "Name": "QUEUE_NAME",
+        "Value": "${awsecspatternsqueuecustomcpuscalingEcsProcessingQueue2AF4CB2C.QueueName}"
+       }
+      ],
+      "Essential": true,
+      "Image": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:8be39d348c20f7e58a373abbd1152069e18da130e51bf52c89bd82a38d0e51d7",
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": "${awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefQueueProcessingContainerLogGroup706DABB2}",
+        "awslogs-stream-prefix": "aws-ecs-patterns-queue-custom-cpu-scaling",
+        "awslogs-region": "${AWS::Region}"
+       }
+      },
+      "Name": "QueueProcessingContainer"
+     }
+    ],
+    "Cpu": "256",
+    "ExecutionRoleArn": "${awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefExecutionRole3F91D316.Arn}",
+    "Family": "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDef1A053021",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": "${awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3.Arn}"
+   }
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefQueueProcessingContainerLogGroup706DABB2": {
+   "Type": "AWS::Logs::LogGroup",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefExecutionRole3F91D316": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefExecutionRoleDefaultPolicy25E1F570": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "${awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefQueueProcessingContainerLogGroup706DABB2.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefExecutionRoleDefaultPolicy25E1F570",
+    "Roles": [
+     "${awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefExecutionRole3F91D316}"
+    ]
+   }
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingFargateService88A0B9F9": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": "${EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3}",
+    "DeploymentConfiguration": {
+     "Alarms": {
+      "AlarmNames": [],
+      "Enable": false,
+      "Rollback": false
+     },
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "EnableECSManagedTags": false,
+    "LaunchType": "FARGATE",
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceSecurityGroup48C94096.GroupId}"
+      ],
+      "Subnets": [
+       "${VPCPublicSubnet1SubnetB4246D30}",
+       "${VPCPublicSubnet2Subnet74179F39}"
+      ]
+     }
+    },
+    "TaskDefinition": "${awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDef7D327EDA}"
+   },
+   "DependsOn": [
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3"
+   ]
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceSecurityGroup48C94096": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "aws-ecs-patterns-queue-custom-cpu-scaling/aws-ecs-patterns-queue-custom-cpu-scaling/QueueProcessingFargateService/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${VPCPrivateSubnet1DefaultRouteAE1D6490[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "${VPCB9E5F0B4}"
+   },
+   "DependsOn": [
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3"
+   ]
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetEA4C3C9A": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 2,
+    "MinCapacity": 1,
+    "ResourceId": "service/${EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3}/${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateService88A0B9F9.Name}",
+    "RoleARN": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+    "ScalableDimension": "ecs:service:DesiredCount",
+    "ServiceNamespace": "ecs"
+   },
+   "DependsOn": [
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3"
+   ]
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetCpuScalingF32A6EB0": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetCpuScalingF32A6EB0.Name}",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetEA4C3C9A}",
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "ECSServiceAverageCPUUtilization"
+     },
+     "TargetValue": 90
+    }
+   },
+   "DependsOn": [
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3"
+   ]
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy081DB979": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy081DB979.Name}",
+    "PolicyType": "StepScaling",
+    "ScalingTargetId": "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetEA4C3C9A}",
+    "StepScalingPolicyConfiguration": {
+     "AdjustmentType": "ChangeInCapacity",
+     "MetricAggregationType": "Maximum",
+     "StepAdjustments": [
+      {
+       "MetricIntervalUpperBound": 0,
+       "ScalingAdjustment": -1
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3"
+   ]
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerAlarm53129CF0": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingLowerPolicy081DB979}"
+    ],
+    "AlarmDescription": "Lower threshold scaling alarm",
+    "ComparisonOperator": "LessThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "QueueName",
+      "Value": "${awsecspatternsqueuecustomcpuscalingEcsProcessingQueue2AF4CB2C.QueueName}"
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "MetricName": "ApproximateNumberOfMessagesVisible",
+    "Namespace": "AWS/SQS",
+    "Period": 300,
+    "Statistic": "Maximum",
+    "Threshold": 0
+   },
+   "DependsOn": [
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3"
+   ]
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyF6102775": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyF6102775.Name}",
+    "PolicyType": "StepScaling",
+    "ScalingTargetId": "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetEA4C3C9A}",
+    "StepScalingPolicyConfiguration": {
+     "AdjustmentType": "ChangeInCapacity",
+     "MetricAggregationType": "Maximum",
+     "StepAdjustments": [
+      {
+       "MetricIntervalLowerBound": 0,
+       "MetricIntervalUpperBound": 400,
+       "ScalingAdjustment": 1
+      },
+      {
+       "MetricIntervalLowerBound": 400,
+       "ScalingAdjustment": 5
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3"
+   ]
+  },
+  "awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperAlarm9397ABFA": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     "${awsecspatternsqueuecustomcpuscalingQueueProcessingFargateServiceTaskCountTargetQueueMessagesVisibleScalingUpperPolicyF6102775}"
+    ],
+    "AlarmDescription": "Upper threshold scaling alarm",
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "QueueName",
+      "Value": "${awsecspatternsqueuecustomcpuscalingEcsProcessingQueue2AF4CB2C.QueueName}"
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "MetricName": "ApproximateNumberOfMessagesVisible",
+    "Namespace": "AWS/SQS",
+    "Period": 300,
+    "Statistic": "Maximum",
+    "Threshold": 100
+   },
+   "DependsOn": [
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRoleDefaultPolicyFF70EC56",
+    "awsecspatternsqueuecustomcpuscalingQueueProcessingTaskDefTaskRole397465C3"
+   ]
+  },
+  "EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3": {
+   "Type": "AWS::ECS::Cluster"
+  }
+ },
+ "outputs": {
+  "awsecspatternsqueuecustomcpuscalingSQSDeadLetterQueue94103AB7": {
+   "Value": "${awsecspatternsqueuecustomcpuscalingEcsProcessingDeadLetterQueue018F2F89.QueueName}"
+  },
+  "awsecspatternsqueuecustomcpuscalingSQSDeadLetterQueueArn45AA7A61": {
+   "Value": "${awsecspatternsqueuecustomcpuscalingEcsProcessingDeadLetterQueue018F2F89.Arn}"
+  },
+  "awsecspatternsqueuecustomcpuscalingSQSQueue56D4C1AB": {
+   "Value": "${awsecspatternsqueuecustomcpuscalingEcsProcessingQueue2AF4CB2C.QueueName}"
+  },
+  "awsecspatternsqueuecustomcpuscalingSQSQueueArnA165EB72": {
+   "Value": "${awsecspatternsqueuecustomcpuscalingEcsProcessingQueue2AF4CB2C.Arn}"
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.VPCPublicSubnet1SubnetB4246D30.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VPCPublicSubnet1NATGatewayE0556630.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${VPCPublicSubnet1EIP6AD938E8}' does not exist (Service: Ec2, Status Code: 400, Request ID: e76c0f7a-5e89-4164-8e6c-c2c9f3d0c83f) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 3a357636-5a3d-4c5e-8e81-a5174ab5eb5d)'"
+  },
+  {
+   "path": "Resources.VPCPublicSubnet2Subnet74179F39.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VPCPublicSubnet2NATGateway3C070193.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${VPCPublicSubnet2EIP4947BC00}' does not exist (Service: Ec2, Status Code: 400, Request ID: 4cb6c67b-97fb-4c01-8937-73d02617545b) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 8d53fc09-11d2-48ef-a2a5-7facf9eeae76)'"
+  },
+  {
+   "path": "Resources.VPCPrivateSubnet1Subnet8BCA10E0.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VPCPrivateSubnet2SubnetCFCDAA7A.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}

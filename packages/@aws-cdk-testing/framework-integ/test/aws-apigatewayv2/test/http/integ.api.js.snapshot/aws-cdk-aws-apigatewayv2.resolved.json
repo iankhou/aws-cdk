@@ -1,0 +1,23 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-aws-apigatewayv2",
+ "resources": {
+  "HttpApiF5A9A8A7": {
+   "Type": "AWS::ApiGatewayV2::Api",
+   "Properties": {
+    "Name": "HttpApi",
+    "ProtocolType": "HTTP",
+    "RouteSelectionExpression": "${request.method} ${request.path}"
+   }
+  },
+  "HttpApiDefaultStage3EEB07D6": {
+   "Type": "AWS::ApiGatewayV2::Stage",
+   "Properties": {
+    "ApiId": "${HttpApiF5A9A8A7}",
+    "AutoDeploy": true,
+    "StageName": "$default"
+   }
+  }
+ },
+ "unresolved": []
+}

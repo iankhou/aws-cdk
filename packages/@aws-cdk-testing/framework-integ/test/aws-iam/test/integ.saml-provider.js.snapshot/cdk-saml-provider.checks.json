@@ -1,0 +1,46 @@
+{
+ "stackName": "cdk-saml-provider",
+ "summary": {
+  "no handler": 1,
+  "pass": 2
+ },
+ "results": [
+  {
+   "logicalId": "Provider2281708E",
+   "type": "AWS::IAM::SAMLProvider",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Role1ABCC5F0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRoleWithSAML",
+      "Condition": {
+       "StringEquals": {
+        "SAML:aud": "https://signin.aws.amazon.com/saml"
+       }
+      },
+      "Effect": "Allow",
+      "Principal": {
+       "Federated": "${Provider2281708E}"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Federated%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Asaml-provider%2F${Provider2281708E.Name}%22%7D%2C%22Action%22%3A%22sts%3AAssumeRoleWithSAML%22%2C%22Condition%22%3A%7B%22StringEquals%22%3A%7B%22SAML%3Aaud%22%3A%22https%3A%2F%2Fsignin.aws.amazon.com%2Fsaml%22%7D%7D%7D%5D%7D"
+  }
+ ]
+}

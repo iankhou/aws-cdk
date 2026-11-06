@@ -1,0 +1,59 @@
+{
+ "version": "1",
+ "stackName": "kinesis-stream-shard-level-monitoring-stack",
+ "resources": {
+  "ExplicitStream4F8E3AC9": {
+   "Type": "AWS::Kinesis::Stream",
+   "Properties": {
+    "DesiredShardLevelMetrics": [
+     "IncomingBytes",
+     "IncomingRecords",
+     "IteratorAgeMilliseconds",
+     "OutgoingBytes",
+     "OutgoingRecords",
+     "WriteProvisionedThroughputExceeded",
+     "ReadProvisionedThroughputExceeded"
+    ],
+    "RetentionPeriodHours": 24,
+    "ShardCount": 1,
+    "StreamEncryption": {
+     "EncryptionType": "KMS",
+     "KeyId": "alias/aws/kinesis"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "AllStream21BE7EBF": {
+   "Type": "AWS::Kinesis::Stream",
+   "Properties": {
+    "DesiredShardLevelMetrics": [
+     "ALL"
+    ],
+    "RetentionPeriodHours": 24,
+    "ShardCount": 1,
+    "StreamEncryption": {
+     "EncryptionType": "KMS",
+     "KeyId": "alias/aws/kinesis"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefExplicitStream4F8E3AC9309E615E": {
+   "Value": "${ExplicitStream4F8E3AC9}",
+   "Export": {
+    "Name": "kinesis-stream-shard-level-monitoring-stack:ExportsOutputRefExplicitStream4F8E3AC9309E615E"
+   }
+  },
+  "ExportsOutputRefAllStream21BE7EBFB28F7444": {
+   "Value": "${AllStream21BE7EBF}",
+   "Export": {
+    "Name": "kinesis-stream-shard-level-monitoring-stack:ExportsOutputRefAllStream21BE7EBFB28F7444"
+   }
+  }
+ },
+ "unresolved": []
+}
