@@ -2,16 +2,16 @@
  "tests": 1520,
  "run": 1519,
  "byResult": {
-  "baselined": 1077,
-  "deploy failed": 442
+  "baselined": 1272,
+  "deploy failed": 247
  },
  "checks": {
-  "no handler": 2483,
-  "pass": 38560,
-  "fail": 84,
-  "unresolved": 1254,
-  "missing": 27,
-  "gap": 26,
+  "no handler": 3457,
+  "pass": 59545,
+  "fail": 89,
+  "unresolved": 2374,
+  "missing": 104,
+  "gap": 27,
   "error": 1
  },
  "destroyFailed": [
@@ -29,11 +29,14 @@
   "aws-ec2/test/integ.machine-image-cached.js.snapshot",
   "aws-ec2/test/integ.nat-instances.lit.js.snapshot",
   "aws-ec2/test/integ.prefix-list-lookup.js.snapshot",
+  "aws-ec2/test/integ.regional-nat-gateway-egress.js.snapshot",
   "aws-ec2/test/integ.vpc-endpoint-eusc.js.snapshot",
   "aws-ec2/test/integ.vpc-lookup.js.snapshot",
   "aws-ecr/test/integ.repository-lookup.js.snapshot",
   "aws-ecs-patterns/test/ec2/integ.alb-ecs-service-command-entry-point.js.snapshot",
   "aws-ecs-patterns/test/ec2/integ.application-load-balanced-ecs-service.js.snapshot",
+  "aws-ecs-patterns/test/ec2/integ.healthchecks-multiple-application-load-balanced-ecs-service.js.snapshot",
+  "aws-ecs-patterns/test/ec2/integ.healthchecks-multiple-network-load-balanced-ecs-service.js.snapshot",
   "aws-ecs-patterns/test/ec2/integ.network-load-balanced-ecs-service.js.snapshot",
   "aws-ecs-patterns/test/fargate/integ.l3-capacity-provider-strategies.js.snapshot",
   "aws-ecs-patterns/test/fargate/integ.runtime-platform-application-load-balanced-fargate-service.js.snapshot",
@@ -42,6 +45,7 @@
   "aws-ecs/test/fargate/integ.capacity-providers.js.snapshot",
   "aws-ecs/test/integ.managedinstances-capacity-provider-default-roles.js.snapshot",
   "aws-ecs/test/integ.managedinstances-capacity-provider.js.snapshot",
+  "aws-ecs/test/integ.managedinstances-no-default-capacity-provider.js.snapshot",
   "aws-events/test/integ.cross-account-rule.js.snapshot",
   "aws-events/test/integ.eventbus-cross-account-grants.js.snapshot",
   "aws-iam/test/integ.custom-permissions-boundary-aspect.js.snapshot",
@@ -66,13 +70,17 @@
   "aws-ssm/test/integ.value-from-lookup-with-default.js.snapshot",
   "aws-stepfunctions-tasks/test/emr/integ.emr-create-cluster-with-auto-deletion-policy-idle-timeout.js.snapshot",
   "aws-stepfunctions-tasks/test/emr/integ.emr-create-cluster-with-ebs.js.snapshot",
+  "aws-synthetics/test/integ.vpc.js.snapshot",
   "core/test/integ.cross-account-references-multi-consumer.js.snapshot",
   "custom-resources/test/aws-custom-resource/integ.cross-account-assumeRole.js.snapshot",
   "pipelines/test/integ.cross-account-pipeline-action.js.snapshot",
   "aws-cloudfront/test/integ.cloudfront-cross-region-cert.js.snapshot",
   "aws-eks/test/integ.eks-cluster-ipv6.js.snapshot",
+  "aws-eks/test/integ.eks-cluster-removal-policy.js.snapshot",
+  "aws-eks/test/integ.eks-cluster.js.snapshot",
   "aws-rds/test/integ.cluster-lookup.js.snapshot",
-  "aws-rds/test/integ.instance-lookup.js.snapshot"
+  "aws-rds/test/integ.instance-lookup.js.snapshot",
+  "aws-rds/test/integ.instance-s3.js.snapshot"
  ],
  "retained": [
   {
@@ -1276,6 +1284,30 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-ec2/test/integ.regional-nat-gateway-egress.js.snapshot",
+   "stack": "RegionalNatGatewayEgressStack",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "/aws/lambda/RegionalNatGatewayEgressStack-SourceIpEcho41FBE38C-JFSNHBdQo5m6",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.regional-nat-gateway-egress.js.snapshot",
+   "stack": "RegionalNatGatewayEgressStack",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "/aws/lambda/RegionalNatGatewayEgressSt-ManualModeProbe20297005-bhtP0ouPGed5",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.regional-nat-gateway-egress.js.snapshot",
+   "stack": "RegionalNatGatewayEgressStack",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "/aws/lambda/RegionalNatGatewayEgressS-AutomaticModeProbe324C6D-TvSGXKPykatQ",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-ec2/test/integ.volume-initialization-rate.js.snapshot",
    "stack": "volume-initialization-rate-stack",
    "type": "AWS::Logs::LogGroup",
@@ -1332,6 +1364,30 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-ec2/test/integ.vpc-flow-logs-firehose.js.snapshot",
+   "stack": "FlowLogsTestStack",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "FlowLogsTestStack-FlowLogsCWLogGroup0398E8F8-WsWnUiaQ2Bx1",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.vpc-flow-logs-from-transit-gateway.js.snapshot",
+   "stack": "aws-cdk-ec2-flow-logs",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-cdk-ec2-flow-logs-TransitGatewayFlowLogsLogGroupDFDBDA9F-poqTjxP3IR08",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.vpc-flow-logs-from-transit-gateway.js.snapshot",
+   "stack": "aws-cdk-ec2-flow-logs",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-cdk-ec2-flow-logs-TransitGatewayAttachmentFlowLogsLogGroup9A4DB90C-6xG6cTJMa1KJ",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-ec2/test/integ.vpc-flow-logs-interval.js.snapshot",
    "stack": "FlowLogsTestStack",
    "type": "AWS::S3::Bucket",
@@ -1345,6 +1401,54 @@
    "type": "AWS::Logs::LogGroup",
    "physicalId": "FlowLogsTestStack-FlowLogsCWLogGroup0398E8F8-YGR4BmmmPA5f",
    "region": "eu-west-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.vpc-flow-logs-kinesis.js.snapshot",
+   "stack": "FlowLogsTestStack",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "FlowLogsTestStack-FlowLogsCWLogGroup0398E8F8-ALeYO8Etw27q",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.vpc-flow-logs.js.snapshot",
+   "stack": "FlowLogsFeatureFlag",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "flowlogsfeatureflag-vpcflowlogss3bucketfb7dc2be-hzgnuivjkyo1",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.vpc-flow-logs.js.snapshot",
+   "stack": "FlowLogsFeatureFlag",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "flowlogsfeatureflag-vpcflowlogss3withdestinationop-xympo2bkfe1z",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.vpc-flow-logs.js.snapshot",
+   "stack": "FlowLogsTestStack",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "flowlogsteststack-vpcflowlogss3bucketfb7dc2be-agyqtckxrkdr",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.vpc-flow-logs.js.snapshot",
+   "stack": "FlowLogsTestStack",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "FlowLogsTestStack-VPCFlowLogsCloudwatchLogGroupACA08DD5-thunk6rpZH55",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ec2/test/integ.vpc-flow-logs.js.snapshot",
+   "stack": "FlowLogsTestStack",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "FlowLogsTestStack-FlowLogsCWLogGroup0398E8F8-2zu0zfaz7e5m",
+   "region": "us-east-1",
    "note": "deletion requested"
   },
   {
@@ -1385,6 +1489,22 @@
    "type": "AWS::Logs::LogGroup",
    "physicalId": "aws-ecs-integ-alb-myServiceTaskDefwebLogGroupA1767F2C-pry2Nh1vzKiw",
    "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/ec2/integ.healthchecks-multiple-application-load-balanced-ecs-service.js.snapshot",
+   "stack": "aws-ecs-integ-multiple-alb-healthchecks",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-multiple-alb-healthchecks-myServiceTaskDefwebLogGroupA1767F2C-MN1xEVElOcng",
+   "region": "eu-west-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/ec2/integ.healthchecks-multiple-network-load-balanced-ecs-service.js.snapshot",
+   "stack": "aws-ecs-integ-nlb-healthchecks",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-nlb-healthchecks-myServiceTaskDefwebLogGroupA1767F2C-F3fhsUVRtgMO",
+   "region": "us-west-2",
    "note": "deletion requested"
   },
   {
@@ -1433,6 +1553,14 @@
    "type": "AWS::Logs::LogGroup",
    "physicalId": "aws-ecs-patterns-alb-health-check-HealthCheckALBServiceTaskDefwebLogGroupCB0829DA-4cGYXJUlgsRn",
    "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/fargate/integ.alb-fargate-service-idle-timeout.js.snapshot",
+   "stack": "aws-ecs-integ-alb-fg-idletimeout",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-alb-fg-idletimeout-myServiceTaskDefwebLogGroupA1767F2C-Yac8gm4nkUJJ",
+   "region": "us-east-1",
    "note": "deletion requested"
   },
   {
@@ -1508,6 +1636,14 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-ecs-patterns/test/fargate/integ.circuit-breaker-no-deployment-controller-fargate-service.js.snapshot",
+   "stack": "aws-ecs-integ-circuit-breaker-no-dc",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-circuit-breaker-no-dc-myServiceTaskDefwebLogGroupA1767F2C-xp1ZHKRFUJIz",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-ecs-patterns/test/fargate/integ.container-cpu-memory.js.snapshot",
    "stack": "aws-ecs-integ-container-cpu-memory",
    "type": "AWS::Logs::LogGroup",
@@ -1524,11 +1660,35 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-ecs-patterns/test/fargate/integ.healthchecks-multiple-application-load-balanced-fargate-service.js.snapshot",
+   "stack": "aws-ecs-integ-fargate-multi-alb-health",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-fargate-multi-alb-health-myServiceTaskDefwebLogGroupA1767F2C-W6GoLTwr0gBv",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-ecs-patterns/test/fargate/integ.healthchecks-multiple-network-load-balanced-fargate-service.js.snapshot",
    "stack": "aws-ecs-integ-multi-nlb-healthchecks",
    "type": "AWS::Logs::LogGroup",
    "physicalId": "aws-ecs-integ-multi-nlb-healthchecks-myServiceTaskDefwebLogGroupA1767F2C-lNLHDYBjQtlN",
    "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/fargate/integ.l3-autocreate.js.snapshot",
+   "stack": "aws-ecs-integ-l3-autocreate",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-l3-autocreate-ALBFargateServiceTaskDefwebLogGroup7073A41D-1jokcwPkyJdz",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/fargate/integ.l3-autocreate.js.snapshot",
+   "stack": "aws-ecs-integ-l3-autocreate",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-l3-autocreate-NLBFargateServiceTaskDefwebLogGroupC4A42FE2-wCCIBbR4TaFN",
+   "region": "us-west-2",
    "note": "deletion requested"
   },
   {
@@ -1548,11 +1708,51 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-ecs-patterns/test/fargate/integ.l3-vpconly.js.snapshot",
+   "stack": "aws-ecs-integ-l3-vpconly",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-l3-vpconly-ALBFargateServiceTaskDefwebLogGroup7073A41D-rPEBS0jNFmGy",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/fargate/integ.l3-vpconly.js.snapshot",
+   "stack": "aws-ecs-integ-l3-vpconly",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-l3-vpconly-NLBFargateServiceTaskDefwebLogGroupC4A42FE2-UPEVKzprOOFQ",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/fargate/integ.l3.js.snapshot",
+   "stack": "aws-ecs-integ-lb-fargate",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-lb-fargate-ALBFargateServiceTaskDefwebLogGroup7073A41D-0iEUutz87Yzm",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/fargate/integ.l3.js.snapshot",
+   "stack": "aws-ecs-integ-lb-fargate",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-lb-fargate-NLBFargateServiceTaskDefwebLogGroupC4A42FE2-1j33clQ1QSbc",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-ecs-patterns/test/fargate/integ.multiple-network-load-balanced-fargate-service.js.snapshot",
    "stack": "aws-ecs-integ-fargate-multi-nlb-health",
    "type": "AWS::Logs::LogGroup",
    "physicalId": "aws-ecs-integ-fargate-multi-nlb-health-myServiceTaskDefwebLogGroupA1767F2C-HoUOtxQLvEaS",
    "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/fargate/integ.network-load-balanced-fargate-service-custom-health.js.snapshot",
+   "stack": "aws-ecs-integ-fargate-health-percentage",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-fargate-health-percentage-myServiceTaskDefwebLogGroupA1767F2C-UkGrcABjEaKJ",
+   "region": "eu-west-1",
    "note": "deletion requested"
   },
   {
@@ -1588,6 +1788,14 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-ecs-patterns/test/fargate/integ.queue-processing-fargate-service-isolated.js.snapshot",
+   "stack": "aws-ecs-patterns-queue-isolated",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-patterns-queue-isolated-IsolatedQueueServiceQueueProcessingTaskDefQueueProcessingContainerLogGroupAEB959E6-2eLCk5zo38ag",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-ecs-patterns/test/fargate/integ.queue-processing-fargate-service-no-cpu-scaling.js.snapshot",
    "stack": "aws-ecs-patterns-queue-no-cpu-scaling",
    "type": "AWS::Logs::LogGroup",
@@ -1609,6 +1817,14 @@
    "type": "AWS::Logs::LogGroup",
    "physicalId": "aws-ecs-patterns-queue-TaskDefTheContainerLogGroupD94C8EF5-2vJSyeKB7ILp",
    "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs-patterns/test/fargate/integ.queue-processing-fargate-service.js.snapshot",
+   "stack": "aws-ecs-patterns-queue",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-patterns-queue-QueueProcessingServiceQueueProcessingTaskDefQueueProcessingContainerLogGroupCC92448A-irgRs4O5tiq3",
+   "region": "us-west-2",
    "note": "deletion requested"
   },
   {
@@ -1652,6 +1868,22 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-ecs/test/base/integ.blue-green-deployment-strategy.js.snapshot",
+   "stack": "aws-ecs-blue-green-deployment",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "/aws/lambda/aws-ecs-blue-green-deployment-LambdaHookBF1BC8B4-46MZ1nbICHhC",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs/test/ec2/integ.enable-execute-command.js.snapshot",
+   "stack": "aws-ecs-integ-enable-execute-command",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "aws-ecs-integ-enable-execute-ecsexecbucket4f468651-fm6j4srucplp",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-ecs/test/ec2/integ.exec-command.js.snapshot",
    "stack": "aws-ecs-integ-exec-command",
    "type": "AWS::KMS::Key",
@@ -1673,6 +1905,14 @@
    "type": "AWS::S3::Bucket",
    "physicalId": "aws-ecs-integ-exec-command-ecsexecbucket4f468651-pmrx5f4tqxqy",
    "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs/test/fargate/integ.awslogs-driver.js.snapshot",
+   "stack": "aws-ecs-integ",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-LogGroupF5B46931-NMcfMvdXYgMN",
+   "region": "eu-west-1",
    "note": "deletion requested"
   },
   {
@@ -1700,6 +1940,46 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-ecs/test/fargate/integ.enable-execute-command.js.snapshot",
+   "stack": "aws-ecs-integ-enable-execute-command",
+   "type": "AWS::KMS::Key",
+   "physicalId": "81a2a694-c104-42a3-97ab-9b3e1c9008e2",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs/test/fargate/integ.enable-execute-command.js.snapshot",
+   "stack": "aws-ecs-integ-enable-execute-command",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "aws-ecs-integ-enable-execute-ecsexecbucket4f468651-zzfeuwczytxc",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs/test/fargate/integ.exec-command.js.snapshot",
+   "stack": "aws-ecs-integ-exec-command",
+   "type": "AWS::KMS::Key",
+   "physicalId": "726df00f-6194-43da-9014-4d72ae812519",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs/test/fargate/integ.exec-command.js.snapshot",
+   "stack": "aws-ecs-integ-exec-command",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-exec-command-LogGroupF5B46931-8NYixzgt4Iz6",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs/test/fargate/integ.exec-command.js.snapshot",
+   "stack": "aws-ecs-integ-exec-command",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "aws-ecs-integ-exec-command-ecsexecbucket4f468651-m0xzzwtugxyj",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-ecs/test/fargate/integ.fargate-with-efs.js.snapshot",
    "stack": "aws-ecs-fargate-efs",
    "type": "AWS::EFS::FileSystem",
@@ -1713,6 +1993,38 @@
    "type": "AWS::Logs::LogGroup",
    "physicalId": "aws-ecs-integ-TaskDeflogrouterLogGroup5C22D15C-tGJrdGN7AWz9",
    "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs/test/fargate/integ.runtime.js.snapshot",
+   "stack": "aws-ecs-integ-runtime",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-runtime-TaskDefWindowswindowsservercoreLogGroupCF570877-czAgzp7lNFsm",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-ecs/test/fargate/integ.runtime.js.snapshot",
+   "stack": "aws-ecs-integ-runtime",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-runtime-TaskDefGraviton2webarm64LogGroup7D0FFEB3-D2jteomb0IX4",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-efs/test/integ.efs-filesystem-one-zone.js.snapshot",
+   "stack": "test-efs-one-zone-integ",
+   "type": "AWS::EFS::FileSystem",
+   "physicalId": "fs-06fe73c35004f05a7",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-efs/test/integ.efs-filesystem-one-zone.js.snapshot",
+   "stack": "test-efs-one-zone-integ",
+   "type": "AWS::EFS::FileSystem",
+   "physicalId": "fs-0e57a1d492a231616",
+   "region": "us-west-2",
    "note": "deletion requested"
   },
   {
@@ -1732,6 +2044,38 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-efs/test/integ.efs.js.snapshot",
+   "stack": "test-efs-integ",
+   "type": "AWS::EFS::FileSystem",
+   "physicalId": "fs-0b216514c3ba96891",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-elasticloadbalancingv2/test/integ.alb.extended.log.js.snapshot",
+   "stack": "aws-cdk-elbv2-integ",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "aws-cdk-elbv2-integ-lbalbaccesslogsbucket6ae92937-mtn1miqbiahp",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-elasticloadbalancingv2/test/integ.alb.extended.log.js.snapshot",
+   "stack": "aws-cdk-elbv2-integ",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "aws-cdk-elbv2-integ-lbalbconnectionlogsbucket4bfa4-qceiwwxt7erz",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-elasticloadbalancingv2/test/integ.alb.log.imported-bucket.js.snapshot",
+   "stack": "aws-cdk-alb-log-imported-bucket-integ",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "aws-cdk-alb-log-imported-bucket-int-bucket83908e77-kqrhqq0egqik",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-events-targets/test/aws-api/integ.aws-api.js.snapshot",
    "stack": "aws-cdk-aws-api-target-integ",
    "type": "AWS::KMS::Key",
@@ -1745,6 +2089,14 @@
    "type": "AWS::S3::Bucket",
    "physicalId": "pipeline-events-pipelinepipeline22f2a91dartifactsb-0qdpczrcl2c4",
    "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-events-targets/test/ecs/integ.event-ec2-task.js.snapshot",
+   "stack": "aws-ecs-integ-ecs",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-ecs-integ-ecs-TaskDefTheContainerLogGroupD94C8EF5-fqj6HiLRA4yH",
+   "region": "eu-west-1",
    "note": "deletion requested"
   },
   {
@@ -3244,6 +3596,22 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-stepfunctions-tasks/test/ecs/integ.fargate-run-task.js.snapshot",
+   "stack": "aws-sfn-tasks-ecs-fargate-run-task",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-sfn-tasks-ecs-fargate-run-task-TaskDefTheContainerLogGroupD94C8EF5-KPG46lNmiyO3",
+   "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-stepfunctions-tasks/test/ecs/integ.fargate-task.js.snapshot",
+   "stack": "aws-sfn-tasks-ecs-fargate-task",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "aws-sfn-tasks-ecs-fargate-task-TaskDefTheContainerLogGroupD94C8EF5-LmJ0LsmJCm83",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-stepfunctions-tasks/test/emrcontainers/integ.job-submission-workflow.js.snapshot",
    "stack": "aws-stepfunctions-tasks-emr-containers-all-services-test",
    "type": "AWS::Logs::LogGroup",
@@ -3396,11 +3764,51 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-synthetics/test/integ.vpc.js.snapshot",
+   "stack": "canary-vpc",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "canary-vpc-myvpccanaryartifactsbucketdc69853c-xazfhxyqwjuy",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "core/test/integ.cfn-mappings-find-in-map.js.snapshot",
    "stack": "core-cfn-mapping-1",
    "type": "AWS::S3::Bucket",
    "physicalId": "core-cfn-mapping-1-cfnmappingfindinmapbucket6f72fe-djqzpwvs3zpa",
    "region": "us-east-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "core/test/integ.prop-injectors.js.snapshot",
+   "stack": "TestStack",
+   "type": "AWS::KMS::Key",
+   "physicalId": "05419724-dcfa-4be4-a839-ac7e6378801f",
+   "region": "eu-west-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "core/test/integ.prop-injectors.js.snapshot",
+   "stack": "TestStack",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "teststack-accesslogging7a1920d61156abc05a60135aefe-k8zcalj7kskn",
+   "region": "eu-west-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "core/test/integ.prop-injectors.js.snapshot",
+   "stack": "TestStack",
+   "type": "AWS::KMS::Key",
+   "physicalId": "763c555b-5683-4f50-998a-0fbd59064f31",
+   "region": "eu-west-1",
+   "note": "deletion requested"
+  },
+  {
+   "test": "core/test/integ.prop-injectors.js.snapshot",
+   "stack": "TestStack",
+   "type": "AWS::S3::Bucket",
+   "physicalId": "teststack-resource-w7hqqdxddtoh",
+   "region": "eu-west-1",
    "note": "deletion requested"
   },
   {
@@ -3748,6 +4156,22 @@
    "note": "deletion requested"
   },
   {
+   "test": "aws-eks-v2/test/integ.eks-default-capacity-al2023.js.snapshot",
+   "stack": "aws-cdk-eks-v2-default-capacity-al2023-test",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "/aws/lambda/aws-cdk-eks-v2-default-ca-ClusterKubectlProviderHa-5Bm0umJ39oME",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-eks-v2/test/integ.eks-default-capacity-al2023.js.snapshot",
+   "stack": "aws-cdk-eks-v2-default-capacity-al2023-test",
+   "type": "AWS::Logs::LogGroup",
+   "physicalId": "/aws/lambda/aws-cdk-eks-v2-default-ca-ClusterKubectlProviderfr-wxSaIzGglweZ",
+   "region": "us-west-2",
+   "note": "deletion requested"
+  },
+  {
    "test": "aws-opensearchservice/test/integ.opensearch.custom-kms-key.js.snapshot",
    "stack": "cdk-integ-opensearch-custom-kms-key",
    "type": "AWS::KMS::Key",
@@ -3785,6 +4209,22 @@
    "type": "AWS::Logs::LogGroup",
    "physicalId": "cdk-integ-opensearch-Domain2AppLogs810876E2-pstGokc7ti9R",
    "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-rds/test/integ.cluster-manage-master-password.js.snapshot",
+   "stack": "aws-cdk-rds-cluster-manage-master-password-integ",
+   "type": "AWS::KMS::Key",
+   "physicalId": "07c9c76c-3f9c-40af-b1a2-dcff253af4a1",
+   "region": "us-east-2",
+   "note": "deletion requested"
+  },
+  {
+   "test": "aws-rds/test/integ.instance-manage-master-password.js.snapshot",
+   "stack": "aws-cdk-rds-instance-manage-master-password-integ",
+   "type": "AWS::KMS::Key",
+   "physicalId": "e69aa0b3-b309-4812-a16a-134be6805371",
+   "region": "us-east-1",
    "note": "deletion requested"
   }
  ],
@@ -3858,36 +4298,6 @@
    "test": "aws-appsync/test/integ.js-resolver.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ AggregateError: "
-  },
-  {
-   "test": "aws-autoscaling/test/integ.asg-capacity-distribution-strategy.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  6a92e8ef-7b67-ac57-af83-1bab742456cc, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-autoscaling/test/integ.asg-capacity-rebalance.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  df1ce0cf-b37b-985d-1e1f-d79529489385, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  64a82619-f52f-88cd-eacb-d10a55054f37, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-autoscaling/test/integ.asg-lt.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  bfb94c62-0e2f-4586-2b2d-a6ea5bd8b2bc, HandlerErrorCode: GeneralServiceException)\n  7839c17e-c26d-4c05-8e28-ba5a28bfa527, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-autoscaling/test/integ.asg-w-elbv2.js.snapshot",
-   "result": "deploy failed",
-   "reason": "   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  18eba726-d325-8cc7-c59d-aab427ecd5f0, HandlerErrorCode: GeneralServiceException)\n  96b22130-b1e1-9668-02eb-e1813e97dee0, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-autoscaling/test/integ.capacity.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  c62d269c-5d0e-036c-527e-ef932661b159, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-autoscaling/test/integ.custom-scaling.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  48a87d8a-7797-19a0-5ec0-2a7b7ea9fa16, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-bedrockagentcore/test/agentcore/memory/integ.memory.js.snapshot",
@@ -3983,16 +4393,6 @@
    "test": "aws-codebuild/test/integ.project-notification.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 4993946e-26a8-cf68-84b7-e3a6b5a46b07, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-codebuild/test/integ.project-vpc.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  b2d500b0-5863-7236-6610-664fa893e85e, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-codedeploy/test/server/integ.deployment-group-zonal-config.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  3192e475-75a3-3435-9984-b11ae5273a5a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  6b6fb5d5-1645-b911-5ca2-92e76ea23a8f, HandlerErrorCode: ServiceLimitExceeded)"
   },
   {
    "test": "aws-codepipeline-actions/test/integ.codepipeline-with-nested-stack.js.snapshot",
@@ -4147,7 +4547,7 @@
   {
    "test": "aws-ec2/test/integ.client-vpn-endpoint-disconnect-on-session-timeout.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  67ea0ef4-4512-ee7d-779a-d3299d4e3610, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "  Resource handler returned message: \"Invalid request provided: Certificate validation failed with status: FAILED\"\n  (RequestToken: 556f3f67-9107-3ca9-12f3-fbaef3b11f1c, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ec2/test/integ.import-default-vpc.lit.js.snapshot",
@@ -4160,21 +4560,6 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  (SDK Attempt Count: 1)\" (RequestToken: e1733ade-1b14-7069-6be9-431edd0664f0, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-ec2/test/integ.instance-init-multiple.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  47a91fde-f3ce-19f5-b651-e8f98ef09ac5, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.instance-public-and-privateip.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  34861b09-2831-b7b1-d304-77940ce5be2b, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.instance.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  31db1e5b-4efd-a6dc-34bf-7598565d8d06, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-ec2/test/integ.machine-image-cached.js.snapshot",
    "result": "deploy failed",
    "reason": ""
@@ -4182,12 +4567,7 @@
   {
    "test": "aws-ec2/test/integ.machine-image.js.snapshot",
    "result": "deploy failed",
-   "reason": "  eaae0228-30be-9011-4c43-e2e14a828e0d, HandlerErrorCode: GeneralServiceException)\n  17020213-ef5c-b091-3a02-c5df2daf4211, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.nat-instance-credit.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  43ced961-e7e7-adf4-bbc3-8a2119801df1, HandlerErrorCode: GeneralServiceException)\n  914ee4f5-ca6b-5061-c42e-427ac052278d, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "  42a75873-d8a9-43f5-c579-92539a8fa073, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  14be3398-abd2-dcbf-bc24-d522bc8d3cc8, HandlerErrorCode: InvalidRequest)"
   },
   {
    "test": "aws-ec2/test/integ.nat-instances.lit.js.snapshot",
@@ -4195,29 +4575,9 @@
    "reason": ""
   },
   {
-   "test": "aws-ec2/test/integ.ports.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  db1cb0a6-1b05-fcba-7889-a33394ad7ec6, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  909bf81e-58cc-bb4a-d8d5-0c1e4eb66474, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
    "test": "aws-ec2/test/integ.prefix-list-lookup.js.snapshot",
    "result": "deploy failed",
    "reason": ""
-  },
-  {
-   "test": "aws-ec2/test/integ.prefix-list.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  1f184d34-b741-7a6b-fbb7-163a74a9bb8d, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  98a25bff-16f1-0f15-d0ee-3642a5d93390, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-ec2/test/integ.regional-nat-gateway-egress.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  59691522-c2e4-d26e-da98-5694ed36b918, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.share-vpcs.lit.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  f37684a4-a8a1-8e05-34b6-86589577f597, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ec2/test/integ.vpc-endpoint-eusc.js.snapshot",
@@ -4227,32 +4587,7 @@
   {
    "test": "aws-ec2/test/integ.vpc-endpoint.lit.js.snapshot",
    "result": "deploy failed",
-   "reason": "  45b3d1e8-af0f-772f-9151-ff2196677cf5, HandlerErrorCode: GeneralServiceException)\n  ee876f9b-e8c5-47cc-7e67-ce27b00199cb, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.vpc-filter-subnets.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  58b19f8c-76a4-2c9d-06ce-55b0e31bd819, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.vpc-flow-logs-firehose.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  c0dc6e63-ae6b-443d-30fb-98f4911ad2b1, HandlerErrorCode: GeneralServiceException)\n  d555f8db-c719-f867-b81d-998822dfa6c6, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.vpc-flow-logs-from-transit-gateway.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  c0d43b44-27e9-f90e-8a29-352ca937ba2a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.vpc-flow-logs-kinesis.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  20221d92-a103-7a1a-a8d9-095cf2682722, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.vpc-flow-logs.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  26d0e0bd-1b07-f5e7-ee22-d14a48dd4a52, HandlerErrorCode: GeneralServiceException)\n  7d91bb60-b423-b8c3-f0d3-503149502a2a, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "‣ DeploymentError: Resource updates failed:\n  HandlerErrorCode: AlreadyExists)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ec2/test/integ.vpc-ipam.js.snapshot",
@@ -4263,16 +4598,6 @@
    "test": "aws-ec2/test/integ.vpc-lookup.js.snapshot",
    "result": "deploy failed",
    "reason": ""
-  },
-  {
-   "test": "aws-ec2/test/integ.vpc.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  abe03dd3-a3a2-9294-346a-f699355c68c4, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ec2/test/integ.vpn.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  e30f9355-41be-3290-5462-3050d147f3f6, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ecr-assets/test/integ.assets-docker-build-context.js.snapshot",
@@ -4290,16 +4615,6 @@
    "reason": ""
   },
   {
-   "test": "aws-ecs-patterns/test/ec2/integ.healthchecks-multiple-application-load-balanced-ecs-service.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  ab0cb8ee-3c85-f904-6954-7d62481b6ac8, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs-patterns/test/ec2/integ.healthchecks-multiple-network-load-balanced-ecs-service.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  e7998d9b-b470-0fbf-c51a-90d9e5745ce6, HandlerErrorCode: GeneralServiceException)\n  f35f5843-3adf-ce37-e7ec-1577421ab3a4, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-ecs-patterns/test/ec2/integ.multiple-application-load-balanced-ecs-service-idle-timeout.js.snapshot",
    "result": "deploy failed",
    "reason": "  Resource handler returned message: \"Error occurred: InvalidDomainNameException - example.com. is reserved by AWS!\n  (RequestToken: d726ce30-8b7c-4c71-2ef9-77605f57802d, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
@@ -4307,7 +4622,7 @@
   {
    "test": "aws-ecs-patterns/test/ec2/integ.tls-network-load-balanced-ecs-service.js.snapshot",
    "result": "deploy failed",
-   "reason": "   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  0866386a-fc39-7965-0c07-8ceb1bef3127, HandlerErrorCode: ServiceLimitExceeded)\n  36853702-924d-a0d1-9eca-393a25ef9b3e, HandlerErrorCode: GeneralServiceException)"
+   "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 1b8c455b-3b38-4fbd-94de-6121fa0c32a8, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ecs-patterns/test/fargate/integ.alb-fargate-service-https-idle-timeout.js.snapshot",
@@ -4320,44 +4635,9 @@
    "reason": "  Resource handler returned message: \"Invalid request provided: Certificate validation failed with status: FAILED\"\n  (RequestToken: efa5ba8c-32ac-e21b-362d-619a3b4c2060, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-ecs-patterns/test/fargate/integ.alb-fargate-service-idle-timeout.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  23474ba7-2ea6-3df2-35c7-3fcbbbc42015, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs-patterns/test/fargate/integ.circuit-breaker-no-deployment-controller-fargate-service.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  7ff55b5c-8c9f-ab34-05d8-f37b2591f654, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-ecs-patterns/test/fargate/integ.circuit-breaker-queue-processing-fargate-service.js.snapshot",
    "result": "deploy failed",
    "reason": "  Resource handler returned message: \"Error occurred during operation 'ECS Deployment Circuit Breaker was triggered'.\"\n  (RequestToken: 6e31b950-e045-f01f-db3c-8a8daafef23f, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs-patterns/test/fargate/integ.healthchecks-multiple-application-load-balanced-fargate-service.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  7ed3c1b7-7e77-ce04-6550-aaef0cfdcbaf, HandlerErrorCode: GeneralServiceException)\n  d91dbead-85e8-06ae-ffbd-52484f32c3c3, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs-patterns/test/fargate/integ.l3-autocreate.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  e7ef90a9-05d8-334f-6a99-b0c8ef43b84c, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs-patterns/test/fargate/integ.l3-vpconly.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  630c1941-6bfe-e091-29b9-79f3146ad8e2, HandlerErrorCode: GeneralServiceException)\n  cf15c17a-256d-0758-15dc-66f268c477d0, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs-patterns/test/fargate/integ.l3.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  5dc982fb-fc46-79f6-6bdb-57c0b5141137, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs-patterns/test/fargate/integ.network-load-balanced-fargate-service-custom-health.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  618e09da-5fd1-844b-5be7-3fc12b49bcf7, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ecs-patterns/test/fargate/integ.queue-processing-fargate-service-grace-period.js.snapshot",
@@ -4365,39 +4645,14 @@
    "reason": "  44343d74-2852-1b7c-06ae-4713cb989f40, HandlerErrorCode: GeneralServiceException)\n  e923f5cf-420b-f250-f04c-3300d9c882f9, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-ecs-patterns/test/fargate/integ.queue-processing-fargate-service-isolated.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  e8a41cd0-76d0-f3c7-4367-8b2bbbc599ad, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  eaa00be2-e6cd-c9e2-113e-41162e70bebb, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
    "test": "aws-ecs-patterns/test/fargate/integ.queue-processing-fargate-service-public.js.snapshot",
    "result": "deploy failed",
-   "reason": "  2f906474-e948-e7ff-4ac0-456e02d8910d, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  fd5b58d2-a2cd-e292-e1bd-48bbaac5d690, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-ecs-patterns/test/fargate/integ.queue-processing-fargate-service.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  ccd5b418-67fc-c82c-0f59-543f99a51c77, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "‣ DeploymentError: Resource updates failed:\n  did not stabilize.\" (RequestToken: 45279130-657c-9a3f-f73d-96090484418f, HandlerErrorCode: NotStabilized)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ecs-patterns/test/fargate/integ.tls-network-load-balanced-fargate-service.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: fbb02628-77c1-77eb-bc4f-69c9c409a517, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/base/integ.blue-green-deployment-strategy.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  13e6f110-3bf5-8205-12c5-3cd3771beb7a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/ec2/integ.availability-zone-rebalancing.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  f209f4d0-f620-0343-396f-3d1956c4b8af, HandlerErrorCode: GeneralServiceException)\n  38682e16-1f2e-6e9e-cc3a-c84166e0d299, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/ec2/integ.capacity-provider-managed-draining.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  7aece565-cdc2-29b6-fa77-a9c14049853f, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ecs/test/ec2/integ.clb-host-nw.js.snapshot",
@@ -4415,11 +4670,6 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  7f9c103d-dbc3-fc87-57af-fb84cf225b13, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-ecs/test/ec2/integ.enable-execute-command.js.snapshot",
-   "result": "deploy failed",
-   "reason": "   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  a0220401-4ad4-0c45-a7f3-f72799d6efc4, HandlerErrorCode: ServiceLimitExceeded)\n  cc6fc480-da7b-c221-79f6-570fcb729598, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
    "test": "aws-ecs/test/ec2/integ.environment-file.js.snapshot",
    "result": "deploy failed",
    "reason": "S3 object does not exist. Bucket: cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1, Key: 262918ed1d70827f98c424a6cdde02a25a3d89ffcfd3cfdee9f26d56660a5eb2.json. Error: NoSuchKey"
@@ -4428,11 +4678,6 @@
    "test": "aws-ecs/test/ec2/integ.firelens-s3-config.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  cda5b97d-9cf6-c532-c3fd-9f1425c08762, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/ec2/integ.graviton-bottlerocket.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  c6ec1112-e3af-ebd0-d877-d3a2bb177602, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ecs/test/ec2/integ.graviton.js.snapshot",
@@ -4455,11 +4700,6 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  05aba643-ff29-85ee-bee4-3d5e918d6963, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-ecs/test/ec2/integ.pseudo-terminal.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  d6c47dee-b5b4-f2e9-8f86-c6e81a459dc0, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  0f93e413-0e02-b892-77c1-4695d204c3c0, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
    "test": "aws-ecs/test/ec2/integ.sd-awsvpc-nw.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  092deae1-98fc-e4f7-1521-378fa57ac06c, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
@@ -4480,64 +4720,9 @@
    "reason": "  3e4a72a8-fa50-ca45-a077-7ebda1b9283c, HandlerErrorCode: GeneralServiceException)\n  679050cc-4b89-9a91-548d-d53c2f1de203, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-ecs/test/fargate/integ.availability-zone-rebalancing.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  bb27c831-f7a9-a4b3-ffff-de9fdddd69e7, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/fargate/integ.awslogs-driver.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  e50b6d57-2b5a-fde8-1f8b-cf4038d00e3f, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/fargate/integ.custom-task-revision.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  4849645c-4e8c-6283-5051-a6c8c795e600, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  19876450-bac7-fb6e-aada-4d0e5b63aca9, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-ecs/test/fargate/integ.ebs-taskattach.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  7c90ef1c-c164-9ad0-0d51-945631a7d1f8, HandlerErrorCode: GeneralServiceException)\n  c6b55748-ce99-58e6-7d49-67e66bf82d74, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/fargate/integ.enable-execute-command.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  e5b13212-6d82-e148-4963-6ebaa4e86357, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/fargate/integ.exec-command.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  77b6dfdc-946e-5dff-dd59-47d98ed9f9f1, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/fargate/integ.pseudo-terminal.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  88f21767-5de1-39cc-663c-c557bb6c69cf, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/fargate/integ.runtime.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  84dac2d4-a16a-53e5-3761-0cec3368ed47, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  2e5a3972-8cac-8044-e795-6932d3da1055, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
    "test": "aws-ecs/test/fargate/integ.service-connect.js.snapshot",
    "result": "deploy failed",
    "reason": "   ERROR (node:2) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n   ERROR (node:2) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/integ.cluster-bottlerocket-nvidia-ami.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  86570960-90e9-d8bd-3e70-4132930e3abf, HandlerErrorCode: GeneralServiceException)\n  a47bbc0c-e9a5-d7f7-b143-0cf3996d69aa, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/integ.cluster-encrypt-storage.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  0ca1f4f4-3ca7-f0ef-0350-884528b1ef79, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/integ.cluster-settings-mixin.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  384609fe-551b-24f1-13ae-c8f1f7b60f86, HandlerErrorCode: GeneralServiceException)\n  fd5df21b-30ca-d760-8277-0489ee764439, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-ecs/test/integ.cluster-windows-server-ami.js.snapshot",
@@ -4550,54 +4735,14 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  HandlerErrorCode: NotStabilized)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-ecs/test/integ.fargate-service-force-new-deployment.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  0e0798a8-29e3-725f-5810-9ed967a74b08, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/integ.managedinstances-no-default-capacity-provider.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  d940c033-2448-9162-7362-186e5772c970, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-ecs/test/log-drivers/integ.fluentd-driver.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  9b25622c-52a2-795d-5816-44c4c6c4bd6e, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  76c4ddb1-8f90-8831-da2e-d2ae89362642, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-efs/test/integ.efs-filesystem-one-zone.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  5d2c3833-3ee1-6e99-ab5b-e17a484e5af9, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-efs/test/integ.efs-filesystem-replication.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  61ccb902-2e23-bfb4-76de-a273745f84fa, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-efs/test/integ.efs.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  9a0a0b2e-4eaa-2a69-7770-7632241c0e02, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  60082baa-cfab-bfae-5244-04892ad75240, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
    "test": "aws-efs/test/integ.efs.permission.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  19373ace-5d70-a3e0-7578-03c11912f1e6, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancing/test/integ.instanceTarget.elb.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  51d4ca7b-7faf-d31e-428c-d0d1827c331e, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "❌  test-efs-permission-integ failed to deploy\n‣ DeploymentError: Resource updates failed:\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-elasticloadbalancingv2-actions/test/integ.cognito.js.snapshot",
    "result": "deploy failed",
    "reason": "  Resource handler returned message: \"Invalid request provided: Certificate validation failed with status: FAILED\"\n  (RequestToken: 5f85b283-0f33-ed4e-6c5b-54732e291299, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2-targets/test/integ.alb-listner-target.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  242ab415-750f-1622-9963-f8a4983e8e12, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-elasticloadbalancingv2-targets/test/integ.lambda-target.js.snapshot",
@@ -4610,49 +4755,14 @@
    "reason": "‣ AggregateError: "
   },
   {
-   "test": "aws-elasticloadbalancingv2/test/integ.alb-target-group-attributes.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  0ee87962-6a16-6c28-a40d-6f30d0bf180b, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.alb.attributes.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  1ed4dc45-ac81-9556-a8fa-79816c006c45, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.alb.dualstack.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  5972558c-2530-52de-d32d-81ecc28e1a22, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.alb.extended.log.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  5fa63091-d749-3abe-37f1-7f4ec9e1ad39, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.alb.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  505b160c-cc08-a268-cc4d-5cb80e1b7805, HandlerErrorCode: GeneralServiceException)\n  84dc8ec8-b37d-1e8f-96a8-05d6f559d3b7, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-elasticloadbalancingv2/test/integ.alb.jwt.js.snapshot",
    "result": "deploy failed",
    "reason": "  Resource handler returned message: \"1 validation error detected: Value of the input at 'domainName' failed to satisfy\n  f6410b09-8399-9d82-ddb4-03b17b941ac3, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-elasticloadbalancingv2/test/integ.alb.log.imported-bucket.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  f3659acd-ca4b-6888-a7f3-cc0f6eaadf9a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.alb.log.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  c5a9c2a8-a4bb-77f5-a553-5f4466c074d8, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-elasticloadbalancingv2/test/integ.alb.minimum-capacity-unit.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  a93ba5a7-25dc-9045-5302-426ff602a525, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "‣ DeploymentError: Resource updates failed:\n  f5d56ec0-2c04-3a60-49e5-cf78e21210f6, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-elasticloadbalancingv2/test/integ.alb.oidc.js.snapshot",
@@ -4660,49 +4770,9 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-elasticloadbalancingv2/test/integ.alb.weighte-random-algorithm.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  06ce7351-463c-591f-6609-5a4d190d15f8, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.crosszone.js.snapshot",
-   "result": "deploy failed",
-   "reason": "   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  5deb1870-3410-015e-363b-dc01530bf07f, HandlerErrorCode: ServiceLimitExceeded)\n  9d915692-667c-0e02-89f2-a3caf34e65bd, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.nlb-subnet-mapping.js.snapshot",
-   "result": "deploy failed",
-   "reason": "   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  aa07d05f-3cf6-dac0-18c7-5a9f2bddf7c7, HandlerErrorCode: ServiceLimitExceeded)\n  17deafb8-5760-8aa6-95b9-34f8dad27023, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.nlb-target-group-cross-zone.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  852b1193-3770-0579-04ef-5f9846053076, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.nlb.dualstack.internet-facing.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  e1238566-181c-c0e0-a1bf-3b4b63d15345, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.nlb.enforce-sg-inbound-rules.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  79a076eb-5fd6-6134-2a41-d69c0115a9cf, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-elasticloadbalancingv2/test/integ.nlb.minimum-capacity-unit.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  2e719867-8960-5c17-36f8-1afe8d21230f, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-elasticloadbalancingv2/test/integ.nlb.security-group.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  4cf65795-c7e6-1b58-bc01-7cceeb8acaba, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-events-targets/test/ecs/integ.event-ec2-task.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  f54d3b86-17c9-b4fe-d426-f982119b5bff, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "‣ DeploymentError: Resource updates failed:\n  42ff2745-f90c-504d-f6c6-233b383b4cdf, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-events-targets/test/ecs/integ.event-fargate-task.js.snapshot",
@@ -4728,11 +4798,6 @@
    "test": "aws-events/test/integ.eventbus-grants.js.snapshot",
    "result": "deploy failed",
    "reason": "❌  EventBusGrantsIntegWithAndWithoutFeatureFlagDefaultTestDeployAssertBBD6850F failed to deploy\n‣ DeploymentError: The stack named EventBusGrantsIntegWithAndWithoutFeatureFlagDefaultTestDeployAssertBBD6850F failed creation, it may need to be manually deleted from the AWS console: ROLLBACK_COMPLETE"
-  },
-  {
-   "test": "aws-globalaccelerator-endpoints/test/integ.globalaccelerator.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  a25f8776-8557-739a-fc2d-079194ccfda9, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-iam/test/integ.custom-permissions-boundary-aspect.js.snapshot",
@@ -4805,21 +4870,6 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-lambda/test/integ.capacity-provider-defaults.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  4726ed3b-2f05-2ad0-5f6e-33c499f2af0e, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-lambda/test/integ.function-capacity-provider-minimal.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  37fed187-d1b4-59bd-4aea-73ccae2a694e, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-lambda/test/integ.lambda-allow-all-ipv6-outbound.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  c672b6ec-c4a8-170f-517a-c11c47f6f177, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-lambda/test/integ.lambda-customize-roles.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  a4578ae0-3ef7-a351-62a6-28b39e770ebe, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
@@ -4833,11 +4883,6 @@
    "test": "aws-lambda/test/integ.lambda.docker.js.snapshot",
    "result": "deploy failed",
    "reason": "lambda-ecr-docker: fail: docker build --tag cdkasset-768d7b6c1d41b85135f498fe0cca69fea410be3c3322c69cf08690aaad29a610 . exited with error code 1: #0 building with \"default\" instance using docker driver"
-  },
-  {
-   "test": "aws-lambda/test/integ.lambda.filesystem.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  bf10b57a-3a25-89ac-2c6d-45c1217855a7, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-logs/test/integ.expose-metric-with-dimensions.js.snapshot",
@@ -4880,11 +4925,6 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 7fbde458-8d71-2893-3ea7-117c4f712da9, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-route53-targets/test/integ.interface-vpc-endpoint-target.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  14c09126-de30-cb42-ed69-e20a37399f47, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-route53-targets/test/integ.userpool-domain-alias-target.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: ef38d835-f23f-65cd-28b0-43ef055a4c99, HandlerErrorCode: AlreadyExists)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
@@ -4900,24 +4940,9 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  59ba0dd0-be72-1ff1-f113-7893b28edee2, HandlerErrorCode: AlreadyExists)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-route53/test/integ.import-existing-record-as-target.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  e79ed720-e2b2-bc7e-6b45-bf94e13cab7c, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-route53/test/integ.rename-cross-account-zone-delegation.js.snapshot",
    "result": "deploy failed",
    "reason": ""
-  },
-  {
-   "test": "aws-route53/test/integ.route53.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  ce308fb0-3a85-ee2b-a27c-f961ecbbab73, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  d8a5513d-609f-3871-96ad-c37c9f2f4e07, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-route53/test/integ.vpc-endpoint-service-domain-name.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  80723b4a-07a2-7bac-7fb0-d821b25e8694, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-s3-deployment/test/integ.bucket-deployment-big-response.js.snapshot",
@@ -4945,19 +4970,9 @@
    "reason": "S3 object does not exist. Bucket: cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1, Key: fe2c06cfd9cf4f8dffa47a74fd89c572686de73d459b27089d569e8b512c34d7.json. Error: NoSuchKey"
   },
   {
-   "test": "aws-s3-deployment/test/integ.bucket-deployment-security-groups-efs.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  10709b0f-aabb-cf84-9dcd-5c8da60e99c2, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-s3-deployment/test/integ.bucket-deployment-security-groups-empty.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: adc794c6-923e-90ef-9105-75fb42bb52e2, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-s3-deployment/test/integ.bucket-deployment-security-groups-single.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  7e05f07c-7247-ee27-5ec6-3f6196269fbf, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-s3-deployment/test/integ.bucket-deployment-signcontent.js.snapshot",
@@ -4965,19 +4980,9 @@
    "reason": "S3 object does not exist. Bucket: cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1, Key: 577fcfbbd736807a5ba903cd9601421f3cf3b7824fc2781f5aaf30852fda5131.json. Error: NoSuchKey"
   },
   {
-   "test": "aws-s3-deployment/test/integ.bucket-deployment-vpc-basic.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  75f5efd9-e482-7daf-ae01-9a0aac998c84, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-s3-deployment/test/integ.bucket-deployment-vpc-custom-subnets.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 27799c0c-5389-7d05-3d85-51e5d55022e9, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-s3-deployment/test/integ.bucket-deployment-vpc-efs.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  4a4ec555-4133-c991-8cc7-85697da16e92, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-s3-deployment/test/integ.bucket-deployment-vpc-security-groups.js.snapshot",
@@ -4987,7 +4992,7 @@
   {
    "test": "aws-s3-deployment/test/integ.bucket-deployment-vpc-subnet-selection.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  4b42f12a-63e0-ad57-1389-3261579412d0, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 75619d17-e137-5204-036c-d7e83621590f, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-s3-deployment/test/integ.bucket-deployment.js.snapshot",
@@ -5025,11 +5030,6 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  Received response status [FAILED] from custom resource. Message returned: Operation timed out:\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-scheduler-targets/test/integ.ecs-run-task-ec2.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  03986458-ce19-3151-3b18-4f5c1441be16, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-scheduler-targets/test/integ.inspector-start-assessment-run.js.snapshot",
    "result": "deploy failed",
    "reason": "❌  aws-cdk-scheduler-targets-inspector-start-assessment-run failed to deploy\n‣ DeploymentError: Resource updates failed:\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
@@ -5058,11 +5058,6 @@
    "test": "aws-servicecatalog/test/integ.two-products.js.snapshot",
    "result": "deploy failed",
    "reason": ""
-  },
-  {
-   "test": "aws-servicediscovery/test/integ.service-with-private-dns-namespace.lit.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  a531ff99-23ac-02d6-285f-01cfa5458fbe, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  78567c5b-def1-172a-857b-067e72082b56, HandlerErrorCode: ServiceLimitExceeded)"
   },
   {
    "test": "aws-ses-actions/test/integ.actions.js.snapshot",
@@ -5120,16 +5115,6 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  dad91e95-6ed7-ed3c-295e-0d8160f1b075, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-stepfunctions-tasks/test/batch/integ.submit-job.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  60e5b246-817a-1a05-550f-37c8b6f91dd4, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-stepfunctions-tasks/test/bedrock/integ.create-model-customization-job.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  6bef14df-2118-6640-9866-67511bf5ba50, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-stepfunctions-tasks/test/bedrock/integ.invoke-model-guardrail-trace.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  Received response status [FAILED] from custom resource. Message returned: Operation timed out:\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
@@ -5138,41 +5123,6 @@
    "test": "aws-stepfunctions-tasks/test/ecs/integ.ec2-run-task-capacity-provider.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  9771a1f9-0b3d-22bc-ebba-f46e09b2e001, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-stepfunctions-tasks/test/ecs/integ.fargate-run-task.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  7c546891-1941-0dff-0b6a-3f276fe66835, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-stepfunctions-tasks/test/ecs/integ.fargate-task.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  7cc0027f-ad81-aad5-0063-88792405f5b9, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-stepfunctions-tasks/test/eks/integ.call.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  bf2544ff-3e89-963a-0e1c-0120371ac9eb, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-stepfunctions-tasks/test/emr/integ.emr-create-cluster-add-step-runtime-role.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  6ccfe837-c326-05e7-6e69-917ad7ed3c40, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-stepfunctions-tasks/test/emr/integ.emr-create-cluster-with-v1-policy.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  22c6f426-ddbd-8513-ede3-6f71f6fe7b07, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-stepfunctions-tasks/test/emr/integ.emr-create-cluster-with-v2-policy.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  2a23ad9e-a0ba-c071-d9a2-08e81b26dc97, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-stepfunctions-tasks/test/emrcontainers/integ.start-job-run.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  46ca80a0-68fa-128b-cd38-92671bed635f, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-stepfunctions-tasks/test/glue/integ.glue-task.js.snapshot",
@@ -5230,11 +5180,6 @@
    "reason": "  Attempt Count: 1)\" (RequestToken: 6b532fd7-1010-50dc-1114-4abda1dd0b85, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  Attempt Count: 1)\" (RequestToken: ca735450-c7c2-6408-d1f9-78de58f07f62, HandlerErrorCode: InvalidRequest)"
   },
   {
-   "test": "aws-synthetics/test/integ.vpc.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  2eede29a-2270-ea88-288d-896807e8a425, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "core/test/integ.cloudformation-validate-plugin.js.snapshot",
    "result": "deploy failed",
    "reason": ""
@@ -5255,19 +5200,9 @@
    "reason": "  Code: 'ValidationError'\n   INFO  Responding to CloudFormation {\"Status\":\"FAILED\",\"Reason\":\"Stack with id Consumer does not exist\",\"PhysicalResourceId\":\"AwsApiCallCloudFormationdescribeStacks96cda770eac95cd44ab6638288cd8c01\",\"StackId\":\"arn:aws:cloudformation:us-east-2:${AWS::AccountId}:stack/NestedStackReferencesDefaultTestDeployAssertFE4F9D3A/9b8ea8f0-d98d-11f1-92c4-0658e4295bb1\",\"RequestId\":\"98340da6-f6e3-4f3e-b8ca-e17413618b87\",\"LogicalResourceId\":\"AwsApiCallCloudFormationdescribeStacks96cda770eac95cd44ab6638288cd8c01\",\"NoEcho\":false}\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "core/test/integ.prop-injectors.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  5a6daa3f-6d7a-cdc4-3b77-61088f73a244, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "core/test/integ.stack-with-mixin.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (SDK Attempt Count: 1)\" (RequestToken: 79a14c48-c871-dff2-4bfa-a6795a9dba46, HandlerErrorCode: AlreadyExists)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "core/test/integ.token-aware-stringify-logical-ids.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  398e1ee2-c9e4-c55a-fd42-f56e9c8a61e0, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "custom-resources/test/aws-custom-resource/integ.aws-custom-resource-athena.js.snapshot",
@@ -5345,21 +5280,6 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-batch/test/integ.job-queue-job-state-time-limit-actions.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  ab2af803-1bb3-d36f-3dc8-4540451d867a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-batch/test/integ.managed-compute-environment-default-instance-class.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  aab560e0-3455-afc3-f7df-6655fdbf181c, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-batch/test/integ.managed-compute-environment.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  3bfdfd87-047c-3fa8-3dc9-8a66bb26690e, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-cloudfront/test/integ.cloudfront-cross-region-cert.js.snapshot",
    "result": "deploy failed",
    "reason": ""
@@ -5375,11 +5295,6 @@
    "reason": "❌  aws-cdk-cloudfront-custom failed to deploy\n‣ DeploymentError: Resource updates failed:\n  (RequestToken: be93bb75-1e12-e7a6-979a-fda0ce4088eb, HandlerErrorCode: InvalidRequest)"
   },
   {
-   "test": "aws-cloudfront/test/integ.cloudfront-vpc-origin.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  befac871-6c18-406a-b695-290e51cbe2f6, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-cloudfront/test/integ.cloudfront-with-webacl.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  Resource handler returned message: \"Error reason: The scope is not valid., field: SCOPE_VALUE, parameter: CLOUDFRONT\n  (RequestToken: 27804e3b-346c-0047-8080-bb4ba20974f2, HandlerErrorCode: InvalidRequest)"
@@ -5390,54 +5305,14 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  838873c0-b888-06d0-d205-a4bcaa64c4c0, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-docdb/test/integ.cluster-copy-tags-to-snapshot.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  17ded0dd-4482-7243-aa20-fc2e1ca5266d, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-docdb/test/integ.cluster-managed-password.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  21d98d72-a99b-d2ee-ac8c-c80e908a0d3d, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-docdb/test/integ.cluster-rotation.lit.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  86e3b8da-8bff-76f7-b50f-7caf79e13a48, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-docdb/test/integ.cluster-serverless.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  3361221e-a554-81f0-9af5-6ced589179e8, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-docdb/test/integ.cluster-storage-type.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  f7178464-865f-cd2c-2a80-2e0b7d99f645, HandlerErrorCode: GeneralServiceException)\n  d99cbfd0-9bb5-7230-07a7-02368b69fbec, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
    "test": "aws-eks-v2/test/integ.alb-controller.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  58c9b35c-9707-fb4c-c76a-4719c3209c62, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks-v2/test/integ.eks-addon.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  c7c64a11-8950-d062-b5b8-98fa794b154b, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks-v2/test/integ.eks-al2023-nodegroup.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  d4058de8-c27b-a4f7-5d75-1cb196dbfa9c, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  09eff370-2acb-d358-c51f-9365cceecc8f, HandlerErrorCode: ServiceLimitExceeded)"
+   "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 727bfbe2-49c0-5c66-4406-8f3274d50913, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-eks-v2/test/integ.eks-auto.js.snapshot",
    "result": "deploy failed",
-   "reason": "  8fa72a78-60d4-91e6-9be6-91c251481273, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  86eca0a3-43e4-918b-3232-71d9e8c2296d, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-eks-v2/test/integ.eks-cluster-imported.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  883075a1-4f95-fafd-1958-50002d579853, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 30637f9e-1f5c-1a47-a8cd-fb0d66534265, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-eks-v2/test/integ.eks-cluster-native-oidc.js.snapshot",
@@ -5445,34 +5320,14 @@
    "reason": "  2a56c745-c184-2604-8e4e-05dfcfb07ae5, HandlerErrorCode: GeneralServiceException)\n  (RequestToken: 98d9713c-3129-46e9-3045-4ab50f20400e, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-eks-v2/test/integ.eks-cluster-private-endpoint.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  b875d377-0cc8-74e6-b5fb-e59c89c32662, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks-v2/test/integ.eks-cluster-removal-policy.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  cfe3efcd-00a3-669f-01ed-8e44bef31d98, HandlerErrorCode: GeneralServiceException)\n  e33543eb-bd15-683a-0a19-469c5e7b716f, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-eks-v2/test/integ.eks-cluster.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 7e96f7d7-549d-f795-afd0-04b39cfaa50b, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-eks-v2/test/integ.eks-default-capacity-al2023.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  9c236f57-3a7e-4288-3245-a2e2e8445259, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-eks-v2/test/integ.eks-grant-access-with-type.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 4a17d2c1-5ac4-3f0b-549c-09c432ccc954, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks-v2/test/integ.eks-helm-asset.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  4c5788f9-7fe4-e834-ee99-43074b3dce0f, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-eks-v2/test/integ.eks-hybrid-nodes.js.snapshot",
@@ -5482,7 +5337,7 @@
   {
    "test": "aws-eks-v2/test/integ.eks-inference-nodegroup.js.snapshot",
    "result": "deploy failed",
-   "reason": "  8872921c-2226-4e54-fec2-d217025a2835, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  eb974f93-d07e-bc92-8b47-06a4d9bcace4, HandlerErrorCode: ServiceLimitExceeded)"
+   "reason": "❌  aws-cdk-eks-cluster-inference-nodegroup failed to deploy\n‣ DeploymentError: Resource updates failed:\n  43368bed-a29d-0b0d-4904-aad50d940aca, HandlerErrorCode: GeneralServiceException)"
   },
   {
    "test": "aws-eks-v2/test/integ.eks-kubectl-security-groups.js.snapshot",
@@ -5495,34 +5350,9 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-eks-v2/test/integ.eks-provisioned-control-plane.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  Received response status [FAILED] from custom resource. Message returned: Operation timed out:\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks-v2/test/integ.eks-standard-access-entry.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  d2e74ecd-6726-779a-e083-fbdb78c3bad4, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks-v2/test/integ.eks-subnet-updates.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  8b290be4-78c7-e99f-d567-b1ec0b4157a5, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks-v2/test/integ.fargate-cluster.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  3f2c5820-0613-46a3-2c5b-05cea0aad524, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  6bebae89-6538-70c6-6605-42a7dbf39b36, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
    "test": "aws-eks-v2/test/integ.helm-chart-logging.js.snapshot",
    "result": "deploy failed",
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 861ecf76-e233-1c94-29d5-c03f7f093693, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.alb-controller-authapi.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  f9508a2e-12e1-8ce9-c502-7964960f0822, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-eks/test/integ.alb-controller.js.snapshot",
@@ -5530,24 +5360,9 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 73472b53-4459-0f40-e62d-350019affff8, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-eks/test/integ.custom-addons.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  da89dd8a-bc58-e07c-e7b6-f76caae74e77, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-eks/test/integ.eks-addon.js.snapshot",
    "result": "deploy failed",
-   "reason": "  45248373-3d83-43e8-a36d-78d74768667c, HandlerErrorCode: GeneralServiceException)\n  68cd565e-2b87-2a07-c688-da1de92cd339, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.eks-al2023-nodegroup.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  2bbec884-257f-8a54-7866-af068306caa1, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  605a9ef6-7f08-3faf-e6ed-cf0b2d04db09, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-eks/test/integ.eks-bottlerocket-ng.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  b0e84624-1c25-d39f-5c05-d782fab71595, HandlerErrorCode: GeneralServiceException)\n  49514d5d-487e-3cb6-fdc1-30a118b9ffbd, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "❌  EksClusterWithAddonStack failed to deploy\n‣ DeploymentError: Resource updates failed:\n  (RequestToken: 99e50e70-650e-d49f-450b-26531630949a, HandlerErrorCode: InvalidRequest)"
   },
   {
    "test": "aws-eks/test/integ.eks-cluster-deletion-protection.js.snapshot",
@@ -5557,7 +5372,7 @@
   {
    "test": "aws-eks/test/integ.eks-cluster-handlers-vpc.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  1431dbc4-3b41-ef32-11d3-ddf4e4d4ab8d, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "❌  aws-cdk-eks-handlers-in-vpc-test failed to deploy\n‣ DeploymentError: Resource updates failed:\n  (RequestToken: 63f3090b-65e6-7878-86b9-1931ded924b1, HandlerErrorCode: InvalidRequest)"
   },
   {
    "test": "aws-eks/test/integ.eks-cluster-ipv6.js.snapshot",
@@ -5567,72 +5382,27 @@
   {
    "test": "aws-eks/test/integ.eks-cluster-native-oidc.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  5a387e56-25b3-85a2-8345-2694f91724ff, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.eks-cluster-private-endpoint.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  4a80bb1e-8936-1882-94f4-8f5df7adffac, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "❌  aws-cdk-eks-cluster-native-oidc failed to deploy\n‣ DeploymentError: Resource updates failed:\n  (RequestToken: 41b41037-94d2-7a36-895f-e6def0dc138e, HandlerErrorCode: InvalidRequest)"
   },
   {
    "test": "aws-eks/test/integ.eks-cluster-removal-policy.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  4e1f1fa9-ff95-2341-e0ae-844161385767, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.eks-cluster-tags.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  0ecfe61c-e0ee-8303-dbce-5960818db53a, HandlerErrorCode: GeneralServiceException)\n  0e1a939c-e6bf-497a-189e-066883d36c6d, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "    '    at AwsQueryProtocol.handleError (/var/runtime/node_modules/@aws-sdk/core/dist-cjs/submodules/protocols/index.js:2352:65)\\n' +\n  Received response status [FAILED] from custom resource. Message returned: The requested resource does not exist.\n    at AwsRestJsonProtocol.handleError"
   },
   {
    "test": "aws-eks/test/integ.eks-cluster.js.snapshot",
    "result": "deploy failed",
-   "reason": "  7942b04d-188b-b0e7-b789-83159dfcee01, HandlerErrorCode: GeneralServiceException)\n  b2cc7584-2b35-4709-be7f-df54eb03b43b, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.eks-default-capacity-al2023.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  bb416d16-e195-e3a5-876f-14f5d800370a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.eks-default-capacity.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  38911ddd-43db-6bc2-9da6-dda104dade93, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.eks-grant-access-with-type.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  ec521ca8-a837-97e8-0ad0-9532b343891c, HandlerErrorCode: GeneralServiceException)\n  2c278435-2a88-8291-55bc-62fa09fd5134, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.eks-helm-asset.js.snapshot",
-   "result": "deploy failed",
-   "reason": "   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  5bccaf5f-137f-896d-66ba-be8b128273c4, HandlerErrorCode: ServiceLimitExceeded)\n  c81b23d9-e765-9877-f3f8-44855aeaba53, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-eks/test/integ.eks-hybrid-nodes.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  a886609d-e9e6-bebd-4d0b-4a53af31059c, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "  Received response status [FAILED] from custom resource. Message returned: The requested resource does not exist.\n    at AwsRestJsonProtocol.handleError\n  (RequestToken: 160189a3-76cf-4af2-0fa6-b421d9db25d7, HandlerErrorCode: InvalidRequest)"
   },
   {
    "test": "aws-eks/test/integ.eks-inference-nodegroup.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  eb98367a-7ac6-f655-cdf4-6402e194e6e7, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "❌  aws-cdk-eks-cluster-inference-nodegroup failed to deploy\n‣ DeploymentError: Resource updates failed:\n  Code: 0, Request ID: null)\" (RequestToken: 8f5cf735-d221-fc2f-694f-8c97c622ff15, HandlerErrorCode:"
   },
   {
    "test": "aws-eks/test/integ.eks-inference.js.snapshot",
    "result": "deploy failed",
-   "reason": "  24061a2a-fcbc-5647-501c-d43073b407c7, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  2c933340-1eb0-ca8f-1258-45e35a2ba39d, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-eks/test/integ.eks-pod-identities.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  76082c5f-9811-3de6-5532-3a5d12ea6fc9, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.eks-provisioned-control-plane.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  Received response status [FAILED] from custom resource. Message returned: Operation timed out:\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "❌  aws-cdk-eks-cluster-inference failed to deploy\n‣ DeploymentError: Resource updates failed:\n  failed.\" (RequestToken: bc9bc340-cd4e-c6aa-6c16-ec102d83d9f3, HandlerErrorCode: NotStabilized)"
   },
   {
    "test": "aws-eks/test/integ.eks-service-account-sdk-call.js.snapshot",
@@ -5642,37 +5412,17 @@
   {
    "test": "aws-eks/test/integ.eks-standard-access-entry.js.snapshot",
    "result": "deploy failed",
-   "reason": "  a0564c9d-0b98-28e1-bade-d6ae4a108fef, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  a0e7092f-4514-e6cc-ef25-d5d638303143, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-eks/test/integ.eks-subnet-updates.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  1420ac2e-2ad6-d752-9aba-85add651a8cc, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "‣ DeploymentError: Resource updates failed:\n  (RequestToken: 77c75cde-e6e2-16a0-eed3-da2587744afd, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-eks/test/integ.eks-windows-ng.js.snapshot",
    "result": "deploy failed",
-   "reason": "  621452bc-0a64-615d-f4dd-67c33b1ae259, HandlerErrorCode: GeneralServiceException)\n  17067333-d617-68e5-40b6-e4e39ccd6287, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.fargate-cluster.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  1f583cea-6306-1947-bc7d-e46e994c7586, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.helm-chart-logging.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  ef4bda86-c240-c474-4f56-b6e5938578cc, HandlerErrorCode: GeneralServiceException)\n  239d01bf-3b92-8621-98ec-ceab24c0bf87, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-eks/test/integ.nodegroup-repair-config.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  3a93cf2d-5302-6c63-4139-a56988400da2, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "  Received response status [FAILED] from custom resource. Message returned: Error: Operation failed after 3 attempts:\n  b'error: error validating \"/tmp/manifest.yaml\": error validating data: failed to download openapi: Get\n  10.0.184.244:443: i/o timeout; if you choose to ignore these errors, turn validation off with --validate=false\\n'"
   },
   {
    "test": "aws-elasticsearch/test/integ.elasticsearch-vpc.js.snapshot",
    "result": "deploy failed",
-   "reason": "  d394fdd7-1834-8d24-3734-8f874ce2f14d, HandlerErrorCode: GeneralServiceException)\n  d7ab27bf-623e-324a-5dc7-7b860f89645b, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "‣ DeploymentError: Resource updates failed:\n  Policy-Min-TLS-1-0-2019-07 is disabled. (Service: AWSElasticsearch; Status Code: 400; Error Code: ValidationException;\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
    "test": "aws-elasticsearch/test/integ.elasticsearch.advancedsecurity.js.snapshot",
@@ -5700,229 +5450,9 @@
    "reason": "‣ DeploymentError: Resource updates failed:\n  Policy-Min-TLS-1-0-2019-07 is disabled. (Service: AWSElasticsearch; Status Code: 400; Error Code: ValidationException;\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   },
   {
-   "test": "aws-fsx/test/integ.lustre-file-system-automatic-backup.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  adefd29f-cfea-abb9-e838-5777ce716695, HandlerErrorCode: GeneralServiceException)\n  d3f14f40-f17c-67e4-b624-25970ecf9ad6, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-fsx/test/integ.lustre-file-system-file-system-type-version.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  2adfdd84-0f80-92cb-d658-afe84ed5ee53, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-fsx/test/integ.lustre-file-system-maintenance-time.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  977444e1-4cd3-ffe7-00d4-4c19db03d552, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-fsx/test/integ.lustre-file-system-storage-type.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  c85a0579-0758-65b8-bbde-6b430c821b60, HandlerErrorCode: GeneralServiceException)\n  0181d853-e13c-1a73-16a0-171e2d217470, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-fsx/test/integ.lustre-file-system-with-s3.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  0b593eac-f764-c807-b8b1-eb0f7145ccce, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-fsx/test/integ.lustre-file-system.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  75895112-8405-f5ff-ebfa-eac4b42e1ca9, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-applyimmediately.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  51e08536-dcf0-5f07-a1d0-ecb5cbb67528, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-data-api.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  b9bed6b0-7a08-7d64-f672-a6e00c396891, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-database-insights.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  a2861b10-5000-c1e7-ce98-3ceb12b83f39, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-dual.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  4d9b695a-a859-9f01-f331-38acd3e4b84c, HandlerErrorCode: GeneralServiceException)\n  f6e5809d-4580-18cb-b546-5ea475f8b5bb, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-enable-local-write-forwarding.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  ecd1a124-6391-e944-8f2a-0365a2710b55, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-engine-lifecycle-support.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  25751a13-f241-a9bf-d7d8-a49756d2e1e0, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  135d790a-5a39-ed27-fd3b-1ae84ecf8cce, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-enhanced-monitoring.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  550c50ca-341d-46ba-9005-6fc8170ab07d, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-instance-ca-certificate.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  523993c0-aa84-2793-e240-5c3d49c1b3bf, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-instance-id.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  cf9f2a4c-06d3-f232-9b70-9c7bd93ba862, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-io.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  17394040-de49-da9c-048c-bd9afe5e3b48, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-kerberos.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  2d796f6e-0896-cea4-18c4-a1e585c00b84, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-limitless.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  2d9a3ed3-f581-9fdc-c5fc-aad5a14e718c, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-rds/test/integ.cluster-lookup.js.snapshot",
    "result": "deploy failed",
    "reason": ""
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-manage-master-password.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  1fd45294-b2f2-bd81-e0ca-97e101df2a43, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  388c26ee-6ca3-cce4-9c77-f4630d3554ce, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-performance-insights.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  fabdb5d6-c579-ec03-77f5-22a85164016e, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-public-subnets.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  00681ea6-9d5c-1d12-e7ad-d39f45805227, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-replication.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  b1518179-73bc-8266-364b-e95f3cf5dbd7, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-rotation.lit.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  00f1e953-98bb-2f2d-9a66-36bfa07343c0, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  2c4a5561-d6d3-b228-b2d4-376b950c1a9d, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-s3.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  873787a9-edaa-8e38-005a-dbe0c40deb7d, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-s3.mysql-8.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  38cab3ac-1318-38f0-74cb-953e2ee6b19a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-s3.mysql-engine-version.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  ff260b19-6d05-6969-587d-097e8b6836a7, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-s3.postgres.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  d7d4d554-fda4-d2eb-26e2-b5ad76140fea, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-serverless-v2-acu-0.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  78459da8-3c25-73cd-04bb-e3693ef1180e, HandlerErrorCode: GeneralServiceException)\n  4a40ba52-3322-7c03-7866-54ddc2a59954, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-serverless-v2-acu.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  b231d621-27f8-373a-228a-da4fb09c5319, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-serverless-v2-autopause.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  5e786a97-2c8c-3939-4f0f-53a7e029a388, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-serverless-v2-capacity-token.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  9661b38e-64ac-a155-4614-b2d765f57d08, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster-volume-iops-metric.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  f24e012a-d67d-209f-1ba0-8a3f712e4e68, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.cluster.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  7dad0e6a-2749-5b5a-66de-92a22edceb1e, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-applyimmediately.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  c1164d3a-2684-72af-115d-2ad930a77cb3, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-ca-certificate.js.snapshot",
-   "result": "deploy failed",
-   "reason": "   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  d61e7be4-cd40-53af-e067-f5706cd3f9bb, HandlerErrorCode: ServiceLimitExceeded)\n  a4165cf9-d420-c5e8-b5bf-26a3703a0c80, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-rds/test/integ.instance-create-grant.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  2e177543-07ec-acfc-0661-272716abd529, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-dual.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  f56e2bfa-e194-9e12-3091-25c0fa60ecdb, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-engine-lifecycle-support.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  ce93c205-8f80-f938-fa0d-76c009e53515, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-from-generated-password.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  eecea748-f461-5d67-dfe0-d841a5923262, HandlerErrorCode: GeneralServiceException)\n  5794938b-3a9c-4f40-7493-dd0ae340c290, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-gp3.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  4bb1f72d-932f-5a69-4181-639905843fa4, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  fc1c9ef8-437d-53c5-c95e-4f12d5c8deef, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-rds/test/integ.instance-io2.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  58d61b3f-09d7-5cbf-b442-ba08ed048450, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-iops-metric.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  286c24f3-469c-c2d0-7b20-77d195e8d25a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-kerberos-without-domainRole.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  53eee636-02e3-cf47-34fd-ea1ce2ef1b98, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-kerberos.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  183ca8b7-9b17-bd24-a91c-5cc672fa2ec4, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  34c740df-26ec-267c-6a00-5a1c7ea4659d, HandlerErrorCode: ServiceLimitExceeded)"
   },
   {
    "test": "aws-rds/test/integ.instance-lookup.js.snapshot",
@@ -5930,74 +5460,9 @@
    "reason": ""
   },
   {
-   "test": "aws-rds/test/integ.instance-manage-master-password.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  bc6bd41d-2c64-e807-f7da-aa18ea9ac0e2, HandlerErrorCode: GeneralServiceException)\n  7f79f8fe-51cc-cc16-ec69-b7174258c467, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-s3-postgres.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  d709522b-af38-8f0a-6434-b229534bd73b, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-s3.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  10bb9b91-28d9-3f9f-1210-fedc65d42647, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-with-metric.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  d1e18f67-1d59-17fe-ca18-49e238247d4a, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.instance-with-parameter-group.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  0dd0f92a-46db-f7ba-34cb-02fa68fec392, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  6735366e-b191-dbd6-af74-ed03acd682af, HandlerErrorCode: ServiceLimitExceeded)"
-  },
-  {
-   "test": "aws-rds/test/integ.option-group.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  373f2039-60f3-e832-faa1-fb3755994339, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied).\n  b751b8d0-6649-2617-4464-586ecea0c51a, HandlerErrorCode: GeneralServiceException)"
-  },
-  {
-   "test": "aws-rds/test/integ.proxy-default-auth-scheme.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  e6f1564c-4370-0038-595d-3235e55b13a5, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.proxy-endpoint.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  7f777754-6ab8-6bdd-bb2d-5f7f9e2255f2, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.proxy.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  ec17ce34-3980-3b7c-dc03-485c2fd18b61, HandlerErrorCode: GeneralServiceException)\n  153127a4-4280-4c9f-9fed-29c70e5f499e, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.read-replica-with-allocated-storage.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  261ca3b4-8ac6-cb8a-e8a5-5d3ac0832313, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.read-replica.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  b45f168a-f5e5-672d-76ae-4d6558c604ce, HandlerErrorCode: GeneralServiceException)\n  81ba77cf-506a-b35c-1d97-e6961373c63a, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.rolling-instance-updates.js.snapshot",
-   "result": "deploy failed",
-   "reason": "  827be6cb-69af-758c-64a7-f8330b1c2058, HandlerErrorCode: GeneralServiceException)\n  a8ff96dd-a6ec-efc2-ad01-70a357d0f48a, HandlerErrorCode: ServiceLimitExceeded)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
-   "test": "aws-rds/test/integ.serverless-cluster-secret-rotation-custom-names.js.snapshot",
-   "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  76772635-2700-c29f-3977-a3e8ac5bcf55, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
-  },
-  {
    "test": "aws-rds/test/integ.serverless-cluster.js.snapshot",
    "result": "deploy failed",
-   "reason": "‣ DeploymentError: Resource updates failed:\n  b2d295a8-5686-7d0b-a5fe-d73eaba1b772, HandlerErrorCode: GeneralServiceException)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
+   "reason": "  08f8eb58-a5ce-1225-aa74-19670acf602a, HandlerErrorCode: InvalidRequest)\n  105475bb-4cf8-b17e-55b4-f7149234fbef, HandlerErrorCode: InvalidRequest)\n   CloudTrail delivery can lag up to 15 minutes behind the failure; re-run `cdk diagnose` in a few minutes to check for additional control-plane errors (e.g. AccessDenied)."
   }
  ]
 }
