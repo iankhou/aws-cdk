@@ -1,0 +1,876 @@
+{
+ "version": "1",
+ "stackName": "aws-stepfunctions-tasks-bedrock-invoke-model-integ",
+ "resources": {
+  "Vpc8378EB38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcIsolatedSubnet1SubnetE48C5737": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc/IsolatedSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcIsolatedSubnet1RouteTable4771E3E5": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc/IsolatedSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcIsolatedSubnet1RouteTableAssociationD300FCBB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcIsolatedSubnet1RouteTable4771E3E5}",
+    "SubnetId": "${VpcIsolatedSubnet1SubnetE48C5737}"
+   }
+  },
+  "VpcIsolatedSubnet2Subnet16364B91": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc/IsolatedSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcIsolatedSubnet2RouteTable1D30AF7D": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc/IsolatedSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcIsolatedSubnet2RouteTableAssociationF7B18CCA": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcIsolatedSubnet2RouteTable1D30AF7D}",
+    "SubnetId": "${VpcIsolatedSubnet2Subnet16364B91}"
+   }
+  },
+  "VpcPublicSubnet1Subnet5C2D37C4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcPublicSubnet1RouteTable6C95E38E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcPublicSubnet1RouteTableAssociation97140677": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcPublicSubnet1RouteTable6C95E38E}",
+    "SubnetId": "${VpcPublicSubnet1Subnet5C2D37C4}"
+   }
+  },
+  "VpcPublicSubnet1DefaultRoute3DA9E72A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VpcPublicSubnet1DefaultRoute3DA9E72A[1]}",
+    "GatewayId": "${VpcIGWD7BA715C}",
+    "RouteTableId": "${VpcPublicSubnet1RouteTable6C95E38E}"
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcPublicSubnet2Subnet691E08A3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcPublicSubnet2RouteTable94F7E489": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcPublicSubnet2RouteTableAssociationDD5762D8": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${VpcPublicSubnet2RouteTable94F7E489}",
+    "SubnetId": "${VpcPublicSubnet2Subnet691E08A3}"
+   }
+  },
+  "VpcPublicSubnet2DefaultRoute97F91067": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${VpcPublicSubnet1DefaultRoute3DA9E72A[1]}",
+    "GatewayId": "${VpcIGWD7BA715C}",
+    "RouteTableId": "${VpcPublicSubnet2RouteTable94F7E489}"
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcIGWD7BA715C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcVPCGWBF912B6E": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": "${VpcIGWD7BA715C}",
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": "${CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E.Arn}",
+    "DefaultSecurityGroupId": "${Vpc8378EB38.DefaultSecurityGroup}",
+    "Account": "${AWS::AccountId}"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/${Vpc8378EB38.DefaultSecurityGroup}"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "bea78ce725e22a5e0d82378f6b49028c09ba86499286d6945a0506e820854e92.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": "${CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0.Arn}",
+    "Runtime": "nodejs24.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ]
+  },
+  "OutputBucket7114EB27": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "OutputBucketPolicyAE009DDC": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${OutputBucket7114EB27}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092.Arn}"
+       },
+       "Resource": [
+        "${OutputBucket7114EB27.Arn}",
+        "${OutputBucket7114EB27.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "OutputBucketAutoDeleteObjectsCustomResource6C7A161F": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": "${CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F.Arn}",
+    "BucketName": "${OutputBucket7114EB27}"
+   },
+   "DependsOn": [
+    "OutputBucketPolicyAE009DDC"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ]
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "44e9c4d7a5d3fd2d677e1a7e416b2b56f6b0104bd5eff9cac5557b4c65a9dc61.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": "${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092.Arn}",
+    "Runtime": "nodejs24.x",
+    "Description": "Lambda function for auto-deleting objects in ${OutputBucket7114EB27} S3 bucket."
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ]
+  },
+  "TrainingBucketEB7BB5C9": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "TrainingBucketPolicy13186AEB": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${TrainingBucketEB7BB5C9}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092.Arn}"
+       },
+       "Resource": [
+        "${TrainingBucketEB7BB5C9.Arn}",
+        "${TrainingBucketEB7BB5C9.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TrainingBucketAutoDeleteObjectsCustomResourceA6F8F657": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": "${CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F.Arn}",
+    "BucketName": "${TrainingBucketEB7BB5C9}"
+   },
+   "DependsOn": [
+    "TrainingBucketPolicy13186AEB"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ValidationBucket984F58C6": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "ValidationBucketPolicy4B1045E0": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${ValidationBucket984F58C6}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "${CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092.Arn}"
+       },
+       "Resource": [
+        "${ValidationBucket984F58C6.Arn}",
+        "${ValidationBucket984F58C6.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ValidationBucketAutoDeleteObjectsCustomResource9840293D": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": "${CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F.Arn}",
+    "BucketName": "${ValidationBucket984F58C6}"
+   },
+   "DependsOn": [
+    "ValidationBucketPolicy4B1045E0"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "KmsKey46693ADD": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+       },
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
+       ],
+       "Condition": {
+        "StringEquals": {
+         "kms:ViaService": [
+          "bedrock.${AWS::Region}.amazonaws.com"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": [
+         "${CreateModelCustomizationJob1BedrockRole25A3ECD3.Arn}",
+         "${CreateModelCustomizationJob2BedrockRole06A5EE64.Arn}"
+        ]
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SecurityGroupDD263621": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "aws-stepfunctions-tasks-bedrock-invoke-model-integ/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${VpcPublicSubnet1DefaultRoute3DA9E72A[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "${Vpc8378EB38}"
+   }
+  },
+  "CreateModelCustomizationJob1BedrockRole25A3ECD3": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnEquals": {
+         "aws:SourceArn": "arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:model-customization-job/*"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "bedrock.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "ec2:DescribeDhcpOptions",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeSubnets",
+          "ec2:DescribeVpcs"
+         ],
+         "Effect": "Allow",
+         "Resource": "*"
+        },
+        {
+         "Action": "ec2:CreateNetworkInterface",
+         "Condition": {
+          "StringEquals": {
+           "aws:RequestTag/BedrockManaged": [
+            "true"
+           ]
+          },
+          "ArnEquals": {
+           "aws:RequestTag/BedrockModelCustomizationJobArn": [
+            "arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:model-customization-job/*"
+           ]
+          }
+         },
+         "Effect": "Allow",
+         "Resource": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:network-interface/*"
+        },
+        {
+         "Action": "ec2:CreateNetworkInterface",
+         "Effect": "Allow",
+         "Resource": [
+          "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/${SecurityGroupDD263621.GroupId}",
+          "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${VpcIsolatedSubnet1SubnetE48C5737}",
+          "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${VpcIsolatedSubnet2Subnet16364B91}"
+         ]
+        },
+        {
+         "Action": [
+          "ec2:CreateNetworkInterfacePermission",
+          "ec2:DeleteNetworkInterface",
+          "ec2:DeleteNetworkInterfacePermission"
+         ],
+         "Condition": {
+          "ArnEquals": {
+           "ec2:Subnet": [
+            "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${VpcIsolatedSubnet1SubnetE48C5737}",
+            "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${VpcIsolatedSubnet2Subnet16364B91}"
+           ],
+           "ec2:ResourceTag/BedrockModelCustomizationJobArn": [
+            "arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:model-customization-job/*"
+           ]
+          },
+          "StringEquals": {
+           "ec2:ResourceTag/BedrockManaged": "true"
+          }
+         },
+         "Effect": "Allow",
+         "Resource": "*"
+        },
+        {
+         "Action": "ec2:CreateTags",
+         "Condition": {
+          "StringEquals": {
+           "ec2:CreateAction": [
+            "CreateNetworkInterface"
+           ]
+          },
+          "ForAllValues:StringEquals": {
+           "aws:TagKeys": [
+            "BedrockManaged",
+            "BedrockModelCustomizationJobArn"
+           ]
+          }
+         },
+         "Effect": "Allow",
+         "Resource": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:network-interface/*"
+        },
+        {
+         "Action": [
+          "s3:GetObject",
+          "s3:ListBucket"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          "${TrainingBucketEB7BB5C9.Arn}",
+          "${ValidationBucket984F58C6.Arn}",
+          "${TrainingBucketEB7BB5C9.Arn}/*",
+          "${ValidationBucket984F58C6.Arn}/*"
+         ]
+        },
+        {
+         "Action": [
+          "s3:GetObject",
+          "s3:ListBucket",
+          "s3:PutObject"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          "${OutputBucket7114EB27.Arn}",
+          "${OutputBucket7114EB27.Arn}/*"
+         ]
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "BedrockCreateModelCustomizationJob"
+     }
+    ]
+   }
+  },
+  "CreateModelCustomizationJob2BedrockRole06A5EE64": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        },
+        "ArnEquals": {
+         "aws:SourceArn": "arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:model-customization-job/*"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "bedrock.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "s3:GetObject",
+          "s3:ListBucket"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          "${TrainingBucketEB7BB5C9.Arn}",
+          "${TrainingBucketEB7BB5C9.Arn}/*"
+         ]
+        },
+        {
+         "Action": [
+          "s3:GetObject",
+          "s3:ListBucket",
+          "s3:PutObject"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          "${OutputBucket7114EB27.Arn}",
+          "${OutputBucket7114EB27.Arn}/*"
+         ]
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "BedrockCreateModelCustomizationJob"
+     }
+    ]
+   }
+  },
+  "StateMachineRoleB840431D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachineRoleDefaultPolicyDF1E6607": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "bedrock:CreateModelCustomizationJob",
+        "bedrock:TagResource"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:custom-model/*",
+        "arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:model-customization-job/*",
+        "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1"
+       ]
+      },
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": [
+        "${CreateModelCustomizationJob1BedrockRole25A3ECD3.Arn}",
+        "${CreateModelCustomizationJob2BedrockRole06A5EE64.Arn}"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StateMachineRoleDefaultPolicyDF1E6607",
+    "Roles": [
+     "${StateMachineRoleB840431D}"
+    ]
+   }
+  },
+  "StateMachine2E01A3A5": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"Start\",\"States\":{\"Start\":{\"Type\":\"Pass\",\"Next\":\"CreateModelCustomizationJob1\"},\"CreateModelCustomizationJob1\":{\"Next\":\"CreateModelCustomizationJob2\",\"Type\":\"Task\",\"Resource\":\"arn:${AWS::Partition}:states:::bedrock:createModelCustomizationJob\",\"Parameters\":{\"BaseModelIdentifier\":\"arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1\",\"ClientRequestToken\":\"MyToken\",\"CustomizationType\":\"FINE_TUNING\",\"CustomModelKmsKeyId\":\"${KmsKey46693ADD.Arn}\",\"CustomModelName\":\"MyCustomModel\",\"CustomModelTags\":[{\"Key\":\"key1\",\"Value\":\"value1\"}],\"HyperParameters\":{\"batchSize\":\"10\"},\"JobName\":\"MyCustomizationJob\",\"JobTags\":[{\"Key\":\"key2\",\"Value\":\"value2\"}],\"OutputDataConfig\":{\"S3Uri\":\"s3://${OutputBucket7114EB27}/output-data\"},\"RoleArn\":\"${CreateModelCustomizationJob1BedrockRole25A3ECD3.Arn}\",\"TrainingDataConfig\":{\"S3Uri\":\"s3://${TrainingBucketEB7BB5C9}/training-data\"},\"ValidationDataConfig\":{\"Validators\":[{\"S3Uri\":\"s3://${ValidationBucket984F58C6}/validation-data1\"},{\"S3Uri\":\"s3://${ValidationBucket984F58C6}/validation-data2\"}]},\"VpcConfig\":{\"SecurityGroupIds\":[\"${SecurityGroupDD263621.GroupId}\"],\"SubnetIds\":[\"${VpcIsolatedSubnet1SubnetE48C5737}\",\"${VpcIsolatedSubnet2Subnet16364B91}\"]}}},\"CreateModelCustomizationJob2\":{\"Next\":\"Done\",\"Type\":\"Task\",\"Resource\":\"arn:${AWS::Partition}:states:::bedrock:createModelCustomizationJob\",\"Parameters\":{\"BaseModelIdentifier\":\"arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-text-express-v1\",\"ClientRequestToken\":\"MyToken2\",\"CustomizationType\":\"FINE_TUNING\",\"CustomModelKmsKeyId\":\"${KmsKey46693ADD.Arn}\",\"CustomModelName\":\"MyCustomModel2\",\"CustomModelTags\":[{\"Key\":\"key1\",\"Value\":\"value1\"}],\"HyperParameters\":{\"Evaluation percentage\":\"10\"},\"JobName\":\"MyCustomizationJob2\",\"JobTags\":[{\"Key\":\"key2\",\"Value\":\"value2\"}],\"OutputDataConfig\":{\"S3Uri\":\"s3://${OutputBucket7114EB27}/output-data\"},\"RoleArn\":\"${CreateModelCustomizationJob2BedrockRole06A5EE64.Arn}\",\"TrainingDataConfig\":{\"S3Uri\":\"s3://${TrainingBucketEB7BB5C9}/training-data\"}}},\"Done\":{\"Type\":\"Pass\",\"End\":true}},\"TimeoutSeconds\":30}",
+    "RoleArn": "${StateMachineRoleB840431D.Arn}"
+   },
+   "DependsOn": [
+    "StateMachineRoleDefaultPolicyDF1E6607",
+    "StateMachineRoleB840431D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefStateMachine2E01A3A5BA46F753": {
+   "Value": "${StateMachine2E01A3A5}",
+   "Export": {
+    "Name": "aws-stepfunctions-tasks-bedrock-invoke-model-integ:ExportsOutputRefStateMachine2E01A3A5BA46F753"
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.VpcIsolatedSubnet1SubnetE48C5737.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcIsolatedSubnet2Subnet16364B91.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcPublicSubnet1Subnet5C2D37C4.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.VpcPublicSubnet2Subnet691E08A3.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}

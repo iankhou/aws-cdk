@@ -1,0 +1,415 @@
+{
+ "stackName": "aws-cdk-eks-fargate-cluster-test-stack2",
+ "summary": {
+  "pass": 25,
+  "unresolved": 1,
+  "no handler": 3
+ },
+ "results": [
+  {
+   "logicalId": "KubectlLayer600207B5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KubectlLayer600207B5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/opt/kubectl/kubectl 1.37.1; /opt/helm/helm 4.3.1",
+   "actual": "/opt/kubectl/kubectl 1.37.1; /opt/helm/helm 4.3.1"
+  },
+  {
+   "logicalId": "KubectlLayer600207B5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "LicenseInfo",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Apache-2.0",
+   "actual": "Apache-2.0"
+  },
+  {
+   "logicalId": "FargateClusterKubectlHandlerRole93DCDA21",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FargateClusterKubectlHandlerRole93DCDA21",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FargateClusterKubectlHandlerRole93DCDA21",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0",
+   "actual": "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0"
+  },
+  {
+   "logicalId": "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${FargateClusterKubectlHandlerRole93DCDA21}",
+   "actual": "${FargateClusterKubectlHandlerRole93DCDA21}"
+  },
+  {
+   "logicalId": "FargateClusterRole8E36B33A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FargateClusterRole8E36B33A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "eks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22eks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FargateClusterRole8E36B33A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ]
+  },
+  {
+   "logicalId": "FargateClusterControlPlaneSecurityGroup1021A150",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FargateClusterControlPlaneSecurityGroup1021A150",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "EKS Control Plane Security Group",
+   "actual": "EKS Control Plane Security Group"
+  },
+  {
+   "logicalId": "FargateClusterControlPlaneSecurityGroup1021A150",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "vpc-061cb8382cd720a2d",
+   "actual": "vpc-061cb8382cd720a2d"
+  },
+  {
+   "logicalId": "FargateClusterControlPlaneSecurityGroup1021A150",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "0.0.0.0/0",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "0.0.0.0/0",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "FargateClusterCreationRole8C524AD8",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FargateClusterCreationRole8C524AD8",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": [
+        "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FargateClusterKubectlHandlerRole93DCDA21}",
+        "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-cdk-eks-fargate-clust-IsCompleteHandlerServiceR-Iu5nglrnFtJJ",
+        "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-cdk-eks-fargate-clust-OnEventHandlerServiceRole-qzaand0GvUkq"
+       ]
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%5B%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Arole%2Faws-cdk-eks-fargate-clust-OnEventHandlerServiceRole-qzaand0GvUkq%22%2C%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Arole%2Faws-cdk-eks-fargate-clust-IsCompleteHandlerServiceR-Iu5nglrnFtJJ%22%2C%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Arole%2F${FargateClusterKubectlHandlerRole93DCDA21}%22%5D%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FargateClusterCreationRoleDefaultPolicy629049D0",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FargateClusterCreationRoleDefaultPolicy629049D0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "FargateClusterCreationRoleDefaultPolicy629049D0",
+   "actual": "FargateClusterCreationRoleDefaultPolicy629049D0"
+  },
+  {
+   "logicalId": "FargateClusterCreationRoleDefaultPolicy629049D0",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FargateClusterRole8E36B33A}",
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FargateClusterfargateprofiledefaultPodExecutionRole66F2610E}"
+      ]
+     },
+     {
+      "Action": [
+       "eks:CreateCluster",
+       "eks:CreateFargateProfile",
+       "eks:DeleteCluster",
+       "eks:DescribeCluster",
+       "eks:DescribeUpdate",
+       "eks:TagResource",
+       "eks:UntagResource",
+       "eks:UpdateClusterConfig",
+       "eks:UpdateClusterVersion"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "eks:DeleteFargateProfile",
+       "eks:DescribeFargateProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "ec2:DescribeDhcpOptions",
+       "ec2:DescribeInstances",
+       "ec2:DescribeNetworkInterfaces",
+       "ec2:DescribeRouteTables",
+       "ec2:DescribeSecurityGroups",
+       "ec2:DescribeSubnets",
+       "ec2:DescribeVpcs",
+       "iam:CreateServiceLinkedRole",
+       "iam:GetRole",
+       "iam:listAttachedRolePolicies"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FargateClusterRole8E36B33A}",
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FargateClusterfargateprofiledefaultPodExecutionRole66F2610E}"
+      ]
+     },
+     {
+      "Action": [
+       "eks:CreateCluster",
+       "eks:CreateFargateProfile",
+       "eks:DeleteCluster",
+       "eks:DescribeCluster",
+       "eks:DescribeUpdate",
+       "eks:TagResource",
+       "eks:UntagResource",
+       "eks:UpdateClusterConfig",
+       "eks:UpdateClusterVersion"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "eks:DeleteFargateProfile",
+       "eks:DescribeFargateProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "ec2:DescribeDhcpOptions",
+       "ec2:DescribeInstances",
+       "ec2:DescribeNetworkInterfaces",
+       "ec2:DescribeRouteTables",
+       "ec2:DescribeSecurityGroups",
+       "ec2:DescribeSubnets",
+       "ec2:DescribeVpcs",
+       "iam:CreateServiceLinkedRole",
+       "iam:GetRole",
+       "iam:listAttachedRolePolicies"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "FargateClusterCreationRoleDefaultPolicy629049D0",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${FargateClusterCreationRole8C524AD8}",
+   "actual": "${FargateClusterCreationRole8C524AD8}"
+  },
+  {
+   "logicalId": "FargateClusterKubectlReadyBarrier93746934",
+   "type": "AWS::SSM::Parameter",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "FargateClusterfargateprofiledefaultPodExecutionRole66F2610E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "FargateClusterfargateprofiledefaultPodExecutionRole66F2610E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "eks-fargate-pods.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22eks-fargate-pods.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "FargateClusterfargateprofiledefaultPodExecutionRole66F2610E",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
+   ]
+  },
+  {
+   "logicalId": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+   "type": "AWS::CloudFormation::Stack",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+   "type": "AWS::CloudFormation::Stack",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}

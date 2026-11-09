@@ -1,0 +1,577 @@
+{
+ "version": "1",
+ "stackName": "aws-sfn-tasks-ecs-fargate-task",
+ "resources": {
+  "FargateCluster7CCD5F93": {
+   "Type": "AWS::ECS::Cluster"
+  },
+  "FargateClusterVpc377E8024": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc"
+     }
+    ]
+   }
+  },
+  "FargateClusterVpcPublicSubnet1SubnetB9C24BC7": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "FargateClusterVpcPublicSubnet1RouteTable1D7FA747": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "FargateClusterVpcPublicSubnet1RouteTableAssociation80F1442F": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${FargateClusterVpcPublicSubnet1RouteTable1D7FA747}",
+    "SubnetId": "${FargateClusterVpcPublicSubnet1SubnetB9C24BC7}"
+   }
+  },
+  "FargateClusterVpcPublicSubnet1DefaultRoute80086690": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${FargateClusterVpcPrivateSubnet1DefaultRoute0438DCBA[1]}",
+    "GatewayId": "${FargateClusterVpcIGW827638CB}",
+    "RouteTableId": "${FargateClusterVpcPublicSubnet1RouteTable1D7FA747}"
+   },
+   "DependsOn": [
+    "FargateClusterVpcVPCGW38717255"
+   ]
+  },
+  "FargateClusterVpcPublicSubnet1EIPF91909D0": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "FargateClusterVpcPublicSubnet1NATGateway5202D86A": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "FargateClusterVpcPublicSubnet1EIPF91909D0",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${FargateClusterVpcPublicSubnet1SubnetB9C24BC7}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "FargateClusterVpcPublicSubnet1DefaultRoute80086690",
+    "FargateClusterVpcPublicSubnet1RouteTableAssociation80F1442F"
+   ]
+  },
+  "FargateClusterVpcPublicSubnet2Subnet24C0F9D8": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "FargateClusterVpcPublicSubnet2RouteTable1493C5D6": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "FargateClusterVpcPublicSubnet2RouteTableAssociation3EFA74DC": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${FargateClusterVpcPublicSubnet2RouteTable1493C5D6}",
+    "SubnetId": "${FargateClusterVpcPublicSubnet2Subnet24C0F9D8}"
+   }
+  },
+  "FargateClusterVpcPublicSubnet2DefaultRoute8E847CD2": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${FargateClusterVpcPrivateSubnet1DefaultRoute0438DCBA[1]}",
+    "GatewayId": "${FargateClusterVpcIGW827638CB}",
+    "RouteTableId": "${FargateClusterVpcPublicSubnet2RouteTable1493C5D6}"
+   },
+   "DependsOn": [
+    "FargateClusterVpcVPCGW38717255"
+   ]
+  },
+  "FargateClusterVpcPublicSubnet2EIPBBB24774": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "FargateClusterVpcPublicSubnet2NATGatewayFFEC8ED2": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "FargateClusterVpcPublicSubnet2EIPBBB24774",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${FargateClusterVpcPublicSubnet2Subnet24C0F9D8}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "FargateClusterVpcPublicSubnet2DefaultRoute8E847CD2",
+    "FargateClusterVpcPublicSubnet2RouteTableAssociation3EFA74DC"
+   ]
+  },
+  "FargateClusterVpcPrivateSubnet1Subnet9127625F": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "FargateClusterVpcPrivateSubnet1RouteTable21B3CEAE": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "FargateClusterVpcPrivateSubnet1RouteTableAssociation78F6E213": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${FargateClusterVpcPrivateSubnet1RouteTable21B3CEAE}",
+    "SubnetId": "${FargateClusterVpcPrivateSubnet1Subnet9127625F}"
+   }
+  },
+  "FargateClusterVpcPrivateSubnet1DefaultRoute0438DCBA": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${FargateClusterVpcPrivateSubnet1DefaultRoute0438DCBA[1]}",
+    "NatGatewayId": "${FargateClusterVpcPublicSubnet1NATGateway5202D86A}",
+    "RouteTableId": "${FargateClusterVpcPrivateSubnet1RouteTable21B3CEAE}"
+   }
+  },
+  "FargateClusterVpcPrivateSubnet2Subnet307CEE57": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "FargateClusterVpcPrivateSubnet2RouteTable7B7F9678": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "FargateClusterVpcPrivateSubnet2RouteTableAssociation3A46964C": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${FargateClusterVpcPrivateSubnet2RouteTable7B7F9678}",
+    "SubnetId": "${FargateClusterVpcPrivateSubnet2Subnet307CEE57}"
+   }
+  },
+  "FargateClusterVpcPrivateSubnet2DefaultRoute35FDD29D": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${FargateClusterVpcPrivateSubnet1DefaultRoute0438DCBA[1]}",
+    "NatGatewayId": "${FargateClusterVpcPublicSubnet2NATGatewayFFEC8ED2}",
+    "RouteTableId": "${FargateClusterVpcPrivateSubnet2RouteTable7B7F9678}"
+   }
+  },
+  "FargateClusterVpcIGW827638CB": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-fargate-task/FargateCluster/Vpc"
+     }
+    ]
+   }
+  },
+  "FargateClusterVpcVPCGW38717255": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": "${FargateClusterVpcIGW827638CB}",
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "TaskDefTaskRole1EDB4A67": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TaskDef54694570": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:cb8db1ca45b29cf8a7db558e2cb31ac823252251ae003dc87318f485c6415d2b",
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": "${TaskDefTheContainerLogGroupD94C8EF5}",
+        "awslogs-stream-prefix": "EventDemo",
+        "awslogs-region": "${AWS::Region}"
+       }
+      },
+      "Memory": 256,
+      "Name": "TheContainer"
+     }
+    ],
+    "Cpu": "256",
+    "ExecutionRoleArn": "${TaskDefExecutionRoleB4775C97.Arn}",
+    "Family": "awssfntasksecsfargatetaskTaskDefBB13BD5B",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": "${TaskDefTaskRole1EDB4A67.Arn}"
+   }
+  },
+  "TaskDefTheContainerLogGroupD94C8EF5": {
+   "Type": "AWS::Logs::LogGroup",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "TaskDefExecutionRoleB4775C97": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TaskDefExecutionRoleDefaultPolicy0DBB737A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "${TaskDefTheContainerLogGroupD94C8EF5.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "TaskDefExecutionRoleDefaultPolicy0DBB737A",
+    "Roles": [
+     "${TaskDefExecutionRoleB4775C97}"
+    ]
+   }
+  },
+  "FargateTaskSecurityGroup0BBB27CB": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "aws-sfn-tasks-ecs-fargate-task/FargateTask/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${FargateClusterVpcPrivateSubnet1DefaultRoute0438DCBA[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "${FargateClusterVpc377E8024}"
+   }
+  },
+  "StateMachineRoleB840431D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachineRoleDefaultPolicyDF1E6607": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ecs:RunTask",
+       "Effect": "Allow",
+       "Resource": "${TaskDef54694570}"
+      },
+      {
+       "Action": [
+        "ecs:DescribeTasks",
+        "ecs:StopTask"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": [
+        "${TaskDefExecutionRoleB4775C97.Arn}",
+        "${TaskDefTaskRole1EDB4A67.Arn}"
+       ]
+      },
+      {
+       "Action": [
+        "events:DescribeRule",
+        "events:PutRule",
+        "events:PutTargets"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/StepFunctionsGetEventsForECSTaskRule"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StateMachineRoleDefaultPolicyDF1E6607",
+    "Roles": [
+     "${StateMachineRoleB840431D}"
+    ]
+   }
+  },
+  "StateMachine2E01A3A5": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"Start\",\"States\":{\"Start\":{\"Type\":\"Pass\",\"Result\":{\"SomeKey\":\"SomeValue\"},\"Next\":\"FargateTask\"},\"FargateTask\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"arn:${AWS::Partition}:states:::ecs:runTask.sync\",\"Parameters\":{\"Cluster\":\"${FargateCluster7CCD5F93.Arn}\",\"TaskDefinition\":\"awssfntasksecsfargatetaskTaskDefBB13BD5B\",\"NetworkConfiguration\":{\"AwsvpcConfiguration\":{\"AssignPublicIp\":\"ENABLED\",\"Subnets\":[\"${FargateClusterVpcPublicSubnet1SubnetB9C24BC7}\",\"${FargateClusterVpcPublicSubnet2Subnet24C0F9D8}\"],\"SecurityGroups\":[\"${FargateTaskSecurityGroup0BBB27CB.GroupId}\"]}},\"Overrides\":{\"ContainerOverrides\":[{\"Name\":\"TheContainer\",\"Environment\":[{\"Name\":\"SOME_KEY\",\"Value.$\":\"$.SomeKey\"}]}]},\"LaunchType\":\"FARGATE\"}}}}",
+    "RoleArn": "${StateMachineRoleB840431D.Arn}"
+   },
+   "DependsOn": [
+    "StateMachineRoleDefaultPolicyDF1E6607",
+    "StateMachineRoleB840431D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.FargateClusterVpcPublicSubnet1SubnetB9C24BC7.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.FargateClusterVpcPublicSubnet1NATGateway5202D86A.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${FargateClusterVpcPublicSubnet1EIPF91909D0}' does not exist (Service: Ec2, Status Code: 400, Request ID: 06077848-f8f1-41be-a91b-de7b811f52c0) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 96289eab-40d5-4eec-ac62-f14e50fcb23c)'"
+  },
+  {
+   "path": "Resources.FargateClusterVpcPublicSubnet2Subnet24C0F9D8.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.FargateClusterVpcPublicSubnet2NATGatewayFFEC8ED2.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${FargateClusterVpcPublicSubnet2EIPBBB24774}' does not exist (Service: Ec2, Status Code: 400, Request ID: 7418d4a2-0309-4e18-9dbb-1fecc90a79da) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: f6bf051f-8cf1-4f37-8eda-72cc25a542bc)'"
+  },
+  {
+   "path": "Resources.FargateClusterVpcPrivateSubnet1Subnet9127625F.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.FargateClusterVpcPrivateSubnet2Subnet307CEE57.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}

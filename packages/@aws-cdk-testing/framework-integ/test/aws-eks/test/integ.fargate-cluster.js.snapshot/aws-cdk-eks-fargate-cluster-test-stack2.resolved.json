@@ -1,0 +1,337 @@
+{
+ "version": "1",
+ "stackName": "aws-cdk-eks-fargate-cluster-test-stack2",
+ "resources": {
+  "KubectlLayer600207B5": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "f3b6d5b2b54099da4dd327ca97f786e63f5774e5b470ef38e6da375b488be27e.zip"
+    },
+    "Description": "/opt/kubectl/kubectl 1.37.1; /opt/helm/helm 4.3.1",
+    "LicenseInfo": "Apache-2.0"
+   }
+  },
+  "FargateClusterKubectlHandlerRole93DCDA21": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole",
+     "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly",
+     "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly"
+    ]
+   }
+  },
+  "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "eks:DescribeCluster",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "FargateCluster019F03E8",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": "${FargateClusterCreationRole8C524AD8.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0",
+    "Roles": [
+     "${FargateClusterKubectlHandlerRole93DCDA21}"
+    ]
+   }
+  },
+  "FargateClusterRole8E36B33A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+    ]
+   }
+  },
+  "FargateClusterControlPlaneSecurityGroup1021A150": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EKS Control Plane Security Group",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "${ImportValue:aws-cdk-eks-fargate-cluster-test-stack1:ExportsOutputRefDummyVpcB6C30D0C8DA8CBBF}"
+   }
+  },
+  "FargateClusterCreationRole8C524AD8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": [
+         "${FargateClusterKubectlHandlerRole93DCDA21.Arn}",
+         "${awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454.Outputs.awscdkeksfargateclusterteststack2awscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole7C6A2DAEArn}",
+         "${awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454.Outputs.awscdkeksfargateclusterteststack2awscdkawseksClusterResourceProviderOnEventHandlerServiceRole4D815224Arn}"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "FargateClusterCreationRoleDefaultPolicy629049D0": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": [
+        "${FargateClusterRole8E36B33A.Arn}",
+        "${FargateClusterfargateprofiledefaultPodExecutionRole66F2610E.Arn}"
+       ]
+      },
+      {
+       "Action": [
+        "eks:CreateCluster",
+        "eks:CreateFargateProfile",
+        "eks:DeleteCluster",
+        "eks:DescribeCluster",
+        "eks:DescribeUpdate",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "eks:UpdateClusterConfig",
+        "eks:UpdateClusterVersion"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "eks:DeleteFargateProfile",
+        "eks:DescribeFargateProfile"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole",
+        "iam:GetRole",
+        "iam:listAttachedRolePolicies"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "FargateClusterCreationRoleDefaultPolicy629049D0",
+    "Roles": [
+     "${FargateClusterCreationRole8C524AD8}"
+    ]
+   }
+  },
+  "FargateCluster019F03E8": {
+   "Type": "Custom::AWSCDK-EKS-Cluster",
+   "Properties": {
+    "ServiceToken": "${awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454.Outputs.awscdkeksfargateclusterteststack2awscdkawseksClusterResourceProviderframeworkonEventB487163FArn}",
+    "Config": {
+     "version": "1.37",
+     "roleArn": "${FargateClusterRole8E36B33A.Arn}",
+     "kubernetesNetworkConfig": {
+      "ipFamily": "ipv4"
+     },
+     "resourcesVpcConfig": {
+      "subnetIds": [
+       "${ImportValue:aws-cdk-eks-fargate-cluster-test-stack1:ExportsOutputRefDummyVpcPublicSubnet1Subnet1073B36B538AF908}",
+       "${ImportValue:aws-cdk-eks-fargate-cluster-test-stack1:ExportsOutputRefDummyVpcPublicSubnet2SubnetD8B684313DA9A92B}",
+       "${ImportValue:aws-cdk-eks-fargate-cluster-test-stack1:ExportsOutputRefDummyVpcPrivateSubnet1SubnetAF2DFEB1255D2AD9}",
+       "${ImportValue:aws-cdk-eks-fargate-cluster-test-stack1:ExportsOutputRefDummyVpcPrivateSubnet2Subnet718780F7D3B4EBA1}"
+      ],
+      "securityGroupIds": [
+       "${FargateClusterControlPlaneSecurityGroup1021A150.GroupId}"
+      ],
+      "endpointPublicAccess": true,
+      "endpointPrivateAccess": true
+     },
+     "accessConfig": {
+      "authenticationMode": "API"
+     }
+    },
+    "AssumeRoleArn": "${FargateClusterCreationRole8C524AD8.Arn}",
+    "AttributesRevision": 5
+   },
+   "DependsOn": [
+    "FargateClusterCreationRoleDefaultPolicy629049D0",
+    "FargateClusterCreationRole8C524AD8"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "FargateClusterKubectlReadyBarrier93746934": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "aws:cdk:eks:kubectl-ready"
+   },
+   "DependsOn": [
+    "FargateClusterfargateprofiledefaultPodExecutionRole66F2610E",
+    "FargateClusterfargateprofiledefault10E54561",
+    "FargateClusterCreationRoleDefaultPolicy629049D0",
+    "FargateClusterCreationRole8C524AD8",
+    "FargateCluster019F03E8"
+   ]
+  },
+  "FargateClusterCoreDnsComputeTypePatch711BF1B2": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesPatch",
+   "Properties": {
+    "ServiceToken": "${awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B.Outputs.awscdkeksfargateclusterteststack2awscdkawseksKubectlProviderframeworkonEventC9D5CB5CArn}",
+    "ResourceName": "deployment/coredns",
+    "ResourceNamespace": "kube-system",
+    "ApplyPatchJson": "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"eks.amazonaws.com/compute-type\":\"fargate\"}}}}}",
+    "RestorePatchJson": "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"eks.amazonaws.com/compute-type\":\"ec2\"}}}}}",
+    "ClusterName": "${FargateCluster019F03E8}",
+    "RoleArn": "${FargateClusterCreationRole8C524AD8.Arn}",
+    "PatchType": "strategic"
+   },
+   "DependsOn": [
+    "FargateClusterKubectlReadyBarrier93746934"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "FargateClusterfargateprofiledefaultPodExecutionRole66F2610E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "eks-fargate-pods.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
+    ]
+   }
+  },
+  "FargateClusterfargateprofiledefault10E54561": {
+   "Type": "Custom::AWSCDK-EKS-FargateProfile",
+   "Properties": {
+    "ServiceToken": "${awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454.Outputs.awscdkeksfargateclusterteststack2awscdkawseksClusterResourceProviderframeworkonEventB487163FArn}",
+    "AssumeRoleArn": "${FargateClusterCreationRole8C524AD8.Arn}",
+    "Config": {
+     "clusterName": "${FargateCluster019F03E8}",
+     "podExecutionRoleArn": "${FargateClusterfargateprofiledefaultPodExecutionRole66F2610E.Arn}",
+     "selectors": [
+      {
+       "namespace": "default"
+      },
+      {
+       "namespace": "kube-system"
+      }
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": "https://s3.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cfcc006f6cd54092e74db85076cc354e29acb2543992ebe82b5d34982e6673cf.json"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "Parameters": {
+     "referencetoawscdkeksfargateclusterteststack2KubectlLayer3957E6CCRef": "${KubectlLayer600207B5}",
+     "referencetoawscdkeksfargateclusterteststack2FargateClusterKubectlHandlerRole1840C412Arn": "${FargateClusterKubectlHandlerRole93DCDA21.Arn}",
+     "referencetoawscdkeksfargateclusterteststack2FargateCluster328B84B5ClusterSecurityGroupId": {
+      "Fn::GetAtt": [
+       "FargateCluster019F03E8",
+       "ClusterSecurityGroupId"
+      ]
+     }
+    },
+    "TemplateURL": "https://s3.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/920f6ce2926c2f3f6d4a51f903781e5254784fc727958d1dd5c6ecf7f2281580.json"
+   },
+   "DependsOn": [
+    "FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0",
+    "FargateClusterKubectlHandlerRole93DCDA21"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.FargateClusterKubectlHandlerRoleDefaultPolicy3F5DBBB0.Properties.PolicyDocument.Statement.0.Resource",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'Arn' attribute of the 'Custom::AWSCDK-EKS-Cluster' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWSCDK-EKS-Cluster' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  },
+  {
+   "path": "Resources.awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B.Properties.Parameters.referencetoawscdkeksfargateclusterteststack2FargateCluster328B84B5ClusterSecurityGroupId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'ClusterSecurityGroupId' attribute of the 'Custom::AWSCDK-EKS-Cluster' resource because an error occurred while attempting to retrieve the information: 'ValidationException:1 validation error detected: Value 'Custom::AWSCDK-EKS-Cluster' at 'typeName' failed to satisfy constraint: Member must satisfy regular expression pattern: [A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'"
+  }
+ ]
+}

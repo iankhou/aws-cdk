@@ -1,0 +1,1527 @@
+{
+ "stackName": "RegionalNatGatewayEgressStack",
+ "summary": {
+  "pass": 129,
+  "no handler": 1,
+  "unresolved": 3
+ },
+ "results": [
+  {
+   "logicalId": "SourceIpEchoServiceRoleE4956266",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceIpEchoServiceRoleE4956266",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SourceIpEchoServiceRoleE4956266",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "SourceIpEcho41FBE38C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceIpEcho41FBE38C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "SourceIpEcho41FBE38C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "SourceIpEcho41FBE38C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SourceIpEchoServiceRoleE4956266}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${SourceIpEchoServiceRoleE4956266}"
+  },
+  {
+   "logicalId": "SourceIpEchoLogGroup32674E6C",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceIpEchoLogGroup32674E6C",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${SourceIpEcho41FBE38C}",
+   "actual": "/aws/lambda/${SourceIpEcho41FBE38C}"
+  },
+  {
+   "logicalId": "SourceIpEchoLogGroup32674E6C",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "SourceIpEchoFunctionUrl9EFEB490",
+   "type": "AWS::Lambda::Url",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionurlCC2BAB62",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionurlCC2BAB62",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunctionUrl",
+   "actual": "lambda:InvokeFunctionUrl"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionurlCC2BAB62",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${SourceIpEcho41FBE38C}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${SourceIpEcho41FBE38C}"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionurlCC2BAB62",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "*",
+   "actual": "*"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionurlCC2BAB62",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionUrlAuthType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "NONE",
+   "actual": "NONE"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionA612F9DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionA612F9DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "Action",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "lambda:InvokeFunction",
+   "actual": "lambda:InvokeFunction"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionA612F9DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "FunctionName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${SourceIpEcho41FBE38C}",
+   "actual": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${SourceIpEcho41FBE38C}"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionA612F9DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "Principal",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "*",
+   "actual": "*"
+  },
+  {
+   "logicalId": "SourceIpEchoinvokefunctionA612F9DE",
+   "type": "AWS::Lambda::Permission",
+   "property": "InvokedViaFunctionUrl",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": "true"
+  },
+  {
+   "logicalId": "NatEip",
+   "type": "AWS::EC2::EIP",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcD2BB252A",
+   "type": "AWS::EC2::VPC",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcD2BB252A",
+   "type": "AWS::EC2::VPC",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/16",
+   "actual": "10.0.0.0/16"
+  },
+  {
+   "logicalId": "ManualModeVpcD2BB252A",
+   "type": "AWS::EC2::VPC",
+   "property": "InstanceTenancy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "default",
+   "actual": "default"
+  },
+  {
+   "logicalId": "ManualModeVpcD2BB252A",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsSupport",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "ManualModeVpcD2BB252A",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsHostnames",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "ManualModeVpcD2BB252A",
+   "type": "AWS::EC2::VPC",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ManualModeVpcD2BB252A"
+    }
+   ]
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1SubnetE346C724",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1SubnetE346C724",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManualModeVpcD2BB252A}",
+   "actual": "${ManualModeVpcD2BB252A}"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1SubnetE346C724",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1SubnetE346C724",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/16",
+   "actual": "10.0.0.0/16"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1SubnetE346C724",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1SubnetE346C724",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc/PrivateSubnet1"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ManualModeVpcPrivateSubnet1SubnetE346C724"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    }
+   ]
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1RouteTableF8F25A2A",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1RouteTableF8F25A2A",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManualModeVpcD2BB252A}",
+   "actual": "${ManualModeVpcD2BB252A}"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1RouteTableF8F25A2A",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ManualModeVpcPrivateSubnet1RouteTableF8F25A2A"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc/PrivateSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    }
+   ]
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1RouteTableAssociationA9987458",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1RouteTableAssociationA9987458",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManualModeVpcPrivateSubnet1RouteTableF8F25A2A}",
+   "actual": "${ManualModeVpcPrivateSubnet1RouteTableF8F25A2A}"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1RouteTableAssociationA9987458",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManualModeVpcPrivateSubnet1SubnetE346C724}",
+   "actual": "${ManualModeVpcPrivateSubnet1SubnetE346C724}"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1DefaultRoute0EF5F574",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1DefaultRoute0EF5F574",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManualModeVpcPrivateSubnet1RouteTableF8F25A2A}",
+   "actual": "${ManualModeVpcPrivateSubnet1RouteTableF8F25A2A}"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1DefaultRoute0EF5F574",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D[1]}",
+   "actual": "${AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D[1]}"
+  },
+  {
+   "logicalId": "ManualModeVpcPrivateSubnet1DefaultRoute0EF5F574",
+   "type": "AWS::EC2::Route",
+   "property": "NatGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManualModeVpcRegionalNatGateway9B258FF3}",
+   "actual": "${ManualModeVpcRegionalNatGateway9B258FF3}"
+  },
+  {
+   "logicalId": "ManualModeVpcIGWE835A8AC",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcIGWE835A8AC",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ManualModeVpcIGWE835A8AC"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    }
+   ]
+  },
+  {
+   "logicalId": "ManualModeVpcVPCGW24A1A902",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcVPCGW24A1A902",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "InternetGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${ManualModeVpcIGWE835A8AC}"
+   ],
+   "actual": [
+    "${ManualModeVpcIGWE835A8AC}"
+   ]
+  },
+  {
+   "logicalId": "ManualModeVpcVPCGW24A1A902",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${ManualModeVpcD2BB252A}"
+   ],
+   "actual": [
+    "${ManualModeVpcD2BB252A}"
+   ]
+  },
+  {
+   "logicalId": "ManualModeVpcRegionalNatGateway9B258FF3",
+   "type": "AWS::EC2::NatGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeVpcRegionalNatGateway9B258FF3",
+   "type": "AWS::EC2::NatGateway",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManualModeVpcD2BB252A}",
+   "actual": "${ManualModeVpcD2BB252A}"
+  },
+  {
+   "logicalId": "ManualModeVpcRegionalNatGateway9B258FF3",
+   "type": "AWS::EC2::NatGateway",
+   "property": "ConnectivityType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "public",
+   "actual": "public"
+  },
+  {
+   "logicalId": "ManualModeVpcRegionalNatGateway9B258FF3",
+   "type": "AWS::EC2::NatGateway",
+   "property": "AvailabilityMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "regional",
+   "actual": "regional"
+  },
+  {
+   "logicalId": "ManualModeVpcRegionalNatGateway9B258FF3",
+   "type": "AWS::EC2::NatGateway",
+   "property": "AvailabilityZoneAddresses",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ManualModeVpcRegionalNatGateway9B258FF3",
+   "type": "AWS::EC2::NatGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "ManualModeVpcRegionalNatGateway9B258FF3"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/ManualModeVpc"
+    }
+   ]
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "Inline"
+   ],
+   "actual": [
+    "Inline"
+   ]
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Effect": "Allow",
+      "Action": [
+       "ec2:AuthorizeSecurityGroupIngress",
+       "ec2:AuthorizeSecurityGroupEgress",
+       "ec2:RevokeSecurityGroupIngress",
+       "ec2:RevokeSecurityGroupEgress"
+      ],
+      "Resource": [
+       "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/sg-0ffbb76a6aa576c14"
+      ]
+     },
+     {
+      "Effect": "Allow",
+      "Action": [
+       "ec2:AuthorizeSecurityGroupIngress",
+       "ec2:AuthorizeSecurityGroupEgress",
+       "ec2:RevokeSecurityGroupIngress",
+       "ec2:RevokeSecurityGroupEgress"
+      ],
+      "Resource": [
+       "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/sg-03298c4badacf5090"
+      ]
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22ec2%3AAuthorizeSecurityGroupIngress%22%2C%22ec2%3AAuthorizeSecurityGroupEgress%22%2C%22ec2%3ARevokeSecurityGroupIngress%22%2C%22ec2%3ARevokeSecurityGroupEgress%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Aec2%3A${AWS::Region}%3A${AWS::AccountId}%3Asecurity-group%2Fsg-0ffbb76a6aa576c14%22%5D%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22ec2%3AAuthorizeSecurityGroupIngress%22%2C%22ec2%3AAuthorizeSecurityGroupEgress%22%2C%22ec2%3ARevokeSecurityGroupIngress%22%2C%22ec2%3ARevokeSecurityGroupEgress%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Aec2%3A${AWS::Region}%3A${AWS::AccountId}%3Asecurity-group%2Fsg-03298c4badacf5090%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Lambda function for removing all inbound/outbound rules from the VPC default security group",
+   "actual": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "__entrypoint__.handler",
+   "actual": "__entrypoint__.handler"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0}"
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 128,
+   "actual": 128
+  },
+  {
+   "logicalId": "ManualModeProbeServiceRole0715D02E",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeProbeServiceRole0715D02E",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ManualModeProbeServiceRole0715D02E",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "ManualModeProbeSecurityGroup37C45D49",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeProbeSecurityGroup37C45D49",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatic security group for Lambda Function RegionalNatGatewayEgressStackManualModeProbeC77AD7D7",
+   "actual": "Automatic security group for Lambda Function RegionalNatGatewayEgressStackManualModeProbeC77AD7D7"
+  },
+  {
+   "logicalId": "ManualModeProbeSecurityGroup37C45D49",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ManualModeVpcD2BB252A}",
+   "actual": "${ManualModeVpcD2BB252A}"
+  },
+  {
+   "logicalId": "ManualModeProbeSecurityGroup37C45D49",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "ManualModeProbe20297005",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeProbe20297005",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "ManualModeProbe20297005",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "ManualModeProbe20297005",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ManualModeProbeServiceRole0715D02E}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ManualModeProbeServiceRole0715D02E}"
+  },
+  {
+   "logicalId": "ManualModeProbe20297005",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  },
+  {
+   "logicalId": "ManualModeProbe20297005",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ECHO_URL": "https://vtib2pveq6phr2zvslnujto7oq0wbrkq.lambda-url.${AWS::Region}.on.aws/"
+   },
+   "actual": {
+    "ECHO_URL": "https://vtib2pveq6phr2zvslnujto7oq0wbrkq.lambda-url.${AWS::Region}.on.aws/"
+   }
+  },
+  {
+   "logicalId": "ManualModeProbe20297005",
+   "type": "AWS::Lambda::Function",
+   "property": "VpcConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SecurityGroupIds": [
+     "${ManualModeProbeSecurityGroup37C45D49}"
+    ],
+    "SubnetIds": [
+     "${ManualModeVpcPrivateSubnet1SubnetE346C724}"
+    ]
+   },
+   "actual": {
+    "SubnetIds": [
+     "${ManualModeVpcPrivateSubnet1SubnetE346C724}"
+    ],
+    "SecurityGroupIds": [
+     "${ManualModeProbeSecurityGroup37C45D49}"
+    ],
+    "VpcId": "${ManualModeVpcD2BB252A}",
+    "Ipv6AllowedForDualStack": false
+   }
+  },
+  {
+   "logicalId": "ManualModeProbeLogGroupBFA2822D",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ManualModeProbeLogGroupBFA2822D",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${ManualModeProbe20297005}",
+   "actual": "/aws/lambda/${ManualModeProbe20297005}"
+  },
+  {
+   "logicalId": "ManualModeProbeLogGroupBFA2822D",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  },
+  {
+   "logicalId": "AutomaticModeVpc4A6FADD8",
+   "type": "AWS::EC2::VPC",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeVpc4A6FADD8",
+   "type": "AWS::EC2::VPC",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/16",
+   "actual": "10.0.0.0/16"
+  },
+  {
+   "logicalId": "AutomaticModeVpc4A6FADD8",
+   "type": "AWS::EC2::VPC",
+   "property": "InstanceTenancy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "default",
+   "actual": "default"
+  },
+  {
+   "logicalId": "AutomaticModeVpc4A6FADD8",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsSupport",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "AutomaticModeVpc4A6FADD8",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsHostnames",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "AutomaticModeVpc4A6FADD8",
+   "type": "AWS::EC2::VPC",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "AutomaticModeVpc4A6FADD8"
+    }
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpc4A6FADD8}",
+   "actual": "${AutomaticModeVpc4A6FADD8}"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/16",
+   "actual": "10.0.0.0/16"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc/PrivateSubnet1"
+    }
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1RouteTable970803D7",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1RouteTable970803D7",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpc4A6FADD8}",
+   "actual": "${AutomaticModeVpc4A6FADD8}"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1RouteTable970803D7",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc/PrivateSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "AutomaticModeVpcPrivateSubnet1RouteTable970803D7"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    }
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1RouteTableAssociationB3241954",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1RouteTableAssociationB3241954",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpcPrivateSubnet1RouteTable970803D7}",
+   "actual": "${AutomaticModeVpcPrivateSubnet1RouteTable970803D7}"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1RouteTableAssociationB3241954",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F}",
+   "actual": "${AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F}"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpcPrivateSubnet1RouteTable970803D7}",
+   "actual": "${AutomaticModeVpcPrivateSubnet1RouteTable970803D7}"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D[1]}",
+   "actual": "${AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D[1]}"
+  },
+  {
+   "logicalId": "AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D",
+   "type": "AWS::EC2::Route",
+   "property": "NatGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpcRegionalNatGateway22462E08}",
+   "actual": "${AutomaticModeVpcRegionalNatGateway22462E08}"
+  },
+  {
+   "logicalId": "AutomaticModeVpcIGW0B90EB7F",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeVpcIGW0B90EB7F",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "AutomaticModeVpcIGW0B90EB7F"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc"
+    }
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeVpcVPCGWD196BFE8",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeVpcVPCGWD196BFE8",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "InternetGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${AutomaticModeVpcIGW0B90EB7F}"
+   ],
+   "actual": [
+    "${AutomaticModeVpcIGW0B90EB7F}"
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeVpcVPCGWD196BFE8",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${AutomaticModeVpc4A6FADD8}"
+   ],
+   "actual": [
+    "${AutomaticModeVpc4A6FADD8}"
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeVpcRegionalNatGateway22462E08",
+   "type": "AWS::EC2::NatGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeVpcRegionalNatGateway22462E08",
+   "type": "AWS::EC2::NatGateway",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpc4A6FADD8}",
+   "actual": "${AutomaticModeVpc4A6FADD8}"
+  },
+  {
+   "logicalId": "AutomaticModeVpcRegionalNatGateway22462E08",
+   "type": "AWS::EC2::NatGateway",
+   "property": "ConnectivityType",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "public",
+   "actual": "public"
+  },
+  {
+   "logicalId": "AutomaticModeVpcRegionalNatGateway22462E08",
+   "type": "AWS::EC2::NatGateway",
+   "property": "AvailabilityMode",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "regional",
+   "actual": "regional"
+  },
+  {
+   "logicalId": "AutomaticModeVpcRegionalNatGateway22462E08",
+   "type": "AWS::EC2::NatGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "RegionalNatGatewayEgressStack"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "AutomaticModeVpcRegionalNatGateway22462E08"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "RegionalNatGatewayEgressStack/AutomaticModeVpc"
+    }
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeProbeServiceRoleACCE46F6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeProbeServiceRoleACCE46F6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "AutomaticModeProbeServiceRoleACCE46F6",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeProbeSecurityGroup2175FE5A",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeProbeSecurityGroup2175FE5A",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Automatic security group for Lambda Function RegionalNatGatewayEgressStackAutomaticModeProbe00BA4893",
+   "actual": "Automatic security group for Lambda Function RegionalNatGatewayEgressStackAutomaticModeProbe00BA4893"
+  },
+  {
+   "logicalId": "AutomaticModeProbeSecurityGroup2175FE5A",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${AutomaticModeVpc4A6FADD8}",
+   "actual": "${AutomaticModeVpc4A6FADD8}"
+  },
+  {
+   "logicalId": "AutomaticModeProbeSecurityGroup2175FE5A",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${AutomaticModeVpcPrivateSubnet1DefaultRoute8477F31D[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "AutomaticModeProbe324C6D4D",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeProbe324C6D4D",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "AutomaticModeProbe324C6D4D",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "AutomaticModeProbe324C6D4D",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AutomaticModeProbeServiceRoleACCE46F6}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${AutomaticModeProbeServiceRoleACCE46F6}"
+  },
+  {
+   "logicalId": "AutomaticModeProbe324C6D4D",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 30,
+   "actual": 30
+  },
+  {
+   "logicalId": "AutomaticModeProbe324C6D4D",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ECHO_URL": "https://vtib2pveq6phr2zvslnujto7oq0wbrkq.lambda-url.${AWS::Region}.on.aws/"
+   },
+   "actual": {
+    "ECHO_URL": "https://vtib2pveq6phr2zvslnujto7oq0wbrkq.lambda-url.${AWS::Region}.on.aws/"
+   }
+  },
+  {
+   "logicalId": "AutomaticModeProbe324C6D4D",
+   "type": "AWS::Lambda::Function",
+   "property": "VpcConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SecurityGroupIds": [
+     "${AutomaticModeProbeSecurityGroup2175FE5A}"
+    ],
+    "SubnetIds": [
+     "${AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F}"
+    ]
+   },
+   "actual": {
+    "SubnetIds": [
+     "${AutomaticModeVpcPrivateSubnet1Subnet9F80FC5F}"
+    ],
+    "SecurityGroupIds": [
+     "${AutomaticModeProbeSecurityGroup2175FE5A}"
+    ],
+    "VpcId": "${AutomaticModeVpc4A6FADD8}",
+    "Ipv6AllowedForDualStack": false
+   }
+  },
+  {
+   "logicalId": "AutomaticModeProbeLogGroupEE0CA3E5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AutomaticModeProbeLogGroupEE0CA3E5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "LogGroupName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/aws/lambda/${AutomaticModeProbe324C6D4D}",
+   "actual": "/aws/lambda/${AutomaticModeProbe324C6D4D}"
+  },
+  {
+   "logicalId": "AutomaticModeProbeLogGroupEE0CA3E5",
+   "type": "AWS::Logs::LogGroup",
+   "property": "RetentionInDays",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 731,
+   "actual": 731
+  }
+ ]
+}

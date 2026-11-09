@@ -1,0 +1,523 @@
+{
+ "version": "1",
+ "stackName": "canary-vpc",
+ "resources": {
+  "MyVpcF9F0CA6F": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc"
+     }
+    ]
+   }
+  },
+  "MyVpcPublicSubnet1SubnetF6608456": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcPublicSubnet1RouteTableC46AB2F4": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcPublicSubnet1RouteTableAssociation2ECEE1CB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${MyVpcPublicSubnet1RouteTableC46AB2F4}",
+    "SubnetId": "${MyVpcPublicSubnet1SubnetF6608456}"
+   }
+  },
+  "MyVpcPublicSubnet1DefaultRoute95FDF9EB": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${MyVpcPrivateSubnet1DefaultRouteA8CDE2FA[1]}",
+    "GatewayId": "${MyVpcIGW5C4A4F63}",
+    "RouteTableId": "${MyVpcPublicSubnet1RouteTableC46AB2F4}"
+   },
+   "DependsOn": [
+    "MyVpcVPCGW488ACE0D"
+   ]
+  },
+  "MyVpcPublicSubnet1EIP096967CB": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "MyVpcPublicSubnet1NATGatewayAD3400C1": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "MyVpcPublicSubnet1EIP096967CB",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${MyVpcPublicSubnet1SubnetF6608456}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "MyVpcPublicSubnet1DefaultRoute95FDF9EB",
+    "MyVpcPublicSubnet1RouteTableAssociation2ECEE1CB"
+   ]
+  },
+  "MyVpcPublicSubnet2Subnet492B6BFB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcPublicSubnet2RouteTable1DF17386": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcPublicSubnet2RouteTableAssociation227DE78D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${MyVpcPublicSubnet2RouteTable1DF17386}",
+    "SubnetId": "${MyVpcPublicSubnet2Subnet492B6BFB}"
+   }
+  },
+  "MyVpcPublicSubnet2DefaultRoute052936F6": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${MyVpcPrivateSubnet1DefaultRouteA8CDE2FA[1]}",
+    "GatewayId": "${MyVpcIGW5C4A4F63}",
+    "RouteTableId": "${MyVpcPublicSubnet2RouteTable1DF17386}"
+   },
+   "DependsOn": [
+    "MyVpcVPCGW488ACE0D"
+   ]
+  },
+  "MyVpcPublicSubnet2EIP8CCBA239": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "MyVpcPublicSubnet2NATGateway91BFBEC9": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "MyVpcPublicSubnet2EIP8CCBA239",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${MyVpcPublicSubnet2Subnet492B6BFB}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "MyVpcPublicSubnet2DefaultRoute052936F6",
+    "MyVpcPublicSubnet2RouteTableAssociation227DE78D"
+   ]
+  },
+  "MyVpcPrivateSubnet1Subnet5057CF7E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcPrivateSubnet1RouteTable8819E6E2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcPrivateSubnet1RouteTableAssociation56D38C7E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${MyVpcPrivateSubnet1RouteTable8819E6E2}",
+    "SubnetId": "${MyVpcPrivateSubnet1Subnet5057CF7E}"
+   }
+  },
+  "MyVpcPrivateSubnet1DefaultRouteA8CDE2FA": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${MyVpcPrivateSubnet1DefaultRouteA8CDE2FA[1]}",
+    "NatGatewayId": "${MyVpcPublicSubnet1NATGatewayAD3400C1}",
+    "RouteTableId": "${MyVpcPrivateSubnet1RouteTable8819E6E2}"
+   }
+  },
+  "MyVpcPrivateSubnet2Subnet0040C983": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcPrivateSubnet2RouteTableCEDCEECE": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcPrivateSubnet2RouteTableAssociation86A610DA": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${MyVpcPrivateSubnet2RouteTableCEDCEECE}",
+    "SubnetId": "${MyVpcPrivateSubnet2Subnet0040C983}"
+   }
+  },
+  "MyVpcPrivateSubnet2DefaultRoute9CE96294": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${MyVpcPrivateSubnet1DefaultRouteA8CDE2FA[1]}",
+    "NatGatewayId": "${MyVpcPublicSubnet2NATGateway91BFBEC9}",
+    "RouteTableId": "${MyVpcPrivateSubnet2RouteTableCEDCEECE}"
+   }
+  },
+  "MyVpcIGW5C4A4F63": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "canary-vpc/MyVpc"
+     }
+    ]
+   }
+  },
+  "MyVpcVPCGW488ACE0D": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": "${MyVpcIGW5C4A4F63}",
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcCanaryArtifactsBucketDC69853C": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "MyVpcCanaryArtifactsBucketPolicy27806F2C": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": "${MyVpcCanaryArtifactsBucketDC69853C}",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        "${MyVpcCanaryArtifactsBucketDC69853C.Arn}",
+        "${MyVpcCanaryArtifactsBucketDC69853C.Arn}/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "MyVpcCanaryServiceRole2B1BBDE8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+    ],
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": "s3:ListAllMyBuckets",
+         "Effect": "Allow",
+         "Resource": "*"
+        },
+        {
+         "Action": "s3:GetBucketLocation",
+         "Effect": "Allow",
+         "Resource": "${MyVpcCanaryArtifactsBucketDC69853C.Arn}"
+        },
+        {
+         "Action": "s3:PutObject",
+         "Effect": "Allow",
+         "Resource": "${MyVpcCanaryArtifactsBucketDC69853C.Arn}/*"
+        },
+        {
+         "Action": "cloudwatch:PutMetricData",
+         "Condition": {
+          "StringEquals": {
+           "cloudwatch:namespace": "CloudWatchSynthetics"
+          }
+         },
+         "Effect": "Allow",
+         "Resource": "*"
+        },
+        {
+         "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+         ],
+         "Effect": "Allow",
+         "Resource": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/cwsyn-*"
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "canaryPolicy"
+     }
+    ]
+   }
+  },
+  "MyVpcCanarySecurityGroupEA9564AA": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatic security group for Canary canaryvpcMyVpcCanaryDEF63B1A",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${MyVpcPrivateSubnet1DefaultRouteA8CDE2FA[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "${MyVpcF9F0CA6F}"
+   }
+  },
+  "MyVpcCanary8C70C179": {
+   "Type": "AWS::Synthetics::Canary",
+   "Properties": {
+    "ArtifactS3Location": "s3://${MyVpcCanaryArtifactsBucketDC69853C}",
+    "Code": {
+     "Handler": "canary.handler",
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "b1b777dcb79a2fa2790059927207d10bf5f4747d6dd1516e2780726d9d6fa820.zip"
+    },
+    "ExecutionRoleArn": "${MyVpcCanaryServiceRole2B1BBDE8.Arn}",
+    "Name": "canary-vpc",
+    "RuntimeVersion": "syn-nodejs-puppeteer-9.1",
+    "Schedule": {
+     "DurationInSeconds": "${MyVpcPrivateSubnet1DefaultRouteA8CDE2FA.Name}",
+     "Expression": "rate(5 minutes)"
+    },
+    "StartCanaryAfterCreation": true,
+    "VPCConfig": {
+     "SecurityGroupIds": [
+      "${MyVpcCanarySecurityGroupEA9564AA.GroupId}"
+     ],
+     "SubnetIds": [
+      "${MyVpcPrivateSubnet1Subnet5057CF7E}",
+      "${MyVpcPrivateSubnet2Subnet0040C983}"
+     ],
+     "VpcId": "${MyVpcF9F0CA6F}"
+    }
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.MyVpcPublicSubnet1SubnetF6608456.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.MyVpcPublicSubnet1NATGatewayAD3400C1.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${MyVpcPublicSubnet1EIP096967CB}' does not exist (Service: Ec2, Status Code: 400, Request ID: be259ba8-a2fb-4b9c-a0ad-33285bf44469) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 9f1ece0a-12be-4811-92e7-c68ea3bf8714)'"
+  },
+  {
+   "path": "Resources.MyVpcPublicSubnet2Subnet492B6BFB.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.MyVpcPublicSubnet2NATGateway91BFBEC9.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${MyVpcPublicSubnet2EIP8CCBA239}' does not exist (Service: Ec2, Status Code: 400, Request ID: 5644f069-5273-4ef3-a718-1ca22c6dd1db) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 531cb865-db9e-4869-b574-3d87726b569e)'"
+  },
+  {
+   "path": "Resources.MyVpcPrivateSubnet1Subnet5057CF7E.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.MyVpcPrivateSubnet2Subnet0040C983.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  }
+ ]
+}
