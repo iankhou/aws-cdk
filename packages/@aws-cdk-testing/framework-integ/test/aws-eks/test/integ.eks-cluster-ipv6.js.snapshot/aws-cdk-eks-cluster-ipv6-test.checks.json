@@ -1,0 +1,1906 @@
+{
+ "stackName": "aws-cdk-eks-cluster-ipv6-test",
+ "summary": {
+  "pass": 81,
+  "missing": 30,
+  "no handler": 67,
+  "unresolved": 3
+ },
+ "results": [
+  {
+   "logicalId": "AdminRole38563C57",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AdminRole38563C57",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Aroot%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "SecretsKey317DCF94",
+   "type": "AWS::KMS::Key",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "NotFoundException: Key 'arn:${AWS::Partition}:kms:us-east-2:${AWS::AccountId}:key/${SecretsKey317DCF94}' does not exist"
+  },
+  {
+   "logicalId": "Vpc8378EB38",
+   "type": "AWS::EC2::VPC",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidVpcID.NotFound: The vpc ID '${Vpc8378EB38}' does not exist"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1Subnet5C2D37C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidSubnetID.NotFound: The subnet ID '${VpcPublicSubnet1Subnet5C2D37C4}' does not exist"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1RouteTable6C95E38E",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPublicSubnet1RouteTable6C95E38E}' does not exist"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1RouteTableAssociation97140677",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPublicSubnet1RouteTable6C95E38E}' does not exist"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1DefaultRoute3DA9E72A",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPublicSubnet1RouteTable6C95E38E}' does not exist"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1EIPD7E02669",
+   "type": "AWS::EC2::EIP",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidAddress.NotFound: Address '${VpcPublicSubnet1EIPD7E02669}' not found."
+  },
+  {
+   "logicalId": "VpcPublicSubnet1NATGateway4D7517AA",
+   "type": "AWS::EC2::NatGateway",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "NatGatewayNotFound: The Nat Gateway ${VpcPublicSubnet1NATGateway4D7517AA} was not found"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2Subnet691E08A3",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidSubnetID.NotFound: The subnet ID '${VpcPublicSubnet2Subnet691E08A3}' does not exist"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2RouteTable94F7E489",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPublicSubnet2RouteTable94F7E489}' does not exist"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2RouteTableAssociationDD5762D8",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPublicSubnet2RouteTable94F7E489}' does not exist"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2DefaultRoute97F91067",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPublicSubnet2RouteTable94F7E489}' does not exist"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1Subnet536B997A",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidSubnetID.NotFound: The subnet ID '${VpcPrivateSubnet1Subnet536B997A}' does not exist"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1RouteTableB2C5B500",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPrivateSubnet1RouteTableB2C5B500}' does not exist"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPrivateSubnet1RouteTableB2C5B500}' does not exist"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPrivateSubnet1RouteTableB2C5B500}' does not exist"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2Subnet3788AAA1",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidSubnetID.NotFound: The subnet ID '${VpcPrivateSubnet2Subnet3788AAA1}' does not exist"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2RouteTableA678073B",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPrivateSubnet2RouteTableA678073B}' does not exist"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPrivateSubnet2RouteTableA678073B}' does not exist"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2DefaultRoute060D2087",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidRouteTableID.NotFound: The routeTable ID '${VpcPrivateSubnet2RouteTableA678073B}' does not exist"
+  },
+  {
+   "logicalId": "VpcIGWD7BA715C",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidInternetGatewayID.NotFound: The internetGateway ID '${VpcIGWD7BA715C}' does not exist"
+  },
+  {
+   "logicalId": "VpcVPCGWBF912B6E",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidInternetGatewayID.NotFound: The internetGateway ID '${VpcIGWD7BA715C}' does not exist"
+  },
+  {
+   "logicalId": "CIDR6",
+   "type": "AWS::EC2::VPCCidrBlock",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "KubectlLayer600207B5",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: The resource you requested does not exist."
+  },
+  {
+   "logicalId": "ClusterKubectlHandlerRole94549F93",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterKubectlHandlerRole94549F93",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterKubectlHandlerRole94549F93",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "ClusterKubectlHandlerRoleDefaultPolicyE44083DD",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterKubectlHandlerRoleDefaultPolicyE44083DD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ClusterKubectlHandlerRoleDefaultPolicyE44083DD",
+   "actual": "ClusterKubectlHandlerRoleDefaultPolicyE44083DD"
+  },
+  {
+   "logicalId": "ClusterKubectlHandlerRoleDefaultPolicyE44083DD",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ClusterKubectlHandlerRoleDefaultPolicyE44083DD",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterKubectlHandlerRole94549F93}",
+   "actual": "${ClusterKubectlHandlerRole94549F93}"
+  },
+  {
+   "logicalId": "ClusterRoleFA261979",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterRoleFA261979",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "eks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22eks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterRoleFA261979",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ]
+  },
+  {
+   "logicalId": "ClusterControlPlaneSecurityGroupD274242C",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidGroup.NotFound: The security group '${ClusterControlPlaneSecurityGroupD274242C}' does not exist"
+  },
+  {
+   "logicalId": "ClusterControlPlaneSecurityGroupfromawscdkeksclusteripv6testClusterNodesInstanceSecurityGroup329A56DE4433ECAB7C9",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterControlPlaneSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D4432AF77268",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterControlPlaneSecurityGroupfromawscdkeksclusteripv6testClusterNodesArmInstanceSecurityGroupFEB06BBB443A1B1AA7A",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterControlPlaneSecurityGroupfromawscdkeksclusteripv6testClusterBottlerocketNodesInstanceSecurityGroupB77642294439ECE17EF",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterControlPlaneSecurityGroupfromawscdkeksclusteripv6testClusterspotInstanceSecurityGroupF363CA034431582AEBA",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterCreationRole360249B6",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterCreationRole360249B6",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": [
+        "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ClusterKubectlHandlerRole94549F93}",
+        "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-cdk-eks-cluster-ipv6--IsCompleteHandlerServiceR-68wDXo2iJpNv",
+        "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-cdk-eks-cluster-ipv6--OnEventHandlerServiceRole-r1R41Cmq0EvL"
+       ]
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22AWS%22%3A%5B%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Arole%2F${ClusterKubectlHandlerRole94549F93}%22%2C%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Arole%2Faws-cdk-eks-cluster-ipv6--IsCompleteHandlerServiceR-68wDXo2iJpNv%22%2C%22arn%3Aaws%3Aiam%3A%3A${AWS::AccountId}%3Arole%2Faws-cdk-eks-cluster-ipv6--OnEventHandlerServiceRole-r1R41Cmq0EvL%22%5D%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterCreationRoleDefaultPolicyE8BDFC7B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterCreationRoleDefaultPolicyE8BDFC7B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ClusterCreationRoleDefaultPolicyE8BDFC7B",
+   "actual": "ClusterCreationRoleDefaultPolicyE8BDFC7B"
+  },
+  {
+   "logicalId": "ClusterCreationRoleDefaultPolicyE8BDFC7B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ClusterRoleFA261979}",
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ClusterfargateprofiledefaultPodExecutionRole09952CFF}"
+      ]
+     },
+     {
+      "Action": [
+       "eks:CreateCluster",
+       "eks:CreateFargateProfile",
+       "eks:DeleteCluster",
+       "eks:DescribeCluster",
+       "eks:DescribeUpdate",
+       "eks:TagResource",
+       "eks:UntagResource",
+       "eks:UpdateClusterConfig",
+       "eks:UpdateClusterVersion"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "eks:DeleteFargateProfile",
+       "eks:DescribeFargateProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "ec2:DescribeDhcpOptions",
+       "ec2:DescribeInstances",
+       "ec2:DescribeNetworkInterfaces",
+       "ec2:DescribeRouteTables",
+       "ec2:DescribeSecurityGroups",
+       "ec2:DescribeSubnets",
+       "ec2:DescribeVpcs",
+       "iam:CreateServiceLinkedRole",
+       "iam:GetRole",
+       "iam:listAttachedRolePolicies"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:CreateGrant",
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SecretsKey317DCF94}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ClusterRoleFA261979}",
+       "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ClusterfargateprofiledefaultPodExecutionRole09952CFF}"
+      ]
+     },
+     {
+      "Action": [
+       "eks:CreateCluster",
+       "eks:CreateFargateProfile",
+       "eks:DeleteCluster",
+       "eks:DescribeCluster",
+       "eks:DescribeUpdate",
+       "eks:TagResource",
+       "eks:UntagResource",
+       "eks:UpdateClusterConfig",
+       "eks:UpdateClusterVersion"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "eks:DeleteFargateProfile",
+       "eks:DescribeFargateProfile"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "ec2:DescribeDhcpOptions",
+       "ec2:DescribeInstances",
+       "ec2:DescribeNetworkInterfaces",
+       "ec2:DescribeRouteTables",
+       "ec2:DescribeSecurityGroups",
+       "ec2:DescribeSubnets",
+       "ec2:DescribeVpcs",
+       "iam:CreateServiceLinkedRole",
+       "iam:GetRole",
+       "iam:listAttachedRolePolicies"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+     },
+     {
+      "Action": [
+       "kms:CreateGrant",
+       "kms:Decrypt",
+       "kms:DescribeKey",
+       "kms:Encrypt"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:kms:${AWS::Region}:${AWS::AccountId}:key/${SecretsKey317DCF94}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ClusterCreationRoleDefaultPolicyE8BDFC7B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterCreationRole360249B6}",
+   "actual": "${ClusterCreationRole360249B6}"
+  },
+  {
+   "logicalId": "ClusterKubectlReadyBarrier200052AF",
+   "type": "AWS::SSM::Parameter",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromIndirectPeerALLTRAFFICB574992D",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfrom100008ALLTRAFFIC1289F1DD",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterNodesInstanceSecurityGroup329A56DE443590558E1",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterNodesInstanceSecurityGroup329A56DEALLTRAFFIC641CD112",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D443F7BC2681",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE44383B7C39C",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D1025655359FF1A5D4",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE1025655351AB443C3",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6DALLTRAFFIC175DE2E1",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterNodesArmInstanceSecurityGroupFEB06BBB4439A9F1426",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterNodesArmInstanceSecurityGroupFEB06BBBALLTRAFFICDD19773F",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterBottlerocketNodesInstanceSecurityGroupB7764229443914C5D7E",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterBottlerocketNodesInstanceSecurityGroupB7764229ALLTRAFFIC3B055075",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterspotInstanceSecurityGroupF363CA034437EEB6700",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterClusterSecurityGroupfromawscdkeksclusteripv6testClusterspotInstanceSecurityGroupF363CA03ALLTRAFFIC39C98724",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodegroupDefaultCapacityNodeGroupRole55953B04",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupDefaultCapacityNodeGroupRole55953B04",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterNodegroupDefaultCapacityNodeGroupRole55953B04",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterNodegroupDefaultCapacityNodeGroupRoleDefaultPolicyA9DAB860",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupDefaultCapacityNodeGroupRoleDefaultPolicyA9DAB860",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ClusterNodegroupDefaultCapacityNodeGroupRoleDefaultPolicyA9DAB860",
+   "actual": "ClusterNodegroupDefaultCapacityNodeGroupRoleDefaultPolicyA9DAB860"
+  },
+  {
+   "logicalId": "ClusterNodegroupDefaultCapacityNodeGroupRoleDefaultPolicyA9DAB860",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ClusterNodegroupDefaultCapacityNodeGroupRoleDefaultPolicyA9DAB860",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterNodegroupDefaultCapacityNodeGroupRole55953B04}",
+   "actual": "${ClusterNodegroupDefaultCapacityNodeGroupRole55953B04}"
+  },
+  {
+   "logicalId": "ClusterNodegroupDefaultCapacityDA0920A3",
+   "type": "AWS::EKS::Nodegroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterfargateprofiledefaultPodExecutionRole09952CFF",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterfargateprofiledefaultPodExecutionRole09952CFF",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "eks-fargate-pods.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22eks-fargate-pods.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterfargateprofiledefaultPodExecutionRole09952CFF",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
+   ]
+  },
+  {
+   "logicalId": "ClusterNodesInstanceSecurityGroup899246BD",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidGroup.NotFound: The security group '${ClusterNodesInstanceSecurityGroup899246BD}' does not exist"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterNodesInstanceSecurityGroup329A56DEALLTRAFFIC7A69EC66",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D4435B21533A",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE4432931D2E6",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D102565535A7F35F64",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE102565535CF4750C4",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6DALLTRAFFIC67D1F519",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceRoleC3C01328",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceRoleC3C01328",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterNodesInstanceRoleC3C01328",
+   "type": "AWS::IAM::Role",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/cluster/${Cluster9EE0221C}",
+     "Value": "owned"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-cluster-ipv6-test/Cluster/Nodes"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "kubernetes.io/cluster/${Cluster9EE0221C}",
+     "Value": "owned"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-cluster-ipv6-test/Cluster/Nodes"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterNodesInstanceRoleC3C01328",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterNodesInstanceProfileF2DD0E21",
+   "type": "AWS::IAM::InstanceProfile",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesLaunchTemplateD1028D0D",
+   "type": "AWS::EC2::LaunchTemplate",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesASGF172BD19",
+   "type": "AWS::AutoScaling::AutoScalingGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceSecurityGroup599F388B",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidGroup.NotFound: The security group '${ClusterNodesArmInstanceSecurityGroup599F388B}' does not exist"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceSecurityGroupfromawscdkeksclusteripv6testClusterNodesArmInstanceSecurityGroupFEB06BBBALLTRAFFIC7E1EC03D",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D4436712E874",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE44335ECB898",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D102565535C8B8BE39",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE102565535A80FF723",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6DALLTRAFFICA21F70E4",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceRoleB93D3298",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceRoleB93D3298",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceRoleB93D3298",
+   "type": "AWS::IAM::Role",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/cluster/${Cluster9EE0221C}",
+     "Value": "owned"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-cluster-ipv6-test/Cluster/NodesArm"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "kubernetes.io/cluster/${Cluster9EE0221C}",
+     "Value": "owned"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-cluster-ipv6-test/Cluster/NodesArm"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceRoleB93D3298",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterNodesArmInstanceProfile158C5C9F",
+   "type": "AWS::IAM::InstanceProfile",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmLaunchTemplateB6CFBA44",
+   "type": "AWS::EC2::LaunchTemplate",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodesArmASG40A593D0",
+   "type": "AWS::AutoScaling::AutoScalingGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceSecurityGroup3794A94B",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidGroup.NotFound: The security group '${ClusterBottlerocketNodesInstanceSecurityGroup3794A94B}' does not exist"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterBottlerocketNodesInstanceSecurityGroupB7764229ALLTRAFFIC681C13E7",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D44354C22497",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE443707A5FDB",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D102565535BB921D93",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE102565535587DF246",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6DALLTRAFFIC2A7F9925",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceRole68E4BCFB",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceRole68E4BCFB",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceRole68E4BCFB",
+   "type": "AWS::IAM::Role",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/cluster/${Cluster9EE0221C}",
+     "Value": "owned"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-cluster-ipv6-test/Cluster/BottlerocketNodes"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "kubernetes.io/cluster/${Cluster9EE0221C}",
+     "Value": "owned"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-cluster-ipv6-test/Cluster/BottlerocketNodes"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceRole68E4BCFB",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesInstanceProfileB6E2F25A",
+   "type": "AWS::IAM::InstanceProfile",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesLaunchTemplate54246C29",
+   "type": "AWS::EC2::LaunchTemplate",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterBottlerocketNodesASGA27A9B70",
+   "type": "AWS::AutoScaling::AutoScalingGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotInstanceSecurityGroup01F7B1CE",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "InvalidGroup.NotFound: The security group '${ClusterspotInstanceSecurityGroup01F7B1CE}' does not exist"
+  },
+  {
+   "logicalId": "ClusterspotInstanceSecurityGroupfromawscdkeksclusteripv6testClusterspotInstanceSecurityGroupF363CA03ALLTRAFFIC1FD26D74",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D4430026205F",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotInstanceSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE44373B6F417",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6D102565535E77539BD",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotInstanceSecurityGroupfromawscdkeksclusteripv6testClusterControlPlaneSecurityGroup919BFEFE1025655357246D15F",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotInstanceSecurityGroupfromawscdkeksclusteripv6testClusterClusterSecurityGroupE4D19A6DALLTRAFFIC5330BC8B",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotInstanceRole39043830",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterspotInstanceRole39043830",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterspotInstanceRole39043830",
+   "type": "AWS::IAM::Role",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/cluster/${Cluster9EE0221C}",
+     "Value": "owned"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-cluster-ipv6-test/Cluster/spot"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "kubernetes.io/cluster/${Cluster9EE0221C}",
+     "Value": "owned"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-cluster-ipv6-test/Cluster/spot"
+    }
+   ]
+  },
+  {
+   "logicalId": "ClusterspotInstanceRole39043830",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterspotInstanceProfileAB88D077",
+   "type": "AWS::IAM::InstanceProfile",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotLaunchTemplate5652F38D",
+   "type": "AWS::EC2::LaunchTemplate",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterspotASG857494B6",
+   "type": "AWS::AutoScaling::AutoScalingGroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangNodeGroupRole23AE23D0",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangNodeGroupRole23AE23D0",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangNodeGroupRole23AE23D0",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangNodeGroupRoleDefaultPolicyC787D047",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangNodeGroupRoleDefaultPolicyC787D047",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ClusterNodegroupextrangNodeGroupRoleDefaultPolicyC787D047",
+   "actual": "ClusterNodegroupextrangNodeGroupRoleDefaultPolicyC787D047"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangNodeGroupRoleDefaultPolicyC787D047",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangNodeGroupRoleDefaultPolicyC787D047",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterNodegroupextrangNodeGroupRole23AE23D0}",
+   "actual": "${ClusterNodegroupextrangNodeGroupRole23AE23D0}"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangF9406A09",
+   "type": "AWS::EKS::Nodegroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangspotNodeGroupRoleB53B4857",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangspotNodeGroupRoleB53B4857",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangspotNodeGroupRoleB53B4857",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangspotNodeGroupRoleDefaultPolicyF0EB5936",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangspotNodeGroupRoleDefaultPolicyF0EB5936",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ClusterNodegroupextrangspotNodeGroupRoleDefaultPolicyF0EB5936",
+   "actual": "ClusterNodegroupextrangspotNodeGroupRoleDefaultPolicyF0EB5936"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangspotNodeGroupRoleDefaultPolicyF0EB5936",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangspotNodeGroupRoleDefaultPolicyF0EB5936",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterNodegroupextrangspotNodeGroupRoleB53B4857}",
+   "actual": "${ClusterNodegroupextrangspotNodeGroupRoleB53B4857}"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangspotB327AE6B",
+   "type": "AWS::EKS::Nodegroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarmNodeGroupRoleADF5749F",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarmNodeGroupRoleADF5749F",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarmNodeGroupRoleADF5749F",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarmNodeGroupRoleDefaultPolicyB52D103B",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarmNodeGroupRoleDefaultPolicyB52D103B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ClusterNodegroupextrangarmNodeGroupRoleDefaultPolicyB52D103B",
+   "actual": "ClusterNodegroupextrangarmNodeGroupRoleDefaultPolicyB52D103B"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarmNodeGroupRoleDefaultPolicyB52D103B",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarmNodeGroupRoleDefaultPolicyB52D103B",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterNodegroupextrangarmNodeGroupRoleADF5749F}",
+   "actual": "${ClusterNodegroupextrangarmNodeGroupRoleADF5749F}"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm7773987A",
+   "type": "AWS::EKS::Nodegroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm3NodeGroupRole3A6AB3EC",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm3NodeGroupRole3A6AB3EC",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "ec2.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22ec2.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm3NodeGroupRole3A6AB3EC",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+   ]
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm3NodeGroupRoleDefaultPolicyC04F2FFE",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm3NodeGroupRoleDefaultPolicyC04F2FFE",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "ClusterNodegroupextrangarm3NodeGroupRoleDefaultPolicyC04F2FFE",
+   "actual": "ClusterNodegroupextrangarm3NodeGroupRoleDefaultPolicyC04F2FFE"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm3NodeGroupRoleDefaultPolicyC04F2FFE",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": [
+       "ec2:AssignIpv6Addresses",
+       "ec2:UnassignIpv6Addresses"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:ec2:*:*:network-interface/*"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm3NodeGroupRoleDefaultPolicyC04F2FFE",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${ClusterNodegroupextrangarm3NodeGroupRole3A6AB3EC}",
+   "actual": "${ClusterNodegroupextrangarm3NodeGroupRole3A6AB3EC}"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrangarm327128311",
+   "type": "AWS::EKS::Nodegroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterNodegroupextrang2F1FB0D40",
+   "type": "AWS::EKS::Nodegroup",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "ClusterMyServiceAccountRole85337B29",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterMyServiceAccountRole85337B29",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "ClusterMyExtendedServiceAccountRole064047AA",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "ClusterMyExtendedServiceAccountRole064047AA",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+   "type": "AWS::CloudFormation::Stack",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+   "type": "AWS::CloudFormation::Stack",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "LaunchTemplate",
+   "type": "AWS::EC2::LaunchTemplate",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+   "type": "AWS::IAM::Role",
+   "property": "Policies",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "Inline"
+   ],
+   "actual": [
+    "Inline"
+   ]
+  },
+  {
+   "logicalId": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+   "type": "AWS::IAM::Role",
+   "property": "Policies.0.PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Effect": "Allow",
+      "Resource": "*",
+      "Action": [
+       "iam:CreateOpenIDConnectProvider",
+       "iam:DeleteOpenIDConnectProvider",
+       "iam:UpdateOpenIDConnectProviderThumbprint",
+       "iam:AddClientIDToOpenIDConnectProvider",
+       "iam:RemoveClientIDFromOpenIDConnectProvider"
+      ]
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22iam%3ACreateOpenIDConnectProvider%22%2C%22iam%3ADeleteOpenIDConnectProvider%22%2C%22iam%3AUpdateOpenIDConnectProviderThumbprint%22%2C%22iam%3AAddClientIDToOpenIDConnectProvider%22%2C%22iam%3ARemoveClientIDFromOpenIDConnectProvider%22%5D%2C%22Resource%22%3A%22%2A%22%2C%22Effect%22%3A%22Allow%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: Function not found: arn:${AWS::Partition}:lambda:us-east-2:${AWS::AccountId}:function:${CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0}"
+  },
+  {
+   "logicalId": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Version": "2012-10-17",
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ]
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "missing",
+   "detail": "ResourceNotFoundException: Function not found: arn:${AWS::Partition}:lambda:us-east-2:${AWS::AccountId}:function:${AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57}"
+  }
+ ]
+}

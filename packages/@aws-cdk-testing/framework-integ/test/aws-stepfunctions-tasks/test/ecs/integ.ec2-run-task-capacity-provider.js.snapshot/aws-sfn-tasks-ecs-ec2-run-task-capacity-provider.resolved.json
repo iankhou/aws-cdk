@@ -1,0 +1,1060 @@
+{
+ "version": "1",
+ "stackName": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider",
+ "resources": {
+  "Ec2ClusterEE43E89D": {
+   "Type": "AWS::ECS::Cluster"
+  },
+  "Ec2ClusterVpc568127F1": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc"
+     }
+    ]
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet1SubnetD46FD92B": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet1RouteTableE30610F5": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet1RouteTableAssociation9C78F646": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${Ec2ClusterVpcPublicSubnet1RouteTableE30610F5}",
+    "SubnetId": "${Ec2ClusterVpcPublicSubnet1SubnetD46FD92B}"
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet1DefaultRouteC7FBE273": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${Ec2ClusterVpcPrivateSubnet1DefaultRouteD31A76F0[1]}",
+    "GatewayId": "${Ec2ClusterVpcIGW605638EB}",
+    "RouteTableId": "${Ec2ClusterVpcPublicSubnet1RouteTableE30610F5}"
+   },
+   "DependsOn": [
+    "Ec2ClusterVpcVPCGW24F3B413"
+   ]
+  },
+  "Ec2ClusterVpcPublicSubnet1EIPD4B5D142": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet1NATGateway79A8A839": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "Ec2ClusterVpcPublicSubnet1EIPD4B5D142",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${Ec2ClusterVpcPublicSubnet1SubnetD46FD92B}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "Ec2ClusterVpcPublicSubnet1DefaultRouteC7FBE273",
+    "Ec2ClusterVpcPublicSubnet1RouteTableAssociation9C78F646"
+   ]
+  },
+  "Ec2ClusterVpcPublicSubnet2Subnet207D9E5E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet2RouteTable44A09188": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet2RouteTableAssociation7615C6B2": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${Ec2ClusterVpcPublicSubnet2RouteTable44A09188}",
+    "SubnetId": "${Ec2ClusterVpcPublicSubnet2Subnet207D9E5E}"
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet2DefaultRouteEBA52256": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${Ec2ClusterVpcPrivateSubnet1DefaultRouteD31A76F0[1]}",
+    "GatewayId": "${Ec2ClusterVpcIGW605638EB}",
+    "RouteTableId": "${Ec2ClusterVpcPublicSubnet2RouteTable44A09188}"
+   },
+   "DependsOn": [
+    "Ec2ClusterVpcVPCGW24F3B413"
+   ]
+  },
+  "Ec2ClusterVpcPublicSubnet2EIP921925E6": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "Ec2ClusterVpcPublicSubnet2NATGateway302F96C0": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "Ec2ClusterVpcPublicSubnet2EIP921925E6",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": "${Ec2ClusterVpcPublicSubnet2Subnet207D9E5E}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "Ec2ClusterVpcPublicSubnet2DefaultRouteEBA52256",
+    "Ec2ClusterVpcPublicSubnet2RouteTableAssociation7615C6B2"
+   ]
+  },
+  "Ec2ClusterVpcPrivateSubnet1Subnet0AE9B91E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcPrivateSubnet1RouteTable50D391D1": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcPrivateSubnet1RouteTableAssociation1043DBDA": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${Ec2ClusterVpcPrivateSubnet1RouteTable50D391D1}",
+    "SubnetId": "${Ec2ClusterVpcPrivateSubnet1Subnet0AE9B91E}"
+   }
+  },
+  "Ec2ClusterVpcPrivateSubnet1DefaultRouteD31A76F0": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${Ec2ClusterVpcPrivateSubnet1DefaultRouteD31A76F0[1]}",
+    "NatGatewayId": "${Ec2ClusterVpcPublicSubnet1NATGateway79A8A839}",
+    "RouteTableId": "${Ec2ClusterVpcPrivateSubnet1RouteTable50D391D1}"
+   }
+  },
+  "Ec2ClusterVpcPrivateSubnet2Subnet16B68C19": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcPrivateSubnet2RouteTable22B9DAE6": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcPrivateSubnet2RouteTableAssociation3AFD70F4": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": "${Ec2ClusterVpcPrivateSubnet2RouteTable22B9DAE6}",
+    "SubnetId": "${Ec2ClusterVpcPrivateSubnet2Subnet16B68C19}"
+   }
+  },
+  "Ec2ClusterVpcPrivateSubnet2DefaultRoute22B3073E": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "${Ec2ClusterVpcPrivateSubnet1DefaultRouteD31A76F0[1]}",
+    "NatGatewayId": "${Ec2ClusterVpcPublicSubnet2NATGateway302F96C0}",
+    "RouteTableId": "${Ec2ClusterVpcPrivateSubnet2RouteTable22B9DAE6}"
+   }
+  },
+  "Ec2ClusterVpcIGW605638EB": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/Ec2Cluster/Vpc"
+     }
+    ]
+   }
+  },
+  "Ec2ClusterVpcVPCGW24F3B413": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": "${Ec2ClusterVpcIGW605638EB}",
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "Ec2ClusterVpcRestrictDefaultSecurityGroupCustomResource326BF034": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": "${CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E.Arn}",
+    "DefaultSecurityGroupId": "${Ec2ClusterVpc568127F1.DefaultSecurityGroup}",
+    "Account": "${AWS::AccountId}"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "Ec2Cluster56240A3A": {
+   "Type": "AWS::ECS::ClusterCapacityProviderAssociations",
+   "Properties": {
+    "CapacityProviders": [
+     "${CP1A08C5A07}",
+     "${CP238A17852}"
+    ],
+    "Cluster": "${Ec2ClusterEE43E89D}",
+    "DefaultCapacityProviderStrategy": [
+     {
+      "Base": 1,
+      "CapacityProvider": "${CP1A08C5A07}",
+      "Weight": 1
+     },
+     {
+      "CapacityProvider": "${CP238A17852}",
+      "Weight": 2
+     }
+    ]
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/${Ec2ClusterVpc568127F1.DefaultSecurityGroup}"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+     "S3Key": "bea78ce725e22a5e0d82378f6b49028c09ba86499286d6945a0506e820854e92.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": "${CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0.Arn}",
+    "Runtime": "nodejs24.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ]
+  },
+  "AutoScalingGroup1InstanceSecurityGroupB9151D5D": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup1/InstanceSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${Ec2ClusterVpcPrivateSubnet1DefaultRouteD31A76F0[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup1"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "AutoScalingGroup1InstanceRole28B77469": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup1"
+     }
+    ]
+   }
+  },
+  "AutoScalingGroup1InstanceRoleDefaultPolicy581963DA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecs:DeregisterContainerInstance",
+        "ecs:RegisterContainerInstance",
+        "ecs:Submit*"
+       ],
+       "Effect": "Allow",
+       "Resource": "${Ec2ClusterEE43E89D.Arn}"
+      },
+      {
+       "Action": [
+        "ecs:Poll",
+        "ecs:StartTelemetrySession"
+       ],
+       "Condition": {
+        "ArnEquals": {
+         "ecs:cluster": "${Ec2ClusterEE43E89D.Arn}"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecs:DiscoverPollEndpoint",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AutoScalingGroup1InstanceRoleDefaultPolicy581963DA",
+    "Roles": [
+     "${AutoScalingGroup1InstanceRole28B77469}"
+    ]
+   }
+  },
+  "AutoScalingGroup1InstanceProfile17D3F43B": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     "${AutoScalingGroup1InstanceRole28B77469}"
+    ]
+   }
+  },
+  "AutoScalingGroup1LaunchTemplate8991583F": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "IamInstanceProfile": {
+      "Arn": "${AutoScalingGroup1InstanceProfile17D3F43B.Arn}"
+     },
+     "ImageId": "ami-0effa040679d3b8cd",
+     "InstanceType": "t2.micro",
+     "Monitoring": {
+      "Enabled": false
+     },
+     "SecurityGroupIds": [
+      "${AutoScalingGroup1InstanceSecurityGroupB9151D5D.GroupId}"
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup1/LaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup1/LaunchTemplate"
+        }
+       ]
+      }
+     ],
+     "UserData": {
+      "Fn::Base64": "#!/bin/bash\necho ECS_CLUSTER=${Ec2ClusterEE43E89D} >> /etc/ecs/ecs.config"
+     }
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup1/LaunchTemplate"
+       }
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "AutoScalingGroup1InstanceRoleDefaultPolicy581963DA",
+    "AutoScalingGroup1InstanceRole28B77469"
+   ]
+  },
+  "AutoScalingGroup1ASG8D1BAC68": {
+   "Type": "AWS::AutoScaling::AutoScalingGroup",
+   "Properties": {
+    "LaunchTemplate": {
+     "LaunchTemplateId": "${AutoScalingGroup1LaunchTemplate8991583F}",
+     "Version": "${AutoScalingGroup1LaunchTemplate8991583F.LatestVersionNumber}"
+    },
+    "MaxSize": "2",
+    "MinSize": "${TaskDef54694570.Name}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "PropagateAtLaunch": true,
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup1"
+     }
+    ],
+    "VPCZoneIdentifier": [
+     "${Ec2ClusterVpcPublicSubnet1SubnetD46FD92B}",
+     "${Ec2ClusterVpcPublicSubnet2Subnet207D9E5E}"
+    ]
+   },
+   "UpdatePolicy": {
+    "AutoScalingScheduledAction": {
+     "IgnoreUnmodifiedGroupSizeProperties": true
+    }
+   }
+  },
+  "AutoScalingGroup2InstanceSecurityGroupFE4C1078": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup2/InstanceSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "${Ec2ClusterVpcPrivateSubnet1DefaultRouteD31A76F0[1]}",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup2"
+     }
+    ],
+    "VpcId": "${Ec2ClusterVpc568127F1}"
+   }
+  },
+  "AutoScalingGroup2InstanceRole28D8FE35": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup2"
+     }
+    ]
+   }
+  },
+  "AutoScalingGroup2InstanceRoleDefaultPolicy4060D489": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecs:DeregisterContainerInstance",
+        "ecs:RegisterContainerInstance",
+        "ecs:Submit*"
+       ],
+       "Effect": "Allow",
+       "Resource": "${Ec2ClusterEE43E89D.Arn}"
+      },
+      {
+       "Action": [
+        "ecs:Poll",
+        "ecs:StartTelemetrySession"
+       ],
+       "Condition": {
+        "ArnEquals": {
+         "ecs:cluster": "${Ec2ClusterEE43E89D.Arn}"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecs:DiscoverPollEndpoint",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AutoScalingGroup2InstanceRoleDefaultPolicy4060D489",
+    "Roles": [
+     "${AutoScalingGroup2InstanceRole28D8FE35}"
+    ]
+   }
+  },
+  "AutoScalingGroup2InstanceProfile52BA4165": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     "${AutoScalingGroup2InstanceRole28D8FE35}"
+    ]
+   }
+  },
+  "AutoScalingGroup2LaunchTemplate8F04F80A": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "IamInstanceProfile": {
+      "Arn": "${AutoScalingGroup2InstanceProfile52BA4165.Arn}"
+     },
+     "ImageId": "ami-0effa040679d3b8cd",
+     "InstanceType": "t2.micro",
+     "Monitoring": {
+      "Enabled": false
+     },
+     "SecurityGroupIds": [
+      "${AutoScalingGroup2InstanceSecurityGroupFE4C1078.GroupId}"
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup2/LaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup2/LaunchTemplate"
+        }
+       ]
+      }
+     ],
+     "UserData": {
+      "Fn::Base64": "#!/bin/bash\necho ECS_CLUSTER=${Ec2ClusterEE43E89D} >> /etc/ecs/ecs.config"
+     }
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup2/LaunchTemplate"
+       }
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "AutoScalingGroup2InstanceRoleDefaultPolicy4060D489",
+    "AutoScalingGroup2InstanceRole28D8FE35"
+   ]
+  },
+  "AutoScalingGroup2ASGF28D2D46": {
+   "Type": "AWS::AutoScaling::AutoScalingGroup",
+   "Properties": {
+    "LaunchTemplate": {
+     "LaunchTemplateId": "${AutoScalingGroup2LaunchTemplate8F04F80A}",
+     "Version": "${AutoScalingGroup2LaunchTemplate8F04F80A.LatestVersionNumber}"
+    },
+    "MaxSize": "2",
+    "MinSize": "${TaskDef54694570.Name}",
+    "Tags": [
+     {
+      "Key": "Name",
+      "PropagateAtLaunch": true,
+      "Value": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider/AutoScalingGroup2"
+     }
+    ],
+    "VPCZoneIdentifier": [
+     "${Ec2ClusterVpcPublicSubnet1SubnetD46FD92B}",
+     "${Ec2ClusterVpcPublicSubnet2Subnet207D9E5E}"
+    ]
+   },
+   "UpdatePolicy": {
+    "AutoScalingScheduledAction": {
+     "IgnoreUnmodifiedGroupSizeProperties": true
+    }
+   }
+  },
+  "CP1A08C5A07": {
+   "Type": "AWS::ECS::CapacityProvider",
+   "Properties": {
+    "AutoScalingGroupProvider": {
+     "AutoScalingGroupArn": "${AutoScalingGroup1ASG8D1BAC68}",
+     "ManagedDraining": "ENABLED",
+     "ManagedScaling": {
+      "Status": "ENABLED",
+      "TargetCapacity": 100
+     },
+     "ManagedTerminationProtection": "DISABLED"
+    },
+    "Name": "cp-aws-sfn-tasks-ecs-ec2-run-task-capacity-providerCP1190EBF9B"
+   }
+  },
+  "CP238A17852": {
+   "Type": "AWS::ECS::CapacityProvider",
+   "Properties": {
+    "AutoScalingGroupProvider": {
+     "AutoScalingGroupArn": "${AutoScalingGroup2ASGF28D2D46}",
+     "ManagedDraining": "ENABLED",
+     "ManagedScaling": {
+      "Status": "ENABLED",
+      "TargetCapacity": 100
+     },
+     "ManagedTerminationProtection": "DISABLED"
+    },
+    "Name": "cp-aws-sfn-tasks-ecs-ec2-run-task-capacity-providerCP297071CF5"
+   }
+  },
+  "TaskDefTaskRole1EDB4A67": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TaskDef54694570": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:cb8db1ca45b29cf8a7db558e2cb31ac823252251ae003dc87318f485c6415d2b",
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": "${TaskDefContainerLogGroupB60E6F44}",
+        "awslogs-stream-prefix": "EventDemo",
+        "awslogs-region": "${AWS::Region}"
+       }
+      },
+      "Memory": 256,
+      "Name": "Container"
+     }
+    ],
+    "ExecutionRoleArn": "${TaskDefExecutionRoleB4775C97.Arn}",
+    "Family": "awssfntasksecsec2runtaskcapacityproviderTaskDefE800140C",
+    "NetworkMode": "bridge",
+    "RequiresCompatibilities": [
+     "EC2"
+    ],
+    "TaskRoleArn": "${TaskDefTaskRole1EDB4A67.Arn}"
+   }
+  },
+  "TaskDefContainerLogGroupB60E6F44": {
+   "Type": "AWS::Logs::LogGroup",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "TaskDefExecutionRoleB4775C97": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TaskDefExecutionRoleDefaultPolicy0DBB737A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "${TaskDefContainerLogGroupB60E6F44.Arn}"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "TaskDefExecutionRoleDefaultPolicy0DBB737A",
+    "Roles": [
+     "${TaskDefExecutionRoleB4775C97}"
+    ]
+   }
+  },
+  "StateMachineRoleB840431D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ArnLike": {
+         "aws:SourceArn": "arn:${AWS::Partition}:states:${AWS::Region}:${AWS::AccountId}:stateMachine:*"
+        },
+        "StringEquals": {
+         "aws:SourceAccount": "${AWS::AccountId}"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "StateMachineRoleDefaultPolicyDF1E6607": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ecs:RunTask",
+       "Effect": "Allow",
+       "Resource": "${TaskDef54694570}"
+      },
+      {
+       "Action": [
+        "ecs:DescribeTasks",
+        "ecs:StopTask"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": [
+        "${TaskDefExecutionRoleB4775C97.Arn}",
+        "${TaskDefTaskRole1EDB4A67.Arn}"
+       ]
+      },
+      {
+       "Action": [
+        "events:DescribeRule",
+        "events:PutRule",
+        "events:PutTargets"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/StepFunctionsGetEventsForECSTaskRule"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StateMachineRoleDefaultPolicyDF1E6607",
+    "Roles": [
+     "${StateMachineRoleB840431D}"
+    ]
+   }
+  },
+  "StateMachine2E01A3A5": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": "{\"StartAt\":\"Start\",\"States\":{\"Start\":{\"Type\":\"Pass\",\"Result\":{\"SomeKey\":\"SomeValue\"},\"Next\":\"Ec2TaskWithNone\"},\"Ec2TaskWithNone\":{\"Next\":\"Ec2TaskWithCustom\",\"Type\":\"Task\",\"ResultPath\":null,\"Resource\":\"arn:${AWS::Partition}:states:::ecs:runTask.sync\",\"Parameters\":{\"Cluster\":\"${Ec2ClusterEE43E89D.Arn}\",\"TaskDefinition\":\"awssfntasksecsec2runtaskcapacityproviderTaskDefE800140C\",\"Overrides\":{\"ContainerOverrides\":[{\"Name\":\"Container\",\"Environment\":[{\"Name\":\"SOME_KEY\",\"Value.$\":\"$.SomeKey\"}]}]},\"LaunchType\":\"EC2\",\"EnableExecuteCommand\":true}},\"Ec2TaskWithCustom\":{\"Next\":\"Ec2TaskWithDefault\",\"Type\":\"Task\",\"ResultPath\":null,\"Resource\":\"arn:${AWS::Partition}:states:::ecs:runTask\",\"Parameters\":{\"Cluster\":\"${Ec2ClusterEE43E89D.Arn}\",\"TaskDefinition\":\"awssfntasksecsec2runtaskcapacityproviderTaskDefE800140C\",\"CapacityProviderStrategy\":[{\"CapacityProvider\":\"${CP1A08C5A07}\",\"Weight\":1,\"Base\":0},{\"CapacityProvider\":\"${CP238A17852}\",\"Weight\":2,\"Base\":1}]}},\"Ec2TaskWithDefault\":{\"End\":true,\"Type\":\"Task\",\"ResultPath\":null,\"Resource\":\"arn:${AWS::Partition}:states:::ecs:runTask\",\"Parameters\":{\"Cluster\":\"${Ec2ClusterEE43E89D.Arn}\",\"TaskDefinition\":\"awssfntasksecsec2runtaskcapacityproviderTaskDefE800140C\"}}}}",
+    "RoleArn": "${StateMachineRoleB840431D.Arn}"
+   },
+   "DependsOn": [
+    "StateMachineRoleDefaultPolicyDF1E6607",
+    "StateMachineRoleB840431D"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  }
+ },
+ "outputs": {
+  "ExportsOutputRefStateMachine2E01A3A5BA46F753": {
+   "Value": "${StateMachine2E01A3A5}",
+   "Export": {
+    "Name": "aws-sfn-tasks-ecs-ec2-run-task-capacity-provider:ExportsOutputRefStateMachine2E01A3A5BA46F753"
+   }
+  }
+ },
+ "unresolved": [
+  {
+   "path": "Resources.Ec2ClusterVpcPublicSubnet1SubnetD46FD92B.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.Ec2ClusterVpcPublicSubnet1NATGateway79A8A839.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${Ec2ClusterVpcPublicSubnet1EIPD4B5D142}' does not exist (Service: Ec2, Status Code: 400, Request ID: b61cb985-daa0-4689-aee5-cc4571530474) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 1db755f8-52b8-4bff-b8f7-a47abcd15f16)'"
+  },
+  {
+   "path": "Resources.Ec2ClusterVpcPublicSubnet2Subnet207D9E5E.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.Ec2ClusterVpcPublicSubnet2NATGateway302F96C0.Properties.AllocationId",
+   "intrinsic": "Fn::GetAtt",
+   "reason": "Could not find 'AllocationId' attribute of the 'AWS::EC2::EIP' resource because an error occurred while attempting to retrieve the information: 'ResourceNotFoundException:AWS::EC2::EIP Handler returned status FAILED: The allocation ID '${Ec2ClusterVpcPublicSubnet2EIP921925E6}' does not exist (Service: Ec2, Status Code: 400, Request ID: 0fd0545d-90d2-4604-baca-2f56349d6852) (SDK Attempt Count: 1) (HandlerErrorCode: NotFound, RequestToken: 3a59dc9f-832c-4388-9f60-d421468da5b0)'"
+  },
+  {
+   "path": "Resources.Ec2ClusterVpcPrivateSubnet1Subnet0AE9B91E.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.Ec2ClusterVpcPrivateSubnet2Subnet16B68C19.Properties.AvailabilityZone.Fn::Select.1",
+   "intrinsic": "Fn::GetAZs",
+   "reason": "CloudFormation function Fn::GetAZs is not supported"
+  },
+  {
+   "path": "Resources.AutoScalingGroup1LaunchTemplate8991583F.Properties.LaunchTemplateData.UserData",
+   "intrinsic": "Fn::Base64",
+   "reason": "CloudFormation function Fn::Base64 is not supported"
+  },
+  {
+   "path": "Resources.AutoScalingGroup2LaunchTemplate8F04F80A.Properties.LaunchTemplateData.UserData",
+   "intrinsic": "Fn::Base64",
+   "reason": "CloudFormation function Fn::Base64 is not supported"
+  }
+ ]
+}

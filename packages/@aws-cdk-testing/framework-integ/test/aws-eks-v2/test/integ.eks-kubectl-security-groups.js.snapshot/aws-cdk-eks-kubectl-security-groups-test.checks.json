@@ -1,0 +1,3070 @@
+{
+ "stackName": "aws-cdk-eks-kubectl-security-groups-test",
+ "summary": {
+  "pass": 236,
+  "unresolved": 5,
+  "no handler": 12
+ },
+ "results": [
+  {
+   "logicalId": "Vpc8378EB38",
+   "type": "AWS::EC2::VPC",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Vpc8378EB38",
+   "type": "AWS::EC2::VPC",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/16",
+   "actual": "10.0.0.0/16"
+  },
+  {
+   "logicalId": "Vpc8378EB38",
+   "type": "AWS::EC2::VPC",
+   "property": "InstanceTenancy",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "default",
+   "actual": "default"
+  },
+  {
+   "logicalId": "Vpc8378EB38",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsSupport",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Vpc8378EB38",
+   "type": "AWS::EC2::VPC",
+   "property": "EnableDnsHostnames",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "Vpc8378EB38",
+   "type": "AWS::EC2::VPC",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "Vpc8378EB38"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPublicSubnet1Subnet5C2D37C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1Subnet5C2D37C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1Subnet5C2D37C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1Subnet5C2D37C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.0.0/18",
+   "actual": "10.0.0.0/18"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1Subnet5C2D37C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "VpcPublicSubnet1Subnet5C2D37C4",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet1"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPublicSubnet1Subnet5C2D37C4"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPublicSubnet1RouteTable6C95E38E",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1RouteTable6C95E38E",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1RouteTable6C95E38E",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPublicSubnet1RouteTable6C95E38E"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet1"
+    },
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPublicSubnet1RouteTableAssociation97140677",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1RouteTableAssociation97140677",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet1RouteTable6C95E38E}",
+   "actual": "${VpcPublicSubnet1RouteTable6C95E38E}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1RouteTableAssociation97140677",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet1Subnet5C2D37C4}",
+   "actual": "${VpcPublicSubnet1Subnet5C2D37C4}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1DefaultRoute3DA9E72A",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1DefaultRoute3DA9E72A",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet1RouteTable6C95E38E}",
+   "actual": "${VpcPublicSubnet1RouteTable6C95E38E}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1DefaultRoute3DA9E72A",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+   "actual": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1DefaultRoute3DA9E72A",
+   "type": "AWS::EC2::Route",
+   "property": "GatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcIGWD7BA715C}",
+   "actual": "${VpcIGWD7BA715C}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1EIPD7E02669",
+   "type": "AWS::EC2::EIP",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1EIPD7E02669",
+   "type": "AWS::EC2::EIP",
+   "property": "Domain",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "vpc",
+   "actual": "vpc"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1EIPD7E02669",
+   "type": "AWS::EC2::EIP",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet1"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPublicSubnet1EIPD7E02669"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPublicSubnet1NATGateway4D7517AA",
+   "type": "AWS::EC2::NatGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1NATGateway4D7517AA",
+   "type": "AWS::EC2::NatGateway",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet1Subnet5C2D37C4}",
+   "actual": "${VpcPublicSubnet1Subnet5C2D37C4}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1NATGateway4D7517AA",
+   "type": "AWS::EC2::NatGateway",
+   "property": "AllocationId",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VpcPublicSubnet1NATGateway4D7517AA",
+   "type": "AWS::EC2::NatGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPublicSubnet1NATGateway4D7517AA"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet1"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPublicSubnet2Subnet691E08A3",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2Subnet691E08A3",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2Subnet691E08A3",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2Subnet691E08A3",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.64.0/18",
+   "actual": "10.0.64.0/18"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2Subnet691E08A3",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "logicalId": "VpcPublicSubnet2Subnet691E08A3",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet2"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPublicSubnet2Subnet691E08A3"
+    },
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPublicSubnet2RouteTable94F7E489",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2RouteTable94F7E489",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2RouteTable94F7E489",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PublicSubnet2"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPublicSubnet2RouteTable94F7E489"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "kubernetes.io/role/elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPublicSubnet2RouteTableAssociationDD5762D8",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2RouteTableAssociationDD5762D8",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet2RouteTable94F7E489}",
+   "actual": "${VpcPublicSubnet2RouteTable94F7E489}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2RouteTableAssociationDD5762D8",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet2Subnet691E08A3}",
+   "actual": "${VpcPublicSubnet2Subnet691E08A3}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2DefaultRoute97F91067",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2DefaultRoute97F91067",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet2RouteTable94F7E489}",
+   "actual": "${VpcPublicSubnet2RouteTable94F7E489}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2DefaultRoute97F91067",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+   "actual": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}"
+  },
+  {
+   "logicalId": "VpcPublicSubnet2DefaultRoute97F91067",
+   "type": "AWS::EC2::Route",
+   "property": "GatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcIGWD7BA715C}",
+   "actual": "${VpcIGWD7BA715C}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1Subnet536B997A",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1Subnet536B997A",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1Subnet536B997A",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1Subnet536B997A",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.128.0/18",
+   "actual": "10.0.128.0/18"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1Subnet536B997A",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1Subnet536B997A",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "kubernetes.io/role/internal-elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPrivateSubnet1Subnet536B997A"
+    },
+    {
+     "Key": "kubernetes.io/role/internal-elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PrivateSubnet1"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1RouteTableB2C5B500",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1RouteTableB2C5B500",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1RouteTableB2C5B500",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/role/internal-elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PrivateSubnet1"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PrivateSubnet1"
+    },
+    {
+     "Key": "kubernetes.io/role/internal-elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPrivateSubnet1RouteTableB2C5B500"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet1RouteTableB2C5B500}",
+   "actual": "${VpcPrivateSubnet1RouteTableB2C5B500}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet1Subnet536B997A}",
+   "actual": "${VpcPrivateSubnet1Subnet536B997A}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet1RouteTableB2C5B500}",
+   "actual": "${VpcPrivateSubnet1RouteTableB2C5B500}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+   "actual": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+   "type": "AWS::EC2::Route",
+   "property": "NatGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet1NATGateway4D7517AA}",
+   "actual": "${VpcPublicSubnet1NATGateway4D7517AA}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2Subnet3788AAA1",
+   "type": "AWS::EC2::Subnet",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2Subnet3788AAA1",
+   "type": "AWS::EC2::Subnet",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2Subnet3788AAA1",
+   "type": "AWS::EC2::Subnet",
+   "property": "AvailabilityZone",
+   "status": "unresolved"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2Subnet3788AAA1",
+   "type": "AWS::EC2::Subnet",
+   "property": "CidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "10.0.192.0/18",
+   "actual": "10.0.192.0/18"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2Subnet3788AAA1",
+   "type": "AWS::EC2::Subnet",
+   "property": "MapPublicIpOnLaunch",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2Subnet3788AAA1",
+   "type": "AWS::EC2::Subnet",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "kubernetes.io/role/internal-elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PrivateSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPrivateSubnet2Subnet3788AAA1"
+    },
+    {
+     "Key": "kubernetes.io/role/internal-elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PrivateSubnet2"
+    },
+    {
+     "Key": "aws-cdk:subnet-name",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2RouteTableA678073B",
+   "type": "AWS::EC2::RouteTable",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2RouteTableA678073B",
+   "type": "AWS::EC2::RouteTable",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2RouteTableA678073B",
+   "type": "AWS::EC2::RouteTable",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "kubernetes.io/role/internal-elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PrivateSubnet2"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPrivateSubnet2RouteTableA678073B"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "kubernetes.io/role/internal-elb",
+     "Value": "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70.Name}"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc/PrivateSubnet2"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet2RouteTableA678073B}",
+   "actual": "${VpcPrivateSubnet2RouteTableA678073B}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+   "type": "AWS::EC2::SubnetRouteTableAssociation",
+   "property": "SubnetId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet2Subnet3788AAA1}",
+   "actual": "${VpcPrivateSubnet2Subnet3788AAA1}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2DefaultRoute060D2087",
+   "type": "AWS::EC2::Route",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2DefaultRoute060D2087",
+   "type": "AWS::EC2::Route",
+   "property": "RouteTableId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet2RouteTableA678073B}",
+   "actual": "${VpcPrivateSubnet2RouteTableA678073B}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2DefaultRoute060D2087",
+   "type": "AWS::EC2::Route",
+   "property": "DestinationCidrBlock",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+   "actual": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}"
+  },
+  {
+   "logicalId": "VpcPrivateSubnet2DefaultRoute060D2087",
+   "type": "AWS::EC2::Route",
+   "property": "NatGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${VpcPublicSubnet1NATGateway4D7517AA}",
+   "actual": "${VpcPublicSubnet1NATGateway4D7517AA}"
+  },
+  {
+   "logicalId": "VpcIGWD7BA715C",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcIGWD7BA715C",
+   "type": "AWS::EC2::InternetGateway",
+   "property": "Tags",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc"
+    }
+   ],
+   "actual": [
+    {
+     "Key": "Name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test/Vpc"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcIGWD7BA715C"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-cdk-eks-kubectl-security-groups-test"
+    }
+   ]
+  },
+  {
+   "logicalId": "VpcVPCGWBF912B6E",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "VpcVPCGWBF912B6E",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "InternetGatewayId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${VpcIGWD7BA715C}"
+   ],
+   "actual": [
+    "${VpcIGWD7BA715C}"
+   ]
+  },
+  {
+   "logicalId": "VpcVPCGWBF912B6E",
+   "type": "AWS::EC2::VPCGatewayAttachment",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${Vpc8378EB38}"
+   ],
+   "actual": [
+    "${Vpc8378EB38}"
+   ]
+  },
+  {
+   "logicalId": "KubectlSG13A1E7139",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KubectlSG13A1E7139",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "First security group for kubectl handler (Cluster1)",
+   "actual": "First security group for kubectl handler (Cluster1)"
+  },
+  {
+   "logicalId": "KubectlSG13A1E7139",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "KubectlSG13A1E7139",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "KubectlSG265C12831",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KubectlSG265C12831",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Second security group for kubectl handler (Cluster1)",
+   "actual": "Second security group for kubectl handler (Cluster1)"
+  },
+  {
+   "logicalId": "KubectlSG265C12831",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "KubectlSG265C12831",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "KubectlLayer195BEFA1D",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KubectlLayer195BEFA1D",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/opt/kubectl/kubectl 1.34.5; /opt/helm/helm 4.1.3",
+   "actual": "/opt/kubectl/kubectl 1.34.5; /opt/helm/helm 4.1.3"
+  },
+  {
+   "logicalId": "KubectlLayer195BEFA1D",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "LicenseInfo",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Apache-2.0",
+   "actual": "Apache-2.0"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsRoleD6349A7A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsRoleD6349A7A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "eks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22eks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsRoleD6349A7A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ]
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsControlPlaneSecurityGroup02DC8786",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsControlPlaneSecurityGroup02DC8786",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "EKS Control Plane Security Group",
+   "actual": "EKS Control Plane Security Group"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsControlPlaneSecurityGroup02DC8786",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsControlPlaneSecurityGroup02DC8786",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroups2FD0854B",
+   "type": "AWS::EKS::Cluster",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlReadyBarrier262A3B6A",
+   "type": "AWS::SSM::Parameter",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsClusterSecurityGroupfromawscdkekskubectlsecuritygroupstestKubectlSG108323F96443AE6188CA",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsClusterSecurityGroupfromawscdkekskubectlsecuritygroupstestKubectlSG2D56CD3A1443E7BFABF2",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRole2BF49541",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRole2BF49541",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRole2BF49541",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRoleDefaultPolicy201FB317",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRoleDefaultPolicy201FB317",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRoleDefaultPolicy201FB317",
+   "actual": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRoleDefaultPolicy201FB317"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRoleDefaultPolicy201FB317",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "eks:DescribeCluster",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:eks:${AWS::Region}:${AWS::AccountId}:cluster/${Cluster1MultipleSecurityGroups2FD0854B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "eks:DescribeCluster",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:eks:${AWS::Region}:${AWS::AccountId}:cluster/${Cluster1MultipleSecurityGroups2FD0854B}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRoleDefaultPolicy201FB317",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRole2BF49541}",
+   "actual": "${Cluster1MultipleSecurityGroupsKubectlProviderHandlerServiceRole2BF49541}"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "onEvent handler for EKS kubectl resource provider",
+   "actual": "onEvent handler for EKS kubectl resource provider"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.13",
+   "actual": "python3.13"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster1MultipleSecurityGroupsClusterAdminRoleAccessDE040553[0]}",
+   "actual": "${Cluster1MultipleSecurityGroupsClusterAdminRoleAccessDE040553[0]}"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1024,
+   "actual": 1024
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_STS_REGIONAL_ENDPOINTS": "regional"
+   },
+   "actual": {
+    "AWS_STS_REGIONAL_ENDPOINTS": "regional"
+   }
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70}",
+    "${KubectlLayer195BEFA1D}"
+   ],
+   "actual": [
+    "${Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70}",
+    "${KubectlLayer195BEFA1D}"
+   ]
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C",
+   "type": "AWS::Lambda::Function",
+   "property": "VpcConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SecurityGroupIds": [
+     "${KubectlSG13A1E7139}",
+     "${KubectlSG265C12831}"
+    ],
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ]
+   },
+   "actual": {
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ],
+    "SecurityGroupIds": [
+     "${KubectlSG13A1E7139}",
+     "${KubectlSG265C12831}"
+    ],
+    "VpcId": "${Vpc8378EB38}",
+    "Ipv6AllowedForDualStack": false
+   }
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderAwsCliLayer0E18BF70",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/opt/awscli/aws",
+   "actual": "/opt/awscli/aws"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRoleDefaultPolicy9C583FB9",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRoleDefaultPolicy9C583FB9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRoleDefaultPolicy9C583FB9",
+   "actual": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRoleDefaultPolicy9C583FB9"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRoleDefaultPolicy9C583FB9",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRoleDefaultPolicy9C583FB9",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9}",
+   "actual": "${Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9}"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS CDK resource provider framework - onEvent (aws-cdk-eks-kubectl-security-groups-test/Cluster1-MultipleSecurityGroups/KubectlProvider/Provider)",
+   "actual": "AWS CDK resource provider framework - onEvent (aws-cdk-eks-kubectl-security-groups-test/Cluster1-MultipleSecurityGroups/KubectlProvider/Provider)"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "framework.onEvent",
+   "actual": "framework.onEvent"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9}"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C}"
+   },
+   "actual": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C}"
+   }
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "VpcConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SecurityGroupIds": [
+     "${KubectlSG13A1E7139}",
+     "${KubectlSG265C12831}"
+    ],
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ]
+   },
+   "actual": {
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ],
+    "SecurityGroupIds": [
+     "${KubectlSG13A1E7139}",
+     "${KubectlSG265C12831}"
+    ],
+    "VpcId": "${Vpc8378EB38}",
+    "Ipv6AllowedForDualStack": false
+   }
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "FATAL",
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "FATAL",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventB0F2A709}"
+   }
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0CFE936A1",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0CFE936A1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0CFE936A1",
+   "actual": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0CFE936A1"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0CFE936A1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster1MultipleSecurityGroupsKubectlProviderHandlerD53E963C}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0CFE936A1",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9}",
+   "actual": "${Cluster1MultipleSecurityGroupsKubectlProviderframeworkonEventServiceRole466E39D9}"
+  },
+  {
+   "logicalId": "Cluster1MultipleSecurityGroupsClusterAdminRoleAccessDE040553",
+   "type": "AWS::EKS::AccessEntry",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "KubectlSG3DD1E6514",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KubectlSG3DD1E6514",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Custom security group for kubectl handler (Cluster2)",
+   "actual": "Custom security group for kubectl handler (Cluster2)"
+  },
+  {
+   "logicalId": "KubectlSG3DD1E6514",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "KubectlSG3DD1E6514",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "KubectlLayer2FC7F83EB",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KubectlLayer2FC7F83EB",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/opt/kubectl/kubectl 1.34.5; /opt/helm/helm 4.1.3",
+   "actual": "/opt/kubectl/kubectl 1.34.5; /opt/helm/helm 4.1.3"
+  },
+  {
+   "logicalId": "KubectlLayer2FC7F83EB",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "LicenseInfo",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Apache-2.0",
+   "actual": "Apache-2.0"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupRole07D5A59A",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupRole07D5A59A",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "eks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22eks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupRole07D5A59A",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ]
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupControlPlaneSecurityGroupB8BD3D4D",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupControlPlaneSecurityGroupB8BD3D4D",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "EKS Control Plane Security Group",
+   "actual": "EKS Control Plane Security Group"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupControlPlaneSecurityGroupB8BD3D4D",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupControlPlaneSecurityGroupB8BD3D4D",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroup59490EB9",
+   "type": "AWS::EKS::Cluster",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlReadyBarrierB48D74F1",
+   "type": "AWS::SSM::Parameter",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupClusterSecurityGroupfromawscdkekskubectlsecuritygroupstestKubectlSG34449FC9E4433E598E84",
+   "type": "AWS::EC2::SecurityGroupIngress",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRole0942F883",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRole0942F883",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRole0942F883",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy2996146A",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy2996146A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy2996146A",
+   "actual": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy2996146A"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy2996146A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "eks:DescribeCluster",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:eks:${AWS::Region}:${AWS::AccountId}:cluster/${Cluster2SingleSecurityGroup59490EB9}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "eks:DescribeCluster",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:eks:${AWS::Region}:${AWS::AccountId}:cluster/${Cluster2SingleSecurityGroup59490EB9}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy2996146A",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRole0942F883}",
+   "actual": "${Cluster2SingleSecurityGroupKubectlProviderHandlerServiceRole0942F883}"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "onEvent handler for EKS kubectl resource provider",
+   "actual": "onEvent handler for EKS kubectl resource provider"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.13",
+   "actual": "python3.13"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster2SingleSecurityGroupClusterAdminRoleAccess74369EF0[0]}",
+   "actual": "${Cluster2SingleSecurityGroupClusterAdminRoleAccess74369EF0[0]}"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1024,
+   "actual": 1024
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_STS_REGIONAL_ENDPOINTS": "regional"
+   },
+   "actual": {
+    "AWS_STS_REGIONAL_ENDPOINTS": "regional"
+   }
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${Cluster2SingleSecurityGroupKubectlProviderAwsCliLayerAC53DDB9}",
+    "${KubectlLayer2FC7F83EB}"
+   ],
+   "actual": [
+    "${Cluster2SingleSecurityGroupKubectlProviderAwsCliLayerAC53DDB9}",
+    "${KubectlLayer2FC7F83EB}"
+   ]
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734",
+   "type": "AWS::Lambda::Function",
+   "property": "VpcConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SecurityGroupIds": [
+     "${KubectlSG3DD1E6514}"
+    ],
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ]
+   },
+   "actual": {
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ],
+    "SecurityGroupIds": [
+     "${KubectlSG3DD1E6514}"
+    ],
+    "VpcId": "${Vpc8378EB38}",
+    "Ipv6AllowedForDualStack": false
+   }
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderAwsCliLayerAC53DDB9",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderAwsCliLayerAC53DDB9",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/opt/awscli/aws",
+   "actual": "/opt/awscli/aws"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicyE89E3A7A",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicyE89E3A7A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicyE89E3A7A",
+   "actual": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicyE89E3A7A"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicyE89E3A7A",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicyE89E3A7A",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32}",
+   "actual": "${Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32}"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS CDK resource provider framework - onEvent (aws-cdk-eks-kubectl-security-groups-test/Cluster2-SingleSecurityGroup/KubectlProvider/Provider)",
+   "actual": "AWS CDK resource provider framework - onEvent (aws-cdk-eks-kubectl-security-groups-test/Cluster2-SingleSecurityGroup/KubectlProvider/Provider)"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "framework.onEvent",
+   "actual": "framework.onEvent"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32}"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734}"
+   },
+   "actual": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734}"
+   }
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "VpcConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SecurityGroupIds": [
+     "${KubectlSG3DD1E6514}"
+    ],
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ]
+   },
+   "actual": {
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ],
+    "SecurityGroupIds": [
+     "${KubectlSG3DD1E6514}"
+    ],
+    "VpcId": "${Vpc8378EB38}",
+    "Ipv6AllowedForDualStack": false
+   }
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "FATAL",
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "FATAL",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${Cluster2SingleSecurityGroupKubectlProviderframeworkonEvent1EDD294B}"
+   }
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0668385D2",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0668385D2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0668385D2",
+   "actual": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0668385D2"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0668385D2",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster2SingleSecurityGroupKubectlProviderHandler7A70B734}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0668385D2",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32}",
+   "actual": "${Cluster2SingleSecurityGroupKubectlProviderframeworkonEventServiceRole552DFA32}"
+  },
+  {
+   "logicalId": "Cluster2SingleSecurityGroupClusterAdminRoleAccess74369EF0",
+   "type": "AWS::EKS::AccessEntry",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "KubectlLayer37CD5C874",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "KubectlLayer37CD5C874",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/opt/kubectl/kubectl 1.34.5; /opt/helm/helm 4.1.3",
+   "actual": "/opt/kubectl/kubectl 1.34.5; /opt/helm/helm 4.1.3"
+  },
+  {
+   "logicalId": "KubectlLayer37CD5C874",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "LicenseInfo",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Apache-2.0",
+   "actual": "Apache-2.0"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupRoleD2E3CE46",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupRoleD2E3CE46",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "eks.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22eks.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupRoleD2E3CE46",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSClusterPolicy"
+   ]
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupControlPlaneSecurityGroupEFDF73E5",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupControlPlaneSecurityGroupEFDF73E5",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "GroupDescription",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "EKS Control Plane Security Group",
+   "actual": "EKS Control Plane Security Group"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupControlPlaneSecurityGroupEFDF73E5",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "VpcId",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Vpc8378EB38}",
+   "actual": "${Vpc8378EB38}"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupControlPlaneSecurityGroupEFDF73E5",
+   "type": "AWS::EC2::SecurityGroup",
+   "property": "SecurityGroupEgress",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    {
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default",
+     "IpProtocol": "-1"
+    }
+   ],
+   "actual": [
+    {
+     "IpProtocol": "-1",
+     "CidrIp": "${VpcPrivateSubnet1DefaultRouteBE02A9ED[1]}",
+     "Description": "Allow all outbound traffic by default"
+    }
+   ]
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroup92D008A5",
+   "type": "AWS::EKS::Cluster",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlReadyBarrier5B665DE2",
+   "type": "AWS::SSM::Parameter",
+   "property": "(exists)",
+   "status": "no handler"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRole87CA2DA3",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRole87CA2DA3",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRole87CA2DA3",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy10180EB1",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy10180EB1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy10180EB1",
+   "actual": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy10180EB1"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy10180EB1",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "eks:DescribeCluster",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:eks:${AWS::Region}:${AWS::AccountId}:cluster/${Cluster3DefaultSecurityGroup92D008A5}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "eks:DescribeCluster",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:eks:${AWS::Region}:${AWS::AccountId}:cluster/${Cluster3DefaultSecurityGroup92D008A5}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRoleDefaultPolicy10180EB1",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRole87CA2DA3}",
+   "actual": "${Cluster3DefaultSecurityGroupKubectlProviderHandlerServiceRole87CA2DA3}"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "onEvent handler for EKS kubectl resource provider",
+   "actual": "onEvent handler for EKS kubectl resource provider"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "index.handler",
+   "actual": "index.handler"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "python3.13",
+   "actual": "python3.13"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster3DefaultSecurityGroupClusterAdminRoleAccess28201079[0]}",
+   "actual": "${Cluster3DefaultSecurityGroupClusterAdminRoleAccess28201079[0]}"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "MemorySize",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 1024,
+   "actual": 1024
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "AWS_STS_REGIONAL_ENDPOINTS": "regional"
+   },
+   "actual": {
+    "AWS_STS_REGIONAL_ENDPOINTS": "regional"
+   }
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "Layers",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "${Cluster3DefaultSecurityGroupKubectlProviderAwsCliLayer992FD6E2}",
+    "${KubectlLayer37CD5C874}"
+   ],
+   "actual": [
+    "${Cluster3DefaultSecurityGroupKubectlProviderAwsCliLayer992FD6E2}",
+    "${KubectlLayer37CD5C874}"
+   ]
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2",
+   "type": "AWS::Lambda::Function",
+   "property": "VpcConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SecurityGroupIds": [
+     "sg-0173710693967568c"
+    ],
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ]
+   },
+   "actual": {
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ],
+    "SecurityGroupIds": [
+     "sg-0173710693967568c"
+    ],
+    "VpcId": "${Vpc8378EB38}",
+    "Ipv6AllowedForDualStack": false
+   }
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderAwsCliLayer992FD6E2",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderAwsCliLayer992FD6E2",
+   "type": "AWS::Lambda::LayerVersion",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "/opt/awscli/aws",
+   "actual": "/opt/awscli/aws"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC",
+   "type": "AWS::IAM::Role",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC",
+   "type": "AWS::IAM::Role",
+   "property": "AssumeRolePolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+       "Service": "lambda.amazonaws.com"
+      }
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%22lambda.amazonaws.com%22%7D%2C%22Action%22%3A%22sts%3AAssumeRole%22%7D%5D%7D"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC",
+   "type": "AWS::IAM::Role",
+   "property": "ManagedPolicyArns",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ],
+   "actual": [
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+    "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+   ]
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicy12320A95",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicy12320A95",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicy12320A95",
+   "actual": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicy12320A95"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicy12320A95",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:InvokeFunction",
+      "Effect": "Allow",
+      "Resource": [
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2}",
+       "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2}:*"
+      ]
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleDefaultPolicy12320A95",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC}",
+   "actual": "${Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC}"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "Description",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "AWS CDK resource provider framework - onEvent (aws-cdk-eks-kubectl-security-groups-test/Cluster3-DefaultSecurityGroup/KubectlProvider/Provider)",
+   "actual": "AWS CDK resource provider framework - onEvent (aws-cdk-eks-kubectl-security-groups-test/Cluster3-DefaultSecurityGroup/KubectlProvider/Provider)"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "Handler",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "framework.onEvent",
+   "actual": "framework.onEvent"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "Runtime",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "nodejs24.x",
+   "actual": "nodejs24.x"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "Role",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC}",
+   "actual": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC}"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "Timeout",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": 900,
+   "actual": 900
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "Environment.Variables",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2}"
+   },
+   "actual": {
+    "USER_ON_EVENT_FUNCTION_ARN": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2}"
+   }
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "VpcConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "SecurityGroupIds": [
+     "sg-0173710693967568c"
+    ],
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ]
+   },
+   "actual": {
+    "SubnetIds": [
+     "${VpcPrivateSubnet1Subnet536B997A}",
+     "${VpcPrivateSubnet2Subnet3788AAA1}"
+    ],
+    "SecurityGroupIds": [
+     "sg-0173710693967568c"
+    ],
+    "VpcId": "${Vpc8378EB38}",
+    "Ipv6AllowedForDualStack": false
+   }
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA",
+   "type": "AWS::Lambda::Function",
+   "property": "LoggingConfig",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "ApplicationLogLevel": "FATAL",
+    "LogFormat": "JSON"
+   },
+   "actual": {
+    "LogFormat": "JSON",
+    "ApplicationLogLevel": "FATAL",
+    "SystemLogLevel": "INFO",
+    "LogGroup": "/aws/lambda/${Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventC96ABBEA}"
+   }
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0C148A235",
+   "type": "AWS::IAM::Policy",
+   "property": "(exists)",
+   "status": "pass"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0C148A235",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyName",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0C148A235",
+   "actual": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0C148A235"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0C148A235",
+   "type": "AWS::IAM::Policy",
+   "property": "PolicyDocument",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2}"
+     }
+    ],
+    "Version": "2012-10-17"
+   },
+   "actual": {
+    "Statement": [
+     {
+      "Action": "lambda:GetFunction",
+      "Effect": "Allow",
+      "Resource": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${Cluster3DefaultSecurityGroupKubectlProviderHandlerF1E3C1E2}"
+     }
+    ],
+    "Version": "2012-10-17"
+   }
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventinlinePolicyAddedToExecutionRole0C148A235",
+   "type": "AWS::IAM::Policy",
+   "property": "Roles.0",
+   "status": "pass",
+   "mutationCaught": true,
+   "expected": "${Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC}",
+   "actual": "${Cluster3DefaultSecurityGroupKubectlProviderframeworkonEventServiceRoleEEBA60AC}"
+  },
+  {
+   "logicalId": "Cluster3DefaultSecurityGroupClusterAdminRoleAccess28201079",
+   "type": "AWS::EKS::AccessEntry",
+   "property": "(exists)",
+   "status": "no handler"
+  }
+ ]
+}
