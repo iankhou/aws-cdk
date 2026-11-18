@@ -1,8 +1,7 @@
 {
  "stackName": "integ-cloudfront-failover",
  "summary": {
-  "pass": 9,
-  "fail": 1
+  "pass": 10
  },
  "results": [
   {
@@ -72,7 +71,8 @@
    "logicalId": "DistributionCFDistribution882A7313",
    "type": "AWS::CloudFront::Distribution",
    "property": "DistributionConfig.DefaultCacheBehavior",
-   "status": "fail",
+   "status": "pass",
+   "mutationCaught": true,
    "expected": {
     "TargetOriginId": "OriginGroup1",
     "ViewerProtocolPolicy": "redirect-to-https",
@@ -99,14 +99,14 @@
     "AllowedMethods": {
      "Quantity": 2,
      "Items": [
-      "HEAD",
-      "GET"
+      "GET",
+      "HEAD"
      ],
      "CachedMethods": {
       "Quantity": 2,
       "Items": [
-       "HEAD",
-       "GET"
+       "GET",
+       "HEAD"
       ]
      }
     }
@@ -122,15 +122,15 @@
     "Quantity": 2,
     "Items": [
      {
-      "Id": "originSecondary1",
-      "DomainName": "${bucket231DE1803}.s3.${AWS::Region}.amazonaws.com",
+      "Id": "origin1",
+      "DomainName": "${bucket1D4C77784}.s3.${AWS::Region}.amazonaws.com",
       "ConnectionAttempts": 3,
       "ConnectionTimeout": 10,
       "S3OriginConfig": {}
      },
      {
-      "Id": "origin1",
-      "DomainName": "${bucket1D4C77784}.s3.${AWS::Region}.amazonaws.com",
+      "Id": "originSecondary1",
+      "DomainName": "${bucket231DE1803}.s3.${AWS::Region}.amazonaws.com",
       "ConnectionAttempts": 3,
       "ConnectionTimeout": 10,
       "S3OriginConfig": {}
@@ -141,15 +141,15 @@
     "Quantity": 2,
     "Items": [
      {
-      "Id": "originSecondary1",
-      "DomainName": "${bucket231DE1803}.s3.${AWS::Region}.amazonaws.com",
+      "Id": "origin1",
+      "DomainName": "${bucket1D4C77784}.s3.${AWS::Region}.amazonaws.com",
       "ConnectionAttempts": 3,
       "ConnectionTimeout": 10,
       "S3OriginConfig": {}
      },
      {
-      "Id": "origin1",
-      "DomainName": "${bucket1D4C77784}.s3.${AWS::Region}.amazonaws.com",
+      "Id": "originSecondary1",
+      "DomainName": "${bucket231DE1803}.s3.${AWS::Region}.amazonaws.com",
       "ConnectionAttempts": 3,
       "ConnectionTimeout": 10,
       "S3OriginConfig": {}

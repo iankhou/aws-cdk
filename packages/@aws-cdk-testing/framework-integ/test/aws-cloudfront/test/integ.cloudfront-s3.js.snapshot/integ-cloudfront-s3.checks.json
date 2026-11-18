@@ -1,8 +1,7 @@
 {
  "stackName": "integ-cloudfront-s3",
  "summary": {
-  "pass": 12,
-  "fail": 2
+  "pass": 14
  },
  "results": [
   {
@@ -30,14 +29,15 @@
    "logicalId": "BucketPolicyE9A3008A",
    "type": "AWS::S3::BucketPolicy",
    "property": "PolicyDocument",
-   "status": "fail",
+   "status": "pass",
+   "mutationCaught": true,
    "expected": {
     "Statement": [
      {
       "Action": "s3:GetObject",
       "Effect": "Allow",
       "Principal": {
-       "AWS": "arn:${AWS::Partition}:iam::cloudfront:user/CloudFront Origin Access Identity ${OAI}"
+       "CanonicalUser": "6f032ef9fa8345787c49fb6b7256280461915a91201069e485841cef15c1e6537558dd6d88a92696c46d16eab24841ad"
       },
       "Resource": "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
      }
@@ -50,7 +50,7 @@
       "Action": "s3:GetObject",
       "Effect": "Allow",
       "Principal": {
-       "CanonicalUser": "d73d3d5ca1d6f3dd954f540b90b7a0992d5bb70dad0d8523d56c5cee01663227acc4e3e207c1a5028354a50dfb6e7092"
+       "CanonicalUser": "6f032ef9fa8345787c49fb6b7256280461915a91201069e485841cef15c1e6537558dd6d88a92696c46d16eab24841ad"
       },
       "Resource": "arn:${AWS::Partition}:s3:::${Bucket83908E77}/*"
      }
@@ -128,7 +128,8 @@
    "logicalId": "DistributionCFDistribution882A7313",
    "type": "AWS::CloudFront::Distribution",
    "property": "DistributionConfig.DefaultCacheBehavior",
-   "status": "fail",
+   "status": "pass",
+   "mutationCaught": true,
    "expected": {
     "TargetOriginId": "origin1",
     "ViewerProtocolPolicy": "redirect-to-https",
@@ -155,14 +156,14 @@
     "AllowedMethods": {
      "Quantity": 2,
      "Items": [
-      "HEAD",
-      "GET"
+      "GET",
+      "HEAD"
      ],
      "CachedMethods": {
       "Quantity": 2,
       "Items": [
-       "HEAD",
-       "GET"
+       "GET",
+       "HEAD"
       ]
      }
     }

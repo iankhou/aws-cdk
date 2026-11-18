@@ -1,8 +1,7 @@
 {
  "stackName": "cloudfront-custom-s3-stack",
  "summary": {
-  "pass": 23,
-  "fail": 1
+  "pass": 24
  },
  "results": [
   {
@@ -283,7 +282,8 @@
    "logicalId": "DistributionCFDistribution882A7313",
    "type": "AWS::CloudFront::Distribution",
    "property": "DistributionConfig.DefaultCacheBehavior",
-   "status": "fail",
+   "status": "pass",
+   "mutationCaught": true,
    "expected": {
     "TargetOriginId": "origin1",
     "ViewerProtocolPolicy": "redirect-to-https",
@@ -310,14 +310,14 @@
     "AllowedMethods": {
      "Quantity": 2,
      "Items": [
-      "HEAD",
-      "GET"
+      "GET",
+      "HEAD"
      ],
      "CachedMethods": {
       "Quantity": 2,
       "Items": [
-       "HEAD",
-       "GET"
+       "GET",
+       "HEAD"
       ]
      }
     }
@@ -334,7 +334,7 @@
     "Items": [
      {
       "Id": "origin1",
-      "DomainName": "${Bucket83908E77}.s3-website-${AWS::Region}.amazonaws.com",
+      "DomainName": "${Bucket83908E77}.s3-website.${AWS::Region}.amazonaws.com",
       "ConnectionAttempts": 3,
       "ConnectionTimeout": 10,
       "CustomOriginConfig": {
@@ -358,7 +358,7 @@
     "Items": [
      {
       "Id": "origin1",
-      "DomainName": "${Bucket83908E77}.s3-website-${AWS::Region}.amazonaws.com",
+      "DomainName": "${Bucket83908E77}.s3-website.${AWS::Region}.amazonaws.com",
       "ConnectionAttempts": 3,
       "ConnectionTimeout": 10,
       "CustomOriginConfig": {

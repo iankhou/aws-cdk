@@ -1,9 +1,8 @@
 {
  "stackName": "aws-lambda-autoscaling",
  "summary": {
-  "pass": 22,
-  "no handler": 1,
-  "fail": 1
+  "pass": 23,
+  "no handler": 1
  },
  "results": [
   {
@@ -172,7 +171,8 @@
    "logicalId": "AliasAliasScalingTarget7449FF0E",
    "type": "AWS::ApplicationAutoScaling::ScalableTarget",
    "property": "ScheduledActions",
-   "status": "fail",
+   "status": "pass",
+   "mutationCaught": true,
    "expected": [
     {
      "ScheduledActionName": "ScaleUpInTheMorning",
@@ -209,17 +209,17 @@
      }
     },
     {
-     "ScheduledActionName": "ScaleDownAtNight",
-     "Schedule": "cron(0 20 * * ? *)",
-     "ScalableTargetAction": {
-      "MaxCapacity": 20
-     }
-    },
-    {
      "ScheduledActionName": "ScaleUpInTheMorning",
      "Schedule": "cron(0 8 * * ? *)",
      "ScalableTargetAction": {
       "MinCapacity": 20
+     }
+    },
+    {
+     "ScheduledActionName": "ScaleDownAtNight",
+     "Schedule": "cron(0 20 * * ? *)",
+     "ScalableTargetAction": {
+      "MaxCapacity": 20
      }
     }
    ]

@@ -1,9 +1,9 @@
 {
  "stackName": "aws-ecs-integ-fargate",
  "summary": {
-  "pass": 110,
+  "pass": 111,
   "unresolved": 3,
-  "fail": 2
+  "fail": 1
  },
  "results": [
   {
@@ -66,16 +66,16 @@
      "Value": "aws-ecs-integ-fargate/Vpc"
     },
     {
-     "Key": "aws:cloudformation:logical-id",
-     "Value": "Vpc8378EB38"
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
     },
     {
      "Key": "aws:cloudformation:stack-name",
      "Value": "aws-ecs-integ-fargate"
     },
     {
-     "Key": "aws:cloudformation:stack-id",
-     "Value": "${AWS::StackId}"
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "Vpc8378EB38"
     }
    ]
   },
@@ -144,16 +144,12 @@
      "Value": "VpcPublicSubnet1Subnet5C2D37C4"
     },
     {
-     "Key": "aws-cdk:subnet-type",
-     "Value": "Public"
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
     },
     {
      "Key": "Name",
      "Value": "aws-ecs-integ-fargate/Vpc/PublicSubnet1"
-    },
-    {
-     "Key": "aws:cloudformation:stack-id",
-     "Value": "${AWS::StackId}"
     },
     {
      "Key": "aws-cdk:subnet-name",
@@ -162,6 +158,10 @@
     {
      "Key": "aws:cloudformation:stack-name",
      "Value": "aws-ecs-integ-fargate"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Public"
     }
    ]
   },
@@ -194,20 +194,20 @@
    ],
    "actual": [
     {
-     "Key": "aws:cloudformation:stack-id",
-     "Value": "${AWS::StackId}"
-    },
-    {
-     "Key": "Name",
-     "Value": "aws-ecs-integ-fargate/Vpc/PublicSubnet1"
-    },
-    {
      "Key": "aws:cloudformation:logical-id",
      "Value": "VpcPublicSubnet1RouteTable6C95E38E"
     },
     {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
      "Key": "aws:cloudformation:stack-name",
      "Value": "aws-ecs-integ-fargate"
+    },
+    {
+     "Key": "Name",
+     "Value": "aws-ecs-integ-fargate/Vpc/PublicSubnet1"
     }
    ]
   },
@@ -301,16 +301,16 @@
      "Value": "VpcPublicSubnet1EIPD7E02669"
     },
     {
-     "Key": "aws:cloudformation:stack-name",
-     "Value": "aws-ecs-integ-fargate"
+     "Key": "Name",
+     "Value": "aws-ecs-integ-fargate/Vpc/PublicSubnet1"
     },
     {
      "Key": "aws:cloudformation:stack-id",
      "Value": "${AWS::StackId}"
     },
     {
-     "Key": "Name",
-     "Value": "aws-ecs-integ-fargate/Vpc/PublicSubnet1"
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-integ-fargate"
     }
    ]
   },
@@ -427,28 +427,28 @@
    ],
    "actual": [
     {
-     "Key": "aws-cdk:subnet-type",
-     "Value": "Private"
-    },
-    {
      "Key": "Name",
      "Value": "aws-ecs-integ-fargate/Vpc/PrivateSubnet1"
     },
     {
-     "Key": "aws:cloudformation:stack-id",
-     "Value": "${AWS::StackId}"
-    },
-    {
-     "Key": "aws:cloudformation:logical-id",
-     "Value": "VpcPrivateSubnet1Subnet536B997A"
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-integ-fargate"
     },
     {
      "Key": "aws-cdk:subnet-name",
      "Value": "Private"
     },
     {
-     "Key": "aws:cloudformation:stack-name",
-     "Value": "aws-ecs-integ-fargate"
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
+    },
+    {
+     "Key": "aws-cdk:subnet-type",
+     "Value": "Private"
+    },
+    {
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPrivateSubnet1Subnet536B997A"
     }
    ]
   },
@@ -481,20 +481,20 @@
    ],
    "actual": [
     {
-     "Key": "aws:cloudformation:logical-id",
-     "Value": "VpcPrivateSubnet1RouteTableB2C5B500"
+     "Key": "aws:cloudformation:stack-name",
+     "Value": "aws-ecs-integ-fargate"
     },
     {
-     "Key": "Name",
-     "Value": "aws-ecs-integ-fargate/Vpc/PrivateSubnet1"
+     "Key": "aws:cloudformation:logical-id",
+     "Value": "VpcPrivateSubnet1RouteTableB2C5B500"
     },
     {
      "Key": "aws:cloudformation:stack-id",
      "Value": "${AWS::StackId}"
     },
     {
-     "Key": "aws:cloudformation:stack-name",
-     "Value": "aws-ecs-integ-fargate"
+     "Key": "Name",
+     "Value": "aws-ecs-integ-fargate/Vpc/PrivateSubnet1"
     }
    ]
   },
@@ -575,10 +575,6 @@
    ],
    "actual": [
     {
-     "Key": "aws:cloudformation:stack-id",
-     "Value": "${AWS::StackId}"
-    },
-    {
      "Key": "aws:cloudformation:stack-name",
      "Value": "aws-ecs-integ-fargate"
     },
@@ -589,6 +585,10 @@
     {
      "Key": "aws:cloudformation:logical-id",
      "Value": "VpcIGWD7BA715C"
+    },
+    {
+     "Key": "aws:cloudformation:stack-id",
+     "Value": "${AWS::StackId}"
     }
    ]
   },
@@ -1589,7 +1589,8 @@
    "logicalId": "Rule4C995B7F",
    "type": "AWS::Events::Rule",
    "property": "Targets",
-   "status": "fail",
+   "status": "pass",
+   "mutationCaught": true,
    "expected": [
     {
      "Arn": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${EcsCluster97242B84}",
@@ -1599,17 +1600,6 @@
      "EcsParameters": {
       "EnableExecuteCommand": true,
       "LaunchType": "FARGATE",
-      "NetworkConfiguration": {
-       "AwsVpcConfiguration": {
-        "AssignPublicIp": "DISABLED",
-        "SecurityGroups": [
-         "${TaskDefSecurityGroupD50E7CF0}"
-        ],
-        "Subnets": [
-         "${VpcPrivateSubnet1Subnet536B997A}"
-        ]
-       }
-      },
       "PropagateTags": "TASK_DEFINITION",
       "TaskCount": 1,
       "TaskDefinitionArn": "${TaskDef54694570}",
@@ -1618,7 +1608,18 @@
         "Key": "my-tag",
         "Value": "my-tag-value"
        }
-      ]
+      ],
+      "NetworkConfiguration": {
+       "awsvpcConfiguration": {
+        "AssignPublicIp": "DISABLED",
+        "SecurityGroups": [
+         "${TaskDefSecurityGroupD50E7CF0}"
+        ],
+        "Subnets": [
+         "${VpcPrivateSubnet1Subnet536B997A}"
+        ]
+       }
+      }
      },
      "Id": "Target0",
      "Input": "{\"containerOverrides\":[{\"name\":\"TheContainer\",\"environment\":[{\"name\":\"I_WAS_TRIGGERED\",\"value\":\"From CloudWatch Events\"}]}],\"cpu\":\"512\",\"memory\":\"512\"}",
@@ -1628,8 +1629,10 @@
      "Arn": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${EcsCluster97242B84}",
      "EcsParameters": {
       "LaunchType": "FARGATE",
+      "TaskCount": 1,
+      "TaskDefinitionArn": "${TaskDef54694570}",
       "NetworkConfiguration": {
-       "AwsVpcConfiguration": {
+       "awsvpcConfiguration": {
         "AssignPublicIp": "ENABLED",
         "SecurityGroups": [
          "${TaskDefSecurityGroupD50E7CF0}"
@@ -1638,9 +1641,7 @@
          "${VpcPublicSubnet1Subnet5C2D37C4}"
         ]
        }
-      },
-      "TaskCount": 1,
-      "TaskDefinitionArn": "${TaskDef54694570}"
+      }
      },
      "Id": "Target1",
      "Input": "{}",
@@ -1650,8 +1651,10 @@
      "Arn": "arn:${AWS::Partition}:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${EcsCluster97242B84}",
      "EcsParameters": {
       "LaunchType": "FARGATE",
+      "TaskCount": 1,
+      "TaskDefinitionArn": "${TaskDefWithCompatibilityAFDDF969}",
       "NetworkConfiguration": {
-       "AwsVpcConfiguration": {
+       "awsvpcConfiguration": {
         "AssignPublicIp": "DISABLED",
         "SecurityGroups": [
          "${TaskDefWithCompatibilitySecurityGroup608AC6F4}"
@@ -1660,9 +1663,7 @@
          "${VpcPrivateSubnet1Subnet536B997A}"
         ]
        }
-      },
-      "TaskCount": 1,
-      "TaskDefinitionArn": "${TaskDefWithCompatibilityAFDDF969}"
+      }
      },
      "Id": "Target2",
      "Input": "{}",

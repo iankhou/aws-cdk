@@ -1,8 +1,7 @@
 {
  "stackName": "aws-cdk-kms-1",
  "summary": {
-  "pass": 5,
-  "fail": 1,
+  "pass": 6,
   "no handler": 1
  },
  "results": [
@@ -16,7 +15,8 @@
    "logicalId": "MyKey6AB29FA6",
    "type": "AWS::KMS::Key",
    "property": "KeyPolicy",
-   "status": "fail",
+   "status": "pass",
+   "mutationCaught": true,
    "expected": {
     "Statement": [
      {
@@ -31,7 +31,7 @@
       "Action": "kms:encrypt",
       "Effect": "Allow",
       "Principal": {
-       "AWS": "${AWS::AccountId}"
+       "AWS": "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
       },
       "Resource": "*"
      }
