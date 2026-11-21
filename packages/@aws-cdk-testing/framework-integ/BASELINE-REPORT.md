@@ -1,6 +1,6 @@
 # aws-cdk integ snapshots: real-AWS baseline and AWS Emulator comparison
 
-2026-11-18. Real AWS is the source of truth. Results are on
+2026-11-21. Real AWS is the source of truth. Results are on
 [iankhou/aws-cdk `resolved-snapshots`](https://github.com/iankhou/aws-cdk/tree/resolved-snapshots) (last commit
 `635b0bb649`), checked with [iankhou/cdk-integ-assertions `fix/comparisons`](https://github.com/iankhou/cdk-integ-assertions/tree/fix/comparisons)
 (`b9a247a`).
@@ -87,57 +87,105 @@ lose their agent connection before the service drains, and capacity-provider sca
 auto-scaling group delete. Fargate profiles, EMR-managed security groups, ALB-controller load balancers and Synthetics
 network interfaces also outlive their stacks.
 
-## AWS Emulator: results on the same 49 tests
+## AWS Emulator: all 1,520 snapshots
 
-On real AWS, all 49 deploy and are checked, and 48 have no fails. On the emulator:
+AWS Emulator 1.0.512, running natively. All snapshots were deployed as committed and checked with the same checker
+(`fix/comparisons`), from a copy of the snapshots without the real-AWS results.
+- **Region:** us-east-1 only, because the emulator doesn't keep regions or accounts apart.
+- **Batches:** tests ran in the same collision-free rounds, in batches of 25.
+- **Fresh state for each batch:** the emulator restarted with an empty state and CDK was bootstrapped again, because
+  the emulator keeps at most 64 MiB of objects per S3 bucket. In a first attempt without restarts, CDK's asset bucket
+  filled after about 560 tests, and every later deploy failed.
+- **Solo reruns:** 46 tests that hit the cap only because of other tests in their batch were rerun with a fresh
+  emulator each.
 
-| | Real AWS | Emulator |
-|---|---|---|
-| Deployed and checked | 49 | 26 |
-| Deploy failed | 0 | 23 |
-| Checks on all 49: pass / fail / missing / error | 2,964 / 1 / 0 / 0 | n/a |
-| Checks on the 26 the emulator deployed: pass / fail / missing / error | 1,522 / 0 / 0 / 0 | 1,456 / 4 / 5 / 24 |
-| Unresolved checks on those 26 | 39 | 61 |
+### Deploy outcomes against real AWS
 
-Of the 26 tests the emulator deployed, 15 match real AWS exactly. The other 11 differ as follows.
+| Real AWS / Emulator | Tests |
+|---|---|
+| Deployed on both | 633 |
+| Deployed on AWS, failed on the emulator | 678 |
+| Failed on both | 183 |
+| Failed on AWS, deployed on the emulator | 25 |
+| No manifest upstream | 1 |
 
-**Why 23 tests fail to deploy on the emulator** (all deploy on real AWS):
+Of the 1,311 tests that deploy on AWS, **48% also deploy on the emulator**.
+
+**Why 678 tests that deploy on AWS fail on the emulator:**
 
 | Tests | Emulator behavior |
 |---|---|
-| 7 | CloudFront `CreateDistributionWithTags` rejects origins: `Value null at ...s3OriginConfig.originAccessIdentity` / `customOriginConfig.hTTPPort`, where AWS applies defaults |
-| 6 | Custom resources fail: CDK assertion stacks (`DeployAssert` SDK calls to Lambda, Step Functions and HTTP), `Custom::CloudwatchLogResourcePolicy` and `Custom::VpcRestrictDefaultSG`. Lambda function runs aren't ready in the emulator |
-| 4 | Docker image assets can't be pushed: `docker push` to the ECR registry host (`<account>.dkr.ecr.<region>.amazonaws.com`) fails with `no basic auth credentials`, since that host isn't the emulator's endpoint |
-| 2 | CloudFormation doesn't know the resource types `AWS::MediaPackageV2::ChannelGroup` and `AWS::S3Files::*` |
-| 1 | API Gateway rejects the path part `$appliances:all`, which AWS accepts |
-| 1 | API Gateway doesn't read a `RestApi` definition from `BodyS3Location` |
-| 1 | `AWS::Lambda::Permission` `InvokedViaFunctionUrl` isn't applied |
-| 1 | Application Auto Scaling scheduled action: `invalid timestamp: failed to parse int` |
+| 212 | Custom resources and CDK assertion stacks fail: Lambda function runs aren't ready (`DeployAssert`, `Custom::VpcRestrictDefaultSG`, cross-region readers, log-retention, bucket notifications, ...) |
+| 81 | Request validation stricter than AWS: for example `Value null at ...` in CloudFront origins where AWS applies defaults, API Gateway access-log format rules, `expected string, got boolean` |
+| 69 | CloudFormation doesn't know the resource type (for example `AWS::MediaPackageV2::*`, `AWS::S3Files::*`) |
+| 53 | Behavior the emulator reports it doesn't support (for example `RestApi` `BodyS3Location`, `Lambda::Permission` `InvokedViaFunctionUrl`) |
+| 42 | RDS rejects current engine versions (`aurora-mysql 8.0.mysql_aurora.3.12.0`, `aurora-postgresql 18.6`, `mysql 8.4.10`) |
+| 40 | Docker image assets can't be pushed: the ECR registry host (`<account>.dkr.ecr.<region>.amazonaws.com`) isn't the emulator's endpoint (`no basic auth credentials`) |
+| 31 | CloudFormation template errors on attributes AWS supports (`resource ... does not support` a `Fn::GetAtt`) |
+| 17 | A resource the stack just created isn't found (IAM groups, load balancers) |
+| 6 | Operation not implemented (`NotImplemented`) |
+| 2 | The test's own assets are over the 64 MiB per-bucket cap |
+| 125 | Other, one-off |
 
-**Where the emulator differs on the 26 tests it deployed:**
-- **CloudFormation reports success for resources it didn't create.**
-  - 4 `AWS::S3::BucketPolicy` are `missing` (`NoSuchBucket`).
-  - 1 `ClusterCapacityProviderAssociations` is `missing` (`ClusterNotFoundException`).
-- **The ECS `DescribeServices` response can't be read by the JavaScript SDK.** Timestamps come back as integer strings,
-  so the SDK throws `Epoch timestamps must be expressed as floating point numbers`. That's 24 `error` checks across 4
-  tests.
-- **S3 `GetBucketLifecycleConfiguration` returns `Filter: {}`** where AWS returns `Filter: { Prefix: "" }` (3 fails).
-- **KMS keeps a bare account-id principal as given.** AWS stores it as the account's root ARN (1 fail, `aws-kms/integ.key`).
-- **More `unresolved` checks:** 61 against 39 on AWS. The `evaluate` action couldn't resolve some `Fn::GetAtt`
-  values from the emulator's stacks.
-- **Same as AWS:** for the 15 tests that matched exactly, every check matches real AWS. That covers CloudWatch
-  alarms, Kafka event sources, DynamoDB autoscaling, Step Functions logging, SNS URL subscriptions and several
-  CloudFront distributions.
+**25 tests deploy only on the emulator.** Each was rejected by AWS for a reason the emulator doesn't check:
+- deprecated runtimes (Synthetics, Node.js 14, Glue versions);
+- an invalid Elasticsearch TLS policy;
+- invalid Bedrock model ids;
+- invalid principals;
+- certificates that don't exist;
+- missing CodeBuild source tokens;
+- unknown third-party CodePipeline action types.
 
-**Takeaway.** For these 49 tests, the emulator deployed about half. Where it deployed, most checks match AWS. The
-biggest gaps are:
-1. CloudFront distribution validation (7 tests);
-2. custom resources and Lambda (6);
-3. Docker image assets (4);
-4. resources reported as created but never created (5 checks);
-5. ECS `DescribeServices` timestamps.
+So a green deploy on the emulator doesn't mean the stack is valid on AWS.
 
-These are concrete, reproducible bug reports for the emulator team: CTI AWS / AWSInABox / Feedback.
+**A hang that never ends.** In `aws-ec2/integ.vpc-egress-only-igw-feature-flag`, the emulator's CloudFormation
+rejected a subnet with `Template error: resource ... does not support` an attribute. It then left the stack in
+`ROLLBACK_IN_PROGRESS` for 22 hours, until the deploy was stopped.
+
+### Checks on the 633 tests that deploy on both
+
+430 of the 633 (68%) have every check identical to real AWS. For the 23,813 checks that pass on AWS:
+
+| On the emulator | Checks | Main causes |
+|---|---|---|
+| pass | 22,518 (94.6%) | |
+| error | 405 | ECS `DescribeServices` returns timestamps as integer strings; the JavaScript SDK throws `Epoch timestamps must be expressed as floating point numbers` (all ECS service checks in 53 tests) |
+| missing | 136 | CloudFormation reports `CREATE_COMPLETE` for resources that don't exist: `S3::BucketPolicy` (`NoSuchBucket`, 48 tests). Physical ids in another shape: `ApiGateway::Method` (no resource id, 27 tests) and `SNS::TopicPolicy` (not a topic ARN, 8 tests) |
+| not checked | 489 | Property checks skipped after one of the `missing` resources above |
+| unresolved | 235 | The `evaluate` action can't resolve values from the emulator's stacks: `Fn::GetAtt`/`Ref` in IAM policies (66 tests), ECS network configuration, Lambda permission source ARNs, API Gateway parent ids |
+| fail | 30 | The deployed value differs from AWS (below) |
+
+**Fails on the emulator where AWS passes:**
+- S3 bucket `LoggingConfiguration` isn't stored; `GetBucketLogging` returns nothing (3 tests).
+- `GetBucketLifecycleConfiguration` returns `Filter: {}` where AWS returns `Filter: { Prefix: "" }` (2 tests).
+- Step Functions `DefinitionString` comes back changed (5 tests).
+- `AWS::URLSuffix` resolves to `127.0.0.1`, so IAM service principals become `ec2.127.0.0.1` instead of
+  `ec2.amazonaws.com` (3 roles).
+- KMS stores a bare account-id principal as given; AWS stores the account's root ARN.
+- `IAM::ManagedPolicy` `Description` is `""` instead of absent.
+- One each in CloudWatch dashboard bodies, S3 bucket encryption and an IAM policy document.
+- The `ApiGateway::Account` `CloudWatchRoleArn` differences (5 one way, 3 the other) are the same per-account
+  setting being overwritten by concurrent tests, as on AWS.
+
+### Takeaway
+
+The emulator runs about half of these tests, and where it does, 95% of the checks that pass on AWS also pass. The
+gaps that block the most tests, in order:
+1. Lambda-backed custom resources (212 tests);
+2. request validation that's stricter than AWS (81);
+3. missing CloudFormation resource types (69) and unsupported features (53);
+4. RDS engine versions (42);
+5. Docker asset pushes (40);
+6. CloudFormation attribute support (31).
+
+On the checks:
+- ECS `DescribeServices` timestamps break the JavaScript SDK.
+- S3 bucket policies are reported created but don't exist.
+- `AWS::URLSuffix` is `127.0.0.1`.
+
+The emulator also accepts templates AWS rejects (25 tests), so it can't replace a real deploy. Each item above is a
+concrete report for the emulator team (CTI AWS / AWSInABox / Feedback). Per-test emulator results are in
+`~/emulator-run-full`, and the comparison is in `~/baseline-tools/compare-emulator.js`.
 
 ## Cleanup and accounts
 
@@ -145,5 +193,4 @@ These are concrete, reproducible bug reports for the emulator team: CTI AWS / AW
   and us-west-2.
 - **test-2:** only its 4 `CDKToolkit` stacks, kept as asked. Its support case `179492781600617` is still open.
 - **test-3:** cleared of its app stacks; only `CDKToolkit` is left.
-- **Emulator:** running in tmux session `emulator` (state is in memory; stopping it deletes everything). The results
-  are in `~/emulator-run` and `~/emulator-snapshots`.
+- **Emulator:** running in tmux session `emulator` (state is in memory). The full-run results are in `~/emulator-run-full`.
